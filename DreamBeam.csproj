@@ -140,14 +140,6 @@
                     HintPath = "libs\BalloonWindow.dll"
                 />
                 <Reference
-                    Name = "ACTIVEDIATHEKELib"
-                    Guid = "{723C13CC-FA83-4FCA-915A-9ECA87DF11A1}"
-                    VersionMajor = "1"
-                    VersionMinor = "0"
-                    Lcid = "0"
-                    WrapperTool = "aximp"
-                />
-                <Reference
                     Name = "DocumentManager"
                     AssemblyName = "DocumentManager"
                     HintPath = "libs\DocumentManager.dll"
@@ -184,14 +176,6 @@
                     VersionMinor = "0"
                     Lcid = "0"
                     WrapperTool = "primary"
-                />
-                <Reference
-                    Name = "ShockwaveFlashObjects"
-                    Guid = "{D27CDB6B-AE6D-11CF-96B8-444553540000}"
-                    VersionMajor = "1"
-                    VersionMinor = "0"
-                    Lcid = "0"
-                    WrapperTool = "aximp"
                 />
                 <Reference
                     Name = "CollapsiblePanelBar"
