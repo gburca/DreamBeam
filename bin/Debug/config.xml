@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<DreamBeam_Config>
+  <BeamBoxPosX>0</BeamBoxPosX>
+  <BeamBoxPosY>0</BeamBoxPosY>
+  <BeamBoxSizeX>640</BeamBoxSizeX>
+  <BeamBoxSizeY>480</BeamBoxSizeY>
+  <BeamBoxAutoPosSize>True</BeamBoxAutoPosSize>
+  <BeamBoxScreenNum>-1</BeamBoxScreenNum>
+  <Alphablending>False</Alphablending>
+  <BlendSpeed>10</BlendSpeed>
+  <useDirect3D>False</useDirect3D>
+  <OutlineSize>3</OutlineSize>
+  <HideMouse>False</HideMouse>
+  <PreRender>False</PreRender>
+  <AlwaysOnTop>False</AlwaysOnTop>
+  <BibleLang>en</BibleLang>
+  <Show_BibleTranslation>False</Show_BibleTranslation>
+  <SwordPath>C:\Program Files\Crosswire\The SWORD Project\</SwordPath>
+  <PlayList>Heavenly home;Truly God;</PlayList>
+  <BackgroundColor>-16777216</BackgroundColor>
+  <LoopMedia>False</LoopMedia>
+  <AutoPlayChangeTime>2</AutoPlayChangeTime>
+  <LoopAutoPlay>False</LoopAutoPlay>
+  <Language>auto</Language>
+</DreamBeam_Config>

@@ -1,3 +1,8 @@
+0.??
+- Fixed Bible text encoding for modules that are encoded in UTF8.
+- Fixed the Lister library to eliminate some errors where the index was out of range and caused errors in the MainForm.cs design.
+Gabriel Burca
+
 0.41
 set Projector window by selecting the Monitor
 Autosave LoopMedia Settings on exit

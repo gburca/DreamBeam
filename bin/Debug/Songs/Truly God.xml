@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<DreamSong>
+  <Version>0.49</Version>
+  <image>Backgrounds\abstract.jpg</image>
+  <TextAlign>left</TextAlign>
+  <MultiLang>False</MultiLang>
+  <TextStyle>0</TextStyle>
+  <windowHeight>480</windowHeight>
+  <windowWidth>640</windowWidth>
+  <Text0>
+    <Text>Truly God</Text>
+    <Font>Verdana</Font>
+    <FontStyle>0</FontStyle>
+    <FontSize>42</FontSize>
+    <TextColor>-1</TextColor>
+    <OutlineColor>-16777216</OutlineColor>
+    <posX>40</posX>
+    <posY>19</posY>
+    <TextEffect>Filled Outline</TextEffect>
+    <AutoPos>True</AutoPos>
+  </Text0>
+  <Text1>
+    <Text>Wonderful Counsellor
+Mighty God, Conqueror
+Prince of Peace, King of Kings
+Jesus Christ, my best friend
+
+
+You are the one
+You said you where
+light of the world
+The way, the truth and life
+I’ll stay with you
+Cause i don’t know
+where else to go
+
+
+And i know for sure
+You are the Light
+You are the Christ
+Oh, you are truly God</Text>
+    <Font>Verdana</Font>
+    <FontStyle>0</FontStyle>
+    <FontSize>30</FontSize>
+    <TextColor>-1</TextColor>
+    <OutlineColor>-16777216</OutlineColor>
+    <posX>40</posX>
+    <posY>100</posY>
+    <TextEffect>Filled Outline</TextEffect>
+    <AutoPos>True</AutoPos>
+  </Text1>
+  <Text2>
+    <Text>© No Need To Be Sheepish</Text>
+    <Font>Times New Roman</Font>
+    <FontStyle>0</FontStyle>
+    <FontSize>20</FontSize>
+    <TextColor>-1</TextColor>
+    <OutlineColor>-8355712</OutlineColor>
+    <posX>570</posX>
+    <posY>575</posY>
+    <TextEffect>Normal</TextEffect>
+    <AutoPos>True</AutoPos>
+  </Text2>
+  <MultiLangSettings>
+    <Font>Arial</Font>
+    <FontStyle>0</FontStyle>
+    <FontSize>48</FontSize>
+    <TextColor>-1</TextColor>
+    <OutlineColor>-16777216</OutlineColor>
+    <TextEffect>Normal</TextEffect>
+  </MultiLangSettings>
+</DreamSong>

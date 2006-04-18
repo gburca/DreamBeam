@@ -1,5 +1,5 @@
 download NSIS
-download files for "Support Files"
+download files for "Support Files" (DirectX and dotNet installers)
 copy Dreambin Bins into "Dreambeam"
 compile Dreambeam.nsi
 unkomment second line in Dreambeam.nsi for an full install version

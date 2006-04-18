@@ -18,7 +18,7 @@ namespace DreamBeam
 
 		public Language()
 		{
-			rm = new ResourceManager("DreamBeam.lang",typeof(Language).Assembly);
+			rm = new ResourceManager("DreamBeam.Language.lang",typeof(Language).Assembly);
 			//
 			// TODO: Hier die Konstruktorlogik einfügen
 			//

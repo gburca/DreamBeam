@@ -133,6 +133,10 @@ namespace DreamBeam
 					_MainForm.RightDocks_BottomPanel_Media.Open();
 					_MainForm.tabControl1.Controls.Add(_MainForm.tabPage4);
 				break;
+					case 4:
+						_MainForm.RightDocks_BottomPanel_Backgrounds.Open();
+						_MainForm.tabControl1.TabPages.Add(_MainForm.BibleText_Tab);
+						break;
 				}
 				ChangeTitle();
 			}

@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DreamBeam", "DreamBeam.csproj", "{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}.Debug.ActiveCfg = Debug|.NET
+		{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}.Debug.Build.0 = Debug|.NET
+		{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}.Release.ActiveCfg = Release|.NET
+		{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(SolutionItems) = postSolution
+		Language\lang.resx = Language\lang.resx
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

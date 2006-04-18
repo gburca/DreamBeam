@@ -195,7 +195,7 @@ namespace Lister
 			// Make sure we actually have an item to draw
 			// before drawing, as we dont want an exception thrown
 			// about our ItemInfo array do we?
-			if(e.Index > -1)
+			if(e.Index > -1 && e.Index < this.itemInfo.Count)
 			{
 				/////
 				// Draw the usual stuff.
@@ -285,8 +285,16 @@ namespace Lister
 			// Set the height - based on the height of the text,
 			// its length, and the width available.
 			e.ItemHeight = 21;
-			string s = Items[e.Index].ToString();
-			SizeF sf = e.Graphics.MeasureString(s,Font,Width);
+			SizeF sf;
+			if (Items.Count > e.Index) 
+			{
+				string s = Items[e.Index].ToString();
+				sf = e.Graphics.MeasureString(s,Font,Width);
+			} 
+			else 
+			{
+				sf = new SizeF(1, 1);
+			}
 			int htex = 10;
 			e.ItemWidth = Width;	
 			e.ItemHeight = (int)sf.Height + htex;	

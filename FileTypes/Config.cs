@@ -26,6 +26,7 @@ namespace DreamBeam
 		public bool useDirect3D;
 		public float OutlineSize;
 		public string BibleLang;
+		public string LastBibleUsed;
 		public bool ShowBibleTranslation;
 		public string PlayListString;
 		public string SwordPath;
@@ -233,6 +234,16 @@ namespace DreamBeam
 					  }else{
 						this.ShowBibleTranslation = false;
 					  }
+
+						list = document.GetElementsByTagName("LastBibleUsed");
+						if (list.Count > 0) 
+						{
+							this.LastBibleUsed = list[0].InnerText;
+						} 
+						else 
+						{
+							this.LastBibleUsed = "";
+						}
 
 					  // Path to Sword.exe
 					  list = document.GetElementsByTagName("SwordPath");

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<MediaList>
+  <Version>1</Version>
+  <MediaItem0>
+    <Path>MediaFiles\sample_MediaTests\Sauna_mpg4.avi</Path>
+  </MediaItem0>
+  <MediaItem1>
+    <Path>C:\Programme\DreamBeam\MediaFiles\sample_MediaTests\water154.swf</Path>
+  </MediaItem1>
+  <MediaItem1>
+    <Path>C:\Program Files\DreamBeam\MediaFiles\sample_MediaTests\water154.swf</Path>
+  </MediaItem1>  
+</MediaList>
