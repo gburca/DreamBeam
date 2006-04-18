@@ -1,0 +1,552 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DreamBeam</name>
+    </assembly>
+    <members>
+        <member name="T:DreamBeam.MainForm">
+            <summary>
+            The Main DreamBeam Window with most of it's functions
+            </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.version">
+            <summary> </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.SongArray">
+            <summary> </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.memoryBitmap">
+            <summary> </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.ShowBeam">
+            <summary> </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.Song">
+            <summary> </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.About">
+            <summary> </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.selectedTab">
+            <summary> </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.SongCount">
+            <summary> </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.Song_Edit_Box">
+            <summary> </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.beamshowed">
+            <summary> </summary>
+        </member>
+        <member name="F:DreamBeam.MainForm.HelpBalloon">
+            <summary> </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.#ctor">
+            <summary> Initialise DreamBeam </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.Dispose(System.Boolean)">
+            <summary>
+            Ressourcen nach der Verwendung bereinigen
+            </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.InitializeComponent">
+            <summary>
+            Erforderliche Methode zur Unterstützung des Designers -
+            ändern Sie die Methode nicht mit dem Quelltext-Editor.
+            </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.Main">
+            <summary>
+            Der Haupteinsprungspunkt für die Anwendung
+            </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SaveSettings">
+            <summary>Saves Program Properties like BeamBox Position and Alphablending to the config.xml. </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.LoadSettings">
+            <summary>Loads Program Properties like BeamBox Position and Alphablending. </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.ListSongs">
+            <summary>Reads all Songs in Directory, validates if it is a Song and put's them into the RightDocks_SongList Box </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.setSong">
+            <summary>Get Song Contents from EditForms to Song</summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.MainForm_Load(System.Object,System.EventArgs)">
+            <summarize> Initialize DreamBeam while MainForm is loading </summarize>
+        </member>
+        <member name="M:DreamBeam.MainForm.MainForm_Closing(System.Object,System.ComponentModel.CancelEventArgs)">
+            <summarize> start SaveSettings while MainForm is closing </summarize>
+        </member>
+        <member name="M:DreamBeam.MainForm.ToolBars_MenuBar_Song_New_Activate(System.Object,System.EventArgs)">
+            <summary> new Song from Menu</summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.ToolBars_MenuBar_Song_SaveAs_Activate(System.Object,System.EventArgs)">
+            <summary> Save Song AS from Menu</summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.ToolBars_MenuBar_Song_Rename_Activate(System.Object,System.EventArgs)">
+            <summary>Rename Song from File Menu</summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.HelpIntro_Activate(System.Object,System.EventArgs)">
+            <summary> Displays Help Balloons - with Intro and Main Components </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.HelpBeamBox_Activate(System.Object,System.EventArgs)">
+            <summary> Displays Help Balloons - BeamBox Help </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.HelpShowSongs_Activate(System.Object,System.EventArgs)">
+            <summary> Displays Help Balloons - ShowSongs </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.HelpEditSongs_Activate(System.Object,System.EventArgs)">
+            <summary> Displays Help Balloons - EditSongs </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.AboutButton_Activate(System.Object,System.EventArgs)">
+            <summary>Displays the About Menu </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.ToolBars_ComponentBar_ButtonClick(System.Object,TD.SandBar.ToolBarItemEventArgs)">
+            <summarize> Switch Components on Click </summarize>
+        </member>
+        <member name="M:DreamBeam.MainForm.RightDocks_SongList_DoubleClick(System.Object,System.EventArgs)">
+            <summary> Load Song from DoubleClicked Listbox</summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.btnRightDocks_SongListDelete_Click(System.Object,System.EventArgs)">
+            <summary> Delete Song in List </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.btnRightDocks_SongList2PlayList_Click(System.Object,System.EventArgs)">
+            <summary> Add a Song to a PlayList</summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.RightDocks_SongListSearch_TextChanged(System.Object,System.EventArgs)">
+            <summary> Search Songlist for entered Characters</summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.RightDocks_PlayList_DoubleClick(System.Object,System.EventArgs)">
+            <summary>Load Song from Playlist on DoubleClick </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.RightDocks_PlayList_Remove_Button_Click(System.Object,System.EventArgs)">
+            <summary>Remove Selected Playlistitem on Click</summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.RightDocks_PlayList_Up_Button_Click(System.Object,System.EventArgs)">
+            <summary>Move selected PlayList Item up, on click </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.RightDocks_PlayList_Down_Button_Click(System.Object,System.EventArgs)">
+            <summary>Move selected PlayList Item down, on click </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.ListImages">
+            <summary>Loads all images from \Backgrounds, puts them in this.RightDocks_imageList and links those with names in ImageListBox  </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.RightDocks_ImageListBox_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>If BGImage chosen, update the current component </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_UpdateBeamBox_Button_Click(System.Object,System.EventArgs)">
+            <summary> Update BeamBox </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongShow_StropheList_ListEx_DoubleClick(System.Object,System.EventArgs)">
+            <summary> On Click on ListEx with Strophes, the selected strophe will be shown on Beambox </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongShow_BG_CheckBox_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>On OverWrite Check Change, forward the property to ShowBeam </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongShow_Alpha_CheckBox_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>On Transit Check Change, forward the property to ShowBeam </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongShow_Preview_Panel_Click(System.Object,System.EventArgs)">
+            <summary>Redraw Panel 8 on Click </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_PreviewStropheDown_Button_Click(System.Object,System.EventArgs)">
+            <summary>Shows the previous strophe on click </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_PreviewStropheUp_Button_Click(System.Object,System.EventArgs)">
+            <summary> Shows the next strophe on click </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_TopTextToolBar_ButtonClick(System.Object,TD.SandBar.ToolBarItemEventArgs)">
+            <summary>Sends the Clicked Item and the Textfield Number to TextProperties </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_MidTextToolBar_ButtonClick(System.Object,TD.SandBar.ToolBarItemEventArgs)">
+            <summary>Sends the Clicked Item and the Textfield Number to TextProperties </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_BottomTextToolBar_ButtonClick(System.Object,TD.SandBar.ToolBarItemEventArgs)">
+            <summary>Sends the Clicked Item and the Textfield Number to TextProperties </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_Header_TextBox_TextChanged(System.Object,System.EventArgs)">
+            <summary>If the Header Text has changed, update the Song-Array </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_Mid_TextBox_TextChanged1(System.Object,System.EventArgs)">
+            <summary>If the Mid Text has changed, update the Song-Array </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.Footer_TextBox_TextChanged(System.Object,System.EventArgs)">
+            <summary>If the Footer Text has changed, update the Song-Array </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_Preview_Panel_Click(System.Object,System.EventArgs)">
+            <summary>Redraw Panel 4 on click </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_TopPosX_UpDown_ValueChanged(System.Object,System.EventArgs)">
+            <summary>If the SongEdit_TopPosX_UpDown has changed, update the Song-Array and Redraw Panel4 </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_TopPosY_UpDown_ValueChanged(System.Object,System.EventArgs)">
+            <summary>If the SongEdit_TopPosY_UpDown has changed, update the Song-Array and Redraw Panel4 </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_MidPosX_UpDown_ValueChanged(System.Object,System.EventArgs)">
+            <summary>If the SongEdit_MidPosX_UpDown has changed, update the Song-Array and Redraw Panel4 </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_MidPosY_UpDown_ValueChanged(System.Object,System.EventArgs)">
+            <summary>If the SongEdit_MidPosY_UpDown has changed, update the Song-Array and Redraw Panel4 </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_BottomPosX_UpDown_ValueChanged(System.Object,System.EventArgs)">
+            <summary>If the SongEdit_BottomPosX_UpDown has changed, update the Song-Array and Redraw Panel4 </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_BottomPosY_UpDown_ValueChanged(System.Object,System.EventArgs)">
+            <summary>If the SongEdit_BottomPosY_UpDown has changed, update the Song-Array and Redraw Panel4 </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_Preview_Panel_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>Preview Panel for EDIT Songs </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.TextProperties(TD.SandBar.ToolBarItemEventArgs,System.Int32)">
+            <summarize>Manages the 3 Text Toolbar ButtonClicks in EDIT Songs </summarize>
+        </member>
+        <member name="M:DreamBeam.MainForm.Set_TextProperty_Controls">
+            <summary> Gets the the Fontsettings for Font Dialog </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.FontButton_Click(System.Object,System.EventArgs)">
+            <summary>Shows a FontDialog and Changes the Song FontSettings </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.ColorButton_Click(System.Object,System.EventArgs)">
+            <summary>Shows a ColorDialog and Changes the Song ColorSettings </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SetEditButtonsStatus">
+            <summary> If Outline, then enable OutlineButton and Show Outline Color </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_Header_TextBox_Enter(System.Object,System.EventArgs)">
+            <summary>Highlight HeaderTextBox </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_Mid_TextBox_Enter(System.Object,System.EventArgs)">
+            <summary>Highlight MidTextBox </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.Footer_TextBox_Enter(System.Object,System.EventArgs)">
+            <summary>Highlight FooterTextBox </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.Mid_TextX_ValueChanged(System.Object,System.EventArgs)">
+            <summary>On Mid_TextX Change, update Song </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.Mid_TextY_ValueChanged(System.Object,System.EventArgs)">
+            <summary>On Mid_TextY Change, update Song </summary>
+        </member>
+        <member name="M:DreamBeam.MainForm.SongEdit_Mid_TextBox_TextChanged(System.Object,System.EventArgs)">
+            <summary>On SongEdit_Mid_TextBox_Text Change, update Song </summary>
+        </member>
+        <member name="T:DreamBeam.ShowBeam">
+            <summary>
+            ShowBeam - the BeamBox class. This is a none-borderd Window for the Beamer
+            </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.WM_NCLBUTTONDOWN">
+            <summary>needed for drag and drop</summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.HTCAPTION">
+            <summary>needed for drag and drop</summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.strSeperator">
+            <summary>The Separator for the strophes - 2 Blank Lines </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.newText">
+            <summary>Has Text changed? Needed to avoid unnecessary Redraws.(</summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.OverWriteBG">
+            <summary>If this is true, take ImageOverWritePath -Image as Background </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.ImageOverWritePath">
+            <summary>altarnate Background Image Path </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.OutlineSize">
+            <summary> the size for the Outlines (will be loaded from config.xml) </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.strImageLoaded">
+            <summary>the name of the actually used BG Image </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.Song">
+            <summary>The Song with all it's information </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.curImage">
+            <summary>The Background Image </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.graphics">
+            <summary>Graphics</summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.memoryBitmap">
+            <summary>The final Bitmap for the BeamBox </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.transit">
+            <summary>Use AlphaBlending Transitions </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.useDirectX">
+            <summary>User Direct X? </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.WindowPosX">
+            <summary>ShowBeam Position Box </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.WindowPosY">
+            <summary>ShowBeam Position Box </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.WindowSizeY">
+            <summary>ShowBeam Size Box </summary>
+        </member>
+        <member name="F:DreamBeam.ShowBeam.WindowSizeX">
+            <summary>ShowBeam Size Box </summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.#ctor">
+            <summary> Initialize the Class</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.Dispose(System.Boolean)">
+            <summary>
+            Dispose components
+            </summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.InitializeComponent">
+            <summary>
+            Form Disigner Method
+            </summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.repaint">
+            <summary> Repaints the BeamBox </summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.DrawBitmap(System.Int32,System.Int32)">
+            <summary>Paints a Bitmap from the Song Contents</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.ShowBeam_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>Repaints the BeamBox with the MoemoryBitmap</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.GDIDraw">
+            <summary>Draws the Image on the BeamBox</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.ShowBeam_SizeChanged(System.Object,System.EventArgs)">
+            <summary> If size changed, redraw the Image </summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.ShowMover">
+            <summary>Make the BeamBox moveable</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.HideMover">
+            <summary>Set the BeamBox</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.WindowPosX_ValueChanged(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.WindowPosY_ValueChanged(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.button1_Click(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.button4_Click(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.button2_Click(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.button3_Click(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.button3_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.button8_Click(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.button7_Click(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.button6_Click(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.button5_Click(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.WindowSizeX_ValueChanged(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.WindowSizeY_ValueChanged(System.Object,System.EventArgs)">
+            <summary>Update the Window Position</summary>
+        </member>
+        <member name="M:DreamBeam.ShowBeam.ShowBeam_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary> Drag/Move the Window on Mouse Down </summary>
+        </member>
+        <member name="T:DreamBeam.Song">
+            <summary>
+            Countains all Song Information and Methods
+            </summary>
+        </member>
+        <member name="F:DreamBeam.Song.SongName">
+            <summary>The Song's Name and Filename (+.xml)</summary>
+        </member>
+        <member name="F:DreamBeam.Song.Text">
+            <summary>The TextArray for Header, Strophes and Footer</summary>
+        </member>
+        <member name="F:DreamBeam.Song.FontFace">
+            <summary>The FontFaceArray for Header, Strophes and Footer</summary>
+        </member>
+        <member name="F:DreamBeam.Song.FontSize">
+            <summary>The FontSizeArray for Header, Strophes and Footer</summary>
+        </member>
+        <member name="F:DreamBeam.Song.posX">
+            <summary>The PositionX Array for Header, Strophes and Footer</summary>
+        </member>
+        <member name="F:DreamBeam.Song.posY">
+            <summary>The PositionY Array for Header, Strophes and Footer</summary>
+        </member>
+        <member name="F:DreamBeam.Song.TextColor">
+            <summary>The TextColor Array for Header, Strophes and Footer</summary>
+        </member>
+        <member name="F:DreamBeam.Song.OutlineColor">
+            <summary>The OutlineColor Array for Header, Strophes and Footer</summary>
+        </member>
+        <member name="F:DreamBeam.Song.TextEffect">
+            <summary>The TextEffect like Outline Array for Header, Strophes and Footer</summary>
+        </member>
+        <member name="F:DreamBeam.Song.bg_image">
+            <summary>The Song's BG Image</summary>
+        </member>
+        <member name="F:DreamBeam.Song.strophe">
+            <summary>active strophe </summary>
+        </member>
+        <member name="F:DreamBeam.Song.strophe_count">
+            <summary>Number of strophes</summary>
+        </member>
+        <member name="F:DreamBeam.Song.version">
+            <summary>DreamBeam Version </summary>
+        </member>
+        <member name="M:DreamBeam.Song.Save">
+            <summary>Saves the Song</summary>
+        </member>
+        <member name="M:DreamBeam.Song.Load(System.String)">
+            <summary>Loads the Song</summary>
+        </member>
+        <member name="M:DreamBeam.Song.isSong(System.String)">
+            <summary>Checks if XML File is a song (nothing yet)</summary>
+        </member>
+        <member name="M:DreamBeam.Song.Init(System.String)">
+            <summary>Init the Song</summary>
+        </member>
+        <member name="M:DreamBeam.Song.#ctor">
+            <summary>Main Class</summary>
+        </member>
+        <member name="T:DreamBeam.InputBox">
+            <summary>
+            The InputBox class is used to show a prompt in a dialog box using the static method Show().
+            </summary>
+            <remarks>
+            Copyright © 2003 Reflection IT
+            
+            This software is provided 'as-is', without any express or implied warranty.
+            In no event will the authors be held liable for any damages arising from the
+            use of this software.
+            
+            Permission is granted to anyone to use this software for any purpose,
+            including commercial applications, subject to the following restrictions:
+            
+            1. The origin of this software must not be misrepresented; you must not claim
+            that you wrote the original software. 
+            
+            2. No substantial portion of the source code of this library may be redistributed
+            without the express written permission of the copyright holders, where
+            "substantial" is defined as enough code to be recognizably from this library. 
+            
+            </remarks>
+        </member>
+        <member name="F:DreamBeam.InputBox.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="F:DreamBeam.InputBox._validator">
+            <summary>
+            Delegate used to validate the object
+            </summary>
+        </member>
+        <member name="M:DreamBeam.InputBox.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:DreamBeam.InputBox.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:DreamBeam.InputBox.Show(System.String,System.String,System.String,DreamBeam.InputBoxValidatingHandler,System.Int32,System.Int32)">
+            <summary>
+            Displays a prompt in a dialog box, waits for the user to input text or click a button.
+            </summary>
+            <param name="prompt">String expression displayed as the message in the dialog box</param>
+            <param name="title">String expression displayed in the title bar of the dialog box</param>
+            <param name="defaultResponse">String expression displayed in the text box as the default response</param>
+            <param name="validator">Delegate used to validate the text</param>
+            <param name="xpos">Numeric expression that specifies the distance of the left edge of the dialog box from the left edge of the screen.</param>
+            <param name="ypos">Numeric expression that specifies the distance of the upper edge of the dialog box from the top of the screen</param>
+            <returns>An InputBoxResult object with the Text and the OK property set to true when OK was clicked.</returns>
+        </member>
+        <member name="M:DreamBeam.InputBox.Show(System.String,System.String,System.String,DreamBeam.InputBoxValidatingHandler)">
+            <summary>
+            Displays a prompt in a dialog box, waits for the user to input text or click a button.
+            </summary>
+            <param name="prompt">String expression displayed as the message in the dialog box</param>
+            <param name="title">String expression displayed in the title bar of the dialog box</param>
+            <param name="defaultResponse">String expression displayed in the text box as the default response</param>
+            <param name="validator">Delegate used to validate the text</param>
+            <returns>An InputBoxResult object with the Text and the OK property set to true when OK was clicked.</returns>
+        </member>
+        <member name="M:DreamBeam.InputBox.textBoxText_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Reset the ErrorProvider
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DreamBeam.InputBox.textBoxText_Validating(System.Object,System.ComponentModel.CancelEventArgs)">
+            <summary>
+            Validate the Text using the Validator
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:DreamBeam.InputBoxResult">
+            <summary>
+            Class used to store the result of an InputBox.Show message.
+            </summary>
+        </member>
+        <member name="T:DreamBeam.InputBoxValidatingArgs">
+            <summary>
+            EventArgs used to Validate an InputBox
+            </summary>
+        </member>
+        <member name="T:DreamBeam.InputBoxValidatingHandler">
+            <summary>
+            Delegate used to Validate an InputBox
+            </summary>
+        </member>
+        <member name="T:DreamBeam.About">
+            <summary>
+            Zusammenfassende Beschreibung für WinForm
+            </summary>
+        </member>
+        <member name="F:DreamBeam.About.components">
+            <summary>
+            Erforderliche Designervariable
+            </summary>
+        </member>
+        <member name="M:DreamBeam.About.Dispose(System.Boolean)">
+            <summary>
+            Ressourcen nach der Verwendung bereinigen
+            </summary>
+        </member>
+        <member name="M:DreamBeam.About.InitializeComponent">
+            <summary>
+            Erforderliche Methode zur Unterstützung des Designers -
+            ändern Sie die Methode nicht mit dem Quelltext-Editor.
+            </summary>
+        </member>
+        <member name="M:DreamBeam.MyBalloonWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>

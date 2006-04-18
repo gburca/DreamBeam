@@ -1,0 +1,9 @@
+0.41
+set Projector window by selecting the Monitor
+Autosave LoopMedia Settings on exit
+Autosave AutoPlay Settings on exit
+Always On Top Option for Projector Window
+Doesn't crash on playing bad Flashs (Errormessage)
+plays unencrypred .vob files
+
+0.40

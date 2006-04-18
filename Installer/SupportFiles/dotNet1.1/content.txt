@@ -1,0 +1,8 @@
+contains the extracted Dot Net 1.1 Setup
+
+03.04.2005  23:14                 0 content.txt
+23.02.2005  17:18            98.304 install.exe
+23.02.2005  17:18         1.707.856 InstMsi.exe
+23.02.2005  17:18         1.821.008 InstMsiW.exe
+23.02.2005  17:18         5.922.304 netfx.msi
+23.02.2005  17:18        14.638.644 netfx1.cab

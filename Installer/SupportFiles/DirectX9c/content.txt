@@ -1,0 +1,14 @@
+contains the extracted DirectX 9 installer
+
+23.02.2005  16:03           703.080 BDA.cab
+23.02.2005  16:03         1.156.363 BDANT.cab
+23.02.2005  16:03           976.020 BDAXP.cab
+03.04.2005  23:13                 0 content.txt
+23.02.2005  16:03        15.493.481 DirectX.cab
+23.02.2005  16:03            62.976 DSETUP.dll
+23.02.2005  16:03         2.242.560 dsetup32.dll
+23.02.2005  16:03        13.265.040 dxnt.cab
+23.02.2005  16:03           472.576 dxsetup.exe
+23.02.2005  16:03         3.432.656 ManagedDX.CAB
+
+

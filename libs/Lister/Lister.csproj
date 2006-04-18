@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<VisualStudioProject>
+	<CSHARP ProjectType="Local" ProductVersion="7.10.3052" SchemaVersion="2.0" ProjectGuid="{14B87235-D657-4009-9C00-63ECA81D7CCF}">
+		<Build>
+			<Settings ApplicationIcon="" AssemblyKeyContainerName="" AssemblyName="" AssemblyOriginatorKeyFile="" DefaultClientScript="JScript" DefaultHTMLPageLayout="Grid" DefaultTargetSchema="IE50" DelaySign="false" PreBuildEvent="" PostBuildEvent="" RunPostBuildEvent="" OutputType="Library" RootNamespace="Lister" StartupObject="">
+				<Config Name="Release" AllowUnsafeBlocks="False" BaseAddress="285212672" CheckForOverflowUnderflow="False" ConfigurationOverrideFile="" DefineConstants="TRACE" DocumentationFile="" DefineDebug="false" DebugSymbols="False" FileAlignment="4096" IncrementalBuild="False" NoStdLib="false" NoWarn="" Optimize="True" OutputPath="bin\Release" RegisterForComInterop="false" RemoveIntegerChecks="false" TreatWarningsAsErrors="False" WarningLevel="4"/>
+				<Config Name="Debug" AllowUnsafeBlocks="False" BaseAddress="285212672" CheckForOverflowUnderflow="False" ConfigurationOverrideFile="" DefineConstants="TRACE;DEBUG" DocumentationFile="" DefineDebug="false" DebugSymbols="True" FileAlignment="4096" IncrementalBuild="True" NoStdLib="false" NoWarn="" Optimize="False" OutputPath="bin\Debug" RegisterForComInterop="false" RemoveIntegerChecks="false" TreatWarningsAsErrors="False" WarningLevel="4"/>
+			</Settings>
+			<References>
+				<Reference Name="System" AssemblyName="System" HintPath="c:\winnt\microsoft.net\framework\v1.1.4322\System.dll"/>
+				<Reference Name="System.Data" AssemblyName="System.Data" HintPath="c:\winnt\microsoft.net\framework\v1.1.4322\System.Data.dll"/>
+				<Reference Name="System.Drawing" AssemblyName="System.Drawing" HintPath="c:\winnt\microsoft.net\framework\v1.1.4322\System.Drawing.dll"/>
+				<Reference Name="System.Windows.Forms" AssemblyName="System.Windows.Forms" HintPath="c:\winnt\microsoft.net\framework\v1.1.4322\System.Windows.Forms.dll"/>
+				<Reference Name="System.XML" AssemblyName="System.XML" HintPath="c:\winnt\microsoft.net\framework\v1.1.4322\System.XML.dll"/>
+			</References>
+		</Build>
+		<Files>
+			<Include>
+				<File RelPath="UserControl.resx" BuildAction="EmbeddedResource" DependentUpon="UserControl.cs"/>
+				<File RelPath="UserControl.cs" BuildAction="Compile"/>
+				<File RelPath="AssemblyInfo.cs" BuildAction="Compile"/>
+			</Include>
+		</Files>
+	</CSHARP>
+</VisualStudioProject>
