@@ -481,12 +481,9 @@ public class MainForm : System.Windows.Forms.Form {
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_Presentation;
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_TextTool;
 		public System.Windows.Forms.ProgressBar RenderStatus;
-	private System.Windows.Forms.Panel panel5;
-	private System.Windows.Forms.Splitter splitter1;
 	private System.Windows.Forms.Panel panel6;
 	private System.Windows.Forms.Panel panel7;
 	private System.Windows.Forms.Label label1;
-	private System.Windows.Forms.Button button1;
 	private System.Windows.Forms.Panel panel8;
 	private System.Windows.Forms.Label label2;
 	private System.Windows.Forms.ComboBox comboBox2;
@@ -496,7 +493,6 @@ public class MainForm : System.Windows.Forms.Form {
 	private System.Windows.Forms.Button button5;
 	public System.Windows.Forms.TabControl tabControl1;
 	public System.Windows.Forms.TabPage BibleText_Tab;
-	private Salamander.Windows.Forms.CollapsiblePanelBar collapsiblePanelBar2;
 	private Salamander.Windows.Forms.CollapsiblePanel collapsiblePanel1;
 	private Salamander.Windows.Forms.CollapsiblePanel collapsiblePanel2;
 	private Salamander.Windows.Forms.CollapsiblePanel collapsiblePanel3;
@@ -504,6 +500,10 @@ public class MainForm : System.Windows.Forms.Form {
 	private System.Windows.Forms.ListBox BibleText_Translations;
 	private System.Windows.Forms.RichTextBox BibleText_Results;
 	private System.Windows.Forms.ComboBox BibleText_RegEx_ComboBox;
+	private Salamander.Windows.Forms.CollapsiblePanelBar BibleText_collapsiblePanelBar;
+	private System.Windows.Forms.Splitter BibleText_splitter1;
+	private System.Windows.Forms.Panel BibleText_panelLeft;
+	private System.Windows.Forms.Button BibleText_Bookmark_button;
 		private System.Windows.Forms.StatusBarPanel statusBarUpdatePanel;
 
 
@@ -800,13 +800,13 @@ public class MainForm : System.Windows.Forms.Form {
 		this.AudioBar = new System.Windows.Forms.TrackBar();
 		this.BibleText_Tab = new System.Windows.Forms.TabPage();
 		this.panel6 = new System.Windows.Forms.Panel();
-		this.collapsiblePanelBar2 = new Salamander.Windows.Forms.CollapsiblePanelBar();
+		this.BibleText_collapsiblePanelBar = new Salamander.Windows.Forms.CollapsiblePanelBar();
 		this.collapsiblePanel3 = new Salamander.Windows.Forms.CollapsiblePanel();
 		this.collapsiblePanel2 = new Salamander.Windows.Forms.CollapsiblePanel();
 		this.collapsiblePanel1 = new Salamander.Windows.Forms.CollapsiblePanel();
 		this.BibleText_Translations = new System.Windows.Forms.ListBox();
-		this.splitter1 = new System.Windows.Forms.Splitter();
-		this.panel5 = new System.Windows.Forms.Panel();
+		this.BibleText_splitter1 = new System.Windows.Forms.Splitter();
+		this.BibleText_panelLeft = new System.Windows.Forms.Panel();
 		this.BibleText_Results = new System.Windows.Forms.RichTextBox();
 		this.panel8 = new System.Windows.Forms.Panel();
 		this.button5 = new System.Windows.Forms.Button();
@@ -816,7 +816,7 @@ public class MainForm : System.Windows.Forms.Form {
 		this.comboBox2 = new System.Windows.Forms.ComboBox();
 		this.label2 = new System.Windows.Forms.Label();
 		this.panel7 = new System.Windows.Forms.Panel();
-		this.button1 = new System.Windows.Forms.Button();
+		this.BibleText_Bookmark_button = new System.Windows.Forms.Button();
 		this.BibleText_RegEx_ComboBox = new System.Windows.Forms.ComboBox();
 		this.label1 = new System.Windows.Forms.Label();
 		this.PreviewUpdateTimer = new System.Windows.Forms.Timer(this.components);
@@ -931,10 +931,10 @@ public class MainForm : System.Windows.Forms.Form {
 		((System.ComponentModel.ISupportInitialize)(this.AudioBar)).BeginInit();
 		this.BibleText_Tab.SuspendLayout();
 		this.panel6.SuspendLayout();
-		((System.ComponentModel.ISupportInitialize)(this.collapsiblePanelBar2)).BeginInit();
-		this.collapsiblePanelBar2.SuspendLayout();
+		((System.ComponentModel.ISupportInitialize)(this.BibleText_collapsiblePanelBar)).BeginInit();
+		this.BibleText_collapsiblePanelBar.SuspendLayout();
 		this.collapsiblePanel1.SuspendLayout();
-		this.panel5.SuspendLayout();
+		this.BibleText_panelLeft.SuspendLayout();
 		this.panel8.SuspendLayout();
 		this.panel7.SuspendLayout();
 		this.rightSandDock.SuspendLayout();
@@ -1299,7 +1299,7 @@ public class MainForm : System.Windows.Forms.Form {
 		this.ToolBars_bottomSandBarDock.Location = new System.Drawing.Point(0, 549);
 		this.ToolBars_bottomSandBarDock.Manager = this.ToolBars_sandBarManager1;
 		this.ToolBars_bottomSandBarDock.Name = "ToolBars_bottomSandBarDock";
-		this.ToolBars_bottomSandBarDock.Size = new System.Drawing.Size(782, 0);
+		this.ToolBars_bottomSandBarDock.Size = new System.Drawing.Size(752, 0);
 		this.ToolBars_bottomSandBarDock.TabIndex = 20;
 		// 
 		// ToolBars_leftSandBarDock
@@ -1386,7 +1386,7 @@ public class MainForm : System.Windows.Forms.Form {
 		this.ToolBars_topSandBarDock.Location = new System.Drawing.Point(0, 0);
 		this.ToolBars_topSandBarDock.Manager = this.ToolBars_sandBarManager1;
 		this.ToolBars_topSandBarDock.Name = "ToolBars_topSandBarDock";
-		this.ToolBars_topSandBarDock.Size = new System.Drawing.Size(782, 50);
+		this.ToolBars_topSandBarDock.Size = new System.Drawing.Size(752, 50);
 		this.ToolBars_topSandBarDock.TabIndex = 21;
 		// 
 		// ToolBars_MainToolbar
@@ -1408,7 +1408,7 @@ public class MainForm : System.Windows.Forms.Form {
 		this.ToolBars_MainToolbar.Location = new System.Drawing.Point(2, 24);
 		this.ToolBars_MainToolbar.Movable = false;
 		this.ToolBars_MainToolbar.Name = "ToolBars_MainToolbar";
-		this.ToolBars_MainToolbar.Size = new System.Drawing.Size(780, 26);
+		this.ToolBars_MainToolbar.Size = new System.Drawing.Size(750, 26);
 		this.ToolBars_MainToolbar.Stretch = true;
 		this.ToolBars_MainToolbar.TabIndex = 1;
 		this.ToolBars_MainToolbar.Tearable = false;
@@ -1754,7 +1754,7 @@ public class MainForm : System.Windows.Forms.Form {
 																					 this.StatusPanel,
 																					 this.statusBarUpdatePanel});
 		this.statusBar.ShowPanels = true;
-		this.statusBar.Size = new System.Drawing.Size(524, 22);
+		this.statusBar.Size = new System.Drawing.Size(494, 22);
 		this.statusBar.SizingGrip = false;
 		this.statusBar.TabIndex = 22;
 		// 
@@ -1770,7 +1770,7 @@ public class MainForm : System.Windows.Forms.Form {
 		this.StatusPanel.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
 		this.StatusPanel.Icon = ((System.Drawing.Icon)(resources.GetObject("StatusPanel.Icon")));
 		this.StatusPanel.MinWidth = 330;
-		this.StatusPanel.Width = 414;
+		this.StatusPanel.Width = 384;
 		// 
 		// statusBarUpdatePanel
 		// 
@@ -1790,7 +1790,7 @@ public class MainForm : System.Windows.Forms.Form {
 		this.tabControl1.Name = "tabControl1";
 		this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
 		this.tabControl1.SelectedIndex = 0;
-		this.tabControl1.Size = new System.Drawing.Size(524, 477);
+		this.tabControl1.Size = new System.Drawing.Size(494, 477);
 		this.tabControl1.TabIndex = 2;
 		this.tabControl1.Click += new System.EventHandler(this.SongShow_Preview_Panel_Click);
 		// 
@@ -3380,36 +3380,36 @@ public class MainForm : System.Windows.Forms.Form {
 		// BibleText_Tab
 		// 
 		this.BibleText_Tab.Controls.Add(this.panel6);
-		this.BibleText_Tab.Controls.Add(this.splitter1);
-		this.BibleText_Tab.Controls.Add(this.panel5);
+		this.BibleText_Tab.Controls.Add(this.BibleText_splitter1);
+		this.BibleText_Tab.Controls.Add(this.BibleText_panelLeft);
 		this.BibleText_Tab.Location = new System.Drawing.Point(4, 24);
 		this.BibleText_Tab.Name = "BibleText_Tab";
-		this.BibleText_Tab.Size = new System.Drawing.Size(516, 449);
+		this.BibleText_Tab.Size = new System.Drawing.Size(486, 449);
 		this.BibleText_Tab.TabIndex = 5;
 		this.BibleText_Tab.Text = "Bible Text";
 		// 
 		// panel6
 		// 
-		this.panel6.Controls.Add(this.collapsiblePanelBar2);
+		this.panel6.Controls.Add(this.BibleText_collapsiblePanelBar);
 		this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
 		this.panel6.Location = new System.Drawing.Point(347, 0);
 		this.panel6.Name = "panel6";
-		this.panel6.Size = new System.Drawing.Size(169, 449);
+		this.panel6.Size = new System.Drawing.Size(139, 449);
 		this.panel6.TabIndex = 2;
 		// 
-		// collapsiblePanelBar2
+		// BibleText_collapsiblePanelBar
 		// 
-		this.collapsiblePanelBar2.BackColor = System.Drawing.Color.CornflowerBlue;
-		this.collapsiblePanelBar2.Border = 8;
-		this.collapsiblePanelBar2.Controls.Add(this.collapsiblePanel3);
-		this.collapsiblePanelBar2.Controls.Add(this.collapsiblePanel2);
-		this.collapsiblePanelBar2.Controls.Add(this.collapsiblePanel1);
-		this.collapsiblePanelBar2.Dock = System.Windows.Forms.DockStyle.Fill;
-		this.collapsiblePanelBar2.Location = new System.Drawing.Point(0, 0);
-		this.collapsiblePanelBar2.Name = "collapsiblePanelBar2";
-		this.collapsiblePanelBar2.Size = new System.Drawing.Size(169, 449);
-		this.collapsiblePanelBar2.Spacing = 8;
-		this.collapsiblePanelBar2.TabIndex = 0;
+		this.BibleText_collapsiblePanelBar.BackColor = System.Drawing.Color.CornflowerBlue;
+		this.BibleText_collapsiblePanelBar.Border = 8;
+		this.BibleText_collapsiblePanelBar.Controls.Add(this.collapsiblePanel3);
+		this.BibleText_collapsiblePanelBar.Controls.Add(this.collapsiblePanel2);
+		this.BibleText_collapsiblePanelBar.Controls.Add(this.collapsiblePanel1);
+		this.BibleText_collapsiblePanelBar.Dock = System.Windows.Forms.DockStyle.Fill;
+		this.BibleText_collapsiblePanelBar.Location = new System.Drawing.Point(0, 0);
+		this.BibleText_collapsiblePanelBar.Name = "BibleText_collapsiblePanelBar";
+		this.BibleText_collapsiblePanelBar.Size = new System.Drawing.Size(139, 449);
+		this.BibleText_collapsiblePanelBar.Spacing = 8;
+		this.BibleText_collapsiblePanelBar.TabIndex = 0;
 		// 
 		// collapsiblePanel3
 		// 
@@ -3421,12 +3421,12 @@ public class MainForm : System.Windows.Forms.Form {
 		this.collapsiblePanel3.Location = new System.Drawing.Point(8, 344);
 		this.collapsiblePanel3.Name = "collapsiblePanel3";
 		this.collapsiblePanel3.PanelState = Salamander.Windows.Forms.PanelState.Expanded;
-		this.collapsiblePanel3.Size = new System.Drawing.Size(153, 100);
+		this.collapsiblePanel3.Size = new System.Drawing.Size(123, 100);
 		this.collapsiblePanel3.StartColour = System.Drawing.Color.White;
 		this.collapsiblePanel3.TabIndex = 2;
 		this.collapsiblePanel3.TitleFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 		this.collapsiblePanel3.TitleFontColour = System.Drawing.Color.Navy;
-		this.collapsiblePanel3.TitleText = "Title";
+		this.collapsiblePanel3.TitleText = "Projectors";
 		// 
 		// collapsiblePanel2
 		// 
@@ -3438,12 +3438,12 @@ public class MainForm : System.Windows.Forms.Form {
 		this.collapsiblePanel2.Location = new System.Drawing.Point(8, 112);
 		this.collapsiblePanel2.Name = "collapsiblePanel2";
 		this.collapsiblePanel2.PanelState = Salamander.Windows.Forms.PanelState.Expanded;
-		this.collapsiblePanel2.Size = new System.Drawing.Size(153, 224);
+		this.collapsiblePanel2.Size = new System.Drawing.Size(123, 224);
 		this.collapsiblePanel2.StartColour = System.Drawing.Color.White;
 		this.collapsiblePanel2.TabIndex = 1;
 		this.collapsiblePanel2.TitleFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 		this.collapsiblePanel2.TitleFontColour = System.Drawing.Color.Navy;
-		this.collapsiblePanel2.TitleText = "Title";
+		this.collapsiblePanel2.TitleText = "Bookmarks";
 		// 
 		// collapsiblePanel1
 		// 
@@ -3456,40 +3456,40 @@ public class MainForm : System.Windows.Forms.Form {
 		this.collapsiblePanel1.Location = new System.Drawing.Point(8, 8);
 		this.collapsiblePanel1.Name = "collapsiblePanel1";
 		this.collapsiblePanel1.PanelState = Salamander.Windows.Forms.PanelState.Expanded;
-		this.collapsiblePanel1.Size = new System.Drawing.Size(153, 96);
+		this.collapsiblePanel1.Size = new System.Drawing.Size(123, 92);
 		this.collapsiblePanel1.StartColour = System.Drawing.Color.White;
 		this.collapsiblePanel1.TabIndex = 0;
 		this.collapsiblePanel1.TitleFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 		this.collapsiblePanel1.TitleFontColour = System.Drawing.Color.Navy;
-		this.collapsiblePanel1.TitleText = "Title";
+		this.collapsiblePanel1.TitleText = "Translations";
 		// 
 		// BibleText_Translations
 		// 
-		this.BibleText_Translations.Dock = System.Windows.Forms.DockStyle.Fill;
-		this.BibleText_Translations.Location = new System.Drawing.Point(0, 0);
+		this.BibleText_Translations.Dock = System.Windows.Forms.DockStyle.Bottom;
+		this.BibleText_Translations.Location = new System.Drawing.Point(0, 23);
 		this.BibleText_Translations.Name = "BibleText_Translations";
-		this.BibleText_Translations.Size = new System.Drawing.Size(153, 95);
+		this.BibleText_Translations.Size = new System.Drawing.Size(123, 69);
 		this.BibleText_Translations.TabIndex = 1;
 		this.BibleText_Translations.SelectedIndexChanged += new System.EventHandler(this.BibleText_Translations_SelectedIndexChanged);
 		// 
-		// splitter1
+		// BibleText_splitter1
 		// 
-		this.splitter1.Location = new System.Drawing.Point(344, 0);
-		this.splitter1.Name = "splitter1";
-		this.splitter1.Size = new System.Drawing.Size(3, 449);
-		this.splitter1.TabIndex = 1;
-		this.splitter1.TabStop = false;
+		this.BibleText_splitter1.Location = new System.Drawing.Point(344, 0);
+		this.BibleText_splitter1.Name = "BibleText_splitter1";
+		this.BibleText_splitter1.Size = new System.Drawing.Size(3, 449);
+		this.BibleText_splitter1.TabIndex = 1;
+		this.BibleText_splitter1.TabStop = false;
 		// 
-		// panel5
+		// BibleText_panelLeft
 		// 
-		this.panel5.Controls.Add(this.BibleText_Results);
-		this.panel5.Controls.Add(this.panel8);
-		this.panel5.Controls.Add(this.panel7);
-		this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-		this.panel5.Location = new System.Drawing.Point(0, 0);
-		this.panel5.Name = "panel5";
-		this.panel5.Size = new System.Drawing.Size(344, 449);
-		this.panel5.TabIndex = 0;
+		this.BibleText_panelLeft.Controls.Add(this.BibleText_Results);
+		this.BibleText_panelLeft.Controls.Add(this.panel8);
+		this.BibleText_panelLeft.Controls.Add(this.panel7);
+		this.BibleText_panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
+		this.BibleText_panelLeft.Location = new System.Drawing.Point(0, 0);
+		this.BibleText_panelLeft.Name = "BibleText_panelLeft";
+		this.BibleText_panelLeft.Size = new System.Drawing.Size(344, 449);
+		this.BibleText_panelLeft.TabIndex = 0;
 		// 
 		// BibleText_Results
 		// 
@@ -3555,7 +3555,6 @@ public class MainForm : System.Windows.Forms.Form {
 		this.comboBox2.Name = "comboBox2";
 		this.comboBox2.Size = new System.Drawing.Size(144, 21);
 		this.comboBox2.TabIndex = 1;
-		this.comboBox2.Text = "comboBox2";
 		// 
 		// label2
 		// 
@@ -3569,7 +3568,7 @@ public class MainForm : System.Windows.Forms.Form {
 		// panel7
 		// 
 		this.panel7.BackColor = System.Drawing.SystemColors.Control;
-		this.panel7.Controls.Add(this.button1);
+		this.panel7.Controls.Add(this.BibleText_Bookmark_button);
 		this.panel7.Controls.Add(this.BibleText_RegEx_ComboBox);
 		this.panel7.Controls.Add(this.label1);
 		this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
@@ -3578,14 +3577,14 @@ public class MainForm : System.Windows.Forms.Form {
 		this.panel7.Size = new System.Drawing.Size(344, 32);
 		this.panel7.TabIndex = 0;
 		// 
-		// button1
+		// BibleText_Bookmark_button
 		// 
-		this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-		this.button1.Location = new System.Drawing.Point(276, 8);
-		this.button1.Name = "button1";
-		this.button1.Size = new System.Drawing.Size(64, 24);
-		this.button1.TabIndex = 2;
-		this.button1.Text = "Mark";
+		this.BibleText_Bookmark_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+		this.BibleText_Bookmark_button.Location = new System.Drawing.Point(276, 8);
+		this.BibleText_Bookmark_button.Name = "BibleText_Bookmark_button";
+		this.BibleText_Bookmark_button.Size = new System.Drawing.Size(64, 24);
+		this.BibleText_Bookmark_button.TabIndex = 2;
+		this.BibleText_Bookmark_button.Text = "Bookmark";
 		// 
 		// BibleText_RegEx_ComboBox
 		// 
@@ -3595,7 +3594,6 @@ public class MainForm : System.Windows.Forms.Form {
 		this.BibleText_RegEx_ComboBox.Name = "BibleText_RegEx_ComboBox";
 		this.BibleText_RegEx_ComboBox.Size = new System.Drawing.Size(216, 21);
 		this.BibleText_RegEx_ComboBox.TabIndex = 1;
-		this.BibleText_RegEx_ComboBox.Text = "comboBox1";
 		this.BibleText_RegEx_ComboBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BibleText_RegEx_ComboBox_KeyUp);
 		// 
 		// label1
@@ -3653,7 +3651,7 @@ public class MainForm : System.Windows.Forms.Form {
 																																																														  this.RightDocks_BottomPanel_Backgrounds,
 																																																														  this.RightDocks_BottomPanel_Media,
 																																																														  this.RightDocks_BottomPanel_MediaLists}, this.RightDocks_BottomPanel_Backgrounds)});
-		this.rightSandDock.Location = new System.Drawing.Point(582, 50);
+		this.rightSandDock.Location = new System.Drawing.Point(552, 50);
 		this.rightSandDock.Manager = this.sandDockManager1;
 		this.rightSandDock.Name = "rightSandDock";
 		this.rightSandDock.Size = new System.Drawing.Size(200, 499);
@@ -3977,7 +3975,7 @@ public class MainForm : System.Windows.Forms.Form {
 		this.bottomSandDock.Location = new System.Drawing.Point(58, 549);
 		this.bottomSandDock.Manager = this.sandDockManager1;
 		this.bottomSandDock.Name = "bottomSandDock";
-		this.bottomSandDock.Size = new System.Drawing.Size(524, 0);
+		this.bottomSandDock.Size = new System.Drawing.Size(494, 0);
 		this.bottomSandDock.TabIndex = 25;
 		// 
 		// topSandDock
@@ -3988,7 +3986,7 @@ public class MainForm : System.Windows.Forms.Form {
 		this.topSandDock.Location = new System.Drawing.Point(58, 50);
 		this.topSandDock.Manager = this.sandDockManager1;
 		this.topSandDock.Name = "topSandDock";
-		this.topSandDock.Size = new System.Drawing.Size(524, 0);
+		this.topSandDock.Size = new System.Drawing.Size(494, 0);
 		this.topSandDock.TabIndex = 26;
 		// 
 		// Media_Logos
@@ -4015,7 +4013,7 @@ public class MainForm : System.Windows.Forms.Form {
 		// 
 		this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
 		this.BackColor = System.Drawing.SystemColors.Control;
-		this.ClientSize = new System.Drawing.Size(782, 549);
+		this.ClientSize = new System.Drawing.Size(752, 549);
 		this.Controls.Add(this.tabControl1);
 		this.Controls.Add(this.statusBar);
 		this.Controls.Add(this.leftSandDock);
@@ -4111,10 +4109,10 @@ public class MainForm : System.Windows.Forms.Form {
 		((System.ComponentModel.ISupportInitialize)(this.AudioBar)).EndInit();
 		this.BibleText_Tab.ResumeLayout(false);
 		this.panel6.ResumeLayout(false);
-		((System.ComponentModel.ISupportInitialize)(this.collapsiblePanelBar2)).EndInit();
-		this.collapsiblePanelBar2.ResumeLayout(false);
+		((System.ComponentModel.ISupportInitialize)(this.BibleText_collapsiblePanelBar)).EndInit();
+		this.BibleText_collapsiblePanelBar.ResumeLayout(false);
 		this.collapsiblePanel1.ResumeLayout(false);
-		this.panel5.ResumeLayout(false);
+		this.BibleText_panelLeft.ResumeLayout(false);
 		this.panel8.ResumeLayout(false);
 		this.panel7.ResumeLayout(false);
 		this.rightSandDock.ResumeLayout(false);
