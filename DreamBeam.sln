@@ -1,6 +1,30 @@
 Microsoft Visual Studio Solution File, Format Version 8.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DreamBeam", "DreamBeam.csproj", "{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}"
 	ProjectSection(ProjectDependencies) = postProject
+		{94302930-4AC3-45CB-9BB6-B7D7572E95DB} = {94302930-4AC3-45CB-9BB6-B7D7572E95DB}
+		{14B87235-D657-4009-9C00-63ECA81D7CCF} = {14B87235-D657-4009-9C00-63ECA81D7CCF}
+		{4847D05C-EB58-49D9-B280-D22F8FF01857} = {4847D05C-EB58-49D9-B280-D22F8FF01857}
+		{1A63B1D0-D2F0-4F8C-B242-863E83E1419C} = {1A63B1D0-D2F0-4F8C-B242-863E83E1419C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExRichTextBox", "..\ExRichTextBox\ExRichTextBox.csproj", "{1A63B1D0-D2F0-4F8C-B242-863E83E1419C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lister", "libs\Lister\Lister.csproj", "{14B87235-D657-4009-9C00-63ECA81D7CCF}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoxExLib", "..\MessageBoxExLib\MessageBoxExLib.csproj", "{4847D05C-EB58-49D9-B280-D22F8FF01857}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlLib", "..\MyControlSamples\ControlLib\ControlLib.csproj", "{94302930-4AC3-45CB-9BB6-B7D7572E95DB}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestControls", "..\MyControlSamples\TestControls\TestControls.csproj", "{51CA6FBF-3CBD-431D-AB6E-36D22A065ABB}"
+	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
 Global
@@ -13,9 +37,26 @@ Global
 		{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}.Debug.Build.0 = Debug|.NET
 		{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}.Release.ActiveCfg = Release|.NET
 		{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}.Release.Build.0 = Release|.NET
-	EndGlobalSection
-	GlobalSection(SolutionItems) = postSolution
-		Language\lang.resx = Language\lang.resx
+		{1A63B1D0-D2F0-4F8C-B242-863E83E1419C}.Debug.ActiveCfg = Debug|.NET
+		{1A63B1D0-D2F0-4F8C-B242-863E83E1419C}.Debug.Build.0 = Debug|.NET
+		{1A63B1D0-D2F0-4F8C-B242-863E83E1419C}.Release.ActiveCfg = Release|.NET
+		{1A63B1D0-D2F0-4F8C-B242-863E83E1419C}.Release.Build.0 = Release|.NET
+		{14B87235-D657-4009-9C00-63ECA81D7CCF}.Debug.ActiveCfg = Debug|.NET
+		{14B87235-D657-4009-9C00-63ECA81D7CCF}.Debug.Build.0 = Debug|.NET
+		{14B87235-D657-4009-9C00-63ECA81D7CCF}.Release.ActiveCfg = Release|.NET
+		{14B87235-D657-4009-9C00-63ECA81D7CCF}.Release.Build.0 = Release|.NET
+		{4847D05C-EB58-49D9-B280-D22F8FF01857}.Debug.ActiveCfg = Debug|.NET
+		{4847D05C-EB58-49D9-B280-D22F8FF01857}.Debug.Build.0 = Debug|.NET
+		{4847D05C-EB58-49D9-B280-D22F8FF01857}.Release.ActiveCfg = Release|.NET
+		{4847D05C-EB58-49D9-B280-D22F8FF01857}.Release.Build.0 = Release|.NET
+		{94302930-4AC3-45CB-9BB6-B7D7572E95DB}.Debug.ActiveCfg = Debug|.NET
+		{94302930-4AC3-45CB-9BB6-B7D7572E95DB}.Debug.Build.0 = Debug|.NET
+		{94302930-4AC3-45CB-9BB6-B7D7572E95DB}.Release.ActiveCfg = Release|.NET
+		{94302930-4AC3-45CB-9BB6-B7D7572E95DB}.Release.Build.0 = Release|.NET
+		{51CA6FBF-3CBD-431D-AB6E-36D22A065ABB}.Debug.ActiveCfg = Debug|.NET
+		{51CA6FBF-3CBD-431D-AB6E-36D22A065ABB}.Debug.Build.0 = Debug|.NET
+		{51CA6FBF-3CBD-431D-AB6E-36D22A065ABB}.Release.ActiveCfg = Release|.NET
+		{51CA6FBF-3CBD-431D-AB6E-36D22A065ABB}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

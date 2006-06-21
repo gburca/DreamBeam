@@ -19,20 +19,20 @@ namespace DreamBeam
 		public void HideBg(){
 			_ShowBeam.Songupdate = true;
 
-						if (_MainForm.ToolBars_MainToolbar_HideBG.Checked){
+						if (_ShowBeam.HideBG == true) {
 							_MainForm.ToolBars_MainToolbar_HideBG.Checked = false;
 							_ShowBeam.HideBG = false;
-						}else{
+						} else {
 							_MainForm.ToolBars_MainToolbar_HideBG.Checked = true;
 							_ShowBeam.HideBG = true;
 						}
 
 						// Repaint Image
-						if (_MainForm.selectedTab == 0 || _MainForm.selectedTab == 1){
+						if (_MainForm.selectedTab == MainTab.ShowSongs || _MainForm.selectedTab == MainTab.EditSongs){
 							_MainForm.Draw_Song_Preview_Image();
 							_ShowBeam.PaintSong();
 						}
-						if (_MainForm.selectedTab == 2){
+						if (_MainForm.selectedTab == MainTab.SermonTools){
 							_MainForm.Draw_Song_Preview_Image();
 							_ShowBeam.PaintSermon();
 						}
@@ -51,11 +51,11 @@ namespace DreamBeam
 						}
 
 						// Repaint Image
-						if (_MainForm.selectedTab == 0 || _MainForm.selectedTab == 1){
+						if (_MainForm.selectedTab == MainTab.ShowSongs || _MainForm.selectedTab == MainTab.EditSongs){
 							_MainForm.Draw_Song_Preview_Image();
 							_ShowBeam.PaintSong();
 						}
-						if (_MainForm.selectedTab == 2){
+						if (_MainForm.selectedTab == MainTab.SermonTools){
 							_MainForm.Draw_Song_Preview_Image();
 							_ShowBeam.PaintSermon();
 						}

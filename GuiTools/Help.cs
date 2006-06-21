@@ -13,9 +13,7 @@ using Rilling.Common.UI.Forms;
 
 namespace DreamBeam
 {
-	/// <summary>
-	/// Zusammenfassende Beschreibung für Class
-	/// </summary>
+
 	public class Help: GuiTemplate
 	{
 		private About About = new About();
@@ -24,9 +22,6 @@ namespace DreamBeam
 		
 		public Help(MainForm impForm, ShowBeam impShowBeam) :  base(impForm,impShowBeam)
 		{
-			//
-			// TODO: Hier die Konstruktorlogik einfügen
-			//
 		}
 
 
@@ -540,7 +535,7 @@ namespace DreamBeam
                 break;
 			case 2:
 
-                _MainForm.GuiTools.ShowTab(0);
+                _MainForm.GuiTools.ShowTab(MainTab.ShowSongs);
                 TheHelpBalloon= new MyBalloonWindow();
                 TheHelpBalloon.AnchorQuadrant = AnchorQuadrant.Auto;
                 pos = new Point(_MainForm.Location.X+ 200 ,_MainForm.Location.Y+300);
@@ -560,7 +555,7 @@ namespace DreamBeam
                 }
                 break;
                 /*         case 3:
-                _MainForm.ShowTab(0);
+                _MainForm.ShowTab(MainTab.ShowSongs);
                 TheHelpBalloon= new MyBalloonWindow();
                 TheHelpBalloon.AnchorQuadrant = AnchorQuadrant.Right;
                 pos = new Point(_MainForm.Location.X+ 90 ,_MainForm.Location.Y+250);
@@ -637,7 +632,7 @@ namespace DreamBeam
                 }
                 break;
             case 2:
-                _MainForm.GuiTools.ShowTab(1);
+                _MainForm.GuiTools.ShowTab(MainTab.EditSongs);
                 TheHelpBalloon= new MyBalloonWindow();
                 TheHelpBalloon.AnchorQuadrant = AnchorQuadrant.Auto;
                 pos = new Point(_MainForm.Location.X+ 200 ,_MainForm.Location.Y+300);
@@ -657,7 +652,7 @@ namespace DreamBeam
                 }
                 break;
             case 3:
-                _MainForm.GuiTools.ShowTab(1);
+                _MainForm.GuiTools.ShowTab(MainTab.EditSongs);
                 TheHelpBalloon= new MyBalloonWindow();
 				TheHelpBalloon.AnchorQuadrant = AnchorQuadrant.Auto;
                 pos = new Point(_MainForm.Location.X+ 200 ,_MainForm.Location.Y+200);
@@ -677,7 +672,7 @@ namespace DreamBeam
                 }
                 break;
             case 4:
-                _MainForm.GuiTools.ShowTab(1);
+                _MainForm.GuiTools.ShowTab(MainTab.EditSongs);
                 TheHelpBalloon= new MyBalloonWindow();
                 TheHelpBalloon.AnchorQuadrant = AnchorQuadrant.Auto;
                 pos = new Point(_MainForm.Location.X+ 250 ,_MainForm.Location.Y+175);
@@ -697,7 +692,7 @@ namespace DreamBeam
                 }
                 break;
             case 5:
-                _MainForm.GuiTools.ShowTab(1);
+                _MainForm.GuiTools.ShowTab(MainTab.EditSongs);
                 TheHelpBalloon= new MyBalloonWindow();
                 TheHelpBalloon.AnchorQuadrant = AnchorQuadrant.Right;
 				pos = new Point(_MainForm.Location.X+102,_MainForm.Location.Y+150);
@@ -717,7 +712,7 @@ namespace DreamBeam
                 }
                 break;
             case 6:
-                _MainForm.GuiTools.ShowTab(1);
+                _MainForm.GuiTools.ShowTab(MainTab.EditSongs);
                 TheHelpBalloon= new MyBalloonWindow();
                 TheHelpBalloon.AnchorQuadrant = AnchorQuadrant.Right;
                 pos = new Point(_MainForm.Location.X+102,_MainForm.Location.Y+235);
@@ -793,7 +788,7 @@ namespace DreamBeam
                 }
                 break;
             case 2:
-                _MainForm.GuiTools.ShowTab(3);
+                _MainForm.GuiTools.ShowTab(MainTab.Presentation);
 				if(_MainForm.Sermon_DocManager.TabStrips.Count < 1){
 					_MainForm.Sermon_NewDocument();
                 }
@@ -913,7 +908,7 @@ namespace DreamBeam
                 }
                 break;
             case 2:
-                _MainForm.GuiTools.ShowTab(2);
+                _MainForm.GuiTools.ShowTab(MainTab.SermonTools);
 				if(_MainForm.Sermon_DocManager.TabStrips.Count < 1){
                     _MainForm.Sermon_NewDocument();
                 }

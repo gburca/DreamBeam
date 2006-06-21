@@ -1,6 +1,6 @@
 
 /*/----------------------------------------------------------------------------
-                                    LISTEX v1.0
+                                    LISTEX v1.1
                                    -------------
 Coded By : Nnamdi Onyeyiri
 Email    : theeclypse@hotmail.com
@@ -11,6 +11,10 @@ cool colours, the line under each item, and an image / bullet next to the items.
 If you have any problems using it, just let me know.
 
                                                          © 2002 Nnamdi Onyeyiri
+
+Gabriel Burca:
+Added two new properties: ReadOnly and ShowBullets. If ReadOnly is true,
+a double click on an item does not change it to edit mode.
 ----------------------------------------------------------------------------/*/
 
 using System;
@@ -18,6 +22,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Collections;
 using System.Reflection;
+using System.ComponentModel;
 
 namespace Lister
 {
@@ -99,7 +104,7 @@ namespace Lister
 	}
 	
 	/////
-	// The ListEx class.Where ll the work is done. *Duh*
+	// The ListEx class. Where all the work is done. *Duh*
 	public class ListEx : ListBox
 	{
 		/////
@@ -113,6 +118,8 @@ namespace Lister
 		private ImageList imgs;		// The image list of bullets
 		public Color lineColor;		// The colour of the line.
 		public bool running = false; 	// manual, if program is running
+		private bool readOnly = true;	// if editing of text items should be allowed
+		private bool showBullets = false;
 
 		/////
 		// Properties to access private variables.
@@ -127,11 +134,23 @@ namespace Lister
 			get { return this.lineColor; }
 			set { this.lineColor = value; }
 		}
+
+		[Category("Appearance"),
+		Description("When set to true, a double-click on an item does not change the control to edit mode.")]
+		public bool ReadOnly {
+			get { return this.readOnly; }
+			set { this.readOnly = value; }
+		}
+
+		[Category("Appearance"),
+		Description("When set to true, the default (or custom) bullet to the left of each item is shown.")]
+		public bool ShowBullets {
+			get { return this.showBullets; }
+			set { this.showBullets = value; }
+		}
 		
-		public static Color ClrNormal
-		{
-			get 
-			{
+		public static Color ClrNormal {
+			get {
 				return Color.FromArgb(80, SystemColors.Control);
 			}
 		}
@@ -234,20 +253,27 @@ namespace Lister
 				TxtPos.Y = (bounds.Top+5);
 				TxtPos.Width = this.Size.Width-16;
 				e.Graphics.DrawString(this.Items[e.Index].ToString(), Font, new SolidBrush(e.ForeColor), TxtPos, strfmt);
-				/*
-				if (((ItemInfo)this.itemInfo[e.Index]).Img != -1)
-				{
-					if (imgs != null)
-					{
-						/////
-						// Draw the image as we have an array.
-						Rectangle rect = new Rectangle();
-						rect.Y = e.Bounds.Y+3;
-						rect.X = e.Bounds.X+2;
-						this.imgs.Draw(e.Graphics, rect.Left,rect.Top,((ItemInfo)this.itemInfo[e.Index]).Img);
-					}
-					else
-					{
+				
+				if (showBullets) {
+					if (((ItemInfo)this.itemInfo[e.Index]).Img != -1) {
+						if (imgs != null && imgs.Images.Count > ((ItemInfo)this.itemInfo[e.Index]).Img) {
+							/////
+							// Draw the image as we have an array.
+							Rectangle rect = new Rectangle();
+							rect.Y = e.Bounds.Y+3;
+							rect.X = e.Bounds.X+2;
+							this.imgs.Draw(e.Graphics, rect.Left,rect.Top,((ItemInfo)this.itemInfo[e.Index]).Img);
+						} else {
+							/////
+							// Draw the bullet point
+							Rectangle rect = new Rectangle();
+							rect.Y = e.Bounds.Y+7;
+							rect.X = e.Bounds.X+5;
+							rect.Width = 5;
+							rect.Height = 5;
+							e.Graphics.FillEllipse(new SolidBrush(Color.Black), rect);
+						}
+					} else {
 						/////
 						// Draw the bullet point
 						Rectangle rect = new Rectangle();
@@ -258,17 +284,6 @@ namespace Lister
 						e.Graphics.FillEllipse(new SolidBrush(Color.Black), rect);
 					}
 				}
-				else
-				{
-					/////
-					// Draw the bullet point
-					Rectangle rect = new Rectangle();
-					rect.Y = e.Bounds.Y+7;
-					rect.X = e.Bounds.X+5;
-					rect.Width = 5;
-					rect.Height = 5;
-					e.Graphics.FillEllipse(new SolidBrush(Color.Black), rect);
-				} 				*/
 			}
 
 			base.OnDrawItem(e);
@@ -318,47 +333,49 @@ namespace Lister
 		{
 			if (HasItems())
 			{
-			 /*	/////
-				// Get the rect of the current item.
-				Rectangle irect = GetItemRectangle(this.SelectedIndex);
+				if (! readOnly) {
+					/////
+					// Get the rect of the current item.
+					Rectangle irect = GetItemRectangle(this.SelectedIndex);
 				
-				/////
-				// Check if there is a vertical scrollbar.
-				int iSWidth = SystemInformation.VerticalScrollBarWidth;
-				int h = (this.PreferredHeight < this.Size.Height) ? 0 : iSWidth;
+					/////
+					// Check if there is a vertical scrollbar.
+					int iSWidth = SystemInformation.VerticalScrollBarWidth;
+					int h = (this.PreferredHeight < this.Size.Height) ? 0 : iSWidth;
 				
-				/////
-				// Initiate the textbox.
-				tb = new TextBox();
-				tb.Size = new Size(this.Size.Width-28-h, irect.Height-10);
-				tb.Text = this.Items[this.SelectedIndex].ToString();
-				tb.BorderStyle = BorderStyle.None;
+					/////
+					// Initiate the textbox.
+					tb = new TextBox();
+					tb.Size = new Size(this.Size.Width-28-h, irect.Height-10);
+					tb.Text = this.Items[this.SelectedIndex].ToString();
+					tb.BorderStyle = BorderStyle.None;
 				
-				/////
-				// Check if we want a vertical scrollbar.
-				string s = Items[this.SelectedIndex].ToString();
-				Graphics grfx = CreateGraphics();
-				SizeF sf = grfx.MeasureString("hello",Font,Width);
-				int IH = (int)sf.Height + 10;			
-				if (!(GetItemHeight(this.SelectedIndex) ==  (Font.Height+10)))
-					tb.ScrollBars = ScrollBars.Vertical;
+					/////
+					// Check if we want a vertical scrollbar.
+					string s = Items[this.SelectedIndex].ToString();
+					Graphics grfx = CreateGraphics();
+					SizeF sf = grfx.MeasureString("hello",Font,Width);
+					int IH = (int)sf.Height + 10;			
+					if (!(GetItemHeight(this.SelectedIndex) ==  (Font.Height+10)))
+						tb.ScrollBars = ScrollBars.Vertical;
 				
-				/////
-				// More setup for the textbox.
-				tb.SelectAll();
-				tb.Multiline = true;
-				Rectangle rect = GetItemRectangle(this.SelectedIndex);
-				rect.X = rect.X+5;
-				if (this.imgs != null)
-					rect.X = rect.X+this.imgs.ImageSize.Width;
-				else
-					rect.X = rect.X+10;
-				rect.Y = rect.Y+4;
-				tb.Location = new Point(rect.X, rect.Y);
-				this.Controls.Add(tb);
-				tb.Show();
-				tb.Focus();
-				this.HasTextBox = true;  */
+					/////
+					// More setup for the textbox.
+					tb.SelectAll();
+					tb.Multiline = true;
+					Rectangle rect = GetItemRectangle(this.SelectedIndex);
+					rect.X = rect.X+5;
+					if (this.imgs != null)
+						rect.X = rect.X+this.imgs.ImageSize.Width;
+					else
+						rect.X = rect.X+10;
+					rect.Y = rect.Y+4;
+					tb.Location = new Point(rect.X, rect.Y);
+					this.Controls.Add(tb);
+					tb.Show();
+					tb.Focus();
+					this.HasTextBox = true;
+				}
 				this.Selected = this.SelectedIndex;
 			}
 			base.OnDoubleClick(e);
@@ -424,7 +441,7 @@ namespace Lister
 				/////
 				// If it was a left mouse click, and over the area of the bullet/image
 				// invoke the PressIcon event.
-				if (e.Button == MouseButtons.Left)
+				if (e.Button == MouseButtons.Left && this.SelectedIndex >= 0)
 				{
 					Rectangle mrect = new Rectangle();
 					Point p  = PointToClient(Control.MousePosition);

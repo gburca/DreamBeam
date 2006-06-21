@@ -33,6 +33,7 @@ namespace DreamBeam
 		   Thread_Render = new Thread(new ThreadStart(RenderAll));
 			Thread_Render.Priority = ThreadPriority.Lowest;
 			Thread_Render.IsBackground = true;
+			Thread_Render.Name = "Prerenderer";
 			this.ReRenderTimer = new System.Windows.Forms.Timer();
 			//
 			// ReRenderTimer
@@ -57,7 +58,7 @@ namespace DreamBeam
 				}else{
 						Thread_Render = new Thread(new ThreadStart(RenderAll));
 						Thread_Render.Priority = ThreadPriority.Lowest;
-						Thread_Render.Name = "Render";
+						Thread_Render.Name = "RenderAllThreaded";
 						Thread_Render.IsBackground = true;
 						Thread_Render.Start();
 				}

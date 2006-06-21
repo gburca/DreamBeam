@@ -37,6 +37,7 @@ namespace DreamBeam
 						LoadingMediaList = "Import";
 						Thread_MediaLoader = new Thread(new ThreadStart(DragDropThread));
 						Thread_MediaLoader.IsBackground = true;
+						Thread_MediaLoader.Name = "MediaLoader:DragDrop";
 						Thread_MediaLoader.Start();
 					}
 				}
@@ -96,7 +97,7 @@ namespace DreamBeam
 					try{
 					   _MainForm.Media_ImageList.Images.Add(_ShowBeam.DrawProportionalBitmap(new Size (100,75),sPath));
 					   this.MediaList.Insert(index,Path.GetFileName(sPath),sPath,_MainForm.Media_ImageList.Images.Count-1);
-					}catch(Exception e){}
+					} catch {}
 				   }
 				   if(MediaList.GetType(sPath) == "flash"){
 					   _MainForm.Media_ImageList.Images.Add(_MainForm.Media_Logos.Images[0]);
@@ -115,6 +116,7 @@ namespace DreamBeam
 						LoadingMediaList = FileName;
 						Thread_MediaLoader = new Thread(new ThreadStart(LoaderThread));
 						Thread_MediaLoader.IsBackground = true;
+						Thread_MediaLoader.Name = "MediaLoader:LoadSelectedMediaList";
 					    Thread_MediaLoader.Start();
 					}
 			   }
@@ -188,7 +190,7 @@ namespace DreamBeam
 						if(File.Exists(localFile)){
 							try{
 								File.Delete (localFile);
-							}catch(Exception doh){}
+							} catch {}
 						}
 					   if(tmp>=0)
 						   _MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex = tmp;

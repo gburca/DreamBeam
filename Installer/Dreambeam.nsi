@@ -14,7 +14,7 @@
 ;General
 
   ;Name and file
-  !define VERSION "0.5"
+  !define VERSION "0.7"
 	!define MUI_PRODUCT "Dreambeam"
 	Name "${MUI_PRODUCT} ${VERSION}"
 	

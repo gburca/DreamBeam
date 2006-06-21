@@ -20,7 +20,7 @@ namespace DreamBeam {
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         public string version = "";
-        public string InfoText = " Copyright 2004 Stefan Kaufmann \n This Software is distributed under the terms of the GNU General Public License. \n";
+        public string InfoText = " Copyright 2004 Stefan Kaufmann (with major contributions by Gabriel Burca) \n This Software is distributed under the terms of the GNU General Public License. \n";
 
 
         // Threading
@@ -35,7 +35,7 @@ namespace DreamBeam {
         // Status and progress bar
         static string ms_sStatus;
         private double m_dblCompletionFraction = 0;
-        private Rectangle m_rProgress;
+        //private Rectangle m_rProgress;
 
 
         // Progress smoothing
@@ -153,6 +153,7 @@ namespace DreamBeam {
                 return;
             ms_oThread = new Thread( new ThreadStart(Splash.ShowForm));
             ms_oThread.IsBackground = true;
+			ms_oThread.Name = "ShowSplashScreen";
             ms_oThread.ApartmentState = ApartmentState.STA;
             ms_oThread.Start();
         }
@@ -337,8 +338,8 @@ namespace DreamBeam {
     /// </summary>
     public class RegistryAccess {
         private const string SOFTWARE_KEY = "Software";
-        private const string COMPANY_NAME = "MyCompany";
-        private const string APPLICATION_NAME = "MyApplication";
+        private const string COMPANY_NAME = "GNU";
+        private const string APPLICATION_NAME = "DreamBeam";
 
         // Method for retrieving a Registry Value.
         static public string GetStringRegistryValue(string key, string defaultValue) {

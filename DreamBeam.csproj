@@ -35,8 +35,8 @@
                     IncrementalBuild = "false"
                     NoStdLib = "false"
                     NoWarn = ""
-                    Optimize = "false"
-                    OutputPath = "C:\DreamBeam\ActiveDream\"
+                    Optimize = "true"
+                    OutputPath = "Installer\Dreambeam\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -118,11 +118,6 @@
                     Name = "System.Web"
                     AssemblyName = "System.Web"
                     HintPath = "c:\windows\microsoft.net\framework\v1.1.4322\System.Web.dll"
-                />
-                <Reference
-                    Name = "Lister"
-                    AssemblyName = "Lister"
-                    HintPath = "libs\Lister.dll"
                 />
                 <Reference
                     Name = "OPaC.Themed.Forms"
@@ -243,6 +238,41 @@
                     AssemblyName = "DreamBeam.resources"
                     HintPath = "bin\Debug\de-DE\DreamBeam.resources.dll"
                 />
+                <Reference
+                    Name = "Khendys.Controls.ExRichTextBox"
+                    AssemblyName = "Khendys.Controls.ExRichTextBox"
+                    HintPath = "..\ExRichTextBox\obj\Debug\Khendys.Controls.ExRichTextBox.dll"
+                />
+                <Reference
+                    Name = "Lister"
+                    AssemblyName = "Lister"
+                    HintPath = "libs\Lister\bin\Debug\Lister.dll"
+                />
+                <Reference
+                    Name = "xppanel"
+                    AssemblyName = "XPPanel"
+                    HintPath = "libs\xppanel.dll"
+                />
+                <Reference
+                    Name = "CookComputing.XmlRpc"
+                    AssemblyName = "CookComputing.XmlRpc"
+                    HintPath = "libs\CookComputing.XmlRpc.dll"
+                />
+                <Reference
+                    Name = "System.Runtime.Remoting"
+                    AssemblyName = "System.Runtime.Remoting"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Runtime.Remoting.dll"
+                />
+                <Reference
+                    Name = "MessageBoxExLib"
+                    AssemblyName = "MessageBoxExLib"
+                    HintPath = "..\MessageBoxExLib\bin\Debug\MessageBoxExLib.dll"
+                />
+                <Reference
+                    Name = "ControlLib"
+                    AssemblyName = "ControlLib"
+                    HintPath = "..\MyControlSamples\ControlLib\bin\Debug\ControlLib.dll"
+                />
             </References>
         </Build>
         <Files>
@@ -275,6 +305,11 @@
                 <File
                     RelPath = "ChangeLog.txt"
                     BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Display.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
                 />
                 <File
                     RelPath = "InputBox.cs"
@@ -327,6 +362,16 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "SongEditor.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "SongEditor.resx"
+                    DependentUpon = "SongEditor.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "splash.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
@@ -337,8 +382,23 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "XmlRpc.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "XmlRpc.resx"
+                    DependentUpon = "XmlRpc.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "Daten\Images.resx"
                     BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "FileTypes\Bible.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
                 />
                 <File
                     RelPath = "FileTypes\Config.cs"
@@ -361,6 +421,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "FileTypes\TextTool.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Graphics\PerPixelAlphaForm.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
@@ -374,6 +439,16 @@
                     RelPath = "Graphics\TextGraphics.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "GuiTools\BibleRTF.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "GuiTools\BibleRTF.resx"
+                    DependentUpon = "BibleRTF.cs"
+                    BuildAction = "EmbeddedResource"
                 />
                 <File
                     RelPath = "GuiTools\GuiTemplate.cs"
@@ -411,6 +486,16 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "GuiTools\TextFormatOptions.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "GuiTools\TextFormatOptions.resx"
+                    DependentUpon = "TextFormatOptions.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "GuiTools\RightDock\BGImageTools.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -430,6 +515,21 @@
                 />
                 <File
                     RelPath = "Language\Language.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\Arguments.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\IniHandler.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\Set.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

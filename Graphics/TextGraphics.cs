@@ -199,7 +199,7 @@ namespace DreamBeam
 													// Definitions for Single Lang Songs:
 													Graphics g = Graphics.FromImage(new Bitmap(100,100));
 
-																									LineStringSize2 =  g.MeasureString(strLine,new Font(_Song.FontFace[3],_Song.FontSize[3]));
+													LineStringSize2 =  g.MeasureString(strLine,new Font(_Song.FontFace[3],_Song.FontSize[3]));
 													LineStringSize2.Width = (int)System.Math.Round((double)LineStringSize2.Width*72/100);
 													LineStringSize2.Height = (int)System.Math.Round((double)LineStringSize2.Height*100/100);
 
@@ -474,7 +474,7 @@ namespace DreamBeam
 
 
 
-			 }catch(Exception e){}
+			 } catch {}
 		}
 	#endregion
 
@@ -509,14 +509,20 @@ namespace DreamBeam
 								if(_ShowBeam.Config.PreRender == false){
 										try{curImage = Image.FromFile(bmImagePath);}finally{}
 								}else if(Thread.CurrentThread.Name == "Render"){
-									bool loaded = false;
+									//bool loaded = false;
 //									while(loaded == false){
-										try{curImage4Thread = Image.FromFile(bmImagePath); loaded = true;}finally{}
+										try {
+											curImage4Thread = Image.FromFile(bmImagePath);
+											//loaded = true;
+										} finally {}
 //									}
 								}else{
-									bool loaded = false;
+									//bool loaded = false;
 //									while(loaded == false){
-										try{curImage = Image.FromFile(bmImagePath); loaded = true;}finally{}
+										try {
+											curImage = Image.FromFile(bmImagePath);
+											//loaded = true;
+										} finally {}
 //									}
 								}
 						 }
@@ -535,14 +541,14 @@ namespace DreamBeam
 					}
 
 
-			}catch(Exception e){}
+			} catch {}
 		#endregion
 
 			graphics.SmoothingMode = SmoothingMode.AntiAlias;
 			//declare Variables, needed in  loop
-			GraphicsPath pth, pth2;
+			GraphicsPath pth;
 			String[] Strophes = new String[100];
-			string strTempText,temp,strCurrentStrophe;
+			string strTempText,strCurrentStrophe;
 			strCurrentStrophe = _ShowBeam.Song.GetStrophe(Strophe);
 			string strLongestStrophe = _ShowBeam.Song.GetLongestStrophe();
 			string strWidestStrophe = _ShowBeam.Song.GetWidestStrophe();
@@ -594,7 +600,7 @@ namespace DreamBeam
 										tmpPosY[0] = ((int)System.Math.Round((double)(tmpPosY[1]/2)) -(int)System.Math.Round((double)(CaptionSize.Height/2)));
 									}
 
-								}catch(Exception e){}
+								} catch {}
 							}
 							if (j == 1 && _ShowBeam.Song.AutoPos[1]) {
 								try{
@@ -604,13 +610,13 @@ namespace DreamBeam
 									tmpPosX[j] = (int)System.Math.Round((double)(iWidth-WidestStropheSize.Width) /2);
 									tmpPosY[j] = (int)System.Math.Round((double)(((iHeight - _ShowBeam.Song.posY[0]) - StropheSize.Height)/2) + tmpPosY[0]);
 
-								}catch(Exception e){}
+								} catch {}
 							}
 							if (j == 2 && _ShowBeam.Song.AutoPos[2]) {
 								try{
 									tmpPosX[j] = (int)System.Math.Round((double)(iWidth - iWidth/300));
 									tmpPosY[j] = (int)System.Math.Round((double)(iHeight - AuthorSize.Height)-(iHeight/100));
-								}catch(Exception e){}
+								} catch {}
 							}
 
 						 #endregion

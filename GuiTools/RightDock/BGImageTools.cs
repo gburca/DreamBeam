@@ -73,6 +73,7 @@ namespace DreamBeam
 				this.g_Bg_Directory = directory;
 				Thread_BgImage = new Thread( new ThreadStart(ListImages_Threader));
 				Thread_BgImage.IsBackground = true;
+				Thread_BgImage.Name = "ListImages";
 				Thread_BgImage.Start();
 			}
 		}
@@ -99,9 +100,7 @@ namespace DreamBeam
 				//find the number of Files in Directory
 				 foreach (string filetype in filetypes){
 					string[] dirs = Directory.GetFiles(@strImageDir, "*"+filetype);
-					foreach (string dir in dirs){
-						filecount++;
-					}
+					 filecount += dirs.Length;
 				}
 
 				int i_file = 1;
@@ -132,7 +131,7 @@ namespace DreamBeam
 						System.IO.Directory.CreateDirectory(directory);
 					}
 
-					int intImageCount=0;
+					//int intImageCount=0;
 					_MainForm.RightDocks_imageList.Images.Clear();
 					_MainForm.RightDocks_ImageListBox.Items.Clear();
 
@@ -154,18 +153,20 @@ namespace DreamBeam
 				if (_MainForm.RightDocks_FolderDropdown.SelectedIndex > 0)   {
 					path = path + _MainForm.RightDocks_FolderDropdown.Items[_MainForm.RightDocks_FolderDropdown.SelectedIndex].ToString() + @"\";
 				}
-				if (_MainForm.selectedTab == 1){
-					_ShowBeam.Song.bg_image =  path + _MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text;
-				   _MainForm.SongEdit_BG_Label.Text =  path + _MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text;
-				}else if(_MainForm.selectedTab == 0){
-					_ShowBeam.ImageOverWritePath =  path + _MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text;
-				   _MainForm.SongShow_BG_Label.Text =  path + _MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text;
-					if(_ShowBeam.OverWriteBG)
-						_ShowBeam.Prerenderer.RenderAllThreaded();
-				}else if(_MainForm.selectedTab == 2){
-					_ShowBeam.SermonImagePath =  path + _MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text;
-			   }
-			   _MainForm.Draw_Song_Preview_Image_Threaded();
+
+				if (_MainForm.RightDocks_ImageListBox.SelectedIndex >= 0) {
+					path = path + _MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text;
+					if (_MainForm.selectedTab == MainTab.EditSongs) {
+						_MainForm.songEditor.Background.Text = path;
+					}
+
+					if (_MainForm.DisplayPreview.content != null) {
+						_MainForm.DisplayPreview.content.ChangeBGImagePath( path );
+						_MainForm.DisplayPreview.UpdateDisplay(true);
+					}
+				}
+
+
 			}
 
 

@@ -63,7 +63,7 @@ namespace DreamBeam {
         ///<summary>Background Image Path for Sermon Texts</summary>
 		public String SermonImagePath = null;
 
-		///<summary> the size for the Outlines (will be loaded from config.xml) </summary>
+		///<summary> the size for the Outlines (will be loaded from the MainForm.ConfigSet) </summary>
 		public float OutlineSize = 5.0f;
 
 		///<summary>the name of the actually used BG Image </summary>
@@ -82,7 +82,7 @@ namespace DreamBeam {
 		public Graphics graphics;
 
 		///<summary>The final Bitmap for the BeamBox </summary>
-		private Bitmap memoryBitmap = null;
+		public Bitmap memoryBitmap = null;
 
 		///<summary>Use AlphaBlending Transitions </summary>
 		public bool transit = false;
@@ -143,6 +143,9 @@ namespace DreamBeam {
 //		DirectShowLib Lib = new DirectShowLib();
 
 		private FXLib FXLib = new FXLib();
+		#endregion
+
+		#region Controls
 		private System.Windows.Forms.Panel panel1;
 		///<summary>ShowBeam Position Box </summary>
 		public System.Windows.Forms.NumericUpDown WindowPosX;
@@ -152,8 +155,6 @@ namespace DreamBeam {
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button4;
-
-
         private System.Windows.Forms.Panel panel2;
         ///<summary>ShowBeam Size Box </summary>
         public System.Windows.Forms.NumericUpDown WindowSizeY;
@@ -163,7 +164,7 @@ namespace DreamBeam {
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Panel ShowSongPanel;
+        public System.Windows.Forms.Panel ShowSongPanel;
 		public AxShockwaveFlashObjects.AxShockwaveFlash axShockwaveFlash;
 		private System.Windows.Forms.Panel VideoPanel;
         private System.Windows.Forms.Timer PlayBackTimer;
@@ -179,9 +180,10 @@ namespace DreamBeam {
         private System.Windows.Forms.Label AutoSizeLabelH;
         private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Button Screen_SetSettingsButton;
-	#endregion
 		private System.Windows.Forms.PictureBox TestImage;
 		private System.Windows.Forms.Timer AlphaTimer;
+		#endregion
+
 
 		/// <summary> Initialize the Class</summary>
 		public ShowBeam() {
@@ -281,18 +283,18 @@ namespace DreamBeam {
 			// 
 			// WindowPosY
 			// 
-			this.WindowPosY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.WindowPosY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.WindowPosY.Location = new System.Drawing.Point(44, 65);
 			this.WindowPosY.Maximum = new System.Decimal(new int[] {
-						10000,
-						0,
-						0,
-						0});
+																	   10000,
+																	   0,
+																	   0,
+																	   0});
 			this.WindowPosY.Minimum = new System.Decimal(new int[] {
-						10000,
-						0,
-						0,
-						-2147483648});
+																	   10000,
+																	   0,
+																	   0,
+																	   -2147483648});
 			this.WindowPosY.Name = "WindowPosY";
 			this.WindowPosY.Size = new System.Drawing.Size(54, 20);
 			this.WindowPosY.TabIndex = 5;
@@ -301,18 +303,18 @@ namespace DreamBeam {
 			// 
 			// WindowPosX
 			// 
-			this.WindowPosX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.WindowPosX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.WindowPosX.Location = new System.Drawing.Point(44, 44);
 			this.WindowPosX.Maximum = new System.Decimal(new int[] {
-						10000,
-						0,
-						0,
-						0});
+																	   10000,
+																	   0,
+																	   0,
+																	   0});
 			this.WindowPosX.Minimum = new System.Decimal(new int[] {
-						10000,
-						0,
-						0,
-						-2147483648});
+																	   10000,
+																	   0,
+																	   0,
+																	   -2147483648});
 			this.WindowPosX.Name = "WindowPosX";
 			this.WindowPosX.Size = new System.Drawing.Size(54, 20);
 			this.WindowPosX.TabIndex = 4;
@@ -372,51 +374,51 @@ namespace DreamBeam {
 			// 
 			// WindowSizeY
 			// 
-			this.WindowSizeY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.WindowSizeY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.WindowSizeY.Location = new System.Drawing.Point(44, 65);
 			this.WindowSizeY.Maximum = new System.Decimal(new int[] {
-						10000,
-						0,
-						0,
-						0});
+																		10000,
+																		0,
+																		0,
+																		0});
 			this.WindowSizeY.Minimum = new System.Decimal(new int[] {
-						160,
-						0,
-						0,
-						0});
+																		160,
+																		0,
+																		0,
+																		0});
 			this.WindowSizeY.Name = "WindowSizeY";
 			this.WindowSizeY.Size = new System.Drawing.Size(54, 20);
 			this.WindowSizeY.TabIndex = 5;
 			this.WindowSizeY.Value = new System.Decimal(new int[] {
-						200,
-						0,
-						0,
-						0});
+																	  200,
+																	  0,
+																	  0,
+																	  0});
 			this.WindowSizeY.ValueChanged += new System.EventHandler(this.WindowSizeY_ValueChanged);
 			this.WindowSizeY.Leave += new System.EventHandler(this.WindowSizeY_ValueChanged);
 			// 
 			// WindowSizeX
 			// 
-			this.WindowSizeX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.WindowSizeX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.WindowSizeX.Location = new System.Drawing.Point(44, 44);
 			this.WindowSizeX.Maximum = new System.Decimal(new int[] {
-						10000,
-						0,
-						0,
-						0});
+																		10000,
+																		0,
+																		0,
+																		0});
 			this.WindowSizeX.Minimum = new System.Decimal(new int[] {
-						150,
-						0,
-						0,
-						0});
+																		150,
+																		0,
+																		0,
+																		0});
 			this.WindowSizeX.Name = "WindowSizeX";
 			this.WindowSizeX.Size = new System.Drawing.Size(54, 20);
 			this.WindowSizeX.TabIndex = 4;
 			this.WindowSizeX.Value = new System.Decimal(new int[] {
-						350,
-						0,
-						0,
-						0});
+																	  350,
+																	  0,
+																	  0,
+																	  0});
 			this.WindowSizeX.ValueChanged += new System.EventHandler(this.WindowSizeX_ValueChanged);
 			this.WindowSizeX.Leave += new System.EventHandler(this.WindowSizeX_ValueChanged);
 			// 
@@ -496,9 +498,9 @@ namespace DreamBeam {
 			this.SizePosControl.Appearance = System.Windows.Forms.TabAppearance.Buttons;
 			this.SizePosControl.Controls.Add(this.tabPage1);
 			this.SizePosControl.Controls.Add(this.TabManSize);
-			this.SizePosControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.SizePosControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.SizePosControl.ItemSize = new System.Drawing.Size(152, 21);
-			this.SizePosControl.Location = new System.Drawing.Point(1, 1);
+			this.SizePosControl.Location = new System.Drawing.Point(0, 0);
 			this.SizePosControl.Name = "SizePosControl";
 			this.SizePosControl.SelectedIndex = 0;
 			this.SizePosControl.Size = new System.Drawing.Size(313, 167);
@@ -536,7 +538,7 @@ namespace DreamBeam {
 			this.groupBox1.Controls.Add(this.AutoSizeLabelW);
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Controls.Add(this.AutoSizeLabelH);
-			this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.groupBox1.Location = new System.Drawing.Point(144, 8);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(160, 86);
@@ -546,7 +548,7 @@ namespace DreamBeam {
 			// 
 			// AutoPosLabelY
 			// 
-			this.AutoPosLabelY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.AutoPosLabelY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.AutoPosLabelY.Location = new System.Drawing.Point(82, 28);
 			this.AutoPosLabelY.Name = "AutoPosLabelY";
 			this.AutoPosLabelY.Size = new System.Drawing.Size(70, 16);
@@ -554,7 +556,7 @@ namespace DreamBeam {
 			// 
 			// AutoPosLabelX
 			// 
-			this.AutoPosLabelX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.AutoPosLabelX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.AutoPosLabelX.Location = new System.Drawing.Point(8, 28);
 			this.AutoPosLabelX.Name = "AutoPosLabelX";
 			this.AutoPosLabelX.Size = new System.Drawing.Size(70, 16);
@@ -571,7 +573,7 @@ namespace DreamBeam {
 			// 
 			// AutoSizeLabelW
 			// 
-			this.AutoSizeLabelW.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.AutoSizeLabelW.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.AutoSizeLabelW.Location = new System.Drawing.Point(8, 60);
 			this.AutoSizeLabelW.Name = "AutoSizeLabelW";
 			this.AutoSizeLabelW.Size = new System.Drawing.Size(70, 16);
@@ -587,7 +589,7 @@ namespace DreamBeam {
 			// 
 			// AutoSizeLabelH
 			// 
-			this.AutoSizeLabelH.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.AutoSizeLabelH.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.AutoSizeLabelH.Location = new System.Drawing.Point(82, 60);
 			this.AutoSizeLabelH.Name = "AutoSizeLabelH";
 			this.AutoSizeLabelH.Size = new System.Drawing.Size(70, 16);
@@ -596,7 +598,7 @@ namespace DreamBeam {
 			// ScreenList
 			// 
 			this.ScreenList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.ScreenList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ScreenList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.ScreenList.Location = new System.Drawing.Point(2, 2);
 			this.ScreenList.Name = "ScreenList";
 			this.ScreenList.Size = new System.Drawing.Size(142, 119);
@@ -661,6 +663,7 @@ namespace DreamBeam {
 			this.groupBox1.ResumeLayout(false);
 			this.TabManSize.ResumeLayout(false);
 			this.ResumeLayout(false);
+
 		}
 	#endregion
 
@@ -673,13 +676,8 @@ namespace DreamBeam {
 			this.DrawWhat = 0;
 
 			this.GDIDraw();
-
 			//this.DXDraw();
 		}
-
-
-
-
 
 		public bool DrawSongItem(int j){
 			if(j == 0 && this.HideTitle){
@@ -705,16 +703,28 @@ namespace DreamBeam {
         }
 
         ///<summary>Paints a Bitmap from the Sermon Contents</summary>
-        public void DrawSermonBitmap(int Width,int Heigt) {
+        public Bitmap DrawSermonBitmap(int Width,int Height) {
 			Pen p;
             SolidBrush sdBrush1;
             sdBrush1 = new SolidBrush(this.BackgroundColor);
-            //   Bitmap bmp = null;
             bmp =  new Bitmap(Width,Height);
             graphics = Graphics.FromImage(bmp);
-            graphics.InterpolationMode =InterpolationMode.HighQualityBicubic;
-            graphics.PixelOffsetMode =PixelOffsetMode.HighQuality;
-
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+			graphics.SmoothingMode = SmoothingMode.AntiAlias;
+			graphics.SmoothingMode = SmoothingMode.HighQuality;
+			graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+			Rectangle bRef, bVerse, rect;
+						
+			// These need to be configuration parameters. They are similar to Sermon.posX and Sermon.posY
+			// Percentage x, y, width, height of the box for Ref, Verse, Transl
+			RectangleF boundsRef = new RectangleF(0.05F, 0.05F, 0.95F, 0.18F);
+			RectangleF boundsVerse = new RectangleF(0.05F, 0.20F, 0.95F, 0.95F);
+			bRef = new System.Drawing.Rectangle((int)(boundsRef.X * Width), (int)(boundsRef.Y * Height),
+				(int)((boundsRef.Width - boundsRef.X)* Width), (int)((boundsRef.Height - boundsRef.Y) * Height));
+			bVerse = new System.Drawing.Rectangle((int)(boundsVerse.X * Width), (int)(boundsVerse.Y * Height),
+				(int)((boundsVerse.Width - boundsVerse.X) * Width), (int)((boundsVerse.Height - boundsVerse.Y) * Height));
+								
 			#region care about BG Image
 
             if (this.SermonImagePath != null  && HideBG == false) {
@@ -726,62 +736,85 @@ namespace DreamBeam {
                 }
                 graphics.DrawImage(curImage, 0, 0, Width, Height);
             } else {
+				//draw a blank rectangle if no image is defined.
                 graphics.FillRectangle(sdBrush1, new Rectangle(0,0,this.Width, this.Height));
             }
-            ; //draw a blank rectangle if no image is defined.
 
 			#endregion
 
+			/*
+			graphics.DrawRectangle(new Pen(Color.Green, 2), bRef);
+			graphics.DrawRectangle(new Pen(Color.Yellow, 2), bVerse);
+			rect = new Rectangle((int)(Width/2), (int)(Height/2), 0, 0);
+			int i = 25;
+			while (rect.Width < Width) {
+				graphics.DrawRectangle(new Pen(Color.Gray, 1), rect);
+				rect.Inflate(i, i);
+			}
+			*/
 
-
-
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
-			//declare Variables, needed in  loop
+			
 			GraphicsPath pth, pth2;
 			pth = new GraphicsPath();
-//			int i,i2;
-			string strTempText;
-			//,temp;
+			string text;
+
             if (!HideText) {
-                strTempText = "";
                 for (int j = 0; j <=2; j++) {
-					if(Sermon.GetText(j).Length > 0) {
+					text = Sermon.GetText(j);
+					if (text.Length > 0) {
 
-					   // RectangleF boundRect;
-                        // Define Size:
-						//      this.Sermon.FontSize[j] = (int)System.Math.Round((double)this.Size.Width/23);
-                        p=new Pen(Sermon.TextColor[j],1.0f);
-                        pth.AddString(strTempText,
-                                      new FontFamily(Sermon.FontFace[j]),0,Sermon.FontSize[j],
-									  new Point(Sermon.posX[j],Sermon.posY[j]),StringFormat.GenericTypographic);
-                        strTempText = Sermon.GetText(j);
-                        sdBrush1 = new SolidBrush(Sermon.TextColor[j]);
-                        graphics.FillPath(sdBrush1,pth);
-                        graphics.DrawPath(p,pth);
-
-
-                        SizeF stringSize = new SizeF();
-                        stringSize = graphics.MeasureString(strTempText,new Font(Sermon.FontFace[j],Sermon.FontSize[j]));
-						stringSize.Width = (int)System.Math.Round((double)stringSize.Width*72/100);
-                        stringSize.Height = (int)System.Math.Round((double)stringSize.Height*74/100);
-                        //     graphics.DrawRectangle(new Pen(Color.Red, 1),0.0F, 0.0F, stringSize.Width, stringSize.Height);
-
-                        //     MessageBox.Show(Convert.ToString());
-
-                        this.Sermon.posX[j] = (int)System.Math.Round((double)(this.Size.Width-stringSize.Width) /2);
-                        //      this.Sermon.posX[j] = 0;
-                        this.Sermon.posY[j] = (int)System.Math.Round((double)(this.Size.Height -stringSize.Height) /2);
-
-						graphics.SmoothingMode = SmoothingMode.HighQuality;
-						graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-						sf = new StringFormat();
-						sf.Alignment = StringAlignment.Near;
-						sf.LineAlignment = StringAlignment.Center;
-						p=new Pen(Sermon.TextColor[j],1.0f);
+						p = new Pen(Sermon.TextColor[j], 1.0f);
 						p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-						System.Drawing.Rectangle rect = new System.Drawing.Rectangle(this.Size.Width/25,this.Size.Height/25,this.Size.Width-this.Size.Width/25,this.Size.Height-this.Size.Height/25);
-						pth.AddString(strTempText, new FontFamily(Sermon.FontFace[j]),0,Sermon.FontSize[j],rect,sf);
+						SizeF stringSize = new SizeF();
+						sf = new StringFormat();
+                        
+						switch (j) {
+							case 0:
+								sf.Alignment = StringAlignment.Near;
+								sf.LineAlignment = StringAlignment.Center;
+								rect = bRef;
+								break;
+							case 1:
+								sf.Alignment = StringAlignment.Center;
+								sf.LineAlignment = StringAlignment.Center;
+								//rect = new System.Drawing.Rectangle(bVerse.X, bVerse.Y, bVerse.Width, bVerse.Height);
+								rect = bVerse;
+								break;
+							default:
+								sf.Alignment = StringAlignment.Far;
+								sf.LineAlignment = StringAlignment.Center;
+								rect = bVerse;
+								break;
+						}		
+
+
+						// Make a rectangle that is very tall to see how far down the text would stretch.
+						Rectangle pathRect = rect;
+						pathRect.Height = 10000;
+
+						RectangleF pathBounds;
+						float fontSz = Sermon.FontSize[j];
+						Font font;
+
+						// If the font size is too big, find the next size down that fits.
+						// Esther 8:9 is one of the longest verses in the bible. See if it fits.
+						do {
+							font = new Font(Sermon.FontFace[j], fontSz, Sermon.FontStyle[j]);
+							pth.Reset();
+							pth.AddString(text, font.FontFamily, (int)font.Style, font.Size, pathRect, sf);
+							pathBounds = pth.GetBounds();
+							fontSz--;
+						} while (pathBounds.Height > bVerse.Height);
+
+						// For some reason, the path gets drawn at some silly Y location, nowhere close to pathRect.Y.
+						// See pathBounds.Y. We re-draw it where it belongs.
+						pth.Reset();
+						pth.AddString(text, font.FontFamily, (int)font.Style, font.Size, rect, sf);
+						pathBounds = pth.GetBounds();
+
 						sdBrush1 = new SolidBrush(Sermon.TextColor[j]);
+
+
 						if (Sermon.TextEffect[j] == "Normal" || Sermon.TextEffect[j] == "") {
 
 							graphics.FillPath(sdBrush1,pth);
@@ -804,7 +837,7 @@ namespace DreamBeam {
 
 						} else  if (Sermon.TextEffect[j] == "Outline") {
                             p=new Pen(Sermon.OutlineColor[j],1.5f);
-                            pth.AddString(strTempText,
+                            pth.AddString(text,
                                           new FontFamily(Sermon.FontFace[j]),0,Sermon.FontSize[j],
                                           new Point(Sermon.posX[j],Sermon.posY[j]),StringFormat.GenericTypographic);
 
@@ -814,7 +847,7 @@ namespace DreamBeam {
                 }
             }
 
-            //   return bmp;
+            return bmp;
 		}
 
 
@@ -822,7 +855,7 @@ namespace DreamBeam {
 	#endregion
 
 	#region DrawOnBeamBox
-		///<summary>Selects which sort of Bitmap has to be Paint</summary>
+		///<summary>Selects which sort of Bitmap has to be painted</summary>
 		public void DrawBitmap(int Width,int Height) {
 			switch(this.DrawWhat) {
 			case 0:
@@ -834,7 +867,7 @@ namespace DreamBeam {
 				DrawnMainBitmap = true;
 				break;
 			case 1:
-				DrawSermonBitmap(Width,Height);
+				bmp = DrawSermonBitmap(Width,Height);
 				break;
 			}
 		}
@@ -939,7 +972,7 @@ namespace DreamBeam {
 		   tmpvideo = null;
 		}
 
-		public  Bitmap DrawProportionalBitmap(System.Drawing.Size Size ,string Path) {
+		public Bitmap DrawProportionalBitmap(System.Drawing.Size Size ,string Path) {
 			Bitmap bm = null;
 
 
@@ -947,12 +980,12 @@ namespace DreamBeam {
 			Image tmpImage = Image.FromFile(Path);
 
 			bm =  DrawProportionalBitmap(Size, tmpImage);
-		   }catch(Exception oh){}
+		   } catch {}
 			return bm;
 
 		}
 
-		public  Bitmap DrawProportionalBitmap(System.Drawing.Size Size ,Image MainImage) {
+		public static Bitmap DrawProportionalBitmap(System.Drawing.Size Size ,Image MainImage) {
 			Graphics graph;
 
 		   //	Image MainImage = Image.FromFile(Path);
@@ -1006,7 +1039,7 @@ namespace DreamBeam {
 			TestImage.Size = this.Size;
 			TestImage.Location = new Point (0,0);
 
-			TestImage.Image = Resizer((Image)rm.GetObject("Dreambeam_testbild.jpg"),this.Width,this.Height) ;
+			//TestImage.Image = Resizer((Image)rm.GetObject("Dreambeam_testbild.jpg"),this.Width,this.Height) ;
 
 
             SizePosControl.Show();
@@ -1016,6 +1049,16 @@ namespace DreamBeam {
 		public void HideMover() {
 			TestImage.Hide();
 			SizePosControl.Hide();
+
+			// Save the new position to the config object
+			this._MainForm.Config.BeamBoxPosX = this.Location.X;
+			this._MainForm.Config.BeamBoxPosY = this.Location.Y;
+			this._MainForm.Config.BeamBoxSizeX = this.Size.Width;
+			this._MainForm.Config.BeamBoxSizeY = this.Size.Height;
+
+			// Update the local display
+			this._MainForm.DisplayLiveLocal.Size = this.Size;
+			this._MainForm.DisplayLiveLocal.Location = this.Location;
 		}
 
 
@@ -1274,7 +1317,7 @@ namespace DreamBeam {
                         }
 
                     } else {
-                    this.video.Stop();
+						this.video.Stop();
                         try {
 							//this.video.Open(Path,false);
 							this.video.Dispose();
@@ -1286,7 +1329,7 @@ namespace DreamBeam {
                         }
                     }
 
-                if(!VideoProblem) {
+					if(!VideoProblem) {
                         this.VideoPanel.Size = Tools.VideoProportions(this.Size,video.DefaultSize);
                         this.video.Size = Tools.VideoProportions(this.Size,video.DefaultSize);
                         this.VideoPanel.Location =  new Point((int)((this.Size.Width - this.VideoPanel.Size.Width)/2),(int)((this.Size.Height - this.VideoPanel.Size.Height)/2));
@@ -1309,9 +1352,12 @@ namespace DreamBeam {
 					this.ShowSongPanel.Show();
 					this.ShowSongPanel.Size = this.Size;
 					this.ShowSongPanel.Location = new Point (0,0);
-					this.bmp = this.DrawProportionalBitmap(this.Size,Path);
-					this.DrawWhat = 777;
-					this.GDIDraw();
+
+					if (this.Config.AppOperatingMode == OperatingMode.Client) {
+						_MainForm.DisplayLiveClient.SetContent(new ImageContent(Path));
+					} else {
+						_MainForm.DisplayLiveLocal.SetContent(new ImageContent(Path));
+					}
                 }
 
             } else if (this.strMediaPlaying == "flash") {

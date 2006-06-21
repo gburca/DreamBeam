@@ -1,63 +1,29 @@
 <?xml version="1.0"?>
-<DreamSong>
-  <Version>0.49</Version>
-  <image>Backgrounds\red.jpg</image>
-  <TextAlign>left</TextAlign>
-  <MultiLang>False</MultiLang>
-  <TextStyle>0</TextStyle>
-  <windowHeight>0</windowHeight>
-  <windowWidth>0</windowWidth>
-  <Text0>
-    <Text>Măreţul Har</Text>
-    <Font>Arial</Font>
-    <FontStyle>0</FontStyle>
-    <FontSize>48</FontSize>
-    <TextColor>-1</TextColor>
-    <OutlineColor>-16777216</OutlineColor>
-    <posX>10</posX>
-    <posY>10</posY>
-    <TextEffect>Normal</TextEffect>
-    <AutoPos>True</AutoPos>
-  </Text0>
-  <Text1>
-    <Text>Măreţul har m-a mântuit
+<NewSong xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CustomFormat>false</CustomFormat>
+  <WordWrap>false</WordWrap>
+  <Version>0.60</Version>
+  <Title>Măreţul Har</Title>
+  <Author>Pit Popovici</Author>
+  <Collection>Test collection</Collection>
+  <Number />
+  <Notes />
+  <KeyRangeLow>G</KeyRangeLow>
+  <KeyRangeHigh>G</KeyRangeHigh>
+  <MinorKey>false</MinorKey>
+  <DualLanguage>false</DualLanguage>
+  <SongLyrics>
+    <LyricsItem Type="Verse" Number="1">1 Măreţul har m-a mântuit
 Pe mine de păcat
-Pierdut eram, dar m-a găsit
-De moarte m-a scăpat.
-
-
-Măreţul har m-a învăţat
+	Pierdut eram, dar m-a găsit
+	De moarte m-a scăpat.</LyricsItem>
+    <LyricsItem Type="Verse" Number="2">2 Măreţul har m-a învăţat
 S-o rup cu poftele
-Prin har ajunge-voi în cer
-Cu slavă îmbrăcat.</Text>
-    <Font>Arial</Font>
-    <FontStyle>0</FontStyle>
-    <FontSize>48</FontSize>
-    <TextColor>-1</TextColor>
-    <OutlineColor>-16777216</OutlineColor>
-    <posX>10</posX>
-    <posY>110</posY>
-    <TextEffect>Normal</TextEffect>
-    <AutoPos>True</AutoPos>
-  </Text1>
-  <Text2>
-    <Text>Pit Popovici</Text>
-    <Font>Arial</Font>
-    <FontStyle>0</FontStyle>
-    <FontSize>14</FontSize>
-    <TextColor>-1</TextColor>
-    <OutlineColor>-16777216</OutlineColor>
-    <posX>10</posX>
-    <posY>210</posY>
-    <TextEffect>Normal</TextEffect>
-    <AutoPos>True</AutoPos>
-  </Text2>
-  <MultiLangSettings>
-    <Font>Arial</Font>
-    <FontStyle>0</FontStyle>
-    <FontSize>48</FontSize>
-    <TextColor>-1</TextColor>
-    <OutlineColor>-16777216</OutlineColor>
-    <TextEffect>Normal</TextEffect>
-  </MultiLangSettings>
-</DreamSong>
+	Prin har ajunge-voi în cer
+Cu slavă îmbrăcat.</LyricsItem>
+  </SongLyrics>
+  <Sequence>
+    <LyricsSequenceItem Type="Verse" Number="1" />
+    <LyricsSequenceItem Type="Verse" Number="2" />
+  </Sequence>
+</NewSong>

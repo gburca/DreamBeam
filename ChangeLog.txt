@@ -4,6 +4,19 @@ Gabriel Burca:
 - Fixed the Lister library to eliminate some errors where the index was out of range and caused errors in the MainForm.cs design.
 - Added BibleText tab for fast bible text searches.
 
+TODO:
+- Allow the user to select the desired Diatheke locale so that the bible book names show up in the desired language.
+- Consider changing FileTypes/Config.cs to use System.Configuration.ConfigurationSettings as in:
+	http://www.c-sharpcorner.com/Code/2002/April/XMLConfigInWinForms.asp
+
+Notes:
+- The Diatheke provided regex search is practically unusable because all orthographic marks must be accounted for
+- The DataGrid and Lister controls are not usable for fast RegEx searches because the matched expressions can not be highlighted.
+- The RichTextBox control is not as slow if the whole bible text is added at once (instead of verse by verse)
+
+
+0.49
+
 0.41
 set Projector window by selecting the Monitor
 Autosave LoopMedia Settings on exit

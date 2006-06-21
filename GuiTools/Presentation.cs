@@ -15,7 +15,6 @@ namespace DreamBeam
 	{
 		public string strMediaPath;
 		private ImageList MediaList = new ImageList();
-		private static string driveLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		public string [] filetypes = {".bmp", ".jpg", ".png",".gif",".jpeg",".swf",".avi",".mpeg",".wmv",".mpg",".vob",".mov" };
 
 		public Presentation(MainForm impForm, ShowBeam impShowBeam) :  base(impForm,impShowBeam)
@@ -48,8 +47,6 @@ namespace DreamBeam
 
 		   /// <summary>Add all selected Files to Playlist</summary>
 		   public void Fade_ToPlaylist_Button_Click(object sender, System.EventArgs e){
-
-			   int index = 0;
 
 			   for (int i = 0; i< _MainForm.Presentation_Fade_ListView.SelectedItems.Count;i++){
 
@@ -103,15 +100,13 @@ namespace DreamBeam
 		   /// </summary>
 		   public void fillTree(){
 			   DirectoryInfo directory;
-			   string sCurPath = "";
 			   // clear out the old values
 			   _MainForm.treeView1.Nodes.Clear();
 			   // loop through the drive letters and find the available drives.
-			   foreach( char c in driveLetters ){
-				   sCurPath = c + ":\\";
+			   foreach (string drive in Directory.GetLogicalDrives()) {
 				   try{
-				   // get the directory informaiton for this path.
-					   directory = new DirectoryInfo(sCurPath);
+					// get the directory informaiton for this path.
+					   directory = new DirectoryInfo(drive);
 					   // if the retrieved directory information points to a valid
 					   // directory or drive in this case, add it to the root of the
 					   // treeView.
@@ -138,9 +133,7 @@ namespace DreamBeam
 				   //find the number of Files in Directory
 				   foreach (string filetype in filetypes){
 					   string[] dirs = Directory.GetFiles(@strImageDir, "*"+filetype);
-					   foreach (string dir in dirs){
-						   filecount++;
-					   }
+					   filecount += dirs.Length;
 				   }
 				   int i_file = 1;
 				   //find all files from defined FileTypes
@@ -198,7 +191,7 @@ namespace DreamBeam
 					}
 				}
 			 }
-			 catch( Exception doh ){}
+			 catch {}
 		 }
 
 		 /// <summary> method fixPath
@@ -217,7 +210,7 @@ namespace DreamBeam
 					 sRet = node.FullPath.Remove(index, 1);
 				 }
 			 }
-			 catch( Exception doh ){}
+			 catch {}
 			 return sRet;
 		 }
 		#endregion
