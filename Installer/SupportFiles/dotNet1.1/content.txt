@@ -1,4 +1,6 @@
 contains the extracted Dot Net 1.1 Setup
+
+Download http://download.microsoft.com/download/a/a/c/aac39226-8825-44ce-90e3-bf8203e74006/dotnetfx.exe
 Open the dotnetfx.exe file with WinZip and extract its contents into this directory
 
 03.04.2005  23:14                 0 content.txt
