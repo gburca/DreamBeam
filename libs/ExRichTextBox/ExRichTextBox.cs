@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Specialized;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -373,7 +374,6 @@ namespace Khendys.Controls {
 			InsertTextAsRtf(_text, this.Font);
 		}
 
-
 		/// <summary>
 		/// Inserts the text using the given font, and current text and highlight
 		/// colors.
@@ -431,6 +431,35 @@ namespace Khendys.Controls {
 			// Create the document area from the text to be added as RTF and append
 			// it to the RTF string.
 			_rtf.Append(GetDocumentArea(_text, _font));
+
+			this.SelectedRtf = _rtf.ToString();
+		}
+
+		/// <summary>
+		/// Inserts the raw RTF into the control after wrapping it in proper RTF headers
+		/// generated from the fonts and colors provided. The RTF text should look like:
+		/// 
+		/// \highlight2\cf3\b\f0\fs40 This text has background of color 2, foreground of
+		/// color 3, is set to bold, uses the first font in the array, and has a size of 40/2
+		/// and is followed by \highlight0\cf2\b0\f1\fs20 some text with the background in
+		/// the default (0) color, foreground color 2, not bold, using font at index 1, and
+		/// has a size of 20/2.
+		/// 
+		/// </summary>
+		/// <remarks>
+		/// NOTE: The text is inserted wherever the caret is at the time of the call,
+		/// and if any text is selected, that text is replaced.
+		/// </remarks>
+		/// <param name="_text">The RTF text to insert</param>
+		/// <param name="_fonts">An array of fonts to create the font table with</param>
+		/// <param name="_colors">An array of colors to create the color table with</param>
+		public void InsertRawRtf(string _text, ArrayList _fonts, ArrayList _colors) {
+			StringBuilder _rtf = new StringBuilder();
+
+			_rtf.Append(GetRtfHeaders(_fonts, _colors));
+			_rtf.Append(RTF_DOCUMENT_PRE);
+			_rtf.Append(_text.Replace("\n", @"\par "));
+			_rtf.Append(RTF_DOCUMENT_POST);
 
 			this.SelectedRtf = _rtf.ToString();
 		}
@@ -524,6 +553,7 @@ namespace Khendys.Controls {
 
 			return _doc.ToString();
 		}
+
 
 		#endregion
 
@@ -770,13 +800,38 @@ namespace Khendys.Controls {
 		#region RTF Helpers
 
 		/// <summary>
+		/// Creates an RTF header that includes a font and color table derived
+		/// from the _fonts and _colors arrays passed in.
+		/// </summary>
+		/// <param name="_fonts">The font array</param>
+		/// <param name="_colors">The color array</param>
+		/// <returns></returns>
+		private string GetRtfHeaders(ArrayList _fonts, ArrayList _colors) {
+			StringBuilder _rtf = new StringBuilder();
+
+			// Append the RTF header
+			_rtf.Append(RTF_HEADER);
+
+			// Create the font table from the fonts passed in and append it to the
+			// RTF string
+			_rtf.Append(GetFontTable(_fonts));
+
+			// Create the color table from the colors passed in and append it to the
+			// RTF string
+			_rtf.Append(GetColorTable(_colors));
+
+			return _rtf.ToString();
+		}
+
+
+		/// <summary>
 		/// Creates a font table from a font object.  When an Insert or Append 
 		/// operation is performed a font is either specified or the default font
 		/// is used.  In any case, on any Insert or Append, only one font is used,
 		/// thus the font table will always contain a single font.  The font table
 		/// should have the form ...
 		/// 
-		/// {\fonttbl{\f0\[FAMILY]\fcharset0 [FONT_NAME];}
+		/// {\fonttbl{\f0\[FAMILY]\fcharset0 [FONT_NAME];}}
 		/// </summary>
 		/// <param name="_font"></param>
 		/// <returns></returns>
@@ -808,8 +863,56 @@ namespace Khendys.Controls {
 			return _fontTable.ToString();
 		}
 
+
 		/// <summary>
-		/// Creates a font table from the RtfColor structure.  When an Insert or Append
+		/// Creates a font table from an array of font objects. The font table
+		/// should have the form ...
+		///
+		/// {\fonttbl{\f0\[FAMILY]\fcharset0 [FONT_NAME];}{\f1\[FAMILY]\fcharset0 [FONT_NAME2];}}
+		/// </summary>
+		/// <param name="_fonts">An array of fonts to create the table with</param>
+		/// <returns></returns>
+		private string GetFontTable(ArrayList _fonts) {
+			StringBuilder _fontTable = new StringBuilder();
+
+			// Append table control string
+			_fontTable.Append(@"{\fonttbl");
+
+			int i = 0;
+			foreach (Font _font in _fonts) {
+				_fontTable.Append(@"{\f" + i.ToString());
+
+				// If the font's family corresponds to an RTF family, append the
+				// RTF family name, else, append the RTF for unknown font family.
+				if (rtfFontFamily.Contains(_font.FontFamily.Name))
+					_fontTable.Append(rtfFontFamily[_font.FontFamily.Name]);
+				else
+					_fontTable.Append(rtfFontFamily[FF_UNKNOWN]);
+
+				// \fcharset specifies the character set of a font in the font table.
+				// 0 is for ANSI.
+				_fontTable.Append(@"\fcharset0 ");
+
+				// Append the name of the font
+				_fontTable.Append(_font.Name);
+
+				// Close control string
+				_fontTable.Append(@";}");
+
+				// Next font
+				i++;
+			}
+
+			// Close font table
+			_fontTable.Append("}");
+
+			return _fontTable.ToString();
+		}
+
+
+
+		/// <summary>
+		/// Creates a color table from the RtfColor structure.  When an Insert or Append
 		/// operation is performed, _textColor and _backColor are either specified
 		/// or the default is used.  In any case, on any Insert or Append, only three
 		/// colors are used.  The default color of the RichTextBox (signified by a
@@ -842,6 +945,38 @@ namespace Khendys.Controls {
 			return _colorTable.ToString();
 		}
 
+
+		/// <summary>
+		/// Creates a color table from the RtfColor structure. The default color of the
+		/// RichTextBox (signified by a semicolon (;) without a definition), is always
+		/// the first color (index 0) in the color table. The color table should have
+		/// the form ...
+		/// 
+		/// {\colortbl ;[COLOR1];[COLOR2];}
+		/// 
+		/// </summary>
+		/// <param name="_colors">An array of colors to create the table with</param>
+		/// <returns></returns>
+		private string GetColorTable(ArrayList _colors) {
+			StringBuilder _colorTable = new StringBuilder();
+
+			// Append color table control string and default font (;)
+			_colorTable.Append(@"{\colortbl ;");
+
+			foreach (RtfColor _color in _colors) {
+				// Append the color
+				_colorTable.Append(rtfColor[_color]);
+				_colorTable.Append(@";");
+			}
+
+			// Close control string
+			_colorTable.Append(@"}");
+					
+			return _colorTable.ToString();
+		}
+
+
+
 		/// <summary>
 		/// Called by overrided RichTextBox.Rtf accessor.
 		/// Removes the null character from the RTF.  This is residue from developing
@@ -852,6 +987,124 @@ namespace Khendys.Controls {
 		private string RemoveBadChars(string _originalRtf) {			
 			return _originalRtf.Replace("\0", "");
 		}
+
+		#endregion
+
+		#region Code from AdvRichTextBox
+
+		/// <summary>
+		/// Maintains performance while updating.
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// It is recommended to call this method before doing
+		/// any major updates that you do not wish the user to
+		/// see. Remember to call EndUpdate when you are finished
+		/// with the update. Nested calls are supported.
+		/// </para>
+		/// <para>
+		/// Calling this method will prevent redrawing. It will
+		/// also setup the event mask of the underlying richedit
+		/// control so that no events are sent.
+		/// </para>
+		/// </remarks>
+		public void BeginUpdate() {
+			// Deal with nested calls.
+			++updating;
+        
+			if ( updating > 1 )
+				return;
+        
+			// Prevent the control from raising any events.
+			oldEventMask = SendMessage( new HandleRef( this, Handle ),
+				EM_SETEVENTMASK, 0, 0 );
+        
+			// Prevent the control from redrawing itself.
+			SendMessage( new HandleRef( this, Handle ),
+				WM_SETREDRAW, 0, 0 );
+		}
+    
+		/// <summary>
+		/// Resumes drawing and event handling.
+		/// </summary>
+		/// <remarks>
+		/// This method should be called every time a call is made
+		/// made to BeginUpdate. It resets the event mask to it's
+		/// original value and enables redrawing of the control.
+		/// </remarks>
+		public void EndUpdate() {
+			// Deal with nested calls.
+			--updating;
+        
+			if ( updating > 0 )
+				return;
+        
+			// Allow the control to redraw itself.
+			SendMessage( new HandleRef( this, Handle ),
+				WM_SETREDRAW, 1, 0 );
+        
+			// Allow the control to raise event messages.
+			SendMessage( new HandleRef( this, Handle ),
+				EM_SETEVENTMASK, 0, oldEventMask );
+		}
+
+		private int updating = 0;
+		private int oldEventMask = 0;
+    
+		// Constants from the Platform SDK.
+		private const int EM_SETEVENTMASK = 1073;
+		private const int EM_GETPARAFORMAT = 1085;
+		private const int EM_SETPARAFORMAT = 1095;
+		private const int EM_SETTYPOGRAPHYOPTIONS = 1226;
+		private const int WM_SETREDRAW = 11;
+		private const int TO_ADVANCEDTYPOGRAPHY = 1;
+		private const int PFM_ALIGNMENT = 8;
+		private const int SCF_SELECTION = 1;
+    
+		// It makes no difference if we use PARAFORMAT or
+		// PARAFORMAT2 here, so I have opted for PARAFORMAT2.
+		[StructLayout( LayoutKind.Sequential )]
+			private struct PARAFORMAT {
+			public int cbSize;
+			public uint dwMask;
+			public short wNumbering;
+			public short wReserved;
+			public int dxStartIndent;
+			public int dxRightIndent;
+			public int dxOffset;
+			public short wAlignment;
+			public short cTabCount;
+			[MarshalAs( UnmanagedType.ByValArray, SizeConst = 32 )]
+			public int[] rgxTabs;
+        
+			// PARAFORMAT2 from here onwards.
+			public int dySpaceBefore;
+			public int dySpaceAfter;
+			public int dyLineSpacing;
+			public short sStyle;
+			public byte bLineSpacingRule;
+			public byte bOutlineLevel;
+			public short wShadingWeight;
+			public short wShadingStyle;
+			public short wNumberingStart;
+			public short wNumberingStyle;
+			public short wNumberingTab;
+			public short wBorderSpace;
+			public short wBorderWidth;
+			public short wBorders;
+		}
+    
+		[DllImport( "user32", CharSet = CharSet.Auto )]
+		private static extern int SendMessage( HandleRef hWnd,
+			int msg,
+			int wParam,
+			int lParam );
+    
+		[DllImport( "user32", CharSet = CharSet.Auto )]
+		private static extern int SendMessage( HandleRef hWnd,
+			int msg,
+			int wParam,
+			ref PARAFORMAT lp );
 
 		#endregion
 	}
