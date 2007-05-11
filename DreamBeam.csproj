@@ -237,7 +237,6 @@
                     Name = "DreamBeam.resources"
                     AssemblyName = "DreamBeam.resources"
                     HintPath = "bin\Debug\de-DE\DreamBeam.resources.dll"
-                    Private = "True"
                 />
                 <Reference
                     Name = "xppanel"
