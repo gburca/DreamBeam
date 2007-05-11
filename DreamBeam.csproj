@@ -237,16 +237,7 @@
                     Name = "DreamBeam.resources"
                     AssemblyName = "DreamBeam.resources"
                     HintPath = "bin\Debug\de-DE\DreamBeam.resources.dll"
-                />
-                <Reference
-                    Name = "Khendys.Controls.ExRichTextBox"
-                    AssemblyName = "Khendys.Controls.ExRichTextBox"
-                    HintPath = "..\ExRichTextBox\obj\Debug\Khendys.Controls.ExRichTextBox.dll"
-                />
-                <Reference
-                    Name = "Lister"
-                    AssemblyName = "Lister"
-                    HintPath = "libs\Lister\bin\Debug\Lister.dll"
+                    Private = "True"
                 />
                 <Reference
                     Name = "xppanel"
@@ -264,14 +255,24 @@
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Runtime.Remoting.dll"
                 />
                 <Reference
-                    Name = "MessageBoxExLib"
-                    AssemblyName = "MessageBoxExLib"
-                    HintPath = "..\MessageBoxExLib\bin\Debug\MessageBoxExLib.dll"
+                    Name = "ControlLib"
+                    Project = "{94302930-4AC3-45CB-9BB6-B7D7572E95DB}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "ControlLib"
-                    AssemblyName = "ControlLib"
-                    HintPath = "..\MyControlSamples\ControlLib\bin\Debug\ControlLib.dll"
+                    Name = "ExRichTextBox"
+                    Project = "{1A63B1D0-D2F0-4F8C-B242-863E83E1419C}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "MessageBoxExLib"
+                    Project = "{4847D05C-EB58-49D9-B280-D22F8FF01857}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Lister"
+                    Project = "{14B87235-D657-4009-9C00-63ECA81D7CCF}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
             </References>
         </Build>
