@@ -1,4 +1,5 @@
 contains the extracted Dot Net 1.1 Setup
+Open the dotnetfx.exe file with WinZip and extract its contents into this directory
 
 03.04.2005  23:14                 0 content.txt
 23.02.2005  17:18            98.304 install.exe

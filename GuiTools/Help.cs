@@ -147,7 +147,6 @@ namespace DreamBeam
                 //_MainForm.RightDocks_TopPanel.SelectedTab = _MainForm.RightDocks_TopPanel_PlayList;
                 TheHelpBalloon= new MyBalloonWindow();
                 TheHelpBalloon.AnchorQuadrant = AnchorQuadrant.Right;
-				_MainForm.RightDocks_TopPanel_Search.Open();
                 pos = new Point(_MainForm.Location.X+320,_MainForm.Location.Y+110);
                 intButtonClicked = TheHelpBalloon.ShowHelp(pos,Lang.say("Help.Intro.6.Title"),Lang.say("Help.Intro.6"));
 				TheHelpBalloon.Dispose();

@@ -28,9 +28,9 @@ namespace DreamBeam
 		#region Variables and Properties
 		public int BeamBoxPosX = 0;
 		public int BeamBoxPosY = 0;
-		public int	BeamBoxSizeX = 640;
-		public int BeamBoxSizeY = 480;
-		public bool BeamBoxAutoPosSize = true;
+		public int	BeamBoxSizeX = 800;
+		public int BeamBoxSizeY = 600;
+		public bool BeamBoxAutoPosSize = false;
 		public int BeamBoxScreenNum = -1;
 		public bool PreRender = false;
 		public bool Alphablending = false;
@@ -82,7 +82,7 @@ namespace DreamBeam
 			}
 		}
 
-		public bool HideMouse = false;
+		public bool HideMouse = true;
 		public bool AlwaysOnTop = false;
 
 		[XmlIgnore()] public static readonly string ProgramDir = Tools.DreamBeamPath();
@@ -121,6 +121,12 @@ namespace DreamBeam
 			Init();
 		}
 
+		/// <summary>
+		/// In case the user deletes the default.config.xml file, or mucks with
+        /// it by hand and messes it up, these are the defaults they will end up
+        /// with, so we try to create something reasonable here, but nothing too
+        /// fancy.
+		/// </summary>
 		public void Init() {
 			int formats;
 			
@@ -131,18 +137,28 @@ namespace DreamBeam
 			for (int i = 0; i < formats; i++) {
 				BibleTextFormat[i] = new BeamTextFormat();
 			}
+			BibleTextFormat[(int)BibleTextType.Reference].Bounds = new RectangleF(5F, 2F, 90F, 8F);
+			BibleTextFormat[(int)BibleTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
+			BibleTextFormat[(int)BibleTextType.Translation].Bounds = new RectangleF(80F, 95F, 15F, 4F);
 
 			formats = Enum.GetValues(typeof(SongTextType)).Length;
 			SongTextFormat = new BeamTextFormat[formats];
 			for (int i = 0; i < formats; i++) {
 				SongTextFormat[i] = new BeamTextFormat();
 			}
+			SongTextFormat[(int)SongTextType.Title].Bounds = BibleTextFormat[(int)BibleTextType.Reference].Bounds;
+			SongTextFormat[(int)SongTextType.Verse].Bounds = BibleTextFormat[(int)BibleTextType.Verse].Bounds;
+			SongTextFormat[(int)SongTextType.Author].Bounds = BibleTextFormat[(int)BibleTextType.Translation].Bounds;
+			SongTextFormat[(int)SongTextType.Verse].HAlignment = StringAlignment.Near;
 
 			formats = Enum.GetValues(typeof(TextToolType)).Length;
 			SermonTextFormat = new BeamTextFormat[formats];
 			for (int i = 0; i < formats; i++) {
 				SermonTextFormat[i] = new BeamTextFormat();
 			}
+			SermonTextFormat[(int)TextToolType.FirstLine].Bounds = new RectangleF(5F, 2F, 90F, 8F);
+			SermonTextFormat[(int)TextToolType.OtherLines].Bounds = new RectangleF(5F, 12F, 90F, 85F);
+			SermonTextFormat[(int)TextToolType.OtherLines].HAlignment = StringAlignment.Near;
 
 			AppOperatingMode = OperatingMode.StandAlone;
 			ListeningPort = 50000;
@@ -192,6 +208,10 @@ namespace DreamBeam
 			}
 		}
 
+		public static Config DeserializeCleanup(Config config) {
+			if (config.BackgroundColor.IsEmpty) config.BackgroundColor = Color.Black;
+			return config;
+		}
 
 		/// <summary>
 		/// Handles deserialization of the Config class, or of any types derived from it.
@@ -214,7 +234,7 @@ namespace DreamBeam
 			if (xs != null) {
 				try {
 					using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
-						return xs.Deserialize(fs);
+						return DeserializeCleanup(xs.Deserialize(fs) as Config);
 					}
 				} catch (FileNotFoundException) {
 					Config.SerializeTo(instance, file);
@@ -224,7 +244,7 @@ namespace DreamBeam
 				}
 			}
 
-			return instance;
+			return DeserializeCleanup(instance);
 		}
 
 

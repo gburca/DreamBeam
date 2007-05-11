@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace DreamBeam {
 
@@ -317,11 +318,18 @@ namespace DreamBeam {
 
 
 		public static string RemoveDiacritics(string stIn) {
-			StringBuilder sb = new StringBuilder();
+			// "sb" must be large enough to store the converted string, else we'll get an exception.
+			StringBuilder sb = new StringBuilder(stIn.Length * 2 + 10);
+
 			int ret = FoldString(MapFlags.MAP_COMPOSITE , stIn, stIn.Length, sb, stIn.Length * 2);
 			sb.Length = ret;	// Otherwise we end up with garbage at the end because of "Length * 2" above
 			return Regex.Replace(sb.ToString(), @"\p{Sk}", "");
 		}
+
+		// We use this to open or close the console programatically
+		[DllImport("kernel32.dll")] public static extern Boolean AllocConsole();
+		[DllImport("kernel32.dll")] public static extern Boolean FreeConsole();
+
     }
 
 

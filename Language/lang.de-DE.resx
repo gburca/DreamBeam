@@ -671,14 +671,8 @@ Mit der 'Lieder zeigen' Komponente können Lieder zum Beamer gesendet werden. Si
 	<data name="Help.Options.2.Title">
 		<value>Allgemeine Einstellungen</value>
 	</data>
-	<data name="Right.Search.sPlaylist">
-		<value>Playlist</value>
-	</data>
 	<data name="Right.Songs.Playlist">
 		<value>Playlist-&gt;</value>
-	</data>
-	<data name="Right.Search.Playlist">
-		<value>&lt;-Playlist</value>
 	</data>
 	<data name="MediaPresentation.Preview">
 		<value>Vorschau</value>
@@ -858,5 +852,8 @@ Hier geben Sie ihre Nachrichten ein. Sie können verschiedene Dokumente für ver
 	</data>
 	<data name="EditSongs.LyricTypeOther">
 		<value>Other</value>
+	</data>
+	<data name="Right.Media.Add.Close">
+		<value>Close media browser</value>
 	</data>
 </root>

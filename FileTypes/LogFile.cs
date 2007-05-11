@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+
 namespace DreamBeam
 {
 	/// <summary>
@@ -8,16 +9,11 @@ namespace DreamBeam
 	public class LogFile
 	{
 		public bool doLog;
-		public DateTime date;
+		public string logPrefix;
 
-		public void Logfile()
+		public LogFile(string logPrefix)
 		{
-
-		  date = new DateTime();
-			//
-			// TODO: Hier die Konstruktorlogik einfügen
-			//
-
+			this.logPrefix = logPrefix;
 		}
 
 		public string Hashcounter(string Text){
@@ -33,9 +29,10 @@ namespace DreamBeam
 		{
 			if(doLog){
 				StreamWriter SW;
-				SW=File.AppendText("LogFile.txt");
+				SW=File.AppendText(logPrefix + ".LogFile.txt");
 
-				SW.WriteLine(date.ToString());
+				SW.WriteLine("");
+				SW.WriteLine(DateTime.Now.ToString());
 				SW.WriteLine("#####################################################"+Hashcounter(Text));
 				SW.WriteLine("########################### "+Text+" #########################");
 				SW.WriteLine("#####################################################"+Hashcounter(Text));
@@ -52,8 +49,8 @@ namespace DreamBeam
 		{
 			if(doLog){
 				StreamWriter SW;
-				SW=File.AppendText("LogFile.txt");
-				SW.WriteLine(Text);
+				SW=File.AppendText(logPrefix + ".LogFile.txt");
+				SW.WriteLine(DateTime.Now.ToString() + ": " + Text);
 				SW.Close();
 			}
 		}

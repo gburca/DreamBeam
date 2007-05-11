@@ -115,7 +115,6 @@ namespace DreamBeam {
 		public int[] tmpPosY = new int[3];
 
 		public TextGraphics TextGraphics =null;
-        public Prerenderer Prerenderer = null;
 
 		public ImageList MediaList = new ImageList();
 		bool FlashPlaying = false;
@@ -181,6 +180,7 @@ namespace DreamBeam {
         private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Button Screen_SetSettingsButton;
 		private System.Windows.Forms.PictureBox TestImage;
+		private System.Timers.Timer AlphaTimer2;
 		private System.Windows.Forms.Timer AlphaTimer;
 		#endregion
 
@@ -194,12 +194,14 @@ namespace DreamBeam {
 			Sermon.TextEffect[1] = "Filled Outline";
 			Sermon.FontSize[1] = 48;
 			Song = new Song(this);
-			 TextGraphics = new TextGraphics(this,Song);
-			Prerenderer = new Prerenderer(this,Song);
-			//   draw = new Device(); // Create a new DrawDevice, using the default device.
-			//   draw.SetCooperativeLevel(this, CooperativeLevelFlags.Normal); // Set the coop level to normal windowed mode.
-			//   clip = new Clipper(draw); // Create a new clipper.
-			//   CreateSurfaces(); // Call the function that creates the surface objects.
+			TextGraphics = new TextGraphics(this,Song);
+
+			ShowSongPanel.Location = new Point (0,0);
+			ShowSongPanel.Size = this.Size;
+
+			axShockwaveFlash.Hide();
+			VideoPanel.Hide();
+			ShowSongPanel.Show();
 		}
 
 		/// <summary>
@@ -214,7 +216,7 @@ namespace DreamBeam {
 			base.Dispose(disposing);
 		}
 
-	#region Vom Windo ws Form-Designer erzeugter Code
+		#region Windows Form Designer generated code
 		/// <summary>
 		/// Form Disigner Method
 		/// </summary>
@@ -253,6 +255,7 @@ namespace DreamBeam {
 			this.TabManSize = new System.Windows.Forms.TabPage();
 			this.TestImage = new System.Windows.Forms.PictureBox();
 			this.AlphaTimer = new System.Windows.Forms.Timer(this.components);
+			this.AlphaTimer2 = new System.Timers.Timer();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.WindowPosY)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.WindowPosX)).BeginInit();
@@ -264,6 +267,7 @@ namespace DreamBeam {
 			this.tabPage1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.TabManSize.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.AlphaTimer2)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -460,8 +464,8 @@ namespace DreamBeam {
 			// 
 			// ShowSongPanel
 			// 
-			this.ShowSongPanel.BackColor = System.Drawing.Color.Black;
-			this.ShowSongPanel.Location = new System.Drawing.Point(48, 240);
+			this.ShowSongPanel.BackColor = System.Drawing.Color.Transparent;
+			this.ShowSongPanel.Location = new System.Drawing.Point(48, 232);
 			this.ShowSongPanel.Name = "ShowSongPanel";
 			this.ShowSongPanel.Size = new System.Drawing.Size(176, 80);
 			this.ShowSongPanel.TabIndex = 2;
@@ -631,6 +635,12 @@ namespace DreamBeam {
 			this.AlphaTimer.Interval = 1;
 			this.AlphaTimer.Tick += new System.EventHandler(this.AlphaTimer_Tick);
 			// 
+			// AlphaTimer2
+			// 
+			this.AlphaTimer2.Interval = 1;
+			this.AlphaTimer2.SynchronizingObject = this;
+			this.AlphaTimer2.Elapsed += new System.Timers.ElapsedEventHandler(this.AlphaTimer2_Elapsed);
+			// 
 			// ShowBeam
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -648,6 +658,7 @@ namespace DreamBeam {
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "ShowBeam";
 			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ShowBeam_MouseDown);
+			this.SizeChanged += new System.EventHandler(this.ShowBeam_SizeChanged);
 			this.VisibleChanged += new System.EventHandler(this.ShowBeam_VisibleChanged);
 			this.MouseEnter += new System.EventHandler(this.ShowBeam_MouseEnter);
 			this.MouseLeave += new System.EventHandler(this.ShowBeam_MouseLeave);
@@ -662,6 +673,7 @@ namespace DreamBeam {
 			this.tabPage1.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.TabManSize.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.AlphaTimer2)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -859,11 +871,7 @@ namespace DreamBeam {
 		public void DrawBitmap(int Width,int Height) {
 			switch(this.DrawWhat) {
 			case 0:
-//			do {}
-				//while(DrawingSong);
 				bmp = new Bitmap(Width,Height,PixelFormat.Format32bppArgb);
-				//TextGraphics.DrawSongBitmap(bmp,Song.strophe,Width,Height);
-				bmp = Prerenderer.GetStrophe(Song.strophe);
 				DrawnMainBitmap = true;
 				break;
 			case 1:
@@ -872,6 +880,63 @@ namespace DreamBeam {
 			}
 		}
 
+		public void GDIDraw(Bitmap b) {
+			bmp = b;
+
+			// It is important for the SongShowPanel to have a "BackColor"
+            // property of "Transparent" or else as the background is being
+            // painted to the non-transparent color we will see the screen
+            // flicker. When set to transparent, the OnPaintBackground function
+            // call for the control is suppressed.
+			Graphics g = Graphics.FromHwnd(ShowSongPanel.Handle);
+			if (strMediaPlaying != null) {
+				// We capture the last frame of the flash or movie and transition from it to the song bitmap.
+				ScreenCapture sc = new ScreenCapture();
+				memoryBitmap = new Bitmap( sc.CaptureWindow(this.Handle) );
+			} else if (memoryBitmap == null) {
+				memoryBitmap = b;
+			}
+
+			g.SmoothingMode = SmoothingMode.HighQuality;
+			g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+			g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+			if (strMediaPlaying == "flash") {
+				if (this.axShockwaveFlash != null) this.axShockwaveFlash.Stop();
+				strMediaPlaying = null;
+			} else if (strMediaPlaying == "movie") {
+				if (this.video != null) this.video.Stop();
+				PlayBackTimer.Enabled = false;
+				strMediaPlaying = null;
+			}
+
+			axShockwaveFlash.Hide();
+			VideoPanel.Hide();
+			ShowSongPanel.Show();
+
+			//Draw Image on Screen, make a Alphablending if transit == true
+			if (transit) {
+				// We set the new bitmap before making the form visible or else
+				// it shows up with the old bitmap for a fraction of a second
+				// and it looks like it flickers.
+				AlphaForm.SetBitmap(bmp, 0);
+				AlphaForm.setpos(Location.X, Location.Y);
+				AlphaForm.Size = this.Size;
+				AlphaForm.Visible = true;
+				_MainForm.BringToFront();
+				
+				g.DrawImage(memoryBitmap, 0, 0, this.Width, this.Height);
+				AlphaOpacity = 0;
+				//AlphaTimer.Start();
+				AlphaTimer2.Start();
+
+			} else {
+				memoryBitmap = bmp;
+				g.DrawImage(bmp, new Rectangle(0,0,this.Width, this.Height), 0,0,this.Width, this.Height, GraphicsUnit.Pixel);
+			}
+
+			g.Dispose();
+		}
 
 		///<summary>Draws the Image on the BeamBox</summary>
 		public void GDIDraw() {
@@ -880,14 +945,17 @@ namespace DreamBeam {
             axShockwaveFlash.Hide();
 			VideoPanel.Hide();
             ShowSongPanel.Show();
-            if (strMediaPlaying == "flash") {
-                this.axShockwaveFlash.Stop();
-                strMediaPlaying = null;
-            }
-            if (strMediaPlaying == "movie") {
-                this.video.Stop();
-                PlayBackTimer.Enabled = false;
-                strMediaPlaying = null;
+			if (strMediaPlaying == "flash") {
+				this.axShockwaveFlash.Stop();
+				strMediaPlaying = null;
+				Console.WriteLine("GDIDraw a 1");
+			} else if (strMediaPlaying == "movie") {
+				this.video.Stop();
+				PlayBackTimer.Enabled = false;
+				strMediaPlaying = null;
+				Console.WriteLine("GDIDraw a 2");
+			} else {
+				Console.WriteLine("GDIDraw a 3");
 			}
 
 			ShowSongPanel.Size = this.Size;
@@ -911,10 +979,7 @@ namespace DreamBeam {
 
 				if(transit & newText) {
 
-					//MyPerPixelAlphaForm AlphaForm;	// our test form
-
 					AlphaForm.setpos(Location.X,Location.Y);
-					//AlphaForm.Show();
                     AlphaForm.Visible = true;
 					_MainForm.BringToFront();
 					
@@ -1032,8 +1097,8 @@ namespace DreamBeam {
                 SizePosControl.SelectedIndex = 1;
 			}
 
-			ResourceManager rm;
-			rm = new ResourceManager("DreamBeam.Images",System.Reflection.Assembly.GetExecutingAssembly());
+			//ResourceManager rm;
+			//rm = new ResourceManager("DreamBeam.Images",System.Reflection.Assembly.GetExecutingAssembly());
 
 			TestImage.Show();
 			TestImage.Size = this.Size;
@@ -1152,6 +1217,10 @@ namespace DreamBeam {
                 this.BeamBoxAutoPosSize = false;
             }
         }
+
+		private void ShowBeam_SizeChanged(object sender, System.EventArgs e) {
+			this.ShowSongPanel.Size = this.Size;
+		}
 
 
         ///<summary>Update the Window Position</summary>
@@ -1276,14 +1345,14 @@ namespace DreamBeam {
 		}
 	#endregion
 
-	#region MediaStuff
+		#region MediaStuff
         public void ShowMedia(string Path) {
 			//this.StopMedia();
 			PrePlaying = PlayWhat;
 			PlayWhat = MediaList.GetType(Path);
 			if(this.strMediaPlaying == null) {
-				if(PlayWhat == "flash") {
 
+				if(PlayWhat == "flash") {
 					strMediaPlaying = MediaList.GetType(Path);
 					this.FlashPlaying = true;
                     this.axShockwaveFlash.Show();
@@ -1296,15 +1365,22 @@ namespace DreamBeam {
 
                     this.axShockwaveFlash.Movie = Path;
                     this.axShockwaveFlash.Play();
-                    this.axShockwaveFlash.Loop = this.LoopMedia ;
-
+                    this.axShockwaveFlash.Loop = this.LoopMedia;
                 }
+
 				if(PlayWhat == "movie") {
                     this.VideoProblem = false;
                     strMediaPlaying = MediaList.GetType(Path);
                     axShockwaveFlash.Stop();
                     this.axShockwaveFlash.Hide();
                     this.ShowSongPanel.Hide();
+
+					// We must paint the whole screen black in case the movie is
+                    // not the same proportion as the screen, otherwise instead
+                    // of black bars we end up with garbage where the bars
+                    // should be.
+					Graphics g = Graphics.FromHwnd(this.Handle);
+					g.DrawImage(this.DrawBlackBitmap(this.Width, this.Height), 0, 0, this.Width, this.Height);
                     this.VideoPanel.Show();
 
                     PlayBackTimer.Enabled = true;
@@ -1378,6 +1454,7 @@ namespace DreamBeam {
 					axShockwaveFlash.Hide();
 				}
 			}
+
 			if(PlayWhat != "image"){
 				if(PrePlaying != PlayWhat){
 					this.bmp = this.DrawBlackBitmap(ShowSongPanel.Size.Width,ShowSongPanel.Size.Height);
@@ -1385,8 +1462,6 @@ namespace DreamBeam {
 					this.GDIDraw();
 				}
 			}
-
-
 
 			if(this.VideoPlaying){
 				video.Stop();
@@ -1396,7 +1471,6 @@ namespace DreamBeam {
 					this.VideoPanel.Hide();
 				}
             }
-
 
             strMediaPlaying = null;
 		}
@@ -1410,44 +1484,71 @@ namespace DreamBeam {
                     video.Pause();
                 } catch{}
             }
-    }
+		}
 
 
-    private void PlayBackTimer_Tick(object sender, System.EventArgs e) {
+		private void PlayBackTimer_Tick(object sender, System.EventArgs e) {
             try {
                 if (this.LoopMedia  && this.video.CurrentPosition == this.video.Duration) {
                     this.video.CurrentPosition = 0;
                 }
             } catch{}
         }
+		#endregion
 
 
-	#endregion
+		#region Repaints
 
-	#region Repaints
-    private void ShowSongPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e) {
+		protected override void OnPaintBackground(PaintEventArgs e) {
+			// Prevent the background from being painted in order to avoid flicker.
+		}
 
-            if(strMediaPlaying == null)
-                this.GDIDraw();
-        }
+		private void ShowSongPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e) {
+//            if (strMediaPlaying == null)
+//                this.GDIDraw();
 
-	#endregion
+			if (memoryBitmap != null) {
+				e.Graphics.DrawImage(memoryBitmap, 0, 0, this.Width, this.Height);
+			} else {
+				// Fill panel with the background color
+				memoryBitmap = new Bitmap(this.Width, this.Height);
+				Graphics g = Graphics.FromImage(memoryBitmap);
+				g.Clear(_MainForm.Config.BackgroundColor);
+				e.Graphics.DrawImage( memoryBitmap, 0, 0, this.Width, this.Height );
+			}
+		}
+		#endregion
 		
 		private void AlphaTimer_Tick(object sender, System.EventArgs e) {
+			if (AlphaOpacity < 255) {
 
-			if(AlphaOpacity<255){
-
-				if(AlphaOpacity+ Config.BlendSpeed > 255) AlphaOpacity = (byte)255;
-				else AlphaOpacity = (byte)(AlphaOpacity+Config.BlendSpeed);
+				if (AlphaOpacity + Config.BlendSpeed > 255) AlphaOpacity = (byte)255;
+				else AlphaOpacity = (byte)(AlphaOpacity + Config.BlendSpeed);
 				
-				AlphaForm.SetBitmap(bmp,AlphaOpacity);
-			}else{
+				AlphaForm.SetBitmap(bmp, AlphaOpacity);
+			} else {
 				AlphaTimer.Stop();
 				Graphics g = Graphics.FromHwnd(ShowSongPanel.Handle);
-				g.DrawImage(memoryBitmap, new Rectangle(0,0,this.Width, this.Height), 0,0,this.Width, this.Height, GraphicsUnit.Pixel);
+				memoryBitmap = bmp;
+				g.DrawImage(memoryBitmap, new Rectangle(0, 0, this.Width, this.Height), 0, 0, this.Width, this.Height, GraphicsUnit.Pixel);
 				AlphaForm.Hide();
 			}
+		}
 
+		private void AlphaTimer2_Elapsed(object sender, System.Timers.ElapsedEventArgs e) {
+			if (AlphaOpacity < 255) {
+
+				if (AlphaOpacity + Config.BlendSpeed > 255) AlphaOpacity = (byte)255;
+				else AlphaOpacity = (byte)(AlphaOpacity + Config.BlendSpeed);
+				
+				AlphaForm.SetBitmap(bmp, AlphaOpacity);
+			} else {
+				AlphaTimer2.Stop();
+				Graphics g = Graphics.FromHwnd(ShowSongPanel.Handle);
+				memoryBitmap = bmp;
+				g.DrawImage(memoryBitmap, new Rectangle(0, 0, this.Width, this.Height), 0, 0, this.Width, this.Height, GraphicsUnit.Pixel);
+				AlphaForm.Hide();
+			}		
 		}
 
 

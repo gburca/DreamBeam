@@ -30,6 +30,7 @@ using System.Xml.Serialization;
 using System.Collections;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 
 namespace DreamBeam {
@@ -51,6 +52,7 @@ namespace DreamBeam {
 	#endregion
 
 	//Contains all Song Information and Methods
+	[Serializable()]
 	public class Song {
 
 
@@ -556,6 +558,12 @@ namespace DreamBeam {
 		Other
 	}
 
+	/// <summary>
+	/// LyricsSequenceItem (LSI) is like a pointer to a LyricsItem. The order in
+	/// which these LSI objects are added to the NewSong.Sequence array
+    /// determines the order in which the parts of a song are displayed when the
+    /// user requests the "Next" slide.
+	/// </summary>
 	[Serializable()]
 	public class LyricsSequenceItem {
 		[XmlIgnore()] public static Language lang;
@@ -576,6 +584,11 @@ namespace DreamBeam {
 		}
 	}
 
+	/// <summary>
+	/// A LyricsItem represents a verse or chorus. A song's LyricsItem(s) can be
+    /// ordered by the user in any sequence desired by using the
+    /// LyricsSequenceItem class.
+	/// </summary>
 	[Serializable()]
 	public class LyricsItem : IComparable {
 		[XmlAttribute] public LyricsType Type;
@@ -639,11 +652,14 @@ namespace DreamBeam {
 
 		// The following settings will not be saved when we serialize this class
 		private string fileName;
+		private Thread render;
+		private Object renderLock = new Object();
 		[XmlIgnore] public Song song;
 		[XmlIgnore] public Config config;
 		[XmlIgnore] protected System.Type enumType;
 		/// <summary>Zero based index of the current lyric (used to index this.Sequence)</summary>
 		[XmlIgnore] public int CurrentLyric;
+		/// <summary>We can hide/display each of the SongTextType items individually</summary>
 		[XmlIgnore] public bool[] Hide = new bool[Enum.GetValues(typeof(SongTextType)).Length];
 		[XmlIgnore] public string FileName {
 			get { return fileName; }
@@ -843,9 +859,10 @@ namespace DreamBeam {
 			this.CurrentLyric = strophe;
 		}
 
-		public LyricsItem GetCurrentLyrics () {
-			if (this.CurrentLyric >= this.Sequence.Count) return null;
-			LyricsSequenceItem current = (LyricsSequenceItem)this.Sequence[this.CurrentLyric];
+		
+		public LyricsItem GetLyrics(int seq) {
+			if (seq >= this.Sequence.Count) return null;
+			LyricsSequenceItem current = (LyricsSequenceItem)this.Sequence[seq];
 			foreach (LyricsItem item in this.SongLyrics) {
 				if (item.CompareTo(current) == 0) return item;
 			}
@@ -853,8 +870,9 @@ namespace DreamBeam {
 		}
 
 		/// <summary>
-		/// Replaces all existing lyrics of the type with new ones obtained by breaking the (user) provided text
-		/// at blank lines and creating verses/choruses/etc... out of it
+		/// Replaces all existing lyrics of the type with new ones obtained by
+		/// breaking the (user) provided text at blank lines and creating
+        /// verses/choruses/etc... out of it
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="text"></param>
@@ -876,7 +894,8 @@ namespace DreamBeam {
 		}
 
 		/// <summary>
-		/// Returns a string containing all the verses (or choruses, or other), the way a user would have typed them in.
+		/// Returns a string containing all the verses (or choruses, or other),
+        /// the way a user would have typed them in.
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
@@ -947,146 +966,189 @@ namespace DreamBeam {
 			return false;
 		}
 
+		/// <summary>
+		/// Returns a normalized textual song key (converts "D# / Eb" to Eb)...
+		/// </summary>
+		/// <returns></returns>
+		public string GetKey() {
+			if (this.KeyRangeLow == null) { return ""; }
+
+			string key = this.KeyRangeLow.Split('/')[0];
+			key = key.Trim();
+
+			switch (key) {
+				case "C#": key = "Db"; break;
+				case "D#": key = "Eb"; break;
+				case "G#": key = "Ab"; break;
+				case "A#": key = "Bb"; break;
+			}
+
+			if (this.MinorKey) {
+				key += "m";
+			}
+			return key;
+		}
 		#endregion
 
-		#region IContentOperations Members
-
-		public Bitmap GetBitmap(int Width, int Height) {
-			Pen p;
-			SolidBrush brush;
-			Bitmap bmp = new Bitmap(Width, Height);
-			Graphics graphics = Graphics.FromImage(bmp);
-			GraphicsPath pth, pth2;
-			Rectangle pathRect, bounds;
-			RectangleF measuredBounds;
-			Font font;
-			float fontSz;
-			string[] text = new string[ Enum.GetValues(typeof(SongTextType)).Length ];
-
-			graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-			graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-			graphics.SmoothingMode = SmoothingMode.AntiAlias;
-			graphics.SmoothingMode = SmoothingMode.HighQuality;
-			graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-
-			#region Render background image
-			// Draw background image
-			if (this.HideBG == false) {
-				string fullPath = Tools.GetFullPath( this.BGImagePath );
-				if (Tools.FileExists(fullPath)) {
-					if (this.bgImage == null) {
-						try {
-							this.bgImage = Image.FromFile(fullPath);
-						} catch {}
-					}
-				} else if (Tools.FileExists(config.SongBGImagePath)) {
-					if (this.bgImage == null) {
-						try {
-							this.bgImage = Image.FromFile(config.SongBGImagePath);
-						} catch {}
-					}
-				}
-
-				if (this.bgImage != null) {
-					graphics.DrawImage(this.bgImage, 0, 0, Width, Height);
-				}
-			} else {
-				// Draw blank rectangle if no image is defined
-				graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, Width, Height));
+		/// <summary>
+		/// The boolean properties are converted to a string so that we get a
+		/// different hash code if they change. Hide.GetHashCode() returns the
+        /// same number regardless of what the array elements contain.
+		/// </summary>
+		/// <returns>A hash code representing the current verse</returns>
+		public int VisibleHashCode(int seq) {
+			string h = "Hide";
+			foreach (bool b in Hide) {
+				h += (b ? "1" : "0");
 			}
-			#endregion
 
-			if (HideText) {
+			return
+				base.VisibleHashCode() + this.GetLyrics(seq).Lyrics.GetHashCode() +
+				h.GetHashCode();
+		}
+
+		#region IContentOperations Members
+		/// <summary>
+		/// Gets the bitmap for the CurrentLyric
+		/// </summary>
+		/// <param name="Width"></param>
+		/// <param name="Height"></param>
+		/// <returns></returns>
+		public Bitmap GetBitmap(int Width, int Height) {
+			return this.GetBitmap(Width, Height, this.CurrentLyric);
+		}
+
+		public Bitmap GetBitmap(int Width, int Height, int seq) {
+			if (this.RenderedFramesContains(this.VisibleHashCode(seq))) {
+				Console.WriteLine("Found pre-rendered frame with: {0}", this.VisibleHashCode(seq));
+				return this.RenderedFramesGet(this.VisibleHashCode(seq)) as Bitmap;
+			} else {
+				Console.WriteLine("Rendering song frame for {0}", this.VisibleHashCode(seq));
+			}
+
+			lock(renderLock) {
+				Pen p;
+				SolidBrush brush;
+				Bitmap bmp = new Bitmap(Width, Height);
+				Graphics graphics = Graphics.FromImage(bmp);
+				GraphicsPath pth, pth2;
+				Rectangle pathRect, bounds;
+				RectangleF measuredBounds;
+				Font font;
+				float fontSz;
+				string[] text = new string[ Enum.GetValues(typeof(SongTextType)).Length ];
+
+				graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+				graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+				graphics.SmoothingMode = SmoothingMode.AntiAlias;
+				graphics.SmoothingMode = SmoothingMode.HighQuality;
+				graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+				this.RenderBGImage(config.SongBGImagePath, graphics, Width, Height);
+
+				if (HideText) {
+					graphics.Dispose();
+					return bmp;
+				}
+
+				LyricsItem lyrics = this.GetLyrics(seq);
+				text[ (int)SongTextType.Title ] = (this.Title == null) ? "" : this.Title;
+				text[ (int)SongTextType.Verse ] = (lyrics == null) ? "" : lyrics.Lyrics;
+				text[ (int)SongTextType.Author ] = (this.Author == null) ? "" : this.Author;
+
+			
+				string songKey = this.GetKey();
+				if (songKey != null && songKey.Length > 0) {
+					// Add the key to the author field?
+					text[ (int)SongTextType.Author ] += " (" + songKey + ")";
+				}
+
+				pth = new GraphicsPath();
+
+				foreach (int type in Enum.GetValues( this.enumType )) {
+					if (this.Hide[type]) continue;
+					// We have to keep the text within these user-specified boundaries
+					bounds = new System.Drawing.Rectangle(
+						(int)(format[type].Bounds.X / 100 * Width),
+						(int)(format[type].Bounds.Y / 100 * Height),
+						(int)(format[type].Bounds.Width / 100 * Width),
+						(int)(format[type].Bounds.Height / 100 * Height));
+
+					if (text[type].Length > 0) {
+						p = new Pen(format[type].TextColor, 1.0F);
+						p.LineJoin = LineJoin.Round;
+						StringFormat sf = new StringFormat();
+						sf.Alignment = format[type].HAlignment;
+						sf.LineAlignment = format[type].VAlignment;
+
+						if (this.WordWrap) {
+							// Make a rectangle that is very tall to see how far down the text would stretch.
+							pathRect = bounds;
+							pathRect.Height *= 2;
+				
+							// We start with the user-specified font size ...
+							fontSz = format[type].TextFont.Size;
+					
+							// ... and decrease the size (if needed) until it fits within the user-specified boundaries
+							do {
+								font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
+								pth.Reset();
+								pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, pathRect, sf);
+								measuredBounds = pth.GetBounds();
+								fontSz--;
+								if (fontSz == 0) break;
+							} while (measuredBounds.Height > bounds.Height);
+
+							// We need to re-create the path. For some reason the do-while loop puts it in the wrong place.
+							pth.Reset();
+							pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, bounds, sf);
+
+						} else {
+							// Tab characters are ignored by AddString below. Converting them to spaces.
+							text[type] = Regex.Replace(text[type], "\t", "        ");
+							pth = new GraphicsPath();
+							font = new Font(format[type].TextFont.FontFamily, format[type].TextFont.Size, format[type].TextFont.Style);
+							pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, new Point(0,0), sf);
+
+							pth.Transform( Tools.FitContents(bounds, pth.GetBounds(), sf));
+						}
+
+						brush = new SolidBrush(format[type].TextColor);
+
+						#region Add special effects
+						if (format[type].Effects == "Outline") {
+							p = new Pen(format[type].OutlineColor, format[type].OutlineSize);
+							graphics.DrawPath(p, pth);
+
+						} else if (format[type].Effects == "Filled Outline") {
+							pth2 = (GraphicsPath)pth.Clone();
+							graphics.FillPath(brush, pth);
+							graphics.DrawPath(p, pth);
+
+							// Widen the path
+							Pen widenPen = new Pen(format[type].OutlineColor, format[type].OutlineSize);
+							widenPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+							pth2.Widen(widenPen);
+							graphics.FillPath(new SolidBrush(format[type].OutlineColor), pth2);
+							graphics.DrawPath(p, pth);
+							graphics.FillPath(brush, pth);
+
+						} else { //if (format[type].Effects == "Normal") {
+							graphics.FillPath(brush, pth);
+							graphics.DrawPath(p, pth);
+
+						}
+						#endregion
+					}
+				}
+
 				graphics.Dispose();
+				if (this.config != null && this.config.PreRender) {
+					this.RenderedFramesSet(this.VisibleHashCode(seq), bmp);
+				}
+
 				return bmp;
 			}
-
-			LyricsItem lyrics = this.GetCurrentLyrics();
-			text[ (int)SongTextType.Title ] = (this.Title == null) ? "" : this.Title;
-			text[ (int)SongTextType.Verse ] = (lyrics == null) ? "" : lyrics.Lyrics;
-			text[ (int)SongTextType.Author ] = (this.Author == null) ? "" : this.Author;
-
-			pth = new GraphicsPath();
-
-			foreach (int type in Enum.GetValues( this.enumType )) {
-				if (this.Hide[type]) continue;
-				// We have to keep the text within these user-specified boundaries
-				bounds = new System.Drawing.Rectangle(
-					(int)(format[type].Bounds.X / 100 * Width),
-					(int)(format[type].Bounds.Y / 100 * Height),
-					(int)(format[type].Bounds.Width / 100 * Width),
-					(int)(format[type].Bounds.Height / 100 * Height));
-
-				if (text[type].Length > 0) {
-					p = new Pen(format[type].TextColor, 1.0F);
-					p.LineJoin = LineJoin.Round;
-					StringFormat sf = new StringFormat();
-					sf.Alignment = format[type].HAlignment;
-					sf.LineAlignment = format[type].VAlignment;
-
-					if (this.WordWrap) {
-						// Make a rectangle that is very tall to see how far down the text would stretch.
-						pathRect = bounds;
-						pathRect.Height *= 2;
-				
-						// We start with the user-specified font size ...
-						fontSz = format[type].TextFont.Size;
-					
-						// ... and decrease the size (if needed) until it fits within the user-specified boundaries
-						do {
-							font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
-							pth.Reset();
-							pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, pathRect, sf);
-							measuredBounds = pth.GetBounds();
-							fontSz--;
-							if (fontSz == 0) break;
-						} while (measuredBounds.Height > bounds.Height);
-
-						// We need to re-create the path. For some reason the do-while loop puts it in the wrong place.
-						pth.Reset();
-						pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, bounds, sf);
-
-					} else {
-						// Tab characters are ignored by AddString below. Converting them to spaces.
-						text[type] = Regex.Replace(text[type], "\t", "        ");
-						pth = new GraphicsPath();
-						font = new Font(format[type].TextFont.FontFamily, format[type].TextFont.Size, format[type].TextFont.Style);
-						pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, new Point(0,0), sf);
-
-						pth.Transform( Tools.FitContents(bounds, pth.GetBounds(), sf));
-					}
-
-					brush = new SolidBrush(format[type].TextColor);
-
-					#region Add special effects
-					if (format[type].Effects == "Outline") {
-						p = new Pen(format[type].OutlineColor, format[type].OutlineSize);
-						graphics.DrawPath(p, pth);
-
-					} else if (format[type].Effects == "Filled Outline") {
-						pth2 = (GraphicsPath)pth.Clone();
-						graphics.FillPath(brush, pth);
-						graphics.DrawPath(p, pth);
-
-						// Widen the path
-						Pen widenPen = new Pen(format[type].OutlineColor, format[type].OutlineSize);
-						widenPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-						pth2.Widen(widenPen);
-						graphics.FillPath(new SolidBrush(format[type].OutlineColor), pth2);
-						graphics.DrawPath(p, pth);
-						graphics.FillPath(brush, pth);
-
-					} else { //if (format[type].Effects == "Normal") {
-						graphics.FillPath(brush, pth);
-						graphics.DrawPath(p, pth);
-
-					}
-					#endregion
-				}
-			}
-
-			graphics.Dispose();
-			return bmp;
 		}
 
 		public bool Next() {
@@ -1115,6 +1177,25 @@ namespace DreamBeam {
 			ident.SongName = Path.GetFileName(this.FileName);
 			ident.SongStrophe = this.CurrentLyric;
 			return ident;
+		}
+
+		private void PreRenderFramesThreaded() {
+			if (this.config != null && this.config.BeamBoxSizeX > 1 && this.config.BeamBoxSizeY > 1) {
+				for (int i = 0; i < this.Sequence.Count; i++) {
+					this.GetBitmap(this.config.BeamBoxSizeX, this.config.BeamBoxSizeY, i);
+				}
+			}
+		}
+
+		public void PreRenderFrames() {
+			if (render != null && render.IsAlive) {
+				render.Abort();
+			}
+
+			render = new Thread(new ThreadStart(PreRenderFramesThreaded));
+			render.IsBackground = true;
+			render.Name = "PreRender Song";
+			render.Start();
 		}
 
 		#endregion

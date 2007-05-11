@@ -42,7 +42,7 @@ namespace DreamBeam.FileTypes {
 		
 		public BibleLib() {
 			versions = new Hashtable();
-			IsDirty = false;
+			//IsDirty = false;
 		}
 
 		#region Indexers
@@ -96,7 +96,6 @@ namespace DreamBeam.FileTypes {
 			Thread diathekeThread = null;
 			//TimerThreadHelper threadHelper;
 			DiathekeThreadHelper diathekeHelper;
-			System.EventArgs e = new System.EventArgs();
 			bool diathekeAutoupdate = Diatheke.autoupdate;
 			
 			//System.EventArgs e = new System.EventArgs();
@@ -163,7 +162,7 @@ namespace DreamBeam.FileTypes {
 			}
 		}
 
-		public BibleLib DeserializeNow(string file) {
+		public static BibleLib DeserializeNow(string file) {
 			FileStream fs = null;
 			BibleLib bLib = null;
 			try {
@@ -195,7 +194,7 @@ namespace DreamBeam.FileTypes {
 	public class BibleVersion {
 		private string _version;
 		private BibleVerse[] verses = new BibleVerse[31102];
-		private int _VerseCount = 0;
+		private int _VerseCount;
 		//private string[] books = new string[66];
 		public BibleBook[] BibleBooks = new BibleBook[66];
 		/// <summary>
@@ -408,7 +407,7 @@ namespace DreamBeam.FileTypes {
 		/// <param name="start_i">Verse index to start searching from.</param>
 		/// <param name="dirFwd">Direction to search in. If "true" searches forward.</param>
 		/// <param name="regex">The regular expression to search for.</param>
-		/// <returns></returns>
+		/// <returns>A negative number when a matching verse could not be found. The 0-based verse index if the verse was found.</returns>
 		public int Find(int start_i, bool dirFwd, string regex) {
 			Regex r;
 			Match m;
@@ -467,7 +466,7 @@ namespace DreamBeam.FileTypes {
 			return text;
 		}
 
-		private string Diatheke_ConvertEncoding(string text) {
+		private static string Diatheke_ConvertEncoding(string text) {
 			Encoding utf8 = Encoding.GetEncoding("UTF-8");
 			Encoding win1252 = Encoding.GetEncoding("Windows-1252");
 
@@ -625,6 +624,8 @@ namespace DreamBeam.FileTypes {
 		private BibleVersion bible;
 		//public Bitmap bitmap;	// This doesn't really belong here...
 		public Config config;
+		private Thread render;
+		private Object renderLock = new Object();
 		
 		public ABibleVerse() : this(null) {}
 		public ABibleVerse(BibleVersion bible) : this(bible, 1) {}
@@ -634,9 +635,18 @@ namespace DreamBeam.FileTypes {
 			this.verseIdx = verseIdx;
 			this.config = config;
 			if (config != null) this.format = config.BibleTextFormat;
+			this.PreRenderFrames();
+		}
+
+		public int VisibleHashCode(int vIdx) {
+			return base.VisibleHashCode() + vIdx.ToString().GetHashCode();
 		}
 
 		#region IContentOperations Members
+
+		public Bitmap GetBitmap(int Width, int Height) {
+			return GetBitmap(Width, Height, this.verseIdx);
+		}
 
 		/// <summary>
 		/// Draws the contents of the current verse on a bitmap
@@ -644,150 +654,138 @@ namespace DreamBeam.FileTypes {
 		/// <param name="Width"></param>
 		/// <param name="Height"></param>
 		/// <returns></returns>
-		public Bitmap GetBitmap(int Width, int Height) {
-			Pen p;
-			SolidBrush brush;
-			Bitmap bmp =  new Bitmap(Width, Height);
-			Graphics graphics = Graphics.FromImage(bmp);
-			GraphicsPath pth, pth2;
-			Rectangle pathRect, bounds;
-			RectangleF measuredBounds;
-			Font font;
-			float fontSz;
-			string[] text = new string[ Enum.GetValues(typeof(BibleTextType)).Length ];
-
-			graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-			graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-			graphics.SmoothingMode = SmoothingMode.AntiAlias;
-			graphics.SmoothingMode = SmoothingMode.HighQuality;
-			graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-
-			#region Render background image
-			// Draw background image
-			if (this.HideBG == false) {
-				if (Tools.FileExists(this.BGImagePath)) {
-					if (this.bgImage == null) {
-						try {
-							this.bgImage = Image.FromFile(this.BGImagePath);
-						} catch {}
-					}
-				} else if (Tools.FileExists(config.BibleBGImagePath)) {
-					if (this.bgImage == null) {
-						try {
-							this.bgImage = Image.FromFile(config.BibleBGImagePath);
-						} catch {}
-					}
-				}
-
-				if (this.bgImage != null) {
-					graphics.DrawImage(this.bgImage, 0, 0, Width, Height);
-				}
-			} else {
-				// Draw blank rectangle if no image is defined
-				graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, Width, Height));
+		public Bitmap GetBitmap(int Width, int Height, int vIdx) {
+			if (this.RenderedFramesContains(this.VisibleHashCode(vIdx))) {
+				Console.WriteLine("ABibleVerse.GetBitmap pre-render cache hit.");
+				return this.RenderedFramesGet(this.VisibleHashCode(vIdx)) as Bitmap;
 			}
-			#endregion
 
-			if (HideText) {
+			lock(renderLock) {
+				Pen p;
+				SolidBrush brush;
+				Bitmap bmp =  new Bitmap(Width, Height);
+				Graphics graphics = Graphics.FromImage(bmp);
+				GraphicsPath pth, pth2;
+				Rectangle pathRect, bounds;
+				RectangleF measuredBounds;
+				Font font;
+				float fontSz;
+				string[] text = new string[ Enum.GetValues(typeof(BibleTextType)).Length ];
+
+				graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+				graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+				graphics.SmoothingMode = SmoothingMode.AntiAlias;
+				graphics.SmoothingMode = SmoothingMode.HighQuality;
+				graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+				this.RenderBGImage(config.BibleBGImagePath, graphics, Width, Height);
+
+				if (HideText) {
+					return bmp;
+				}
+
+				string vText = bible[vIdx].t;
+				// Non-breaking hyphen gets displayed with too much space after it. Change it to regular hyphen.
+				vText = Regex.Replace(vText, "\u2011", "\u00ad");
+				text[ (int)BibleTextType.Reference ] = bible.GetRef(vIdx);
+				text[ (int)BibleTextType.Verse ] = vText;
+				text[ (int)BibleTextType.Translation ] = bible.version;
+				pth = new GraphicsPath();
+
+				foreach (int type in Enum.GetValues(typeof(BibleTextType))) {
+					// We have to keep the text within these user-specified boundaries
+					bounds = new System.Drawing.Rectangle(
+						(int)(format[type].Bounds.X / 100 * Width),
+						(int)(format[type].Bounds.Y / 100 * Height),
+						(int)(format[type].Bounds.Width / 100 * Width),
+						(int)(format[type].Bounds.Height / 100 * Height));
+
+					/*
+					// For debug:
+					graphics.DrawRectangle(new Pen(format[type].OutlineColor, 2), bounds);
+					Rectangle rect = new Rectangle((int)(Width/2), (int)(Height/2), 0, 0);
+					int i = 25;
+					while (rect.Width < Width) {
+						graphics.DrawRectangle(new Pen(Color.Gray, 1), rect);
+						rect.Inflate(i, i);
+					};
+					*/
+
+					if (text[type].Length > 0) {
+						p = new Pen(format[type].TextColor, 1.0F);
+						p.LineJoin = LineJoin.Round;
+						StringFormat sf = new StringFormat();
+						sf.Alignment = format[type].HAlignment;
+						sf.LineAlignment = format[type].VAlignment;
+						sf.FormatFlags = StringFormatFlags.NoFontFallback;
+
+						// Make a rectangle that is very tall to see how far down the text would stretch.
+						pathRect = bounds;
+						pathRect.Height *= 2;
+				
+						// We start with the user-specified font size ...
+						fontSz = format[type].TextFont.Size;
+
+						// ... and decrease the size (if needed) until it fits within the user-specified boundaries
+						do {
+							font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
+							pth.Reset();
+							pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, pathRect, sf);
+							measuredBounds = pth.GetBounds();
+							fontSz--;
+							if (fontSz == 0) break;
+						} while (measuredBounds.Height > bounds.Height);
+
+						// We need to re-create the path. For some reason the do-while loop puts it in the wrong place.
+						pth.Reset();
+						pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, bounds, sf);
+
+						brush = new SolidBrush(format[type].TextColor);
+
+						#region Add special effects
+						if (format[type].Effects == "Outline") {
+							p = new Pen(format[type].OutlineColor, format[type].OutlineSize);
+							//						pth.AddString(text[type],
+							//							font.FontFamily, 0, font.Size,
+							//							bounds, StringFormat.GenericTypographic);
+							graphics.DrawPath(p, pth);
+
+						} else if (format[type].Effects == "Filled Outline") {
+							pth2 = (GraphicsPath)pth.Clone();
+							graphics.FillPath(brush, pth);
+							graphics.DrawPath(p, pth);
+
+							// Widen the path
+							Pen widenPen = new Pen(format[type].OutlineColor, format[type].OutlineSize);
+							widenPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+							pth2.Widen(widenPen);
+							graphics.FillPath(new SolidBrush(format[type].OutlineColor), pth2);
+							graphics.DrawPath(p, pth);
+							graphics.FillPath(brush, pth);
+
+						} else { //if (format[type].Effects == "Normal") {
+							graphics.FillPath(brush, pth);
+							graphics.DrawPath(p, pth);
+
+						}
+						#endregion
+
+					}
+				}
+
+				graphics.Dispose();
+				if (this.config != null && this.config.PreRender) {
+					this.RenderedFramesSet(this.VisibleHashCode(vIdx), bmp);
+				}
+
 				return bmp;
 			}
-
-			string vText = bible[verseIdx].t;
-			// Non-breaking hyphen gets displayed with too much space after it. Change it to regular hyphen.
-			vText = Regex.Replace(vText, "\u2011", "\u00ad");
-			text[ (int)BibleTextType.Reference ] = bible.GetRef(verseIdx);
-			text[ (int)BibleTextType.Verse ] = vText;
-			text[ (int)BibleTextType.Translation ] = bible.version;
-			pth = new GraphicsPath();
-
-			foreach (int type in Enum.GetValues(typeof(BibleTextType))) {
-				// We have to keep the text within these user-specified boundaries
-				bounds = new System.Drawing.Rectangle(
-					(int)(format[type].Bounds.X / 100 * Width),
-					(int)(format[type].Bounds.Y / 100 * Height),
-					(int)(format[type].Bounds.Width / 100 * Width),
-					(int)(format[type].Bounds.Height / 100 * Height));
-
-				/*
-				// For debug:
-				graphics.DrawRectangle(new Pen(format[type].OutlineColor, 2), bounds);
-				Rectangle rect = new Rectangle((int)(Width/2), (int)(Height/2), 0, 0);
-				int i = 25;
-				while (rect.Width < Width) {
-					graphics.DrawRectangle(new Pen(Color.Gray, 1), rect);
-					rect.Inflate(i, i);
-				};
-				*/
-
-				if (text[type].Length > 0) {
-					p = new Pen(format[type].TextColor, 1.0F);
-					p.LineJoin = LineJoin.Round;
-					StringFormat sf = new StringFormat();
-					sf.Alignment = format[type].HAlignment;
-					sf.LineAlignment = format[type].VAlignment;
-					sf.FormatFlags = StringFormatFlags.NoFontFallback;
-
-					// Make a rectangle that is very tall to see how far down the text would stretch.
-					pathRect = bounds;
-					pathRect.Height *= 2;
-				
-					// We start with the user-specified font size ...
-					fontSz = format[type].TextFont.Size;
-
-					// ... and decrease the size (if needed) until it fits within the user-specified boundaries
-					do {
-						font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
-						pth.Reset();
-						pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, pathRect, sf);
-						measuredBounds = pth.GetBounds();
-						fontSz--;
-						if (fontSz == 0) break;
-					} while (measuredBounds.Height > bounds.Height);
-
-					// We need to re-create the path. For some reason the do-while loop puts it in the wrong place.
-					pth.Reset();
-					pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, bounds, sf);
-
-					brush = new SolidBrush(format[type].TextColor);
-
-					#region Add special effects
-					if (format[type].Effects == "Outline") {
-						p = new Pen(format[type].OutlineColor, format[type].OutlineSize);
-//						pth.AddString(text[type],
-//							font.FontFamily, 0, font.Size,
-//							bounds, StringFormat.GenericTypographic);
-						graphics.DrawPath(p, pth);
-
-					} else if (format[type].Effects == "Filled Outline") {
-						pth2 = (GraphicsPath)pth.Clone();
-						graphics.FillPath(brush, pth);
-						graphics.DrawPath(p, pth);
-
-						// Widen the path
-						Pen widenPen = new Pen(format[type].OutlineColor, format[type].OutlineSize);
-						widenPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-						pth2.Widen(widenPen);
-						graphics.FillPath(new SolidBrush(format[type].OutlineColor), pth2);
-						graphics.DrawPath(p, pth);
-						graphics.FillPath(brush, pth);
-
-					} else { //if (format[type].Effects == "Normal") {
-						graphics.FillPath(brush, pth);
-						graphics.DrawPath(p, pth);
-
-					}
-					#endregion
-
-				}
-			}
-
-			graphics.Dispose();
-			return bmp;
 		}
 
 		public bool Next() {
 			if (verseIdx < bible.VerseCount - 1) {
 				verseIdx++;
+				this.PreRenderFrames();
 				return true;
 			}
 			return false;
@@ -815,6 +813,24 @@ namespace DreamBeam.FileTypes {
 			ident.BibleTransl = bible.version;
 			ident.VerseIdx = verseIdx;
 			return ident;
+		}
+
+		private void PreRenderFramesThreaded() {
+			// We only pre-render one frame in advance
+			if (this.config != null && (this.verseIdx + 1 < bible.VerseCount)) {
+				this.GetBitmap(this.config.BeamBoxSizeX, this.config.BeamBoxSizeY, this.verseIdx + 1);
+			}
+		}
+
+		public void PreRenderFrames() {
+			if (render != null && render.IsAlive) {
+				render.Abort();
+			}
+
+			render = new Thread(new ThreadStart(PreRenderFramesThreaded));
+			render.IsBackground = true;
+			render.Name = "PreRender Verse";
+			render.Start();
 		}
 
 		/// <summary>

@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Collections;
+using System.Text.RegularExpressions;
+
 
 namespace DreamBeam {
 
@@ -29,6 +31,17 @@ namespace DreamBeam {
 
 
 		#region ShowTab
+//		public void ShowTab() {
+//			foreach (TD.SandBar.ButtonItem b in _MainForm.ToolBars_ComponentBar.Buttons) {
+//				if (b.Checked) {
+//					if (b == _MainForm.ShowSongs_Button) ShowTab(MainTab.ShowSongs);
+//					else if (b == _MainForm.EditSongs_Button) ShowTab(MainTab.EditSongs);
+//					else if (b == _MainForm.Presentation_Button) ShowTab(MainTab.Presentation);
+//					return;
+//				}
+//			}
+//		}
+
 		/// <summary>
 		/// Shows the assigned Tab
 		/// </summary>
@@ -59,11 +72,7 @@ namespace DreamBeam {
 
 			_MainForm.selectedTab = Tab;
 
-			if(_MainForm.selectedTab == MainTab.EditSongs){
-				_ShowBeam.Prerenderer.RenderAllThreaded();
-			}
-
-			_MainForm.PreviewUpdateTimer.Enabled = false;
+//			_MainForm.PreviewUpdateTimer.Enabled = false;
 
 			// Hide all Tabs
 			for	(int i = _MainForm.tabControl1.TabCount-1;i>=0;i--){
@@ -93,7 +102,7 @@ namespace DreamBeam {
 					_MainForm.tabControl1.Controls.Add(_MainForm.EditSongs2_Tab);
 					//_MainForm.tabControl1.Controls.Add(_MainForm.EditSongs_Tab);
 					_MainForm.ToolBars_MainToolbar_SaveSong.Visible = true;
-					_MainForm.PreviewUpdateTimer.Enabled = true;
+//					_MainForm.PreviewUpdateTimer.Enabled = true;
 					break;
 
 				case MainTab.SermonTools:
@@ -139,40 +148,40 @@ namespace DreamBeam {
 		public void KeyListner(System.Windows.Forms.KeyEventArgs e){
 			switch(e.KeyCode){
 				case Keys.F1:
-					this.ShowBeamTools.ShowStrophe(0);
+					this.ShowBeamTools.ShowStrophe(0); 			e.Handled = true;
 					break;
 				case Keys.F2:
-					this.ShowBeamTools.ShowStrophe(1);
+					this.ShowBeamTools.ShowStrophe(1);			e.Handled = true;
 					break;
 				case Keys.F3:
-					this.ShowBeamTools.ShowStrophe(2);
+					this.ShowBeamTools.ShowStrophe(2);			e.Handled = true;
 					break;
 				case Keys.F4:
-					this.ShowBeamTools.ShowStrophe(3);
+					this.ShowBeamTools.ShowStrophe(3);			e.Handled = true;
 					break;
 				case Keys.F5:
-					this.ShowBeamTools.ShowStrophe(4);
+					this.ShowBeamTools.ShowStrophe(4);			e.Handled = true;
 					break;
 				case Keys.F6:
-					this.ShowBeamTools.ShowStrophe(5);
+					this.ShowBeamTools.ShowStrophe(5);			e.Handled = true;
 					break;
 				case Keys.F7:
-					this.ShowBeamTools.ShowStrophe(6);
+					this.ShowBeamTools.ShowStrophe(6);			e.Handled = true;
 					break;
 				case Keys.F8:
-					this.ShowBeamTools.ShowStrophe(7);
+					this.ShowBeamTools.ShowStrophe(7);			e.Handled = true;
 					break;
 				case Keys.F9:
-					this.ShowTab(MainTab.ShowSongs);
+					this.ShowTab(MainTab.ShowSongs);			e.Handled = true;
 					break;
 				case Keys.F10:
-					this.ShowTab(MainTab.EditSongs);
+					this.ShowTab(MainTab.EditSongs);			e.Handled = true;
 					break;
 				case Keys.F11:
-					this.ShowTab(MainTab.Presentation);
+					this.ShowTab(MainTab.Presentation);			e.Handled = true;
 					break;
 				case Keys.F12:
-					this.ShowTab(MainTab.SermonTools);
+					this.ShowTab(MainTab.SermonTools);			e.Handled = true;
 					break;
 				case Keys.Escape:
 					if (_MainForm.Config.AppOperatingMode == OperatingMode.Client) {
@@ -181,14 +190,16 @@ namespace DreamBeam {
 						_MainForm.DisplayLiveLocal.HideText(true);
 					}
 					_MainForm.ToolBars_MainToolbar_HideText.Checked = true;
+					e.Handled = true;
 					break;
 				case Keys.PageDown:
-					_MainForm.DisplayLive_Next();
+					_MainForm.DisplayLive_Next();			e.Handled = true;
 					break;
 				case Keys.PageUp:
-					_MainForm.DisplayLive_Prev();
+					_MainForm.DisplayLive_Prev();			e.Handled = true;
 					break;
 			}
+
 
 		}
 
@@ -220,16 +231,24 @@ namespace DreamBeam {
 		#endregion
 
 		public void	ChangeTitle(){
-			if (_MainForm.selectedTab == MainTab.ShowSongs || _MainForm.selectedTab == MainTab.EditSongs){
-				_MainForm.Text = "DreamBeam - "+ _MainForm.Lang.say("Menu.Song") +": " + _ShowBeam.Song.SongName;
+			switch (_MainForm.selectedTab) {
+				case MainTab.ShowSongs:
+				case MainTab.EditSongs:
+					_MainForm.Text = "DreamBeam - " + Regex.Replace(_MainForm.Lang.say("Menu.Song"), @"&", "");
+					break;
+				case MainTab.SermonTools:
+					_MainForm.Text = "DreamBeam - Sermon";
+					break;
+				case MainTab.BibleText:
+					_MainForm.Text = "DreamBeam - Bible";
+					break;
+				case MainTab.Presentation:
+					_MainForm.Text = "DreamBeam - " + Regex.Replace(_MainForm.Lang.say("Menu.MediaList"), @"&", "");
+					break;
+				default:
+					_MainForm.Text = "DreamBeam";
+					break;
 			}
-			if(_MainForm.selectedTab == MainTab.SermonTools){
-				_MainForm.Text = "DreamBeam - Text";
-			}
-			if(_MainForm.selectedTab == MainTab.Presentation){
-				_MainForm.Text = "DreamBeam - "+ _MainForm.Lang.say("Menu.MediaList") +": " + _ShowBeam.MediaList.Name;
-			}
-
 		}
 
 		#region SandDoc persistance functions

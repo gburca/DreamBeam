@@ -1,3 +1,23 @@
+/*
+DreamBeam - a Church Song Presentation Program
+Copyright (C) 2006 Gabriel Burca
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+*/
+
 using System;
 using System.IO;
 using System.Drawing;
@@ -15,9 +35,11 @@ using System.Xml.Serialization;
 namespace DreamBeam	{
 
 	/// <summary>
-	/// Each Song, BibleVerse, or SermonText piece of content needs to know how to draw itself (possibly caching
-	/// and/or prerendering). It also needs to know how to switch to the next/previous strophe, verse, sermon tab
-	/// We inherit from ICloneable so that we can pass from a Preview display to a Live display a clone that is independent.
+	/// Each Song, BibleVerse, or SermonText piece of content needs to know how
+	/// to draw itself (possibly caching and/or prerendering). It also needs to
+    /// know how to switch to the next/previous strophe, verse, sermon tab. We
+	/// inherit from ICloneable so that we can pass from a Preview display to a
+    /// Live display a clone that is independent.
 	/// </summary>
 	public interface IContentOperations : ICloneable {
 		Bitmap GetBitmap(int Width, int Height);
@@ -26,27 +48,23 @@ namespace DreamBeam	{
 		void ChangeBGImagePath(string newPath);
 
 		/// <summary>
-		/// When asking a remote display to show a piece of content, we don't want to send the actual content
-		/// across. Instead we send just enough information for the remote server to be able to identify the
-		/// content and display it.
+		/// When asking a remote display to show a piece of content, we don't
+		/// want to send the actual content across. Instead we send just enough
+        /// information for the remote server to be able to identify the content
+		/// and display it.
 		/// </summary>
 		/// <returns>Information required to uniquely identify the content.</returns>
 		ContentIdentity GetIdentity();
+
+		void PreRenderFrames();
 	}
 
-//	public interface IContentItem {
-//		/// <summary>
-//		/// When asking a remote display to show a piece of content, we don't want to send the actual content
-//		/// across. Instead we send just enough information for the remote server to be able to identify the
-//		/// content and display it.
-//		/// </summary>
-//		/// <returns>Information required to uniquely identify the content.</returns>
-//		ContentIdentity GetIdentity();
-//	}
 
 	/// <summary>
-	/// All content (Songs, BibleVerses, SermonText) has some attributes in common. They all derive from this class.
-	/// TODO: The ICloneable should probably move here, and this base class should implement Clone() itself also.
+	/// All content (Songs, BibleVerses, SermonText) has some attributes in
+	/// common. They all derive from this class. TODO: The ICloneable should
+    /// probably move here, and this base class should implement Clone() itself
+    /// also.
 	/// </summary>
 	[Serializable()]
 	public class Content {
@@ -55,6 +73,11 @@ namespace DreamBeam	{
 		[XmlIgnore()] public Image bgImage;
 		[XmlIgnore()] public bool HideBG = false;
 		[XmlIgnore()] public bool HideText = false;
+		
+		/// <summary>The maximum number of pre-rendered frames to retain.</summary>
+		[XmlIgnore()] public int maxFrames = 10;
+		[XmlIgnore()] private Hashtable renderedFrames = new Hashtable();
+		[XmlIgnore()] private ArrayList renderedFramesOrder = new ArrayList(10);
 
 		// The following setting and properties will be serialized
 		public BeamTextFormat[] format;
@@ -68,6 +91,86 @@ namespace DreamBeam	{
 				// bgImage is no longer valid when the path is changed
 				bgImage = null;
 				this.bgImagePath = value;
+				// To save memory we could also clear the pre-rendered cache:
+				//this.RenderedFrames.Clear();
+			}
+		}
+
+		#region RenderedFrames wrapper functions
+		public void RenderedFramesClear() {
+			renderedFrames.Clear();
+			renderedFramesOrder.Clear();
+		}
+
+		public bool RenderedFramesContains(object key) {
+			return this.renderedFrames.Contains(key);
+		}
+
+		public object RenderedFramesGet(object key) {
+			return this.renderedFrames[key];
+		}
+
+		public void RenderedFramesSet(object key, object value) {
+			if (this.renderedFrames.Count > maxFrames) {
+				this.renderedFrames.Remove(this.renderedFramesOrder[0]);
+				this.renderedFramesOrder.RemoveAt(0);
+			}
+
+			this.renderedFrames.Add(key, value);
+			this.renderedFramesOrder.Add(key);
+		}
+		#endregion
+
+		/// <summary>
+		/// This is not a true hash code. It is only used to determine if any
+        /// graphically visible characteristics of the Content object have
+        /// changed.
+		/// </summary>
+		/// <returns></returns>
+		public virtual int VisibleHashCode() {
+			int fh = 0;
+			if (format != null) {
+				foreach (BeamTextFormat f in format) {
+					fh += f.GetHashCode();
+				}
+			}
+
+			return
+				fh + (this.HideBG ? "HideBG".GetHashCode() : "ShowBG".GetHashCode()) +
+				(this.HideText ? "HideText".GetHashCode() : "ShowText".GetHashCode()) +
+				(this.BGImagePath != null ? this.BGImagePath.GetHashCode() : "NoBgImg".GetHashCode());
+		}
+
+		/// <summary>
+		/// Renders the background image for the content (unless HideBG is true).
+		/// </summary>
+		/// <param name="ConfigBGImagePath">This background is used unless the user selected a custom one.</param>
+		/// <param name="graphics">The Graphics object to render the background on</param>
+		/// <param name="Width"></param>
+		/// <param name="Height"></param>
+		public void RenderBGImage(string ConfigBGImagePath, Graphics graphics, int Width, int Height) {
+			if (this.HideBG == false) {
+				string fullPath = Tools.GetFullPath( this.BGImagePath );
+				if (Tools.FileExists(fullPath)) {
+					if (this.bgImage == null) {
+						try {
+							this.bgImage = Image.FromFile(fullPath);
+						} catch {}
+					}
+				} else if (Tools.FileExists(Tools.GetFullPath(ConfigBGImagePath))) {
+					if (this.bgImage == null) {
+						try {
+							this.bgImage = Image.FromFile(Tools.GetFullPath(ConfigBGImagePath));
+						} catch {}
+					}
+				}
+
+				if (this.bgImage != null) {
+					graphics.DrawImage(this.bgImage, 0, 0, Width, Height);
+				}
+			} else {
+				// Draw blank rectangle if no image is defined
+				graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, Width, Height));
 			}
 		}
 	}
@@ -85,6 +188,11 @@ namespace DreamBeam	{
 		#region IContentOperations Members
 
 		public Bitmap GetBitmap(int Width, int Height) {
+			if (this.RenderedFramesContains(this.VisibleHashCode())) {
+				Console.WriteLine("ImageContent pre-render cache hit.");
+				return this.RenderedFramesGet(this.VisibleHashCode()) as Bitmap;
+			}
+
 			Bitmap bmp = new Bitmap(Width, Height);
 			Graphics graphics = Graphics.FromImage(bmp);
 
@@ -110,6 +218,8 @@ namespace DreamBeam	{
 			#endregion
 
 			graphics.Dispose();
+			this.RenderedFramesSet(this.VisibleHashCode(), bmp);
+
 			return bmp;
 		}
 
@@ -131,6 +241,12 @@ namespace DreamBeam	{
 			// TODO:  Add ImageContent.GetIdentity implementation
 			ContentIdentity ident = new ContentIdentity();			
 			return ident;
+		}
+
+		public void PreRenderFrames() {
+			// This function doesn't really need to do anything. We've
+            // prerendered the one and only frame as soon as we call GetBitmap
+            // the first time.
 		}
 
 		#endregion
@@ -165,17 +281,13 @@ namespace DreamBeam	{
 		// should be non-null.
 		public PictureBox pictureBox;
 		public Graphics graphics;
-		public Panel panel;
+		public ShowBeam showBeam;
 		public XmlRpcClient XmlRpcProxy;
 
 		public static BibleLib bibleLib;
 		public static Config config;
 
-		// Alpha blending
-		MyPerPixelAlphaForm AlphaForm;
-		byte AlphaOpacity;
-		Timer AlphaTimer;
-		Bitmap bmp;
+		//Bitmap bmp;
 
 		private Size size;
 		private Point location;
@@ -186,14 +298,14 @@ namespace DreamBeam	{
 				size = value;
 				if (size.Width < 200) size.Width = 200;
 				if (size.Height < 150) size.Height = 150;
-				if (panel != null) this.panel.TopLevelControl.Size = this.size;
+				if (showBeam != null) this.showBeam.TopLevelControl.Size = this.size;
 			}
 			get { return size; }
 		}
 		public Point Location {
 			set {
 				location = value;
-				if (panel != null) this.panel.TopLevelControl.Location = this.location;
+				if (showBeam != null) this.showBeam.TopLevelControl.Location = this.location;
 			}
 			get { return location; }
 		}
@@ -221,10 +333,12 @@ namespace DreamBeam	{
 		}
 
 		/// <summary>
-		/// This method is used in StandAlone mode to set the content to be displayed in various displays.
+		/// This method is used in StandAlone mode to set the content to be
+        /// displayed in various displays.
 		/// </summary>
 		/// <param name="obj">The content object to display</param>
-		/// <returns>Returns true if the entire display chain has successfully set its content to the object passed in</returns>
+		/// <returns>Returns true if the entire display chain has successfully
+		/// set its content to the object passed in</returns>
 		public bool SetContent(IContentOperations obj) {
 			bool result = true;
 
@@ -360,15 +474,8 @@ namespace DreamBeam	{
 		public void SetDestination(Graphics graphics) {
 			this.graphics = graphics;
 		}
-		public void SetDestination(Panel panel) {
-			this.panel = panel;
-
-			if (AlphaForm == null) AlphaForm = new MyPerPixelAlphaForm();
-			if (AlphaTimer == null) {
-				AlphaTimer = new Timer();
-				AlphaTimer.Interval = 1;
-				AlphaTimer.Tick += new System.EventHandler(this.AlphaTimer_Tick);
-			}
+		public void SetDestination(ShowBeam showBeam) {
+			this.showBeam = showBeam;
 		}
 
 		// This display is the Client end and forwards all requests over XML-RPC to the server.
@@ -417,43 +524,16 @@ namespace DreamBeam	{
 					// Preview, or mini-Live display
 					pictureBox.Image = ShowBeam.DrawProportionalBitmap(pictureBox.Size, GetBitmap(this.Size));
 
-				} else if (panel != null && panel.TopLevelControl.Visible) {
+				} else if (showBeam != null && showBeam.TopLevelControl.Visible) {
 					// Live display
-					if (config.Alphablending) {
-						this.bmp = GetBitmap(Size);
-						AlphaForm.setpos(Location.X, Location.Y);
-						AlphaForm.Visible = true;
-						AlphaForm.SetBitmap(bmp);
-						AlphaOpacity = 0;
-						AlphaTimer.Start();
+					showBeam.GDIDraw( this.GetBitmap(Size) );
 
-					} else {
-						Graphics g = Graphics.FromHwnd(panel.Handle);
-						g.SmoothingMode = SmoothingMode.HighQuality;
-						g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-						g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-						g.DrawImage(GetBitmap(Size), new Rectangle(0, 0, Size.Width, Size.Height));
-					}
 				}
 			}
 			if (cascade && NextDisplay != null) return NextDisplay.UpdateDisplay(cascade);
 			return true;
 		}
 
-
-		private void AlphaTimer_Tick(object sender, System.EventArgs e) {
-			if (AlphaOpacity < 255) {
-				if (AlphaOpacity + config.BlendSpeed > 255) AlphaOpacity = (byte)255;
-				else AlphaOpacity = (byte)(AlphaOpacity + config.BlendSpeed);
-
-				AlphaForm.SetBitmap(bmp, AlphaOpacity);
-			} else {
-				AlphaTimer.Stop();
-				Graphics g = Graphics.FromHwnd(panel.Handle);
-				g.DrawImage(bmp, new Rectangle(0, 0, Size.Width, Size.Height));
-				AlphaForm.Hide();
-			}
-		}
 
 		public void ChangeDisplayCoord(Config config) {
 			if (config == null) return;

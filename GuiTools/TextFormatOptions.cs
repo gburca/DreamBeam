@@ -14,7 +14,10 @@ namespace DreamBeam
 {
 
 	/// <summary>
-	/// Summary description for TextFormatOptions.
+	/// This is the control in the title, verse, etc... tabs in the
+	/// Edit->Options dialog box. There's one of each for each type of text we
+    /// handle (song title, song verse, etc...) so we can control the format of
+    /// each type.
 	/// </summary>
 	public class TextFormatOptions : System.Windows.Forms.UserControl
 	{
@@ -59,7 +62,6 @@ namespace DreamBeam
 			// This call is required by the Windows.Forms Form Designer.
 			InitializeComponent();
 			// TODO: Add any initialization after the InitializeComponent call
-			SetDefaults();
 			SetControls();
 		}
 
@@ -75,24 +77,11 @@ namespace DreamBeam
 			}
 		}
 
-		private void SetDefaults() {
-			this.format1.TextColor = Color.White;
-			this.format1.OutlineColor = Color.Red;
-			this.format1.OutlineSize = 1;
-			this.format1.TextFont = new Font("Times New Roman", 48);
-			this.format1.HAlignment = StringAlignment.Center;
-			this.format1.VAlignment = StringAlignment.Center;
-			this.format1.Bounds = new RectangleF(5F, 10F, 90F, 85F);
-			this.format1.Effects = "Normal";
-		}
-
 		private void ReadControls() {
 			this.format1.Bounds.X = (float)this.Bounds1.Value;
 			this.format1.Bounds.Y = (float)this.Bounds2.Value;
 			this.format1.Bounds.Width = (float)(100 - this.Bounds3.Value - this.Bounds1.Value);
 			this.format1.Bounds.Height = (float)(100 - this.Bounds4.Value - this.Bounds2.Value);
-			//this.format1.Bounds.Width = (float)(this.Bounds3.Value - this.Bounds1.Value);
-			//this.format1.Bounds.Height = (float)(this.Bounds4.Value - this.Bounds2.Value);
 
 			this.format1.OutlineSize = (int)this.OutlineSize.Value;
 
@@ -552,24 +541,21 @@ namespace DreamBeam
 		// XML can not serialize Color. We use a property to get around the problem.
 		[XmlIgnore] public System.Drawing.Color TextColor = new System.Drawing.Color();
 		[XmlIgnore] public System.Drawing.Color OutlineColor = new System.Drawing.Color();
-		public int OutlineSize;
-		public System.Drawing.StringAlignment HAlignment;
-		public System.Drawing.StringAlignment VAlignment;
-		public RectangleF Bounds;
-		public string Effects;
-		public string FontFamily;
-		public Single FontEmSize;
-		public FontStyle FontStyle;
+		public int OutlineSize = 1;
+		public System.Drawing.StringAlignment HAlignment = StringAlignment.Center;
+		public System.Drawing.StringAlignment VAlignment = StringAlignment.Center;
+
+		/// <summary>
+		/// This represents the boundary of the text on the screen, and is in
+        /// percentage points with respect to the screen dimmensions.
+		/// </summary>
+		public RectangleF Bounds = new RectangleF(5F, 10F, 90F, 85F);
+		public string Effects = "Normal";
+		public string FontFamily = "Arial";
+		public Single FontEmSize = 36.0F;
+		public FontStyle FontStyle = FontStyle.Regular;
 
 		public BeamTextFormat () {
-			FontFamily = "Arial";
-			Effects = "Normal";
-			FontEmSize = 36.0F;
-			FontStyle = FontStyle.Regular;
-			OutlineSize = 1;
-			HAlignment = StringAlignment.Center;
-			VAlignment = StringAlignment.Center;
-			Bounds = new RectangleF(0, 0, 300, 300);
 			TextColor = Color.White;
 			OutlineColor = Color.Red;
 		}

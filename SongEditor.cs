@@ -371,6 +371,7 @@ namespace DreamBeam
 			this.KeyRangeHigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.KeyRangeHigh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.KeyRangeHigh.Items.AddRange(new object[] {
+															  "",
 															  "A",
 															  "A# / Bb",
 															  "B",
@@ -394,6 +395,7 @@ namespace DreamBeam
 			this.KeyRangeLow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.KeyRangeLow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.KeyRangeLow.Items.AddRange(new object[] {
+															 "",
 															 "A",
 															 "A# / Bb",
 															 "B",
@@ -491,7 +493,6 @@ namespace DreamBeam
 			// 
 			// LyricsTabs
 			// 
-			this.LyricsTabs.Alignment = System.Windows.Forms.TabAlignment.Left;
 			this.LyricsTabs.Controls.Add(this.LyricsVerse_Tab);
 			this.LyricsTabs.Controls.Add(this.LyricsChorus_Tab);
 			this.LyricsTabs.Controls.Add(this.LyricsOther_Tab);
@@ -506,9 +507,9 @@ namespace DreamBeam
 			// LyricsVerse_Tab
 			// 
 			this.LyricsVerse_Tab.Controls.Add(this.VerseLyrics);
-			this.LyricsVerse_Tab.Location = new System.Drawing.Point(23, 4);
+			this.LyricsVerse_Tab.Location = new System.Drawing.Point(4, 22);
 			this.LyricsVerse_Tab.Name = "LyricsVerse_Tab";
-			this.LyricsVerse_Tab.Size = new System.Drawing.Size(313, 303);
+			this.LyricsVerse_Tab.Size = new System.Drawing.Size(332, 285);
 			this.LyricsVerse_Tab.TabIndex = 0;
 			this.LyricsVerse_Tab.Text = "Verse";
 			// 
@@ -519,16 +520,16 @@ namespace DreamBeam
 			this.VerseLyrics.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.VerseLyrics.Location = new System.Drawing.Point(0, 0);
 			this.VerseLyrics.Name = "VerseLyrics";
-			this.VerseLyrics.Size = new System.Drawing.Size(313, 303);
+			this.VerseLyrics.Size = new System.Drawing.Size(332, 285);
 			this.VerseLyrics.TabIndex = 0;
 			this.VerseLyrics.Text = "";
 			// 
 			// LyricsChorus_Tab
 			// 
 			this.LyricsChorus_Tab.Controls.Add(this.ChorusLyrics);
-			this.LyricsChorus_Tab.Location = new System.Drawing.Point(23, 4);
+			this.LyricsChorus_Tab.Location = new System.Drawing.Point(4, 22);
 			this.LyricsChorus_Tab.Name = "LyricsChorus_Tab";
-			this.LyricsChorus_Tab.Size = new System.Drawing.Size(313, 303);
+			this.LyricsChorus_Tab.Size = new System.Drawing.Size(332, 285);
 			this.LyricsChorus_Tab.TabIndex = 1;
 			this.LyricsChorus_Tab.Text = "Chorus";
 			// 
@@ -539,16 +540,16 @@ namespace DreamBeam
 			this.ChorusLyrics.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.ChorusLyrics.Location = new System.Drawing.Point(0, 0);
 			this.ChorusLyrics.Name = "ChorusLyrics";
-			this.ChorusLyrics.Size = new System.Drawing.Size(313, 303);
+			this.ChorusLyrics.Size = new System.Drawing.Size(332, 285);
 			this.ChorusLyrics.TabIndex = 0;
 			this.ChorusLyrics.Text = "";
 			// 
 			// LyricsOther_Tab
 			// 
 			this.LyricsOther_Tab.Controls.Add(this.OtherLyrics);
-			this.LyricsOther_Tab.Location = new System.Drawing.Point(23, 4);
+			this.LyricsOther_Tab.Location = new System.Drawing.Point(4, 22);
 			this.LyricsOther_Tab.Name = "LyricsOther_Tab";
-			this.LyricsOther_Tab.Size = new System.Drawing.Size(313, 303);
+			this.LyricsOther_Tab.Size = new System.Drawing.Size(332, 285);
 			this.LyricsOther_Tab.TabIndex = 2;
 			this.LyricsOther_Tab.Text = "Other";
 			// 
@@ -559,7 +560,7 @@ namespace DreamBeam
 			this.OtherLyrics.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.OtherLyrics.Location = new System.Drawing.Point(0, 0);
 			this.OtherLyrics.Name = "OtherLyrics";
-			this.OtherLyrics.Size = new System.Drawing.Size(313, 303);
+			this.OtherLyrics.Size = new System.Drawing.Size(332, 285);
 			this.OtherLyrics.TabIndex = 0;
 			this.OtherLyrics.Text = "";
 			// 

@@ -715,17 +715,11 @@
 	<data name="Right.Search.Phrase">
 		<value>Phrase</value>
 	</data>
-	<data name="Right.Search.Playlist">
-		<value>Playlist -&gt;</value>
-	</data>
 	<data name="Right.Search.sAllSongs">
 		<value>All Songs</value>
 	</data>
 	<data name="Right.Search.Search">
 		<value>Search</value>
-	</data>
-	<data name="Right.Search.sPlaylist">
-		<value>Playlist</value>
 	</data>
 	<data name="Right.Search.Words">
 		<value>Words</value>
@@ -740,7 +734,7 @@
 		<value>&lt;- Load</value>
 	</data>
 	<data name="Right.Songs.Playlist">
-		<value>Playlist -&gt;</value>
+		<value>Add to Playlist</value>
 	</data>
 	<data name="ShowSongs.BackgroundPanel">
 		<value>Background</value>
@@ -873,5 +867,8 @@
 	</data>
 	<data name="EditSongs.LyricTypeOther">
 		<value>Other</value>
+	</data>
+	<data name="Right.Media.Add.Close">
+		<value>Close media browser</value>
 	</data>
 </root>

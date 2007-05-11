@@ -156,13 +156,16 @@ namespace DreamBeam
 
 				if (_MainForm.RightDocks_ImageListBox.SelectedIndex >= 0) {
 					path = path + _MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text;
-					if (_MainForm.selectedTab == MainTab.EditSongs) {
-						_MainForm.songEditor.Background.Text = path;
-					}
-
-					if (_MainForm.DisplayPreview.content != null) {
-						_MainForm.DisplayPreview.content.ChangeBGImagePath( path );
-						_MainForm.DisplayPreview.UpdateDisplay(true);
+					if (_MainForm.selectedTab == MainTab.Presentation) {
+						_MainForm.PreviewPresentationMedia(path);
+					} else {
+						if (_MainForm.selectedTab == MainTab.EditSongs) {
+							_MainForm.songEditor.Background.Text = path;
+						}
+						if (_MainForm.DisplayPreview.content != null) {
+							_MainForm.DisplayPreview.content.ChangeBGImagePath( path );
+							_MainForm.DisplayPreview.UpdateDisplay(true);
+						}
 					}
 				}
 

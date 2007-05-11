@@ -11,8 +11,8 @@ using Khendys.Controls;
 namespace DreamBeam.Bible {
 
 	public class BibleRTF : Khendys.Controls.ExRichTextBox {
-		private int currentVerse = 0;
-		private int firstVerse = 0, lastVerse = 0;
+		private int currentVerse;
+		private int firstVerse, lastVerse;
 		private int verseBufferSize = 200;
 		private ArrayList rtfFonts = new ArrayList();
 		private ArrayList rtfColors = new ArrayList();
@@ -80,7 +80,7 @@ namespace DreamBeam.Bible {
 			return new int[2] {first, last};
 		}
 
-		private int AppendText(StringBuilder str, string text) {
+		private static int AppendText(StringBuilder str, string text) {
 			int length = text.Length;
 			str.Append(text.Replace("\n", @"\par "));
 			return length;
@@ -110,9 +110,9 @@ namespace DreamBeam.Bible {
 				// We need to keep track of how many non-control characters we're adding so we
 				// can't just use: _rtfData.Append( bible.GetSimpleRef(i) + " " );
 				// The text added here should be identical to the text searched for in BibleVersion.Find
-				length += this.AppendText(_rtfData, bible.GetSimpleRef(i, true) + " " );
+				length += BibleRTF.AppendText(_rtfData, bible.GetSimpleRef(i, true) + " " );
 				_rtfData.Append(@"\highlight0\cf2\b0\f1\fs20 ");
-				length += this.AppendText(_rtfData, " " + bible.GetSimpleVerseText(i) + "\n");
+				length += BibleRTF.AppendText(_rtfData, " " + bible.GetSimpleVerseText(i) + "\n");
 				
 				// Note: Unicode characters get converted to their ASCII equivalents.
 			}
@@ -129,6 +129,13 @@ namespace DreamBeam.Bible {
 			//Tools.ElapsedTime("Finish Populate");
 		}
 
+		/// <summary>
+		/// Finds a verse matching the regex, and updates the RTF control to make the verse visible.
+		/// </summary>
+		/// <param name="bible"></param>
+		/// <param name="dirFwd"></param>
+		/// <param name="regex"></param>
+		/// <returns>The result of calling BibleVersion.Find (negative number to indicate failure, or a 0-based verse index)</returns>
 		public int Find(BibleVersion bible, bool dirFwd, string regex) {
 			Tools.ElapsedTime("Start regex search");
 			

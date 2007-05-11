@@ -29,11 +29,11 @@ namespace DreamBeam
 
 						// Repaint Image
 						if (_MainForm.selectedTab == MainTab.ShowSongs || _MainForm.selectedTab == MainTab.EditSongs){
-							_MainForm.Draw_Song_Preview_Image();
+//							_MainForm.Draw_Song_Preview_Image();
 							_ShowBeam.PaintSong();
 						}
 						if (_MainForm.selectedTab == MainTab.SermonTools){
-							_MainForm.Draw_Song_Preview_Image();
+//							_MainForm.Draw_Song_Preview_Image();
 							_ShowBeam.PaintSermon();
 						}
 
@@ -52,11 +52,11 @@ namespace DreamBeam
 
 						// Repaint Image
 						if (_MainForm.selectedTab == MainTab.ShowSongs || _MainForm.selectedTab == MainTab.EditSongs){
-							_MainForm.Draw_Song_Preview_Image();
+//							_MainForm.Draw_Song_Preview_Image();
 							_ShowBeam.PaintSong();
 						}
 						if (_MainForm.selectedTab == MainTab.SermonTools){
-							_MainForm.Draw_Song_Preview_Image();
+//							_MainForm.Draw_Song_Preview_Image();
 							_ShowBeam.PaintSermon();
 						}
 		}
@@ -72,7 +72,7 @@ namespace DreamBeam
 		   _ShowBeam.newText = true;
 		   _ShowBeam.Songupdate = true;
 		   _ShowBeam.PaintSong();
-		   _MainForm.Draw_Song_Preview_Image();
+//		   _MainForm.Draw_Song_Preview_Image();
 		}
 
 	   public void ShowStrophe(int Number){

@@ -436,6 +436,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Graphics\ScreenCapture.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Graphics\TextGraphics.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

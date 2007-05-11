@@ -1,5 +1,13 @@
 download NSIS
 download files for "Support Files" (DirectX and dotNet installers)
+- Directory structure:
+	SupportFiles\flashplayer7_winax.exe
+	SupportFiles\directx_apr2006_redist.exe
+	SupportFiles\dotnetfx.exe	(not used by the installer currently)
+	SupportFiles\dotNet1.1\*.*	(extracted contents from dotnetfx.exe)
+	
+
 copy Dreambin Bins into "Dreambeam"
+copy a good set of configuration files into "Dreambeam"
 compile Dreambeam.nsi
 unkomment second line in Dreambeam.nsi for an full install version
