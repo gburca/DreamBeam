@@ -557,7 +557,7 @@ namespace DreamBeam {
 			// SongTitle_TextFormat
 			// 
 			this.SongTitle_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SongTitle_TextFormat.Format = ((DreamBeam.BeamTextFormat)(resources.GetObject("SongTitle_TextFormat.Format")));
+            this.SongTitle_TextFormat.Format = new DreamBeam.BeamTextFormat();
 			this.SongTitle_TextFormat.Location = new System.Drawing.Point(0, 0);
 			this.SongTitle_TextFormat.Name = "SongTitle_TextFormat";
 			this.SongTitle_TextFormat.Size = new System.Drawing.Size(392, 207);
@@ -575,7 +575,7 @@ namespace DreamBeam {
 			// SongVerse_TextFormat
 			// 
 			this.SongVerse_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SongVerse_TextFormat.Format = ((DreamBeam.BeamTextFormat)(resources.GetObject("SongVerse_TextFormat.Format")));
+			this.SongVerse_TextFormat.Format = new DreamBeam.BeamTextFormat();
 			this.SongVerse_TextFormat.Location = new System.Drawing.Point(0, 0);
 			this.SongVerse_TextFormat.Name = "SongVerse_TextFormat";
 			this.SongVerse_TextFormat.Size = new System.Drawing.Size(392, 207);
@@ -593,7 +593,7 @@ namespace DreamBeam {
 			// SongAuthor_TextFormat
 			// 
 			this.SongAuthor_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SongAuthor_TextFormat.Format = ((DreamBeam.BeamTextFormat)(resources.GetObject("SongAuthor_TextFormat.Format")));
+            this.SongAuthor_TextFormat.Format = new DreamBeam.BeamTextFormat();
 			this.SongAuthor_TextFormat.Location = new System.Drawing.Point(0, 0);
 			this.SongAuthor_TextFormat.Name = "SongAuthor_TextFormat";
 			this.SongAuthor_TextFormat.Size = new System.Drawing.Size(392, 207);
@@ -1225,7 +1225,7 @@ namespace DreamBeam {
 			// BibleRef_TextFormat
 			// 
 			this.BibleRef_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BibleRef_TextFormat.Format = ((DreamBeam.BeamTextFormat)(resources.GetObject("BibleRef_TextFormat.Format")));
+            this.BibleRef_TextFormat.Format = new DreamBeam.BeamTextFormat();
 			this.BibleRef_TextFormat.Location = new System.Drawing.Point(0, 0);
 			this.BibleRef_TextFormat.Name = "BibleRef_TextFormat";
 			this.BibleRef_TextFormat.Size = new System.Drawing.Size(392, 207);
@@ -1243,7 +1243,7 @@ namespace DreamBeam {
 			// BibleVerse_TextFormat
 			// 
 			this.BibleVerse_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BibleVerse_TextFormat.Format = ((DreamBeam.BeamTextFormat)(resources.GetObject("BibleVerse_TextFormat.Format")));
+            this.BibleVerse_TextFormat.Format = new DreamBeam.BeamTextFormat();
 			this.BibleVerse_TextFormat.Location = new System.Drawing.Point(0, 0);
 			this.BibleVerse_TextFormat.Name = "BibleVerse_TextFormat";
 			this.BibleVerse_TextFormat.Size = new System.Drawing.Size(392, 207);
@@ -1261,7 +1261,7 @@ namespace DreamBeam {
 			// BibleTransl_TextFormat
 			// 
 			this.BibleTransl_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BibleTransl_TextFormat.Format = ((DreamBeam.BeamTextFormat)(resources.GetObject("BibleTransl_TextFormat.Format")));
+            this.BibleTransl_TextFormat.Format = new DreamBeam.BeamTextFormat();
 			this.BibleTransl_TextFormat.Location = new System.Drawing.Point(0, 0);
 			this.BibleTransl_TextFormat.Name = "BibleTransl_TextFormat";
 			this.BibleTransl_TextFormat.Size = new System.Drawing.Size(392, 207);
@@ -1327,7 +1327,7 @@ namespace DreamBeam {
 			// TextTool_1stLine_TextFormat
 			// 
 			this.TextTool_1stLine_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TextTool_1stLine_TextFormat.Format = ((DreamBeam.BeamTextFormat)(resources.GetObject("TextTool_1stLine_TextFormat.Format")));
+            this.TextTool_1stLine_TextFormat.Format = new DreamBeam.BeamTextFormat();
 			this.TextTool_1stLine_TextFormat.Location = new System.Drawing.Point(0, 0);
 			this.TextTool_1stLine_TextFormat.Name = "TextTool_1stLine_TextFormat";
 			this.TextTool_1stLine_TextFormat.Size = new System.Drawing.Size(392, 207);
@@ -1345,7 +1345,7 @@ namespace DreamBeam {
 			// TextTool_OtherLines_TextFormat
 			// 
 			this.TextTool_OtherLines_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TextTool_OtherLines_TextFormat.Format = ((DreamBeam.BeamTextFormat)(resources.GetObject("TextTool_OtherLines_TextFormat.Format")));
+            this.TextTool_OtherLines_TextFormat.Format = new DreamBeam.BeamTextFormat();
 			this.TextTool_OtherLines_TextFormat.Location = new System.Drawing.Point(0, 0);
 			this.TextTool_OtherLines_TextFormat.Name = "TextTool_OtherLines_TextFormat";
 			this.TextTool_OtherLines_TextFormat.Size = new System.Drawing.Size(392, 207);
