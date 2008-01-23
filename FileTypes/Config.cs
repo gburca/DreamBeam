@@ -26,21 +26,9 @@ namespace DreamBeam
         public string BGImagePath = null;
         public BeamTextFormat[] TextFormat;
 
-        public Theme(ContentType type) {
-            switch (type) {
-                case ContentType.Song:
-                    CreateDefaultSongTheme();
-                    break;
-                case ContentType.BibleVerse:
-                    CreateDefaultBibleTheme();
-                    break;
-                case ContentType.PlainText:
-                    CreateDefaultSermonTextTheme();
-                    break;
-            }
-        }
+        public Theme() {}
 
-        private void CreateTextFormats(int size) {
+        protected void CreateTextFormats(int size) {
             // Create the array
             TextFormat = new BeamTextFormat[size];
             // Populate the array
@@ -49,22 +37,108 @@ namespace DreamBeam
             }
         }
 
-        private void CreateDefaultSongTheme() {
+        public void SaveAs() {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.DefaultExt = "xml";
+            dialog.Filter = @"DreamBeam themes (*.theme.xml)|*.theme.xml|All (*.*)|*.*";
+            dialog.FilterIndex = 1;
+            dialog.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Themes");
+            dialog.Title = "Save Theme As";
+
+            Directory.CreateDirectory(dialog.InitialDirectory);
+
+            //if (!Tools.StringIsNullOrEmptyTrim(this.songEditor.Song.FileName)) {
+            //    this.SaveFileDialog.FileName = this.songEditor.Song.FileName;
+            //} else if (!Tools.StringIsNullOrEmptyTrim(this.songEditor.Song.Title)) {
+            //    this.SaveFileDialog.FileName = this.songEditor.Song.Title + ".xml";
+            //} else {
+            //    this.SaveFileDialog.FileName = "New Song.xml";
+            //}
+
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                string fileName = dialog.FileName;
+                try {
+                    SerializeTo(this, fileName);
+                    //this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.SaveFileDialog.FileName);
+                } catch (Exception ex) {
+                    MessageBox.Show("Theme not saved: " + ex.Message);
+                }
+            }
+        }
+
+        public static void SerializeTo(Theme instance, string file) {
+            XmlSerializer xs = new XmlSerializer(instance.GetType());
+
+            file = Tools.GetFullPath(file);
+            Directory.CreateDirectory(Path.GetDirectoryName(file));
+            FileStream fs = null;
+
+            try {
+                fs = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Read);
+                xs.Serialize(fs, instance);
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+            } finally {
+                if (fs != null) {
+                    fs.Close();
+                }
+            }
+        }
+
+        public static object DeserializeFrom(Theme instance, string file) {
+            Type type = instance.GetType();
+            XmlSerializer xs = null;
+
+            file = Tools.GetFullPath(file);
+            try {
+                xs = new XmlSerializer(type);
+            } catch (InvalidOperationException ex) {
+                // Invalid class. Does the class have a public constructor?
+                Console.WriteLine("DeserializeFrom exception: " + ex.Message);
+            }
+
+            if (xs != null) {
+                try {
+                    using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
+                        return xs.Deserialize(fs);
+                    }
+                } catch (FileNotFoundException) {
+                    return null;
+                } catch (InvalidOperationException) {
+                    // Invalid XML code
+                    return null;
+                }
+            }
+
+            return null;
+        }
+
+    }
+
+    [Serializable()]
+    public class BibleTheme : Theme {
+        public BibleTheme() {
+            CreateTextFormats(Enum.GetValues(typeof(BibleTextType)).Length);
+            TextFormat[(int)BibleTextType.Reference].Bounds = new RectangleF(5F, 2F, 90F, 8F);
+            TextFormat[(int)BibleTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
+            TextFormat[(int)BibleTextType.Translation].Bounds = new RectangleF(80F, 95F, 15F, 4F);
+        }
+    }
+
+    [Serializable()]
+    public class SongTheme : Theme {
+        public SongTheme() {
             CreateTextFormats(Enum.GetValues(typeof(SongTextType)).Length);
             TextFormat[(int)SongTextType.Title].Bounds = new RectangleF(5F, 2F, 90F, 8F);
             TextFormat[(int)SongTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
             TextFormat[(int)SongTextType.Author].Bounds = new RectangleF(80F, 95F, 15F, 4F);
             TextFormat[(int)SongTextType.Verse].HAlignment = StringAlignment.Near;
         }
+    }
 
-        private void CreateDefaultBibleTheme() {
-            CreateTextFormats(Enum.GetValues(typeof(BibleTextType)).Length);
-            TextFormat[(int)BibleTextType.Reference].Bounds = new RectangleF(5F, 2F, 90F, 8F);
-            TextFormat[(int)BibleTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
-            TextFormat[(int)BibleTextType.Translation].Bounds = new RectangleF(80F, 95F, 15F, 4F);
-        }
-
-        private void CreateDefaultSermonTextTheme() {
+    [Serializable()]
+    public class SermonTheme : Theme {
+        public SermonTheme() {
             CreateTextFormats(Enum.GetValues(typeof(TextToolType)).Length);
             TextFormat[(int)TextToolType.FirstLine].Bounds = new RectangleF(5F, 2F, 90F, 8F);
             TextFormat[(int)TextToolType.OtherLines].Bounds = new RectangleF(5F, 12F, 90F, 85F);
@@ -73,8 +147,28 @@ namespace DreamBeam
     }
 
     [Serializable()]
-    public class Themes {
-        public Theme[] themes;
+    public class ComboTheme {
+        public SongTheme Song;
+        public BibleTheme Bible;
+        public SermonTheme Sermon;
+
+        public ComboTheme() {
+            Song = new SongTheme();
+            Bible = new BibleTheme();
+            Sermon = new SermonTheme();
+        }
+
+        public Theme getTheme(ContentType type) {
+            switch (type) {
+                case ContentType.Song:
+                    return Song;
+                case ContentType.PlainText:
+                    return Sermon;
+                //case ContentType.BibleVerse:
+                default:
+                    return Bible;
+            }
+        }
     }
 
 	[Serializable()]
@@ -127,17 +221,40 @@ namespace DreamBeam
 		public bool LoopAutoPlay = false;
 		public int AutoPlayChangeTime = 2;
 		public string Language = "auto";
-		public string BibleBGImagePath = null;
-		public string SongBGImagePath = null;
-		public string TextBGImagePath = null;
 
-		public BeamTextFormat[] BibleTextFormat;
-		public BeamTextFormat[] SongTextFormat;
-		public BeamTextFormat[] SermonTextFormat;
+        [XmlElement("Theme")]
+        public ComboTheme theme;
+        #region Theme accessors
+        [XmlIgnore]
+        public string BibleBGImagePath {
+            get { return theme.getTheme(ContentType.BibleVerse).BGImagePath; }
+            set { theme.getTheme(ContentType.BibleVerse).BGImagePath = value; }
+        }
+        [XmlIgnore]
+        public string SongBGImagePath {
+            get { return theme.getTheme(ContentType.Song).BGImagePath; }
+            set { theme.getTheme(ContentType.Song).BGImagePath = value; }
+        }
+        [XmlIgnore]
+        public string TextBGImagePath {
+            get { return theme.getTheme(ContentType.PlainText).BGImagePath; }
+            set { theme.getTheme(ContentType.PlainText).BGImagePath = value; }
+        }
+        [XmlIgnore]
+        public BeamTextFormat[] BibleTextFormat {
+            get { return theme.getTheme(ContentType.BibleVerse).TextFormat; }
+        }
+        [XmlIgnore]
+        public BeamTextFormat[] SongTextFormat {
+            get { return theme.getTheme(ContentType.Song).TextFormat; }
+        }
+        [XmlIgnore]
+        public BeamTextFormat[] SermonTextFormat {
+            get { return theme.getTheme(ContentType.Song).TextFormat; }
+        }
+        #endregion
 
-        public Theme BibleTheme, SongTheme, SermonTextTheme;
-
-		public OperatingMode AppOperatingMode;
+        public OperatingMode AppOperatingMode;
 
 		/// <summary>
 		/// When operating in client mode, this is the server address the client will attempt
@@ -166,37 +283,7 @@ namespace DreamBeam
         /// fancy.
 		/// </summary>
 		public void Init() {
-			int formats;
-			
-			// Create the array
-			formats = Enum.GetValues(typeof(BibleTextType)).Length;
-			BibleTextFormat = new BeamTextFormat[formats];
-			// Populate the array
-			for (int i = 0; i < formats; i++) {
-				BibleTextFormat[i] = new BeamTextFormat();
-			}
-			BibleTextFormat[(int)BibleTextType.Reference].Bounds = new RectangleF(5F, 2F, 90F, 8F);
-			BibleTextFormat[(int)BibleTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
-			BibleTextFormat[(int)BibleTextType.Translation].Bounds = new RectangleF(80F, 95F, 15F, 4F);
-
-			formats = Enum.GetValues(typeof(SongTextType)).Length;
-			SongTextFormat = new BeamTextFormat[formats];
-			for (int i = 0; i < formats; i++) {
-				SongTextFormat[i] = new BeamTextFormat();
-			}
-			SongTextFormat[(int)SongTextType.Title].Bounds = BibleTextFormat[(int)BibleTextType.Reference].Bounds;
-			SongTextFormat[(int)SongTextType.Verse].Bounds = BibleTextFormat[(int)BibleTextType.Verse].Bounds;
-			SongTextFormat[(int)SongTextType.Author].Bounds = BibleTextFormat[(int)BibleTextType.Translation].Bounds;
-			SongTextFormat[(int)SongTextType.Verse].HAlignment = StringAlignment.Near;
-
-			formats = Enum.GetValues(typeof(TextToolType)).Length;
-			SermonTextFormat = new BeamTextFormat[formats];
-			for (int i = 0; i < formats; i++) {
-				SermonTextFormat[i] = new BeamTextFormat();
-			}
-			SermonTextFormat[(int)TextToolType.FirstLine].Bounds = new RectangleF(5F, 2F, 90F, 8F);
-			SermonTextFormat[(int)TextToolType.OtherLines].Bounds = new RectangleF(5F, 12F, 90F, 85F);
-			SermonTextFormat[(int)TextToolType.OtherLines].HAlignment = StringAlignment.Near;
+            theme = new ComboTheme();
 
 			AppOperatingMode = OperatingMode.StandAlone;
 			ListeningPort = 50000;
@@ -207,21 +294,6 @@ namespace DreamBeam
 		}
 
 		/// <summary>
-		/// If the file has an absolute path, it returns the file, otherwise it constructs
-		/// an absolute path relative to the ProgramDir value.
-		/// </summary>
-		/// <param name="file"></param>
-		/// <returns></returns>
-		public static string GetAbsoluteLocation(string file) {
-			if (Path.IsPathRooted(file)) {
-				return file;
-			} else {
-				return Path.Combine(Tools.GetAppDocPath(), file);
-			}
-		}
-
-
-		/// <summary>
 		/// Handles serialization of the Config class, or of any types derived from it.
 		/// </summary>
 		/// <param name="instance">The instance to serialize</param>
@@ -230,7 +302,7 @@ namespace DreamBeam
 			Type type = instance.GetType();
 			XmlSerializer xs = new XmlSerializer(type);
 
-			file = GetAbsoluteLocation(file);
+			file = Tools.GetFullPath(file);
 			Directory.CreateDirectory(Path.GetDirectoryName(file));
 			FileStream fs = null;
 
@@ -261,7 +333,7 @@ namespace DreamBeam
 			Type type = instance.GetType();
 			XmlSerializer xs = null;
 
-			file = GetAbsoluteLocation(file);
+			file = Tools.GetFullPath(file);
 			try {
 				xs = new XmlSerializer(type);
 			} catch (InvalidOperationException ex) {

@@ -1647,6 +1647,7 @@ namespace DreamBeam {
 						break;
 					case ContentType.BibleVerseIdx:
 					case ContentType.BibleVerseRef:
+                    case ContentType.BibleVerse:
 						content.ChangeBGImagePath(Conf.BibleBGImagePath);
 						break;
 				}
