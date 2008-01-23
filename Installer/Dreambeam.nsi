@@ -189,9 +189,9 @@ Section "un.Uninstall DreamBeam" SUnDreamBeam
 	; Remove install directory (only if empty)
 	RMDir "$INSTDIR"
 
-	;TODO:
-	;RMDir /r "$USERFILES\BibleCache"
-	;RMDir "$USERFILES" ; Remove user directory (only if empty)
+	; This should contain the directory returned by Tools.GetAppCachePath() in the App.
+	RMDir /r "$APPDATA\${PRODUCT}\Cache"
+	RMDir "$APPDATA\${PRODUCT}" ; Remove user directory (only if empty)
 
 SectionEnd
 

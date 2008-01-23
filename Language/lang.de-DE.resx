@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
-    Version 1.3
+    Version 2.0
     
     The primary goals of this format is to allow a simple XML format 
     that is mostly human readable. The generation and parsing of the 
@@ -14,16 +14,17 @@
     
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">1.3</resheader>
+    <resheader name="version">2.0</resheader>
     <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
     <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1">this is my long string</data>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
     <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        [base64 mime encoded serialized .NET Framework object]
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
     <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        [base64 mime encoded string representing a byte array form of the .NET Framework object]
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
     </data>
                 
     There are any number of "resheader" rows that contain simple 
@@ -35,7 +36,7 @@
     Classes that don't support this are serialized and stored with the 
     mimetype set.
     
-    The mimetype is used forserialized objects, and tells the 
+    The mimetype is used for serialized objects, and tells the 
     ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
     
@@ -45,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -58,802 +59,558 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="Menu.Song">
-		<value>Lied</value>
-	</data>
-	<data name="Menu.MediaList.Save">
-		<value>Speichern</value>
-	</data>
-	<data name="EditSongs.Author">
-		<value>Autor</value>
-	</data>
-	<data name="Options.Common.Translate">
-		<value>Wenn Sie diese Software in eine andere Sprache übersetzen wollen, sind Sie dazu sehr willkommen.</value>
-	</data>
-	<data name="EditSongs.BackgroundImage">
-		<value>Hintergrund Bild:</value>
-	</data>
-	<data name="Options.Tabs.Bible">
-		<value>Bibel</value>
-	</data>
-	<data name="Help.Intro.7.Title">
-		<value>Bildordner Liste</value>
-	</data>
-	<data name="Help.TextTool.3.Title">
-		<value>Text Einstellungen</value>
-	</data>
-	<data name="Help.Presentation.5.Title">
-		<value>Media Listen</value>
-	</data>
-	<data name="Status.LoadingImages">
-		<value>Lade Hintergrund-Bilder ... "%1%"%</value>
-	</data>
-	<data name="Message.WantDeleteSong">
-		<value>Wollen Sie das Lied "%1%" wirklich löschen?</value>
-	</data>
-	<data name="Status.SongDeleted">
-		<value>Lied "%1%" gelöscht.</value>
-	</data>
-	<data name="TabPages.ShowSongs">
-		<value>Lieder zeigen</value>
-	</data>
-	<data name="Help.BeamBox.1.Title">
-		<value>Beamer-Fenster</value>
-	</data>
-	<data name="Right.MediaLists.TimerText">
-		<value>Medien wechseln nach:</value>
-	</data>
-	<data name="Toolbar.SaveMediaList">
-		<value>Media Liste speichern</value>
-	</data>
-	<data name="Menu.Edit.Options">
-		<value>Optionen</value>
-	</data>
-	<data name="TextTool.Bible.Translation">
-		<value>Übersetzung</value>
-	</data>
-	<data name="Toolbar.SaveSong">
-		<value>Lied speichern</value>
-	</data>
-	<data name="EditSongs.ColorButton">
-		<value>Farbe</value>
-	</data>
-	<data name="Toolbar.ShowBeamBox">
-		<value>Beamer-Fenster zeigen</value>
-	</data>
-	<data name="Menu.MediaList.Exit">
-		<value>DreamBeam beenden</value>
-	</data>
-	<data name="EditSongs.Verses">
-		<value>Strophen</value>
-	</data>
-	<data name="Right.Playlist.Up">
-		<value>Hoch</value>
-	</data>
-	<data name="Status.ImagesLoaded">
-		<value>Hintergrund-Bilder geladen.</value>
-	</data>
-	<data name="Menu.Help.Components">
-		<value>DreamBeam Komponenten</value>
-	</data>
-	<data name="Menu.MediaList">
-		<value>Media Liste</value>
-	</data>
-	<data name="Help.TextTool.1.Title">
-		<value>Text Werkzeug</value>
-	</data>
-	<data name="Help.Intro.1.Title">
-		<value>Dreambeam Hilfe</value>
-	</data>
-	<data name="EditSongs.Title">
-		<value>Titel</value>
-	</data>
-	<data name="Help.Options.3.Title">
-		<value>Grafik Einstellungen</value>
-	</data>
-	<data name="EditSongs.FontButton">
-		<value>Schrift</value>
-	</data>
-	<data name="ShowSongs.BackgroundPanel">
-		<value>Hintergrund</value>
-	</data>
-	<data name="Menu.MediaList.New">
-		<value>Neu...</value>
-	</data>
-	<data name="TextTool.Bible.FindVerse">
-		<value>Vers suchen</value>
-	</data>
-	<data name="Status.MediaFilesLoaded">
-		<value>Media-Dateien geladen.</value>
-	</data>
-	<data name="Options.Tabs.Browse">
-		<value>auswählen...</value>
-	</data>
-	<data name="Options.BeamBox.OnTopCheckBox">
-		<value>Fenster immer oben</value>
-	</data>
-	<data name="Help.Presentation.4.Title">
-		<value>Media</value>
-	</data>
-	<data name="Message.SongExists">
-		<value>Das Lied existiert bereits.</value>
-	</data>
-	<data name="Options.Tabs.Graphics">
-		<value>Grafik</value>
-	</data>
-	<data name="Right.MediaLists.Load">
-		<value>&lt;-Laden</value>
-	</data>
-	<data name="Right.Search.sAllSongs">
-		<value>alle Lieder</value>
-	</data>
-	<data name="TabPages.Bible">
-		<value>Bibel</value>
-	</data>
-	<data name="Options.BeamBox.HideMouseCheckBox">
-		<value>Mauszeiger verstecken</value>
-	</data>
-	<data name="Right.Media.Add">
-		<value>Medien hinzufügen...</value>
-	</data>
-	<data name="Options.BeamBox.PositionGroup">
-		<value>Position:</value>
-	</data>
-	<data name="TextTool.Bible.Books">
-		<value>Bücher</value>
-	</data>
-	<data name="Message.MediaListNotSaved">
-		<value>Kein Name angegeben - Media Liste wurde nicht gespeichert.</value>
-	</data>
-	<data name="Right.MediaLists.TimerCaption">
-		<value>Auto-Play-Zeiten:</value>
-	</data>
-	<data name="Message.ImportMedia">
-		<value>Drücken sie "Ja" um die Dateien in den DreamBeam Media-Ordner zu kopieren, oder "Nein" um Verknüpfungen zum aktuellen Speicherort zu benutzen.</value>
-	</data>
-	<data name="Help.Intro.3.Title">
-		<value>Komponenten Leiste</value>
-	</data>
-	<data name="TabPages.EditSongs">
-		<value>Lieder Bearbeiten</value>
-	</data>
-	<data name="ShowSongs.HideTitle_Button">
-		<value>Titel</value>
-	</data>
-	<data name="Help.Presentation.1.Title">
-		<value>Media Präsentation</value>
-	</data>
-	<data name="Right.Backgrounds">
-		<value>Hintergrund-Bilder</value>
-	</data>
-	<data name="Help.ShowSongs.2.Title">
-		<value>Strophen</value>
-	</data>
-	<data name="Options.Tabs.BeamBox">
-		<value>Beamer Fenster</value>
-	</data>
-	<data name="Help.Options.1.Title">
-		<value>Optionen</value>
-	</data>
-	<data name="Message.NoNameEntered">
-		<value>Kein Name eingegeben.</value>
-	</data>
-	<data name="Right.Search.Phrase">
-		<value>Wortgruppe</value>
-	</data>
-	<data name="Menu.Song.Save">
-		<value>Speichern</value>
-	</data>
-	<data name="Help.Options.1">
-		<value>Das Options Panel kann im Edit Menü gefunden werden.</value>
-	</data>
-	<data name="Menu.Help.Intro">
-		<value>Intro und Hauptkomponenten</value>
-	</data>
-	<data name="Help.EditSongs.2.Title">
-		<value>Text Felder</value>
-	</data>
-	<data name="Right.Media.Remove">
-		<value>Entfernen</value>
-	</data>
-	<data name="ShowSongs.HideElementsPanel">
-		<value>Elemente verstecken</value>
-	</data>
-	<data name="Options.BeamBox.Height">
-		<value>Höhe</value>
-	</data>
-	<data name="Message.SaveMediaListAs">
-		<value>Media Liste speichern als...</value>
-	</data>
-	<data name="Help.Options.6.Title">
-		<value>Speichern oder Abbrechen</value>
-	</data>
-	<data name="Help.ShowSongs.2">
-		<value>Hier können sie die anzuzeigenden Strophen auswählen, nachdem sie ein Lied aus der Liedliste geladen haben. Um es zu dem Beamer zu schicken klicken Sie auf den 'zum Beamer' Button oder Doppelklicken sie einfach eine Strophe.</value>
-	</data>
-	<data name="Help.ShowSongs.3">
-		<value>Wenn sie ein Bild aus der BildListe auswählen und Überschreiben aktivieren, dann wechselt der Lied Hintergrund zu dem Neuen.</value>
-	</data>
-	<data name="Help.ShowSongs.1">
-		<value>The 'Show Songs' component is used to send songs and verses to the Projector Box. It will be activated with this Button.
-Mit der 'Lieder zeigen' Komponente können Lieder zum Beamer gesendet werden. Sie wird mit diesem Button aktiviert.</value>
-	</data>
-	<data name="Status.LoadingMediaFiles">
-		<value>Lade Media-Dateien ... "%1%"%</value>
-	</data>
-	<data name="Message.SongNotSavedYet">
-		<value>Lied wurde noch nicht gespeichert.</value>
-	</data>
-	<data name="Help.Options.3">
-		<value>Hier können sie die Grafik Einstellungen ändern. Alpha Überblendungen sind Übergänge zwischen 2 Liedern oder Bildern, ein wirklich schneller Rechner ist hierfür vorraussetzung. Die Text Umrandung ist eine farbige Linie um den Text, hier können sie dessen Größe bestimmen.</value>
-	</data>
-	<data name="Help.Options.2">
-		<value>Hier können sie die Dreambeam Sprachversion auswählen.</value>
-	</data>
-	<data name="Help.BeamBox.2.Title">
-		<value>Beamer-Fenster zeigen</value>
-	</data>
-	<data name="Help.Options.6">
-		<value>Zum Schluss 'Speichern' sie Ihre Einstellungen oder verwerfen sie mit 'Abbrechen'.</value>
-	</data>
-	<data name="Help.Options.5">
-		<value>To be able using the Bible in DreamBeam, 'The Sword Project' must be installed. Here you can enter the Path to Sword (if it's installed), and select the language of it's Book titles.</value>
-	</data>
-	<data name="Help.Options.4">
-		<value>Wie in den 'Größe/Position' Optionen im Beamer-Fenster, können sie auch hier dessen größe und Position ändern. (Wenn zum Beispiel das Beamer-Fenster aus irgendwelchen Gründen außerhalb der Sichtbaren Bildschirmfläche ist, können Sie es hier zurückholen.) Außerdem kann hier definiert werden ob das Beamer-Fenster immer an oberster Stelle ist und ob der Mauspfeil darauf sichtbar ist.</value>
-	</data>
-	<data name="Left.ShowSongs">
-		<value>Lieder zeigen</value>
-	</data>
-	<data name="Options.BeamBox.MouseGroup">
-		<value>Fenster und Mauszeiger:</value>
-	</data>
-	<data name="Right.Media.Down">
-		<value>Runter</value>
-	</data>
-	<data name="Options.BeamBox.Width">
-		<value>Breite</value>
-	</data>
-	<data name="SongEdit.ML_Button">
-		<value>Aktivieren</value>
-	</data>
-	<data name="Left.TextTool">
-		<value>Text Werkzeug</value>
-	</data>
-	<data name="Toolbar.SizePosition">
-		<value>Größe / Position</value>
-	</data>
-	<data name="Left.EditSongs">
-		<value>Lieder Bearbeiten</value>
-	</data>
-	<data name="Message.MediaListName">
-		<value>Bitte den Namen für die Media Liste eingeben:</value>
-	</data>
-	<data name="Help.Intro.2.Title">
-		<value>Haupt-Werkzeugleiste</value>
-	</data>
-	<data name="Status.MediaListSavedAs">
-		<value>Media Liste wurde als "%1%" gespeichert.</value>
-	</data>
-	<data name="Options.BeamBox.SizeGroup">
-		<value>Größe:</value>
-	</data>
-	<data name="Status.SongSavedAs">
-		<value>Lied wurde als "%1%" gespeichert.</value>
-	</data>
-	<data name="Help.EditSongs.7.Title">
-		<value>Zum Beamer Fenster</value>
-	</data>
-	<data name="ShowSongs.OverwriteBG_Button">
-		<value>Überschreiben</value>
-	</data>
-	<data name="Help.BeamBox.5.Title">
-		<value>Größe</value>
-	</data>
-	<data name="Toolbar.HideText">
-		<value>Text verstecken</value>
-	</data>
-	<data name="Help.EditSongs.4.Title">
-		<value>Positions Felder</value>
-	</data>
-	<data name="Menu.Song.New">
-		<value>Neu...</value>
-	</data>
-	<data name="Menu.Help.TextTool">
-		<value>Text Werkzeug</value>
-	</data>
-	<data name="Help.Presentation.5">
-		<value>Hier können sie ihre Media Sets verwalten. Speichern sie eine Media Liste unter dem Namen 'default' um sie beim start automatisch geladen zu bekommen. Hier können sie außerdem die Geschwindigkeit von Autoplay einstellen, sowie ob es sich Wiederholen soll.</value>
-	</data>
-	<data name="Help.Presentation.4">
-		<value>Das ist eine Mini-Vorschau und Auswahlliste ihrer Media-Dateien. Klicken Sie auf 'Medien hinzufügen' um nach nach Dateien zu browsen die Sie hinzufügen wollen. Konfigurieren sie AutoPlay im Menü der Media Listen.</value>
-	</data>
-	<data name="Message.SongNotRenamed">
-		<value>Kein Name angegeben - Lied wurde nicht umbenannt.</value>
-	</data>
-	<data name="Help.Presentation.1">
-		<value>Die 'Media Präsentation' wird zum zeigen von Bildern, Videos und Flash Animationen genutzt. Diese Medien können in der Media List arrangiert werden.</value>
-	</data>
-	<data name="Help.Presentation.3">
-		<value>Steuern sie Videos und Flashs mit dem 'Film Panel'. Klicken sie auf Vorschau um Flashs und Videos (ohne Ton) anzusehen. Schalten sie 'Wiederholen' ein um Flashs und Videos im Beamer-Fenster als Endlos-Schleife laufen zu lassen.</value>
-	</data>
-	<data name="Help.Presentation.2">
-		<value>Hier können Sie die Media Dateien anschauen bevor Sie über den Projektor zeigen.</value>
-	</data>
-	<data name="Toolbar.HideBackground">
-		<value>Hindergrund aus</value>
-	</data>
-	<data name="Message.NewSongTitle">
-		<value>Neues Lied...</value>
-	</data>
-	<data name="Right.Songs.Load">
-		<value>&lt;-Laden</value>
-	</data>
-	<data name="Message.SongNotSaved">
-		<value>Kein Name angegeben - Lied wurde nicht gespeichert.</value>
-	</data>
-	<data name="Help.BeamBox.3.Title">
-		<value>Größe/Positions-Button</value>
-	</data>
-	<data name="Options.Tabs.SwordLanguageGroup">
-		<value>Sword Sprache</value>
-	</data>
-	<data name="Message.RenameMediaListTitle">
-		<value>Media Liste "%1%" umbenennen zu ...</value>
-	</data>
-	<data name="Help.Options.5.Title">
-		<value>Bibel Einstellungen</value>
-	</data>
-	<data name="Message.ImportMediaTitle">
-		<value>Importieren oder Verknüpfen?</value>
-	</data>
-	<data name="Right.Search.Load">
-		<value>&lt;&lt;-Laden</value>
-	</data>
-	<data name="SongEdit.TextAlignPanel">
-		<value>Textausrichtung</value>
-	</data>
-	<data name="Help.ShowSongs.1.Title">
-		<value>Lieder zeigen</value>
-	</data>
-	<data name="Status.SongLoaded">
-		<value>Lied "%1%" geladen.</value>
-	</data>
-	<data name="Status.MediaListRenamed">
-		<value>Media Liste wurde zu "%1%" umbenannt.</value>
-	</data>
-	<data name="Help.Options.4.Title">
-		<value>Beamer Einstellungen</value>
-	</data>
-	<data name="Help.Presentation.2.Title">
-		<value>Media Vorschau</value>
-	</data>
-	<data name="ShowSongs.HideAuthor_Button">
-		<value>Autor</value>
-	</data>
-	<data name="Help.Intro.4">
-		<value>Die Lied Liste zeigt alle verfügbaren Lieder. Wählen sie eines, und klicken sie auf 'Laden' um es in das 'Lied zeigen' und 'Lied Bearbeiten' Fenster zu bekommen. Mit einem Doppelklick erreichen sie dasselbe. Haben sie eine lange Lied Liste, dann benutzen sie das obere Eingabefeld um ein Lied zu finden. Der 'löschen' Button wird das selektierte Lied löschen und der 'Playlist' Button fügt das Lied der Playlist hinze.</value>
-	</data>
-	<data name="Help.Intro.7">
-		<value>Listet alle Ordner im 'Backgrounds'-Verzeichnis auf. Wählen sie eines aus um die sich darin befindenden Bilder zu sehen.</value>
-	</data>
-	<data name="Menu.Song.Rename">
-		<value>Umbenennen...</value>
-	</data>
-	<data name="Help.Intro.1">
-		<value>Willkommen zur Einführung der Dreambeam Hilfe. Diese Sprechblase wird Sie durch alle wichtigen Komponenten von Dreambeam führen. Benutzen sie die unteren Buttons um durch das Tutorial zu Navigieren. Drücken sie auf 'Abbrechen' um die Hilfe zu beenden, auf 'Zurück' um zur vorherigen Sprechblase zu gelangen und auf 'Weiter' um die Tour fortzuführen.</value>
-	</data>
-	<data name="ShowSongs.HideText_Button">
-		<value>Strophen</value>
-	</data>
-	<data name="Options.Cancel">
-		<value>Abbrechen</value>
-	</data>
-	<data name="Menu.Song.Exit">
-		<value>DreamBeam beenden</value>
-	</data>
-	<data name="Help.Intro.8">
-		<value>Benutzen sie die Liste um Hintergrundbilder für ihre Lieder auszuwählen. Mit einem Klick der Rechten Maustaste öffnet sich ein Kontext Menü, dort können sie mit Manage den Bilder Ordner im Explorer öffnen, um Bilder hinzuzufügen, zu löschen oder umzubenennen. Mit Reload im Kontextmenü können sie die Bildliste neu laden.</value>
-	</data>
-	<data name="Right.Backgrounds.Manage">
-		<value>Bilder verwalten</value>
-	</data>
-	<data name="Menu.Help.Presentation">
-		<value>Presentation</value>
-	</data>
-	<data name="Help.TextTool.5.Titlel">
-		<value>zum Beamer</value>
-	</data>
-	<data name="Help.Buttons.Finish">
-		<value>Fertig</value>
-	</data>
-	<data name="Menu.Help.Options">
-		<value>Optionen</value>
-	</data>
-	<data name="Right.Playlist.Remove">
-		<value>Entfernen</value>
-	</data>
-	<data name="Status.SongToPlayList">
-		<value>Lied "%1%" zur Playlist gefügt.</value>
-	</data>
-	<data name="Help.Intro.4.Title">
-		<value>Lieder</value>
-	</data>
-	<data name="EditSongs.TextOutline">
-		<value>Umrandung</value>
-	</data>
-	<data name="Right.Backgrounds.Reload">
-		<value>Bilder neu laden</value>
-	</data>
-	<data name="Options.Graphics.AlphaCheckBox">
-		<value>Alpha Überblendung</value>
-	</data>
-	<data name="Help.BeamBox.5">
-		<value>Bestimmen Sie die Größe des  Beamer-Fensters genau so wie die Position.</value>
-	</data>
-	<data name="Help.BeamBox.4">
-		<value>Hier bestimmen sie die Position des Beamer-Fensters. Sie können Koordinaten eingeben, oder über die Pfeil-Buttons die exakte Position festlegen. Sie können es natürlich auch mit der Maus verschieben (nur wenn der Größe/Positions-Button aktiviert ist).</value>
-	</data>
-	<data name="Help.Intro.5">
-		<value>In der Playlist werden alle Lieder aufgelistet, die für die aktuelle Worship Session gebraucht werden. Kein Grund also für hektische Lied-Suchen. Benutzen sie die 'Hoch' und 'Runter' Buttons um die Playlist zu ordnen. Der 'Entfernen' Knopf entfenrt den Song aus der Playlist, ohne ihn in der Lied Liste zu löschen.</value>
-	</data>
-	<data name="Options.Bible.SwordFolderGroup">
-		<value>Sword Project Ordner</value>
-	</data>
-	<data name="Help.BeamBox.1">
-		<value>Das Beamer Fenster zum anzeigen der Lieder auf dem Beamer benutzt. Sie können es ein/aus schalten und seine Größe/Position bestimmen.</value>
-	</data>
-	<data name="Help.Intro.6">
-		<value>Benutzen sie die 'Suche' um Lieder aus der Lied Liste oder Playlist zu finden, den die Eingegebenen Worte beinhalten.</value>
-	</data>
-	<data name="Help.BeamBox.3">
-		<value>Drücken Sie diese Schaltfläche um das Beamer-Fenster zu positionieren und seine Größe einzustellen.</value>
-	</data>
-	<data name="Help.BeamBox.2">
-		<value>Aktivieren Sie diese Schaltfläche um das Beamer-Fenster zu zeigen, deaktivieren sie es, um das Fenster wieder zu verstecken.</value>
-	</data>
-	<data name="Help.Intro.3">
-		<value>Hier können sie zwischen den DreamBeam Komponenten umherwechseln. Die Komponenten sind: LIEDER ZEIGEN, LIEDER BEARBEITEN, MEDIA PRESENTATION und das TEXT WERKZEUG. Im Hilfe Menü erfahren sie mehr über sie.</value>
-	</data>
-	<data name="Help.Intro.2">
-		<value>Das ist die Haupt-Werkzeugleiste. Hier können sie das Beamer Fenster (Anzeigen, verstecken, Position verändern) steuern, den Text und Hintergrund getrennt ein und ausblenden, sowie Lieder und Medien Listen speichern.</value>
-	</data>
-	<data name="Right.Search">
-		<value>Suchen</value>
-	</data>
-	<data name="Options.Graphics.AlphaBlending">
-		<value>Alpha Überblendung</value>
-	</data>
-	<data name="Menu.MediaList.Rename">
-		<value>Umbenennen...</value>
-	</data>
-	<data name="Right.Media.AutoPlay">
-		<value>Auto Play</value>
-	</data>
-	<data name="EditSongs.NextVerse">
-		<value>Nächste Strophe</value>
-	</data>
-	<data name="EditSongs.PreviousVerse">
-		<value>Vorherige Strophe</value>
-	</data>
-	<data name="Message.DeleteSongTitle">
-		<value>Lied löschen ...</value>
-	</data>
-	<data name="Message.NewMediaListTitle">
-		<value>Neue Media Liste..</value>
-	</data>
-	<data name="Help.EditSongs.5">
-		<value>Hier wird die Vorschau ihres Songs angezeigt. Klicken sie darauf um eine Aktuallisierung zu erzwingen.</value>
-	</data>
-	<data name="Menu.Help.About">
-		<value>Über DreamBeam</value>
-	</data>
-	<data name="TextTool.Bible.GetSword">
-		<value>Sword Bibel WepPage</value>
-	</data>
-	<data name="Options.Tabs.Common">
-		<value>Allgemein</value>
-	</data>
-	<data name="Help.Presentation.3.Title">
-		<value>Film Panel</value>
-	</data>
-	<data name="Help.ShowSongs.3.Title">
-		<value>Hintergrund überschreiben</value>
-	</data>
-	<data name="Right.Playlist.Down">
-		<value>Runter</value>
-	</data>
-	<data name="Options.BeamBox.BackgroundGroup">
-		<value>Hintergrundfarbe:</value>
-	</data>
-	<data name="Help.Intro.8.Title">
-		<value>Bild Liste</value>
-	</data>
-	<data name="EditSongs.AutoPos">
-		<value>Auto Position</value>
-	</data>
-	<data name="Right.Playlist.Load">
-		<value>&lt;-Laden</value>
-	</data>
-	<data name="Status.SongRenamed">
-		<value>Lied wurde zu "%1%" umbenannt.</value>
-	</data>
-	<data name="Menu.Help.ProjectorWindow">
-		<value>Das Beamer Fenster</value>
-	</data>
-	<data name="Message.MediaListNotRenamed">
-		<value>Kein Name angegeben - Media Liste wurde nicht umbenannt.</value>
-	</data>
-	<data name="Left.Presentation">
-		<value>Media Präsentation</value>
-	</data>
-	<data name="Options.BeamBox.BGColorButton">
-		<value>Farbe einstellen</value>
-	</data>
-	<data name="Options.BeamBox.tabpage2">
-		<value>Manuell</value>
-	</data>
-	<data name="Help.EditSongs.1.Title">
-		<value>Lieder bearbeiten</value>
-	</data>
-	<data name="Menu.Help.EditSongs">
-		<value>Lieder bearbeiten</value>
-	</data>
-	<data name="Menu.MediaList.SaveAs">
-		<value>Speichern als...</value>
-	</data>
-	<data name="Options.Graphics.AlphaSpeed">
-		<value>Geschwindigkeit</value>
-	</data>
-	<data name="Help.Intro.6.Title">
-		<value>Suchen</value>
-	</data>
-	<data name="Right.MediaLists.Delete">
-		<value>Löschen</value>
-	</data>
-	<data name="Menu.Help.GetToKnow">
-		<value>DreamBeam kennenlernen</value>
-	</data>
-	<data name="TextTool.Bible.OldTestament">
-		<value>Altes Testament</value>
-	</data>
-	<data name="Message.MediaListNotSavedYet">
-		<value>Media Liste wurde noch nicht gespeichert.</value>
-	</data>
-	<data name="Help.EditSongs.3.Title">
-		<value>Werkzeugleisten</value>
-	</data>
-	<data name="TabPages.Presentation">
-		<value>Media Präsentation</value>
-	</data>
-	<data name="Menu.Help.ShowSongs">
-		<value>Lieder anzeigen</value>
-	</data>
-	<data name="Help.Options.2.Title">
-		<value>Allgemeine Einstellungen</value>
-	</data>
-	<data name="Right.Songs.Playlist">
-		<value>Playlist-&gt;</value>
-	</data>
-	<data name="MediaPresentation.Preview">
-		<value>Vorschau</value>
-	</data>
-	<data name="Options.BeamBox.PositionTitle">
-		<value>Position bestimmen:</value>
-	</data>
-	<data name="TabPages.TextTool">
-		<value>Text Werkzeug</value>
-	</data>
-	<data name="Message.SaveSongAs">
-		<value>Lied speichern als..</value>
-	</data>
-	<data name="Options.Common.Language">
-		<value>Sprache</value>
-	</data>
-	<data name="TextTool.Bible.NewTestament">
-		<value>Neues Testament</value>
-	</data>
-	<data name="Options.Bible.SwordFolderButton">
-		<value>auswählen...</value>
-	</data>
-	<data name="MediaPresentation.Loop">
-		<value>Wiederholen</value>
-	</data>
-	<data name="Options.Bible.SwordLanguage">
-		<value>Sword Sprache</value>
-	</data>
-	<data name="Menu.Song.SaveAs">
-		<value>Speichern als...</value>
-	</data>
-	<data name="Right.MediaLists.Loop">
-		<value>mit Wiederholung</value>
-	</data>
-	<data name="Help.EditSongs.1">
-		<value>Die 'Lieder bearbeiten' - Komponente wird zum bearbeiten, platzierung und Darstellung der Liedtexte und des Hintergrundbildes verwendet. Über diese Schaltfläche wird es aktiviert.</value>
-	</data>
-	<data name="Help.EditSongs.3">
-		<value>Hier können sie die Art, die Größe, die Farbe und die Umrandung der Schrift festlegen. Die Textumrandung ist sehr empfehlenswert um Text auf verschiedenfarbigen Hintergründen besser lesbar zu machen.</value>
-	</data>
-	<data name="Help.EditSongs.2">
-		<value>Es gibt 3 von ihnen. Das erste ist für den Titel, das zweite für die Strophen und das dritte für den Autor. Natürlich können jegliche auch leer gelassen werden. Um im Feld für die Strophen eine neue Strophe zu beginnen, fügen sie zwei Leerzeilen ein.</value>
-	</data>
-	<data name="Options.BeamBox.tabpage1">
-		<value>Automatisch</value>
-	</data>
-	<data name="Help.EditSongs.4">
-		<value>Benutzen sie AutoPos im den Text automatisch zu platzieren, alternativ können sie das auch manuell über die X-Y Koordinaten tun.</value>
-	</data>
-	<data name="Help.EditSongs.7">
-		<value>Zeigt/Aktuallisiert das Lied im Beamer Fenster.</value>
-	</data>
-	<data name="Help.EditSongs.6">
-		<value>Wechseln sie Vorwärts und Rückwärts durch die Strophen für die Vorschau.</value>
-	</data>
-	<data name="Menu.Edit">
-		<value>Bearbeiten</value>
-	</data>
-	<data name="Help.TextTool.2.Title">
-		<value>Dokumente</value>
-	</data>
-	<data name="TextTool.NewDocument">
-		<value>Neu</value>
-	</data>
-	<data name="Options.Okay">
-		<value>Übernehmen</value>
-	</data>
-	<data name="SongEdit.MultiLangPanel">
-		<value>Mehrsprachig</value>
-	</data>
-	<data name="Message.MediaListExits">
-		<value>Diese Media Liste existiert bereits.</value>
-	</data>
-	<data name="Help.Intro.5.Title">
-		<value>Playlist</value>
-	</data>
-	<data name="Options.Graphics.Outline">
-		<value>Text-Umrahmungs-Größe</value>
-	</data>
-	<data name="EditSongs.OutlineColor">
-		<value>Farbe</value>
-	</data>
-	<data name="Right.Playlist">
-		<value>Playlist</value>
-	</data>
-	<data name="Message.RenameSongTitle">
-		<value>Lied "%1%" umbenennen zu ...</value>
-	</data>
-	<data name="Help.TextTool.4">
-		<value>Das Bibel Panel benutzt das 'Sword Project' um aus der Bibel zu zitieren. Um es richtig zu einzustellen, müssen Sie 'Sword Project' installieren und dessen Pfad im Options Menü angeben. Um ein Zitat zu bekommen wählen sie eine Übersetzung und ein Buch und geben dann Kapitel und Vers an. zb. '1 John 3:13'.</value>
-	</data>
-	<data name="Help.TextTool.5">
-		<value>Zeigt/Erneuert den Text auf dem Beamer-Fenster.</value>
-	</data>
-	<data name="Help.TextTool.2">
-		<value>Here you enter you Text Messages. You can use multiple Documents for different Messages.
-Hier geben Sie ihre Nachrichten ein. Sie können verschiedene Dokumente für verschiedene Nachrichten benutzen.</value>
-	</data>
-	<data name="Help.TextTool.3">
-		<value>Erstellen sie neue Dokumente, ändern Sie Schriftart, Farbe und Größe ihrer Nachricht.</value>
-	</data>
-	<data name="SongEdit.BG_DecscriptionLabel">
-		<value>Hintergrund-Bild</value>
-	</data>
-	<data name="Help.TextTool.1">
-		<value>Benutzen Sie das 'Text Werkzeig' um Nachrichten wie Bibelstellen oder Neuigkeiten zu Präsentieren.</value>
-	</data>
-	<data name="Right.Media">
-		<value>Medien</value>
-	</data>
-	<data name="Right.Search.Words">
-		<value>Wörter</value>
-	</data>
-	<data name="Right.Media.Up">
-		<value>Hoch</value>
-	</data>
-	<data name="Right.MediaLists">
-		<value>Medien Listen</value>
-	</data>
-	<data name="ShowSongs.ToProjector">
-		<value>zum Beamer</value>
-	</data>
-	<data name="Right.Songs">
-		<value>Lieder</value>
-	</data>
-	<data name="Menu.View">
-		<value>Ansicht</value>
-	</data>
-	<data name="Status.PlaylistSongRemoved">
-		<value>Lied "%1%" von der Playlist entfernt.</value>
-	</data>
-	<data name="Right.Search.Search">
-		<value>Suchen!</value>
-	</data>
-	<data name="Right.MediaLists.Seconds">
-		<value>Sekunden.</value>
-	</data>
-	<data name="Help.EditSongs.6.Title">
-		<value>Nächste/Vorherige</value>
-	</data>
-	<data name="Help.TextTool.4.Title">
-		<value>Das Bible Panel</value>
-	</data>
-	<data name="Right.Songs.Delete">
-		<value>Löschen</value>
-	</data>
-	<data name="Message.EnterSongName">
-		<value>Bitte den Namen des Liedes eingeben:</value>
-	</data>
-	<data name="Right.Media.Show">
-		<value>Zeigen&amp;Weiter</value>
-	</data>
-	<data name="Menu.Help">
-		<value>Hilfe</value>
-	</data>
-	<data name="Help.BeamBox.4.Title">
-		<value>Positionierung</value>
-	</data>
-	<data name="Help.EditSongs.5.Title">
-		<value>Vorschau Fenster</value>
-	</data>
-	<data name="Options.Graphics.PreRender">
-		<value>Vorberechnen</value>
-	</data>
-	<data name="Options.Graphics.PreRenderTitle">
-		<value>Alle Strophen vorberechnen</value>
-	</data>
-	<data name="Options.Graphics.PreRenderDescription">
-		<value>Alle Strophen-Bilder werden im Hintergrund berechnet und im Programmspeicher abgelegt. Das erhöht die Anzeigegeschwindigkeit enorm. Der einzige Nachteil ist ein größerer Speicherverbrauch, mit ca. 2 MB pro Strophe.
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Menu.Song" xml:space="preserve">
+    <value>Lied</value>
+  </data>
+  <data name="Menu.MediaList.Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="EditSongs.Author" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="Options.Common.Translate" xml:space="preserve">
+    <value>Wenn Sie diese Software in eine andere Sprache übersetzen wollen, sind Sie dazu sehr willkommen.</value>
+  </data>
+  <data name="EditSongs.BackgroundImage" xml:space="preserve">
+    <value>Hintergrund Bild:</value>
+  </data>
+  <data name="Options.Tabs.Bible" xml:space="preserve">
+    <value>Bibel</value>
+  </data>
+  <data name="Status.LoadingImages" xml:space="preserve">
+    <value>Lade Hintergrund-Bilder ... "%1%"%</value>
+  </data>
+  <data name="Message.WantDeleteSong" xml:space="preserve">
+    <value>Wollen Sie das Lied "%1%" wirklich löschen?</value>
+  </data>
+  <data name="Status.SongDeleted" xml:space="preserve">
+    <value>Lied "%1%" gelöscht.</value>
+  </data>
+  <data name="TabPages.ShowSongs" xml:space="preserve">
+    <value>Lieder zeigen</value>
+  </data>
+  <data name="Right.MediaLists.TimerText" xml:space="preserve">
+    <value>Medien wechseln nach:</value>
+  </data>
+  <data name="Toolbar.SaveMediaList" xml:space="preserve">
+    <value>Media Liste speichern</value>
+  </data>
+  <data name="Menu.Edit.Options" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
+  <data name="TextTool.Bible.Translation" xml:space="preserve">
+    <value>Übersetzung</value>
+  </data>
+  <data name="Toolbar.SaveSong" xml:space="preserve">
+    <value>Lied speichern</value>
+  </data>
+  <data name="EditSongs.ColorButton" xml:space="preserve">
+    <value>Farbe</value>
+  </data>
+  <data name="Toolbar.ShowBeamBox" xml:space="preserve">
+    <value>Beamer-Fenster zeigen</value>
+  </data>
+  <data name="Menu.MediaList.Exit" xml:space="preserve">
+    <value>DreamBeam beenden</value>
+  </data>
+  <data name="EditSongs.Verses" xml:space="preserve">
+    <value>Strophen</value>
+  </data>
+  <data name="Right.Playlist.Up" xml:space="preserve">
+    <value>Hoch</value>
+  </data>
+  <data name="Status.ImagesLoaded" xml:space="preserve">
+    <value>Hintergrund-Bilder geladen.</value>
+  </data>
+  <data name="Menu.MediaList" xml:space="preserve">
+    <value>Media Liste</value>
+  </data>
+  <data name="EditSongs.Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="EditSongs.FontButton" xml:space="preserve">
+    <value>Schrift</value>
+  </data>
+  <data name="ShowSongs.BackgroundPanel" xml:space="preserve">
+    <value>Hintergrund</value>
+  </data>
+  <data name="Menu.MediaList.New" xml:space="preserve">
+    <value>Neu...</value>
+  </data>
+  <data name="TextTool.Bible.FindVerse" xml:space="preserve">
+    <value>Vers suchen</value>
+  </data>
+  <data name="Status.MediaFilesLoaded" xml:space="preserve">
+    <value>Media-Dateien geladen.</value>
+  </data>
+  <data name="Options.Tabs.Browse" xml:space="preserve">
+    <value>auswählen...</value>
+  </data>
+  <data name="Options.BeamBox.OnTopCheckBox" xml:space="preserve">
+    <value>Fenster immer oben</value>
+  </data>
+  <data name="Message.SongExists" xml:space="preserve">
+    <value>Das Lied existiert bereits.</value>
+  </data>
+  <data name="Options.Tabs.Graphics" xml:space="preserve">
+    <value>Grafik</value>
+  </data>
+  <data name="Right.MediaLists.Load" xml:space="preserve">
+    <value>&lt;-Laden</value>
+  </data>
+  <data name="Right.Search.sAllSongs" xml:space="preserve">
+    <value>alle Lieder</value>
+  </data>
+  <data name="TabPages.Bible" xml:space="preserve">
+    <value>Bibel</value>
+  </data>
+  <data name="Options.BeamBox.HideMouseCheckBox" xml:space="preserve">
+    <value>Mauszeiger verstecken</value>
+  </data>
+  <data name="Right.Media.Add" xml:space="preserve">
+    <value>Medien hinzufügen...</value>
+  </data>
+  <data name="Options.BeamBox.PositionGroup" xml:space="preserve">
+    <value>Position:</value>
+  </data>
+  <data name="TextTool.Bible.Books" xml:space="preserve">
+    <value>Bücher</value>
+  </data>
+  <data name="Message.MediaListNotSaved" xml:space="preserve">
+    <value>Kein Name angegeben - Media Liste wurde nicht gespeichert.</value>
+  </data>
+  <data name="Right.MediaLists.TimerCaption" xml:space="preserve">
+    <value>Auto-Play-Zeiten:</value>
+  </data>
+  <data name="Message.ImportMedia" xml:space="preserve">
+    <value>Drücken sie "Ja" um die Dateien in den DreamBeam Media-Ordner zu kopieren, oder "Nein" um Verknüpfungen zum aktuellen Speicherort zu benutzen.</value>
+  </data>
+  <data name="TabPages.EditSongs" xml:space="preserve">
+    <value>Lieder Bearbeiten</value>
+  </data>
+  <data name="ShowSongs.HideTitle_Button" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Right.Backgrounds" xml:space="preserve">
+    <value>Hintergrund-Bilder</value>
+  </data>
+  <data name="Options.Tabs.BeamBox" xml:space="preserve">
+    <value>Beamer Fenster</value>
+  </data>
+  <data name="Message.NoNameEntered" xml:space="preserve">
+    <value>Kein Name eingegeben.</value>
+  </data>
+  <data name="Right.Search.Phrase" xml:space="preserve">
+    <value>Wortgruppe</value>
+  </data>
+  <data name="Menu.Song.Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Menu.Help.Intro" xml:space="preserve">
+    <value>Intro und Hauptkomponenten</value>
+  </data>
+  <data name="Right.Media.Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="ShowSongs.HideElementsPanel" xml:space="preserve">
+    <value>Elemente verstecken</value>
+  </data>
+  <data name="Options.BeamBox.Height" xml:space="preserve">
+    <value>Höhe</value>
+  </data>
+  <data name="Message.SaveMediaListAs" xml:space="preserve">
+    <value>Media Liste speichern als...</value>
+  </data>
+  <data name="Status.LoadingMediaFiles" xml:space="preserve">
+    <value>Lade Media-Dateien ... "%1%"%</value>
+  </data>
+  <data name="Message.SongNotSavedYet" xml:space="preserve">
+    <value>Lied wurde noch nicht gespeichert.</value>
+  </data>
+  <data name="Left.ShowSongs" xml:space="preserve">
+    <value>Lieder zeigen</value>
+  </data>
+  <data name="Options.BeamBox.MouseGroup" xml:space="preserve">
+    <value>Fenster und Mauszeiger:</value>
+  </data>
+  <data name="Right.Media.Down" xml:space="preserve">
+    <value>Runter</value>
+  </data>
+  <data name="Options.BeamBox.Width" xml:space="preserve">
+    <value>Breite</value>
+  </data>
+  <data name="SongEdit.ML_Button" xml:space="preserve">
+    <value>Aktivieren</value>
+  </data>
+  <data name="Left.TextTool" xml:space="preserve">
+    <value>Text Werkzeug</value>
+  </data>
+  <data name="Toolbar.SizePosition" xml:space="preserve">
+    <value>Größe / Position</value>
+  </data>
+  <data name="Left.EditSongs" xml:space="preserve">
+    <value>Lieder Bearbeiten</value>
+  </data>
+  <data name="Message.MediaListName" xml:space="preserve">
+    <value>Bitte den Namen für die Media Liste eingeben:</value>
+  </data>
+  <data name="Status.MediaListSavedAs" xml:space="preserve">
+    <value>Media Liste wurde als "%1%" gespeichert.</value>
+  </data>
+  <data name="Options.BeamBox.SizeGroup" xml:space="preserve">
+    <value>Größe:</value>
+  </data>
+  <data name="Status.SongSavedAs" xml:space="preserve">
+    <value>Lied wurde als "%1%" gespeichert.</value>
+  </data>
+  <data name="ShowSongs.OverwriteBG_Button" xml:space="preserve">
+    <value>Überschreiben</value>
+  </data>
+  <data name="Toolbar.HideText" xml:space="preserve">
+    <value>Text verstecken</value>
+  </data>
+  <data name="Menu.Song.New" xml:space="preserve">
+    <value>Neu...</value>
+  </data>
+  <data name="Message.SongNotRenamed" xml:space="preserve">
+    <value>Kein Name angegeben - Lied wurde nicht umbenannt.</value>
+  </data>
+  <data name="Toolbar.HideBackground" xml:space="preserve">
+    <value>Hindergrund aus</value>
+  </data>
+  <data name="Message.NewSongTitle" xml:space="preserve">
+    <value>Neues Lied...</value>
+  </data>
+  <data name="Right.Songs.Load" xml:space="preserve">
+    <value>&lt;-Laden</value>
+  </data>
+  <data name="Message.SongNotSaved" xml:space="preserve">
+    <value>Kein Name angegeben - Lied wurde nicht gespeichert.</value>
+  </data>
+  <data name="Options.Tabs.SwordLanguageGroup" xml:space="preserve">
+    <value>Sword Sprache</value>
+  </data>
+  <data name="Message.RenameMediaListTitle" xml:space="preserve">
+    <value>Media Liste "%1%" umbenennen zu ...</value>
+  </data>
+  <data name="Message.ImportMediaTitle" xml:space="preserve">
+    <value>Importieren oder Verknüpfen?</value>
+  </data>
+  <data name="Right.Search.Load" xml:space="preserve">
+    <value>&lt;&lt;-Laden</value>
+  </data>
+  <data name="SongEdit.TextAlignPanel" xml:space="preserve">
+    <value>Textausrichtung</value>
+  </data>
+  <data name="Status.SongLoaded" xml:space="preserve">
+    <value>Lied "%1%" geladen.</value>
+  </data>
+  <data name="Status.MediaListRenamed" xml:space="preserve">
+    <value>Media Liste wurde zu "%1%" umbenannt.</value>
+  </data>
+  <data name="ShowSongs.HideAuthor_Button" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="Menu.Song.Rename" xml:space="preserve">
+    <value>Umbenennen...</value>
+  </data>
+  <data name="ShowSongs.HideText_Button" xml:space="preserve">
+    <value>Strophen</value>
+  </data>
+  <data name="Options.Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Menu.Song.Exit" xml:space="preserve">
+    <value>DreamBeam beenden</value>
+  </data>
+  <data name="Right.Backgrounds.Manage" xml:space="preserve">
+    <value>Bilder verwalten</value>
+  </data>
+  <data name="Right.Playlist.Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="Status.SongToPlayList" xml:space="preserve">
+    <value>Lied "%1%" zur Playlist gefügt.</value>
+  </data>
+  <data name="EditSongs.TextOutline" xml:space="preserve">
+    <value>Umrandung</value>
+  </data>
+  <data name="Right.Backgrounds.Reload" xml:space="preserve">
+    <value>Bilder neu laden</value>
+  </data>
+  <data name="Options.Graphics.AlphaCheckBox" xml:space="preserve">
+    <value>Alpha Überblendung</value>
+  </data>
+  <data name="Options.Bible.SwordFolderGroup" xml:space="preserve">
+    <value>Sword Project Ordner</value>
+  </data>
+  <data name="Right.Search" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="Options.Graphics.AlphaBlending" xml:space="preserve">
+    <value>Alpha Überblendung</value>
+  </data>
+  <data name="Menu.MediaList.Rename" xml:space="preserve">
+    <value>Umbenennen...</value>
+  </data>
+  <data name="Right.Media.AutoPlay" xml:space="preserve">
+    <value>Auto Play</value>
+  </data>
+  <data name="EditSongs.NextVerse" xml:space="preserve">
+    <value>Nächste Strophe</value>
+  </data>
+  <data name="EditSongs.PreviousVerse" xml:space="preserve">
+    <value>Vorherige Strophe</value>
+  </data>
+  <data name="Message.DeleteSongTitle" xml:space="preserve">
+    <value>Lied löschen ...</value>
+  </data>
+  <data name="Message.NewMediaListTitle" xml:space="preserve">
+    <value>Neue Media Liste..</value>
+  </data>
+  <data name="Menu.Help.About" xml:space="preserve">
+    <value>Über DreamBeam</value>
+  </data>
+  <data name="TextTool.Bible.GetSword" xml:space="preserve">
+    <value>Sword Bibel WepPage</value>
+  </data>
+  <data name="Options.Tabs.Common" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="Right.Playlist.Down" xml:space="preserve">
+    <value>Runter</value>
+  </data>
+  <data name="Options.BeamBox.BackgroundGroup" xml:space="preserve">
+    <value>Hintergrundfarbe:</value>
+  </data>
+  <data name="EditSongs.AutoPos" xml:space="preserve">
+    <value>Auto Position</value>
+  </data>
+  <data name="Right.Playlist.Load" xml:space="preserve">
+    <value>&lt;-Laden</value>
+  </data>
+  <data name="Status.SongRenamed" xml:space="preserve">
+    <value>Lied wurde zu "%1%" umbenannt.</value>
+  </data>
+  <data name="Message.MediaListNotRenamed" xml:space="preserve">
+    <value>Kein Name angegeben - Media Liste wurde nicht umbenannt.</value>
+  </data>
+  <data name="Left.Presentation" xml:space="preserve">
+    <value>Media Präsentation</value>
+  </data>
+  <data name="Options.BeamBox.BGColorButton" xml:space="preserve">
+    <value>Farbe einstellen</value>
+  </data>
+  <data name="Options.BeamBox.tabpage2" xml:space="preserve">
+    <value>Manuell</value>
+  </data>
+  <data name="Menu.MediaList.SaveAs" xml:space="preserve">
+    <value>Speichern als...</value>
+  </data>
+  <data name="Options.Graphics.AlphaSpeed" xml:space="preserve">
+    <value>Geschwindigkeit</value>
+  </data>
+  <data name="Right.MediaLists.Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="TextTool.Bible.OldTestament" xml:space="preserve">
+    <value>Altes Testament</value>
+  </data>
+  <data name="Message.MediaListNotSavedYet" xml:space="preserve">
+    <value>Media Liste wurde noch nicht gespeichert.</value>
+  </data>
+  <data name="TabPages.Presentation" xml:space="preserve">
+    <value>Media Präsentation</value>
+  </data>
+  <data name="Right.Songs.Playlist" xml:space="preserve">
+    <value>Playlist-&gt;</value>
+  </data>
+  <data name="MediaPresentation.Preview" xml:space="preserve">
+    <value>Vorschau</value>
+  </data>
+  <data name="Options.BeamBox.PositionTitle" xml:space="preserve">
+    <value>Position bestimmen:</value>
+  </data>
+  <data name="TabPages.TextTool" xml:space="preserve">
+    <value>Text Werkzeug</value>
+  </data>
+  <data name="Message.SaveSongAs" xml:space="preserve">
+    <value>Lied speichern als..</value>
+  </data>
+  <data name="Options.Common.Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="TextTool.Bible.NewTestament" xml:space="preserve">
+    <value>Neues Testament</value>
+  </data>
+  <data name="Options.Bible.SwordFolderButton" xml:space="preserve">
+    <value>auswählen...</value>
+  </data>
+  <data name="MediaPresentation.Loop" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="Options.Bible.SwordLanguage" xml:space="preserve">
+    <value>Sword Sprache</value>
+  </data>
+  <data name="Menu.Song.SaveAs" xml:space="preserve">
+    <value>Speichern als...</value>
+  </data>
+  <data name="Right.MediaLists.Loop" xml:space="preserve">
+    <value>mit Wiederholung</value>
+  </data>
+  <data name="Options.BeamBox.tabpage1" xml:space="preserve">
+    <value>Automatisch</value>
+  </data>
+  <data name="Menu.Edit" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="TextTool.NewDocument" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="Options.Okay" xml:space="preserve">
+    <value>Übernehmen</value>
+  </data>
+  <data name="SongEdit.MultiLangPanel" xml:space="preserve">
+    <value>Mehrsprachig</value>
+  </data>
+  <data name="Message.MediaListExits" xml:space="preserve">
+    <value>Diese Media Liste existiert bereits.</value>
+  </data>
+  <data name="Options.Graphics.Outline" xml:space="preserve">
+    <value>Text-Umrahmungs-Größe</value>
+  </data>
+  <data name="EditSongs.OutlineColor" xml:space="preserve">
+    <value>Farbe</value>
+  </data>
+  <data name="Right.Playlist" xml:space="preserve">
+    <value>Playlist</value>
+  </data>
+  <data name="Message.RenameSongTitle" xml:space="preserve">
+    <value>Lied "%1%" umbenennen zu ...</value>
+  </data>
+  <data name="SongEdit.BG_DecscriptionLabel" xml:space="preserve">
+    <value>Hintergrund-Bild</value>
+  </data>
+  <data name="Right.Media" xml:space="preserve">
+    <value>Medien</value>
+  </data>
+  <data name="Right.Search.Words" xml:space="preserve">
+    <value>Wörter</value>
+  </data>
+  <data name="Right.Media.Up" xml:space="preserve">
+    <value>Hoch</value>
+  </data>
+  <data name="Right.MediaLists" xml:space="preserve">
+    <value>Medien Listen</value>
+  </data>
+  <data name="ShowSongs.ToProjector" xml:space="preserve">
+    <value>zum Beamer</value>
+  </data>
+  <data name="Right.Songs" xml:space="preserve">
+    <value>Lieder</value>
+  </data>
+  <data name="Menu.View" xml:space="preserve">
+    <value>Ansicht</value>
+  </data>
+  <data name="Status.PlaylistSongRemoved" xml:space="preserve">
+    <value>Lied "%1%" von der Playlist entfernt.</value>
+  </data>
+  <data name="Right.Search.Search" xml:space="preserve">
+    <value>Suchen!</value>
+  </data>
+  <data name="Right.MediaLists.Seconds" xml:space="preserve">
+    <value>Sekunden.</value>
+  </data>
+  <data name="Right.Songs.Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Message.EnterSongName" xml:space="preserve">
+    <value>Bitte den Namen des Liedes eingeben:</value>
+  </data>
+  <data name="Right.Media.Show" xml:space="preserve">
+    <value>Zeigen&amp;Weiter</value>
+  </data>
+  <data name="Menu.Help" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="Options.Graphics.PreRender" xml:space="preserve">
+    <value>Vorberechnen</value>
+  </data>
+  <data name="Options.Graphics.PreRenderTitle" xml:space="preserve">
+    <value>Alle Strophen vorberechnen</value>
+  </data>
+  <data name="Options.Graphics.PreRenderDescription" xml:space="preserve">
+    <value>Alle Strophen-Bilder werden im Hintergrund berechnet und im Programmspeicher abgelegt. Das erhöht die Anzeigegeschwindigkeit enorm. Der einzige Nachteil ist ein größerer Speicherverbrauch, mit ca. 2 MB pro Strophe.
 </value>
-	</data>
-	<data name="EditSongs.LyricTypeChorus">
-		<value>Chorus</value>
-	</data>
-	<data name="EditSongs.LyricTypeVerse">
-		<value>Verse</value>
-	</data>
-	<data name="EditSongs.LyricTypeOther">
-		<value>Other</value>
-	</data>
-	<data name="Right.Media.Add.Close">
-		<value>Close media browser</value>
-	</data>
+  </data>
+  <data name="EditSongs.LyricTypeChorus" xml:space="preserve">
+    <value>Chorus</value>
+  </data>
+  <data name="EditSongs.LyricTypeVerse" xml:space="preserve">
+    <value>Verse</value>
+  </data>
+  <data name="EditSongs.LyricTypeOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Right.Media.Add.Close" xml:space="preserve">
+    <value>Close media browser</value>
+  </data>
 </root>

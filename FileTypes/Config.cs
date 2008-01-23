@@ -21,6 +21,62 @@ namespace DreamBeam
 	}
 	#endregion
 
+    [Serializable()]
+    public class Theme {
+        public string BGImagePath = null;
+        public BeamTextFormat[] TextFormat;
+
+        public Theme(ContentType type) {
+            switch (type) {
+                case ContentType.Song:
+                    CreateDefaultSongTheme();
+                    break;
+                case ContentType.BibleVerse:
+                    CreateDefaultBibleTheme();
+                    break;
+                case ContentType.PlainText:
+                    CreateDefaultSermonTextTheme();
+                    break;
+            }
+        }
+
+        private void CreateTextFormats(int size) {
+            // Create the array
+            TextFormat = new BeamTextFormat[size];
+            // Populate the array
+            for (int i = 0; i < size; i++) {
+                TextFormat[i] = new BeamTextFormat();
+            }
+        }
+
+        private void CreateDefaultSongTheme() {
+            CreateTextFormats(Enum.GetValues(typeof(SongTextType)).Length);
+            TextFormat[(int)SongTextType.Title].Bounds = BibleTextFormat[(int)BibleTextType.Reference].Bounds;
+            TextFormat[(int)SongTextType.Verse].Bounds = BibleTextFormat[(int)BibleTextType.Verse].Bounds;
+            TextFormat[(int)SongTextType.Author].Bounds = BibleTextFormat[(int)BibleTextType.Translation].Bounds;
+            TextFormat[(int)SongTextType.Verse].HAlignment = StringAlignment.Near;
+        }
+
+        private void CreateDefaultBibleTheme() {
+            CreateTextFormats(Enum.GetValues(typeof(BibleTextType)).Length);
+            TextFormat[(int)BibleTextType.Reference].Bounds = new RectangleF(5F, 2F, 90F, 8F);
+            TextFormat[(int)BibleTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
+            TextFormat[(int)BibleTextType.Translation].Bounds = new RectangleF(80F, 95F, 15F, 4F);
+        }
+
+        private void CreateDefaultSermonTextTheme() {
+            CreateTextFormats(Enum.GetValues(typeof(TextToolType)).Length);
+            TextFormat[(int)TextToolType.FirstLine].Bounds = new RectangleF(5F, 2F, 90F, 8F);
+            TextFormat[(int)TextToolType.OtherLines].Bounds = new RectangleF(5F, 12F, 90F, 85F);
+            TextFormat[(int)TextToolType.OtherLines].HAlignment = StringAlignment.Near;
+        }
+    }
+
+    [Serializable()]
+    public class Themes {
+        public Theme[] themes;
+    }
+
 	[Serializable()]
 	public class Config
 	{
@@ -45,25 +101,6 @@ namespace DreamBeam
 
 		[XmlIgnore] public ArrayList PlayList = new ArrayList();
 		
-//		[XmlArrayItem(ElementName = "ContentIdentity", Type = typeof(ContentIdentity))]
-//		[XmlArray] public ArrayList PlayListSequence {
-//			get {
-//				ArrayList list = new ArrayList(this.PlayList.Count);
-//				foreach (IContentItem item in this.PlayList) {
-//					list.Add(item.GetIdentity());
-//				}
-//				return list;
-//			}
-//			set {
-//				ArrayList list = value as ArrayList;
-//				if (list == null) return;
-//				foreach (ContentIdentity item in list) {
-//					//this.PlayList.Add();
-//				}
-//			}
-//		}
-
-
 		private string swordPath = "";
 		public string SwordPath {
 			get { return swordPath; }
@@ -85,7 +122,6 @@ namespace DreamBeam
 		public bool HideMouse = true;
 		public bool AlwaysOnTop = false;
 
-		[XmlIgnore()] public static readonly string ProgramDir = Tools.DreamBeamPath();
 		public System.Drawing.Color BackgroundColor = Color.Black;
 		public bool LoopMedia = false;
 		public bool LoopAutoPlay = false;
@@ -98,6 +134,8 @@ namespace DreamBeam
 		public BeamTextFormat[] BibleTextFormat;
 		public BeamTextFormat[] SongTextFormat;
 		public BeamTextFormat[] SermonTextFormat;
+
+        public Theme BibleTheme, SongTheme, SermonTextTheme;
 
 		public OperatingMode AppOperatingMode;
 
@@ -165,7 +203,7 @@ namespace DreamBeam
 		}
 
 		string GetLocation(Type type) {
-			return ProgramDir + type.Name + ".xml";
+			return Tools.CombinePaths(Tools.GetAppDocPath(), type.Name + ".xml");
 		}
 
 		/// <summary>
@@ -178,7 +216,7 @@ namespace DreamBeam
 			if (Path.IsPathRooted(file)) {
 				return file;
 			} else {
-				return Path.Combine(Config.ProgramDir, file);
+				return Path.Combine(Tools.GetAppDocPath(), file);
 			}
 		}
 

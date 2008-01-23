@@ -1,555 +1,418 @@
-<VisualStudioProject>
-    <CSHARP
-        ProjectType = "Local"
-        ProductVersion = "7.10.3077"
-        SchemaVersion = "2.0"
-        ProjectGuid = "{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}"
-    >
-        <Build>
-            <Settings
-                ApplicationIcon = "60.ico"
-                AssemblyKeyContainerName = ""
-                AssemblyName = "DreamBeam"
-                AssemblyOriginatorKeyFile = ""
-                DefaultClientScript = "JScript"
-                DefaultHTMLPageLayout = "Grid"
-                DefaultTargetSchema = "IE50"
-                DelaySign = "false"
-                OutputType = "WinExe"
-                PreBuildEvent = ""
-                PostBuildEvent = ""
-                RootNamespace = "DreamBeam"
-                RunPostBuildEvent = "OnBuildSuccess"
-                StartupObject = ""
-            >
-                <Config
-                    Name = "Release"
-                    AllowUnsafeBlocks = "true"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "TRACE"
-                    DocumentationFile = ""
-                    DebugSymbols = "false"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = ""
-                    Optimize = "true"
-                    OutputPath = "Installer\Dreambeam\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "2"
-                />
-                <Config
-                    Name = "Debug"
-                    AllowUnsafeBlocks = "false"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "TRACE;DEBUG"
-                    DocumentationFile = ""
-                    DebugSymbols = "true"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = ""
-                    Optimize = "false"
-                    OutputPath = "bin\Debug\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
-                />
-            </Settings>
-            <References>
-                <Reference
-                    Name = "System"
-                    AssemblyName = "System"
-                    HintPath = "c:\windows\microsoft.net\framework\v1.1.4322\System.dll"
-                />
-                <Reference
-                    Name = "System.Data"
-                    AssemblyName = "System.Data"
-                    HintPath = "c:\windows\microsoft.net\framework\v1.1.4322\System.Data.dll"
-                />
-                <Reference
-                    Name = "System.Drawing"
-                    AssemblyName = "System.Drawing"
-                    HintPath = "c:\windows\microsoft.net\framework\v1.1.4322\System.Drawing.dll"
-                />
-                <Reference
-                    Name = "System.Windows.Forms"
-                    AssemblyName = "System.Windows.Forms"
-                    HintPath = "c:\windows\microsoft.net\framework\v1.1.4322\System.Windows.Forms.dll"
-                />
-                <Reference
-                    Name = "System.XML"
-                    AssemblyName = "System.Xml"
-                    HintPath = "c:\windows\microsoft.net\framework\v1.1.4322\System.XML.dll"
-                />
-                <Reference
-                    Name = "mscorlib"
-                    AssemblyName = "mscorlib"
-                    HintPath = "c:\windows\microsoft.net\framework\v1.1.4322\mscorlib.dll"
-                />
-                <Reference
-                    Name = "Microsoft.VisualBasic"
-                    AssemblyName = "Microsoft.VisualBasic"
-                    HintPath = "c:\windows\microsoft.net\framework\v1.1.4322\Microsoft.VisualBasic.dll"
-                />
-                <Reference
-                    Name = "System.Design"
-                    AssemblyName = "System.Design"
-                    HintPath = "c:\windows\microsoft.net\framework\v1.1.4322\System.Design.dll"
-                />
-                <Reference
-                    Name = "ListControls"
-                    AssemblyName = "ListControls"
-                    HintPath = "libs\ListControls.dll"
-                />
-                <Reference
-                    Name = "DockingSuite"
-                    AssemblyName = "DockingSuite"
-                    HintPath = "libs\DockingSuite.dll"
-                />
-                <Reference
-                    Name = "System.Web"
-                    AssemblyName = "System.Web"
-                    HintPath = "c:\windows\microsoft.net\framework\v1.1.4322\System.Web.dll"
-                />
-                <Reference
-                    Name = "OPaC.Themed.Forms"
-                    AssemblyName = "OPaC.Themed.Forms"
-                    HintPath = "libs\OPaC.Themed.Forms.dll"
-                />
-                <Reference
-                    Name = "OPaC.uxTheme"
-                    AssemblyName = "OPaC.uxTheme"
-                    HintPath = "libs\OPaC.uxTheme.dll"
-                />
-                <Reference
-                    Name = "BalloonWindow"
-                    AssemblyName = "BalloonWindow"
-                    HintPath = "libs\BalloonWindow.dll"
-                />
-                <Reference
-                    Name = "DocumentManager"
-                    AssemblyName = "DocumentManager"
-                    HintPath = "libs\DocumentManager.dll"
-                />
-                <Reference
-                    Name = "SandDock"
-                    AssemblyName = "SandDock"
-                    HintPath = "libs\SandDock.dll"
-                />
-                <Reference
-                    Name = "SandBar"
-                    AssemblyName = "SandBar"
-                    HintPath = "libs\SandBar.dll"
-                />
-                <Reference
-                    Name = "DragNDrop"
-                    AssemblyName = "DragNDrop"
-                    HintPath = "libs\DragNDrop.dll"
-                />
-                <Reference
-                    Name = "DragAndDropListView"
-                    AssemblyName = "DragAndDropListView"
-                    HintPath = "libs\DragAndDropListView.dll"
-                />
-                <Reference
-                    Name = "LumiSoft.UI"
-                    AssemblyName = "LumiSoft.UI"
-                    HintPath = "libs\LumiSoft.UI.dll"
-                />
-                <Reference
-                    Name = "stdole"
-                    Guid = "{00020430-0000-0000-C000-000000000046}"
-                    VersionMajor = "2"
-                    VersionMinor = "0"
-                    Lcid = "0"
-                    WrapperTool = "primary"
-                />
-                <Reference
-                    Name = "CollapsiblePanelBar"
-                    AssemblyName = "CollapsiblePanelBar"
-                    HintPath = "libs\CollapsiblePanelBar.dll"
-                />
-                <Reference
-                    Name = "LEDRadioButton"
-                    AssemblyName = "LEDRadioButton"
-                    HintPath = "libs\LEDRadioButton.dll"
-                />
-                <Reference
-                    Name = "Microsoft.DirectX"
-                    AssemblyName = "Microsoft.DirectX"
-                    HintPath = "..\directx\Microsoft.DirectX.dll"
-                />
-                <Reference
-                    Name = "Microsoft.DirectX.AudioVideoPlayback"
-                    AssemblyName = "Microsoft.DirectX.AudioVideoPlayback"
-                    HintPath = "..\directx\Microsoft.DirectX.AudioVideoPlayback.dll"
-                />
-                <Reference
-                    Name = "Microsoft.DirectX.Direct3D"
-                    AssemblyName = "Microsoft.DirectX.Direct3D"
-                    HintPath = "..\directx\Microsoft.DirectX.Direct3D.dll"
-                />
-                <Reference
-                    Name = "Microsoft.DirectX.Direct3DX"
-                    AssemblyName = "Microsoft.DirectX.Direct3DX"
-                    HintPath = "..\directx\Microsoft.DirectX.Direct3DX.dll"
-                />
-                <Reference
-                    Name = "DirectShowLib"
-                    AssemblyName = "DirectShowLib"
-                    HintPath = "..\..\direct\DirectShowLib.dll"
-                />
-                <Reference
-                    Name = "DXTRANSLib"
-                    Guid = "{54314D1D-35FE-11D1-81A1-0000F87557DB}"
-                    VersionMajor = "1"
-                    VersionMinor = "1"
-                    Lcid = "0"
-                    WrapperTool = "tlbimp"
-                />
-                <Reference
-                    Name = "DXTMSFTLib"
-                    Guid = "{5E77EB03-937C-11D1-B047-00AA003B6061}"
-                    VersionMajor = "1"
-                    VersionMinor = "1"
-                    Lcid = "0"
-                    WrapperTool = "tlbimp"
-                />
-                <Reference
-                    Name = "AxInterop.ACTIVEDIATHEKELib"
-                    AssemblyName = "AxInterop.ACTIVEDIATHEKELib"
-                    HintPath = "ComImports\AxInterop.ACTIVEDIATHEKELib.dll"
-                />
-                <Reference
-                    Name = "AxInterop.ShockwaveFlashObjects"
-                    AssemblyName = "AxInterop.ShockwaveFlashObjects"
-                    HintPath = "ComImports\AxInterop.ShockwaveFlashObjects.dll"
-                />
-                <Reference
-                    Name = "DreamBeam.resources"
-                    AssemblyName = "DreamBeam.resources"
-                    HintPath = "bin\Debug\de-DE\DreamBeam.resources.dll"
-                />
-                <Reference
-                    Name = "xppanel"
-                    AssemblyName = "XPPanel"
-                    HintPath = "libs\xppanel.dll"
-                />
-                <Reference
-                    Name = "CookComputing.XmlRpc"
-                    AssemblyName = "CookComputing.XmlRpc"
-                    HintPath = "libs\CookComputing.XmlRpc.dll"
-                />
-                <Reference
-                    Name = "System.Runtime.Remoting"
-                    AssemblyName = "System.Runtime.Remoting"
-                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Runtime.Remoting.dll"
-                />
-                <Reference
-                    Name = "ControlLib"
-                    Project = "{94302930-4AC3-45CB-9BB6-B7D7572E95DB}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-                <Reference
-                    Name = "ExRichTextBox"
-                    Project = "{1A63B1D0-D2F0-4F8C-B242-863E83E1419C}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-                <Reference
-                    Name = "MessageBoxExLib"
-                    Project = "{4847D05C-EB58-49D9-B280-D22F8FF01857}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-                <Reference
-                    Name = "Lister"
-                    Project = "{14B87235-D657-4009-9C00-63ECA81D7CCF}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-            </References>
-        </Build>
-        <Files>
-            <Include>
-                <File
-                    RelPath = "3D.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "About.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "About.resx"
-                    DependentUpon = "About.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "AssemblyInfo.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "BrowseForFolder.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ChangeLog.txt"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Display.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "InputBox.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "InputBox.resx"
-                    DependentUpon = "InputBox.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "MainForm.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "MainForm.resx"
-                    DependentUpon = "MainForm.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "MyBalloonWindow.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "MyBalloonWindow.resx"
-                    DependentUpon = "MyBalloonWindow.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "Options.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Options.resx"
-                    DependentUpon = "Options.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "ShowBeam.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ShowBeam.resx"
-                    DependentUpon = "ShowBeam.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "SongEditor.cs"
-                    SubType = "UserControl"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SongEditor.resx"
-                    DependentUpon = "SongEditor.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "splash.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "splash.resx"
-                    DependentUpon = "splash.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "XmlRpc.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "XmlRpc.resx"
-                    DependentUpon = "XmlRpc.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "Daten\Images.resx"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "FileTypes\Bible.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "FileTypes\Config.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "FileTypes\ImageList.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "FileTypes\LogFile.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "FileTypes\Song.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "FileTypes\TextTool.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Graphics\PerPixelAlphaForm.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Graphics\Prerenderer.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Graphics\ScreenCapture.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Graphics\TextGraphics.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\BibleRTF.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\BibleRTF.resx"
-                    DependentUpon = "BibleRTF.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "GuiTools\GuiTemplate.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\GuiTools.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\Help.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\Presentation.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\RightDock.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\ShowBeamTools.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\SongEdit.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\TextFormatOptions.cs"
-                    SubType = "UserControl"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\TextFormatOptions.resx"
-                    DependentUpon = "TextFormatOptions.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "GuiTools\RightDock\BGImageTools.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GuiTools\RightDock\MediaListTools.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Language\lang.de-DE.resx"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "Language\lang.resx"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "Language\Language.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Tools\Arguments.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Tools\IniHandler.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Tools\Set.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Tools\SimpleHash.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Tools\Tools.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-            </Include>
-        </Files>
-    </CSHARP>
-</VisualStudioProject>
-
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>60.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>DreamBeam</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DreamBeam</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>Installer\Dreambeam\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>2</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxInterop.ACTIVEDIATHEKELib">
+      <Name>AxInterop.ACTIVEDIATHEKELib</Name>
+      <HintPath>ComImports\AxInterop.ACTIVEDIATHEKELib.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.ShockwaveFlashObjects">
+      <Name>AxInterop.ShockwaveFlashObjects</Name>
+      <HintPath>ComImports\AxInterop.ShockwaveFlashObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="BalloonWindow">
+      <Name>BalloonWindow</Name>
+      <HintPath>libs\BalloonWindow.dll</HintPath>
+    </Reference>
+    <Reference Include="CollapsiblePanelBar">
+      <Name>CollapsiblePanelBar</Name>
+      <HintPath>libs\CollapsiblePanelBar.dll</HintPath>
+    </Reference>
+    <Reference Include="CookComputing.XmlRpc">
+      <Name>CookComputing.XmlRpc</Name>
+      <HintPath>libs\CookComputing.XmlRpc.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib">
+      <Name>DirectShowLib</Name>
+      <HintPath>..\..\direct\DirectShowLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DockingSuite">
+      <Name>DockingSuite</Name>
+      <HintPath>libs\DockingSuite.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentManager">
+      <Name>DocumentManager</Name>
+      <HintPath>libs\DocumentManager.dll</HintPath>
+    </Reference>
+    <Reference Include="DragAndDropListView">
+      <Name>DragAndDropListView</Name>
+      <HintPath>libs\DragAndDropListView.dll</HintPath>
+    </Reference>
+    <Reference Include="DragNDrop">
+      <Name>DragNDrop</Name>
+      <HintPath>libs\DragNDrop.dll</HintPath>
+    </Reference>
+    <Reference Include="DreamBeam.resources">
+      <Name>DreamBeam.resources</Name>
+      <HintPath>bin\Debug\de-DE\DreamBeam.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="LEDRadioButton">
+      <Name>LEDRadioButton</Name>
+      <HintPath>libs\LEDRadioButton.dll</HintPath>
+    </Reference>
+    <Reference Include="ListControls">
+      <Name>ListControls</Name>
+      <HintPath>libs\ListControls.dll</HintPath>
+    </Reference>
+    <Reference Include="LumiSoft.UI">
+      <Name>LumiSoft.UI</Name>
+      <HintPath>libs\LumiSoft.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX">
+      <Name>Microsoft.DirectX</Name>
+      <HintPath>..\directx\Microsoft.DirectX.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.AudioVideoPlayback">
+      <Name>Microsoft.DirectX.AudioVideoPlayback</Name>
+      <HintPath>..\directx\Microsoft.DirectX.AudioVideoPlayback.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3D">
+      <Name>Microsoft.DirectX.Direct3D</Name>
+      <HintPath>..\directx\Microsoft.DirectX.Direct3D.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3DX">
+      <Name>Microsoft.DirectX.Direct3DX</Name>
+      <HintPath>..\directx\Microsoft.DirectX.Direct3DX.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic">
+      <Name>Microsoft.VisualBasic</Name>
+    </Reference>
+    <Reference Include="mscorlib">
+      <Name>mscorlib</Name>
+    </Reference>
+    <Reference Include="OPaC.Themed.Forms">
+      <Name>OPaC.Themed.Forms</Name>
+      <HintPath>libs\OPaC.Themed.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="OPaC.uxTheme">
+      <Name>OPaC.uxTheme</Name>
+      <HintPath>libs\OPaC.uxTheme.dll</HintPath>
+    </Reference>
+    <Reference Include="SandBar">
+      <Name>SandBar</Name>
+      <HintPath>libs\SandBar.dll</HintPath>
+    </Reference>
+    <Reference Include="SandDock">
+      <Name>SandDock</Name>
+      <HintPath>libs\SandDock.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting">
+      <Name>System.Runtime.Remoting</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="XPPanel">
+      <Name>xppanel</Name>
+      <HintPath>libs\xppanel.dll</HintPath>
+    </Reference>
+    <COMReference Include="DXTMSFTLib">
+      <Guid>{5E77EB03-937C-11D1-B047-00AA003B6061}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+    </COMReference>
+    <COMReference Include="DXTRANSLib">
+      <Guid>{54314D1D-35FE-11D1-81A1-0000F87557DB}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+    </COMReference>
+    <ProjectReference Include="libs\ControlLib\ControlLib.csproj">
+      <Name>ControlLib</Name>
+      <Project>{94302930-4AC3-45CB-9BB6-B7D7572E95DB}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="libs\ExRichTextBox\ExRichTextBox.csproj">
+      <Name>ExRichTextBox</Name>
+      <Project>{1A63B1D0-D2F0-4F8C-B242-863E83E1419C}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="libs\Lister\Lister.csproj">
+      <Name>Lister</Name>
+      <Project>{14B87235-D657-4009-9C00-63ECA81D7CCF}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="libs\MessageBoxExLib\MessageBoxExLib.csproj">
+      <Name>MessageBoxExLib</Name>
+      <Project>{4847D05C-EB58-49D9-B280-D22F8FF01857}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="3D.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BrowseForFolder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Display.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FileTypes\Bible.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FileTypes\Config.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FileTypes\ImageList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FileTypes\LogFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FileTypes\Song.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FileTypes\TextTool.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Graphics\PerPixelAlphaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Graphics\Prerenderer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Graphics\ScreenCapture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Graphics\TextGraphics.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuiTools\BibleRTF.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GuiTools\GuiTemplate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuiTools\GuiTools.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Presentation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuiTools\RightDock.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuiTools\RightDock\BGImageTools.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuiTools\RightDock\MediaListTools.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuiTools\ShowBeamTools.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuiTools\SongEdit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuiTools\TextFormatOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Language\Language.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyBalloonWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowBeam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SongEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\Arguments.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tools\IniHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tools\Set.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tools\SimpleHash.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tools\Tools.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="XmlRpc.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Daten\Images.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\BibleRTF.resx">
+      <DependentUpon>BibleRTF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\TextFormatOptions.resx">
+      <DependentUpon>TextFormatOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Language\lang.de-DE.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Language\lang.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyBalloonWindow.resx">
+      <DependentUpon>MyBalloonWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowBeam.resx">
+      <DependentUpon>ShowBeam.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SongEditor.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="splash.resx">
+      <DependentUpon>splash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XmlRpc.resx">
+      <DependentUpon>XmlRpc.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="ChangeLog.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

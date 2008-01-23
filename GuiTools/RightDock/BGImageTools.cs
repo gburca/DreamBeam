@@ -32,7 +32,7 @@ namespace DreamBeam
 
 						foreach(string ex in filetypes){
 							if(Path.GetExtension(s).ToLower() == ex){
-								string strImageDir = Tools.DreamBeamPath()+"\\"+GetCurrentPath();
+								string strImageDir = Tools.GetAppDocPath()+"\\"+GetCurrentPath();
 								bool doCopy = true;
 
 								//Check if File Exists
@@ -83,9 +83,10 @@ namespace DreamBeam
 		public void ListImages_Threader(){
 			try{
 				LoadingBGThumbs = true;
-				string directory = g_Bg_Directory;
-				if(!System.IO.Directory.Exists(directory)){
-					System.IO.Directory.CreateDirectory(directory);
+                string strImageDir = Path.Combine(Tools.GetAppDocPath(), g_Bg_Directory);
+                if (!System.IO.Directory.Exists(strImageDir))
+                {
+					System.IO.Directory.CreateDirectory(strImageDir);
 				}
 
 				int intImageCount=0;
@@ -94,7 +95,6 @@ namespace DreamBeam
 				_MainForm.RightDocks_ImageListBox.Items.Clear();
 
 				// Define Directory and ImageTypes
-				string strImageDir = Tools.DreamBeamPath()+"\\"+directory;
 				int filecount = 0;
 
 				//find the number of Files in Directory
@@ -127,21 +127,21 @@ namespace DreamBeam
 				/// <summary></summary>
 				public void ListDirectories(string directory){
 
-					if(!System.IO.Directory.Exists(directory)){
-						System.IO.Directory.CreateDirectory(directory);
+                    string strImageDir = Path.Combine(Tools.GetAppDocPath(), directory);
+                    if (!System.IO.Directory.Exists(strImageDir))
+                    {
+						System.IO.Directory.CreateDirectory(strImageDir);
 					}
 
-					//int intImageCount=0;
 					_MainForm.RightDocks_imageList.Images.Clear();
 					_MainForm.RightDocks_ImageListBox.Items.Clear();
 
 					// Define Directory and ImageTypes
-					string strImageDir = Tools.DreamBeamPath()+"\\"+directory;
 					string[] folders = Directory.GetDirectories(@strImageDir);
 					_MainForm.RightDocks_FolderDropdown.Items.Clear();
 					_MainForm.RightDocks_FolderDropdown.Items.Add("- Top -");
-					foreach (string folder in folders){
-						_MainForm.RightDocks_FolderDropdown.Items.Add(Tools.Reverse(Tools.Reverse(folder).Substring(0,Tools.Reverse(folder).IndexOf(@"\"))));
+					foreach (string folder in folders) {
+						_MainForm.RightDocks_FolderDropdown.Items.Add(Path.GetFileName(folder));
 					}
 			   }
 		  #endregion

@@ -97,7 +97,7 @@ namespace DreamBeam {
 
         ///<summary>Saves the ImageList</summary>
 		public void Save() {
-            XmlTextWriter tw = new XmlTextWriter(Tools.DreamBeamPath()+"\\MediaLists\\"+Name+".xml",null);
+            XmlTextWriter tw = new XmlTextWriter(Tools.GetAppDocPath()+@"\MediaLists\"+Name+".xml",null);
             tw.Formatting = Formatting.Indented;
             tw.WriteStartDocument();
             tw.WriteStartElement("MediaList");
@@ -113,15 +113,13 @@ namespace DreamBeam {
             tw.Close();
         }
 
-        ///<summary>Loads the MediaList</summary>
+        ///<summary>Loads the MediaList. The "filename" must be relative to
+        ///the MediaLists directory.</summary>
         public void Load(string filename) {
-
-          //  int i;
             Count = 0;
             XmlDocument document = new XmlDocument();
             try {
-                //"Songs\\"+filename+".xml"
-                document.Load(Tools.DreamBeamPath()+"\\MediaLists\\"+filename+".xml");
+                document.Load(Tools.GetAppDocPath()+@"\MediaLists\"+filename+".xml");
             } catch(XmlException xmle) {
                 MessageBox.Show(xmle.Message);
             }
@@ -130,7 +128,6 @@ namespace DreamBeam {
 
             // Get the Path
             list = document.GetElementsByTagName("Path");
-            //i = 0;
             foreach(XmlNode n in list) {
                 if(File.Exists(n.InnerText)) {
                     this.iItem[Count].Path = n.InnerText;
@@ -138,11 +135,8 @@ namespace DreamBeam {
                     Count++;
                 }
 			}
-
             this.Name = filename;
-
         }
-
     }
 
 

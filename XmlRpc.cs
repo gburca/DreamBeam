@@ -10,7 +10,8 @@ namespace DreamBeam
 		Song,
 		BibleVerseIdx,
 		BibleVerseRef,
-		PlainText
+		PlainText,  // == SermonText
+        BibleVerse  // Not used for XML-RPC
 	}
 	#endregion
 

@@ -299,19 +299,19 @@ namespace DreamBeam {
 				} else {
 					this.bg_image = null;
 					// Define Directory and ImageTypes
-					string strImageDir = Tools.DreamBeamPath()+"\\Backgrounds";
+					string strImageDir = Tools.GetAppDocPath()+@"\Backgrounds";
 					string[] folders = Directory.GetDirectories(@strImageDir);
 
 					string tmpfilename = Path.GetFileName(n.InnerText);
-					if (System.IO.File.Exists(Tools.DreamBeamPath()+"\\Backgrounds\\"+tmpfilename))
+					if (System.IO.File.Exists(Tools.GetAppDocPath()+@"\Backgrounds\"+tmpfilename))
 					{
-						this.bg_image = Tools.DreamBeamPath()+"\\Backgrounds\\"+tmpfilename;
+						this.bg_image = Tools.GetAppDocPath()+@"\Backgrounds\"+tmpfilename;
 					} else {
 						foreach (string folder in folders)
 						{
-							if (System.IO.File.Exists(folder+"\\"+tmpfilename))
+							if (System.IO.File.Exists(folder+@"\"+tmpfilename))
 							{
-								this.bg_image = Tools.DreamBeamPath()+"\\Backgrounds\\"+Tools.Reverse(Tools.Reverse(folder).Substring(0,Tools.Reverse(folder).IndexOf(@"\"))) + "\\" +tmpfilename;
+								this.bg_image = Tools.GetAppDocPath()+@"\Backgrounds\"+Tools.Reverse(Tools.Reverse(folder).Substring(0,Tools.Reverse(folder).IndexOf(@"\"))) + "\\" +tmpfilename;
 							}
 						}
 					 }
@@ -631,6 +631,7 @@ namespace DreamBeam {
 	}
 
 	[Serializable()]
+    [XmlRoot(ElementName="DreamSong")]
 	public class NewSong : Content, IContentOperations {
 		// The following setting and properties will be serialized
 		public string Version;
@@ -639,7 +640,7 @@ namespace DreamBeam {
 		public string Collection;
 		public string Number;
 		public string Notes;
-		public string KeyRangeLow, KeyRangeHigh;
+        public string KeyRangeLow, KeyRangeHigh;
 		public bool MinorKey;
 		public bool DualLanguage;
 
@@ -689,14 +690,17 @@ namespace DreamBeam {
 		}
 
 		public NewSong() {
-			Version vrs = new Version(Application.ProductVersion);
-			this.Version = vrs.Major + "." + vrs.Minor;
-
 			this.enumType = typeof(SongTextType);
 			this.SongLyrics = new ArrayList();
 			this.Sequence = new ArrayList();
 			this.CurrentLyric = 0;
+            UpdateVersion();
 		}
+
+        private void UpdateVersion() {
+            Version vrs = new Version(Application.ProductVersion);
+            this.Version = vrs.Major + "." + vrs.Minor;
+        }
 
 		/// <summary>
 		/// This constructor creates a new song out of a plain text file. The file must contain a single
@@ -857,7 +861,11 @@ namespace DreamBeam {
 			}
 			this.format = config.SongTextFormat;
 			this.CurrentLyric = strophe;
-		}
+
+            // Version 0.71 allowed the user to save files with keys such as "D# / Eb".
+            this.KeyRangeLow = this.NormalizeKey(this.KeyRangeLow);
+            this.KeyRangeHigh = this.NormalizeKey(this.KeyRangeHigh);
+        }
 
 		
 		public LyricsItem GetLyrics(int seq) {
@@ -932,7 +940,8 @@ namespace DreamBeam {
 		/// <param name="lyrics"></param>
 		/// <returns></returns>
 		public string SanitizeLyrics(string lyrics) {
-			return Regex.Replace(lyrics, "\u00ad", "-");
+            return lyrics;
+			//return Regex.Replace(lyrics, "\u00ad", "-");
 		}
 
 		/// <summary>
@@ -966,27 +975,32 @@ namespace DreamBeam {
 			return false;
 		}
 
+        public string GetKey() {
+            if (this.KeyRangeLow == null) { return ""; }
+            return NormalizeKey(this.KeyRangeLow) + (this.MinorKey ? "m" : "");
+        }
+
 		/// <summary>
 		/// Returns a normalized textual song key (converts "D# / Eb" to Eb)...
 		/// </summary>
 		/// <returns></returns>
-		public string GetKey() {
-			if (this.KeyRangeLow == null) { return ""; }
+		public string NormalizeKey(string keyStr) {
+			if (keyStr == null) { return ""; }
 
-			string key = this.KeyRangeLow.Split('/')[0];
-			key = key.Trim();
+            if (keyStr.Contains(@"/")) {
+                string key = keyStr.Split('/')[0];
+                key = key.Trim();
 
-			switch (key) {
-				case "C#": key = "Db"; break;
-				case "D#": key = "Eb"; break;
-				case "G#": key = "Ab"; break;
-				case "A#": key = "Bb"; break;
-			}
-
-			if (this.MinorKey) {
-				key += "m";
-			}
-			return key;
+                switch (key) {
+                    case "C#": key = "Db"; break;
+                    case "D#": key = "Eb"; break;
+                    case "G#": key = "Ab"; break;
+                    case "A#": key = "Bb"; break;
+                }
+                return key;
+            } else {
+                return keyStr;
+            }
 		}
 		#endregion
 
@@ -1058,7 +1072,7 @@ namespace DreamBeam {
 
 			
 				string songKey = this.GetKey();
-				if (songKey != null && songKey.Length > 0) {
+				if (songKey.Length > 0) {
 					// Add the key to the author field?
 					text[ (int)SongTextType.Author ] += " (" + songKey + ")";
 				}
@@ -1247,6 +1261,10 @@ namespace DreamBeam {
 				instance.BGImagePath = null;
 			}
 
+            // When files are de-serialized, they retain the version they were
+            // originally serialized under. We need to update it here.
+            instance.UpdateVersion();
+
 			try {
 				fs = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Read);
 				xs.Serialize(fs, instance);
@@ -1263,9 +1281,9 @@ namespace DreamBeam {
 		/// Handles deserialization of the NewSong class, or of any types derived from it.
 		/// </summary>
 		/// <param name="type">The type of class to deserialize. Allows this function to be used in derived classes.</param>
-		/// <param name="file">The full path to the XML file to deserialize</param>
+		/// <param name="tr">A TextReader containing the document to deserialize</param>
 		/// <returns></returns>
-		public static object DeserializeFrom(System.Type type, string file) {
+		public static object DeserializeFrom(System.Type type, TextReader tr) {
 			XmlSerializer xs = null;
 
 			try {
@@ -1277,11 +1295,7 @@ namespace DreamBeam {
 			
 			if (xs != null) {
 				try {
-					using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
-						return xs.Deserialize(fs);
-					}
-				} catch (FileNotFoundException e) {
-					Console.WriteLine("Exception deserializing (FileNotFound): " + e.Message);
+					return xs.Deserialize(tr);
 				} catch (InvalidOperationException e) {
 					Console.WriteLine("Exception deserializing (Invalid XML or old format): " + e.Message);
 				}
@@ -1290,29 +1304,78 @@ namespace DreamBeam {
 			return null;
 		}
 
-		public static object DeserializeFrom(string file, int strophe, Config config) {
-			NewSong s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
-			if (s != null) {
-				if (! s.CustomFormat) {
-					s.Init(strophe, config);
-				} else {
-					s.config = config;
-					s.CurrentLyric = strophe;
-				}
-				s.FileName = file;
-				return s;
-			} else {
-				// This might be an old version of the file. Attempt to load it as the old version.
-				Song oldS = new Song(file);
-				if (oldS.strophe_count > 0) {
-					s = new NewSong(oldS);
-				} else {
-					s = new NewSong();
-				}
-				s.Init(strophe, config);
-				s.FileName = file;
-				return s;
+		/// <summary>
+		/// Handles deserialization of the NewSong class, or of any types derived from it.
+		/// </summary>
+		/// <param name="type">The type of class to deserialize. Allows this function to be used in derived classes.</param>
+		/// <param name="file">The full path to the XML file to deserialize</param>
+		/// <returns></returns>
+        public static object DeserializeFrom(System.Type type, string file) {
+            try {
+                using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
+                    return DeserializeFrom(type, new StreamReader(fs));
+                }
+            } catch (FileNotFoundException e) {
+				Console.WriteLine("Exception deserializing (FileNotFound): " + e.Message);
 			}
+            return null;
+        }
+
+		public static object DeserializeFrom(string file, int strophe, Config config) {
+            XmlDocument xmlDoc = new XmlDocument();
+            try {
+                xmlDoc.Load(file);
+            } catch (Exception e) {
+                return new NewSong();
+            }
+
+            NewSong s = null;
+            //XmlNodeList nodes = xmlDoc.GetElementsByTagName("Version");
+            XmlNode version = xmlDoc.SelectSingleNode(@"/DreamSong/Version");
+            if (version == null) {
+                version = xmlDoc.SelectSingleNode(@"/NewSong/Version");
+            }
+            if (version != null) {                
+                switch (version.InnerText) {
+                    case "0.49":
+				        Song oldS = new Song(file);
+				        if (oldS.strophe_count > 0) {
+					        s = new NewSong(oldS);
+				        } else {
+					        s = new NewSong();
+				        }
+                        break;
+
+                    case "0.60":
+                        // Fix old songs that were saved with NewSong XML root instead of DreamSong
+                        XmlNode root = xmlDoc.DocumentElement;
+                        if (root.Name.Equals("NewSong")) {
+                            Tools.RenameXmlNode(root, root.NamespaceURI, "DreamSong");
+                            s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), new StringReader(xmlDoc.OuterXml));
+                        } else {
+                            s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
+                        }
+                        break;
+
+                    //case "0.72":
+                    default:
+		                s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
+                        break;
+                }
+            }
+
+            if (s != null) {
+                if (!s.CustomFormat) {
+                    s.Init(strophe, config);
+                } else {
+                    s.config = config;
+                    s.CurrentLyric = strophe;
+                }
+                s.FileName = file;
+                return s;
+            } else {
+                return new NewSong();
+            }
 		}
 		#endregion
 

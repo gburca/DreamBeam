@@ -20,6 +20,9 @@ namespace Extensions
 	/// <exception>
 	/// Throws no exceptions, and propagates untouched all exceptions thrown by callees.
 	/// </exception>
+
+// Disable warnings about obsolete methods/interfaces/members/etc...
+#pragma warning disable 0618
 	public class Set : Hashtable
 	{
 		/// <summary>
@@ -200,4 +203,5 @@ namespace Extensions
 			return this - otherSet;
 		}
 	}
+#pragma warning restore
 }

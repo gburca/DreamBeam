@@ -384,8 +384,9 @@ namespace DreamBeam	{
 						(newContent as TextToolContents).song.strophe = identity.SongStrophe;
 						break;
 					case ContentType.Song:
-						string songFile = Path.Combine(Tools.DreamBeamPath(), Path.Combine("Songs", identity.SongName));
-						newContent = (NewSong)NewSong.DeserializeFrom(songFile, identity.SongStrophe, Display.config);
+						//string songFile = Path.Combine(Tools.GetAppDocPath(), Path.Combine("Songs", identity.SongName));
+                        string songFile = Tools.CombinePaths(Tools.GetAppDocPath(), "Songs", identity.SongName);
+                        newContent = (NewSong)NewSong.DeserializeFrom(songFile, identity.SongStrophe, Display.config);
 						break;
 				}
 			} catch {}	// Covers a multitude of sins (non-existent translation, or song, or verse, etc...)
@@ -498,11 +499,11 @@ namespace DreamBeam	{
 			props["port"] = ListeningPort;
 			HttpChannel channel = new HttpChannel(props, null, xml_rpc);
 
-			ChannelServices.RegisterChannel(channel);
+			ChannelServices.RegisterChannel(channel, false);
 				
 			// Not sure how this works if we re-configure and register when OperatingMode changes
 			// There might be other ways to do the same thing and allow for de-registration
-			RemotingConfiguration.Configure(null);
+			RemotingConfiguration.Configure(null, false);
 
 			// Counterintuitive, but when set to FALSE it reports errors across XML-RPC. Keep it this way to simplify debugging.
 			RemotingConfiguration.CustomErrorsEnabled(false);

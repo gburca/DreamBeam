@@ -13,7 +13,6 @@ namespace DreamBeam {
 		public RightDock RightDock = null;
 		public SongEdit SongEdit = null;
 		public Presentation Presentation = null;
-		public Help Help = null;
 		public ShowBeamTools ShowBeamTools = null;
 		private Hashtable SandDockLayouts = null;
 		private bool firstShowing = true;
@@ -22,7 +21,6 @@ namespace DreamBeam {
 			this.RightDock = new RightDock(impForm, impShowBeam);
 			this.SongEdit = new SongEdit(impForm, impShowBeam);
 			this.Presentation = new Presentation(impForm, impShowBeam);
-			this.Help = new Help(impForm, impShowBeam);
 			this.ShowBeamTools = new ShowBeamTools(impForm, impShowBeam);
 			this.SandDockLayouts = new Hashtable();
 

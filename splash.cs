@@ -154,7 +154,7 @@ namespace DreamBeam {
             ms_oThread = new Thread( new ThreadStart(Splash.ShowForm));
             ms_oThread.IsBackground = true;
 			ms_oThread.Name = "ShowSplashScreen";
-            ms_oThread.ApartmentState = ApartmentState.STA;
+            ms_oThread.SetApartmentState(ApartmentState.STA);
             ms_oThread.Start();
         }
 

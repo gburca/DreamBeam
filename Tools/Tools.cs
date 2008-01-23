@@ -11,6 +11,7 @@ using System.Xml.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace DreamBeam {
 
@@ -94,12 +95,65 @@ namespace DreamBeam {
             return (WindowSize);
         }
 
-        public static string DreamBeamPath() {
-            return System.Windows.Forms.Application.StartupPath;
-		}
+        /// <summary>
+        /// This is the directory that contains the song files, backgrounds, etc...
+        /// 
+        /// In Vista this can not be a subdirectory of "Program Files" due to
+        /// permission issues after the SW is installed.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAppDocPath()
+        {
+            //return System.Windows.Forms.Application.StartupPath;
+            string defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "DreamBeam");
+            RegistryKey masterKey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\DreamBeam");
+            if (masterKey == null) {
+                // Key doesn't exist and we could not create it (permissions?)
+                return defaultPath;
+            } else {
+                defaultPath = masterKey.GetValue("UserFilesDir", defaultPath).ToString();
+                masterKey.Close();
+                return defaultPath;
+            }
+        }
+
+        /// <summary>
+        /// This function should return the same thing that NSIS returns for $APPDATA\${PRODUCT}
+        /// </summary>
+        /// <returns>A place where the application should store data that is common among machine users.</returns>
+        public static string GetCommonAppDataPath() {
+            string fullPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            fullPath = Path.Combine(fullPath, "DreamBeam");
+            return fullPath;
+        }
+
+        /// <summary>
+        /// The cache is probably not compatible between versions, so we use a cache directory
+        /// which contains the app version number.
+        /// 
+        /// Application.CommonAppDataPath contains build and revision number so if
+        /// we save settings to that directory we won't be able to read them back
+        /// during development because the build and/or revision number keeps
+        /// changing.
+        /// 
+        /// For proper uninstall of DreamBeam, the parent of the directory returned
+        /// by this function should be the same as NSIS's $APPDATA\${PRODUCT}\Cache
+        /// 
+        /// </summary>
+        /// <returns>A directory where the application should store cached data.
+        /// Basically the Application.CommonAppDataPath with the build and version number removed.</returns>
+        public static string GetAppCachePath() {
+            Version vrs = new Version(Application.ProductVersion);
+            string fullPath = CombinePaths(
+                GetCommonAppDataPath(),
+                "Cache",
+                vrs.Major + "." + vrs.Minor);
+            return fullPath;
+        }
+
 
 		/// <summary>
-		/// If the FileName is not an absolute path, it assumes it is relative to the application directory
+		/// If the FileName is not an absolute path, it assumes it is relative to the application data directory
 		/// and generates the full path based on that assumption. This function is used primarily to obtain
 		/// the full path of background images that could be stored in various places as relative paths.
 		/// </summary>
@@ -113,7 +167,7 @@ namespace DreamBeam {
 				return fi.FullName;
 			}
 
-			fi = new FileInfo(Tools.DreamBeamPath() + @"\" + FileName);
+			fi = new FileInfo(Path.Combine(Tools.GetAppDocPath(), FileName));
 			if ( FileExists(fi.FullName) ) {
 				return fi.FullName;
 			}
@@ -121,20 +175,13 @@ namespace DreamBeam {
 			return null;
 		}
 
-		/// <summary>
-		/// Application.CommonAppDataPath contains build and revision number so if
-		/// we save settings to that directory we won't be able to read them back
-		/// during development because the build and/or revision number keeps
-		/// changing.
-		/// </summary>
-		/// <returns>The Application.CommonAppDataPath with the build and version number removed</returns>
-		public static string GetCommonAppDataPath() {
-			Version vrs = new Version(Application.ProductVersion);
-			string fullPath = Application.CommonAppDataPath;
-			int i = fullPath.IndexOf("." + vrs.Build + "." + vrs.Revision, 0);
-			return fullPath.Substring(0, i);
-		}
-
+        public static string CombinePaths(params string[] paths) {
+            string path = "";
+            foreach (string p in paths) {
+                path = Path.Combine(path, p);
+            }
+            return path;
+        }
 
 		[DllImport("kernel32.dll")]
 		  public static extern bool Beep(int frequency, int duration);
@@ -325,6 +372,29 @@ namespace DreamBeam {
 			sb.Length = ret;	// Otherwise we end up with garbage at the end because of "Length * 2" above
 			return Regex.Replace(sb.ToString(), @"\p{Sk}", "");
 		}
+
+        public static XmlNode RenameXmlNode(XmlNode node, string namespaceURI, string qualifiedName) {
+            if (node.NodeType == XmlNodeType.Element) {
+                XmlElement oldElement = (XmlElement)node;
+                XmlElement newElement = node.OwnerDocument.CreateElement(qualifiedName, namespaceURI);
+
+                while (oldElement.HasAttributes) {
+                    newElement.SetAttributeNode(oldElement.RemoveAttributeNode(oldElement.Attributes[0]));
+                }
+
+                while (oldElement.HasChildNodes) {
+                    newElement.AppendChild(oldElement.RemoveChild(oldElement.FirstChild));
+                }
+
+                if (oldElement.ParentNode != null) {
+                    oldElement.ParentNode.ReplaceChild(newElement, oldElement);
+                }
+
+                return newElement;
+            } else {
+                return null;
+            }
+        }
 
 		// We use this to open or close the console programatically
 		[DllImport("kernel32.dll")] public static extern Boolean AllocConsole();

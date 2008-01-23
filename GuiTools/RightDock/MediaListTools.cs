@@ -52,7 +52,7 @@ namespace DreamBeam
 						if(Path.GetExtension(s).ToLower() == ex){
 							string FilePath = s;
 							if (answer == DialogResult.Yes){
-								string MediaFolder = Tools.DreamBeamPath()+"\\MediaFiles";
+								string MediaFolder = Tools.GetAppDocPath()+"\\MediaFiles";
 								if(System.IO.Directory.Exists (MediaFolder) == false){
 									System.IO.Directory.CreateDirectory(MediaFolder);
 								}
@@ -178,7 +178,7 @@ namespace DreamBeam
 			   public void Media_Remove_Click(object sender, System.EventArgs e){
 					if (_MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex >= 0){
 
-						string MediaFolder = Tools.DreamBeamPath()+"\\MediaFiles";
+						string MediaFolder = Tools.GetAppDocPath()+"\\MediaFiles";
 						string localFile = MediaFolder+"\\"+this.MediaList.Name+"\\"+_MainForm.RightDocks_BottomPanel_MediaList.Items[_MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex].Text;
 
 					   int tmp = _MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex;
