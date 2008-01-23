@@ -301,7 +301,7 @@ namespace DreamBeam {
 		/// <param name="tab"></param>
 		/// <returns></returns>
 		private string GetTabLayoutFile(MainTab tab) {
-			return Tools.GetFullPath(_MainForm.ConfigSet + ".Tab_" + Enum.GetName(typeof(MainTab), tab) + ".xml");
+			return Path.GetFullPath(_MainForm.ConfigSet + ".Tab_" + Enum.GetName(typeof(MainTab), tab) + ".xml");
 		}
 		#endregion
 

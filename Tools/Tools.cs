@@ -174,6 +174,14 @@ namespace DreamBeam {
 
 			return null;
 		}
+        //public static string GetFullPath(string FileName, bool mustExist) {
+        //    if (mustExist) {
+        //        return GetFullPath(FileName);
+        //    } else {
+        //        //FileInfo fi = new FileInfo(FileName);
+        //        Path.GetFullPath(FileName);
+        //    }
+        //}
 
         public static string CombinePaths(params string[] paths) {
             string path = "";

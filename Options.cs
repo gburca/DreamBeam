@@ -136,6 +136,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.ToolTip Options_ToolTip;
 		private System.Data.DataSet Options_DataSet;
 		private System.Windows.Forms.Label BibleCache_Message;
+        private Button SaveSongFormatButton;
 		private System.Windows.Forms.Label PreRenderLabel;
 		#endregion
 
@@ -288,6 +289,7 @@ namespace DreamBeam {
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.Options_ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Options_DataSet = new System.Data.DataSet();
+            this.SaveSongFormatButton = new System.Windows.Forms.Button();
             this.Options_TopPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.Common_Tab.SuspendLayout();
@@ -1171,6 +1173,7 @@ namespace DreamBeam {
             // 
             // SongFormat_Tab
             // 
+            this.SongFormat_Tab.Controls.Add(this.SaveSongFormatButton);
             this.SongFormat_Tab.Controls.Add(this.tabControl2);
             this.SongFormat_Tab.Controls.Add(this.groupBox3);
             this.SongFormat_Tab.Location = new System.Drawing.Point(4, 40);
@@ -1486,6 +1489,16 @@ namespace DreamBeam {
             this.Options_DataSet.Locale = new System.Globalization.CultureInfo("en-US");
             this.Options_DataSet.Tables.AddRange(new System.Data.DataTable[] {
             this.Options_RegEx_Table});
+            // 
+            // SaveSongFormatButton
+            // 
+            this.SaveSongFormatButton.Location = new System.Drawing.Point(427, 55);
+            this.SaveSongFormatButton.Name = "SaveSongFormatButton";
+            this.SaveSongFormatButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveSongFormatButton.TabIndex = 2;
+            this.SaveSongFormatButton.Text = "Save As...";
+            this.SaveSongFormatButton.UseVisualStyleBackColor = true;
+            this.SaveSongFormatButton.Click += new System.EventHandler(this.SaveSongFormatButton_Click);
             // 
             // Options
             // 
@@ -2069,5 +2082,9 @@ namespace DreamBeam {
 				}
 			}
 		}
+
+        private void SaveSongFormatButton_Click(object sender, EventArgs e) {
+            Conf.theme.Song.SaveAs();
+        }
 	}
 }

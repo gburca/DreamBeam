@@ -69,7 +69,7 @@ namespace DreamBeam
         public static void SerializeTo(Theme instance, string file) {
             XmlSerializer xs = new XmlSerializer(instance.GetType());
 
-            file = Tools.GetFullPath(file);
+            file = Path.GetFullPath(file);
             Directory.CreateDirectory(Path.GetDirectoryName(file));
             FileStream fs = null;
 
@@ -90,6 +90,7 @@ namespace DreamBeam
             XmlSerializer xs = null;
 
             file = Tools.GetFullPath(file);
+            if (file == null) { return null; }
             try {
                 xs = new XmlSerializer(type);
             } catch (InvalidOperationException ex) {
@@ -302,7 +303,7 @@ namespace DreamBeam
 			Type type = instance.GetType();
 			XmlSerializer xs = new XmlSerializer(type);
 
-			file = Tools.GetFullPath(file);
+			file = Path.GetFullPath(file);
 			Directory.CreateDirectory(Path.GetDirectoryName(file));
 			FileStream fs = null;
 
@@ -344,7 +345,12 @@ namespace DreamBeam
 			if (xs != null) {
 				try {
 					using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
-						return DeserializeCleanup(xs.Deserialize(fs) as Config);
+                        Config config = xs.Deserialize(fs) as Config;
+                        if (config != null) {
+                            return DeserializeCleanup(config);
+                        } else {
+                            Config.SerializeTo(instance, file);
+                        }
 					}
 				} catch (FileNotFoundException) {
 					Config.SerializeTo(instance, file);

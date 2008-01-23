@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<NewSong xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<NewSong xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CustomFormat>false</CustomFormat>
   <WordWrap>false</WordWrap>
   <Version>0.60</Version>
@@ -8,7 +8,7 @@
   <Collection>Test collection</Collection>
   <Number />
   <Notes />
-  <KeyRangeLow>G</KeyRangeLow>
+  <KeyRangeLow>G# / Ab</KeyRangeLow>
   <KeyRangeHigh>G</KeyRangeHigh>
   <MinorKey>false</MinorKey>
   <DualLanguage>false</DualLanguage>
