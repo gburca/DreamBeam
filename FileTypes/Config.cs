@@ -51,9 +51,9 @@ namespace DreamBeam
 
         private void CreateDefaultSongTheme() {
             CreateTextFormats(Enum.GetValues(typeof(SongTextType)).Length);
-            TextFormat[(int)SongTextType.Title].Bounds = BibleTextFormat[(int)BibleTextType.Reference].Bounds;
-            TextFormat[(int)SongTextType.Verse].Bounds = BibleTextFormat[(int)BibleTextType.Verse].Bounds;
-            TextFormat[(int)SongTextType.Author].Bounds = BibleTextFormat[(int)BibleTextType.Translation].Bounds;
+            TextFormat[(int)SongTextType.Title].Bounds = new RectangleF(5F, 2F, 90F, 8F);
+            TextFormat[(int)SongTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
+            TextFormat[(int)SongTextType.Author].Bounds = new RectangleF(80F, 95F, 15F, 4F);
             TextFormat[(int)SongTextType.Verse].HAlignment = StringAlignment.Near;
         }
 
