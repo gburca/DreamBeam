@@ -49,7 +49,7 @@ namespace DreamBeam
 		{
 			if(doLog){
 				StreamWriter SW;
-				SW=File.AppendText(logPrefix + ".LogFile.txt");
+				SW=File.AppendText(Path.Combine(Tools.GetAppDocPath(), logPrefix + ".LogFile.txt"));
 				SW.WriteLine(DateTime.Now.ToString() + ": " + Text);
 				SW.Close();
 			}

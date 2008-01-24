@@ -37,23 +37,31 @@ namespace DreamBeam
             }
         }
 
-        public void SaveAs() {
+        public static Theme OpenFile(string FileDialogFilter, Type type) {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.DefaultExt = "xml";
+            dialog.Filter = FileDialogFilter;
+            dialog.FilterIndex = 1;
+            dialog.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Themes");
+            dialog.Title = "Open Theme";
+            dialog.Multiselect = false;
+
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                return DeserializeFrom(type, dialog.FileName) as Theme;
+            } else {
+                return null;
+            }
+        }
+
+        public void SaveAs(string FileDialogFilter) {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.DefaultExt = "xml";
-            dialog.Filter = @"DreamBeam themes (*.theme.xml)|*.theme.xml|All (*.*)|*.*";
+            dialog.Filter = FileDialogFilter;
             dialog.FilterIndex = 1;
             dialog.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Themes");
             dialog.Title = "Save Theme As";
 
             Directory.CreateDirectory(dialog.InitialDirectory);
-
-            //if (!Tools.StringIsNullOrEmptyTrim(this.songEditor.Song.FileName)) {
-            //    this.SaveFileDialog.FileName = this.songEditor.Song.FileName;
-            //} else if (!Tools.StringIsNullOrEmptyTrim(this.songEditor.Song.Title)) {
-            //    this.SaveFileDialog.FileName = this.songEditor.Song.Title + ".xml";
-            //} else {
-            //    this.SaveFileDialog.FileName = "New Song.xml";
-            //}
 
             if (dialog.ShowDialog() == DialogResult.OK) {
                 string fileName = dialog.FileName;
@@ -85,8 +93,7 @@ namespace DreamBeam
             }
         }
 
-        public static object DeserializeFrom(Theme instance, string file) {
-            Type type = instance.GetType();
+        public static object DeserializeFrom(Type type, string file) {
             XmlSerializer xs = null;
 
             file = Tools.GetFullPath(file);
@@ -118,16 +125,27 @@ namespace DreamBeam
 
     [Serializable()]
     public class BibleTheme : Theme {
+        protected static string FileDialogFilter = @"DreamBeam Bible themes (*.BibleTheme.xml)|*.BibleTheme.xml|All (*.*)|*.*";
+
         public BibleTheme() {
             CreateTextFormats(Enum.GetValues(typeof(BibleTextType)).Length);
             TextFormat[(int)BibleTextType.Reference].Bounds = new RectangleF(5F, 2F, 90F, 8F);
             TextFormat[(int)BibleTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
             TextFormat[(int)BibleTextType.Translation].Bounds = new RectangleF(80F, 95F, 15F, 4F);
         }
+
+        public static BibleTheme OpenFile() {
+            return Theme.OpenFile(FileDialogFilter, typeof(BibleTheme)) as BibleTheme;
+        }
+        public void SaveAs() {
+            SaveAs(FileDialogFilter);
+        }
     }
 
     [Serializable()]
     public class SongTheme : Theme {
+        protected static string FileDialogFilter = @"DreamBeam song themes (*.SongTheme.xml)|*.SongTheme.xml|All (*.*)|*.*";
+
         public SongTheme() {
             CreateTextFormats(Enum.GetValues(typeof(SongTextType)).Length);
             TextFormat[(int)SongTextType.Title].Bounds = new RectangleF(5F, 2F, 90F, 8F);
@@ -135,15 +153,31 @@ namespace DreamBeam
             TextFormat[(int)SongTextType.Author].Bounds = new RectangleF(80F, 95F, 15F, 4F);
             TextFormat[(int)SongTextType.Verse].HAlignment = StringAlignment.Near;
         }
+
+        public static SongTheme OpenFile() {
+            return Theme.OpenFile(FileDialogFilter, typeof(SongTheme)) as SongTheme;
+        }
+        public void SaveAs() {
+            SaveAs(FileDialogFilter);
+        }
     }
 
     [Serializable()]
     public class SermonTheme : Theme {
+        protected static string FileDialogFilter = @"DreamBeam sermon themes (*.SermonTheme.xml)|*.SermonTheme.xml|All (*.*)|*.*";
+
         public SermonTheme() {
             CreateTextFormats(Enum.GetValues(typeof(TextToolType)).Length);
             TextFormat[(int)TextToolType.FirstLine].Bounds = new RectangleF(5F, 2F, 90F, 8F);
             TextFormat[(int)TextToolType.OtherLines].Bounds = new RectangleF(5F, 12F, 90F, 85F);
             TextFormat[(int)TextToolType.OtherLines].HAlignment = StringAlignment.Near;
+        }
+
+        public static SermonTheme OpenFile() {
+            return Theme.OpenFile(FileDialogFilter, typeof(SermonTheme)) as SermonTheme;
+        }
+        public void SaveAs() {
+            SaveAs(FileDialogFilter);
         }
     }
 

@@ -115,6 +115,8 @@ Section "DreamBeam" SDreamBeam
 	; Create uninstaller
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 
+	; A place where we can create logs
+	CreateDirectory "$USERFILES"
 SectionEnd
 
 ; Subsections should default to optional if this is an update so that
@@ -191,6 +193,7 @@ Section "un.Uninstall DreamBeam" SUnDreamBeam
 
 	; This should contain the directory returned by Tools.GetAppCachePath() in the App.
 	RMDir /r "$APPDATA\${PRODUCT}\Cache"
+	Delete "$APPDATA\${PRODUCT}\LogFile.txt"
 	RMDir "$APPDATA\${PRODUCT}" ; Remove user directory (only if empty)
 
 SectionEnd

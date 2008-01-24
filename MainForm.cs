@@ -564,7 +564,7 @@ namespace DreamBeam {
 				Application.Run(new MainForm(args));
 			} catch (Exception e) {
 				StreamWriter SW;
-				SW=File.AppendText("LogFile.txt");
+				SW=File.AppendText(Path.Combine(Tools.GetCommonAppDataPath(), "LogFile.txt"));
 				SW.WriteLine(e.Message);
 				SW.WriteLine(e.StackTrace);
 				if (e.InnerException != null) {

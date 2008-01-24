@@ -109,10 +109,12 @@ namespace DreamBeam {
             RegistryKey masterKey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\DreamBeam");
             if (masterKey == null) {
                 // Key doesn't exist and we could not create it (permissions?)
+                Directory.CreateDirectory(defaultPath);
                 return defaultPath;
             } else {
                 defaultPath = masterKey.GetValue("UserFilesDir", defaultPath).ToString();
                 masterKey.Close();
+                Directory.CreateDirectory(defaultPath);
                 return defaultPath;
             }
         }
@@ -124,6 +126,7 @@ namespace DreamBeam {
         public static string GetCommonAppDataPath() {
             string fullPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             fullPath = Path.Combine(fullPath, "DreamBeam");
+            Directory.CreateDirectory(fullPath);
             return fullPath;
         }
 
@@ -158,7 +161,7 @@ namespace DreamBeam {
 		/// the full path of background images that could be stored in various places as relative paths.
 		/// </summary>
 		/// <param name="FileName"></param>
-		/// <returns></returns>
+		/// <returns>The filename (if the file exists), or NULL if the file does not exist.</returns>
 		public static string GetFullPath(string FileName) {
 			// We need at least 1 char for file name + 4 chars for extension ".jpg"
 			if (FileName == null || FileName.Length < 5) return null;
@@ -174,14 +177,6 @@ namespace DreamBeam {
 
 			return null;
 		}
-        //public static string GetFullPath(string FileName, bool mustExist) {
-        //    if (mustExist) {
-        //        return GetFullPath(FileName);
-        //    } else {
-        //        //FileInfo fi = new FileInfo(FileName);
-        //        Path.GetFullPath(FileName);
-        //    }
-        //}
 
         public static string CombinePaths(params string[] paths) {
             string path = "";

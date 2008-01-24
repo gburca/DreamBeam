@@ -137,6 +137,7 @@ namespace DreamBeam {
 		private System.Data.DataSet Options_DataSet;
 		private System.Windows.Forms.Label BibleCache_Message;
         private Button SaveSongFormatButton;
+        private Button OpenSongFormatButton;
 		private System.Windows.Forms.Label PreRenderLabel;
 		#endregion
 
@@ -253,6 +254,7 @@ namespace DreamBeam {
             this.Grafics_Outline = new System.Windows.Forms.GroupBox();
             this.OutlineSize_UpDown1 = new System.Windows.Forms.NumericUpDown();
             this.SongFormat_Tab = new OPaC.Themed.Forms.TabPage();
+            this.SaveSongFormatButton = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.SongFormat_Title_Tab = new System.Windows.Forms.TabPage();
             this.SongTitle_TextFormat = new DreamBeam.TextFormatOptions();
@@ -289,7 +291,7 @@ namespace DreamBeam {
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.Options_ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Options_DataSet = new System.Data.DataSet();
-            this.SaveSongFormatButton = new System.Windows.Forms.Button();
+            this.OpenSongFormatButton = new System.Windows.Forms.Button();
             this.Options_TopPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.Common_Tab.SuspendLayout();
@@ -1173,6 +1175,7 @@ namespace DreamBeam {
             // 
             // SongFormat_Tab
             // 
+            this.SongFormat_Tab.Controls.Add(this.OpenSongFormatButton);
             this.SongFormat_Tab.Controls.Add(this.SaveSongFormatButton);
             this.SongFormat_Tab.Controls.Add(this.tabControl2);
             this.SongFormat_Tab.Controls.Add(this.groupBox3);
@@ -1181,6 +1184,16 @@ namespace DreamBeam {
             this.SongFormat_Tab.Size = new System.Drawing.Size(464, 302);
             this.SongFormat_Tab.TabIndex = 6;
             this.SongFormat_Tab.Text = "Song Format";
+            // 
+            // SaveSongFormatButton
+            // 
+            this.SaveSongFormatButton.Location = new System.Drawing.Point(421, 19);
+            this.SaveSongFormatButton.Name = "SaveSongFormatButton";
+            this.SaveSongFormatButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveSongFormatButton.TabIndex = 2;
+            this.SaveSongFormatButton.Text = "Save As...";
+            this.SaveSongFormatButton.UseVisualStyleBackColor = true;
+            this.SaveSongFormatButton.Click += new System.EventHandler(this.SaveSongFormatButton_Click);
             // 
             // tabControl2
             // 
@@ -1490,15 +1503,15 @@ namespace DreamBeam {
             this.Options_DataSet.Tables.AddRange(new System.Data.DataTable[] {
             this.Options_RegEx_Table});
             // 
-            // SaveSongFormatButton
+            // OpenSongFormatButton
             // 
-            this.SaveSongFormatButton.Location = new System.Drawing.Point(427, 55);
-            this.SaveSongFormatButton.Name = "SaveSongFormatButton";
-            this.SaveSongFormatButton.Size = new System.Drawing.Size(75, 23);
-            this.SaveSongFormatButton.TabIndex = 2;
-            this.SaveSongFormatButton.Text = "Save As...";
-            this.SaveSongFormatButton.UseVisualStyleBackColor = true;
-            this.SaveSongFormatButton.Click += new System.EventHandler(this.SaveSongFormatButton_Click);
+            this.OpenSongFormatButton.Location = new System.Drawing.Point(425, 54);
+            this.OpenSongFormatButton.Name = "OpenSongFormatButton";
+            this.OpenSongFormatButton.Size = new System.Drawing.Size(75, 23);
+            this.OpenSongFormatButton.TabIndex = 3;
+            this.OpenSongFormatButton.Text = "Open...";
+            this.OpenSongFormatButton.UseVisualStyleBackColor = true;
+            this.OpenSongFormatButton.Click += new System.EventHandler(this.OpenSongFormatButton_Click);
             // 
             // Options
             // 
@@ -2084,7 +2097,22 @@ namespace DreamBeam {
 		}
 
         private void SaveSongFormatButton_Click(object sender, EventArgs e) {
-            Conf.theme.Song.SaveAs();
+            SongTheme theme = new SongTheme();
+            theme.BGImagePath = this.SongBGImagePath.Text;
+            theme.TextFormat[(int)SongTextType.Title] = this.SongTitle_TextFormat.Format;
+            theme.TextFormat[(int)SongTextType.Author] = this.SongAuthor_TextFormat.Format;
+            theme.TextFormat[(int)SongTextType.Verse] = this.SongVerse_TextFormat.Format;
+            theme.SaveAs();
+        }
+
+        private void OpenSongFormatButton_Click(object sender, EventArgs e) {
+            SongTheme theme = SongTheme.OpenFile();
+            if (theme == null) return;
+
+            this.SongBGImagePath.Text = theme.BGImagePath;
+            this.SongTitle_TextFormat.Format = theme.TextFormat[(int)SongTextType.Title];
+            this.SongAuthor_TextFormat.Format = theme.TextFormat[(int)SongTextType.Author];
+            this.SongVerse_TextFormat.Format = theme.TextFormat[(int)SongTextType.Verse];
         }
 	}
 }
