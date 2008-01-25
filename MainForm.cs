@@ -585,11 +585,11 @@ namespace DreamBeam {
 		private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node2");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node2");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
+            treeNode5});
             this.RightDocks_ImageListBox = new Controls.Development.ImageListBox();
             this.ImageContext = new System.Windows.Forms.ContextMenu();
             this.ImageContextItemManage = new System.Windows.Forms.MenuItem();
@@ -2840,14 +2840,14 @@ namespace DreamBeam {
             this.treeView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.treeView1.Location = new System.Drawing.Point(2, 2);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "";
-            treeNode1.Text = "Node2";
-            treeNode2.Name = "";
-            treeNode2.Text = "Node1";
-            treeNode3.Name = "";
-            treeNode3.Text = "Node0";
+            treeNode4.Name = "";
+            treeNode4.Text = "Node2";
+            treeNode5.Name = "";
+            treeNode5.Text = "Node1";
+            treeNode6.Name = "";
+            treeNode6.Text = "Node0";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode6});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(190, 685);
             this.treeView1.TabIndex = 2;

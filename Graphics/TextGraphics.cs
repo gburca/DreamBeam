@@ -67,7 +67,6 @@ namespace DreamBeam
 
 
 			if(_Song.MultiLang && j == 1){
-				Size p2 = new Size();
 				   GraphicsPath pth2 = TextPath(j, strTempText,1,0,0);
 				   r = pth2.GetBounds();
 				   if(r.Width > p.Width){

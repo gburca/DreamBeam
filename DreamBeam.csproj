@@ -19,8 +19,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DreamBeam</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <StartupObject>
-    </StartupObject>
+    <StartupObject>DreamBeam.MainForm</StartupObject>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -313,6 +312,12 @@
     <Compile Include="GuiTools\TextFormatOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="GuiTools\ThemeWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GuiTools\ThemeWidget.Designer.cs">
+      <DependentUpon>ThemeWidget.cs</DependentUpon>
+    </Compile>
     <Compile Include="InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -367,6 +372,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GuiTools\TextFormatOptions.resx">
       <DependentUpon>TextFormatOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\ThemeWidget.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ThemeWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>

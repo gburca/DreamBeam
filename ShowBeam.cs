@@ -777,7 +777,6 @@ namespace DreamBeam {
 
 						p = new Pen(Sermon.TextColor[j], 1.0f);
 						p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-						SizeF stringSize = new SizeF();
 						sf = new StringFormat();
                         
 						switch (j) {

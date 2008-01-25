@@ -27,6 +27,9 @@ namespace DreamBeam
         public BeamTextFormat[] TextFormat;
 
         public Theme() {}
+        public Theme(int formats) {
+            CreateTextFormats(formats);
+        }
 
         protected void CreateTextFormats(int size) {
             // Create the array
@@ -285,7 +288,7 @@ namespace DreamBeam
         }
         [XmlIgnore]
         public BeamTextFormat[] SermonTextFormat {
-            get { return theme.getTheme(ContentType.Song).TextFormat; }
+            get { return theme.getTheme(ContentType.PlainText).TextFormat; }
         }
         #endregion
 
