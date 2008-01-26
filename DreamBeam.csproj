@@ -248,6 +248,7 @@
     <Compile Include="FileTypes\TextTool.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FileTypes\Theme.cs" />
     <Compile Include="Graphics\PerPixelAlphaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,6 +311,9 @@
     </Compile>
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowBeam.cs">
       <SubType>Form</SubType>

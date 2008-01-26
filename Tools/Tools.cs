@@ -146,11 +146,10 @@ namespace DreamBeam {
         /// <returns>A directory where the application should store cached data.
         /// Basically the Application.CommonAppDataPath with the build and version number removed.</returns>
         public static string GetAppCachePath() {
-            Version vrs = new Version(Application.ProductVersion);
             string fullPath = CombinePaths(
                 GetCommonAppDataPath(),
                 "Cache",
-                vrs.Major + "." + vrs.Minor);
+                GetAppVersion());
             return fullPath;
         }
 
@@ -184,6 +183,11 @@ namespace DreamBeam {
                 path = Path.Combine(path, p);
             }
             return path;
+        }
+
+        public static string GetAppVersion() {
+            Version vrs = new Version(Application.ProductVersion);
+            return vrs.Major + "." + vrs.Minor;
         }
 
 		[DllImport("kernel32.dll")]

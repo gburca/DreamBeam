@@ -694,13 +694,8 @@ namespace DreamBeam {
 			this.SongLyrics = new ArrayList();
 			this.Sequence = new ArrayList();
 			this.CurrentLyric = 0;
-            UpdateVersion();
+            this.Version = Tools.GetAppVersion();
 		}
-
-        private void UpdateVersion() {
-            Version vrs = new Version(Application.ProductVersion);
-            this.Version = vrs.Major + "." + vrs.Minor;
-        }
 
 		/// <summary>
 		/// This constructor creates a new song out of a plain text file. The file must contain a single
@@ -1263,7 +1258,7 @@ namespace DreamBeam {
 
             // When files are de-serialized, they retain the version they were
             // originally serialized under. We need to update it here.
-            instance.UpdateVersion();
+            instance.Version = Tools.GetAppVersion();
 
 			try {
 				fs = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Read);
@@ -1325,7 +1320,7 @@ namespace DreamBeam {
             XmlDocument xmlDoc = new XmlDocument();
             try {
                 xmlDoc.Load(file);
-            } catch (Exception e) {
+            } catch {
                 return new NewSong();
             }
 
