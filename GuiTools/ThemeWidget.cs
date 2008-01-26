@@ -39,6 +39,16 @@ namespace DreamBeam {
             this.ResumeLayout(false);
         }
 
+        public string[] getTabs() {
+            int tabs = tabControl.TabPages.Count;
+            string[] names = new string[tabs];
+            for (int i = 0; i < tabs; i++) {
+                names[i] = tabControl.TabPages[i].Text;
+            }
+            return names;
+        }
+
+
         /// <summary>
         /// Returns the TextFormatOptions control from the i-th tab
         /// </summary>
@@ -48,6 +58,7 @@ namespace DreamBeam {
             return (tabControl.TabPages[i].Controls[0] as TextFormatOptions);
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public Theme Theme {
             set {
                 this.BgImagePath.Text = value.BGImagePath;
@@ -65,5 +76,11 @@ namespace DreamBeam {
                 return t;
             }
         }
+ 
+        public string[] panelNames {
+            set { setTabs(value); }
+            get { return getTabs(); }
+        }
+ 
     }
 }

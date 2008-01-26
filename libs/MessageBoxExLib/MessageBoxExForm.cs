@@ -243,7 +243,6 @@ namespace Utils.MessageBoxExLib
             // 
             // MessageBoxExForm
             // 
-            this.AutoScale = false;
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 14);
             this.ClientSize = new System.Drawing.Size(322, 224);
             this.Controls.Add(this.rtbMessage);

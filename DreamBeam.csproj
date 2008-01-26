@@ -92,10 +92,6 @@
       <Name>CookComputing.XmlRpc</Name>
       <HintPath>libs\CookComputing.XmlRpc.dll</HintPath>
     </Reference>
-    <Reference Include="DirectShowLib">
-      <Name>DirectShowLib</Name>
-      <HintPath>..\..\direct\DirectShowLib.dll</HintPath>
-    </Reference>
     <Reference Include="DockingSuite">
       <Name>DockingSuite</Name>
       <HintPath>libs\DockingSuite.dll</HintPath>
@@ -111,10 +107,6 @@
     <Reference Include="DragNDrop">
       <Name>DragNDrop</Name>
       <HintPath>libs\DragNDrop.dll</HintPath>
-    </Reference>
-    <Reference Include="DreamBeam.resources">
-      <Name>DreamBeam.resources</Name>
-      <HintPath>bin\Debug\de-DE\DreamBeam.resources.dll</HintPath>
     </Reference>
     <Reference Include="LEDRadioButton">
       <Name>LEDRadioButton</Name>

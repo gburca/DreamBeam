@@ -560,13 +560,14 @@ namespace DreamBeam
 			OutlineColor = Color.Red;
 		}
 
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public string XmlTextColor {
 			get { return Tools.SerializeColor(TextColor); }
 			set { TextColor = Tools.DeserializeColor(value); }
 		}
 
-		public string XmlOutlineColor {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public string XmlOutlineColor {
 			get { return Tools.SerializeColor(OutlineColor); }
 			set { OutlineColor = Tools.DeserializeColor(value); }
 		}
@@ -576,7 +577,8 @@ namespace DreamBeam
 		/// allow font information to be serialized.
 		/// </summary>
 		[XmlIgnore()]
-		public Font TextFont {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public Font TextFont {
 			get {
 				return new Font(FontFamily, FontEmSize, FontStyle);
 			}
