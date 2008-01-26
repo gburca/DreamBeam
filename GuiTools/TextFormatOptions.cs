@@ -65,6 +65,7 @@ namespace DreamBeam
 			SetControls();
 		}
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public BeamTextFormat Format {
 			get {
 				this.ReadControls();

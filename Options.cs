@@ -222,6 +222,7 @@ namespace DreamBeam {
             this.BeamBox_AlwaysOnTop = new System.Windows.Forms.CheckBox();
             this.BeamBox_HideMouse = new System.Windows.Forms.CheckBox();
             this.Bible_Tab = new OPaC.Themed.Forms.TabPage();
+            this.songThemeWidget = new DreamBeam.ThemeWidget();
             this.SwordLangGroupBox = new System.Windows.Forms.GroupBox();
             this.Sword_LanguageBox = new System.Windows.Forms.ComboBox();
             this.SwordFolderGroupBox = new System.Windows.Forms.GroupBox();
@@ -293,7 +294,6 @@ namespace DreamBeam {
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.Options_ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Options_DataSet = new System.Data.DataSet();
-            this.songThemeWidget = new DreamBeam.ThemeWidget();
             this.Options_TopPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.Common_Tab.SuspendLayout();
@@ -840,6 +840,17 @@ namespace DreamBeam {
             this.Bible_Tab.Size = new System.Drawing.Size(648, 320);
             this.Bible_Tab.TabIndex = 3;
             this.Bible_Tab.Text = "Bible";
+            // 
+            // songThemeWidget
+            // 
+            this.songThemeWidget.Location = new System.Drawing.Point(24, 70);
+            this.songThemeWidget.Name = "songThemeWidget";
+            this.songThemeWidget.panelNames = new string[] {
+        "Title",
+        "Verse",
+        "Author"};
+            this.songThemeWidget.Size = new System.Drawing.Size(619, 312);
+            this.songThemeWidget.TabIndex = 9;
             // 
             // SwordLangGroupBox
             // 
@@ -1507,13 +1518,6 @@ namespace DreamBeam {
             this.Options_DataSet.Locale = new System.Globalization.CultureInfo("en-US");
             this.Options_DataSet.Tables.AddRange(new System.Data.DataTable[] {
             this.Options_RegEx_Table});
-            // 
-            // songThemeWidget
-            // 
-            this.songThemeWidget.Location = new System.Drawing.Point(24, 70);
-            this.songThemeWidget.Name = "songThemeWidget";
-            this.songThemeWidget.Size = new System.Drawing.Size(619, 312);
-            this.songThemeWidget.TabIndex = 9;
             // 
             // Options
             // 
