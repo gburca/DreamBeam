@@ -76,17 +76,7 @@ namespace DreamBeam {
         private OPaC.Themed.Forms.Label label3;
         private OPaC.Themed.Forms.Label BibleCache_Available_Label;
         private OPaC.Themed.Forms.Label BibleCache_Replacements_Label;
-        private OPaC.Themed.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.CheckBox Options_PanelLocations_checkBox;
-        private DreamBeam.TextFormatOptions BibleRef_TextFormat;
-        private DreamBeam.TextFormatOptions BibleTransl_TextFormat;
-        private DreamBeam.TextFormatOptions BibleVerse_TextFormat;
-        private System.Windows.Forms.TextBox BibleBGImagePath;
-        private System.Windows.Forms.Button BibleBGImageBrowse;
         private OPaC.Themed.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox ServerAddress;
         private OPaC.Themed.Forms.Label label4;
@@ -97,31 +87,10 @@ namespace DreamBeam {
         private System.Windows.Forms.RadioButton OperatingMode_Server;
         private OPaC.Themed.Forms.TabPage BibleFormat_Tab;
         private OPaC.Themed.Forms.TabPage SongFormat_Tab;
-        private OPaC.Themed.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage SongFormat_Title_Tab;
-        private System.Windows.Forms.TabPage SongFormat_Verse_Tab;
-        private System.Windows.Forms.TabPage SongFormat_Author_Tab;
-        private DreamBeam.TextFormatOptions SongTitle_TextFormat;
-        private DreamBeam.TextFormatOptions SongVerse_TextFormat;
-        private DreamBeam.TextFormatOptions SongAuthor_TextFormat;
-        private System.Windows.Forms.TextBox SongBGImagePath;
-        private System.Windows.Forms.Button SongBGImageBrowse;
         private OPaC.Themed.Forms.TabPage TextToolFormat_Tab;
-        private System.Windows.Forms.TabControl tabControl3;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.TabPage tabPage7;
-        private OPaC.Themed.Forms.GroupBox groupBox4;
-        private DreamBeam.TextFormatOptions TextTool_1stLine_TextFormat;
-        private DreamBeam.TextFormatOptions TextTool_OtherLines_TextFormat;
-        private System.Windows.Forms.TextBox TextBGImagePath;
-        private System.Windows.Forms.Button TextBGImageBrowse;
         private System.Windows.Forms.ToolTip Options_ToolTip;
         private System.Data.DataSet Options_DataSet;
         private System.Windows.Forms.Label BibleCache_Message;
-        private Button SaveSongFormatButton;
-        private Button OpenSongFormatButton;
-        private ThemeWidget songThemeWidget;
         private System.Windows.Forms.Label PreRenderLabel;
         #endregion
 
@@ -179,7 +148,6 @@ namespace DreamBeam {
             this.BeamBox_AlwaysOnTop = new System.Windows.Forms.CheckBox();
             this.BeamBox_HideMouse = new System.Windows.Forms.CheckBox();
             this.Bible_Tab = new OPaC.Themed.Forms.TabPage();
-            this.songThemeWidget = new DreamBeam.ThemeWidget();
             this.SwordLangGroupBox = new System.Windows.Forms.GroupBox();
             this.Sword_LanguageBox = new System.Windows.Forms.ComboBox();
             this.SwordFolderGroupBox = new System.Windows.Forms.GroupBox();
@@ -213,44 +181,17 @@ namespace DreamBeam {
             this.Grafics_Outline = new System.Windows.Forms.GroupBox();
             this.OutlineSize_UpDown1 = new System.Windows.Forms.NumericUpDown();
             this.SongFormat_Tab = new OPaC.Themed.Forms.TabPage();
-            this.OpenSongFormatButton = new System.Windows.Forms.Button();
-            this.SaveSongFormatButton = new System.Windows.Forms.Button();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.SongFormat_Title_Tab = new System.Windows.Forms.TabPage();
-            this.SongTitle_TextFormat = new DreamBeam.TextFormatOptions();
-            this.SongFormat_Verse_Tab = new System.Windows.Forms.TabPage();
-            this.SongVerse_TextFormat = new DreamBeam.TextFormatOptions();
-            this.SongFormat_Author_Tab = new System.Windows.Forms.TabPage();
-            this.SongAuthor_TextFormat = new DreamBeam.TextFormatOptions();
-            this.groupBox3 = new OPaC.Themed.Forms.GroupBox();
-            this.SongBGImageBrowse = new System.Windows.Forms.Button();
-            this.SongBGImagePath = new System.Windows.Forms.TextBox();
             this.BibleFormat_Tab = new OPaC.Themed.Forms.TabPage();
-            this.groupBox2 = new OPaC.Themed.Forms.GroupBox();
-            this.BibleBGImageBrowse = new System.Windows.Forms.Button();
-            this.BibleBGImagePath = new System.Windows.Forms.TextBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.BibleRef_TextFormat = new DreamBeam.TextFormatOptions();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.BibleVerse_TextFormat = new DreamBeam.TextFormatOptions();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.BibleTransl_TextFormat = new DreamBeam.TextFormatOptions();
             this.TextToolFormat_Tab = new OPaC.Themed.Forms.TabPage();
-            this.groupBox4 = new OPaC.Themed.Forms.GroupBox();
-            this.TextBGImageBrowse = new System.Windows.Forms.Button();
-            this.TextBGImagePath = new System.Windows.Forms.TextBox();
-            this.tabControl3 = new System.Windows.Forms.TabControl();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.TextTool_1stLine_TextFormat = new DreamBeam.TextFormatOptions();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.TextTool_OtherLines_TextFormat = new DreamBeam.TextFormatOptions();
             this.Options_Cancelbtn = new System.Windows.Forms.Button();
             this.Options_Okaybtn = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.Options_ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Options_DataSet = new System.Data.DataSet();
+            this.songThemeWidget = new DreamBeam.ThemeWidget();
+            this.bibleFormatWidget = new DreamBeam.ThemeWidget();
+            this.sermonThemeWidget = new DreamBeam.ThemeWidget();
             this.Options_TopPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.Common_Tab.SuspendLayout();
@@ -285,22 +226,8 @@ namespace DreamBeam {
             this.Grafics_Outline.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OutlineSize_UpDown1)).BeginInit();
             this.SongFormat_Tab.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.SongFormat_Title_Tab.SuspendLayout();
-            this.SongFormat_Verse_Tab.SuspendLayout();
-            this.SongFormat_Author_Tab.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.BibleFormat_Tab.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage5.SuspendLayout();
             this.TextToolFormat_Tab.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.tabControl3.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Options_DataSet)).BeginInit();
             this.SuspendLayout();
             // 
@@ -789,7 +716,6 @@ namespace DreamBeam {
             // 
             // Bible_Tab
             // 
-            this.Bible_Tab.Controls.Add(this.songThemeWidget);
             this.Bible_Tab.Controls.Add(this.SwordLangGroupBox);
             this.Bible_Tab.Controls.Add(this.SwordFolderGroupBox);
             this.Bible_Tab.Location = new System.Drawing.Point(4, 22);
@@ -797,17 +723,6 @@ namespace DreamBeam {
             this.Bible_Tab.Size = new System.Drawing.Size(648, 320);
             this.Bible_Tab.TabIndex = 3;
             this.Bible_Tab.Text = "Bible";
-            // 
-            // songThemeWidget
-            // 
-            this.songThemeWidget.Location = new System.Drawing.Point(24, 70);
-            this.songThemeWidget.Name = "songThemeWidget";
-            this.songThemeWidget.panelNames = new string[] {
-        "Title",
-        "Verse",
-        "Author"};
-            this.songThemeWidget.Size = new System.Drawing.Size(619, 312);
-            this.songThemeWidget.TabIndex = 9;
             // 
             // SwordLangGroupBox
             // 
@@ -1146,308 +1061,30 @@ namespace DreamBeam {
             // 
             // SongFormat_Tab
             // 
-            this.SongFormat_Tab.Controls.Add(this.OpenSongFormatButton);
-            this.SongFormat_Tab.Controls.Add(this.SaveSongFormatButton);
-            this.SongFormat_Tab.Controls.Add(this.tabControl2);
-            this.SongFormat_Tab.Controls.Add(this.groupBox3);
+            this.SongFormat_Tab.Controls.Add(this.songThemeWidget);
             this.SongFormat_Tab.Location = new System.Drawing.Point(4, 22);
             this.SongFormat_Tab.Name = "SongFormat_Tab";
             this.SongFormat_Tab.Size = new System.Drawing.Size(648, 320);
             this.SongFormat_Tab.TabIndex = 6;
             this.SongFormat_Tab.Text = "Song Format";
             // 
-            // OpenSongFormatButton
-            // 
-            this.OpenSongFormatButton.Location = new System.Drawing.Point(425, 95);
-            this.OpenSongFormatButton.Name = "OpenSongFormatButton";
-            this.OpenSongFormatButton.Size = new System.Drawing.Size(75, 23);
-            this.OpenSongFormatButton.TabIndex = 3;
-            this.OpenSongFormatButton.Text = "Open...";
-            this.OpenSongFormatButton.UseVisualStyleBackColor = true;
-            this.OpenSongFormatButton.Click += new System.EventHandler(this.OpenSongFormatButton_Click);
-            // 
-            // SaveSongFormatButton
-            // 
-            this.SaveSongFormatButton.Location = new System.Drawing.Point(425, 66);
-            this.SaveSongFormatButton.Name = "SaveSongFormatButton";
-            this.SaveSongFormatButton.Size = new System.Drawing.Size(75, 23);
-            this.SaveSongFormatButton.TabIndex = 2;
-            this.SaveSongFormatButton.Text = "Save As...";
-            this.SaveSongFormatButton.UseVisualStyleBackColor = true;
-            this.SaveSongFormatButton.Click += new System.EventHandler(this.SaveSongFormatButton_Click);
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Controls.Add(this.SongFormat_Title_Tab);
-            this.tabControl2.Controls.Add(this.SongFormat_Verse_Tab);
-            this.tabControl2.Controls.Add(this.SongFormat_Author_Tab);
-            this.tabControl2.Location = new System.Drawing.Point(10, 66);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(400, 233);
-            this.tabControl2.TabIndex = 1;
-            // 
-            // SongFormat_Title_Tab
-            // 
-            this.SongFormat_Title_Tab.Controls.Add(this.SongTitle_TextFormat);
-            this.SongFormat_Title_Tab.Location = new System.Drawing.Point(4, 22);
-            this.SongFormat_Title_Tab.Name = "SongFormat_Title_Tab";
-            this.SongFormat_Title_Tab.Size = new System.Drawing.Size(392, 207);
-            this.SongFormat_Title_Tab.TabIndex = 0;
-            this.SongFormat_Title_Tab.Text = "Title (header)";
-            // 
-            // SongTitle_TextFormat
-            // 
-            this.SongTitle_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SongTitle_TextFormat.Location = new System.Drawing.Point(0, 0);
-            this.SongTitle_TextFormat.Name = "SongTitle_TextFormat";
-            this.SongTitle_TextFormat.Size = new System.Drawing.Size(392, 207);
-            this.SongTitle_TextFormat.TabIndex = 0;
-            // 
-            // SongFormat_Verse_Tab
-            // 
-            this.SongFormat_Verse_Tab.Controls.Add(this.SongVerse_TextFormat);
-            this.SongFormat_Verse_Tab.Location = new System.Drawing.Point(4, 22);
-            this.SongFormat_Verse_Tab.Name = "SongFormat_Verse_Tab";
-            this.SongFormat_Verse_Tab.Size = new System.Drawing.Size(392, 207);
-            this.SongFormat_Verse_Tab.TabIndex = 1;
-            this.SongFormat_Verse_Tab.Text = "Verse";
-            // 
-            // SongVerse_TextFormat
-            // 
-            this.SongVerse_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SongVerse_TextFormat.Location = new System.Drawing.Point(0, 0);
-            this.SongVerse_TextFormat.Name = "SongVerse_TextFormat";
-            this.SongVerse_TextFormat.Size = new System.Drawing.Size(392, 207);
-            this.SongVerse_TextFormat.TabIndex = 0;
-            // 
-            // SongFormat_Author_Tab
-            // 
-            this.SongFormat_Author_Tab.Controls.Add(this.SongAuthor_TextFormat);
-            this.SongFormat_Author_Tab.Location = new System.Drawing.Point(4, 22);
-            this.SongFormat_Author_Tab.Name = "SongFormat_Author_Tab";
-            this.SongFormat_Author_Tab.Size = new System.Drawing.Size(392, 207);
-            this.SongFormat_Author_Tab.TabIndex = 2;
-            this.SongFormat_Author_Tab.Text = "Author (footer)";
-            // 
-            // SongAuthor_TextFormat
-            // 
-            this.SongAuthor_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SongAuthor_TextFormat.Location = new System.Drawing.Point(0, 0);
-            this.SongAuthor_TextFormat.Name = "SongAuthor_TextFormat";
-            this.SongAuthor_TextFormat.Size = new System.Drawing.Size(392, 207);
-            this.SongAuthor_TextFormat.TabIndex = 0;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.SongBGImageBrowse);
-            this.groupBox3.Controls.Add(this.SongBGImagePath);
-            this.groupBox3.Location = new System.Drawing.Point(10, 10);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(400, 48);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Default Background Image";
-            // 
-            // SongBGImageBrowse
-            // 
-            this.SongBGImageBrowse.Location = new System.Drawing.Point(318, 20);
-            this.SongBGImageBrowse.Name = "SongBGImageBrowse";
-            this.SongBGImageBrowse.Size = new System.Drawing.Size(75, 23);
-            this.SongBGImageBrowse.TabIndex = 1;
-            this.SongBGImageBrowse.Text = "Browse...";
-            this.SongBGImageBrowse.Click += new System.EventHandler(this.SongBGImageBrowse_Click);
-            // 
-            // SongBGImagePath
-            // 
-            this.SongBGImagePath.Location = new System.Drawing.Point(10, 20);
-            this.SongBGImagePath.Name = "SongBGImagePath";
-            this.SongBGImagePath.Size = new System.Drawing.Size(300, 20);
-            this.SongBGImagePath.TabIndex = 0;
-            // 
             // BibleFormat_Tab
             // 
-            this.BibleFormat_Tab.Controls.Add(this.groupBox2);
-            this.BibleFormat_Tab.Controls.Add(this.tabControl1);
+            this.BibleFormat_Tab.Controls.Add(this.bibleFormatWidget);
             this.BibleFormat_Tab.Location = new System.Drawing.Point(4, 22);
             this.BibleFormat_Tab.Name = "BibleFormat_Tab";
             this.BibleFormat_Tab.Size = new System.Drawing.Size(648, 320);
             this.BibleFormat_Tab.TabIndex = 5;
             this.BibleFormat_Tab.Text = "Bible Format";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.BibleBGImageBrowse);
-            this.groupBox2.Controls.Add(this.BibleBGImagePath);
-            this.groupBox2.Location = new System.Drawing.Point(10, 10);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(400, 48);
-            this.groupBox2.TabIndex = 12;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Default Background Image";
-            // 
-            // BibleBGImageBrowse
-            // 
-            this.BibleBGImageBrowse.Location = new System.Drawing.Point(318, 20);
-            this.BibleBGImageBrowse.Name = "BibleBGImageBrowse";
-            this.BibleBGImageBrowse.Size = new System.Drawing.Size(75, 23);
-            this.BibleBGImageBrowse.TabIndex = 1;
-            this.BibleBGImageBrowse.Text = "Browse...";
-            this.BibleBGImageBrowse.Click += new System.EventHandler(this.BibleBGImageBrowse_Click);
-            // 
-            // BibleBGImagePath
-            // 
-            this.BibleBGImagePath.Location = new System.Drawing.Point(10, 20);
-            this.BibleBGImagePath.Name = "BibleBGImagePath";
-            this.BibleBGImagePath.Size = new System.Drawing.Size(300, 20);
-            this.BibleBGImagePath.TabIndex = 0;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.ItemSize = new System.Drawing.Size(62, 18);
-            this.tabControl1.Location = new System.Drawing.Point(10, 66);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(400, 233);
-            this.tabControl1.TabIndex = 11;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.BibleRef_TextFormat);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(392, 207);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "Reference";
-            // 
-            // BibleRef_TextFormat
-            // 
-            this.BibleRef_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BibleRef_TextFormat.Location = new System.Drawing.Point(0, 0);
-            this.BibleRef_TextFormat.Name = "BibleRef_TextFormat";
-            this.BibleRef_TextFormat.Size = new System.Drawing.Size(392, 207);
-            this.BibleRef_TextFormat.TabIndex = 0;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.BibleVerse_TextFormat);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(392, 207);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Verse";
-            // 
-            // BibleVerse_TextFormat
-            // 
-            this.BibleVerse_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BibleVerse_TextFormat.Location = new System.Drawing.Point(0, 0);
-            this.BibleVerse_TextFormat.Name = "BibleVerse_TextFormat";
-            this.BibleVerse_TextFormat.Size = new System.Drawing.Size(392, 207);
-            this.BibleVerse_TextFormat.TabIndex = 0;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.BibleTransl_TextFormat);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(392, 207);
-            this.tabPage5.TabIndex = 2;
-            this.tabPage5.Text = "Translation";
-            // 
-            // BibleTransl_TextFormat
-            // 
-            this.BibleTransl_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BibleTransl_TextFormat.Location = new System.Drawing.Point(0, 0);
-            this.BibleTransl_TextFormat.Name = "BibleTransl_TextFormat";
-            this.BibleTransl_TextFormat.Size = new System.Drawing.Size(392, 207);
-            this.BibleTransl_TextFormat.TabIndex = 0;
-            // 
             // TextToolFormat_Tab
             // 
-            this.TextToolFormat_Tab.Controls.Add(this.groupBox4);
-            this.TextToolFormat_Tab.Controls.Add(this.tabControl3);
+            this.TextToolFormat_Tab.Controls.Add(this.sermonThemeWidget);
             this.TextToolFormat_Tab.Location = new System.Drawing.Point(4, 22);
             this.TextToolFormat_Tab.Name = "TextToolFormat_Tab";
             this.TextToolFormat_Tab.Size = new System.Drawing.Size(648, 320);
             this.TextToolFormat_Tab.TabIndex = 7;
             this.TextToolFormat_Tab.Text = "Sermon Tool Format";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox4.Controls.Add(this.TextBGImageBrowse);
-            this.groupBox4.Controls.Add(this.TextBGImagePath);
-            this.groupBox4.Location = new System.Drawing.Point(10, 10);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(400, 48);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Default Background Image";
-            // 
-            // TextBGImageBrowse
-            // 
-            this.TextBGImageBrowse.Location = new System.Drawing.Point(318, 20);
-            this.TextBGImageBrowse.Name = "TextBGImageBrowse";
-            this.TextBGImageBrowse.Size = new System.Drawing.Size(75, 23);
-            this.TextBGImageBrowse.TabIndex = 1;
-            this.TextBGImageBrowse.Text = "Browse...";
-            this.TextBGImageBrowse.Click += new System.EventHandler(this.TextBGImageBrowse_Click);
-            // 
-            // TextBGImagePath
-            // 
-            this.TextBGImagePath.Location = new System.Drawing.Point(10, 20);
-            this.TextBGImagePath.Name = "TextBGImagePath";
-            this.TextBGImagePath.Size = new System.Drawing.Size(300, 20);
-            this.TextBGImagePath.TabIndex = 0;
-            // 
-            // tabControl3
-            // 
-            this.tabControl3.Controls.Add(this.tabPage6);
-            this.tabControl3.Controls.Add(this.tabPage7);
-            this.tabControl3.Location = new System.Drawing.Point(10, 66);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(400, 233);
-            this.tabControl3.TabIndex = 0;
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.TextTool_1stLine_TextFormat);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(392, 207);
-            this.tabPage6.TabIndex = 0;
-            this.tabPage6.Text = "1st Line";
-            // 
-            // TextTool_1stLine_TextFormat
-            // 
-            this.TextTool_1stLine_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextTool_1stLine_TextFormat.Location = new System.Drawing.Point(0, 0);
-            this.TextTool_1stLine_TextFormat.Name = "TextTool_1stLine_TextFormat";
-            this.TextTool_1stLine_TextFormat.Size = new System.Drawing.Size(392, 207);
-            this.TextTool_1stLine_TextFormat.TabIndex = 0;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.TextTool_OtherLines_TextFormat);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(392, 207);
-            this.tabPage7.TabIndex = 1;
-            this.tabPage7.Text = "Other Lines";
-            // 
-            // TextTool_OtherLines_TextFormat
-            // 
-            this.TextTool_OtherLines_TextFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextTool_OtherLines_TextFormat.Location = new System.Drawing.Point(0, 0);
-            this.TextTool_OtherLines_TextFormat.Name = "TextTool_OtherLines_TextFormat";
-            this.TextTool_OtherLines_TextFormat.Size = new System.Drawing.Size(392, 207);
-            this.TextTool_OtherLines_TextFormat.TabIndex = 0;
             // 
             // Options_Cancelbtn
             // 
@@ -1467,7 +1104,7 @@ namespace DreamBeam {
             this.Options_Okaybtn.Size = new System.Drawing.Size(75, 23);
             this.Options_Okaybtn.TabIndex = 2;
             this.Options_Okaybtn.Text = "OK";
-            this.Options_Okaybtn.Click += new System.EventHandler(this.Options_Okaybtn_Click);
+            this.Options_Okaybtn.Click += new System.EventHandler(this.Options_OkBtn_Click);
             // 
             // Options_DataSet
             // 
@@ -1475,6 +1112,38 @@ namespace DreamBeam {
             this.Options_DataSet.Locale = new System.Globalization.CultureInfo("en-US");
             this.Options_DataSet.Tables.AddRange(new System.Data.DataTable[] {
             this.Options_RegEx_Table});
+            // 
+            // songThemeWidget
+            // 
+            this.songThemeWidget.Location = new System.Drawing.Point(0, 0);
+            this.songThemeWidget.Name = "songThemeWidget";
+            this.songThemeWidget.panelNames = new string[] {
+        "Title",
+        "Verse",
+        "Author"};
+            this.songThemeWidget.Size = new System.Drawing.Size(619, 312);
+            this.songThemeWidget.TabIndex = 0;
+            // 
+            // bibleFormatWidget
+            // 
+            this.bibleFormatWidget.Location = new System.Drawing.Point(0, 0);
+            this.bibleFormatWidget.Name = "bibleFormatWidget";
+            this.bibleFormatWidget.panelNames = new string[] {
+        "Reference",
+        "Verse",
+        "Translation"};
+            this.bibleFormatWidget.Size = new System.Drawing.Size(619, 312);
+            this.bibleFormatWidget.TabIndex = 0;
+            // 
+            // sermonThemeWidget
+            // 
+            this.sermonThemeWidget.Location = new System.Drawing.Point(0, 0);
+            this.sermonThemeWidget.Name = "sermonThemeWidget";
+            this.sermonThemeWidget.panelNames = new string[] {
+        "1st line",
+        "Other lines"};
+            this.sermonThemeWidget.Size = new System.Drawing.Size(619, 312);
+            this.sermonThemeWidget.TabIndex = 0;
             // 
             // Options
             // 
@@ -1524,30 +1193,17 @@ namespace DreamBeam {
             this.Grafics_Outline.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OutlineSize_UpDown1)).EndInit();
             this.SongFormat_Tab.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
-            this.SongFormat_Title_Tab.ResumeLayout(false);
-            this.SongFormat_Verse_Tab.ResumeLayout(false);
-            this.SongFormat_Author_Tab.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.BibleFormat_Tab.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
             this.TextToolFormat_Tab.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.tabControl3.ResumeLayout(false);
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Options_DataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
         #endregion
+
+        private ThemeWidget songThemeWidget;
+        private ThemeWidget bibleFormatWidget;
+        private ThemeWidget sermonThemeWidget;
 
     }
 }

@@ -29,6 +29,16 @@ namespace DreamBeam {
             }
         }
 
+        public void set(Theme other) {
+            if (other == null || other.TextFormat == null) return;
+
+            this.BGImagePath = other.BGImagePath;
+            int formats = Math.Min(this.TextFormat.Length, other.TextFormat.Length);
+            for (int i = 0; i < formats; i++) {
+                TextFormat[i] = other.TextFormat[i];
+            }
+        }
+
         public static Theme OpenFile(string FileDialogFilter, Type type) {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.DefaultExt = "xml";

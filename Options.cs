@@ -17,7 +17,6 @@ namespace DreamBeam {
 		public Config Conf;
 		private Language Lang = new Language();
 		public MainForm _MainForm = null;
-		private const string ImageFileFilter = "Image Files (*.bmp;*.jpg;*.jpeg;*.png;*.gif)|*.bmp;*.jpg;*.jpeg;*.png;*.gif|All files (*.*)|*.*";
 
         public Options(MainForm mainForm) {
 			_MainForm = mainForm;
@@ -47,7 +46,7 @@ namespace DreamBeam {
             base.Dispose(disposing);
         }
 
-		private void Options_Okaybtn_Click(object sender, System.EventArgs e) {
+		private void Options_OkBtn_Click(object sender, System.EventArgs e) {
 			this.Conf.Alphablending = this.Alpha_CheckBox.Checked;
 			this.Conf.PreRender = this.PreRendercheckBox.Checked;
 			this.Conf.BlendSpeed = (int)Speed_Updown.Value;
@@ -95,27 +94,10 @@ namespace DreamBeam {
 			}
 
 			Conf.RememberPanelLocations = this.Options_PanelLocations_checkBox.Checked;
-			Conf.BibleBGImagePath = this.BibleBGImagePath.Text;
-			Conf.SongBGImagePath = this.SongBGImagePath.Text;
-			Conf.TextBGImagePath = this.TextBGImagePath.Text;
-			
-			// It is possible we deserialized the Conf object and there was no BibleTextFormat array.
-			// This would normally happen when someone edited the file by hand and removed sections.
-			try {
-				Conf.BibleTextFormat[ (int)BibleTextType.Reference ] = this.BibleRef_TextFormat.Format;
-				Conf.BibleTextFormat[ (int)BibleTextType.Verse ] = this.BibleVerse_TextFormat.Format;
-				Conf.BibleTextFormat[ (int)BibleTextType.Translation ] = this.BibleTransl_TextFormat.Format;
 
-				Conf.SongTextFormat[ (int)SongTextType.Title ] = this.SongTitle_TextFormat.Format;
-				Conf.SongTextFormat[ (int)SongTextType.Author ] = this.SongAuthor_TextFormat.Format;
-				Conf.SongTextFormat[ (int)SongTextType.Verse ] = this.SongVerse_TextFormat.Format;
-
-				Conf.SermonTextFormat[ (int)TextToolType.FirstLine ] = this.TextTool_1stLine_TextFormat.Format;
-				Conf.SermonTextFormat[ (int)TextToolType.OtherLines ] = this.TextTool_OtherLines_TextFormat.Format;
-			} catch {
-				// We probably got a null exception, or index out of range. Re-initialize.
-				Conf.Init();
-			}
+            Conf.theme.Song.set(this.songThemeWidget.Theme);
+            Conf.theme.Bible.set(this.bibleFormatWidget.Theme);
+            Conf.theme.Sermon.set(this.sermonThemeWidget.Theme);
 
 			#region Update Preview display chain with the new background image
 			IContentOperations content = _MainForm.DisplayPreview.content;
@@ -218,24 +200,24 @@ namespace DreamBeam {
             }
 
 			this.Options_PanelLocations_checkBox.Checked = this.Conf.RememberPanelLocations;
-			this.BibleBGImagePath.Text = this.Conf.BibleBGImagePath;
-			this.SongBGImagePath.Text = this.Conf.SongBGImagePath;
-			this.TextBGImagePath.Text = this.Conf.TextBGImagePath;
+            //this.BibleBGImagePath.Text = this.Conf.BibleBGImagePath;
+            //this.SongBGImagePath.Text = this.Conf.SongBGImagePath;
+            //this.TextBGImagePath.Text = this.Conf.TextBGImagePath;
 
-			if (this.Conf.BibleTextFormat != null & this.Conf.BibleTextFormat.Length == Enum.GetValues(typeof(BibleTextType)).Length) {
-				this.BibleRef_TextFormat.Format = Conf.BibleTextFormat[ (int)BibleTextType.Reference ];
-				this.BibleVerse_TextFormat.Format = Conf.BibleTextFormat[ (int)BibleTextType.Verse ];
-				this.BibleTransl_TextFormat.Format = Conf.BibleTextFormat[ (int)BibleTextType.Translation ];
-			}
-			if (this.Conf.SongTextFormat != null & this.Conf.SongTextFormat.Length == Enum.GetValues(typeof(SongTextType)).Length) {
-				this.SongTitle_TextFormat.Format = Conf.SongTextFormat[ (int)SongTextType.Title ];
-				this.SongVerse_TextFormat.Format = Conf.SongTextFormat[ (int)SongTextType.Verse ];
-				this.SongAuthor_TextFormat.Format = Conf.SongTextFormat[ (int)SongTextType.Author ];
-			}
-			if (this.Conf.SermonTextFormat != null & this.Conf.SermonTextFormat.Length == Enum.GetValues(typeof(TextToolType)).Length) {
-				this.TextTool_1stLine_TextFormat.Format = Conf.SermonTextFormat[ (int)TextToolType.FirstLine ];
-				this.TextTool_OtherLines_TextFormat.Format = Conf.SermonTextFormat[ (int)TextToolType.OtherLines ];
-			}
+            //if (this.Conf.BibleTextFormat != null & this.Conf.BibleTextFormat.Length == Enum.GetValues(typeof(BibleTextType)).Length) {
+            //    this.BibleRef_TextFormat.Format = Conf.BibleTextFormat[ (int)BibleTextType.Reference ];
+            //    this.BibleVerse_TextFormat.Format = Conf.BibleTextFormat[ (int)BibleTextType.Verse ];
+            //    this.BibleTransl_TextFormat.Format = Conf.BibleTextFormat[ (int)BibleTextType.Translation ];
+            //}
+            //if (this.Conf.SongTextFormat != null & this.Conf.SongTextFormat.Length == Enum.GetValues(typeof(SongTextType)).Length) {
+            //    this.SongTitle_TextFormat.Format = Conf.SongTextFormat[ (int)SongTextType.Title ];
+            //    this.SongVerse_TextFormat.Format = Conf.SongTextFormat[ (int)SongTextType.Verse ];
+            //    this.SongAuthor_TextFormat.Format = Conf.SongTextFormat[ (int)SongTextType.Author ];
+            //}
+            //if (this.Conf.SermonTextFormat != null & this.Conf.SermonTextFormat.Length == Enum.GetValues(typeof(TextToolType)).Length) {
+            //    this.TextTool_1stLine_TextFormat.Format = Conf.SermonTextFormat[ (int)TextToolType.FirstLine ];
+            //    this.TextTool_OtherLines_TextFormat.Format = Conf.SermonTextFormat[ (int)TextToolType.OtherLines ];
+            //}
 
 			this.ServerAddress.Text = this.Conf.ServerAddress;
 			this.ListeningPort.Value = this.Conf.ListeningPort;
@@ -256,12 +238,16 @@ namespace DreamBeam {
 			}
 
             //this.songThemeWidget.setTabs(new string[] {"Title", "Verse", "Author"});
-            SongTheme theme = new SongTheme();
-            theme.BGImagePath = this.SongBGImagePath.Text;
-            theme.TextFormat[(int)SongTextType.Title] = this.SongTitle_TextFormat.Format;
-            theme.TextFormat[(int)SongTextType.Author] = this.SongAuthor_TextFormat.Format;
-            theme.TextFormat[(int)SongTextType.Verse] = this.SongVerse_TextFormat.Format;
-            this.songThemeWidget.Theme = theme;
+            //SongTheme theme = new SongTheme();
+            //theme.BGImagePath = this.SongBGImagePath.Text;
+            //theme.TextFormat[(int)SongTextType.Title] = this.SongTitle_TextFormat.Format;
+            //theme.TextFormat[(int)SongTextType.Author] = this.SongAuthor_TextFormat.Format;
+            //theme.TextFormat[(int)SongTextType.Verse] = this.SongVerse_TextFormat.Format;
+            //this.songThemeWidget.Theme = theme;
+
+            this.songThemeWidget.Theme = Conf.theme.Song as Theme;
+            this.bibleFormatWidget.Theme = Conf.theme.Bible as Theme;
+            this.sermonThemeWidget.Theme = Conf.theme.Sermon as Theme;
         }
 
         private void Options_Cancelbtn_Click(object sender, System.EventArgs e) {
@@ -475,30 +461,6 @@ namespace DreamBeam {
 		#endregion
 
 
-		private void BibleBGImageBrowse_Click(object sender, System.EventArgs e) {
-			this.openFileDialog1.Filter = ImageFileFilter;
-            this.openFileDialog1.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Backgrounds");
-            if (this.openFileDialog1.ShowDialog() != DialogResult.Cancel) {
-				this.BibleBGImagePath.Text = this.openFileDialog1.FileName;
-			}
-		}
-
-		private void SongBGImageBrowse_Click(object sender, System.EventArgs e) {
-			this.openFileDialog1.Filter = ImageFileFilter;
-            this.openFileDialog1.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Backgrounds");
-			if (this.openFileDialog1.ShowDialog() != DialogResult.Cancel) {
-				this.SongBGImagePath.Text = this.openFileDialog1.FileName;
-			}
-		}
-
-		private void TextBGImageBrowse_Click(object sender, System.EventArgs e) {
-			this.openFileDialog1.Filter = ImageFileFilter;
-            this.openFileDialog1.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Backgrounds");
-            if (this.openFileDialog1.ShowDialog() != DialogResult.Cancel) {
-				this.TextBGImagePath.Text = this.openFileDialog1.FileName;
-			}		
-		}
-
 		protected void SizeColumns(DataGrid grid) {
 			Graphics g = CreateGraphics();  
 
@@ -563,25 +525,6 @@ namespace DreamBeam {
 				}
 			}
 		}
-
-        private void SaveSongFormatButton_Click(object sender, EventArgs e) {
-            SongTheme theme = new SongTheme();
-            theme.BGImagePath = this.SongBGImagePath.Text;
-            theme.TextFormat[(int)SongTextType.Title] = this.SongTitle_TextFormat.Format;
-            theme.TextFormat[(int)SongTextType.Author] = this.SongAuthor_TextFormat.Format;
-            theme.TextFormat[(int)SongTextType.Verse] = this.SongVerse_TextFormat.Format;
-            theme.SaveAs();
-        }
-
-        private void OpenSongFormatButton_Click(object sender, EventArgs e) {
-            SongTheme theme = SongTheme.OpenFile();
-            if (theme == null) return;
-
-            this.SongBGImagePath.Text = theme.BGImagePath;
-            this.SongTitle_TextFormat.Format = theme.TextFormat[(int)SongTextType.Title];
-            this.SongAuthor_TextFormat.Format = theme.TextFormat[(int)SongTextType.Author];
-            this.SongVerse_TextFormat.Format = theme.TextFormat[(int)SongTextType.Verse];
-        }
 
 	}
 }

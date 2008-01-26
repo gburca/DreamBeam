@@ -23,16 +23,15 @@ namespace DreamBeam {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThemeWidget));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.bgImageBrowse = new System.Windows.Forms.Button();
             this.BgImagePath = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textFormatOptions1 = new DreamBeam.TextFormatOptions();
             this.saveAsBtn = new System.Windows.Forms.Button();
             this.openBtn = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.textFormatOptions1 = new DreamBeam.TextFormatOptions();
             this.groupBox1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -58,6 +57,7 @@ namespace DreamBeam {
             this.bgImageBrowse.TabIndex = 1;
             this.bgImageBrowse.Text = "Browse...";
             this.bgImageBrowse.UseVisualStyleBackColor = true;
+            this.bgImageBrowse.Click += new System.EventHandler(this.bgImageBrowse_Click);
             // 
             // BgImagePath
             // 
@@ -86,14 +86,6 @@ namespace DreamBeam {
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // textFormatOptions1
-            // 
-            //this.textFormatOptions1.Format = ((DreamBeam.BeamTextFormat)(resources.GetObject("textFormatOptions1.Format")));
-            this.textFormatOptions1.Location = new System.Drawing.Point(6, 5);
-            this.textFormatOptions1.Name = "textFormatOptions1";
-            this.textFormatOptions1.Size = new System.Drawing.Size(392, 206);
-            this.textFormatOptions1.TabIndex = 0;
-            // 
             // saveAsBtn
             // 
             this.saveAsBtn.Location = new System.Drawing.Point(429, 80);
@@ -102,6 +94,7 @@ namespace DreamBeam {
             this.saveAsBtn.TabIndex = 2;
             this.saveAsBtn.Text = "Save As...";
             this.saveAsBtn.UseVisualStyleBackColor = true;
+            this.saveAsBtn.Click += new System.EventHandler(this.saveAsBtn_Click);
             // 
             // openBtn
             // 
@@ -111,6 +104,7 @@ namespace DreamBeam {
             this.openBtn.TabIndex = 3;
             this.openBtn.Text = "Open...";
             this.openBtn.UseVisualStyleBackColor = true;
+            this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
             // 
             // pictureBox
             // 
@@ -120,6 +114,13 @@ namespace DreamBeam {
             this.pictureBox.Size = new System.Drawing.Size(176, 166);
             this.pictureBox.TabIndex = 4;
             this.pictureBox.TabStop = false;
+            // 
+            // textFormatOptions1
+            // 
+            this.textFormatOptions1.Location = new System.Drawing.Point(6, 5);
+            this.textFormatOptions1.Name = "textFormatOptions1";
+            this.textFormatOptions1.Size = new System.Drawing.Size(392, 206);
+            this.textFormatOptions1.TabIndex = 0;
             // 
             // ThemeWidget
             // 

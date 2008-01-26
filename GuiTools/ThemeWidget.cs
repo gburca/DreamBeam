@@ -5,9 +5,12 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DreamBeam {
     public partial class ThemeWidget : UserControl {
+        private const string ImageFileFilter = "Image Files (*.bmp;*.jpg;*.jpeg;*.png;*.gif)|*.bmp;*.jpg;*.jpeg;*.png;*.gif|All files (*.*)|*.*";
+
         public ThemeWidget() {
             InitializeComponent();
         }
@@ -61,6 +64,8 @@ namespace DreamBeam {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public Theme Theme {
             set {
+                if (value == null | value.TextFormat == null) return;
+
                 this.BgImagePath.Text = value.BGImagePath;
                 for (int i = 0; i < Math.Min(value.TextFormat.Length, tabControl.TabPages.Count); i++) {
                     getFormatControl(i).Format = value.TextFormat[i];
@@ -80,6 +85,26 @@ namespace DreamBeam {
         public string[] panelNames {
             set { setTabs(value); }
             get { return getTabs(); }
+        }
+
+        private void bgImageBrowse_Click(object sender, EventArgs e) {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ImageFileFilter;
+            ofd.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Backgrounds");
+            if (ofd.ShowDialog() != DialogResult.Cancel) {
+                this.BgImagePath.Text = ofd.FileName;
+            }
+        }
+
+        private void saveAsBtn_Click(object sender, EventArgs e) {
+            SongTheme theme = new SongTheme();
+            theme.set(this.Theme);
+            theme.SaveAs();
+        }
+
+        private void openBtn_Click(object sender, EventArgs e) {
+            SongTheme theme = SongTheme.OpenFile();
+            this.Theme = theme as Theme;
         }
  
     }
