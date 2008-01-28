@@ -96,10 +96,14 @@ namespace DreamBeam {
         }
 
         /// <summary>
-        /// This is the directory that contains the song files, backgrounds, etc...
+        /// This is the directory that contains the song files, backgrounds, configs, etc...
         /// 
         /// In Vista this can not be a subdirectory of "Program Files" due to
         /// permission issues after the SW is installed.
+        /// 
+        /// This directory is selected by the user during installation and will be
+        /// saved to the registry. It defaults to the same directory as the one
+        /// returned by Tools.GetCommonAppDataPath() unless the user changes it.
         /// </summary>
         /// <returns></returns>
         public static string GetAppDocPath()
@@ -121,6 +125,7 @@ namespace DreamBeam {
 
         /// <summary>
         /// This function should return the same thing that NSIS returns for $APPDATA\${PRODUCT}
+        /// Ex: D:\Profiles\All Users\Application Data\DreamBeam
         /// </summary>
         /// <returns>A place where the application should store data that is common among machine users.</returns>
         public static string GetCommonAppDataPath() {

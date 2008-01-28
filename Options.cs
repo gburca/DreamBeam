@@ -26,7 +26,7 @@ namespace DreamBeam {
 
 			PopulateBibleCacheTab();
 
-			string DataSetFile = Tools.GetCommonAppDataPath() + "/" + _MainForm.ConfigSet + ".dataset.config.xml";
+			string DataSetFile = Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".dataset.config.xml");
 			if (Tools.FileExists(DataSetFile)) {
 				this.Options_DataSet.ReadXml( DataSetFile, XmlReadMode.ReadSchema );
 			}
@@ -140,10 +140,10 @@ namespace DreamBeam {
 			}
 
 			Conf.Options_DataSet = this.Options_DataSet;
-			Directory.CreateDirectory( Tools.GetCommonAppDataPath() );
-			this.Options_DataSet.WriteXml( Path.Combine(Tools.GetCommonAppDataPath(), _MainForm.ConfigSet + ".dataset.config.xml"), XmlWriteMode.WriteSchema );
+			Directory.CreateDirectory( Tools.GetAppDocPath() );
+			this.Options_DataSet.WriteXml( Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".dataset.config.xml"), XmlWriteMode.WriteSchema );
 
-			Config.SerializeTo(this.Conf, _MainForm.ConfigSet + ".config.xml");
+			Config.SerializeTo(this.Conf, Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".config.xml"));
 			this.Close();
 		}
 
@@ -200,24 +200,6 @@ namespace DreamBeam {
             }
 
 			this.Options_PanelLocations_checkBox.Checked = this.Conf.RememberPanelLocations;
-            //this.BibleBGImagePath.Text = this.Conf.BibleBGImagePath;
-            //this.SongBGImagePath.Text = this.Conf.SongBGImagePath;
-            //this.TextBGImagePath.Text = this.Conf.TextBGImagePath;
-
-            //if (this.Conf.BibleTextFormat != null & this.Conf.BibleTextFormat.Length == Enum.GetValues(typeof(BibleTextType)).Length) {
-            //    this.BibleRef_TextFormat.Format = Conf.BibleTextFormat[ (int)BibleTextType.Reference ];
-            //    this.BibleVerse_TextFormat.Format = Conf.BibleTextFormat[ (int)BibleTextType.Verse ];
-            //    this.BibleTransl_TextFormat.Format = Conf.BibleTextFormat[ (int)BibleTextType.Translation ];
-            //}
-            //if (this.Conf.SongTextFormat != null & this.Conf.SongTextFormat.Length == Enum.GetValues(typeof(SongTextType)).Length) {
-            //    this.SongTitle_TextFormat.Format = Conf.SongTextFormat[ (int)SongTextType.Title ];
-            //    this.SongVerse_TextFormat.Format = Conf.SongTextFormat[ (int)SongTextType.Verse ];
-            //    this.SongAuthor_TextFormat.Format = Conf.SongTextFormat[ (int)SongTextType.Author ];
-            //}
-            //if (this.Conf.SermonTextFormat != null & this.Conf.SermonTextFormat.Length == Enum.GetValues(typeof(TextToolType)).Length) {
-            //    this.TextTool_1stLine_TextFormat.Format = Conf.SermonTextFormat[ (int)TextToolType.FirstLine ];
-            //    this.TextTool_OtherLines_TextFormat.Format = Conf.SermonTextFormat[ (int)TextToolType.OtherLines ];
-            //}
 
 			this.ServerAddress.Text = this.Conf.ServerAddress;
 			this.ListeningPort.Value = this.Conf.ListeningPort;
@@ -236,14 +218,6 @@ namespace DreamBeam {
 			if ( !Tools.StringIsNullOrEmpty(this.Sword_LanguageBox.Text) ) {
 				SetBibleLocale(this._MainForm.bibles, this.Conf.SwordPath, this.Sword_LanguageBox.Text);
 			}
-
-            //this.songThemeWidget.setTabs(new string[] {"Title", "Verse", "Author"});
-            //SongTheme theme = new SongTheme();
-            //theme.BGImagePath = this.SongBGImagePath.Text;
-            //theme.TextFormat[(int)SongTextType.Title] = this.SongTitle_TextFormat.Format;
-            //theme.TextFormat[(int)SongTextType.Author] = this.SongAuthor_TextFormat.Format;
-            //theme.TextFormat[(int)SongTextType.Verse] = this.SongVerse_TextFormat.Format;
-            //this.songThemeWidget.Theme = theme;
 
             this.songThemeWidget.Theme = Conf.theme.Song as Theme;
             this.bibleFormatWidget.Theme = Conf.theme.Bible as Theme;

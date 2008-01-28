@@ -8,7 +8,7 @@ using System.Drawing;
 namespace DreamBeam {
 
     [Serializable()]
-    public class Theme {
+    public abstract class Theme {
         public string Version;
         public string BGImagePath = null;
         public BeamTextFormat[] TextFormat;
@@ -54,6 +54,8 @@ namespace DreamBeam {
                 return null;
             }
         }
+
+        public abstract void SaveAs();
 
         public void SaveAs(string FileDialogFilter) {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -143,7 +145,7 @@ namespace DreamBeam {
         public static BibleTheme OpenFile() {
             return Theme.OpenFile(FileDialogFilter, typeof(BibleTheme)) as BibleTheme;
         }
-        public void SaveAs() {
+        public override void SaveAs() {
             SaveAs(FileDialogFilter);
         }
     }
@@ -164,7 +166,7 @@ namespace DreamBeam {
         public static SongTheme OpenFile() {
             return Theme.OpenFile(FileDialogFilter, typeof(SongTheme)) as SongTheme;
         }
-        public void SaveAs() {
+        public override void SaveAs() {
             SaveAs(FileDialogFilter);
         }
     }
@@ -184,7 +186,7 @@ namespace DreamBeam {
         public static SermonTheme OpenFile() {
             return Theme.OpenFile(FileDialogFilter, typeof(SermonTheme)) as SermonTheme;
         }
-        public void SaveAs() {
+        public override void SaveAs() {
             SaveAs(FileDialogFilter);
         }
     }

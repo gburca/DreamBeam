@@ -1117,7 +1117,7 @@ namespace DreamBeam {
             // 
             this.songThemeWidget.Location = new System.Drawing.Point(0, 0);
             this.songThemeWidget.Name = "songThemeWidget";
-            this.songThemeWidget.panelNames = new string[] {
+            this.songThemeWidget.TabNames = new string[] {
         "Title",
         "Verse",
         "Author"};
@@ -1128,7 +1128,7 @@ namespace DreamBeam {
             // 
             this.bibleFormatWidget.Location = new System.Drawing.Point(0, 0);
             this.bibleFormatWidget.Name = "bibleFormatWidget";
-            this.bibleFormatWidget.panelNames = new string[] {
+            this.bibleFormatWidget.TabNames = new string[] {
         "Reference",
         "Verse",
         "Translation"};
@@ -1139,7 +1139,7 @@ namespace DreamBeam {
             // 
             this.sermonThemeWidget.Location = new System.Drawing.Point(0, 0);
             this.sermonThemeWidget.Name = "sermonThemeWidget";
-            this.sermonThemeWidget.panelNames = new string[] {
+            this.sermonThemeWidget.TabNames = new string[] {
         "1st line",
         "Other lines"};
             this.sermonThemeWidget.Size = new System.Drawing.Size(619, 312);

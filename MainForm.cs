@@ -468,7 +468,8 @@ namespace DreamBeam {
 			if (CommandLine["console"] != null) { Tools.AllocConsole(); }
 
 			bibleLibFile = Path.Combine(Tools.GetAppCachePath(), "BibleLib.bin");
-			this.Config = (Config)Config.DeserializeFrom(new Config(), ConfigSet + ".config.xml");
+			this.Config = (Config)Config.DeserializeFrom(new Config(), 
+                Path.Combine(Tools.GetAppDocPath(), ConfigSet + ".config.xml"));
 
 			ShowBeam.LogFile = new LogFile(ConfigSet);
 
@@ -564,7 +565,7 @@ namespace DreamBeam {
 				Application.Run(new MainForm(args));
 			} catch (Exception e) {
 				StreamWriter SW;
-				SW=File.AppendText(Path.Combine(Tools.GetCommonAppDataPath(), "LogFile.txt"));
+				SW=File.AppendText(Path.Combine(Tools.GetAppDocPath(), "LogFile.txt"));
 				SW.WriteLine(e.Message);
 				SW.WriteLine(e.StackTrace);
 				if (e.InnerException != null) {

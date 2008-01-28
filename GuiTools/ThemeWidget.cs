@@ -10,13 +10,14 @@ using System.IO;
 namespace DreamBeam {
     public partial class ThemeWidget : UserControl {
         private const string ImageFileFilter = "Image Files (*.bmp;*.jpg;*.jpeg;*.png;*.gif)|*.bmp;*.jpg;*.jpeg;*.png;*.gif|All files (*.*)|*.*";
+        private Theme theme = null;
 
         public ThemeWidget() {
             InitializeComponent();
         }
 
         public ThemeWidget(string[] tabNames) : this() {
-            setTabs(tabNames);
+            setTabNames(tabNames);
         }
 
         /// <summary>
@@ -24,13 +25,13 @@ namespace DreamBeam {
         /// strings in the tabNames array.
         /// </summary>
         /// <param name="tabNames">The tab names to use</param>
-        public void setTabs(string[] tabNames) {
+        public void setTabNames(string[] tabNames) {
             this.SuspendLayout();
             tabControl.Controls.Clear();
 
             foreach (string tn in tabNames) {
                 TextFormatOptions textOpt = new TextFormatOptions();
-                textOpt.Location = new Point(6, 5);
+                textOpt.Location = new Point(0, 0);
                 //textOpt.Size = new Point(392, 206);
 
                 TabPage tabPage = new TabPage();
@@ -42,7 +43,7 @@ namespace DreamBeam {
             this.ResumeLayout(false);
         }
 
-        public string[] getTabs() {
+        public string[] getTabNames() {
             int tabs = tabControl.TabPages.Count;
             string[] names = new string[tabs];
             for (int i = 0; i < tabs; i++) {
@@ -70,21 +71,22 @@ namespace DreamBeam {
                 for (int i = 0; i < Math.Min(value.TextFormat.Length, tabControl.TabPages.Count); i++) {
                     getFormatControl(i).Format = value.TextFormat[i];
                 }
+                this.theme = value;
             }
             get {
                 int tabs = tabControl.TabPages.Count;
-                Theme t = new Theme(tabs);
-                t.BGImagePath = BgImagePath.Text;
-                for (int i = 0; i < tabs; i++) {
-                    t.TextFormat[i] = getFormatControl(i).Format;
+                if (theme == null) theme = new SongTheme();
+                theme.BGImagePath = BgImagePath.Text;
+                for (int i = 0; i < Math.Min(tabs, theme.TextFormat.Length); i++) {
+                    theme.TextFormat[i] = getFormatControl(i).Format;
                 }
-                return t;
+                return theme;
             }
         }
  
-        public string[] panelNames {
-            set { setTabs(value); }
-            get { return getTabs(); }
+        public string[] TabNames {
+            set { setTabNames(value); }
+            get { return getTabNames(); }
         }
 
         private void bgImageBrowse_Click(object sender, EventArgs e) {
@@ -97,14 +99,21 @@ namespace DreamBeam {
         }
 
         private void saveAsBtn_Click(object sender, EventArgs e) {
-            SongTheme theme = new SongTheme();
-            theme.set(this.Theme);
-            theme.SaveAs();
+            this.Theme.SaveAs();
         }
 
         private void openBtn_Click(object sender, EventArgs e) {
-            SongTheme theme = SongTheme.OpenFile();
-            this.Theme = theme as Theme;
+            Theme newTheme = null;
+
+            if (this.theme.GetType() == typeof(SongTheme)) {
+                newTheme = SongTheme.OpenFile();
+            } else if (this.theme.GetType() == typeof(BibleTheme)) {
+                newTheme = BibleTheme.OpenFile();
+            } else if (this.theme.GetType() == typeof(SongTheme)) {
+                newTheme = SermonTheme.OpenFile();
+            }
+
+            this.Theme = newTheme;
         }
  
     }
