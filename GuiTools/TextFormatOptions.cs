@@ -12,6 +12,13 @@ using System.Xml;
 
 namespace DreamBeam
 {
+    // Most action events (like the Click event) in Windows Forms
+    // use the EventHandler delegate and the EventArgs arguments.
+    // We will define our own delegate that does not specify parameters.
+    // Mostly, we really don't care what the conditions of the
+    // change were, we just care that something was changed.
+    public delegate void ControlChangeHandler();
+
 
 	/// <summary>
 	/// This is the control in the title, verse, etc... tabs in the
@@ -54,8 +61,9 @@ namespace DreamBeam
 		private System.Windows.Forms.ComboBox Effects;
 		private OPaC.Themed.Forms.Label label1;
 		#endregion
-
+        
 		private BeamTextFormat format1 = new BeamTextFormat();
+        protected bool changingControls = false;
 
 		public TextFormatOptions()
 		{
@@ -63,7 +71,24 @@ namespace DreamBeam
 			InitializeComponent();
 			// TODO: Add any initialization after the InitializeComponent call
 			SetControls();
-		}
+
+            Bounds1.ValueChanged += new EventHandler(ControlChanged);
+            Bounds2.ValueChanged += new EventHandler(ControlChanged);
+            Bounds3.ValueChanged += new EventHandler(ControlChanged);
+            Bounds4.ValueChanged += new EventHandler(ControlChanged);
+
+            OutlineSize.ValueChanged += new EventHandler(ControlChanged);
+
+            VAlignBottom.CheckedChanged += new EventHandler(ControlChanged);
+            VAlignCenter.CheckedChanged += new EventHandler(ControlChanged);
+            VAlignTop.CheckedChanged += new EventHandler(ControlChanged);
+
+            HAlignCenter.CheckedChanged += new EventHandler(ControlChanged);
+            HAlignLeft.CheckedChanged += new EventHandler(ControlChanged);
+            HAlignRight.CheckedChanged += new EventHandler(ControlChanged);
+
+            Effects.TextChanged += new EventHandler(ControlChanged);
+        }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public BeamTextFormat Format {
@@ -108,7 +133,9 @@ namespace DreamBeam
 		}
 
 		private void SetControls() {
-			// If we assign values that are out-of-range to the controls, we'll get an exception.
+            changingControls = true;
+            
+            // If we assign values that are out-of-range to the controls, we'll get an exception.
 			this.Bounds1.Value = Tools.ForceToRange(Bounds1.Minimum, Bounds1.Maximum, (decimal)this.format1.Bounds.Left);
 			this.Bounds2.Value = Tools.ForceToRange(Bounds2.Minimum, Bounds2.Maximum, (decimal)this.format1.Bounds.Top);
 			this.Bounds3.Value = Tools.ForceToRange(Bounds3.Minimum, Bounds3.Maximum, (decimal)(100F - this.format1.Bounds.Right));
@@ -146,7 +173,10 @@ namespace DreamBeam
 			}
 
 			this.Effects.Text = format1.Effects;
-		}
+
+            changingControls = false;
+            NotifyControlChangeListeners();
+        }
 
 		/// <summary> 
 		/// Clean up any resources being used.
@@ -512,6 +542,7 @@ namespace DreamBeam
 				this.fontDialog.ShowDialog();
 			} catch {}
 			this.format1.TextFont = this.fontDialog.Font;
+            NotifyControlChangeListeners();
 		}
 
 		private void TextColor_Click(object sender, System.EventArgs e) {
@@ -520,6 +551,7 @@ namespace DreamBeam
 				this.colorDialog.ShowDialog();
 			} catch {}
 			this.format1.TextColor = this.colorDialog.Color;
+            NotifyControlChangeListeners();
 		}
 
 		private void OutlineColor_Click(object sender, System.EventArgs e) {
@@ -528,9 +560,30 @@ namespace DreamBeam
 				this.colorDialog.ShowDialog();
 			} catch {}
 			this.format1.OutlineColor = this.colorDialog.Color;
+            NotifyControlChangeListeners();
 		}
 
-	}
+        // Declare the event, which is associated with our
+        // delegate SubmitClickedHandler(). Add some attributes
+        // for the Visual C# control property.
+        [Category("Action")]
+        [Description("Fires when a text format option setting is changed.")]
+        public event ControlChangeHandler ControlChangedEvent;
+
+        private void ControlChanged(Object sender, EventArgs e) {
+            // If we're in the process of changing all the controls, wait until
+            // they're all changed before firing the event.
+            if (!changingControls) {
+                NotifyControlChangeListeners();
+            }
+        }
+
+        protected void NotifyControlChangeListeners() {
+            if (ControlChangedEvent != null) {
+                ControlChangedEvent();
+            }
+        }
+    }
 
 
 	/// <summary>

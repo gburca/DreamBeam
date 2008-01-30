@@ -14,6 +14,7 @@ namespace DreamBeam {
 
         public ThemeWidget() {
             InitializeComponent();
+            BgImagePath.TextChanged += new EventHandler(ControlChanged);
         }
 
         public ThemeWidget(string[] tabNames) : this() {
@@ -33,6 +34,7 @@ namespace DreamBeam {
                 TextFormatOptions textOpt = new TextFormatOptions();
                 textOpt.Location = new Point(0, 0);
                 //textOpt.Size = new Point(392, 206);
+                textOpt.ControlChangedEvent += new ControlChangeHandler(TextFormatOptions_ControlChangedEvent);
 
                 TabPage tabPage = new TabPage();
                 tabPage.Controls.Add(textOpt);
@@ -115,6 +117,33 @@ namespace DreamBeam {
 
             this.Theme = newTheme;
         }
- 
+
+
+        [Category("Action")]
+        [Description("Fires when a theme setting is changed.")]
+        public event EventHandler ControlChangedEvent;
+
+        protected void ControlChanged(Object sender, EventArgs e) {
+            NotifyControlChangeListeners();
+        }
+
+        public void TextFormatOptions_ControlChangedEvent() {
+            // Pass on the TextFormatOptions change event.
+            NotifyControlChangeListeners();
+        }
+
+        protected void NotifyControlChangeListeners() {
+            if (ControlChangedEvent != null) {
+                ControlChangedEvent(this, new ThemeEventArgs(this.Theme));
+            }
+        }
+    }
+
+    public class ThemeEventArgs: EventArgs
+    {
+        public Theme theme;
+        public ThemeEventArgs(Theme t) {
+            theme = t;
+        }
     }
 }

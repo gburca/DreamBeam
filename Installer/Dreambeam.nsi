@@ -12,7 +12,7 @@
 ; General
 
         ; Name and file
-        !define VERSION "0.7"
+        !define VERSION "0.72"
         !define PRODUCT "DreamBeam"
 	Name "${PRODUCT} ${VERSION}"
 	
@@ -34,7 +34,7 @@
 	Var /GLOBAL USERFILES
 
 	SetCompressor lzma
-	
+
 
 ;--------------------------------
 ; Interface Configuration
@@ -44,6 +44,7 @@
 	!define MUI_WELCOMEFINISHPAGE_BITMAP "images\balken.bmp"
 	!define MUI_ABORTWARNING
 	!define MUI_FINISHPAGE_RUN DreamBeam.exe
+	!define MUI_FINISHPAGE_RUN_NOTCHECKED
 
 ;--------------------------------
 ; Pages
@@ -169,6 +170,8 @@ Section "un.Uninstall DreamBeam" SUnDreamBeam
 	SetShellVarContext all
 	Call un.Read_USERFILES
 	
+	UnRegDll "$INSTDIR\ActiveDiatheke.ocx"
+
 	; Delete DreamBeam Files
 	Delete "$INSTDIR\*.*"
 	Delete "$SMPROGRAMS\DreamBeam\DreamBeam.lnk"
