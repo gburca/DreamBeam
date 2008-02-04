@@ -187,30 +187,34 @@ namespace DreamBeam
 		public static object DeserializeFrom(Config instance, string file) {
 			Type type = instance.GetType();
 			XmlSerializer xs = null;
+            string fullPath = Tools.GetFullPath(file);
 
-			file = Tools.GetFullPath(file);
+
 			try {
 				xs = new XmlSerializer(type);
 			} catch (InvalidOperationException ex) {
 				// Invalid class. Does the class have a public constructor?
 				Console.WriteLine("DeserializeFrom exception: " + ex.Message);
 			}
-			
-			if (xs != null) {
+
+            if (!Tools.FileExists(fullPath)) {
+                // fullPath could be NULL here, so use "file"
+                Config.SerializeTo(instance, file);
+            } else if (xs != null) {
 				try {
-					using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
+					using (FileStream fs = File.Open(fullPath, FileMode.Open, FileAccess.Read)) {
                         Config config = xs.Deserialize(fs) as Config;
                         if (config != null) {
                             return DeserializeCleanup(config);
                         } else {
-                            Config.SerializeTo(instance, file);
+                            Config.SerializeTo(instance, fullPath);
                         }
 					}
 				} catch (FileNotFoundException) {
-					Config.SerializeTo(instance, file);
+					Config.SerializeTo(instance, fullPath);
 				} catch (InvalidOperationException) {
 					// Invalid XML code
-					Config.SerializeTo(instance, file);
+					Config.SerializeTo(instance, fullPath);
 				}
 			}
 

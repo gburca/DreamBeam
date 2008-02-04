@@ -103,13 +103,13 @@ namespace DreamBeam {
         /// 
         /// This directory is selected by the user during installation and will be
         /// saved to the registry. It defaults to the same directory as the one
-        /// returned by Tools.GetCommonAppDataPath() unless the user changes it.
+        /// returned by Tools.GetCommonAppDataPath() if there's a problem with reading
+        /// the registry entry.
         /// </summary>
         /// <returns></returns>
         public static string GetAppDocPath()
         {
-            //return System.Windows.Forms.Application.StartupPath;
-            string defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "DreamBeam");
+            string defaultPath = GetCommonAppDataPath();
             RegistryKey masterKey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\DreamBeam");
             if (masterKey == null) {
                 // Key doesn't exist and we could not create it (permissions?)
