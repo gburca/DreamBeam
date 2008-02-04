@@ -29,21 +29,21 @@ namespace DreamBeam
 	public class TextFormatOptions : System.Windows.Forms.UserControl
 	{
 		#region Designer generated variables
-		private OPaC.Themed.Forms.GroupBox groupBox3;
-		private OPaC.Themed.Forms.Label label7;
-		private OPaC.Themed.Forms.Label label6;
-		private OPaC.Themed.Forms.Label label5;
-		private OPaC.Themed.Forms.Label label4;
-		private OPaC.Themed.Forms.GroupBox groupBox5;
-		private OPaC.Themed.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Button FontButton;
 		private System.Windows.Forms.Button TextColor;
 		private System.Windows.Forms.Button OutlineColor;
-		private OPaC.Themed.Forms.GroupBox VerticalAlignment;
+		private System.Windows.Forms.GroupBox VerticalAlignment;
 		private System.Windows.Forms.RadioButton VAlignBottom;
 		private System.Windows.Forms.RadioButton VAlignCenter;
 		private System.Windows.Forms.RadioButton VAlignTop;
-		private OPaC.Themed.Forms.GroupBox HorizontalAlignment;
+		private System.Windows.Forms.GroupBox HorizontalAlignment;
 		private System.Windows.Forms.RadioButton HAlignRight;
 		private System.Windows.Forms.RadioButton HAlignCenter;
 		private System.Windows.Forms.RadioButton HAlignLeft;
@@ -59,7 +59,7 @@ namespace DreamBeam
 		private System.ComponentModel.Container components = null;
 		private System.Windows.Forms.NumericUpDown OutlineSize;
 		private System.Windows.Forms.ComboBox Effects;
-		private OPaC.Themed.Forms.Label label1;
+		private System.Windows.Forms.Label label1;
 		#endregion
         
 		private BeamTextFormat format1 = new BeamTextFormat();
@@ -200,339 +200,339 @@ namespace DreamBeam
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.VerticalAlignment = new OPaC.Themed.Forms.GroupBox();
-			this.VAlignBottom = new System.Windows.Forms.RadioButton();
-			this.VAlignCenter = new System.Windows.Forms.RadioButton();
-			this.VAlignTop = new System.Windows.Forms.RadioButton();
-			this.groupBox3 = new OPaC.Themed.Forms.GroupBox();
-			this.label7 = new OPaC.Themed.Forms.Label();
-			this.label6 = new OPaC.Themed.Forms.Label();
-			this.label5 = new OPaC.Themed.Forms.Label();
-			this.label4 = new OPaC.Themed.Forms.Label();
-			this.Bounds4 = new System.Windows.Forms.NumericUpDown();
-			this.Bounds3 = new System.Windows.Forms.NumericUpDown();
-			this.Bounds2 = new System.Windows.Forms.NumericUpDown();
-			this.Bounds1 = new System.Windows.Forms.NumericUpDown();
-			this.HorizontalAlignment = new OPaC.Themed.Forms.GroupBox();
-			this.HAlignRight = new System.Windows.Forms.RadioButton();
-			this.HAlignCenter = new System.Windows.Forms.RadioButton();
-			this.HAlignLeft = new System.Windows.Forms.RadioButton();
-			this.FontButton = new System.Windows.Forms.Button();
-			this.TextColor = new System.Windows.Forms.Button();
-			this.groupBox5 = new OPaC.Themed.Forms.GroupBox();
-			this.label1 = new OPaC.Themed.Forms.Label();
-			this.label8 = new OPaC.Themed.Forms.Label();
-			this.OutlineSize = new System.Windows.Forms.NumericUpDown();
-			this.OutlineColor = new System.Windows.Forms.Button();
-			this.Effects = new System.Windows.Forms.ComboBox();
-			this.fontDialog = new System.Windows.Forms.FontDialog();
-			this.colorDialog = new System.Windows.Forms.ColorDialog();
-			this.VerticalAlignment.SuspendLayout();
-			this.groupBox3.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.Bounds4)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.Bounds3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.Bounds2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.Bounds1)).BeginInit();
-			this.HorizontalAlignment.SuspendLayout();
-			this.groupBox5.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.OutlineSize)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// VerticalAlignment
-			// 
-			this.VerticalAlignment.BackColor = System.Drawing.Color.Transparent;
-			this.VerticalAlignment.Controls.Add(this.VAlignBottom);
-			this.VerticalAlignment.Controls.Add(this.VAlignCenter);
-			this.VerticalAlignment.Controls.Add(this.VAlignTop);
-			this.VerticalAlignment.Location = new System.Drawing.Point(176, 64);
-			this.VerticalAlignment.Name = "VerticalAlignment";
-			this.VerticalAlignment.Size = new System.Drawing.Size(208, 52);
-			this.VerticalAlignment.TabIndex = 13;
-			this.VerticalAlignment.TabStop = false;
-			this.VerticalAlignment.Text = "Vertical Alignment";
-			// 
-			// VAlignBottom
-			// 
-			this.VAlignBottom.Location = new System.Drawing.Point(144, 20);
-			this.VAlignBottom.Name = "VAlignBottom";
-			this.VAlignBottom.Size = new System.Drawing.Size(58, 24);
-			this.VAlignBottom.TabIndex = 2;
-			this.VAlignBottom.Text = "Bottom";
-			// 
-			// VAlignCenter
-			// 
-			this.VAlignCenter.Location = new System.Drawing.Point(74, 20);
-			this.VAlignCenter.Name = "VAlignCenter";
-			this.VAlignCenter.Size = new System.Drawing.Size(58, 24);
-			this.VAlignCenter.TabIndex = 1;
-			this.VAlignCenter.Text = "Center";
-			// 
-			// VAlignTop
-			// 
-			this.VAlignTop.Location = new System.Drawing.Point(6, 20);
-			this.VAlignTop.Name = "VAlignTop";
-			this.VAlignTop.Size = new System.Drawing.Size(58, 24);
-			this.VAlignTop.TabIndex = 0;
-			this.VAlignTop.Text = "Top";
-			// 
-			// groupBox3
-			// 
-			this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-			this.groupBox3.Controls.Add(this.label7);
-			this.groupBox3.Controls.Add(this.label6);
-			this.groupBox3.Controls.Add(this.label5);
-			this.groupBox3.Controls.Add(this.label4);
-			this.groupBox3.Controls.Add(this.Bounds4);
-			this.groupBox3.Controls.Add(this.Bounds3);
-			this.groupBox3.Controls.Add(this.Bounds2);
-			this.groupBox3.Controls.Add(this.Bounds1);
-			this.groupBox3.Location = new System.Drawing.Point(8, 46);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(152, 154);
-			this.groupBox3.TabIndex = 12;
-			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "Margins (in %)";
-			// 
-			// label7
-			// 
-			this.label7.BackColor = System.Drawing.Color.Transparent;
-			this.label7.Location = new System.Drawing.Point(58, 106);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(44, 16);
-			this.label7.TabIndex = 7;
-			this.label7.Text = "Bottom";
-			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// label6
-			// 
-			this.label6.BackColor = System.Drawing.Color.Transparent;
-			this.label6.Location = new System.Drawing.Point(100, 64);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(44, 16);
-			this.label6.TabIndex = 6;
-			this.label6.Text = "Right";
-			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
-			// label5
-			// 
-			this.label5.BackColor = System.Drawing.Color.Transparent;
-			this.label5.Location = new System.Drawing.Point(58, 22);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(44, 16);
-			this.label5.TabIndex = 5;
-			this.label5.Text = "Top";
-			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// label4
-			// 
-			this.label4.BackColor = System.Drawing.Color.Transparent;
-			this.label4.Location = new System.Drawing.Point(8, 62);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(44, 16);
-			this.label4.TabIndex = 4;
-			this.label4.Text = "Left";
-			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// Bounds4
-			// 
-			this.Bounds4.Location = new System.Drawing.Point(56, 122);
-			this.Bounds4.Name = "Bounds4";
-			this.Bounds4.Size = new System.Drawing.Size(48, 20);
-			this.Bounds4.TabIndex = 3;
-			this.Bounds4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.Bounds4.Value = new System.Decimal(new int[] {
-																  5,
-																  0,
-																  0,
-																  0});
-			// 
-			// Bounds3
-			// 
-			this.Bounds3.Location = new System.Drawing.Point(98, 80);
-			this.Bounds3.Name = "Bounds3";
-			this.Bounds3.Size = new System.Drawing.Size(48, 20);
-			this.Bounds3.TabIndex = 2;
-			this.Bounds3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.Bounds3.Value = new System.Decimal(new int[] {
-																  5,
-																  0,
-																  0,
-																  0});
-			// 
-			// Bounds2
-			// 
-			this.Bounds2.Location = new System.Drawing.Point(56, 38);
-			this.Bounds2.Name = "Bounds2";
-			this.Bounds2.Size = new System.Drawing.Size(48, 20);
-			this.Bounds2.TabIndex = 1;
-			this.Bounds2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.Bounds2.Value = new System.Decimal(new int[] {
-																  5,
-																  0,
-																  0,
-																  0});
-			// 
-			// Bounds1
-			// 
-			this.Bounds1.Location = new System.Drawing.Point(6, 78);
-			this.Bounds1.Name = "Bounds1";
-			this.Bounds1.Size = new System.Drawing.Size(48, 20);
-			this.Bounds1.TabIndex = 0;
-			this.Bounds1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.Bounds1.Value = new System.Decimal(new int[] {
-																  5,
-																  0,
-																  0,
-																  0});
-			// 
-			// HorizontalAlignment
-			// 
-			this.HorizontalAlignment.BackColor = System.Drawing.Color.Transparent;
-			this.HorizontalAlignment.Controls.Add(this.HAlignRight);
-			this.HorizontalAlignment.Controls.Add(this.HAlignCenter);
-			this.HorizontalAlignment.Controls.Add(this.HAlignLeft);
-			this.HorizontalAlignment.Location = new System.Drawing.Point(176, 8);
-			this.HorizontalAlignment.Name = "HorizontalAlignment";
-			this.HorizontalAlignment.Size = new System.Drawing.Size(208, 52);
-			this.HorizontalAlignment.TabIndex = 11;
-			this.HorizontalAlignment.TabStop = false;
-			this.HorizontalAlignment.Text = "Horizontal Alignment";
-			// 
-			// HAlignRight
-			// 
-			this.HAlignRight.Location = new System.Drawing.Point(142, 20);
-			this.HAlignRight.Name = "HAlignRight";
-			this.HAlignRight.Size = new System.Drawing.Size(58, 24);
-			this.HAlignRight.TabIndex = 2;
-			this.HAlignRight.Text = "Right";
-			// 
-			// HAlignCenter
-			// 
-			this.HAlignCenter.Location = new System.Drawing.Point(76, 20);
-			this.HAlignCenter.Name = "HAlignCenter";
-			this.HAlignCenter.Size = new System.Drawing.Size(58, 24);
-			this.HAlignCenter.TabIndex = 1;
-			this.HAlignCenter.Text = "Center";
-			// 
-			// HAlignLeft
-			// 
-			this.HAlignLeft.Location = new System.Drawing.Point(10, 20);
-			this.HAlignLeft.Name = "HAlignLeft";
-			this.HAlignLeft.Size = new System.Drawing.Size(58, 24);
-			this.HAlignLeft.TabIndex = 0;
-			this.HAlignLeft.Text = "Left";
-			// 
-			// FontButton
-			// 
-			this.FontButton.Location = new System.Drawing.Point(8, 12);
-			this.FontButton.Name = "FontButton";
-			this.FontButton.Size = new System.Drawing.Size(38, 23);
-			this.FontButton.TabIndex = 9;
-			this.FontButton.Text = "Font";
-			this.FontButton.Click += new System.EventHandler(this.FontButton_Click);
-			// 
-			// TextColor
-			// 
-			this.TextColor.Location = new System.Drawing.Point(48, 12);
-			this.TextColor.Name = "TextColor";
-			this.TextColor.Size = new System.Drawing.Size(40, 23);
-			this.TextColor.TabIndex = 10;
-			this.TextColor.Text = "Color";
-			this.TextColor.Click += new System.EventHandler(this.TextColor_Click);
-			// 
-			// groupBox5
-			// 
-			this.groupBox5.BackColor = System.Drawing.Color.Transparent;
-			this.groupBox5.Controls.Add(this.label1);
-			this.groupBox5.Controls.Add(this.label8);
-			this.groupBox5.Controls.Add(this.OutlineSize);
-			this.groupBox5.Controls.Add(this.OutlineColor);
-			this.groupBox5.Controls.Add(this.Effects);
-			this.groupBox5.Location = new System.Drawing.Point(176, 120);
-			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(206, 78);
-			this.groupBox5.TabIndex = 14;
-			this.groupBox5.TabStop = false;
-			this.groupBox5.Text = "Text Outline";
-			// 
-			// label1
-			// 
-			this.label1.BackColor = System.Drawing.Color.Transparent;
-			this.label1.Location = new System.Drawing.Point(8, 22);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(42, 20);
-			this.label1.TabIndex = 16;
-			this.label1.Text = "Effects";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// label8
-			// 
-			this.label8.BackColor = System.Drawing.Color.Transparent;
-			this.label8.Location = new System.Drawing.Point(8, 52);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(70, 15);
-			this.label8.TabIndex = 9;
-			this.label8.Text = "Outline size:";
-			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// OutlineSize
-			// 
-			this.OutlineSize.Location = new System.Drawing.Point(84, 50);
-			this.OutlineSize.Minimum = new System.Decimal(new int[] {
-																		1,
-																		0,
-																		0,
-																		0});
-			this.OutlineSize.Name = "OutlineSize";
-			this.OutlineSize.Size = new System.Drawing.Size(46, 20);
-			this.OutlineSize.TabIndex = 8;
-			this.OutlineSize.Value = new System.Decimal(new int[] {
-																	  1,
-																	  0,
-																	  0,
-																	  0});
-			// 
-			// OutlineColor
-			// 
-			this.OutlineColor.Location = new System.Drawing.Point(138, 52);
-			this.OutlineColor.Name = "OutlineColor";
-			this.OutlineColor.Size = new System.Drawing.Size(56, 18);
-			this.OutlineColor.TabIndex = 2;
-			this.OutlineColor.Text = "Color";
-			this.OutlineColor.Click += new System.EventHandler(this.OutlineColor_Click);
-			// 
-			// Effects
-			// 
-			this.Effects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.Effects.Items.AddRange(new object[] {
-														 "Normal",
-														 "Outline",
-														 "Filled Outline"});
-			this.Effects.Location = new System.Drawing.Point(56, 20);
-			this.Effects.Name = "Effects";
-			this.Effects.Size = new System.Drawing.Size(138, 21);
-			this.Effects.TabIndex = 15;
-			// 
-			// TextFormatOptions
-			// 
-			this.Controls.Add(this.VerticalAlignment);
-			this.Controls.Add(this.groupBox3);
-			this.Controls.Add(this.HorizontalAlignment);
-			this.Controls.Add(this.FontButton);
-			this.Controls.Add(this.TextColor);
-			this.Controls.Add(this.groupBox5);
-			this.Name = "TextFormatOptions";
-			this.Size = new System.Drawing.Size(392, 206);
-			this.VerticalAlignment.ResumeLayout(false);
-			this.groupBox3.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.Bounds4)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.Bounds3)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.Bounds2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.Bounds1)).EndInit();
-			this.HorizontalAlignment.ResumeLayout(false);
-			this.groupBox5.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.OutlineSize)).EndInit();
-			this.ResumeLayout(false);
+            this.VerticalAlignment = new System.Windows.Forms.GroupBox();
+            this.VAlignBottom = new System.Windows.Forms.RadioButton();
+            this.VAlignCenter = new System.Windows.Forms.RadioButton();
+            this.VAlignTop = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.Bounds4 = new System.Windows.Forms.NumericUpDown();
+            this.Bounds3 = new System.Windows.Forms.NumericUpDown();
+            this.Bounds2 = new System.Windows.Forms.NumericUpDown();
+            this.Bounds1 = new System.Windows.Forms.NumericUpDown();
+            this.HorizontalAlignment = new System.Windows.Forms.GroupBox();
+            this.HAlignRight = new System.Windows.Forms.RadioButton();
+            this.HAlignCenter = new System.Windows.Forms.RadioButton();
+            this.HAlignLeft = new System.Windows.Forms.RadioButton();
+            this.FontButton = new System.Windows.Forms.Button();
+            this.TextColor = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.OutlineSize = new System.Windows.Forms.NumericUpDown();
+            this.OutlineColor = new System.Windows.Forms.Button();
+            this.Effects = new System.Windows.Forms.ComboBox();
+            this.fontDialog = new System.Windows.Forms.FontDialog();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.VerticalAlignment.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Bounds4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bounds3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bounds2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bounds1)).BeginInit();
+            this.HorizontalAlignment.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.OutlineSize)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // VerticalAlignment
+            // 
+            this.VerticalAlignment.BackColor = System.Drawing.Color.Transparent;
+            this.VerticalAlignment.Controls.Add(this.VAlignBottom);
+            this.VerticalAlignment.Controls.Add(this.VAlignCenter);
+            this.VerticalAlignment.Controls.Add(this.VAlignTop);
+            this.VerticalAlignment.Location = new System.Drawing.Point(176, 64);
+            this.VerticalAlignment.Name = "VerticalAlignment";
+            this.VerticalAlignment.Size = new System.Drawing.Size(208, 52);
+            this.VerticalAlignment.TabIndex = 13;
+            this.VerticalAlignment.TabStop = false;
+            this.VerticalAlignment.Text = "Vertical Alignment";
+            // 
+            // VAlignBottom
+            // 
+            this.VAlignBottom.Location = new System.Drawing.Point(144, 20);
+            this.VAlignBottom.Name = "VAlignBottom";
+            this.VAlignBottom.Size = new System.Drawing.Size(58, 24);
+            this.VAlignBottom.TabIndex = 2;
+            this.VAlignBottom.Text = "Bottom";
+            // 
+            // VAlignCenter
+            // 
+            this.VAlignCenter.Location = new System.Drawing.Point(74, 20);
+            this.VAlignCenter.Name = "VAlignCenter";
+            this.VAlignCenter.Size = new System.Drawing.Size(58, 24);
+            this.VAlignCenter.TabIndex = 1;
+            this.VAlignCenter.Text = "Center";
+            // 
+            // VAlignTop
+            // 
+            this.VAlignTop.Location = new System.Drawing.Point(6, 20);
+            this.VAlignTop.Name = "VAlignTop";
+            this.VAlignTop.Size = new System.Drawing.Size(58, 24);
+            this.VAlignTop.TabIndex = 0;
+            this.VAlignTop.Text = "Top";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.Bounds4);
+            this.groupBox3.Controls.Add(this.Bounds3);
+            this.groupBox3.Controls.Add(this.Bounds2);
+            this.groupBox3.Controls.Add(this.Bounds1);
+            this.groupBox3.Location = new System.Drawing.Point(8, 46);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(152, 154);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Margins (in %)";
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Location = new System.Drawing.Point(58, 106);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 16);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Bottom";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Location = new System.Drawing.Point(100, 64);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 16);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Right";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Location = new System.Drawing.Point(58, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 16);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Top";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Location = new System.Drawing.Point(8, 62);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 16);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Left";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Bounds4
+            // 
+            this.Bounds4.Location = new System.Drawing.Point(56, 122);
+            this.Bounds4.Name = "Bounds4";
+            this.Bounds4.Size = new System.Drawing.Size(48, 20);
+            this.Bounds4.TabIndex = 3;
+            this.Bounds4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Bounds4.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // Bounds3
+            // 
+            this.Bounds3.Location = new System.Drawing.Point(98, 80);
+            this.Bounds3.Name = "Bounds3";
+            this.Bounds3.Size = new System.Drawing.Size(48, 20);
+            this.Bounds3.TabIndex = 2;
+            this.Bounds3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Bounds3.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // Bounds2
+            // 
+            this.Bounds2.Location = new System.Drawing.Point(56, 38);
+            this.Bounds2.Name = "Bounds2";
+            this.Bounds2.Size = new System.Drawing.Size(48, 20);
+            this.Bounds2.TabIndex = 1;
+            this.Bounds2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Bounds2.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // Bounds1
+            // 
+            this.Bounds1.Location = new System.Drawing.Point(6, 78);
+            this.Bounds1.Name = "Bounds1";
+            this.Bounds1.Size = new System.Drawing.Size(48, 20);
+            this.Bounds1.TabIndex = 0;
+            this.Bounds1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Bounds1.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // HorizontalAlignment
+            // 
+            this.HorizontalAlignment.BackColor = System.Drawing.Color.Transparent;
+            this.HorizontalAlignment.Controls.Add(this.HAlignRight);
+            this.HorizontalAlignment.Controls.Add(this.HAlignCenter);
+            this.HorizontalAlignment.Controls.Add(this.HAlignLeft);
+            this.HorizontalAlignment.Location = new System.Drawing.Point(176, 8);
+            this.HorizontalAlignment.Name = "HorizontalAlignment";
+            this.HorizontalAlignment.Size = new System.Drawing.Size(208, 52);
+            this.HorizontalAlignment.TabIndex = 11;
+            this.HorizontalAlignment.TabStop = false;
+            this.HorizontalAlignment.Text = "Horizontal Alignment";
+            // 
+            // HAlignRight
+            // 
+            this.HAlignRight.Location = new System.Drawing.Point(142, 20);
+            this.HAlignRight.Name = "HAlignRight";
+            this.HAlignRight.Size = new System.Drawing.Size(58, 24);
+            this.HAlignRight.TabIndex = 2;
+            this.HAlignRight.Text = "Right";
+            // 
+            // HAlignCenter
+            // 
+            this.HAlignCenter.Location = new System.Drawing.Point(76, 20);
+            this.HAlignCenter.Name = "HAlignCenter";
+            this.HAlignCenter.Size = new System.Drawing.Size(58, 24);
+            this.HAlignCenter.TabIndex = 1;
+            this.HAlignCenter.Text = "Center";
+            // 
+            // HAlignLeft
+            // 
+            this.HAlignLeft.Location = new System.Drawing.Point(10, 20);
+            this.HAlignLeft.Name = "HAlignLeft";
+            this.HAlignLeft.Size = new System.Drawing.Size(58, 24);
+            this.HAlignLeft.TabIndex = 0;
+            this.HAlignLeft.Text = "Left";
+            // 
+            // FontButton
+            // 
+            this.FontButton.Location = new System.Drawing.Point(8, 12);
+            this.FontButton.Name = "FontButton";
+            this.FontButton.Size = new System.Drawing.Size(38, 23);
+            this.FontButton.TabIndex = 9;
+            this.FontButton.Text = "Font";
+            this.FontButton.Click += new System.EventHandler(this.FontButton_Click);
+            // 
+            // TextColor
+            // 
+            this.TextColor.Location = new System.Drawing.Point(48, 12);
+            this.TextColor.Name = "TextColor";
+            this.TextColor.Size = new System.Drawing.Size(40, 23);
+            this.TextColor.TabIndex = 10;
+            this.TextColor.Text = "Color";
+            this.TextColor.Click += new System.EventHandler(this.TextColor_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox5.Controls.Add(this.label1);
+            this.groupBox5.Controls.Add(this.label8);
+            this.groupBox5.Controls.Add(this.OutlineSize);
+            this.groupBox5.Controls.Add(this.OutlineColor);
+            this.groupBox5.Controls.Add(this.Effects);
+            this.groupBox5.Location = new System.Drawing.Point(176, 120);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(206, 78);
+            this.groupBox5.TabIndex = 14;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Text Outline";
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(8, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 20);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Effects";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Location = new System.Drawing.Point(8, 52);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 15);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Outline size:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // OutlineSize
+            // 
+            this.OutlineSize.Location = new System.Drawing.Point(84, 50);
+            this.OutlineSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.OutlineSize.Name = "OutlineSize";
+            this.OutlineSize.Size = new System.Drawing.Size(46, 20);
+            this.OutlineSize.TabIndex = 8;
+            this.OutlineSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // OutlineColor
+            // 
+            this.OutlineColor.Location = new System.Drawing.Point(138, 52);
+            this.OutlineColor.Name = "OutlineColor";
+            this.OutlineColor.Size = new System.Drawing.Size(56, 18);
+            this.OutlineColor.TabIndex = 2;
+            this.OutlineColor.Text = "Color";
+            this.OutlineColor.Click += new System.EventHandler(this.OutlineColor_Click);
+            // 
+            // Effects
+            // 
+            this.Effects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Effects.Items.AddRange(new object[] {
+            "Normal",
+            "Outline",
+            "Filled Outline"});
+            this.Effects.Location = new System.Drawing.Point(56, 20);
+            this.Effects.Name = "Effects";
+            this.Effects.Size = new System.Drawing.Size(138, 21);
+            this.Effects.TabIndex = 15;
+            // 
+            // TextFormatOptions
+            // 
+            this.Controls.Add(this.VerticalAlignment);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.HorizontalAlignment);
+            this.Controls.Add(this.FontButton);
+            this.Controls.Add(this.TextColor);
+            this.Controls.Add(this.groupBox5);
+            this.Name = "TextFormatOptions";
+            this.Size = new System.Drawing.Size(392, 206);
+            this.VerticalAlignment.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Bounds4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bounds3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bounds2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bounds1)).EndInit();
+            this.HorizontalAlignment.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.OutlineSize)).EndInit();
+            this.ResumeLayout(false);
 
 		}
 		#endregion

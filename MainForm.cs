@@ -367,9 +367,9 @@ namespace DreamBeam {
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_File_Exit;
 		private System.Windows.Forms.ImageList SongShow_ImageList;
 		private System.Windows.Forms.SaveFileDialog SaveFileDialog;
-		public OPaC.Themed.Forms.TabPage ShowSong_Tab;
+		public System.Windows.Forms.TabPage ShowSong_Tab;
 		public Lister.ListEx SongShow_StropheList_ListEx;
-		public OPaC.Themed.Forms.TabPage SermonTools_Tab;
+		public System.Windows.Forms.TabPage SermonTools_Tab;
 		private System.Windows.Forms.Panel Sermon_LeftPanel;
 		private System.Windows.Forms.Panel Sermon_LeftBottom_Panel;
 		private System.Windows.Forms.Button Sermon_Preview_Button;
@@ -380,7 +380,7 @@ namespace DreamBeam {
 		private TD.SandBar.ToolBar Sermon_ToolBar;
 		private TD.SandBar.ButtonItem Sermon_ToolBar_NewDoc_Button;
 		private System.Windows.Forms.TabControl Sermon_TabControl;
-		public OPaC.Themed.Forms.TabPage tabPage3;
+		public System.Windows.Forms.TabPage tabPage3;
 		private System.Windows.Forms.LinkLabel linkLabel1;
 		private System.Windows.Forms.Label Sermon_Verse_Label;
 		private System.Windows.Forms.Label Sermon_Translation_Label;
@@ -389,7 +389,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.ListBox Sermon_Testament_ListBox;
 		private System.Windows.Forms.ComboBox Sermon_Books;
 		private System.Windows.Forms.ListBox Sermon_BookList;
-		public OPaC.Themed.Forms.TabPage Presentation_Tab;
+		public System.Windows.Forms.TabPage Presentation_Tab;
 		private System.Windows.Forms.Panel Presentation_FadePanel;
 		private System.Windows.Forms.Panel Fade_panel;
 		public System.Windows.Forms.ListView Presentation_Fade_ListView;
@@ -419,7 +419,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.TrackBar AudioBar;
 		public System.Windows.Forms.TabPage EditSongs2_Tab;
 		public DreamBeam.SongEditor songEditor;
-		public OPaC.Themed.Forms.TabPage BibleText_Tab;
+		public System.Windows.Forms.TabPage BibleText_Tab;
 		private System.Windows.Forms.Panel BibleText_panelLeft;
 		private DreamBeam.Bible.BibleRTF BibleText_Results;
 		private System.Windows.Forms.Panel panel8;
@@ -748,9 +748,9 @@ namespace DreamBeam {
             this.BibleText_Bookmark_button = new System.Windows.Forms.Button();
             this.Main_ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.ShowSong_Tab = new OPaC.Themed.Forms.TabPage();
+            this.ShowSong_Tab = new System.Windows.Forms.TabPage();
             this.SongShow_StropheList_ListEx = new Lister.ListEx();
-            this.SermonTools_Tab = new OPaC.Themed.Forms.TabPage();
+            this.SermonTools_Tab = new System.Windows.Forms.TabPage();
             this.Sermon_LeftPanel = new System.Windows.Forms.Panel();
             this.Sermon_LeftDoc_Panel = new System.Windows.Forms.Panel();
             this.Sermon_DocManager = new DocumentManager.DocumentManager();
@@ -761,7 +761,7 @@ namespace DreamBeam {
             this.Sermon_Preview_Button = new System.Windows.Forms.Button();
             this.Sermon_BeamBox_Button = new System.Windows.Forms.Button();
             this.Sermon_TabControl = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new OPaC.Themed.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.Sermon_Verse_Label = new System.Windows.Forms.Label();
             this.Sermon_Translation_Label = new System.Windows.Forms.Label();
@@ -769,7 +769,7 @@ namespace DreamBeam {
             this.Sermon_Testament_ListBox = new System.Windows.Forms.ListBox();
             this.Sermon_Books = new System.Windows.Forms.ComboBox();
             this.Sermon_BookList = new System.Windows.Forms.ListBox();
-            this.Presentation_Tab = new OPaC.Themed.Forms.TabPage();
+            this.Presentation_Tab = new System.Windows.Forms.TabPage();
             this.Presentation_FadePanel = new System.Windows.Forms.Panel();
             this.Fade_panel = new System.Windows.Forms.Panel();
             this.Presentation_Fade_ListView = new System.Windows.Forms.ListView();
@@ -799,7 +799,7 @@ namespace DreamBeam {
             this.AudioBar = new System.Windows.Forms.TrackBar();
             this.EditSongs2_Tab = new System.Windows.Forms.TabPage();
             this.songEditor = new DreamBeam.SongEditor();
-            this.BibleText_Tab = new OPaC.Themed.Forms.TabPage();
+            this.BibleText_Tab = new System.Windows.Forms.TabPage();
             this.BibleText_panelLeft = new System.Windows.Forms.Panel();
             this.BibleText_Results = new DreamBeam.Bible.BibleRTF();
             this.panel8 = new System.Windows.Forms.Panel();

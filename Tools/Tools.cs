@@ -166,7 +166,7 @@ namespace DreamBeam {
 		/// </summary>
 		/// <param name="FileName"></param>
 		/// <returns>The filename (if the file exists), or NULL if the file does not exist.</returns>
-		public static string GetFullPath(string FileName) {
+		public static string GetFullPathOrNull(string FileName) {
 			// We need at least 1 char for file name + 4 chars for extension ".jpg"
 			if (FileName == null || FileName.Length < 5) return null;
 			FileInfo fi = new FileInfo(FileName);

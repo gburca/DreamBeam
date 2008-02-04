@@ -142,14 +142,6 @@
     <Reference Include="mscorlib">
       <Name>mscorlib</Name>
     </Reference>
-    <Reference Include="OPaC.Themed.Forms">
-      <Name>OPaC.Themed.Forms</Name>
-      <HintPath>libs\OPaC.Themed.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="OPaC.uxTheme">
-      <Name>OPaC.uxTheme</Name>
-      <HintPath>libs\OPaC.uxTheme.dll</HintPath>
-    </Reference>
     <Reference Include="SandBar">
       <Name>SandBar</Name>
       <HintPath>libs\SandBar.dll</HintPath>

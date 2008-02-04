@@ -79,10 +79,13 @@
 Function .onInit
 	SetShellVarContext all
 	; Set the default location for user created files
+
+	; In Vista Home, this directory is hidden, so it's not a good place to use
 	; C:\Documents and Settings\All Users\Application Data\DreamBeam
-	StrCpy $USERFILES "$APPDATA\${PRODUCT}"
+	; StrCpy $USERFILES "$APPDATA\${PRODUCT}"
+
 	; C:\Documents and Settings\All Users\DreamBeam
-	;StrCpy $USERFILES "$DOCUMENTS\${PRODUCT}"
+	StrCpy $USERFILES "$DOCUMENTS\${PRODUCT}"
 FunctionEnd
 
 

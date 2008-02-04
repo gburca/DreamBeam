@@ -103,7 +103,7 @@ namespace DreamBeam {
         public static object DeserializeFrom(Type type, string file) {
             XmlSerializer xs = null;
 
-            file = Tools.GetFullPath(file);
+            file = Tools.GetFullPathOrNull(file);
             if (file == null) { return null; }
             try {
                 xs = new XmlSerializer(type);

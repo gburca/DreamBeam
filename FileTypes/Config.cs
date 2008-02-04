@@ -120,7 +120,7 @@ namespace DreamBeam
 		public int ListeningPort;
 
 		public Rectangle AppDesktopLocation = new Rectangle(50, 50, 800, 600);
-		public System.Data.DataSet Options_DataSet;
+		[XmlIgnore] public System.Data.DataSet Options_DataSet;
 
 		#endregion
 
@@ -187,7 +187,7 @@ namespace DreamBeam
 		public static object DeserializeFrom(Config instance, string file) {
 			Type type = instance.GetType();
 			XmlSerializer xs = null;
-            string fullPath = Tools.GetFullPath(file);
+            string fullPath = Tools.GetFullPathOrNull(file);
 
 
 			try {

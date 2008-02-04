@@ -27,7 +27,7 @@
   <Theme>
     <Song>
       <Version>0.72</Version>
-      <BGImagePath>D:\Profiles\All Users\Application Data\DreamBeam\Backgrounds\red.jpg</BGImagePath>
+      <BGImagePath>Backgrounds\red.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>
@@ -108,7 +108,7 @@
     </Song>
     <Bible>
       <Version>0.72</Version>
-      <BGImagePath>D:\Profiles\All Users\Application Data\DreamBeam\Backgrounds\red.jpg</BGImagePath>
+      <BGImagePath>Backgrounds\red.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>
@@ -189,7 +189,7 @@
     </Bible>
     <Sermon>
       <Version>0.72</Version>
-      <BGImagePath>D:\Profiles\All Users\Application Data\DreamBeam\Backgrounds\TilesBlue.jpg</BGImagePath>
+      <BGImagePath>Backgrounds\TilesBlue.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>
