@@ -105,6 +105,8 @@ namespace DreamBeam {
             this.Options_TopPanel = new System.Windows.Forms.Panel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.Common_Tab = new System.Windows.Forms.TabPage();
+            this.DataDirectory = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ListeningPort = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -151,6 +153,9 @@ namespace DreamBeam {
             this.Sword_PathBox = new System.Windows.Forms.TextBox();
             this.Select_Sword = new System.Windows.Forms.Button();
             this.BibleCache_Tab = new System.Windows.Forms.TabPage();
+            this.BibleCache_Cached_Label = new System.Windows.Forms.Label();
+            this.BibleCache_Available_Label = new System.Windows.Forms.Label();
+            this.BibleCache_Replacements_Label = new System.Windows.Forms.Label();
             this.BibleCache_Message = new System.Windows.Forms.Label();
             this.BibleConversions_dataGrid = new System.Windows.Forms.DataGrid();
             this.Options_RegEx_Table = new System.Data.DataTable();
@@ -186,9 +191,6 @@ namespace DreamBeam {
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.Options_ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Options_DataSet = new System.Data.DataSet();
-            this.BibleCache_Replacements_Labe = new System.Windows.Forms.Label();
-            this.BibleCache_Available_Label = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.Options_TopPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.Common_Tab.SuspendLayout();
@@ -241,7 +243,7 @@ namespace DreamBeam {
             this.Options_TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.Options_TopPanel.Location = new System.Drawing.Point(0, 0);
             this.Options_TopPanel.Name = "Options_TopPanel";
-            this.Options_TopPanel.Size = new System.Drawing.Size(656, 346);
+            this.Options_TopPanel.Size = new System.Drawing.Size(523, 346);
             this.Options_TopPanel.TabIndex = 0;
             // 
             // tabControl
@@ -259,20 +261,39 @@ namespace DreamBeam {
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(656, 346);
+            this.tabControl.Size = new System.Drawing.Size(523, 346);
             this.tabControl.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl.TabIndex = 1;
             // 
             // Common_Tab
             // 
+            this.Common_Tab.Controls.Add(this.DataDirectory);
+            this.Common_Tab.Controls.Add(this.label3);
             this.Common_Tab.Controls.Add(this.groupBox1);
             this.Common_Tab.Controls.Add(this.Options_PanelLocations_checkBox);
             this.Common_Tab.Controls.Add(this.LanguageBox);
-            this.Common_Tab.Location = new System.Drawing.Point(4, 22);
+            this.Common_Tab.Location = new System.Drawing.Point(4, 40);
             this.Common_Tab.Name = "Common_Tab";
-            this.Common_Tab.Size = new System.Drawing.Size(648, 320);
+            this.Common_Tab.Size = new System.Drawing.Size(515, 302);
             this.Common_Tab.TabIndex = 0;
             this.Common_Tab.Text = "Common Settings";
+            // 
+            // DataDirectory
+            // 
+            this.DataDirectory.Location = new System.Drawing.Point(97, 241);
+            this.DataDirectory.Name = "DataDirectory";
+            this.DataDirectory.ReadOnly = true;
+            this.DataDirectory.Size = new System.Drawing.Size(319, 20);
+            this.DataDirectory.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 244);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(78, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Data Directory:";
             // 
             // groupBox1
             // 
@@ -397,8 +418,8 @@ namespace DreamBeam {
             this.TranslateLabel.Name = "TranslateLabel";
             this.TranslateLabel.Size = new System.Drawing.Size(248, 48);
             this.TranslateLabel.TabIndex = 1;
-            this.TranslateLabel.Text = "If you like to translate this Software into another Language, you are very welcom" +
-                "e!";
+            this.TranslateLabel.Text = "If you like to translate this software into another language, please contact the " +
+                "developers.";
             // 
             // LanguageList
             // 
@@ -415,9 +436,9 @@ namespace DreamBeam {
             this.BeamBox_tab.Controls.Add(this.Position_Title_GroupBox);
             this.BeamBox_tab.Controls.Add(this.Background_groupBox3);
             this.BeamBox_tab.Controls.Add(this.Mouse_groupBox2);
-            this.BeamBox_tab.Location = new System.Drawing.Point(4, 22);
+            this.BeamBox_tab.Location = new System.Drawing.Point(4, 40);
             this.BeamBox_tab.Name = "BeamBox_tab";
-            this.BeamBox_tab.Size = new System.Drawing.Size(648, 320);
+            this.BeamBox_tab.Size = new System.Drawing.Size(515, 302);
             this.BeamBox_tab.TabIndex = 2;
             this.BeamBox_tab.Text = "Projector Window";
             // 
@@ -715,9 +736,9 @@ namespace DreamBeam {
             // 
             this.Bible_Tab.Controls.Add(this.SwordLangGroupBox);
             this.Bible_Tab.Controls.Add(this.SwordFolderGroupBox);
-            this.Bible_Tab.Location = new System.Drawing.Point(4, 22);
+            this.Bible_Tab.Location = new System.Drawing.Point(4, 40);
             this.Bible_Tab.Name = "Bible_Tab";
-            this.Bible_Tab.Size = new System.Drawing.Size(648, 320);
+            this.Bible_Tab.Size = new System.Drawing.Size(515, 302);
             this.Bible_Tab.TabIndex = 3;
             this.Bible_Tab.Text = "Bible";
             // 
@@ -791,19 +812,46 @@ namespace DreamBeam {
             // 
             // BibleCache_Tab
             // 
-            this.BibleCache_Tab.Controls.Add(this.label6);
+            this.BibleCache_Tab.Controls.Add(this.BibleCache_Cached_Label);
             this.BibleCache_Tab.Controls.Add(this.BibleCache_Available_Label);
-            this.BibleCache_Tab.Controls.Add(this.BibleCache_Replacements_Labe);
+            this.BibleCache_Tab.Controls.Add(this.BibleCache_Replacements_Label);
             this.BibleCache_Tab.Controls.Add(this.BibleCache_Message);
             this.BibleCache_Tab.Controls.Add(this.BibleConversions_dataGrid);
             this.BibleCache_Tab.Controls.Add(this.BibleCache_progressBar);
             this.BibleCache_Tab.Controls.Add(this.BiblesAvailable_listEx);
             this.BibleCache_Tab.Controls.Add(this.BiblesCached_listEx);
-            this.BibleCache_Tab.Location = new System.Drawing.Point(4, 22);
+            this.BibleCache_Tab.Location = new System.Drawing.Point(4, 40);
             this.BibleCache_Tab.Name = "BibleCache_Tab";
-            this.BibleCache_Tab.Size = new System.Drawing.Size(648, 320);
+            this.BibleCache_Tab.Size = new System.Drawing.Size(515, 302);
             this.BibleCache_Tab.TabIndex = 4;
             this.BibleCache_Tab.Text = "Bible Cache";
+            // 
+            // BibleCache_Cached_Label
+            // 
+            this.BibleCache_Cached_Label.AutoSize = true;
+            this.BibleCache_Cached_Label.Location = new System.Drawing.Point(8, 8);
+            this.BibleCache_Cached_Label.Name = "BibleCache_Cached_Label";
+            this.BibleCache_Cached_Label.Size = new System.Drawing.Size(100, 13);
+            this.BibleCache_Cached_Label.TabIndex = 13;
+            this.BibleCache_Cached_Label.Text = "Cached translations";
+            // 
+            // BibleCache_Available_Label
+            // 
+            this.BibleCache_Available_Label.AutoSize = true;
+            this.BibleCache_Available_Label.Location = new System.Drawing.Point(134, 7);
+            this.BibleCache_Available_Label.Name = "BibleCache_Available_Label";
+            this.BibleCache_Available_Label.Size = new System.Drawing.Size(80, 13);
+            this.BibleCache_Available_Label.TabIndex = 12;
+            this.BibleCache_Available_Label.Text = "Not yet cached";
+            // 
+            // BibleCache_Replacements_Label
+            // 
+            this.BibleCache_Replacements_Label.AutoSize = true;
+            this.BibleCache_Replacements_Label.Location = new System.Drawing.Point(263, 7);
+            this.BibleCache_Replacements_Label.Name = "BibleCache_Replacements_Label";
+            this.BibleCache_Replacements_Label.Size = new System.Drawing.Size(153, 13);
+            this.BibleCache_Replacements_Label.TabIndex = 11;
+            this.BibleCache_Replacements_Label.Text = "Replacements when searching";
             // 
             // BibleCache_Message
             // 
@@ -828,7 +876,7 @@ namespace DreamBeam {
             this.BibleConversions_dataGrid.Location = new System.Drawing.Point(266, 24);
             this.BibleConversions_dataGrid.Name = "BibleConversions_dataGrid";
             this.BibleConversions_dataGrid.RowHeadersVisible = false;
-            this.BibleConversions_dataGrid.Size = new System.Drawing.Size(376, 290);
+            this.BibleConversions_dataGrid.Size = new System.Drawing.Size(243, 272);
             this.BibleConversions_dataGrid.TabIndex = 3;
             this.BibleConversions_dataGrid.TableStyles.AddRange(new System.Windows.Forms.DataGridTableStyle[] {
             this.BibleConversions_GridTableStyle});
@@ -920,9 +968,9 @@ namespace DreamBeam {
             this.Graphics_tab.Controls.Add(this.PreRenderBox);
             this.Graphics_tab.Controls.Add(this.Alpha_groupBox1);
             this.Graphics_tab.Controls.Add(this.Grafics_Outline);
-            this.Graphics_tab.Location = new System.Drawing.Point(4, 22);
+            this.Graphics_tab.Location = new System.Drawing.Point(4, 40);
             this.Graphics_tab.Name = "Graphics_tab";
-            this.Graphics_tab.Size = new System.Drawing.Size(648, 320);
+            this.Graphics_tab.Size = new System.Drawing.Size(515, 302);
             this.Graphics_tab.TabIndex = 1;
             this.Graphics_tab.Text = "Graphics";
             // 
@@ -1032,9 +1080,9 @@ namespace DreamBeam {
             // SongFormat_Tab
             // 
             this.SongFormat_Tab.Controls.Add(this.songThemeWidget);
-            this.SongFormat_Tab.Location = new System.Drawing.Point(4, 22);
+            this.SongFormat_Tab.Location = new System.Drawing.Point(4, 40);
             this.SongFormat_Tab.Name = "SongFormat_Tab";
-            this.SongFormat_Tab.Size = new System.Drawing.Size(648, 320);
+            this.SongFormat_Tab.Size = new System.Drawing.Size(515, 302);
             this.SongFormat_Tab.TabIndex = 6;
             this.SongFormat_Tab.Text = "Song Format";
             // 
@@ -1042,19 +1090,20 @@ namespace DreamBeam {
             // 
             this.songThemeWidget.Location = new System.Drawing.Point(0, 0);
             this.songThemeWidget.Name = "songThemeWidget";
-            this.songThemeWidget.Size = new System.Drawing.Size(619, 312);
+            this.songThemeWidget.Size = new System.Drawing.Size(515, 312);
             this.songThemeWidget.TabIndex = 0;
             this.songThemeWidget.TabNames = new string[] {
         "Title",
         "Verse",
         "Author"};
+            this.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
             // 
             // BibleFormat_Tab
             // 
             this.BibleFormat_Tab.Controls.Add(this.bibleFormatWidget);
-            this.BibleFormat_Tab.Location = new System.Drawing.Point(4, 22);
+            this.BibleFormat_Tab.Location = new System.Drawing.Point(4, 40);
             this.BibleFormat_Tab.Name = "BibleFormat_Tab";
-            this.BibleFormat_Tab.Size = new System.Drawing.Size(648, 320);
+            this.BibleFormat_Tab.Size = new System.Drawing.Size(515, 302);
             this.BibleFormat_Tab.TabIndex = 5;
             this.BibleFormat_Tab.Text = "Bible Format";
             // 
@@ -1062,19 +1111,21 @@ namespace DreamBeam {
             // 
             this.bibleFormatWidget.Location = new System.Drawing.Point(0, 0);
             this.bibleFormatWidget.Name = "bibleFormatWidget";
-            this.bibleFormatWidget.Size = new System.Drawing.Size(619, 312);
+            this.bibleFormatWidget.Size = new System.Drawing.Size(515, 312);
             this.bibleFormatWidget.TabIndex = 0;
             this.bibleFormatWidget.TabNames = new string[] {
-        "Reference",
         "Verse",
+        "Reference",
         "Translation"};
+            this.bibleFormatWidget.Load += new System.EventHandler(this.bibleFormatWidget_Load);
+            this.bibleFormatWidget.ControlChangedEvent += new System.EventHandler(this.bibleFormatWidget_ControlChangedEvent);
             // 
             // TextToolFormat_Tab
             // 
             this.TextToolFormat_Tab.Controls.Add(this.sermonThemeWidget);
-            this.TextToolFormat_Tab.Location = new System.Drawing.Point(4, 22);
+            this.TextToolFormat_Tab.Location = new System.Drawing.Point(4, 40);
             this.TextToolFormat_Tab.Name = "TextToolFormat_Tab";
-            this.TextToolFormat_Tab.Size = new System.Drawing.Size(648, 320);
+            this.TextToolFormat_Tab.Size = new System.Drawing.Size(515, 302);
             this.TextToolFormat_Tab.TabIndex = 7;
             this.TextToolFormat_Tab.Text = "Sermon Tool Format";
             // 
@@ -1082,11 +1133,12 @@ namespace DreamBeam {
             // 
             this.sermonThemeWidget.Location = new System.Drawing.Point(0, 0);
             this.sermonThemeWidget.Name = "sermonThemeWidget";
-            this.sermonThemeWidget.Size = new System.Drawing.Size(619, 312);
+            this.sermonThemeWidget.Size = new System.Drawing.Size(515, 312);
             this.sermonThemeWidget.TabIndex = 0;
             this.sermonThemeWidget.TabNames = new string[] {
         "1st line",
         "Other lines"};
+            this.sermonThemeWidget.ControlChangedEvent += new System.EventHandler(this.sermonThemeWidget_ControlChangedEvent);
             // 
             // Options_Cancelbtn
             // 
@@ -1115,37 +1167,10 @@ namespace DreamBeam {
             this.Options_DataSet.Tables.AddRange(new System.Data.DataTable[] {
             this.Options_RegEx_Table});
             // 
-            // BibleCache_Replacements_Labe
-            // 
-            this.BibleCache_Replacements_Labe.AutoSize = true;
-            this.BibleCache_Replacements_Labe.Location = new System.Drawing.Point(263, 7);
-            this.BibleCache_Replacements_Labe.Name = "BibleCache_Replacements_Labe";
-            this.BibleCache_Replacements_Labe.Size = new System.Drawing.Size(153, 13);
-            this.BibleCache_Replacements_Labe.TabIndex = 11;
-            this.BibleCache_Replacements_Labe.Text = "Replacements when searching";
-            // 
-            // BibleCache_Available_Label
-            // 
-            this.BibleCache_Available_Label.AutoSize = true;
-            this.BibleCache_Available_Label.Location = new System.Drawing.Point(134, 7);
-            this.BibleCache_Available_Label.Name = "BibleCache_Available_Label";
-            this.BibleCache_Available_Label.Size = new System.Drawing.Size(80, 13);
-            this.BibleCache_Available_Label.TabIndex = 12;
-            this.BibleCache_Available_Label.Text = "Not yet cached";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 8);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 13);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Cached translations";
-            // 
             // Options
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(656, 384);
+            this.ClientSize = new System.Drawing.Size(523, 384);
             this.Controls.Add(this.Options_Okaybtn);
             this.Controls.Add(this.Options_Cancelbtn);
             this.Controls.Add(this.Options_TopPanel);
@@ -1157,6 +1182,7 @@ namespace DreamBeam {
             this.Options_TopPanel.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.Common_Tab.ResumeLayout(false);
+            this.Common_Tab.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListeningPort)).EndInit();
@@ -1202,9 +1228,11 @@ namespace DreamBeam {
         private ThemeWidget songThemeWidget;
         private ThemeWidget bibleFormatWidget;
         private ThemeWidget sermonThemeWidget;
-        private Label BibleCache_Replacements_Labe;
+        private Label BibleCache_Replacements_Label;
         private Label BibleCache_Available_Label;
-        private Label label6;
+        private Label BibleCache_Cached_Label;
+        private Label label3;
+        private TextBox DataDirectory;
 
     }
 }

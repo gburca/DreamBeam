@@ -46,6 +46,7 @@ namespace DreamBeam	{
 		bool Next();
 		bool Prev();
 		void ChangeBGImagePath(string newPath);
+        void ChangeTheme(Theme theme);
 
 		/// <summary>
 		/// When asking a remote display to show a piece of content, we don't
@@ -236,6 +237,9 @@ namespace DreamBeam	{
 		public void ChangeBGImagePath(string newPath) {
 			this.BGImagePath = newPath;
 		}
+        public void ChangeTheme(Theme theme) {
+            ChangeBGImagePath(theme.BGImagePath);
+        }
 
 		public ContentIdentity GetIdentity() {
 			// TODO:  Add ImageContent.GetIdentity implementation

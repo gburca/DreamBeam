@@ -23,6 +23,7 @@ namespace DreamBeam {
 			this.Conf = _MainForm.Config;
 
 			InitializeComponent();
+            this.DataDirectory.Text = Tools.GetAppDocPath();
 
 			PopulateBibleCacheTab();
 
@@ -44,6 +45,31 @@ namespace DreamBeam {
                 }
             }
             base.Dispose(disposing);
+        }
+
+        private void HandleThemeChange() {
+            IContentOperations content = _MainForm.DisplayPreview.content;
+            if (content != null) {
+                // First, let's clear the pre-render cache
+                try {
+                    (content as Content).RenderedFramesClear();
+                } catch { }
+
+                switch ((ContentType)content.GetIdentity().Type) {
+                    case ContentType.Song:
+                        content.ChangeTheme(this.songThemeWidget.Theme);
+                        break;
+                    case ContentType.PlainText:
+                        content.ChangeTheme(this.sermonThemeWidget.Theme);
+                        break;
+                    case ContentType.BibleVerseIdx:
+                    case ContentType.BibleVerseRef:
+                    case ContentType.BibleVerse:
+                        content.ChangeTheme(this.bibleFormatWidget.Theme);
+                        break;
+                }
+                _MainForm.DisplayPreview.UpdateDisplay(true);
+            }
         }
 
 		private void Options_OkBtn_Click(object sender, System.EventArgs e) {
@@ -98,31 +124,7 @@ namespace DreamBeam {
             Conf.theme.Song.set(this.songThemeWidget.Theme);
             Conf.theme.Bible.set(this.bibleFormatWidget.Theme);
             Conf.theme.Sermon.set(this.sermonThemeWidget.Theme);
-
-			#region Update Preview display chain with the new background image
-			IContentOperations content = _MainForm.DisplayPreview.content;
-			if (content != null) {
-				// First, let's clear the pre-render cache
-				try {
-					(content as Content).RenderedFramesClear();
-				} catch {}
-
-				switch ((ContentType)content.GetIdentity().Type) {
-					case ContentType.Song:
-						content.ChangeBGImagePath(Conf.SongBGImagePath);
-						break;
-					case ContentType.PlainText:
-						content.ChangeBGImagePath(Conf.TextBGImagePath);
-						break;
-					case ContentType.BibleVerseIdx:
-					case ContentType.BibleVerseRef:
-                    case ContentType.BibleVerse:
-						content.ChangeBGImagePath(Conf.BibleBGImagePath);
-						break;
-				}
-				_MainForm.DisplayPreview.UpdateDisplay(true);
-			}
-			#endregion
+            HandleThemeChange();
 
 			Conf.ServerAddress = this.ServerAddress.Text;
 			Conf.ListeningPort = (int)this.ListeningPort.Value;
@@ -147,6 +149,17 @@ namespace DreamBeam {
 			this.Close();
 		}
 
+        private void Options_Cancelbtn_Click(object sender, System.EventArgs e) {
+            // Restore original settings in case the user made changes
+            //_MainForm.Config = (Config)Config.DeserializeFrom(new Config(),
+            //    Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".config.xml"));
+            //this.Conf = _MainForm.Config;
+
+            //HandleThemeChange();
+            this.PopulateControls();
+            HandleThemeChange();
+            this.Close();
+        }
 
 		private void Select_Sword_Click(object sender, System.EventArgs e) {
 			this.openFileDialog1.FileName = Path.Combine(this.Sword_PathBox.Text, "sword.exe");
@@ -222,12 +235,6 @@ namespace DreamBeam {
             this.songThemeWidget.Theme = Conf.theme.Song as Theme;
             this.bibleFormatWidget.Theme = Conf.theme.Bible as Theme;
             this.sermonThemeWidget.Theme = Conf.theme.Sermon as Theme;
-        }
-
-        private void Options_Cancelbtn_Click(object sender, System.EventArgs e) {
-			// Restore original settings in case the user made changes
-			this.PopulateControls();
-			this.Close();
         }
 
         private void BeamBox_ColorButton_Click(object sender, System.EventArgs e) {
@@ -499,6 +506,22 @@ namespace DreamBeam {
 				}
 			}
 		}
+
+        private void songThemeWidget_ControlChangedEvent(object sender, EventArgs e) {
+            HandleThemeChange();
+        }
+
+        private void bibleFormatWidget_ControlChangedEvent(object sender, EventArgs e) {
+            HandleThemeChange();
+        }
+
+        private void sermonThemeWidget_ControlChangedEvent(object sender, EventArgs e) {
+            HandleThemeChange();
+        }
+
+        private void bibleFormatWidget_Load(object sender, EventArgs e) {
+
+        }
 
 	}
 }

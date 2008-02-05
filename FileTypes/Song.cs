@@ -1179,6 +1179,10 @@ namespace DreamBeam {
 		public void ChangeBGImagePath(string newPath) {
 			this.BGImagePath = newPath;
 		}
+        public void ChangeTheme(Theme t) {
+            ChangeBGImagePath(t.BGImagePath);
+            this.format = t.TextFormat;
+        }
 
 		public virtual ContentIdentity GetIdentity() {
 			ContentIdentity ident = new ContentIdentity();

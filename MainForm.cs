@@ -468,6 +468,8 @@ namespace DreamBeam {
 			if (CommandLine["console"] != null) { Tools.AllocConsole(); }
 
 			bibleLibFile = Path.Combine(Tools.GetAppCachePath(), "BibleLib.bin");
+
+            // Make sure we do the same thing when the Options dialog is "cancelled"
 			this.Config = (Config)Config.DeserializeFrom(new Config(), 
                 Path.Combine(Tools.GetAppDocPath(), ConfigSet + ".config.xml"));
 
@@ -1872,7 +1874,7 @@ namespace DreamBeam {
                         ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(196, 731, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
                                     ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(196, 294, new TD.SandDock.DockControl[] {
                                                 this.RightDocks_PreviewScreen,
-                                                this.RightDocks_LiveScreen}, this.RightDocks_LiveScreen))),
+                                                this.RightDocks_LiveScreen}, this.RightDocks_PreviewScreen))),
                                     ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(196, 432, new TD.SandDock.DockControl[] {
                                                 this.Dock_BibleTools,
                                                 this.Dock_SongTools}, this.Dock_BibleTools)))}))),
@@ -4074,7 +4076,10 @@ namespace DreamBeam {
 
 		#region Help
 		private void HelpIntro_Activate(object sender, System.EventArgs e) {
-            System.Diagnostics.Process.Start(Path.Combine(Application.StartupPath, "DreamBeam.html"));
+            string helpFile = Tools.CombinePaths(Application.StartupPath, "Help", "DreamBeam.html");
+            if (Tools.FileExists(helpFile)) {
+                System.Diagnostics.Process.Start(helpFile);
+            }
 		}
 
 		private void AboutButton_Activate(object sender, System.EventArgs e) {
@@ -5158,7 +5163,9 @@ namespace DreamBeam {
 
 		private void Sermon_DocManager_Control_TextChanged(object sender, System.EventArgs e) {
 			DocumentManager.Document d = this.Sermon_DocManager.FocusedDocument;
-			d.Text = this.getSermonDocumentTitle(d.Control.Text);
+            if (d != null && d.Control != null && d.Control.Text != null) {
+                d.Text = this.getSermonDocumentTitle(d.Control.Text);
+            }
 		}
 
 		private string getSermonDocumentTitle(string text) {

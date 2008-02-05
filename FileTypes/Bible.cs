@@ -15,6 +15,7 @@ namespace DreamBeam.FileTypes {
 
 	#region Enums
 	// These are used as array indices so they must be numbered sequentially, from 0
+    // They must also match the order of the tabs in the Options dialog box.
 	public enum BibleTextType {
 		Verse,
 		Reference,
@@ -802,6 +803,10 @@ namespace DreamBeam.FileTypes {
 		public void ChangeBGImagePath(string newPath) {
 			this.BGImagePath = newPath;
 		}
+        public void ChangeTheme(Theme t) {
+            ChangeBGImagePath(t.BGImagePath);
+            this.format = t.TextFormat;
+        }
 
 //		public string GetIdentity() {
 //			return this.bible.version + "\t" + this.verseIdx + " DEBUG: " + this.bible[this.verseIdx].t;

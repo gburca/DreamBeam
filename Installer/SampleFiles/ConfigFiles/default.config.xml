@@ -3,8 +3,8 @@
   <Version>0.72</Version>
   <BeamBoxPosX>0</BeamBoxPosX>
   <BeamBoxPosY>0</BeamBoxPosY>
-  <BeamBoxSizeX>640</BeamBoxSizeX>
-  <BeamBoxSizeY>480</BeamBoxSizeY>
+  <BeamBoxSizeX>800</BeamBoxSizeX>
+  <BeamBoxSizeY>600</BeamBoxSizeY>
   <BeamBoxAutoPosSize>false</BeamBoxAutoPosSize>
   <BeamBoxScreenNum>0</BeamBoxScreenNum>
   <PreRender>true</PreRender>
@@ -13,7 +13,7 @@
   <useDirect3D>false</useDirect3D>
   <OutlineSize>3</OutlineSize>
   <BibleLang>en</BibleLang>
-  <LastBibleUsed>RomCor</LastBibleUsed>
+  <LastBibleUsed />
   <ShowBibleTranslation>false</ShowBibleTranslation>
   <PlayListString />
   <RememberPanelLocations>false</RememberPanelLocations>
@@ -36,31 +36,6 @@
           <Bounds>
             <Location>
               <X>5</X>
-              <Y>10</Y>
-            </Location>
-            <Size>
-              <Width>90</Width>
-              <Height>85</Height>
-            </Size>
-            <X>5</X>
-            <Y>10</Y>
-            <Width>90</Width>
-            <Height>85</Height>
-          </Bounds>
-          <Effects>Normal</Effects>
-          <FontFamily>Arial</FontFamily>
-          <FontEmSize>36</FontEmSize>
-          <FontStyle>Regular</FontStyle>
-          <XmlTextColor>NamedColor:White</XmlTextColor>
-          <XmlOutlineColor>NamedColor:Red</XmlOutlineColor>
-        </BeamTextFormat>
-        <BeamTextFormat>
-          <OutlineSize>1</OutlineSize>
-          <HAlignment>Center</HAlignment>
-          <VAlignment>Center</VAlignment>
-          <Bounds>
-            <Location>
-              <X>5</X>
               <Y>2</Y>
             </Location>
             <Size>
@@ -71,6 +46,31 @@
             <Y>2</Y>
             <Width>90</Width>
             <Height>8</Height>
+          </Bounds>
+          <Effects>Normal</Effects>
+          <FontFamily>Arial</FontFamily>
+          <FontEmSize>36</FontEmSize>
+          <FontStyle>Regular</FontStyle>
+          <XmlTextColor>NamedColor:White</XmlTextColor>
+          <XmlOutlineColor>NamedColor:Red</XmlOutlineColor>
+        </BeamTextFormat>
+        <BeamTextFormat>
+          <OutlineSize>1</OutlineSize>
+          <HAlignment>Near</HAlignment>
+          <VAlignment>Center</VAlignment>
+          <Bounds>
+            <Location>
+              <X>5</X>
+              <Y>12</Y>
+            </Location>
+            <Size>
+              <Width>90</Width>
+              <Height>83</Height>
+            </Size>
+            <X>5</X>
+            <Y>12</Y>
+            <Width>90</Width>
+            <Height>83</Height>
           </Bounds>
           <Effects>Normal</Effects>
           <FontFamily>Arial</FontFamily>
@@ -108,7 +108,7 @@
     </Song>
     <Bible>
       <Version>0.72</Version>
-      <BGImagePath>Backgrounds\red.jpg</BGImagePath>
+      <BGImagePath>Backgrounds\TilesBlue.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>
@@ -117,16 +117,16 @@
           <Bounds>
             <Location>
               <X>5</X>
-              <Y>15</Y>
+              <Y>12</Y>
             </Location>
             <Size>
               <Width>90</Width>
-              <Height>80</Height>
+              <Height>83</Height>
             </Size>
             <X>5</X>
-            <Y>15</Y>
+            <Y>12</Y>
             <Width>90</Width>
-            <Height>80</Height>
+            <Height>83</Height>
           </Bounds>
           <Effects>Normal</Effects>
           <FontFamily>Arial</FontFamily>
@@ -189,7 +189,7 @@
     </Bible>
     <Sermon>
       <Version>0.72</Version>
-      <BGImagePath>Backgrounds\TilesBlue.jpg</BGImagePath>
+      <BGImagePath>Backgrounds\white.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>

@@ -28,14 +28,12 @@ namespace DreamBeam {
             this.BgImagePath = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textFormatOptions1 = new DreamBeam.TextFormatOptions();
             this.saveAsBtn = new System.Windows.Forms.Button();
             this.openBtn = new System.Windows.Forms.Button();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.textFormatOptions1 = new DreamBeam.TextFormatOptions();
             this.groupBox1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -86,6 +84,13 @@ namespace DreamBeam {
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // textFormatOptions1
+            // 
+            this.textFormatOptions1.Location = new System.Drawing.Point(6, 5);
+            this.textFormatOptions1.Name = "textFormatOptions1";
+            this.textFormatOptions1.Size = new System.Drawing.Size(392, 206);
+            this.textFormatOptions1.TabIndex = 0;
+            // 
             // saveAsBtn
             // 
             this.saveAsBtn.Location = new System.Drawing.Point(429, 80);
@@ -98,7 +103,7 @@ namespace DreamBeam {
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(530, 80);
+            this.openBtn.Location = new System.Drawing.Point(429, 109);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(75, 23);
             this.openBtn.TabIndex = 3;
@@ -106,38 +111,20 @@ namespace DreamBeam {
             this.openBtn.UseVisualStyleBackColor = true;
             this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
             // 
-            // pictureBox
-            // 
-            this.pictureBox.BackColor = System.Drawing.Color.White;
-            this.pictureBox.Location = new System.Drawing.Point(429, 131);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(176, 166);
-            this.pictureBox.TabIndex = 4;
-            this.pictureBox.TabStop = false;
-            // 
-            // textFormatOptions1
-            // 
-            this.textFormatOptions1.Location = new System.Drawing.Point(6, 5);
-            this.textFormatOptions1.Name = "textFormatOptions1";
-            this.textFormatOptions1.Size = new System.Drawing.Size(392, 206);
-            this.textFormatOptions1.TabIndex = 0;
-            // 
             // ThemeWidget
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.openBtn);
             this.Controls.Add(this.saveAsBtn);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.groupBox1);
             this.Name = "ThemeWidget";
-            this.Size = new System.Drawing.Size(619, 312);
+            this.Size = new System.Drawing.Size(513, 312);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -152,7 +139,6 @@ namespace DreamBeam {
         private TextFormatOptions textFormatOptions1;
         private System.Windows.Forms.Button saveAsBtn;
         private System.Windows.Forms.Button openBtn;
-        private System.Windows.Forms.PictureBox pictureBox;
 
     }
 }

@@ -34,7 +34,10 @@
 	Var /GLOBAL USERFILES
 
 	SetCompressor lzma
+	ShowInstDetails show
 
+	; Request application privileges for Windows Vista
+	RequestExecutionLevel user
 
 ;--------------------------------
 ; Interface Configuration
@@ -43,8 +46,9 @@
 	!define MUI_HEADERIMAGE_BITMAP "images\banner2.bmp"
 	!define MUI_WELCOMEFINISHPAGE_BITMAP "images\balken.bmp"
 	!define MUI_ABORTWARNING
-	!define MUI_FINISHPAGE_RUN DreamBeam.exe
-	!define MUI_FINISHPAGE_RUN_NOTCHECKED
+	; Doesn't seem to work. How do we specify the full path?
+	;!define MUI_FINISHPAGE_RUN "DreamBeam.exe"
+	;!define MUI_FINISHPAGE_RUN_NOTCHECKED
 
 ;--------------------------------
 ; Pages
@@ -96,6 +100,9 @@ Section "DreamBeam" SDreamBeam
 	; DreamBeam...
 	File /r /x .svn /x *.xml DreamBeam\*.*
 	File /r /x .svn Libs\*.*
+
+	SetOutPath "$INSTDIR\Help"
+	File /r /x .svn Help\*.*
 	
 	RegDll "$INSTDIR\ActiveDiatheke.ocx"
 	
@@ -176,26 +183,28 @@ Section "un.Uninstall DreamBeam" SUnDreamBeam
 	UnRegDll "$INSTDIR\ActiveDiatheke.ocx"
 
 	; Delete DreamBeam Files
-	Delete "$INSTDIR\*.*"
 	Delete "$SMPROGRAMS\DreamBeam\DreamBeam.lnk"
 	Delete "$DESKTOP\DreamBeam.lnk"
-	RMDir /r "$INSTDIR\de-DE"
-	RMDir /r "$INSTDIR\de"
-	RMDir /r "$INSTDIR\fr"
-	RMDir /r "$INSTDIR\Sword"
 
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}"
 
 	; Delete Startmenu Entries
-	RMDir	/r "$SMPROGRAMS\${PRODUCT}"
+	RMDir /r "$SMPROGRAMS\${PRODUCT}"
 	DeleteRegValue HKLM "Software\${PRODUCT}" "UserFilesDir"	; Remove $USERFILES entry
 	DeleteRegKey /ifempty HKLM "Software\${PRODUCT}"
 
 	; Delete Uninstaller
 	Delete "$INSTDIR\Uninstall.exe"
 	
-	; Remove install directory (only if empty)
-	RMDir "$INSTDIR"
+	; Remove install directory
+	RMDir /r /REBOOTOK "$INSTDIR"
+	; Or delete things one by one. But it's very easy to forget some things this way.
+	;Delete "$INSTDIR\*.*"
+	;RMDir /r "$INSTDIR\de-DE"
+	;RMDir /r "$INSTDIR\de"
+	;RMDir /r "$INSTDIR\fr"
+	;RMDir /r "$INSTDIR\Sword"
+
 
 	; This should contain the directory returned by Tools.GetAppCachePath() in the App.
 	RMDir /r "$APPDATA\${PRODUCT}\Cache"
