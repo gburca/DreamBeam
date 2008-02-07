@@ -14,13 +14,14 @@ namespace DreamBeam {
 
     public partial class Options : System.Windows.Forms.Form {
 
-		public Config Conf;
+		public Config Conf, origConf;
 		private Language Lang = new Language();
 		public MainForm _MainForm = null;
 
         public Options(MainForm mainForm) {
 			_MainForm = mainForm;
 			this.Conf = _MainForm.Config;
+            this.origConf = (Config)Conf.Clone();
 
 			InitializeComponent();
             this.DataDirectory.Text = Tools.GetAppDocPath();
@@ -156,6 +157,9 @@ namespace DreamBeam {
             //this.Conf = _MainForm.Config;
 
             //HandleThemeChange();
+
+            _MainForm.Config = this.origConf;
+            this.Conf = this.origConf;
             this.PopulateControls();
             HandleThemeChange();
             this.Close();
@@ -175,7 +179,7 @@ namespace DreamBeam {
 		}
 
 		private void PopulateControls() {
-			this.Conf = _MainForm.Config;
+			//this.Conf = _MainForm.Config;
 			this.SetLanguage();
 			this.Sword_PathBox.Text = this.Conf.SwordPath;
 			this.Sword_LanguageBox.SelectedItem = this.Conf.BibleLang;
@@ -517,10 +521,6 @@ namespace DreamBeam {
 
         private void sermonThemeWidget_ControlChangedEvent(object sender, EventArgs e) {
             HandleThemeChange();
-        }
-
-        private void bibleFormatWidget_Load(object sender, EventArgs e) {
-
         }
 
 	}

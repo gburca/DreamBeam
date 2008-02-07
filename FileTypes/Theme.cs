@@ -4,11 +4,12 @@ using System.IO;
 using System.Xml.Serialization;
 using DreamBeam.FileTypes;
 using System.Drawing;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace DreamBeam {
 
     [Serializable()]
-    public abstract class Theme {
+    public abstract class Theme : ICloneable {
         public string Version;
         public string BGImagePath = null;
         public BeamTextFormat[] TextFormat;
@@ -128,6 +129,20 @@ namespace DreamBeam {
             return null;
         }
 
+
+        #region ICloneable Members
+
+        public object Clone() {
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(ms, this);
+            ms.Position = 0;
+            object clone = bf.Deserialize(ms);
+            ms.Close();
+            return clone;
+        }
+
+        #endregion
     }
 
     [Serializable()]

@@ -1117,7 +1117,6 @@ namespace DreamBeam {
         "Verse",
         "Reference",
         "Translation"};
-            this.bibleFormatWidget.Load += new System.EventHandler(this.bibleFormatWidget_Load);
             this.bibleFormatWidget.ControlChangedEvent += new System.EventHandler(this.bibleFormatWidget_ControlChangedEvent);
             // 
             // TextToolFormat_Tab

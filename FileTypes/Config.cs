@@ -8,6 +8,8 @@ using System.Xml.Serialization;
 using System.Text.RegularExpressions;
 using System.Collections;
 using DreamBeam.FileTypes;
+using System.ComponentModel;
+using System.Runtime.Serialization.Formatters.Binary;
 
 
 namespace DreamBeam
@@ -23,7 +25,7 @@ namespace DreamBeam
 
 
 	[Serializable()]
-	public class Config
+	public class Config : ICloneable
 	{
 
 		#region Variables and Properties
@@ -68,7 +70,13 @@ namespace DreamBeam
 		public bool HideMouse = true;
 		public bool AlwaysOnTop = false;
 
-		public System.Drawing.Color BackgroundColor = Color.Black;
+		[XmlIgnore] public System.Drawing.Color BackgroundColor = Color.Black;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public string XmlBackgroundColor {
+            get { return Tools.SerializeColor(BackgroundColor); }
+            set { BackgroundColor = Tools.DeserializeColor(value); }
+        }
+
 		public bool LoopMedia = false;
 		public bool LoopAutoPlay = false;
 		public int AutoPlayChangeTime = 2;
@@ -222,5 +230,19 @@ namespace DreamBeam
 		}
 
 
-	} // End of Config class
+
+        #region ICloneable Members
+
+        public virtual object Clone() {
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(ms, this);
+            ms.Position = 0;
+            object clone = bf.Deserialize(ms);
+            ms.Close();
+            return clone;
+        }
+
+        #endregion
+    } // End of Config class
 }

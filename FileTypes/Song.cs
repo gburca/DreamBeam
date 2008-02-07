@@ -1220,10 +1220,8 @@ namespace DreamBeam {
 		}
 
 		public virtual NewSong Clone() {
-			NewSong s = new NewSong();
-
 			// TODO: Make a proper clone, or else the Live screen will show updates made to preview screen.
-			s = this.MemberwiseClone() as NewSong;
+			NewSong s = this.MemberwiseClone() as NewSong;
 			s.SongLyrics = (ArrayList)this.SongLyrics.Clone();
 			s.Sequence = (ArrayList)this.Sequence.Clone();
 

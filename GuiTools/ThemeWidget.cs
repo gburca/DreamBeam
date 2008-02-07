@@ -73,7 +73,7 @@ namespace DreamBeam {
                 for (int i = 0; i < Math.Min(value.TextFormat.Length, tabControl.TabPages.Count); i++) {
                     getFormatControl(i).Format = value.TextFormat[i];
                 }
-                this.theme = value;
+                this.theme = (Theme)value.Clone();
             }
             get {
                 int tabs = tabControl.TabPages.Count;

@@ -8,6 +8,8 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Xml.Serialization;
 using System.Xml;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 
 namespace DreamBeam
@@ -654,15 +656,24 @@ namespace DreamBeam
 		}
 
 		public virtual BeamTextFormat Clone() {
-			BeamTextFormat f = new BeamTextFormat();
+            //BeamTextFormat f = new BeamTextFormat();
 
-			// Start with a flat, memberwise copy
-			f = this.MemberwiseClone() as BeamTextFormat;
+            //// Start with a flat, memberwise copy
+            //f = this.MemberwiseClone() as BeamTextFormat;
 
-			// Copy things that need special attention
-			//f.FontFamily = (string)this.FontFamily.Clone();
-			//f.Effects = (string)this.Effects.Clone();
-			return f;
+            //// Copy things that need special attention
+            ////f.FontFamily = (string)this.FontFamily.Clone();
+            ////f.Effects = (string)this.Effects.Clone();
+            //return f;
+
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(ms, this);
+            ms.Position = 0;
+            object clone = bf.Deserialize(ms);
+            ms.Close();
+
+            return (BeamTextFormat)clone;
 		}
 
 		#endregion
