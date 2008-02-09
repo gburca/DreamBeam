@@ -33,9 +33,9 @@ namespace DreamBeam {
 
 
 
-    /// <summary>
-    /// Zusammenfassende Beschreibung für Class
-    /// </summary>
+	/// <summary>
+	/// Zusammenfassende Beschreibung für Class
+	/// </summary>
 	public class Tools {
 		public Tools() {
 		}
@@ -45,10 +45,10 @@ namespace DreamBeam {
 		/// </summary>
 		public static string Reverse(string str) {
 			/*termination condition*/
-			if (1== str.Length ) {
-				return str ;
+			if (1 == str.Length) {
+				return str;
 			} else {
-				return Reverse( str.Substring (1) ) + str.Substring (0,1);
+				return Reverse(str.Substring(1)) + str.Substring(0, 1);
 			}
 		}
 		/// <summary>
@@ -56,8 +56,8 @@ namespace DreamBeam {
 		/// </summary>
 		public static int Count(string Input, string Needle) {
 			int x = 1;
-			while (Input.IndexOf(Needle)>= 0) {
-				Input=Input.Substring(Input.IndexOf(Needle)+Needle.Length);
+			while (Input.IndexOf(Needle) >= 0) {
+				Input = Input.Substring(Input.IndexOf(Needle) + Needle.Length);
 				x++;
 			}
 			return x;
@@ -75,88 +75,87 @@ namespace DreamBeam {
 			System.TimeSpan span = DateTime.Now.Subtract(Tools.lastTime);
 			string last = Tools.lastTime.TimeOfDay.ToString();
 			Tools.lastTime = DateTime.Now;
-			res = "Last time " + last +	" now " + Tools.lastTime.TimeOfDay +
+			res = "Last time " + last + " now " + Tools.lastTime.TimeOfDay +
 					"  Elapsed " + span + " -> " + msg;
 			Console.WriteLine(res);
 			return res;
 		}
 
 
-        public static System.Drawing.Size VideoProportions(System.Drawing.Size WindowSize, System.Drawing.Size VideoSize) {
-            double WindowProportion= (double)WindowSize.Height / (double)WindowSize.Width;
+		public static System.Drawing.Size VideoProportions(System.Drawing.Size WindowSize, System.Drawing.Size VideoSize) {
+			double WindowProportion = (double)WindowSize.Height / (double)WindowSize.Width;
 
-            double VideoProportion = (double)VideoSize.Height / (double)VideoSize.Width;
+			double VideoProportion = (double)VideoSize.Height / (double)VideoSize.Width;
 
-            if (WindowProportion > VideoProportion) {
-                return (new System.Drawing.Size(WindowSize.Width,(int)(WindowSize.Width*VideoProportion)));
-            } else if(WindowProportion < VideoProportion) {
-                return (new System.Drawing.Size((int)(WindowSize.Height/VideoProportion),WindowSize.Height));
-            }
-            return (WindowSize);
-        }
+			if (WindowProportion > VideoProportion) {
+				return (new System.Drawing.Size(WindowSize.Width, (int)(WindowSize.Width * VideoProportion)));
+			} else if (WindowProportion < VideoProportion) {
+				return (new System.Drawing.Size((int)(WindowSize.Height / VideoProportion), WindowSize.Height));
+			}
+			return (WindowSize);
+		}
 
-        /// <summary>
-        /// This is the directory that contains the song files, backgrounds, configs, etc...
-        /// 
-        /// In Vista this can not be a subdirectory of "Program Files" due to
-        /// permission issues after the SW is installed.
-        /// 
-        /// This directory is selected by the user during installation and will be
-        /// saved to the registry. It defaults to the same directory as the one
-        /// returned by Tools.GetCommonAppDataPath() if there's a problem with reading
-        /// the registry entry.
-        /// </summary>
-        /// <returns></returns>
-        public static string GetAppDocPath()
-        {
-            string defaultPath = GetCommonAppDataPath();
-            RegistryKey masterKey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\DreamBeam");
-            if (masterKey == null) {
-                // Key doesn't exist and we could not create it (permissions?)
-                Directory.CreateDirectory(defaultPath);
-                return defaultPath;
-            } else {
-                defaultPath = masterKey.GetValue("UserFilesDir", defaultPath).ToString();
-                masterKey.Close();
-                Directory.CreateDirectory(defaultPath);
-                return defaultPath;
-            }
-        }
+		/// <summary>
+		/// This is the directory that contains the song files, backgrounds, configs, etc...
+		/// 
+		/// In Vista this can not be a subdirectory of "Program Files" due to
+		/// permission issues after the SW is installed.
+		/// 
+		/// This directory is selected by the user during installation and will be
+		/// saved to the registry. It defaults to the same directory as the one
+		/// returned by Tools.GetCommonAppDataPath() if there's a problem with reading
+		/// the registry entry.
+		/// </summary>
+		/// <returns></returns>
+		public static string GetAppDocPath() {
+			string defaultPath = GetCommonAppDataPath();
+			RegistryKey masterKey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\DreamBeam");
+			if (masterKey == null) {
+				// Key doesn't exist and we could not create it (permissions?)
+				Directory.CreateDirectory(defaultPath);
+				return defaultPath;
+			} else {
+				defaultPath = masterKey.GetValue("UserFilesDir", defaultPath).ToString();
+				masterKey.Close();
+				Directory.CreateDirectory(defaultPath);
+				return defaultPath;
+			}
+		}
 
-        /// <summary>
-        /// This function should return the same thing that NSIS returns for $APPDATA\${PRODUCT}
-        /// Ex: D:\Profiles\All Users\Application Data\DreamBeam
-        /// </summary>
-        /// <returns>A place where the application should store data that is common among machine users.</returns>
-        public static string GetCommonAppDataPath() {
-            string fullPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-            fullPath = Path.Combine(fullPath, "DreamBeam");
-            Directory.CreateDirectory(fullPath);
-            return fullPath;
-        }
+		/// <summary>
+		/// This function should return the same thing that NSIS returns for $APPDATA\${PRODUCT}
+		/// Ex: D:\Profiles\All Users\Application Data\DreamBeam
+		/// </summary>
+		/// <returns>A place where the application should store data that is common among machine users.</returns>
+		public static string GetCommonAppDataPath() {
+			string fullPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+			fullPath = Path.Combine(fullPath, "DreamBeam");
+			Directory.CreateDirectory(fullPath);
+			return fullPath;
+		}
 
-        /// <summary>
-        /// The cache is probably not compatible between versions, so we use a cache directory
-        /// which contains the app version number.
-        /// 
-        /// Application.CommonAppDataPath contains build and revision number so if
-        /// we save settings to that directory we won't be able to read them back
-        /// during development because the build and/or revision number keeps
-        /// changing.
-        /// 
-        /// For proper uninstall of DreamBeam, the parent of the directory returned
-        /// by this function should be the same as NSIS's $APPDATA\${PRODUCT}\Cache
-        /// 
-        /// </summary>
-        /// <returns>A directory where the application should store cached data.
-        /// Basically the Application.CommonAppDataPath with the build and version number removed.</returns>
-        public static string GetAppCachePath() {
-            string fullPath = CombinePaths(
-                GetCommonAppDataPath(),
-                "Cache",
-                GetAppVersion());
-            return fullPath;
-        }
+		/// <summary>
+		/// The cache is probably not compatible between versions, so we use a cache directory
+		/// which contains the app version number.
+		/// 
+		/// Application.CommonAppDataPath contains build and revision number so if
+		/// we save settings to that directory we won't be able to read them back
+		/// during development because the build and/or revision number keeps
+		/// changing.
+		/// 
+		/// For proper uninstall of DreamBeam, the parent of the directory returned
+		/// by this function should be the same as NSIS's $APPDATA\${PRODUCT}\Cache
+		/// 
+		/// </summary>
+		/// <returns>A directory where the application should store cached data.
+		/// Basically the Application.CommonAppDataPath with the build and version number removed.</returns>
+		public static string GetAppCachePath() {
+			string fullPath = CombinePaths(
+				GetCommonAppDataPath(),
+				"Cache",
+				GetAppVersion());
+			return fullPath;
+		}
 
 
 		/// <summary>
@@ -170,33 +169,33 @@ namespace DreamBeam {
 			// We need at least 1 char for file name + 4 chars for extension ".jpg"
 			if (FileName == null || FileName.Length < 5) return null;
 			FileInfo fi = new FileInfo(FileName);
-			if ( FileExists(fi.FullName) ) {
+			if (FileExists(fi.FullName)) {
 				return fi.FullName;
 			}
 
 			fi = new FileInfo(Path.Combine(Tools.GetAppDocPath(), FileName));
-			if ( FileExists(fi.FullName) ) {
+			if (FileExists(fi.FullName)) {
 				return fi.FullName;
 			}
 
 			return null;
 		}
 
-        public static string CombinePaths(params string[] paths) {
-            string path = "";
-            foreach (string p in paths) {
-                path = Path.Combine(path, p);
-            }
-            return path;
-        }
+		public static string CombinePaths(params string[] paths) {
+			string path = "";
+			foreach (string p in paths) {
+				path = Path.Combine(path, p);
+			}
+			return path;
+		}
 
-        public static string GetAppVersion() {
-            Version vrs = new Version(Application.ProductVersion);
-            return vrs.Major + "." + vrs.Minor;
-        }
+		public static string GetAppVersion() {
+			Version vrs = new Version(Application.ProductVersion);
+			return vrs.Major + "." + vrs.Minor;
+		}
 
 		[DllImport("kernel32.dll")]
-		  public static extern bool Beep(int frequency, int duration);
+		public static extern bool Beep(int frequency, int duration);
 
 		/// <summary>
 		/// TODO: Replace calls to this function with String.IsNullOrEmpty in .NET 2.0
@@ -292,7 +291,7 @@ namespace DreamBeam {
 				case StringAlignment.Near:
 					cont.X = box.X; break;
 				case StringAlignment.Center:
-					cont.X = box.X + (box.Width - cont.Width)/2; break;
+					cont.X = box.X + (box.Width - cont.Width) / 2; break;
 				case StringAlignment.Far:
 					cont.X = box.X + (box.Width - cont.Width); break;
 			}
@@ -302,7 +301,7 @@ namespace DreamBeam {
 				case StringAlignment.Near:
 					cont.Y = box.Y; break;
 				case StringAlignment.Center:
-					cont.Y = box.Y + (box.Height - cont.Height)/2; break;
+					cont.Y = box.Y + (box.Height - cont.Height) / 2; break;
 				case StringAlignment.Far:
 					cont.Y = box.Y + (box.Height - cont.Height); break;
 			}
@@ -333,12 +332,12 @@ namespace DreamBeam {
 		/// <param name="color"></param>
 		/// <returns></returns>
 		public static string SerializeColor(Color color) {
-			if( color.IsNamedColor )
-				return string.Format("{0}:{1}", 
+			if (color.IsNamedColor)
+				return string.Format("{0}:{1}",
 					ColorFormat.NamedColor, color.Name);
 			else
-				return string.Format("{0}:{1}:{2}:{3}:{4}", 
-					ColorFormat.ARGBColor, 
+				return string.Format("{0}:{1}:{2}:{3}:{4}",
+					ColorFormat.ARGBColor,
 					color.A, color.R, color.G, color.B);
 		}
 
@@ -350,12 +349,12 @@ namespace DreamBeam {
 		public static Color DeserializeColor(string color) {
 			byte a, r, g, b;
 
-			string [] pieces = color.Split(new char[] {':'});
-		
-			ColorFormat colorType = (ColorFormat) 
+			string[] pieces = color.Split(new char[] { ':' });
+
+			ColorFormat colorType = (ColorFormat)
 				Enum.Parse(typeof(ColorFormat), pieces[0], true);
 
-			switch(colorType) {
+			switch (colorType) {
 				case ColorFormat.NamedColor:
 					return Color.FromName(pieces[1]);
 
@@ -364,14 +363,14 @@ namespace DreamBeam {
 					r = byte.Parse(pieces[2]);
 					g = byte.Parse(pieces[3]);
 					b = byte.Parse(pieces[4]);
-			
+
 					return Color.FromArgb(a, r, g, b);
 			}
 			return Color.Empty;
 		}
 
 
-		[DllImport("kernel32.dll", SetLastError=true)]
+		[DllImport("kernel32.dll", SetLastError = true)]
 		static extern int FoldString(MapFlags dwMapFlags, string lpSrcStr, int cchSrc,
 			[Out] StringBuilder lpDestStr, int cchDest);
 
@@ -380,45 +379,47 @@ namespace DreamBeam {
 			// "sb" must be large enough to store the converted string, else we'll get an exception.
 			StringBuilder sb = new StringBuilder(stIn.Length * 2 + 10);
 
-			int ret = FoldString(MapFlags.MAP_COMPOSITE , stIn, stIn.Length, sb, stIn.Length * 2);
+			int ret = FoldString(MapFlags.MAP_COMPOSITE, stIn, stIn.Length, sb, stIn.Length * 2);
 			sb.Length = ret;	// Otherwise we end up with garbage at the end because of "Length * 2" above
 			return Regex.Replace(sb.ToString(), @"\p{Sk}", "");
 		}
 
-        public static XmlNode RenameXmlNode(XmlNode node, string namespaceURI, string qualifiedName) {
-            if (node.NodeType == XmlNodeType.Element) {
-                XmlElement oldElement = (XmlElement)node;
-                XmlElement newElement = node.OwnerDocument.CreateElement(qualifiedName, namespaceURI);
+		public static XmlNode RenameXmlNode(XmlNode node, string namespaceURI, string qualifiedName) {
+			if (node.NodeType == XmlNodeType.Element) {
+				XmlElement oldElement = (XmlElement)node;
+				XmlElement newElement = node.OwnerDocument.CreateElement(qualifiedName, namespaceURI);
 
-                while (oldElement.HasAttributes) {
-                    newElement.SetAttributeNode(oldElement.RemoveAttributeNode(oldElement.Attributes[0]));
-                }
+				while (oldElement.HasAttributes) {
+					newElement.SetAttributeNode(oldElement.RemoveAttributeNode(oldElement.Attributes[0]));
+				}
 
-                while (oldElement.HasChildNodes) {
-                    newElement.AppendChild(oldElement.RemoveChild(oldElement.FirstChild));
-                }
+				while (oldElement.HasChildNodes) {
+					newElement.AppendChild(oldElement.RemoveChild(oldElement.FirstChild));
+				}
 
-                if (oldElement.ParentNode != null) {
-                    oldElement.ParentNode.ReplaceChild(newElement, oldElement);
-                }
+				if (oldElement.ParentNode != null) {
+					oldElement.ParentNode.ReplaceChild(newElement, oldElement);
+				}
 
-                return newElement;
-            } else {
-                return null;
-            }
-        }
+				return newElement;
+			} else {
+				return null;
+			}
+		}
 
 		// We use this to open or close the console programatically
-		[DllImport("kernel32.dll")] public static extern Boolean AllocConsole();
-		[DllImport("kernel32.dll")] public static extern Boolean FreeConsole();
+		[DllImport("kernel32.dll")]
+		public static extern Boolean AllocConsole();
+		[DllImport("kernel32.dll")]
+		public static extern Boolean FreeConsole();
 
-    }
+	}
 
 
 	[Serializable]
 	public class SerializableHashtable : Hashtable,
 		System.Xml.Serialization.IXmlSerializable {
-		
+
 		#region IXmlSerializable Members
 
 		#region Node class
@@ -446,12 +447,12 @@ namespace DreamBeam {
 		/// </summary>
 		public void WriteXml(System.Xml.XmlWriter writer) {
 			XmlSerializer xs = new XmlSerializer(typeof(System.Collections.ArrayList),
-				new System.Type[]{typeof(Node)});
+				new System.Type[] { typeof(Node) });
 			ArrayList list = new ArrayList();
-			foreach(object key in this.Keys) {
+			foreach (object key in this.Keys) {
 				list.Add(new Node(key, this[key]));
 			}
-			xs.Serialize(writer,list);
+			xs.Serialize(writer, list);
 		}
 
 		public System.Xml.Schema.XmlSchema GetSchema() {
@@ -465,13 +466,13 @@ namespace DreamBeam {
 		/// </summary>
 		public void ReadXml(System.Xml.XmlReader reader) {
 			XmlSerializer xs = new XmlSerializer(typeof(System.Collections.ArrayList),
-				new System.Type[]{typeof(Node)});
+				new System.Type[] { typeof(Node) });
 
 			//Move the reader into the ArrayList element.
 			reader.Read();
-			ArrayList list  = xs.Deserialize(reader) as ArrayList;
+			ArrayList list = xs.Deserialize(reader) as ArrayList;
 
-			if(list == null)
+			if (list == null)
 				return;
 
 			//Reload the hashTable.

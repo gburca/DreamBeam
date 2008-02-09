@@ -32,26 +32,26 @@ using System.Runtime.Remoting.Channels.Http;
 using CookComputing.XmlRpc;
 using System.Xml.Serialization;
 
-namespace DreamBeam	{
+namespace DreamBeam {
 
 	/// <summary>
 	/// Each Song, BibleVerse, or SermonText piece of content needs to know how
 	/// to draw itself (possibly caching and/or prerendering). It also needs to
-    /// know how to switch to the next/previous strophe, verse, sermon tab. We
+	/// know how to switch to the next/previous strophe, verse, sermon tab. We
 	/// inherit from ICloneable so that we can pass from a Preview display to a
-    /// Live display a clone that is independent.
+	/// Live display a clone that is independent.
 	/// </summary>
 	public interface IContentOperations : ICloneable {
 		Bitmap GetBitmap(int Width, int Height);
 		bool Next();
 		bool Prev();
 		void ChangeBGImagePath(string newPath);
-        void ChangeTheme(Theme theme);
+		void ChangeTheme(Theme theme);
 
 		/// <summary>
 		/// When asking a remote display to show a piece of content, we don't
 		/// want to send the actual content across. Instead we send just enough
-        /// information for the remote server to be able to identify the content
+		/// information for the remote server to be able to identify the content
 		/// and display it.
 		/// </summary>
 		/// <returns>Information required to uniquely identify the content.</returns>
@@ -64,21 +64,28 @@ namespace DreamBeam	{
 	/// <summary>
 	/// All content (Songs, BibleVerses, SermonText) has some attributes in
 	/// common. They all derive from this class. TODO: The ICloneable should
-    /// probably move here, and this base class should implement Clone() itself
-    /// also.
+	/// probably move here, and this base class should implement Clone() itself
+	/// also.
 	/// </summary>
 	[Serializable()]
 	public class Content {
 		// The following settings will not be saved when we serialize this class
-		[XmlIgnore()] private string bgImagePath;
-		[XmlIgnore()] public Image bgImage;
-		[XmlIgnore()] public bool HideBG = false;
-		[XmlIgnore()] public bool HideText = false;
-		
+		[XmlIgnore()]
+		private string bgImagePath;
+		[XmlIgnore()]
+		public Image bgImage;
+		[XmlIgnore()]
+		public bool HideBG = false;
+		[XmlIgnore()]
+		public bool HideText = false;
+
 		/// <summary>The maximum number of pre-rendered frames to retain.</summary>
-		[XmlIgnore()] public int maxFrames = 10;
-		[XmlIgnore()] private Hashtable renderedFrames = new Hashtable();
-		[XmlIgnore()] private ArrayList renderedFramesOrder = new ArrayList(10);
+		[XmlIgnore()]
+		public int maxFrames = 10;
+		[XmlIgnore()]
+		private Hashtable renderedFrames = new Hashtable();
+		[XmlIgnore()]
+		private ArrayList renderedFramesOrder = new ArrayList(10);
 
 		// The following setting and properties will be serialized
 		public BeamTextFormat[] format;
@@ -124,8 +131,8 @@ namespace DreamBeam	{
 
 		/// <summary>
 		/// This is not a true hash code. It is only used to determine if any
-        /// graphically visible characteristics of the Content object have
-        /// changed.
+		/// graphically visible characteristics of the Content object have
+		/// changed.
 		/// </summary>
 		/// <returns></returns>
 		public virtual int VisibleHashCode() {
@@ -151,18 +158,18 @@ namespace DreamBeam	{
 		/// <param name="Height"></param>
 		public void RenderBGImage(string ConfigBGImagePath, Graphics graphics, int Width, int Height) {
 			if (this.HideBG == false) {
-				string fullPath = Tools.GetFullPathOrNull( this.BGImagePath );
+				string fullPath = Tools.GetFullPathOrNull(this.BGImagePath);
 				if (Tools.FileExists(fullPath)) {
 					if (this.bgImage == null) {
 						try {
 							this.bgImage = Image.FromFile(fullPath);
-						} catch {}
+						} catch { }
 					}
 				} else if (Tools.FileExists(Tools.GetFullPathOrNull(ConfigBGImagePath))) {
 					if (this.bgImage == null) {
 						try {
 							this.bgImage = Image.FromFile(Tools.GetFullPathOrNull(ConfigBGImagePath));
-						} catch {}
+						} catch { }
 					}
 				}
 
@@ -181,8 +188,8 @@ namespace DreamBeam	{
 	/// It is used for the "image" multimedia type.
 	/// </summary>
 	public class ImageContent : Content, IContentOperations {
-		public ImageContent () {}
-		public ImageContent (string Path) {
+		public ImageContent() { }
+		public ImageContent(string Path) {
 			this.BGImagePath = Path;
 		}
 
@@ -200,12 +207,12 @@ namespace DreamBeam	{
 			#region Render background image
 			// Draw background image
 			if (this.HideBG == false) {
-				string fullPath = Tools.GetFullPathOrNull( this.BGImagePath );
+				string fullPath = Tools.GetFullPathOrNull(this.BGImagePath);
 				if (Tools.FileExists(fullPath)) {
 					if (this.bgImage == null) {
 						try {
 							this.bgImage = Image.FromFile(fullPath);
-						} catch {}
+						} catch { }
 					}
 				}
 
@@ -237,21 +244,21 @@ namespace DreamBeam	{
 		public void ChangeBGImagePath(string newPath) {
 			this.BGImagePath = newPath;
 		}
-        public void ChangeTheme(Theme theme) {
-            if (theme == null) return;
-            ChangeBGImagePath(theme.BGImagePath);
-        }
+		public void ChangeTheme(Theme theme) {
+			if (theme == null) return;
+			ChangeBGImagePath(theme.BGImagePath);
+		}
 
 		public ContentIdentity GetIdentity() {
 			// TODO:  Add ImageContent.GetIdentity implementation
-			ContentIdentity ident = new ContentIdentity();			
+			ContentIdentity ident = new ContentIdentity();
 			return ident;
 		}
 
 		public void PreRenderFrames() {
 			// This function doesn't really need to do anything. We've
-            // prerendered the one and only frame as soon as we call GetBitmap
-            // the first time.
+			// prerendered the one and only frame as soon as we call GetBitmap
+			// the first time.
 		}
 
 		#endregion
@@ -339,7 +346,7 @@ namespace DreamBeam	{
 
 		/// <summary>
 		/// This method is used in StandAlone mode to set the content to be
-        /// displayed in various displays.
+		/// displayed in various displays.
 		/// </summary>
 		/// <param name="obj">The content object to display</param>
 		/// <returns>Returns true if the entire display chain has successfully
@@ -349,7 +356,7 @@ namespace DreamBeam	{
 
 			if (XmlRpcProxy != null) {
 				// This is a "client" display, and must relay its content to the "server" peer
-				result = XmlRpcProxy.SetContent( obj.GetIdentity() );
+				result = XmlRpcProxy.SetContent(obj.GetIdentity());
 			}
 
 			// Note: We intentionaly don't pass a clone of the object because we want the whole
@@ -390,11 +397,11 @@ namespace DreamBeam	{
 						break;
 					case ContentType.Song:
 						//string songFile = Path.Combine(Tools.GetAppDocPath(), Path.Combine("Songs", identity.SongName));
-                        string songFile = Tools.CombinePaths(Tools.GetAppDocPath(), "Songs", identity.SongName);
-                        newContent = (NewSong)NewSong.DeserializeFrom(songFile, identity.SongStrophe, Display.config);
+						string songFile = Tools.CombinePaths(Tools.GetAppDocPath(), "Songs", identity.SongName);
+						newContent = (NewSong)NewSong.DeserializeFrom(songFile, identity.SongStrophe, Display.config);
 						break;
 				}
-			} catch {}	// Covers a multitude of sins (non-existent translation, or song, or verse, etc...)
+			} catch { }	// Covers a multitude of sins (non-existent translation, or song, or verse, etc...)
 
 			if (newContent != null) {
 				if (NextDisplay != null) success = NextDisplay.SetContent(newContent);
@@ -440,7 +447,7 @@ namespace DreamBeam	{
 			if (XmlRpcProxy != null) {
 				success = XmlRpcProxy.ContentPrev();
 			}
-			
+
 			if (success) {
 				success = content.Prev();
 				if (success) success = this.UpdateDisplay(true);
@@ -456,7 +463,7 @@ namespace DreamBeam	{
 			if (XmlRpcProxy != null) {
 				success = XmlRpcProxy.HideText(Hidden);
 			}
-			
+
 			if (success) {
 				(content as Content).HideText = Hidden;
 				success = UpdateDisplay(true);
@@ -505,7 +512,7 @@ namespace DreamBeam	{
 			HttpChannel channel = new HttpChannel(props, null, xml_rpc);
 
 			ChannelServices.RegisterChannel(channel, false);
-				
+
 			// Not sure how this works if we re-configure and register when OperatingMode changes
 			// There might be other ways to do the same thing and allow for de-registration
 			RemotingConfiguration.Configure(null, false);
@@ -514,7 +521,7 @@ namespace DreamBeam	{
 			RemotingConfiguration.CustomErrorsEnabled(false);
 
 			// Can't figure out how to register at "http://serverip:port/". Must use "http://serverip:port/DreamBeam"
-			RemotingConfiguration.RegisterWellKnownServiceType( typeof(XmlRpcServer),
+			RemotingConfiguration.RegisterWellKnownServiceType(typeof(XmlRpcServer),
 				"DreamBeam", WellKnownObjectMode.Singleton);
 		}
 		#endregion
@@ -532,7 +539,7 @@ namespace DreamBeam	{
 
 				} else if (showBeam != null && showBeam.TopLevelControl.Visible) {
 					// Live display
-					showBeam.GDIDraw( this.GetBitmap(Size) );
+					showBeam.GDIDraw(this.GetBitmap(Size));
 
 				}
 			}

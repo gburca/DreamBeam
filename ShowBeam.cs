@@ -42,24 +42,24 @@ namespace DreamBeam {
 	/// </summary>
 	public class ShowBeam : System.Windows.Forms.Form {
 
-	#region Variables
+		#region Variables
 		private System.ComponentModel.IContainer components;
 
 		public Config Config;
 		public MainForm _MainForm = null;
-        ///<summary>The Separator for the strophes - 2 Blank Lines </summary>
-//        public string strSeperator = "\r\n\r\n\r\n";
+		///<summary>The Separator for the strophes - 2 Blank Lines </summary>
+		//        public string strSeperator = "\r\n\r\n\r\n";
 
-        ///<summary>Has Text changed? Needed to avoid unnecessary Redraws.(</summary>
-        public bool newText = false;
+		///<summary>Has Text changed? Needed to avoid unnecessary Redraws.(</summary>
+		public bool newText = false;
 
-        ///<summary>If this is true, take ImageOverWritePath -Image as Background </summary>
-        public bool OverWriteBG = false;
+		///<summary>If this is true, take ImageOverWritePath -Image as Background </summary>
+		public bool OverWriteBG = false;
 
-        ///<summary>alternate Background Image Path </summary>
-        public String ImageOverWritePath = "";
+		///<summary>alternate Background Image Path </summary>
+		public String ImageOverWritePath = "";
 
-        ///<summary>Background Image Path for Sermon Texts</summary>
+		///<summary>Background Image Path for Sermon Texts</summary>
 		public String SermonImagePath = null;
 
 		///<summary> the size for the Outlines (will be loaded from the MainForm.ConfigSet) </summary>
@@ -88,7 +88,7 @@ namespace DreamBeam {
 
 		///<summary>Temporary bitmap</summary>
 		public Bitmap bmp = null;
-        public bool DrawnMainBitmap = false;
+		public bool DrawnMainBitmap = false;
 
 		///<summary>User Direct X? (not used yet)</summary>
 		public bool useDirectX = false;
@@ -113,7 +113,7 @@ namespace DreamBeam {
 		public int[] tmpPosX = new int[3];
 		public int[] tmpPosY = new int[3];
 
-		public TextGraphics TextGraphics =null;
+		public TextGraphics TextGraphics = null;
 
 		public ImageList MediaList = new ImageList();
 		bool FlashPlaying = false;
@@ -138,7 +138,7 @@ namespace DreamBeam {
 		public LogFile LogFile;
 		StringFormat sf = new StringFormat();
 
-//		DirectShowLib Lib = new DirectShowLib();
+		//		DirectShowLib Lib = new DirectShowLib();
 
 		private FXLib FXLib = new FXLib();
 		#endregion
@@ -153,30 +153,30 @@ namespace DreamBeam {
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Panel panel2;
-        ///<summary>ShowBeam Size Box </summary>
-        public System.Windows.Forms.NumericUpDown WindowSizeY;
-        ///<summary>ShowBeam Size Box </summary>
-        public System.Windows.Forms.NumericUpDown WindowSizeX;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        public System.Windows.Forms.Panel ShowSongPanel;
+		private System.Windows.Forms.Panel panel2;
+		///<summary>ShowBeam Size Box </summary>
+		public System.Windows.Forms.NumericUpDown WindowSizeY;
+		///<summary>ShowBeam Size Box </summary>
+		public System.Windows.Forms.NumericUpDown WindowSizeX;
+		private System.Windows.Forms.Button button5;
+		private System.Windows.Forms.Button button6;
+		private System.Windows.Forms.Button button7;
+		private System.Windows.Forms.Button button8;
+		public System.Windows.Forms.Panel ShowSongPanel;
 		public AxShockwaveFlashObjects.AxShockwaveFlash axShockwaveFlash;
 		private System.Windows.Forms.Panel VideoPanel;
-        private System.Windows.Forms.Timer PlayBackTimer;
-        private System.Windows.Forms.TabControl SizePosControl;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage TabManSize;
-        private System.Windows.Forms.ListBox ScreenList;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label AutoPosLabelX;
-        private System.Windows.Forms.Label AutoSizeLabelW;
-        private System.Windows.Forms.Label AutoPosLabelY;
-        private System.Windows.Forms.Label AutoSizeLabelH;
-        private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.Timer PlayBackTimer;
+		private System.Windows.Forms.TabControl SizePosControl;
+		private System.Windows.Forms.TabPage tabPage1;
+		private System.Windows.Forms.TabPage TabManSize;
+		private System.Windows.Forms.ListBox ScreenList;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label AutoPosLabelX;
+		private System.Windows.Forms.Label AutoSizeLabelW;
+		private System.Windows.Forms.Label AutoPosLabelY;
+		private System.Windows.Forms.Label AutoSizeLabelH;
+		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Button Screen_SetSettingsButton;
 		private System.Windows.Forms.PictureBox TestImage;
 		private System.Timers.Timer AlphaTimer2;
@@ -193,9 +193,9 @@ namespace DreamBeam {
 			Sermon.TextEffect[1] = "Filled Outline";
 			Sermon.FontSize[1] = 48;
 			Song = new Song(this);
-			TextGraphics = new TextGraphics(this,Song);
+			TextGraphics = new TextGraphics(this, Song);
 
-			ShowSongPanel.Location = new Point (0,0);
+			ShowSongPanel.Location = new Point(0, 0);
 			ShowSongPanel.Size = this.Size;
 
 			axShockwaveFlash.Hide();
@@ -206,7 +206,7 @@ namespace DreamBeam {
 		/// <summary>
 		/// Dispose components
 		/// </summary>
-		protected override void Dispose (bool disposing) {
+		protected override void Dispose(bool disposing) {
 			if (disposing) {
 				if (components != null) {
 					components.Dispose();
@@ -676,12 +676,9 @@ namespace DreamBeam {
 			this.ResumeLayout(false);
 
 		}
-	#endregion
+		#endregion
 
-
-
-
-	#region Song
+		#region Song
 		/// <summary> paints a Song to the BeamBox </summary>
 		public void PaintSong() {
 			this.DrawWhat = 0;
@@ -690,66 +687,66 @@ namespace DreamBeam {
 			//this.DXDraw();
 		}
 
-		public bool DrawSongItem(int j){
-			if(j == 0 && this.HideTitle){
+		public bool DrawSongItem(int j) {
+			if (j == 0 && this.HideTitle) {
 				return false;
 			}
-			if(j == 1 && this.HideVerse){
+			if (j == 1 && this.HideVerse) {
 				return false;
 			}
-			if(j == 2 && this.HideAuthor){
+			if (j == 2 && this.HideAuthor) {
 				return false;
 			}
 			return true;
 		}
 
-	#endregion
+		#endregion
 
-	#region Sermon
+		#region Sermon
 		/// <summary> paints a Sermon to the BeamBox </summary>
-        public void PaintSermon() {
-            this.DrawWhat = 1;
-            this.GDIDraw();
-            //this.DXDraw();
-        }
+		public void PaintSermon() {
+			this.DrawWhat = 1;
+			this.GDIDraw();
+			//this.DXDraw();
+		}
 
-        ///<summary>Paints a Bitmap from the Sermon Contents</summary>
-        public Bitmap DrawSermonBitmap(int Width,int Height) {
+		///<summary>Paints a Bitmap from the Sermon Contents</summary>
+		public Bitmap DrawSermonBitmap(int Width, int Height) {
 			Pen p;
-            SolidBrush sdBrush1;
-            sdBrush1 = new SolidBrush(this.BackgroundColor);
-            bmp =  new Bitmap(Width,Height);
-            graphics = Graphics.FromImage(bmp);
-            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+			SolidBrush sdBrush1;
+			sdBrush1 = new SolidBrush(this.BackgroundColor);
+			bmp = new Bitmap(Width, Height);
+			graphics = Graphics.FromImage(bmp);
+			graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+			graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 			graphics.SmoothingMode = SmoothingMode.AntiAlias;
 			graphics.SmoothingMode = SmoothingMode.HighQuality;
 			graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
 			Rectangle bRef, bVerse, rect;
-						
+
 			// These need to be configuration parameters. They are similar to Sermon.posX and Sermon.posY
 			// Percentage x, y, width, height of the box for Ref, Verse, Transl
 			RectangleF boundsRef = new RectangleF(0.05F, 0.05F, 0.95F, 0.18F);
 			RectangleF boundsVerse = new RectangleF(0.05F, 0.20F, 0.95F, 0.95F);
 			bRef = new System.Drawing.Rectangle((int)(boundsRef.X * Width), (int)(boundsRef.Y * Height),
-				(int)((boundsRef.Width - boundsRef.X)* Width), (int)((boundsRef.Height - boundsRef.Y) * Height));
+				(int)((boundsRef.Width - boundsRef.X) * Width), (int)((boundsRef.Height - boundsRef.Y) * Height));
 			bVerse = new System.Drawing.Rectangle((int)(boundsVerse.X * Width), (int)(boundsVerse.Y * Height),
 				(int)((boundsVerse.Width - boundsVerse.X) * Width), (int)((boundsVerse.Height - boundsVerse.Y) * Height));
-								
+
 			#region care about BG Image
 
-            if (this.SermonImagePath != null  && HideBG == false) {
-                if (this.SermonImagePath.Length > 0) {
-                    if (this.strImageLoaded != this.SermonImagePath) {
-                        curImage = Image.FromFile(this.SermonImagePath);
-                    }
-                    this.strImageLoaded = this.SermonImagePath;
-                }
-                graphics.DrawImage(curImage, 0, 0, Width, Height);
-            } else {
+			if (this.SermonImagePath != null && HideBG == false) {
+				if (this.SermonImagePath.Length > 0) {
+					if (this.strImageLoaded != this.SermonImagePath) {
+						curImage = Image.FromFile(this.SermonImagePath);
+					}
+					this.strImageLoaded = this.SermonImagePath;
+				}
+				graphics.DrawImage(curImage, 0, 0, Width, Height);
+			} else {
 				//draw a blank rectangle if no image is defined.
-                graphics.FillRectangle(sdBrush1, new Rectangle(0,0,this.Width, this.Height));
-            }
+				graphics.FillRectangle(sdBrush1, new Rectangle(0, 0, this.Width, this.Height));
+			}
 
 			#endregion
 
@@ -764,20 +761,20 @@ namespace DreamBeam {
 			}
 			*/
 
-			
+
 			GraphicsPath pth, pth2;
 			pth = new GraphicsPath();
 			string text;
 
-            if (!HideText) {
-                for (int j = 0; j <=2; j++) {
+			if (!HideText) {
+				for (int j = 0; j <= 2; j++) {
 					text = Sermon.GetText(j);
 					if (text.Length > 0) {
 
 						p = new Pen(Sermon.TextColor[j], 1.0f);
 						p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
 						sf = new StringFormat();
-                        
+
 						switch (j) {
 							case 0:
 								sf.Alignment = StringAlignment.Near;
@@ -795,7 +792,7 @@ namespace DreamBeam {
 								sf.LineAlignment = StringAlignment.Center;
 								rect = bVerse;
 								break;
-						}		
+						}
 
 
 						// Make a rectangle that is very tall to see how far down the text would stretch.
@@ -827,54 +824,54 @@ namespace DreamBeam {
 
 						if (Sermon.TextEffect[j] == "Normal" || Sermon.TextEffect[j] == "") {
 
-							graphics.FillPath(sdBrush1,pth);
-							graphics.DrawPath(p,pth);
+							graphics.FillPath(sdBrush1, pth);
+							graphics.DrawPath(p, pth);
 
 						} else if (Sermon.TextEffect[j] == "Filled Outline") {
 
 							pth2 = (GraphicsPath)pth.Clone();
-							graphics.FillPath(sdBrush1,pth);
-							graphics.DrawPath(p,pth);
+							graphics.FillPath(sdBrush1, pth);
+							graphics.DrawPath(p, pth);
 
 							// Widen the path.
 							Pen widenPen = new Pen(Sermon.OutlineColor[j], OutlineSize);
 							widenPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
 							pth2.Widen(widenPen);
 							graphics.FillPath(new SolidBrush(Sermon.OutlineColor[j]), pth2);
-							graphics.DrawPath(p,pth);
-							graphics.FillPath(sdBrush1,pth);
+							graphics.DrawPath(p, pth);
+							graphics.FillPath(sdBrush1, pth);
 
 
-						} else  if (Sermon.TextEffect[j] == "Outline") {
-                            p=new Pen(Sermon.OutlineColor[j],1.5f);
-                            pth.AddString(text,
-                                          new FontFamily(Sermon.FontFace[j]),0,Sermon.FontSize[j],
-                                          new Point(Sermon.posX[j],Sermon.posY[j]),StringFormat.GenericTypographic);
+						} else if (Sermon.TextEffect[j] == "Outline") {
+							p = new Pen(Sermon.OutlineColor[j], 1.5f);
+							pth.AddString(text,
+										  new FontFamily(Sermon.FontFace[j]), 0, Sermon.FontSize[j],
+										  new Point(Sermon.posX[j], Sermon.posY[j]), StringFormat.GenericTypographic);
 
-                            graphics.DrawPath(p,pth);
-                        }
-                    }
-                }
-            }
+							graphics.DrawPath(p, pth);
+						}
+					}
+				}
+			}
 
-            return bmp;
+			return bmp;
 		}
 
 
 
-	#endregion
+		#endregion
 
-	#region DrawOnBeamBox
+		#region DrawOnBeamBox
 		///<summary>Selects which sort of Bitmap has to be painted</summary>
-		public void DrawBitmap(int Width,int Height) {
-			switch(this.DrawWhat) {
-			case 0:
-				bmp = new Bitmap(Width,Height,PixelFormat.Format32bppArgb);
-				DrawnMainBitmap = true;
-				break;
-			case 1:
-				bmp = DrawSermonBitmap(Width,Height);
-				break;
+		public void DrawBitmap(int Width, int Height) {
+			switch (this.DrawWhat) {
+				case 0:
+					bmp = new Bitmap(Width, Height, PixelFormat.Format32bppArgb);
+					DrawnMainBitmap = true;
+					break;
+				case 1:
+					bmp = DrawSermonBitmap(Width, Height);
+					break;
 			}
 		}
 
@@ -882,15 +879,15 @@ namespace DreamBeam {
 			bmp = b;
 
 			// It is important for the SongShowPanel to have a "BackColor"
-            // property of "Transparent" or else as the background is being
-            // painted to the non-transparent color we will see the screen
-            // flicker. When set to transparent, the OnPaintBackground function
-            // call for the control is suppressed.
+			// property of "Transparent" or else as the background is being
+			// painted to the non-transparent color we will see the screen
+			// flicker. When set to transparent, the OnPaintBackground function
+			// call for the control is suppressed.
 			Graphics g = Graphics.FromHwnd(ShowSongPanel.Handle);
 			if (strMediaPlaying != null) {
 				// We capture the last frame of the flash or movie and transition from it to the song bitmap.
 				ScreenCapture sc = new ScreenCapture();
-				memoryBitmap = new Bitmap( sc.CaptureWindow(this.Handle) );
+				memoryBitmap = new Bitmap(sc.CaptureWindow(this.Handle));
 			} else if (memoryBitmap == null) {
 				memoryBitmap = b;
 			}
@@ -922,7 +919,7 @@ namespace DreamBeam {
 				AlphaForm.Size = this.Size;
 				AlphaForm.Visible = true;
 				_MainForm.BringToFront();
-				
+
 				g.DrawImage(memoryBitmap, 0, 0, this.Width, this.Height);
 				AlphaOpacity = 0;
 				//AlphaTimer.Start();
@@ -930,7 +927,7 @@ namespace DreamBeam {
 
 			} else {
 				memoryBitmap = bmp;
-				g.DrawImage(bmp, new Rectangle(0,0,this.Width, this.Height), 0,0,this.Width, this.Height, GraphicsUnit.Pixel);
+				g.DrawImage(bmp, new Rectangle(0, 0, this.Width, this.Height), 0, 0, this.Width, this.Height, GraphicsUnit.Pixel);
 			}
 
 			g.Dispose();
@@ -939,10 +936,10 @@ namespace DreamBeam {
 		///<summary>Draws the Image on the BeamBox</summary>
 		public void GDIDraw() {
 
-            Graphics g = Graphics.FromHwnd(ShowSongPanel.Handle);
-            axShockwaveFlash.Hide();
+			Graphics g = Graphics.FromHwnd(ShowSongPanel.Handle);
+			axShockwaveFlash.Hide();
 			VideoPanel.Hide();
-            ShowSongPanel.Show();
+			ShowSongPanel.Show();
 			if (strMediaPlaying == "flash") {
 				this.axShockwaveFlash.Stop();
 				strMediaPlaying = null;
@@ -957,7 +954,7 @@ namespace DreamBeam {
 			}
 
 			ShowSongPanel.Size = this.Size;
-			ShowSongPanel.Location = new Point (0,0);
+			ShowSongPanel.Location = new Point(0, 0);
 
 
 			g.SmoothingMode = SmoothingMode.HighQuality;
@@ -968,131 +965,131 @@ namespace DreamBeam {
 				g.DrawImage(memoryBitmap, 0, 0, this.Width, this.Height);
 			}
 
-			if (Songupdate){
+			if (Songupdate) {
 				Songupdate = false;
-				DrawBitmap(this.Width,this.Height);
+				DrawBitmap(this.Width, this.Height);
 				memoryBitmap = bmp;
 
 				//Draw Image on Screen, make a Alphablending if transit == true
 
-				if(transit & newText) {
+				if (transit & newText) {
 
-					AlphaForm.setpos(Location.X,Location.Y);
-                    AlphaForm.Visible = true;
+					AlphaForm.setpos(Location.X, Location.Y);
+					AlphaForm.Visible = true;
 					_MainForm.BringToFront();
-					
+
 					AlphaForm.SetBitmap(bmp, 0);
 					AlphaOpacity = 0;
 					AlphaTimer.Start();
 
 				} else {
-					g.DrawImage(memoryBitmap, new Rectangle(0,0,this.Width, this.Height), 0,0,this.Width, this.Height, GraphicsUnit.Pixel);
+					g.DrawImage(memoryBitmap, new Rectangle(0, 0, this.Width, this.Height), 0, 0, this.Width, this.Height, GraphicsUnit.Pixel);
 				}
 
 			}
-				g.Dispose();
+			g.Dispose();
 
 		}
-	#endregion
+		#endregion
 
-	#region BitmapTools
-        ///<summary>Paints a Bitmap from the Sermon Contents</summary>
-        public Bitmap DrawBlackBitmap(int Width,int Heigt) {
+		#region BitmapTools
+		///<summary>Paints a Bitmap from the Sermon Contents</summary>
+		public Bitmap DrawBlackBitmap(int Width, int Heigt) {
 
-            SolidBrush sdBrush1;
-            sdBrush1 = new SolidBrush(Color.Black);
-            Bitmap Localbmp =  new Bitmap(Width,Height);
-            graphics = Graphics.FromImage(Localbmp);
-            graphics.FillRectangle(sdBrush1, new Rectangle(0,0,Width,Height));
-            return Localbmp;
+			SolidBrush sdBrush1;
+			sdBrush1 = new SolidBrush(Color.Black);
+			Bitmap Localbmp = new Bitmap(Width, Height);
+			graphics = Graphics.FromImage(Localbmp);
+			graphics.FillRectangle(sdBrush1, new Rectangle(0, 0, Width, Height));
+			return Localbmp;
 		}
 
 
-		public Bitmap Resizer(string dir,int Width,int Height) {
-				Image ResizeImage;
-				ResizeImage = Image.FromFile(dir);
-				return(Resizer(ResizeImage,Width,Height));
+		public Bitmap Resizer(string dir, int Width, int Height) {
+			Image ResizeImage;
+			ResizeImage = Image.FromFile(dir);
+			return (Resizer(ResizeImage, Width, Height));
 		}
 
-		public Bitmap Resizer(Image ResizeImage, int Width, int Height){
+		public Bitmap Resizer(Image ResizeImage, int Width, int Height) {
 			Graphics ResizeGraph;
-			Bitmap ResizeBMP = new Bitmap(Width,Height);
+			Bitmap ResizeBMP = new Bitmap(Width, Height);
 
 			ResizeGraph = Graphics.FromImage(ResizeBMP);
-			ResizeGraph.InterpolationMode =InterpolationMode.HighQualityBicubic;
+			ResizeGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
 			ResizeGraph.PixelOffsetMode = PixelOffsetMode.HighQuality;
 			ResizeGraph.DrawImage(ResizeImage, 0, 0, Width, Height);
-			 //ResizeImage.Dispose();
-		   //	ResizeGraph.
+			//ResizeImage.Dispose();
+			//	ResizeGraph.
 			return ResizeBMP;
 		}
 
-		public void GetVideoFrame(string Path){
+		public void GetVideoFrame(string Path) {
 			Microsoft.DirectX.AudioVideoPlayback.Video tmpvideo = null;
-			
-			 tmpvideo = new Microsoft.DirectX.AudioVideoPlayback.Video(Path, false);
+
+			tmpvideo = new Microsoft.DirectX.AudioVideoPlayback.Video(Path, false);
 			tmpvideo.Dispose();
-		   tmpvideo = null;
+			tmpvideo = null;
 		}
 
-		public Bitmap DrawProportionalBitmap(System.Drawing.Size Size ,string Path) {
+		public Bitmap DrawProportionalBitmap(System.Drawing.Size Size, string Path) {
 			Bitmap bm = null;
 
 
-		   try{
-			Image tmpImage = Image.FromFile(Path);
+			try {
+				Image tmpImage = Image.FromFile(Path);
 
-			bm =  DrawProportionalBitmap(Size, tmpImage);
-		   } catch {}
+				bm = DrawProportionalBitmap(Size, tmpImage);
+			} catch { }
 			return bm;
 
 		}
 
-		public static Bitmap DrawProportionalBitmap(System.Drawing.Size Size ,Image MainImage) {
+		public static Bitmap DrawProportionalBitmap(System.Drawing.Size Size, Image MainImage) {
 			Graphics graph;
 
-		   //	Image MainImage = Image.FromFile(Path);
-		   if(Size.Height < 1)
-			Size.Height = 1;
-		   if(Size.Width < 1)
-			Size.Width = 1;
-			
-			Bitmap Canvas =  new Bitmap(Size.Width , Size.Height);
+			//	Image MainImage = Image.FromFile(Path);
+			if (Size.Height < 1)
+				Size.Height = 1;
+			if (Size.Width < 1)
+				Size.Width = 1;
+
+			Bitmap Canvas = new Bitmap(Size.Width, Size.Height);
 			SolidBrush sdBrush1 = new SolidBrush(Color.Black);
 
 			graph = Graphics.FromImage(Canvas);
 
-			graph.FillRectangle(sdBrush1, new Rectangle(0,0,Size.Width, Size.Height));
-			graph.InterpolationMode =InterpolationMode.HighQualityBicubic;
+			graph.FillRectangle(sdBrush1, new Rectangle(0, 0, Size.Width, Size.Height));
+			graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
 			graph.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-			Size InputSize = Tools.VideoProportions(Size,MainImage.Size);
+			Size InputSize = Tools.VideoProportions(Size, MainImage.Size);
 
-			graph.DrawImage(MainImage, (int)((Size.Width - InputSize.Width)/2), (int)((Size.Height - InputSize.Height)/2),InputSize.Width, InputSize.Height);
+			graph.DrawImage(MainImage, (int)((Size.Width - InputSize.Width) / 2), (int)((Size.Height - InputSize.Height) / 2), InputSize.Width, InputSize.Height);
 
 
 
 			return Canvas;
 		}
 
-	#endregion
+		#endregion
 
-	#region Size/Position
+		#region Size/Position
 
-        private void SetSizePosValues() {
-            this.WindowPosX.Value = this.Location.X;
-            this.WindowPosY.Value = this.Location.Y;
-            this.WindowSizeX.Value = this.Size.Width;
-            this.WindowSizeY.Value = this.Size.Height;
-        }
+		private void SetSizePosValues() {
+			this.WindowPosX.Value = this.Location.X;
+			this.WindowPosY.Value = this.Location.Y;
+			this.WindowSizeX.Value = this.Size.Width;
+			this.WindowSizeY.Value = this.Size.Height;
+		}
 
 		///<summary>Make the BeamBox moveable</summary>
 		public void ShowMover() {
 			GetScreens();
 			if (this.BeamBoxAutoPosSize) {
 				SizePosControl.SelectedIndex = 0;
-            } else {
-                SizePosControl.SelectedIndex = 1;
+			} else {
+				SizePosControl.SelectedIndex = 1;
 			}
 
 			//ResourceManager rm;
@@ -1100,15 +1097,15 @@ namespace DreamBeam {
 
 			TestImage.Show();
 			TestImage.Size = this.Size;
-			TestImage.Location = new Point (0,0);
+			TestImage.Location = new Point(0, 0);
 
 			//TestImage.Image = Resizer((Image)rm.GetObject("Dreambeam_testbild.jpg"),this.Width,this.Height) ;
 
 
-            SizePosControl.Show();
-            SizePosControl.BringToFront();
-        }
-        ///<summary>Set the BeamBox</summary>
+			SizePosControl.Show();
+			SizePosControl.BringToFront();
+		}
+		///<summary>Set the BeamBox</summary>
 		public void HideMover() {
 			TestImage.Hide();
 			SizePosControl.Hide();
@@ -1125,186 +1122,185 @@ namespace DreamBeam {
 		}
 
 
-        public void GetScreens() {
-            this.ScreenList.Items.Clear();
-            //  if (System.Windows.Forms.Screen.AllScreens.Length>1) // If there are at least 2 monitors
+		public void GetScreens() {
+			this.ScreenList.Items.Clear();
+			//  if (System.Windows.Forms.Screen.AllScreens.Length>1) // If there are at least 2 monitors
 
-            // Find second monitor
-            int i = 0;
-            int FirstSecundary = -1;
-            foreach(System.Windows.Forms.Screen s in System.Windows.Forms.Screen.AllScreens) {
-                if (s == System.Windows.Forms.Screen.PrimaryScreen) {
-                    this.ScreenList.Items.Add ("Primary Screen");
-                    // secondary = s;
+			// Find second monitor
+			int i = 0;
+			int FirstSecundary = -1;
+			foreach (System.Windows.Forms.Screen s in System.Windows.Forms.Screen.AllScreens) {
+				if (s == System.Windows.Forms.Screen.PrimaryScreen) {
+					this.ScreenList.Items.Add("Primary Screen");
+					// secondary = s;
 
-                } else {
-                    this.ScreenList.Items.Add ("Secundary Screen "+ i.ToString());
-                    i++;
-                    if (FirstSecundary == -1) {
-                        FirstSecundary = i;
-                    }
-                }
-                //if no Secundary Found take the Primary (in this case, the only one found)
-                if (FirstSecundary == -1) {
-                    FirstSecundary = 0;
-                }
+				} else {
+					this.ScreenList.Items.Add("Secundary Screen " + i.ToString());
+					i++;
+					if (FirstSecundary == -1) {
+						FirstSecundary = i;
+					}
+				}
+				//if no Secundary Found take the Primary (in this case, the only one found)
+				if (FirstSecundary == -1) {
+					FirstSecundary = 0;
+				}
 
-                if(BeamBoxAutoPosSize) {
-                    if(BeamBoxScreenNum < ScreenList.Items.Count) {
-                        ScreenList.SelectedIndex = BeamBoxScreenNum;
-                    }
-                } else {
-                    ScreenList.SelectedIndex = FirstSecundary;
-                }
+				if (BeamBoxAutoPosSize) {
+					if (BeamBoxScreenNum < ScreenList.Items.Count) {
+						ScreenList.SelectedIndex = BeamBoxScreenNum;
+					}
+				} else {
+					ScreenList.SelectedIndex = FirstSecundary;
+				}
 
-            }
-        }
+			}
+		}
 
-        private void ScreenList_SelectedIndexChanged(object sender, System.EventArgs e) {
-            if(ScreenList.SelectedIndex >=  0) {
-                AutoPosLabelX.Text = "X: " + System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds.X.ToString();
-                AutoPosLabelY.Text = " Y:"+System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds.Y.ToString();
-                AutoSizeLabelW.Text = "Width: " + System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds.Width.ToString();
-                AutoSizeLabelH.Text = "Height: " + System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds.Height.ToString();
-            }
-        }
+		private void ScreenList_SelectedIndexChanged(object sender, System.EventArgs e) {
+			if (ScreenList.SelectedIndex >= 0) {
+				AutoPosLabelX.Text = "X: " + System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds.X.ToString();
+				AutoPosLabelY.Text = " Y:" + System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds.Y.ToString();
+				AutoSizeLabelW.Text = "Width: " + System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds.Width.ToString();
+				AutoSizeLabelH.Text = "Height: " + System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds.Height.ToString();
+			}
+		}
 
-        private void Screen_SetSettingsButton_Click(object sender, System.EventArgs e) {
-            System.Drawing.Size tmpSize = this.Size;
-            System.Drawing.Point tmpPoint = this.Location;
+		private void Screen_SetSettingsButton_Click(object sender, System.EventArgs e) {
+			System.Drawing.Size tmpSize = this.Size;
+			System.Drawing.Point tmpPoint = this.Location;
 
-            if(ScreenList.SelectedIndex >=  0) {
-                this.Bounds = System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds;
-                DialogResult answer = MessageBox.Show("Do you want to keep this settings?\nPress Yes to accept or No to restore.","Keep Settings?", MessageBoxButtons.YesNo);
-                if (answer == DialogResult.No) {
-                    this.Size = tmpSize;
-                    this.Location = tmpPoint;
-                } else {
-                    BeamBoxScreenNum = ScreenList.SelectedIndex;
-                    SetSizePosValues();
-                }
-            }
-        }
+			if (ScreenList.SelectedIndex >= 0) {
+				this.Bounds = System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds;
+				DialogResult answer = MessageBox.Show("Do you want to keep this settings?\nPress Yes to accept or No to restore.", "Keep Settings?", MessageBoxButtons.YesNo);
+				if (answer == DialogResult.No) {
+					this.Size = tmpSize;
+					this.Location = tmpPoint;
+				} else {
+					BeamBoxScreenNum = ScreenList.SelectedIndex;
+					SetSizePosValues();
+				}
+			}
+		}
 
-        public void SetAutoPosition() {
-            if(BeamBoxAutoPosSize) {
-                int i = 0;
-                foreach(System.Windows.Forms.Screen s in System.Windows.Forms.Screen.AllScreens) {
-                    if(i == BeamBoxScreenNum) {
-                        this.Bounds = s.Bounds;
-                        SetSizePosValues();
-                    }
-                }
-            }
-        }
+		public void SetAutoPosition() {
+			if (BeamBoxAutoPosSize) {
+				int i = 0;
+				foreach (System.Windows.Forms.Screen s in System.Windows.Forms.Screen.AllScreens) {
+					if (i == BeamBoxScreenNum) {
+						this.Bounds = s.Bounds;
+						SetSizePosValues();
+					}
+				}
+			}
+		}
 
 
-        private void ShowBeam_VisibleChanged(object sender, System.EventArgs e) {
+		private void ShowBeam_VisibleChanged(object sender, System.EventArgs e) {
 			SetAutoPosition();
-			if(this.useDirectX)
-			{
+			if (this.useDirectX) {
 				FXLib.Init3D(this.ShowSongPanel);
 			}
-        }
+		}
 
 
-        private void SizePosControl_Click(object sender, System.EventArgs e) {
-            if (SizePosControl.SelectedIndex == 0) {
-                this.BeamBoxAutoPosSize = true;
-            } else {
-                this.BeamBoxAutoPosSize = false;
-            }
-        }
+		private void SizePosControl_Click(object sender, System.EventArgs e) {
+			if (SizePosControl.SelectedIndex == 0) {
+				this.BeamBoxAutoPosSize = true;
+			} else {
+				this.BeamBoxAutoPosSize = false;
+			}
+		}
 
 		private void ShowBeam_SizeChanged(object sender, System.EventArgs e) {
 			this.ShowSongPanel.Size = this.Size;
 		}
 
 
-        ///<summary>Update the Window Position</summary>
-        private void WindowPosX_ValueChanged(object sender, System.EventArgs e) {
-            this.Location = new Point(Convert.ToInt32(this.WindowPosX.Value) ,this.Location.Y );
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void WindowPosY_ValueChanged(object sender, System.EventArgs e) {
-            this.Location = new Point(this.Location.X ,Convert.ToInt32(this.WindowPosY.Value) );
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void button1_Click(object sender, System.EventArgs e) {
-
-            this.WindowPosX.Value --;
-
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void button4_Click(object sender, System.EventArgs e) {
-            this.WindowPosY.Value ++;
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void button2_Click(object sender, System.EventArgs e) {
-            this.WindowPosX.Value ++;
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void button3_Click(object sender, System.EventArgs e) {
-            this.WindowPosY.Value --;
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void button3_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e) {
-            this.WindowPosY.Value --;
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void button8_Click(object sender, System.EventArgs e) {
-            this.WindowSizeX.Value --;
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void button7_Click(object sender, System.EventArgs e) {
-            this.WindowSizeX.Value ++;
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void button6_Click(object sender, System.EventArgs e) {
-            this.WindowSizeY.Value ++;
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void button5_Click(object sender, System.EventArgs e) {
-            this.WindowSizeY.Value --;
-        }
-
-        ///<summary>Update the Window Position</summary>
-        private void WindowSizeX_ValueChanged(object sender, System.EventArgs e) {
-            if (this.WindowSizeX.Value < 350) {
-                this.WindowSizeX.Value = 350;
-            }
-            this.Size = new Size(Convert.ToInt32(this.WindowSizeX.Value),this.Size.Height );
+		///<summary>Update the Window Position</summary>
+		private void WindowPosX_ValueChanged(object sender, System.EventArgs e) {
+			this.Location = new Point(Convert.ToInt32(this.WindowPosX.Value), this.Location.Y);
 		}
 
-        ///<summary>Update the Window Position</summary>
-        private void WindowSizeY_ValueChanged(object sender, System.EventArgs e) {
-            if (this.WindowSizeY.Value < 165) {
-                this.WindowSizeY.Value = 165;
-            }
-            this.Size = new Size(this.Size.Width ,Convert.ToInt32(this.WindowSizeY.Value));
-        }
+		///<summary>Update the Window Position</summary>
+		private void WindowPosY_ValueChanged(object sender, System.EventArgs e) {
+			this.Location = new Point(this.Location.X, Convert.ToInt32(this.WindowPosY.Value));
+		}
 
-	#region move window while drag in the client area (thanks to Yiyi Sun's Tutorial)
-        /// <summary> Drag/Move the Window on Mouse Down </summary>
-        private void ShowBeam_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e) {
-            if (this.TestImage.Visible == true) {
+		///<summary>Update the Window Position</summary>
+		private void button1_Click(object sender, System.EventArgs e) {
+
+			this.WindowPosX.Value--;
+
+		}
+
+		///<summary>Update the Window Position</summary>
+		private void button4_Click(object sender, System.EventArgs e) {
+			this.WindowPosY.Value++;
+		}
+
+		///<summary>Update the Window Position</summary>
+		private void button2_Click(object sender, System.EventArgs e) {
+			this.WindowPosX.Value++;
+		}
+
+		///<summary>Update the Window Position</summary>
+		private void button3_Click(object sender, System.EventArgs e) {
+			this.WindowPosY.Value--;
+		}
+
+		///<summary>Update the Window Position</summary>
+		private void button3_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e) {
+			this.WindowPosY.Value--;
+		}
+
+		///<summary>Update the Window Position</summary>
+		private void button8_Click(object sender, System.EventArgs e) {
+			this.WindowSizeX.Value--;
+		}
+
+		///<summary>Update the Window Position</summary>
+		private void button7_Click(object sender, System.EventArgs e) {
+			this.WindowSizeX.Value++;
+		}
+
+		///<summary>Update the Window Position</summary>
+		private void button6_Click(object sender, System.EventArgs e) {
+			this.WindowSizeY.Value++;
+		}
+
+		///<summary>Update the Window Position</summary>
+		private void button5_Click(object sender, System.EventArgs e) {
+			this.WindowSizeY.Value--;
+		}
+
+		///<summary>Update the Window Position</summary>
+		private void WindowSizeX_ValueChanged(object sender, System.EventArgs e) {
+			if (this.WindowSizeX.Value < 350) {
+				this.WindowSizeX.Value = 350;
+			}
+			this.Size = new Size(Convert.ToInt32(this.WindowSizeX.Value), this.Size.Height);
+		}
+
+		///<summary>Update the Window Position</summary>
+		private void WindowSizeY_ValueChanged(object sender, System.EventArgs e) {
+			if (this.WindowSizeY.Value < 165) {
+				this.WindowSizeY.Value = 165;
+			}
+			this.Size = new Size(this.Size.Width, Convert.ToInt32(this.WindowSizeY.Value));
+		}
+
+		#region move window while drag in the client area (thanks to Yiyi Sun's Tutorial)
+		/// <summary> Drag/Move the Window on Mouse Down </summary>
+		private void ShowBeam_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e) {
+			if (this.TestImage.Visible == true) {
 				ReleaseCapture();
 				SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
 
-				if(this.WindowPosX.Value == this.Location.X && this.WindowPosY.Value == this.Location.Y){
-					if(SizePosControl.Visible){
+				if (this.WindowPosX.Value == this.Location.X && this.WindowPosY.Value == this.Location.Y) {
+					if (SizePosControl.Visible) {
 						SizePosControl.Hide();
-					}else{
+					} else {
 						SizePosControl.Show();
 					}
 				}
@@ -1315,185 +1311,184 @@ namespace DreamBeam {
 			}
 		}
 
-        ///<summary>needed for drag and drop</summary>
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        ///<summary>needed for drag and drop</summary>
-        public const int HTCAPTION = 0x2;
-        [DllImportAttribute ("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImportAttribute ("user32.dll")]
+		///<summary>needed for drag and drop</summary>
+		public const int WM_NCLBUTTONDOWN = 0xA1;
+		///<summary>needed for drag and drop</summary>
+		public const int HTCAPTION = 0x2;
+		[DllImportAttribute("user32.dll")]
+		public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+		[DllImportAttribute("user32.dll")]
 		public static extern bool ReleaseCapture();
-	#endregion
+		#endregion
 
 
-	#endregion
+		#endregion
 
-	#region HideMouse
+		#region HideMouse
 
-        private void ShowBeam_MouseEnter(object sender, System.EventArgs e) {
-            if (this.HideMouse) {
-                Cursor.Hide();
-            }
-        }
-
-        private void ShowBeam_MouseLeave(object sender, System.EventArgs e) {
-            if (this.HideMouse) {
-                Cursor.Show();
-            }
+		private void ShowBeam_MouseEnter(object sender, System.EventArgs e) {
+			if (this.HideMouse) {
+				Cursor.Hide();
+			}
 		}
-	#endregion
+
+		private void ShowBeam_MouseLeave(object sender, System.EventArgs e) {
+			if (this.HideMouse) {
+				Cursor.Show();
+			}
+		}
+		#endregion
 
 		#region MediaStuff
-        public void ShowMedia(string Path) {
+		public void ShowMedia(string Path) {
 			//this.StopMedia();
 			PrePlaying = PlayWhat;
 			PlayWhat = MediaList.GetType(Path);
-			if(this.strMediaPlaying == null) {
+			if (this.strMediaPlaying == null) {
 
-				if(PlayWhat == "flash") {
+				if (PlayWhat == "flash") {
 					strMediaPlaying = MediaList.GetType(Path);
 					this.FlashPlaying = true;
-                    this.axShockwaveFlash.Show();
-                    this.ShowSongPanel.Hide();
-                    this.VideoPanel.Hide();
-                    this.axShockwaveFlash.BringToFront();
-                    this.axShockwaveFlash.Size = this.Size;
-                    this.axShockwaveFlash.Location = new Point(0,0);
-                    this.axShockwaveFlash.BGColor = "0";
+					this.axShockwaveFlash.Show();
+					this.ShowSongPanel.Hide();
+					this.VideoPanel.Hide();
+					this.axShockwaveFlash.BringToFront();
+					this.axShockwaveFlash.Size = this.Size;
+					this.axShockwaveFlash.Location = new Point(0, 0);
+					this.axShockwaveFlash.BGColor = "0";
 
-                    this.axShockwaveFlash.Movie = Path;
-                    this.axShockwaveFlash.Play();
-                    this.axShockwaveFlash.Loop = this.LoopMedia;
-                }
+					this.axShockwaveFlash.Movie = Path;
+					this.axShockwaveFlash.Play();
+					this.axShockwaveFlash.Loop = this.LoopMedia;
+				}
 
-				if(PlayWhat == "movie") {
-                    this.VideoProblem = false;
-                    strMediaPlaying = MediaList.GetType(Path);
-                    axShockwaveFlash.Stop();
-                    this.axShockwaveFlash.Hide();
-                    this.ShowSongPanel.Hide();
+				if (PlayWhat == "movie") {
+					this.VideoProblem = false;
+					strMediaPlaying = MediaList.GetType(Path);
+					axShockwaveFlash.Stop();
+					this.axShockwaveFlash.Hide();
+					this.ShowSongPanel.Hide();
 
 					// We must paint the whole screen black in case the movie is
-                    // not the same proportion as the screen, otherwise instead
-                    // of black bars we end up with garbage where the bars
-                    // should be.
+					// not the same proportion as the screen, otherwise instead
+					// of black bars we end up with garbage where the bars
+					// should be.
 					Graphics g = Graphics.FromHwnd(this.Handle);
 					g.DrawImage(this.DrawBlackBitmap(this.Width, this.Height), 0, 0, this.Width, this.Height);
-                    this.VideoPanel.Show();
+					this.VideoPanel.Show();
 
-                    PlayBackTimer.Enabled = true;
-                    if (this.video == null) {
-                        try {
-							this.video = new Microsoft.DirectX.AudioVideoPlayback.Video(Path,false);
+					PlayBackTimer.Enabled = true;
+					if (this.video == null) {
+						try {
+							this.video = new Microsoft.DirectX.AudioVideoPlayback.Video(Path, false);
 							this.video.Owner = VideoPanel;
-                        } catch{
-                            this.VideoProblem = true;
-                        }
+						} catch {
+							this.VideoProblem = true;
+						}
 
-                    } else {
+					} else {
 						this.video.Stop();
-                        try {
+						try {
 							//this.video.Open(Path,false);
 							this.video.Dispose();
 							this.video = null;
-							this.video = new Microsoft.DirectX.AudioVideoPlayback.Video(Path,false);
+							this.video = new Microsoft.DirectX.AudioVideoPlayback.Video(Path, false);
 							this.video.Owner = VideoPanel;
-                        } catch{
-                            this.VideoProblem = true;
-                        }
-                    }
+						} catch {
+							this.VideoProblem = true;
+						}
+					}
 
-					if(!VideoProblem) {
-                        this.VideoPanel.Size = Tools.VideoProportions(this.Size,video.DefaultSize);
-                        this.video.Size = Tools.VideoProportions(this.Size,video.DefaultSize);
-                        this.VideoPanel.Location =  new Point((int)((this.Size.Width - this.VideoPanel.Size.Width)/2),(int)((this.Size.Height - this.VideoPanel.Size.Height)/2));
-                        try {
-                            this.video.Audio.Volume = this.AudioVolume;
-                        } catch{}
+					if (!VideoProblem) {
+						this.VideoPanel.Size = Tools.VideoProportions(this.Size, video.DefaultSize);
+						this.video.Size = Tools.VideoProportions(this.Size, video.DefaultSize);
+						this.VideoPanel.Location = new Point((int)((this.Size.Width - this.VideoPanel.Size.Width) / 2), (int)((this.Size.Height - this.VideoPanel.Size.Height) / 2));
+						try {
+							this.video.Audio.Volume = this.AudioVolume;
+						} catch { }
 						this.video.Play();
 						this.VideoPlaying = true;
 					}
 
-                }
-				if(PlayWhat == "image") {
-                    if (video != null) {
-                        video.Stop();
-                        PlayBackTimer.Enabled = false;
-                    }
-                    StopMedia();
+				}
+				if (PlayWhat == "image") {
+					if (video != null) {
+						video.Stop();
+						PlayBackTimer.Enabled = false;
+					}
+					StopMedia();
 					this.axShockwaveFlash.Hide();
 					this.VideoPanel.Hide();
 					this.ShowSongPanel.Show();
 					this.ShowSongPanel.Size = this.Size;
-					this.ShowSongPanel.Location = new Point (0,0);
+					this.ShowSongPanel.Location = new Point(0, 0);
 
 					if (this.Config.AppOperatingMode == OperatingMode.Client) {
 						_MainForm.DisplayLiveClient.SetContent(new ImageContent(Path));
 					} else {
 						_MainForm.DisplayLiveLocal.SetContent(new ImageContent(Path));
 					}
-                }
+				}
 
-            } else if (this.strMediaPlaying == "flash") {
-                this.axShockwaveFlash.Play();
-            } else if (this.strMediaPlaying == "movie") {
-                this.video.Play();
-            }
-        }
+			} else if (this.strMediaPlaying == "flash") {
+				this.axShockwaveFlash.Play();
+			} else if (this.strMediaPlaying == "movie") {
+				this.video.Play();
+			}
+		}
 
 
 		public void StopMedia() {
 
-			if(this.FlashPlaying){
+			if (this.FlashPlaying) {
 				axShockwaveFlash.Stop();
 				axShockwaveFlash.Rewind();
 				this.FlashPlaying = false;
-				if(PrePlaying != PlayWhat){
+				if (PrePlaying != PlayWhat) {
 					axShockwaveFlash.Hide();
 				}
 			}
 
-			if(PlayWhat != "image"){
-				if(PrePlaying != PlayWhat){
-					this.bmp = this.DrawBlackBitmap(ShowSongPanel.Size.Width,ShowSongPanel.Size.Height);
+			if (PlayWhat != "image") {
+				if (PrePlaying != PlayWhat) {
+					this.bmp = this.DrawBlackBitmap(ShowSongPanel.Size.Width, ShowSongPanel.Size.Height);
 					this.DrawWhat = 777;
 					this.GDIDraw();
 				}
 			}
 
-			if(this.VideoPlaying){
+			if (this.VideoPlaying) {
 				video.Stop();
 				PlayBackTimer.Enabled = false;
 				VideoPlaying = false;
-				if(PrePlaying != PlayWhat){
+				if (PrePlaying != PlayWhat) {
 					this.VideoPanel.Hide();
 				}
-            }
+			}
 
-            strMediaPlaying = null;
+			strMediaPlaying = null;
 		}
 
-        public void PauseMedia() {
-            if(strMediaPlaying == "flash") {
-                axShockwaveFlash.Stop();
-            }
-            if(strMediaPlaying == "movie") {
-                try {
-                    video.Pause();
-                } catch{}
-            }
+		public void PauseMedia() {
+			if (strMediaPlaying == "flash") {
+				axShockwaveFlash.Stop();
+			}
+			if (strMediaPlaying == "movie") {
+				try {
+					video.Pause();
+				} catch { }
+			}
 		}
 
 
 		private void PlayBackTimer_Tick(object sender, System.EventArgs e) {
-            try {
-                if (this.LoopMedia  && this.video.CurrentPosition == this.video.Duration) {
-                    this.video.CurrentPosition = 0;
-                }
-            } catch{}
-        }
+			try {
+				if (this.LoopMedia && this.video.CurrentPosition == this.video.Duration) {
+					this.video.CurrentPosition = 0;
+				}
+			} catch { }
+		}
 		#endregion
-
 
 		#region Repaints
 
@@ -1502,8 +1497,8 @@ namespace DreamBeam {
 		}
 
 		private void ShowSongPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e) {
-//            if (strMediaPlaying == null)
-//                this.GDIDraw();
+			//            if (strMediaPlaying == null)
+			//                this.GDIDraw();
 
 			if (memoryBitmap != null) {
 				e.Graphics.DrawImage(memoryBitmap, 0, 0, this.Width, this.Height);
@@ -1512,17 +1507,17 @@ namespace DreamBeam {
 				memoryBitmap = new Bitmap(this.Width, this.Height);
 				Graphics g = Graphics.FromImage(memoryBitmap);
 				g.Clear(_MainForm.Config.BackgroundColor);
-				e.Graphics.DrawImage( memoryBitmap, 0, 0, this.Width, this.Height );
+				e.Graphics.DrawImage(memoryBitmap, 0, 0, this.Width, this.Height);
 			}
 		}
 		#endregion
-		
+
 		private void AlphaTimer_Tick(object sender, System.EventArgs e) {
 			if (AlphaOpacity < 255) {
 
 				if (AlphaOpacity + Config.BlendSpeed > 255) AlphaOpacity = (byte)255;
 				else AlphaOpacity = (byte)(AlphaOpacity + Config.BlendSpeed);
-				
+
 				AlphaForm.SetBitmap(bmp, AlphaOpacity);
 			} else {
 				AlphaTimer.Stop();
@@ -1538,7 +1533,7 @@ namespace DreamBeam {
 
 				if (AlphaOpacity + Config.BlendSpeed > 255) AlphaOpacity = (byte)255;
 				else AlphaOpacity = (byte)(AlphaOpacity + Config.BlendSpeed);
-				
+
 				AlphaForm.SetBitmap(bmp, AlphaOpacity);
 			} else {
 				AlphaTimer2.Stop();
@@ -1546,7 +1541,7 @@ namespace DreamBeam {
 				memoryBitmap = bmp;
 				g.DrawImage(memoryBitmap, new Rectangle(0, 0, this.Width, this.Height), 0, 0, this.Width, this.Height, GraphicsUnit.Pixel);
 				AlphaForm.Hide();
-			}		
+			}
 		}
 
 

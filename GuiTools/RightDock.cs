@@ -5,8 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Threading;
 using System.IO;
 
-namespace DreamBeam
-{
+namespace DreamBeam {
 	/// <summary>
 	/// Zusammenfassende Beschreibung für Class
 	/// </summary>
@@ -14,21 +13,15 @@ namespace DreamBeam
 
 
 
-	public class RightDock : GuiTemplate
-	{
+	public class RightDock : GuiTemplate {
 		public BGImageTools BGImageTools = null;
-        public MediaListTools MediaListTools = null;
+		public MediaListTools MediaListTools = null;
 
 
-		public RightDock(MainForm impForm, ShowBeam impShowBeam) :  base(impForm,impShowBeam)
-		{
-		   this.BGImageTools = new BGImageTools(impForm, impShowBeam);
-		   this.MediaListTools = new MediaListTools(impForm, impShowBeam);
+		public RightDock(MainForm impForm, ShowBeam impShowBeam)
+			: base(impForm, impShowBeam) {
+			this.BGImageTools = new BGImageTools(impForm, impShowBeam);
+			this.MediaListTools = new MediaListTools(impForm, impShowBeam);
 		}
-
-
-
-
-
 	}
 }

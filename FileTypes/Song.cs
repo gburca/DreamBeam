@@ -73,7 +73,7 @@ namespace DreamBeam {
 		public bool[] AutoPos = new bool[3];//Autoposition ?
 		public string bg_image;//The Song's BG Image
 		/// <summary>Active strophe. Zero-based.</summary>
- 		public int strophe = 0;
+		public int strophe = 0;
 		public int strophe_count = 0; 		//Number of strophes
 		public string version = "0.5";//DreamBeam Version
 		public int TextStyle = 0;
@@ -95,45 +95,45 @@ namespace DreamBeam {
 			return s;
 		}
 
-	#region Save
+		#region Save
 		///<summary>Saves the Song</summary>
 		public void Save() {
-			XmlTextWriter tw = new XmlTextWriter("Songs\\"+SongName+".xml",null);
+			XmlTextWriter tw = new XmlTextWriter("Songs\\" + SongName + ".xml", null);
 			tw.Formatting = Formatting.Indented;
 			tw.WriteStartDocument();
 			tw.WriteStartElement("DreamSong");
-			tw.WriteElementString("Version",this.version);
-			tw.WriteElementString("image",bg_image);
-			tw.WriteElementString("TextAlign",TextAlign);
-			tw.WriteElementString("MultiLang",MultiLang.ToString());
-			tw.WriteElementString("TextStyle",TextStyle.ToString());
-			tw.WriteElementString("windowHeight",windowHeight.ToString());
-			tw.WriteElementString("windowWidth",windowWidth.ToString());
+			tw.WriteElementString("Version", this.version);
+			tw.WriteElementString("image", bg_image);
+			tw.WriteElementString("TextAlign", TextAlign);
+			tw.WriteElementString("MultiLang", MultiLang.ToString());
+			tw.WriteElementString("TextStyle", TextStyle.ToString());
+			tw.WriteElementString("windowHeight", windowHeight.ToString());
+			tw.WriteElementString("windowWidth", windowWidth.ToString());
 
-			for (int i = 0; i<3;i++) {
-				tw.WriteStartElement("Text"+i);
-				tw.WriteElementString("Text",this.Text[i]);
-				tw.WriteElementString("Font",this.FontFace[i]);
+			for (int i = 0; i < 3; i++) {
+				tw.WriteStartElement("Text" + i);
+				tw.WriteElementString("Text", this.Text[i]);
+				tw.WriteElementString("Font", this.FontFace[i]);
 				tw.WriteElementString("FontStyle", Convert.ToString(Convert.ToInt32(FontStyle[i])));
 
-				tw.WriteElementString("FontSize",((int)this.FontSize[i]).ToString());
-				tw.WriteElementString("TextColor",Convert.ToString(this.TextColor[i].ToArgb()));
-				tw.WriteElementString("OutlineColor",Convert.ToString(this.OutlineColor[i].ToArgb()));
-				tw.WriteElementString("posX",Convert.ToString(this.posX[i]));
-				tw.WriteElementString("posY",Convert.ToString(this.posY[i]));
-				tw.WriteElementString("TextEffect",this.TextEffect[i]);
-				tw.WriteElementString("AutoPos",AutoPos[i].ToString());
+				tw.WriteElementString("FontSize", ((int)this.FontSize[i]).ToString());
+				tw.WriteElementString("TextColor", Convert.ToString(this.TextColor[i].ToArgb()));
+				tw.WriteElementString("OutlineColor", Convert.ToString(this.OutlineColor[i].ToArgb()));
+				tw.WriteElementString("posX", Convert.ToString(this.posX[i]));
+				tw.WriteElementString("posY", Convert.ToString(this.posY[i]));
+				tw.WriteElementString("TextEffect", this.TextEffect[i]);
+				tw.WriteElementString("AutoPos", AutoPos[i].ToString());
 				tw.WriteEndElement();
 			}
 
 			// Multilanguage
 			tw.WriteStartElement("MultiLangSettings");
-				tw.WriteElementString("Font",this.FontFace[3]);
-				tw.WriteElementString("FontStyle", Convert.ToString(Convert.ToInt32(FontStyle[3])));
-				tw.WriteElementString("FontSize",((int)this.FontSize[3]).ToString());
-				tw.WriteElementString("TextColor",Convert.ToString(this.TextColor[3].ToArgb()));
-				tw.WriteElementString("OutlineColor",Convert.ToString(this.OutlineColor[3].ToArgb()));
-				tw.WriteElementString("TextEffect",this.TextEffect[3]);
+			tw.WriteElementString("Font", this.FontFace[3]);
+			tw.WriteElementString("FontStyle", Convert.ToString(Convert.ToInt32(FontStyle[3])));
+			tw.WriteElementString("FontSize", ((int)this.FontSize[3]).ToString());
+			tw.WriteElementString("TextColor", Convert.ToString(this.TextColor[3].ToArgb()));
+			tw.WriteElementString("OutlineColor", Convert.ToString(this.OutlineColor[3].ToArgb()));
+			tw.WriteElementString("TextEffect", this.TextEffect[3]);
 			tw.WriteEndElement();
 
 			tw.WriteEndElement();
@@ -141,12 +141,12 @@ namespace DreamBeam {
 			tw.Flush();
 			tw.Close();
 		}
-	#endregion
+		#endregion
 
-	#region Load
+		#region Load
 		///<summary>Loads the Song</summary>
 		public void Load(string filename) {
-            Init(filename);
+			Init(filename);
 			int i;
 			this.strophe = 0;
 			XmlDocument document = new XmlDocument();
@@ -154,7 +154,7 @@ namespace DreamBeam {
 				//"Songs\\"+filename+".xml"
 				//document.Load(Tools.DreamBeamPath() + @"\Songs\" + filename + ".xml");
 				document.Load(filename);
-			} catch(XmlException xmle) {
+			} catch (XmlException xmle) {
 				MessageBox.Show(xmle.Message);
 			}
 
@@ -163,8 +163,8 @@ namespace DreamBeam {
 			// Get This.Text[*]
 			list = document.GetElementsByTagName("Text");
 			i = 0;
-			foreach(XmlNode n in list) {
-				this.Text[i]=n.InnerText;
+			foreach (XmlNode n in list) {
+				this.Text[i] = n.InnerText;
 				i++;
 			}
 
@@ -173,15 +173,15 @@ namespace DreamBeam {
 			list = document.GetElementsByTagName("Font");
 			i = 0;
 
-			foreach(XmlNode n in list) {
-				this.FontFace[i]=n.InnerText;
+			foreach (XmlNode n in list) {
+				this.FontFace[i] = n.InnerText;
 				i++;
 			}
 
 			// Get This.TextStyle
 			list = document.GetElementsByTagName("FontStyle");
 			i = 0;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				this.FontStyle[i] = (System.Drawing.FontStyle)Convert.ToInt32(n.InnerText);
 				i++;
 			}
@@ -190,7 +190,7 @@ namespace DreamBeam {
 			list = document.GetElementsByTagName("FontSize");
 			double x;
 			i = 0;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				x = Convert.ToDouble(n.InnerText.Trim());
 				this.FontSize[i] = (float)x;
 				i++;
@@ -199,7 +199,7 @@ namespace DreamBeam {
 			// Get This.posX[*]
 			list = document.GetElementsByTagName("posX");
 			i = 0;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				this.posX[i] = Convert.ToInt32(n.InnerText);
 				i++;
 			}
@@ -207,7 +207,7 @@ namespace DreamBeam {
 			// Get This.posX[*]
 			list = document.GetElementsByTagName("posY");
 			i = 0;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				this.posY[i] = Convert.ToInt32(n.InnerText);
 				i++;
 			}
@@ -215,7 +215,7 @@ namespace DreamBeam {
 			// Get This.TextColor[*]
 			list = document.GetElementsByTagName("TextColor");
 			i = 0;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				this.TextColor[i] = System.Drawing.Color.FromArgb(Convert.ToInt32(n.InnerText));
 				i++;
 			}
@@ -223,7 +223,7 @@ namespace DreamBeam {
 			// Get This.OutlineColor[*]
 			list = document.GetElementsByTagName("OutlineColor");
 			i = 0;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				this.OutlineColor[i] = System.Drawing.Color.FromArgb(Convert.ToInt32(n.InnerText));
 				i++;
 			}
@@ -231,25 +231,25 @@ namespace DreamBeam {
 			// Get This.TextStyle
 			list = document.GetElementsByTagName("TextStyle");
 			i = 0;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				this.TextStyle = Convert.ToInt32(n.InnerText);
 				i++;
 			}
 
 
 
-			   // Get This.TextAlign
+			// Get This.TextAlign
 			list = document.GetElementsByTagName("TextAlign");
 			TextAlign = "left";
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				TextAlign = n.InnerText;
 			}
 
 
-			   // Get Multilang
+			// Get Multilang
 			list = document.GetElementsByTagName("MultiLang");
 			MultiLang = false;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				MultiLang = Convert.ToBoolean(n.InnerText);
 			}
 
@@ -257,7 +257,7 @@ namespace DreamBeam {
 			// Get This.TextEffect[*]
 			list = document.GetElementsByTagName("TextEffect");
 			i = 0;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				this.TextEffect[i] = n.InnerText;
 				i++;
 			}
@@ -270,7 +270,7 @@ namespace DreamBeam {
 			AutoPos[0] = false;
 			AutoPos[1] = false;
 			AutoPos[2] = false;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				this.AutoPos[i] = Convert.ToBoolean(n.InnerText);
 				i++;
 			}
@@ -278,7 +278,7 @@ namespace DreamBeam {
 			// Get AutoPos
 			list = document.GetElementsByTagName("windowHeight");
 			i = 0;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				windowHeight = Convert.ToInt32(n.InnerText);
 				i++;
 			}
@@ -286,83 +286,80 @@ namespace DreamBeam {
 			// Get AutoPos
 			list = document.GetElementsByTagName("windowWidth");
 			i = 0;
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				windowWidth = Convert.ToInt32(n.InnerText);
 				i++;
 			}
 
 			// Get This.bg_image
 			list = document.GetElementsByTagName("image");
-			foreach(XmlNode n in list) {
+			foreach (XmlNode n in list) {
 				if (System.IO.File.Exists(n.InnerText)) {
 					this.bg_image = n.InnerText;
 				} else {
 					this.bg_image = null;
 					// Define Directory and ImageTypes
-					string strImageDir = Tools.GetAppDocPath()+@"\Backgrounds";
+					string strImageDir = Tools.GetAppDocPath() + @"\Backgrounds";
 					string[] folders = Directory.GetDirectories(@strImageDir);
 
 					string tmpfilename = Path.GetFileName(n.InnerText);
-					if (System.IO.File.Exists(Tools.GetAppDocPath()+@"\Backgrounds\"+tmpfilename))
-					{
-						this.bg_image = Tools.GetAppDocPath()+@"\Backgrounds\"+tmpfilename;
+					if (System.IO.File.Exists(Tools.GetAppDocPath() + @"\Backgrounds\" + tmpfilename)) {
+						this.bg_image = Tools.GetAppDocPath() + @"\Backgrounds\" + tmpfilename;
 					} else {
-						foreach (string folder in folders)
-						{
-							if (System.IO.File.Exists(folder+@"\"+tmpfilename))
-							{
-								this.bg_image = Tools.GetAppDocPath()+@"\Backgrounds\"+Tools.Reverse(Tools.Reverse(folder).Substring(0,Tools.Reverse(folder).IndexOf(@"\"))) + "\\" +tmpfilename;
+						foreach (string folder in folders) {
+							if (System.IO.File.Exists(folder + @"\" + tmpfilename)) {
+								this.bg_image = Tools.GetAppDocPath() + @"\Backgrounds\" + Tools.Reverse(Tools.Reverse(folder).Substring(0, Tools.Reverse(folder).IndexOf(@"\"))) + "\\" + tmpfilename;
 							}
 						}
-					 }
+					}
 				}
 			}
 
 			this.SongName = filename;
 
-			if(this.SizeForm != null)
+			if (this.SizeForm != null)
 				CalculateSizes();
 
 			this.strophe_count = CountStrophes();
-		  }
-	#endregion
+		}
+		#endregion
 
-		private void CalculateSizes(){
+		private void CalculateSizes() {
 
-			if(windowHeight != 0 && windowWidth != 0){
+			if (windowHeight != 0 && windowWidth != 0) {
 
-				for (int i = 0; i<= 2; i++){
-					this.posX[i] = 	(int)System.Math.Round((float)SizeForm.Size.Width/(float)windowWidth * this.posX[i]);
-					this.posY[i] = (int)System.Math.Round((float)SizeForm.Size.Height/(float)windowHeight * this.posY[i]);
+				for (int i = 0; i <= 2; i++) {
+					this.posX[i] = (int)System.Math.Round((float)SizeForm.Size.Width / (float)windowWidth * this.posX[i]);
+					this.posY[i] = (int)System.Math.Round((float)SizeForm.Size.Height / (float)windowHeight * this.posY[i]);
 				}
 
 
-				if(windowWidth/windowHeight >= SizeForm.Size.Width/SizeForm.Size.Height){  //
-				   //windowWidth is smaller or equal
-					for (int i = 0; i<4; i++){
-						this.FontSize[i] = (float)SizeForm.Size.Width/(float)windowWidth * this.FontSize[i];
+				if (windowWidth / windowHeight >= SizeForm.Size.Width / SizeForm.Size.Height) {  //
+					//windowWidth is smaller or equal
+					for (int i = 0; i < 4; i++) {
+						this.FontSize[i] = (float)SizeForm.Size.Width / (float)windowWidth * this.FontSize[i];
 					}
-				}else{
-				   //windowHeight is smaller
-					for (int i = 0; i<4; i++){
-						this.FontSize[i] = (float)SizeForm.Size.Height/(float)windowHeight * this.FontSize[i];
+				} else {
+					//windowHeight is smaller
+					for (int i = 0; i < 4; i++) {
+						this.FontSize[i] = (float)SizeForm.Size.Height / (float)windowHeight * this.FontSize[i];
 					}
 				}
 			}
 
 			windowHeight = SizeForm.Size.Height;
 			windowWidth = SizeForm.Size.Width;
-		   
+
 		}
 
 		///<summary>Checks if XML File is a song (nothing yet)</summary>
-		public bool isSong(string filename){
+		public bool isSong(string filename) {
 			return true;
 		}
 
 		///<summary>Init the Song</summary>
-		public void Init(string strName){
-			for (int i = 0; i<4; i++){
+		public void Init(string strName) {
+			for (int i = 0; i < 4; i++) {
 				this.FontFace[i] = "Arial";
 				this.FontSize[i] = 48;
 				this.FontStyle[i] = System.Drawing.FontStyle.Regular;
@@ -371,10 +368,10 @@ namespace DreamBeam {
 				this.OutlineColor[i] = Color.Black;
 			}
 
-			for (int i = 0; i<3; i++){
+			for (int i = 0; i < 3; i++) {
 				this.Text[i] = "";
 				this.posX[i] = 10;
-				this.posY[i] = 10+(100*i);
+				this.posY[i] = 10 + (100 * i);
 				this.AutoPos[i] = true;
 			}
 			SongName = strName;
@@ -382,21 +379,21 @@ namespace DreamBeam {
 		}
 
 
-		public void SetText(string Content,int x){
-		 Text[x] = Content;
+		public void SetText(string Content, int x) {
+			Text[x] = Content;
 		}
 
-		public string GetText(int x){
-			 return Text[x];
+		public string GetText(int x) {
+			return Text[x];
 		}
 
 		#region Constructors
 		///<summary>Main Class</summary>
-		public Song(){
+		public Song() {
 			this.Init("New Song");
 		}
 
-		public Song(System.Windows.Forms.Form Form){
+		public Song(System.Windows.Forms.Form Form) {
 			this.SizeForm = Form;
 			this.Init("New Song");
 		}
@@ -405,150 +402,150 @@ namespace DreamBeam {
 			this.Init("New Song");
 			this.Load(filename);
 		}
-		
+
 		#endregion
 
-	#region StropheTools
+		#region StropheTools
 
-		public int CountStrophes(){
-			return(Tools.Count(Text[1],strSeperator));
+		public int CountStrophes() {
+			return (Tools.Count(Text[1], strSeperator));
 		}
 
-		public string GetStrophe(int StropheNumber){
+		public string GetStrophe(int StropheNumber) {
 
-						if(StropheNumber == -1)
-							StropheNumber = this.strophe;
+			if (StropheNumber == -1)
+				StropheNumber = this.strophe;
 
-						string temp = GetText(1);
-						int x = 0;
-						int intSLength = 0; //(height)length of the biggest strophe
-						int intSWidth = 0;
-						LongestStrophe = GetText(1); //Text of the Biggest_Strophe
-						WidestStrophe = GetText(1);
-						string strCurrentStrophe = temp;
-						int strophes;
-
-
-						//get strophe and search for the longest one
-						strophes = CountStrophes();
-						if (StropheNumber >= strophes) StropheNumber = strophes - 1;
-						for (x=0;x < strophes;x++) {
-
-							// find all strophes, exept the last one
-							if (x < (strophes -1)) {
-
-								// if selected strophe, then copy this into the Textfield
-								if(x == StropheNumber ) {
-									strCurrentStrophe = temp.Substring(0,temp.IndexOf(strSeperator));
-								}
-
-								//check if this is the longest strophe
-								int tmp = Tools.Count(temp.Substring(0,temp.IndexOf(strSeperator)),"\n");
-								if(tmp > intSLength) {
-									intSLength = tmp;
-									LongestStrophe = temp.Substring(0,temp.IndexOf(strSeperator));
-								}
-
-								//check if this is the widest strophe
-								tmp = TextGraphics.GetLongestLine(temp.Substring(0,temp.IndexOf(strSeperator)));
-								if( tmp > intSWidth){
-								  intSWidth = tmp;
-								  WidestStrophe =  temp.Substring(0,temp.IndexOf(strSeperator));
-								}
-
-								// cut the first strophe out of the list
-								temp=temp.Substring(temp.IndexOf(strSeperator)+strSeperator.Length);
+			string temp = GetText(1);
+			int x = 0;
+			int intSLength = 0; //(height)length of the biggest strophe
+			int intSWidth = 0;
+			LongestStrophe = GetText(1); //Text of the Biggest_Strophe
+			WidestStrophe = GetText(1);
+			string strCurrentStrophe = temp;
+			int strophes;
 
 
-							} else {
-								// get the last strophe
-								// if selected strophe, then copy this into the Textfield
-								if (x == StropheNumber) {
-									strCurrentStrophe = temp;
-								}
+			//get strophe and search for the longest one
+			strophes = CountStrophes();
+			if (StropheNumber >= strophes) StropheNumber = strophes - 1;
+			for (x = 0; x < strophes; x++) {
 
-								//check if this is the longest strophe
-								int tmp = Tools.Count(temp,"\n");
-								if(tmp > intSLength) {
-									intSLength = tmp;
-									LongestStrophe = temp;
-								}
+				// find all strophes, exept the last one
+				if (x < (strophes - 1)) {
 
-								//check if this is the widest strophe
-								tmp = TextGraphics.GetLongestLine(temp);
-								if( tmp > intSWidth){
-								 intSWidth = tmp;
-								 WidestStrophe =  temp;
-								}
-							}
-						}
-					   this.TextChanged = false;
-					   return strCurrentStrophe;
+					// if selected strophe, then copy this into the Textfield
+					if (x == StropheNumber) {
+						strCurrentStrophe = temp.Substring(0, temp.IndexOf(strSeperator));
+					}
+
+					//check if this is the longest strophe
+					int tmp = Tools.Count(temp.Substring(0, temp.IndexOf(strSeperator)), "\n");
+					if (tmp > intSLength) {
+						intSLength = tmp;
+						LongestStrophe = temp.Substring(0, temp.IndexOf(strSeperator));
+					}
+
+					//check if this is the widest strophe
+					tmp = TextGraphics.GetLongestLine(temp.Substring(0, temp.IndexOf(strSeperator)));
+					if (tmp > intSWidth) {
+						intSWidth = tmp;
+						WidestStrophe = temp.Substring(0, temp.IndexOf(strSeperator));
+					}
+
+					// cut the first strophe out of the list
+					temp = temp.Substring(temp.IndexOf(strSeperator) + strSeperator.Length);
+
+
+				} else {
+					// get the last strophe
+					// if selected strophe, then copy this into the Textfield
+					if (x == StropheNumber) {
+						strCurrentStrophe = temp;
+					}
+
+					//check if this is the longest strophe
+					int tmp = Tools.Count(temp, "\n");
+					if (tmp > intSLength) {
+						intSLength = tmp;
+						LongestStrophe = temp;
+					}
+
+					//check if this is the widest strophe
+					tmp = TextGraphics.GetLongestLine(temp);
+					if (tmp > intSWidth) {
+						intSWidth = tmp;
+						WidestStrophe = temp;
+					}
+				}
+			}
+			this.TextChanged = false;
+			return strCurrentStrophe;
 		}
 
-		public string GetLongestStrophe(){
+		public string GetLongestStrophe() {
 			string tmp;
-			if(TextChanged)
-				 tmp = this.GetStrophe(-1);
+			if (TextChanged)
+				tmp = this.GetStrophe(-1);
 			return this.LongestStrophe;
 		}
 
 
-		public string GetWidestStrophe(){
+		public string GetWidestStrophe() {
 			string tmp;
-			if(this.TextChanged )
+			if (this.TextChanged)
 				tmp = this.GetStrophe(-1);
 			return this.WidestStrophe;
 		}
 
-	#endregion
+		#endregion
 
-	#region SerializeStropheSettings
-	public string SerializeStropheSettings(int strophenumber){
-		String StropheString = "";
+		#region SerializeStropheSettings
+		public string SerializeStropheSettings(int strophenumber) {
+			String StropheString = "";
 
 
-			 StropheString = StropheString + bg_image;
-			 StropheString = StropheString+ TextAlign;
-			 StropheString = StropheString+ TextStyle.ToString();
+			StropheString = StropheString + bg_image;
+			StropheString = StropheString + TextAlign;
+			StropheString = StropheString + TextStyle.ToString();
 
-			for (int i = 0; i<3;i++) {
+			for (int i = 0; i < 3; i++) {
 
-//				tw.WriteElementString("Text",this.Text[i]);
-				 if(i == 1)
+				//				tw.WriteElementString("Text",this.Text[i]);
+				if (i == 1)
 					StropheString += this.GetStrophe(strophenumber);
-				 else
+				else
 					StropheString += this.Text[i];
 
-				 StropheString += this.FontFace[i];
-				 StropheString += Convert.ToString(Convert.ToInt32(FontStyle[i]));
-				 StropheString += this.FontSize[i].ToString();
-				 StropheString += Convert.ToString(this.TextColor[i].ToArgb());
-				 StropheString += Convert.ToString(this.OutlineColor[i].ToArgb());
+				StropheString += this.FontFace[i];
+				StropheString += Convert.ToString(Convert.ToInt32(FontStyle[i]));
+				StropheString += this.FontSize[i].ToString();
+				StropheString += Convert.ToString(this.TextColor[i].ToArgb());
+				StropheString += Convert.ToString(this.OutlineColor[i].ToArgb());
 
-				 if(AutoPos[i] == false){
-					 StropheString += Convert.ToString(this.posX[i]);
-					 StropheString += Convert.ToString(this.posY[i]);
-				 }
-					StropheString  += this.TextEffect[i];
+				if (AutoPos[i] == false) {
+					StropheString += Convert.ToString(this.posX[i]);
+					StropheString += Convert.ToString(this.posY[i]);
+				}
+				StropheString += this.TextEffect[i];
 			}
 
 
 
-		   if(MultiLang){
-			 StropheString += this.FontFace[3];
-			 StropheString += Convert.ToString(Convert.ToInt32(FontStyle[3]));
-			 StropheString += this.FontSize[3].ToString();
-			 StropheString +=Convert.ToString(this.TextColor[3].ToArgb());
-			 StropheString +=Convert.ToString(this.OutlineColor[3].ToArgb());
-			 StropheString += this.TextEffect[3];
+			if (MultiLang) {
+				StropheString += this.FontFace[3];
+				StropheString += Convert.ToString(Convert.ToInt32(FontStyle[3]));
+				StropheString += this.FontSize[3].ToString();
+				StropheString += Convert.ToString(this.TextColor[3].ToArgb());
+				StropheString += Convert.ToString(this.OutlineColor[3].ToArgb());
+				StropheString += this.TextEffect[3];
 			}
 
 
 
-		return StropheString;
-	}
-	#endregion
+			return StropheString;
+		}
+		#endregion
 
 	}
 
@@ -561,42 +558,49 @@ namespace DreamBeam {
 	/// <summary>
 	/// LyricsSequenceItem (LSI) is like a pointer to a LyricsItem. The order in
 	/// which these LSI objects are added to the NewSong.Sequence array
-    /// determines the order in which the parts of a song are displayed when the
-    /// user requests the "Next" slide.
+	/// determines the order in which the parts of a song are displayed when the
+	/// user requests the "Next" slide.
 	/// </summary>
 	[Serializable()]
 	public class LyricsSequenceItem {
-		[XmlIgnore()] public static Language lang;
-		[XmlAttribute] public LyricsType Type;
-		[XmlAttribute] public int Number;
+		[XmlIgnore()]
+		public static Language lang;
+		[XmlAttribute]
+		public LyricsType Type;
+		[XmlAttribute]
+		public int Number;
 
-		public LyricsSequenceItem() {}
+		public LyricsSequenceItem() { }
 		public LyricsSequenceItem(LyricsType Type, int Number) {
 			this.Type = Type;
 			this.Number = Number;
 		}
-		public LyricsSequenceItem(LyricsSequenceItem item) :
-			this(item.Type, item.Number) {}
+		public LyricsSequenceItem(LyricsSequenceItem item)
+			:
+			this(item.Type, item.Number) { }
 
 		public override string ToString() {
-			return lang.say("EditSongs.LyricType" + 
+			return lang.say("EditSongs.LyricType" +
 				Enum.GetName(typeof(LyricsType), Type)) + " " + Number.ToString();
 		}
 	}
 
 	/// <summary>
 	/// A LyricsItem represents a verse or chorus. A song's LyricsItem(s) can be
-    /// ordered by the user in any sequence desired by using the
-    /// LyricsSequenceItem class.
+	/// ordered by the user in any sequence desired by using the
+	/// LyricsSequenceItem class.
 	/// </summary>
 	[Serializable()]
 	public class LyricsItem : IComparable {
-		[XmlAttribute] public LyricsType Type;
+		[XmlAttribute]
+		public LyricsType Type;
 		/// <summary>The verse (chorus, other) number. One-based.</summary>
-		[XmlAttribute] public int Number;
-		[XmlText] public string Lyrics;
+		[XmlAttribute]
+		public int Number;
+		[XmlText]
+		public string Lyrics;
 
-		public LyricsItem() {}
+		public LyricsItem() { }
 		public LyricsItem(LyricsType Type, int Number, string Lyrics) {
 			this.Type = Type;
 			this.Number = Number;
@@ -631,7 +635,7 @@ namespace DreamBeam {
 	}
 
 	[Serializable()]
-    [XmlRoot(ElementName="DreamSong")]
+	[XmlRoot(ElementName = "DreamSong")]
 	public class NewSong : Content, IContentOperations {
 		// The following setting and properties will be serialized
 		public string Version;
@@ -640,35 +644,44 @@ namespace DreamBeam {
 		public string Collection;
 		public string Number;
 		public string Notes;
-        public string KeyRangeLow, KeyRangeHigh;
+		public string KeyRangeLow, KeyRangeHigh;
 		public bool MinorKey;
 		public bool DualLanguage;
 
 		[XmlArrayItem(ElementName = "LyricsItem", Type = typeof(LyricsItem))]
-		[XmlArray] public ArrayList SongLyrics;
+		[XmlArray]
+		public ArrayList SongLyrics;
 
 		[XmlArrayItem(ElementName = "LyricsSequenceItem", Type = typeof(LyricsSequenceItem))]
-		[XmlArray] public ArrayList Sequence;
+		[XmlArray]
+		public ArrayList Sequence;
 
 
 		// The following settings will not be saved when we serialize this class
 		private string fileName;
 		private Thread render;
 		private Object renderLock = new Object();
-		[XmlIgnore] public Song song;
-		[XmlIgnore] public Config config;
-		[XmlIgnore] protected System.Type enumType;
+		[XmlIgnore]
+		public Song song;
+		[XmlIgnore]
+		public Config config;
+		[XmlIgnore]
+		protected System.Type enumType;
 		/// <summary>Zero based index of the current lyric (used to index this.Sequence)</summary>
-		[XmlIgnore] public int CurrentLyric;
+		[XmlIgnore]
+		public int CurrentLyric;
 		/// <summary>We can hide/display each of the SongTextType items individually</summary>
-		[XmlIgnore] public bool[] Hide = new bool[Enum.GetValues(typeof(SongTextType)).Length];
-		[XmlIgnore] public string FileName {
+		[XmlIgnore]
+		public bool[] Hide = new bool[Enum.GetValues(typeof(SongTextType)).Length];
+		[XmlIgnore]
+		public string FileName {
 			get { return fileName; }
 			set { fileName = value; }
 		}
-		[XmlIgnore] public string FullName {
+		[XmlIgnore]
+		public string FullName {
 			get {
-				if (! Tools.StringIsNullOrEmptyTrim(this.Number)) {
+				if (!Tools.StringIsNullOrEmptyTrim(this.Number)) {
 					return this.Number + ". " + this.Title;
 				} else {
 					return this.Title;
@@ -677,7 +690,8 @@ namespace DreamBeam {
 		}
 
 		#region Constructors
-		public NewSong(Song s) : this() {
+		public NewSong(Song s)
+			: this() {
 			this.Title = s.GetText(0);
 			this.FileName = s.SongName;
 			this.Author = s.GetText(2);
@@ -694,7 +708,7 @@ namespace DreamBeam {
 			this.SongLyrics = new ArrayList();
 			this.Sequence = new ArrayList();
 			this.CurrentLyric = 0;
-            this.Version = Tools.GetAppVersion();
+			this.Version = Tools.GetAppVersion();
 		}
 
 		/// <summary>
@@ -718,7 +732,8 @@ namespace DreamBeam {
 		///	This constructor is mainly used when importing songs stored in this text format.
 		/// </summary>
 		/// <param name="fileName"></param>
-		public NewSong(string fileName) : this() {
+		public NewSong(string fileName)
+			: this() {
 			// If BOM is present, read the file as Unicode, else default to UTF-8
 			string[] lines;
 			Regex r;
@@ -735,7 +750,7 @@ namespace DreamBeam {
 					this.Notes += Regex.Replace(line, @"\s*#\s?(.*)", @"$1");
 					continue;
 				}
-				
+
 				r = new Regex(@"\s*(verse|chorus)\s+(\d+):", RegexOptions.IgnoreCase);
 				m = r.Match(line);
 
@@ -840,7 +855,7 @@ namespace DreamBeam {
 				}
 				foreach (LyricsItem item in choruses) {
 					this.Sequence.Add(new LyricsSequenceItem(item.Type, item.Number));
-				}					
+				}
 			}
 
 			// Add the "other" lyric types all at the end.
@@ -857,12 +872,12 @@ namespace DreamBeam {
 			this.format = config.SongTextFormat;
 			this.CurrentLyric = strophe;
 
-            // Version 0.71 allowed the user to save files with keys such as "D# / Eb".
-            this.KeyRangeLow = this.NormalizeKey(this.KeyRangeLow);
-            this.KeyRangeHigh = this.NormalizeKey(this.KeyRangeHigh);
-        }
+			// Version 0.71 allowed the user to save files with keys such as "D# / Eb".
+			this.KeyRangeLow = this.NormalizeKey(this.KeyRangeLow);
+			this.KeyRangeHigh = this.NormalizeKey(this.KeyRangeHigh);
+		}
 
-		
+
 		public LyricsItem GetLyrics(int seq) {
 			if (seq >= this.Sequence.Count) return null;
 			LyricsSequenceItem current = (LyricsSequenceItem)this.Sequence[seq];
@@ -875,7 +890,7 @@ namespace DreamBeam {
 		/// <summary>
 		/// Replaces all existing lyrics of the type with new ones obtained by
 		/// breaking the (user) provided text at blank lines and creating
-        /// verses/choruses/etc... out of it
+		/// verses/choruses/etc... out of it
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="text"></param>
@@ -898,7 +913,7 @@ namespace DreamBeam {
 
 		/// <summary>
 		/// Returns a string containing all the verses (or choruses, or other),
-        /// the way a user would have typed them in.
+		/// the way a user would have typed them in.
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
@@ -935,7 +950,7 @@ namespace DreamBeam {
 		/// <param name="lyrics"></param>
 		/// <returns></returns>
 		public string SanitizeLyrics(string lyrics) {
-            return lyrics;
+			return lyrics;
 			//return Regex.Replace(lyrics, "\u00ad", "-");
 		}
 
@@ -948,8 +963,8 @@ namespace DreamBeam {
 		public bool ContainsText(SongSearchType Search, string Text) {
 			StringBuilder s = new StringBuilder("");
 
-			s.Append( Tools.StringIsNullOrEmpty(this.Title) ? " " : this.Title + " ");
-			s.Append( Tools.StringIsNullOrEmpty(this.Notes) ? " " : this.Notes + " ");
+			s.Append(Tools.StringIsNullOrEmpty(this.Title) ? " " : this.Title + " ");
+			s.Append(Tools.StringIsNullOrEmpty(this.Notes) ? " " : this.Notes + " ");
 			foreach (LyricsType type in Enum.GetValues(typeof(LyricsType))) {
 				s.Append(this.GetLyrics(type));
 			}
@@ -970,10 +985,10 @@ namespace DreamBeam {
 			return false;
 		}
 
-        public string GetKey() {
-            if (this.KeyRangeLow == null) { return ""; }
-            return NormalizeKey(this.KeyRangeLow) + (this.MinorKey ? "m" : "");
-        }
+		public string GetKey() {
+			if (this.KeyRangeLow == null) { return ""; }
+			return NormalizeKey(this.KeyRangeLow) + (this.MinorKey ? "m" : "");
+		}
 
 		/// <summary>
 		/// Returns a normalized textual song key (converts "D# / Eb" to Eb)...
@@ -982,27 +997,27 @@ namespace DreamBeam {
 		public string NormalizeKey(string keyStr) {
 			if (keyStr == null) { return ""; }
 
-            if (keyStr.Contains(@"/")) {
-                string key = keyStr.Split('/')[0];
-                key = key.Trim();
+			if (keyStr.Contains(@"/")) {
+				string key = keyStr.Split('/')[0];
+				key = key.Trim();
 
-                switch (key) {
-                    case "C#": key = "Db"; break;
-                    case "D#": key = "Eb"; break;
-                    case "G#": key = "Ab"; break;
-                    case "A#": key = "Bb"; break;
-                }
-                return key;
-            } else {
-                return keyStr;
-            }
+				switch (key) {
+					case "C#": key = "Db"; break;
+					case "D#": key = "Eb"; break;
+					case "G#": key = "Ab"; break;
+					case "A#": key = "Bb"; break;
+				}
+				return key;
+			} else {
+				return keyStr;
+			}
 		}
 		#endregion
 
 		/// <summary>
 		/// The boolean properties are converted to a string so that we get a
 		/// different hash code if they change. Hide.GetHashCode() returns the
-        /// same number regardless of what the array elements contain.
+		/// same number regardless of what the array elements contain.
 		/// </summary>
 		/// <returns>A hash code representing the current verse</returns>
 		public int VisibleHashCode(int seq) {
@@ -1035,7 +1050,7 @@ namespace DreamBeam {
 				Console.WriteLine("Rendering song frame for {0}", this.VisibleHashCode(seq));
 			}
 
-			lock(renderLock) {
+			lock (renderLock) {
 				Pen p;
 				SolidBrush brush;
 				Bitmap bmp = new Bitmap(Width, Height);
@@ -1045,7 +1060,7 @@ namespace DreamBeam {
 				RectangleF measuredBounds;
 				Font font;
 				float fontSz;
-				string[] text = new string[ Enum.GetValues(typeof(SongTextType)).Length ];
+				string[] text = new string[Enum.GetValues(typeof(SongTextType)).Length];
 
 				graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
 				graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -1061,20 +1076,20 @@ namespace DreamBeam {
 				}
 
 				LyricsItem lyrics = this.GetLyrics(seq);
-				text[ (int)SongTextType.Title ] = (this.Title == null) ? "" : this.Title;
-				text[ (int)SongTextType.Verse ] = (lyrics == null) ? "" : lyrics.Lyrics;
-				text[ (int)SongTextType.Author ] = (this.Author == null) ? "" : this.Author;
+				text[(int)SongTextType.Title] = (this.Title == null) ? "" : this.Title;
+				text[(int)SongTextType.Verse] = (lyrics == null) ? "" : lyrics.Lyrics;
+				text[(int)SongTextType.Author] = (this.Author == null) ? "" : this.Author;
 
-			
+
 				string songKey = this.GetKey();
 				if (songKey.Length > 0) {
 					// Add the key to the author field?
-					text[ (int)SongTextType.Author ] += " (" + songKey + ")";
+					text[(int)SongTextType.Author] += " (" + songKey + ")";
 				}
 
 				pth = new GraphicsPath();
 
-				foreach (int type in Enum.GetValues( this.enumType )) {
+				foreach (int type in Enum.GetValues(this.enumType)) {
 					if (this.Hide[type]) continue;
 					// We have to keep the text within these user-specified boundaries
 					bounds = new System.Drawing.Rectangle(
@@ -1094,10 +1109,10 @@ namespace DreamBeam {
 							// Make a rectangle that is very tall to see how far down the text would stretch.
 							pathRect = bounds;
 							pathRect.Height *= 2;
-				
+
 							// We start with the user-specified font size ...
 							fontSz = format[type].TextFont.Size;
-					
+
 							// ... and decrease the size (if needed) until it fits within the user-specified boundaries
 							do {
 								font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
@@ -1117,9 +1132,9 @@ namespace DreamBeam {
 							text[type] = Regex.Replace(text[type], "\t", "        ");
 							pth = new GraphicsPath();
 							font = new Font(format[type].TextFont.FontFamily, format[type].TextFont.Size, format[type].TextFont.Style);
-							pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, new Point(0,0), sf);
+							pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, new Point(0, 0), sf);
 
-							pth.Transform( Tools.FitContents(bounds, pth.GetBounds(), sf));
+							pth.Transform(Tools.FitContents(bounds, pth.GetBounds(), sf));
 						}
 
 						brush = new SolidBrush(format[type].TextColor);
@@ -1179,11 +1194,11 @@ namespace DreamBeam {
 		public void ChangeBGImagePath(string newPath) {
 			this.BGImagePath = newPath;
 		}
-        public void ChangeTheme(Theme t) {
-            if (t == null) return;
-            ChangeBGImagePath(t.BGImagePath);
-            this.format = t.TextFormat;
-        }
+		public void ChangeTheme(Theme t) {
+			if (t == null) return;
+			ChangeBGImagePath(t.BGImagePath);
+			this.format = t.TextFormat;
+		}
 
 		public virtual ContentIdentity GetIdentity() {
 			ContentIdentity ident = new ContentIdentity();
@@ -1254,14 +1269,14 @@ namespace DreamBeam {
 			Directory.CreateDirectory(Path.GetDirectoryName(file));
 			FileStream fs = null;
 
-			if (! instance.CustomFormat) {
+			if (!instance.CustomFormat) {
 				instance.format = null;
 				instance.BGImagePath = null;
 			}
 
-            // When files are de-serialized, they retain the version they were
-            // originally serialized under. We need to update it here.
-            instance.Version = Tools.GetAppVersion();
+			// When files are de-serialized, they retain the version they were
+			// originally serialized under. We need to update it here.
+			instance.Version = Tools.GetAppVersion();
 
 			try {
 				fs = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Read);
@@ -1290,7 +1305,7 @@ namespace DreamBeam {
 				// Invalid class. Does the class have a public constructor?
 				Console.WriteLine("DeserializeFrom exception: " + ex.Message);
 			}
-			
+
 			if (xs != null) {
 				try {
 					return xs.Deserialize(tr);
@@ -1308,72 +1323,72 @@ namespace DreamBeam {
 		/// <param name="type">The type of class to deserialize. Allows this function to be used in derived classes.</param>
 		/// <param name="file">The full path to the XML file to deserialize</param>
 		/// <returns></returns>
-        public static object DeserializeFrom(System.Type type, string file) {
-            try {
-                using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
-                    return DeserializeFrom(type, new StreamReader(fs));
-                }
-            } catch (FileNotFoundException e) {
+		public static object DeserializeFrom(System.Type type, string file) {
+			try {
+				using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
+					return DeserializeFrom(type, new StreamReader(fs));
+				}
+			} catch (FileNotFoundException e) {
 				Console.WriteLine("Exception deserializing (FileNotFound): " + e.Message);
 			}
-            return null;
-        }
+			return null;
+		}
 
 		public static object DeserializeFrom(string file, int strophe, Config config) {
-            XmlDocument xmlDoc = new XmlDocument();
-            try {
-                xmlDoc.Load(file);
-            } catch {
-                return new NewSong();
-            }
+			XmlDocument xmlDoc = new XmlDocument();
+			try {
+				xmlDoc.Load(file);
+			} catch {
+				return new NewSong();
+			}
 
-            NewSong s = null;
-            //XmlNodeList nodes = xmlDoc.GetElementsByTagName("Version");
-            XmlNode version = xmlDoc.SelectSingleNode(@"/DreamSong/Version");
-            if (version == null) {
-                version = xmlDoc.SelectSingleNode(@"/NewSong/Version");
-            }
-            if (version != null) {                
-                switch (version.InnerText) {
-                    case "0.49":
-				        Song oldS = new Song(file);
-				        if (oldS.strophe_count > 0) {
-					        s = new NewSong(oldS);
-				        } else {
-					        s = new NewSong();
-				        }
-                        break;
+			NewSong s = null;
+			//XmlNodeList nodes = xmlDoc.GetElementsByTagName("Version");
+			XmlNode version = xmlDoc.SelectSingleNode(@"/DreamSong/Version");
+			if (version == null) {
+				version = xmlDoc.SelectSingleNode(@"/NewSong/Version");
+			}
+			if (version != null) {
+				switch (version.InnerText) {
+					case "0.49":
+						Song oldS = new Song(file);
+						if (oldS.strophe_count > 0) {
+							s = new NewSong(oldS);
+						} else {
+							s = new NewSong();
+						}
+						break;
 
-                    case "0.60":
-                        // Fix old songs that were saved with NewSong XML root instead of DreamSong
-                        XmlNode root = xmlDoc.DocumentElement;
-                        if (root.Name.Equals("NewSong")) {
-                            Tools.RenameXmlNode(root, root.NamespaceURI, "DreamSong");
-                            s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), new StringReader(xmlDoc.OuterXml));
-                        } else {
-                            s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
-                        }
-                        break;
+					case "0.60":
+						// Fix old songs that were saved with NewSong XML root instead of DreamSong
+						XmlNode root = xmlDoc.DocumentElement;
+						if (root.Name.Equals("NewSong")) {
+							Tools.RenameXmlNode(root, root.NamespaceURI, "DreamSong");
+							s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), new StringReader(xmlDoc.OuterXml));
+						} else {
+							s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
+						}
+						break;
 
-                    //case "0.72":
-                    default:
-		                s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
-                        break;
-                }
-            }
+					//case "0.72":
+					default:
+						s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
+						break;
+				}
+			}
 
-            if (s != null) {
-                if (!s.CustomFormat) {
-                    s.Init(strophe, config);
-                } else {
-                    s.config = config;
-                    s.CurrentLyric = strophe;
-                }
-                s.FileName = file;
-                return s;
-            } else {
-                return new NewSong();
-            }
+			if (s != null) {
+				if (!s.CustomFormat) {
+					s.Init(strophe, config);
+				} else {
+					s.config = config;
+					s.CurrentLyric = strophe;
+				}
+				s.FileName = file;
+				return s;
+			} else {
+				return new NewSong();
+			}
 		}
 		#endregion
 

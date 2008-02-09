@@ -5,8 +5,7 @@ using System.Xml.Serialization;
 using System.Collections;
 
 
-namespace DreamBeam.FileTypes
-{
+namespace DreamBeam.FileTypes {
 
 	#region Enums
 	public enum TextToolType {
@@ -88,16 +87,17 @@ namespace DreamBeam.FileTypes
 	}
 
 	/// <summary>
-    /// On power-down, all the documents contained in Sermon_DocManager are
-    /// saved to this class and this class is serialized to disk. On start-up,
-    /// this class is deserialized, and all the documents it contains are added
-    /// to Sermon_DocManager.
+	/// On power-down, all the documents contained in Sermon_DocManager are
+	/// saved to this class and this class is serialized to disk. On start-up,
+	/// this class is deserialized, and all the documents it contains are added
+	/// to Sermon_DocManager.
 	/// </summary>
 	public class SermonToolDocuments {
 		[XmlArrayItem(ElementName = "Document", Type = typeof(string))]
-		[XmlArray] public ArrayList Documents;
+		[XmlArray]
+		public ArrayList Documents;
 
-		public SermonToolDocuments () {
+		public SermonToolDocuments() {
 			Documents = new ArrayList();
 		}
 

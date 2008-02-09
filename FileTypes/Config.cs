@@ -12,8 +12,7 @@ using System.ComponentModel;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
-namespace DreamBeam
-{
+namespace DreamBeam {
 
 	#region Enums
 	public enum OperatingMode {
@@ -25,14 +24,13 @@ namespace DreamBeam
 
 
 	[Serializable()]
-	public class Config : ICloneable
-	{
+	public class Config : ICloneable {
 
 		#region Variables and Properties
-        public string Version;
+		public string Version;
 		public int BeamBoxPosX = 0;
 		public int BeamBoxPosY = 0;
-		public int	BeamBoxSizeX = 800;
+		public int BeamBoxSizeX = 800;
 		public int BeamBoxSizeY = 600;
 		public bool BeamBoxAutoPosSize = false;
 		public int BeamBoxScreenNum = -1;
@@ -47,8 +45,9 @@ namespace DreamBeam
 		public string PlayListString = "";
 		public bool RememberPanelLocations = false;
 
-		[XmlIgnore] public ArrayList PlayList = new ArrayList();
-		
+		[XmlIgnore]
+		public ArrayList PlayList = new ArrayList();
+
 		private string swordPath = "";
 		public string SwordPath {
 			get { return swordPath; }
@@ -57,64 +56,65 @@ namespace DreamBeam
 				try {
 					DirectoryInfo dir = new DirectoryInfo(value);
 					if (dir.Exists) {
-						FileInfo f = new FileInfo( Path.Combine(dir.FullName, "sword.exe") );
+						FileInfo f = new FileInfo(Path.Combine(dir.FullName, "sword.exe"));
 						if (f.Exists) {
 							swordPath = f.DirectoryName;
 							return;
 						}
 					}
-				} catch {}
+				} catch { }
 			}
 		}
 
 		public bool HideMouse = true;
 		public bool AlwaysOnTop = false;
 
-		[XmlIgnore] public System.Drawing.Color BackgroundColor = Color.Black;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public string XmlBackgroundColor {
-            get { return Tools.SerializeColor(BackgroundColor); }
-            set { BackgroundColor = Tools.DeserializeColor(value); }
-        }
+		[XmlIgnore]
+		public System.Drawing.Color BackgroundColor = Color.Black;
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+		public string XmlBackgroundColor {
+			get { return Tools.SerializeColor(BackgroundColor); }
+			set { BackgroundColor = Tools.DeserializeColor(value); }
+		}
 
 		public bool LoopMedia = false;
 		public bool LoopAutoPlay = false;
 		public int AutoPlayChangeTime = 2;
 		public string Language = "auto";
 
-        [XmlElement("Theme")]
-        public ComboTheme theme;
-        #region Theme accessors
-        [XmlIgnore]
-        public string BibleBGImagePath {
-            get { return theme.Bible == null ? null : theme.Bible.BGImagePath; }
-            set { if (theme.Bible != null) theme.Bible.BGImagePath = value; }
-        }
-        [XmlIgnore]
-        public string SongBGImagePath {
-            get { return theme.Song == null ? null : theme.Song.BGImagePath; }
-            set { if (theme.Song != null) theme.Song.BGImagePath = value; }
-        }
-        [XmlIgnore]
-        public string TextBGImagePath {
-            get { return theme.Sermon == null ? null : theme.Sermon.BGImagePath; }
-            set { if (theme.Sermon != null) theme.Sermon.BGImagePath = value; }
-        }
-        [XmlIgnore]
-        public BeamTextFormat[] BibleTextFormat {
-            get { return theme.Bible == null ? null : theme.Bible.TextFormat; }
-        }
-        [XmlIgnore]
-        public BeamTextFormat[] SongTextFormat {
-            get { return theme.Song == null ? null : theme.Song.TextFormat; }
-        }
-        [XmlIgnore]
-        public BeamTextFormat[] SermonTextFormat {
-            get { return theme.Sermon == null ? null : theme.Sermon.TextFormat; }
-        }
-        #endregion
+		[XmlElement("Theme")]
+		public ComboTheme theme;
+		#region Theme accessors
+		[XmlIgnore]
+		public string BibleBGImagePath {
+			get { return theme.Bible == null ? null : theme.Bible.BGImagePath; }
+			set { if (theme.Bible != null) theme.Bible.BGImagePath = value; }
+		}
+		[XmlIgnore]
+		public string SongBGImagePath {
+			get { return theme.Song == null ? null : theme.Song.BGImagePath; }
+			set { if (theme.Song != null) theme.Song.BGImagePath = value; }
+		}
+		[XmlIgnore]
+		public string TextBGImagePath {
+			get { return theme.Sermon == null ? null : theme.Sermon.BGImagePath; }
+			set { if (theme.Sermon != null) theme.Sermon.BGImagePath = value; }
+		}
+		[XmlIgnore]
+		public BeamTextFormat[] BibleTextFormat {
+			get { return theme.Bible == null ? null : theme.Bible.TextFormat; }
+		}
+		[XmlIgnore]
+		public BeamTextFormat[] SongTextFormat {
+			get { return theme.Song == null ? null : theme.Song.TextFormat; }
+		}
+		[XmlIgnore]
+		public BeamTextFormat[] SermonTextFormat {
+			get { return theme.Sermon == null ? null : theme.Sermon.TextFormat; }
+		}
+		#endregion
 
-        public OperatingMode AppOperatingMode;
+		public OperatingMode AppOperatingMode;
 
 		/// <summary>
 		/// When operating in client mode, this is the server address the client will attempt
@@ -128,23 +128,24 @@ namespace DreamBeam
 		public int ListeningPort;
 
 		public Rectangle AppDesktopLocation = new Rectangle(50, 50, 800, 600);
-		[XmlIgnore] public System.Data.DataSet Options_DataSet;
+		[XmlIgnore]
+		public System.Data.DataSet Options_DataSet;
 
 		#endregion
 
 		public Config() {
-            Version = Tools.GetAppVersion();
+			Version = Tools.GetAppVersion();
 			Init();
 		}
 
 		/// <summary>
 		/// In case the user deletes the default.config.xml file, or mucks with
-        /// it by hand and messes it up, these are the defaults they will end up
-        /// with, so we try to create something reasonable here, but nothing too
-        /// fancy.
+		/// it by hand and messes it up, these are the defaults they will end up
+		/// with, so we try to create something reasonable here, but nothing too
+		/// fancy.
 		/// </summary>
 		public void Init() {
-            theme = new ComboTheme();
+			theme = new ComboTheme();
 
 			AppOperatingMode = OperatingMode.StandAlone;
 			ListeningPort = 50000;
@@ -167,7 +168,7 @@ namespace DreamBeam
 			Directory.CreateDirectory(Path.GetDirectoryName(file));
 			FileStream fs = null;
 
-            instance.Version = Tools.GetAppVersion();
+			instance.Version = Tools.GetAppVersion();
 
 			try {
 				fs = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Read);
@@ -195,7 +196,7 @@ namespace DreamBeam
 		public static object DeserializeFrom(Config instance, string file) {
 			Type type = instance.GetType();
 			XmlSerializer xs = null;
-            string fullPath = Tools.GetFullPathOrNull(file);
+			string fullPath = Tools.GetFullPathOrNull(file);
 
 
 			try {
@@ -205,18 +206,18 @@ namespace DreamBeam
 				Console.WriteLine("DeserializeFrom exception: " + ex.Message);
 			}
 
-            if (!Tools.FileExists(fullPath)) {
-                // fullPath could be NULL here, so use "file"
-                Config.SerializeTo(instance, file);
-            } else if (xs != null) {
+			if (!Tools.FileExists(fullPath)) {
+				// fullPath could be NULL here, so use "file"
+				Config.SerializeTo(instance, file);
+			} else if (xs != null) {
 				try {
 					using (FileStream fs = File.Open(fullPath, FileMode.Open, FileAccess.Read)) {
-                        Config config = xs.Deserialize(fs) as Config;
-                        if (config != null) {
-                            return DeserializeCleanup(config);
-                        } else {
-                            Config.SerializeTo(instance, fullPath);
-                        }
+						Config config = xs.Deserialize(fs) as Config;
+						if (config != null) {
+							return DeserializeCleanup(config);
+						} else {
+							Config.SerializeTo(instance, fullPath);
+						}
 					}
 				} catch (FileNotFoundException) {
 					Config.SerializeTo(instance, fullPath);
@@ -231,18 +232,18 @@ namespace DreamBeam
 
 
 
-        #region ICloneable Members
+		#region ICloneable Members
 
-        public virtual object Clone() {
-            MemoryStream ms = new MemoryStream();
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(ms, this);
-            ms.Position = 0;
-            object clone = bf.Deserialize(ms);
-            ms.Close();
-            return clone;
-        }
+		public virtual object Clone() {
+			MemoryStream ms = new MemoryStream();
+			BinaryFormatter bf = new BinaryFormatter();
+			bf.Serialize(ms, this);
+			ms.Position = 0;
+			object clone = bf.Deserialize(ms);
+			ms.Close();
+			return clone;
+		}
 
-        #endregion
-    } // End of Config class
+		#endregion
+	} // End of Config class
 }

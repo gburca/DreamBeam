@@ -244,9 +244,6 @@
     <Compile Include="Graphics\PerPixelAlphaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Graphics\Prerenderer.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Graphics\ScreenCapture.cs">
       <SubType>Code</SubType>
     </Compile>

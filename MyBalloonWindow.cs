@@ -30,51 +30,50 @@ using System.Windows.Forms;
 using Rilling.Common.UI.Forms;
 
 namespace DreamBeam {
-    public class MyBalloonWindow : BalloonWindow {
-        private System.Windows.Forms.ComboBox cboTrigShape;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Timer tmrMoveTime;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel pnlTrigShape;
-        private System.Windows.Forms.Label HelpText;
-        private System.ComponentModel.IContainer components;
-        public System.Windows.Forms.Button button1;
-        public System.Windows.Forms.Button button2;
-        public System.Windows.Forms.Button button3;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label Header;
+	public class MyBalloonWindow : BalloonWindow {
+		private System.Windows.Forms.ComboBox cboTrigShape;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Timer tmrMoveTime;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Panel pnlTrigShape;
+		private System.Windows.Forms.Label HelpText;
+		private System.ComponentModel.IContainer components;
+		public System.Windows.Forms.Button button1;
+		public System.Windows.Forms.Button button2;
+		public System.Windows.Forms.Button button3;
+		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.Label Header;
 		private int ButtonClicked = 0;
 		public Config Config = new Config();
 		private Language Lang = new Language();
 
-        public MyBalloonWindow() {
-            // This call is required by the Windows Form Designer.
-            InitializeComponent();
+		public MyBalloonWindow() {
+			// This call is required by the Windows Form Designer.
+			InitializeComponent();
 
-        }
+		}
 
-        protected override void OnLoad(EventArgs e) {
-            base.OnLoad(e);
-        }
+		protected override void OnLoad(EventArgs e) {
+			base.OnLoad(e);
+		}
 
-        protected override void Dispose( bool disposing ) {
-            /*   if( disposing )
-               {
-                if (components != null)
-                {
-                 components.Dispose();
-                }
-               }
-               base.Dispose( disposing );*/
-        }
+		protected override void Dispose(bool disposing) {
+			/*   if( disposing )
+			   {
+				if (components != null)
+				{
+				 components.Dispose();
+				}
+			   }
+			   base.Dispose( disposing );*/
+		}
 
-#region Designer generated code
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-		{
+		#region Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(MyBalloonWindow));
 			this.cboTrigShape = new System.Windows.Forms.ComboBox();
@@ -200,70 +199,69 @@ namespace DreamBeam {
 			this.pnlTrigShape.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
-#endregion
+		#endregion
 
-        public int ShowHelp(Point pt,string strHeader, string strHelpText) {
-            this.Header.Text = strHeader;
-            this.HelpText.Text = strHelpText;
-            // Move the balloon to anchor position.
-            MoveAnchorTo(pt);
-            this.ButtonClicked = 0;
-            this.ShowDialog();
-            return this.ButtonClicked;
-
-
-        }
-
-        public int ShowHelp(Control control,Point pt,string strHeader, string strHelpText) {
-            if(control == null)
-                throw(new ArgumentNullException("control"));
-
-            this.Header.Text = strHeader;
-            this.HelpText.Text = strHelpText;
-            this.Shadow = true;
-            // Move the balloon to anchor position.
-            MoveAnchorTo(control);
-            this.Location = new Point (this.Location.X+pt.X,this.Location.Y+pt.Y);
-
-            this.ButtonClicked = 0;
-            this.ShowDialog();
-            return this.ButtonClicked;
-        }
+		public int ShowHelp(Point pt, string strHeader, string strHelpText) {
+			this.Header.Text = strHeader;
+			this.HelpText.Text = strHelpText;
+			// Move the balloon to anchor position.
+			MoveAnchorTo(pt);
+			this.ButtonClicked = 0;
+			this.ShowDialog();
+			return this.ButtonClicked;
 
 
+		}
+
+		public int ShowHelp(Control control, Point pt, string strHeader, string strHelpText) {
+			if (control == null)
+				throw (new ArgumentNullException("control"));
+
+			this.Header.Text = strHeader;
+			this.HelpText.Text = strHelpText;
+			this.Shadow = true;
+			// Move the balloon to anchor position.
+			MoveAnchorTo(control);
+			this.Location = new Point(this.Location.X + pt.X, this.Location.Y + pt.Y);
+
+			this.ButtonClicked = 0;
+			this.ShowDialog();
+			return this.ButtonClicked;
+		}
 
 
-        protected override void OnVisibleChanged(EventArgs e) {
-            base.OnVisibleChanged(e);
-        }
 
-        private void button2_Click(object sender, System.EventArgs e) {
-            this.ButtonClicked = 0;
-            this.Close();
-        }
 
-        private void button3_Click(object sender, System.EventArgs e) {
-            this.ButtonClicked = 1;
-            this.Close();
-        }
+		protected override void OnVisibleChanged(EventArgs e) {
+			base.OnVisibleChanged(e);
+		}
 
-        private void button1_Click(object sender, System.EventArgs e) {
-            this.ButtonClicked = 2;
-            this.Close();
-        }
-		
-		private void MyBalloonWindow_Load(object sender, System.EventArgs e)
-		{
+		private void button2_Click(object sender, System.EventArgs e) {
+			this.ButtonClicked = 0;
+			this.Close();
+		}
+
+		private void button3_Click(object sender, System.EventArgs e) {
+			this.ButtonClicked = 1;
+			this.Close();
+		}
+
+		private void button1_Click(object sender, System.EventArgs e) {
+			this.ButtonClicked = 2;
+			this.Close();
+		}
+
+		private void MyBalloonWindow_Load(object sender, System.EventArgs e) {
 			Lang.setCulture(Config.Language);
 			#region Language
-				button2.Text = Lang.say("Global.Buttons.Cancel");
-				button3.Text = Lang.say("Global.Buttons.Back");
-				button1.Text = Lang.say("Global.Buttons.Next");
+			button2.Text = Lang.say("Global.Buttons.Cancel");
+			button3.Text = Lang.say("Global.Buttons.Back");
+			button1.Text = Lang.say("Global.Buttons.Next");
 			#endregion
 		}
 
 
-    }
+	}
 }
 
 
