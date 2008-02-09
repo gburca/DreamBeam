@@ -180,7 +180,6 @@ namespace DreamBeam {
         #endregion
 
         #region internalTools
-
         private string GetCurrentPath() {
             string path = @"Backgrounds\";
             if (_MainForm.RightDocks_FolderDropdown.SelectedIndex > 0) {
@@ -189,6 +188,19 @@ namespace DreamBeam {
             return path;
         }
 
+        // Adds an Image to the List
+        public void AddImage(string dir) {
+            try {
+                _MainForm.RightDocks_imageList.Images.Add(_ShowBeam.Resizer(dir, 80, 60));
+                Controls.Development.ImageListBoxItem x = new Controls.Development.ImageListBoxItem(Path.GetFileName(dir), _MainForm.RightDocks_imageList.Images.Count - 1);
+                AddImageItem(x);
+            } catch (Exception doh) { MessageBox.Show(doh.Message); }
+        }
+        #endregion
+
+
+        #region UI thread access
+        // We can't modify UI controls from a different thread, so we do it like this:
         private delegate void AddImageDelegate(Controls.Development.ImageListBoxItem item);
         private void AddImageItem(Controls.Development.ImageListBoxItem item) {
             if (_MainForm.RightDocks_ImageListBox.InvokeRequired) {
@@ -199,24 +211,15 @@ namespace DreamBeam {
                 _MainForm.RightDocks_ImageListBox.Items.Add(item);
             }
         }
-
         private delegate void UpdateStatusPanelDelegate(string msg);
         private void UpdateStatusPanel(String msg) {
-            //_MainForm.StatusPanel.Text = msg;
-        }
-
-        // Adds an Image to the List
-        public void AddImage(string dir) {
-            try {
-                _MainForm.RightDocks_imageList.Images.Add(_ShowBeam.Resizer(dir, 80, 60));
-                Controls.Development.ImageListBoxItem x = new Controls.Development.ImageListBoxItem(Path.GetFileName(dir), _MainForm.RightDocks_imageList.Images.Count - 1);
-                //_MainForm.RightDocks_ImageListBox.Items.Add(x);
-                AddImageItem(x);
-            } catch (Exception doh) { MessageBox.Show(doh.Message); }
+            if (_MainForm.InvokeRequired) {
+                _MainForm.Invoke(new UpdateStatusPanelDelegate(this.UpdateStatusPanel), msg);
+            } else {
+                _MainForm.StatusPanel.Text = msg;
+            }
         }
         #endregion
-
-
 
     }
 }
