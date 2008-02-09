@@ -804,6 +804,7 @@ namespace DreamBeam.FileTypes {
 			this.BGImagePath = newPath;
 		}
         public void ChangeTheme(Theme t) {
+            if (t == null) return;
             ChangeBGImagePath(t.BGImagePath);
             this.format = t.TextFormat;
         }

@@ -486,7 +486,7 @@ namespace DreamBeam {
 		
 			this.Hide();
 
-			this.SwordProject_Found = this.Check_SwordProject();
+			this.SwordProject_Found = this.Check_SwordProject(this.Config);
 			Splash.ShowSplashScreen();
 			Splash.SetStatus("Initializing");
 			InitializeComponent();
@@ -1735,7 +1735,6 @@ namespace DreamBeam {
             // SongShow_HideText_Button
             // 
             this.SongShow_HideText_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.SongShow_HideText_Button.bottomColor = System.Drawing.Color.DarkBlue;
             this.SongShow_HideText_Button.BottomTransparent = 64;
             this.SongShow_HideText_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SongShow_HideText_Button.LEDColor = System.Drawing.Color.SteelBlue;
@@ -5252,7 +5251,7 @@ namespace DreamBeam {
 		///	This function both sets the SwordProject_Found private variable and returns its value.
 		/// </summary>
 		/// <returns></returns>
-		public bool Check_SwordProject() {
+		public bool Check_SwordProject(Config config) {
 			string strSwordConfDir = Path.Combine(Directory.GetDirectoryRoot(Tools.GetAppDocPath()), "etc");
 			string strSwordConfPath = Path.Combine(strSwordConfDir, "sword.conf");
 			string pathSeparator = Path.DirectorySeparatorChar.ToString();
@@ -5271,20 +5270,20 @@ namespace DreamBeam {
 					}	
 				}
 
-				if (File.Exists(Path.Combine(this.Config.SwordPath, "sword.exe"))) {
+				if (File.Exists(Path.Combine(config.SwordPath, "sword.exe"))) {
 					// swordDir was null, or did not contain sword.exe, but we have the proper path in Config.SwordPath
 					swordConf.AddCategory("Install");
 					if (swordDir == null) {
-						swordConf.AddValue("Install", "DataPath", this.Config.SwordPath.Replace(pathSeparator, "/"));
+						swordConf.AddValue("Install", "DataPath", config.SwordPath.Replace(pathSeparator, "/"));
 					} else {
-						swordConf.ModifyValue("Install", "DataPath", this.Config.SwordPath.Replace(pathSeparator, "/"));
+						swordConf.ModifyValue("Install", "DataPath", config.SwordPath.Replace(pathSeparator, "/"));
 					}
 					return this.SwordProject_Found = IniStructure.WriteIni(swordConf, strSwordConfPath);
 				}
-			} else if (File.Exists(Path.Combine(this.Config.SwordPath, "sword.exe"))) {
+			} else if (File.Exists(Path.Combine(config.SwordPath, "sword.exe"))) {
 				swordConf = new IniStructure();
 				swordConf.AddCategory("Install");
-				swordConf.AddValue("Install", "DataPath", this.Config.SwordPath.Replace(pathSeparator, "/"));
+				swordConf.AddValue("Install", "DataPath", config.SwordPath.Replace(pathSeparator, "/"));
 				return this.SwordProject_Found = IniStructure.WriteIni(swordConf, strSwordConfPath);
 			}
 

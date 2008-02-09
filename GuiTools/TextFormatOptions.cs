@@ -64,15 +64,16 @@ namespace DreamBeam
 		private System.Windows.Forms.Label label1;
 		#endregion
         
-		private BeamTextFormat format1 = new BeamTextFormat();
         protected bool changingControls = false;
+        private Font font = null;
+        private Color textColor, outlineColor;
 
 		public TextFormatOptions()
 		{
 			// This call is required by the Windows.Forms Form Designer.
 			InitializeComponent();
 			// TODO: Add any initialization after the InitializeComponent call
-			SetControls();
+			SetControls(new BeamTextFormat());
 
             Bounds1.ValueChanged += new EventHandler(ControlChanged);
             Bounds2.ValueChanged += new EventHandler(ControlChanged);
@@ -89,68 +90,76 @@ namespace DreamBeam
             HAlignLeft.CheckedChanged += new EventHandler(ControlChanged);
             HAlignRight.CheckedChanged += new EventHandler(ControlChanged);
 
-            Effects.TextChanged += new EventHandler(ControlChanged);
+            Effects.SelectedIndexChanged += new EventHandler(ControlChanged);
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public BeamTextFormat Format {
 			get {
-				this.ReadControls();
-				return this.format1;
+				return ReadControls();
 			}
 			set {
 				if (value == null) { return; }
-				this.format1 = value.Clone();
-				this.SetControls();
+				this.SetControls(value);
 			}
 		}
 
-		private void ReadControls() {
-			this.format1.Bounds.X = (float)this.Bounds1.Value;
-			this.format1.Bounds.Y = (float)this.Bounds2.Value;
-			this.format1.Bounds.Width = (float)(100 - this.Bounds3.Value - this.Bounds1.Value);
-			this.format1.Bounds.Height = (float)(100 - this.Bounds4.Value - this.Bounds2.Value);
+		private BeamTextFormat ReadControls() {
+            BeamTextFormat format = new BeamTextFormat();
 
-			this.format1.OutlineSize = (int)this.OutlineSize.Value;
+			format.Bounds.X = (float)this.Bounds1.Value;
+			format.Bounds.Y = (float)this.Bounds2.Value;
+			format.Bounds.Width = (float)(100 - this.Bounds3.Value - this.Bounds1.Value);
+			format.Bounds.Height = (float)(100 - this.Bounds4.Value - this.Bounds2.Value);
 
-			this.format1.TextFont = this.fontDialog.Font;
+			format.OutlineSize = (int)this.OutlineSize.Value;
+
+			if (this.font != null) format.TextFont = this.font;
+            if (!this.textColor.IsEmpty) format.TextColor = this.textColor;
+            if (!this.outlineColor.IsEmpty) format.OutlineColor = this.outlineColor;
 
 			if (this.HAlignLeft.Checked) {
-				this.format1.HAlignment = StringAlignment.Near;
+				format.HAlignment = StringAlignment.Near;
 			} else if (this.HAlignRight.Checked) {
-				this.format1.HAlignment = StringAlignment.Far;
+				format.HAlignment = StringAlignment.Far;
 			} else {
-				this.format1.HAlignment = StringAlignment.Center;
+				format.HAlignment = StringAlignment.Center;
 			}
 
 			if (this.VAlignTop.Checked) {
-				this.format1.VAlignment = StringAlignment.Near;
+				format.VAlignment = StringAlignment.Near;
 			} else if (this.VAlignBottom.Checked) {
-				this.format1.VAlignment = StringAlignment.Far;
+				format.VAlignment = StringAlignment.Far;
 			} else {
-				this.format1.VAlignment = StringAlignment.Center;
+				format.VAlignment = StringAlignment.Center;
 			}
 
-			this.format1.Effects = this.Effects.Text;
+			format.Effects = this.Effects.Text;
+
+            return format;
 		}
 
-		private void SetControls() {
+		private void SetControls(BeamTextFormat format) {
             changingControls = true;
+
+            this.font = format.TextFont;
+            this.textColor = format.TextColor;
+            this.outlineColor = format.OutlineColor;
             
             // If we assign values that are out-of-range to the controls, we'll get an exception.
-			this.Bounds1.Value = Tools.ForceToRange(Bounds1.Minimum, Bounds1.Maximum, (decimal)this.format1.Bounds.Left);
-			this.Bounds2.Value = Tools.ForceToRange(Bounds2.Minimum, Bounds2.Maximum, (decimal)this.format1.Bounds.Top);
-			this.Bounds3.Value = Tools.ForceToRange(Bounds3.Minimum, Bounds3.Maximum, (decimal)(100F - this.format1.Bounds.Right));
-			this.Bounds4.Value = Tools.ForceToRange(Bounds4.Minimum, Bounds4.Maximum, (decimal)(100F - this.format1.Bounds.Bottom));
+			this.Bounds1.Value = Tools.ForceToRange(Bounds1.Minimum, Bounds1.Maximum, (decimal)format.Bounds.Left);
+			this.Bounds2.Value = Tools.ForceToRange(Bounds2.Minimum, Bounds2.Maximum, (decimal)format.Bounds.Top);
+			this.Bounds3.Value = Tools.ForceToRange(Bounds3.Minimum, Bounds3.Maximum, (decimal)(100F - format.Bounds.Right));
+			this.Bounds4.Value = Tools.ForceToRange(Bounds4.Minimum, Bounds4.Maximum, (decimal)(100F - format.Bounds.Bottom));
 
-			this.OutlineSize.Value = Tools.ForceToRange(OutlineSize.Minimum, OutlineSize.Maximum, this.format1.OutlineSize);
-			if (format1.TextFont != null) {
-				this.fontDialog.Font = this.format1.TextFont;
+			this.OutlineSize.Value = Tools.ForceToRange(OutlineSize.Minimum, OutlineSize.Maximum, format.OutlineSize);
+			if (format.TextFont != null) {
+				this.fontDialog.Font = format.TextFont;
 			} else {
 				this.fontDialog.Font = new Font("Times New Roman", 48);
 			}
 
-			switch (format1.HAlignment) {
+			switch (format.HAlignment) {
 				case StringAlignment.Near:
 					this.HAlignLeft.Checked = true;
 					break;
@@ -162,7 +171,7 @@ namespace DreamBeam
 					break;
 			}
 
-			switch (format1.VAlignment) {
+			switch (format.VAlignment) {
 				case StringAlignment.Near:
 					this.VAlignTop.Checked = true;
 					break;
@@ -174,7 +183,7 @@ namespace DreamBeam
 					break;
 			}
 
-			this.Effects.Text = format1.Effects;
+			this.Effects.Text = format.Effects;
 
             changingControls = false;
             NotifyControlChangeListeners();
@@ -541,28 +550,31 @@ namespace DreamBeam
 
 		private void FontButton_Click(object sender, System.EventArgs e) {
 			try {
-				this.fontDialog.ShowDialog();
+                if (this.fontDialog.ShowDialog() == DialogResult.OK) {
+                    this.font = this.fontDialog.Font;
+                    NotifyControlChangeListeners();
+                }
 			} catch {}
-			this.format1.TextFont = this.fontDialog.Font;
-            NotifyControlChangeListeners();
 		}
 
 		private void TextColor_Click(object sender, System.EventArgs e) {
 			try {
-				this.colorDialog.Color = this.format1.TextColor;
-				this.colorDialog.ShowDialog();
+				this.colorDialog.Color = this.textColor;
+                if (this.colorDialog.ShowDialog() == DialogResult.OK) {
+                    this.textColor = this.colorDialog.Color;
+                    NotifyControlChangeListeners();
+                }
 			} catch {}
-			this.format1.TextColor = this.colorDialog.Color;
-            NotifyControlChangeListeners();
 		}
 
 		private void OutlineColor_Click(object sender, System.EventArgs e) {
 			try {
-				this.colorDialog.Color = this.format1.OutlineColor;
-				this.colorDialog.ShowDialog();
+				this.colorDialog.Color = outlineColor;
+                if (this.colorDialog.ShowDialog() == DialogResult.OK) {
+                    this.outlineColor = this.colorDialog.Color;
+                    NotifyControlChangeListeners();
+                }
 			} catch {}
-			this.format1.OutlineColor = this.colorDialog.Color;
-            NotifyControlChangeListeners();
 		}
 
         // Declare the event, which is associated with our

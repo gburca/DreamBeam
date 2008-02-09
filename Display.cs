@@ -238,6 +238,7 @@ namespace DreamBeam	{
 			this.BGImagePath = newPath;
 		}
         public void ChangeTheme(Theme theme) {
+            if (theme == null) return;
             ChangeBGImagePath(theme.BGImagePath);
         }
 

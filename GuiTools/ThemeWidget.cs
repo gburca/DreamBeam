@@ -10,7 +10,7 @@ using System.IO;
 namespace DreamBeam {
     public partial class ThemeWidget : UserControl {
         private const string ImageFileFilter = "Image Files (*.bmp;*.jpg;*.jpeg;*.png;*.gif)|*.bmp;*.jpg;*.jpeg;*.png;*.gif|All files (*.*)|*.*";
-        private Theme theme = null;
+        private System.Type themeType;
 
         public ThemeWidget() {
             InitializeComponent();
@@ -69,15 +69,20 @@ namespace DreamBeam {
             set {
                 if (value == null | value.TextFormat == null) return;
 
+                this.themeType = value.GetType();
                 this.BgImagePath.Text = value.BGImagePath;
                 for (int i = 0; i < Math.Min(value.TextFormat.Length, tabControl.TabPages.Count); i++) {
                     getFormatControl(i).Format = value.TextFormat[i];
                 }
-                this.theme = (Theme)value.Clone();
             }
             get {
                 int tabs = tabControl.TabPages.Count;
-                if (theme == null) theme = new SongTheme();
+                Theme theme;
+                if (this.themeType != null) {
+                    theme = (Theme)this.themeType.GetConstructor(new System.Type[0]).Invoke(new object[0]);
+                } else {
+                    theme = new SongTheme();
+                }
                 theme.BGImagePath = BgImagePath.Text;
                 for (int i = 0; i < Math.Min(tabs, theme.TextFormat.Length); i++) {
                     theme.TextFormat[i] = getFormatControl(i).Format;
@@ -105,17 +110,7 @@ namespace DreamBeam {
         }
 
         private void openBtn_Click(object sender, EventArgs e) {
-            Theme newTheme = null;
-
-            if (this.theme.GetType() == typeof(SongTheme)) {
-                newTheme = SongTheme.OpenFile();
-            } else if (this.theme.GetType() == typeof(BibleTheme)) {
-                newTheme = BibleTheme.OpenFile();
-            } else if (this.theme.GetType() == typeof(SongTheme)) {
-                newTheme = SermonTheme.OpenFile();
-            }
-
-            this.Theme = newTheme;
+            this.Theme = (Theme)this.themeType.GetMethod("OpenFile").Invoke(null, null);
         }
 
 
@@ -133,7 +128,7 @@ namespace DreamBeam {
         }
 
         protected void NotifyControlChangeListeners() {
-            if (ControlChangedEvent != null) {
+            if (ControlChangedEvent != null && this.themeType != null) {
                 ControlChangedEvent(this, new ThemeEventArgs(this.Theme));
             }
         }

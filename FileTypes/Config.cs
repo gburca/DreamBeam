@@ -87,30 +87,30 @@ namespace DreamBeam
         #region Theme accessors
         [XmlIgnore]
         public string BibleBGImagePath {
-            get { return theme.getTheme(ContentType.BibleVerse).BGImagePath; }
-            set { theme.getTheme(ContentType.BibleVerse).BGImagePath = value; }
+            get { return theme.Bible == null ? null : theme.Bible.BGImagePath; }
+            set { if (theme.Bible != null) theme.Bible.BGImagePath = value; }
         }
         [XmlIgnore]
         public string SongBGImagePath {
-            get { return theme.getTheme(ContentType.Song).BGImagePath; }
-            set { theme.getTheme(ContentType.Song).BGImagePath = value; }
+            get { return theme.Song == null ? null : theme.Song.BGImagePath; }
+            set { if (theme.Song != null) theme.Song.BGImagePath = value; }
         }
         [XmlIgnore]
         public string TextBGImagePath {
-            get { return theme.getTheme(ContentType.PlainText).BGImagePath; }
-            set { theme.getTheme(ContentType.PlainText).BGImagePath = value; }
+            get { return theme.Sermon == null ? null : theme.Sermon.BGImagePath; }
+            set { if (theme.Sermon != null) theme.Sermon.BGImagePath = value; }
         }
         [XmlIgnore]
         public BeamTextFormat[] BibleTextFormat {
-            get { return theme.getTheme(ContentType.BibleVerse).TextFormat; }
+            get { return theme.Bible == null ? null : theme.Bible.TextFormat; }
         }
         [XmlIgnore]
         public BeamTextFormat[] SongTextFormat {
-            get { return theme.getTheme(ContentType.Song).TextFormat; }
+            get { return theme.Song == null ? null : theme.Song.TextFormat; }
         }
         [XmlIgnore]
         public BeamTextFormat[] SermonTextFormat {
-            get { return theme.getTheme(ContentType.PlainText).TextFormat; }
+            get { return theme.Sermon == null ? null : theme.Sermon.TextFormat; }
         }
         #endregion
 

@@ -14,14 +14,13 @@ namespace DreamBeam {
 
     public partial class Options : System.Windows.Forms.Form {
 
-		public Config Conf, origConf;
 		private Language Lang = new Language();
-		public MainForm _MainForm = null;
+		public MainForm _MainForm;
+        private Color showBeamBackground;
+        private Boolean loadComplete = false;
 
         public Options(MainForm mainForm) {
 			_MainForm = mainForm;
-			this.Conf = _MainForm.Config;
-            this.origConf = (Config)Conf.Clone();
 
 			InitializeComponent();
             this.DataDirectory.Text = Tools.GetAppDocPath();
@@ -48,7 +47,28 @@ namespace DreamBeam {
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// By default we handle theme changes by using the contents of the widgets
+        /// </summary>
         private void HandleThemeChange() {
+            /* This will get called 3-times on load, as each theme is configured.
+             * After the first widget is configured, the yet-unconfigured ones will
+             * return a "default" SongTheme which can't be typecast to a Bible or SermonTheme.
+             */
+            if (!loadComplete) return;
+            HandleThemeChange(
+                this.songThemeWidget.Theme as SongTheme,
+                this.bibleFormatWidget.Theme as BibleTheme,
+                this.sermonThemeWidget.Theme as SermonTheme);
+        }
+
+        /// <summary>
+        /// Propagates the provided themes to the preview window content
+        /// </summary>
+        /// <param name="song"></param>
+        /// <param name="bible"></param>
+        /// <param name="sermon"></param>
+        private void HandleThemeChange(SongTheme song, BibleTheme bible, SermonTheme sermon) {
             IContentOperations content = _MainForm.DisplayPreview.content;
             if (content != null) {
                 // First, let's clear the pre-render cache
@@ -58,15 +78,15 @@ namespace DreamBeam {
 
                 switch ((ContentType)content.GetIdentity().Type) {
                     case ContentType.Song:
-                        content.ChangeTheme(this.songThemeWidget.Theme);
+                        content.ChangeTheme(song);
                         break;
                     case ContentType.PlainText:
-                        content.ChangeTheme(this.sermonThemeWidget.Theme);
+                        content.ChangeTheme(sermon);
                         break;
                     case ContentType.BibleVerseIdx:
                     case ContentType.BibleVerseRef:
                     case ContentType.BibleVerse:
-                        content.ChangeTheme(this.bibleFormatWidget.Theme);
+                        content.ChangeTheme(bible);
                         break;
                 }
                 _MainForm.DisplayPreview.UpdateDisplay(true);
@@ -74,94 +94,96 @@ namespace DreamBeam {
         }
 
 		private void Options_OkBtn_Click(object sender, System.EventArgs e) {
-			this.Conf.Alphablending = this.Alpha_CheckBox.Checked;
-			this.Conf.PreRender = this.PreRendercheckBox.Checked;
-			this.Conf.BlendSpeed = (int)Speed_Updown.Value;
-			this.Conf.useDirect3D = this.Direct3D_CheckBox.Checked;
-			this.Conf.OutlineSize = (float)this.OutlineSize_UpDown1.Value;
+            Config config = new Config();
+            this._MainForm.Config = config;
 
+			config.Alphablending = this.Alpha_CheckBox.Checked;
+			config.PreRender = this.PreRendercheckBox.Checked;
+			config.BlendSpeed = (int)Speed_Updown.Value;
+			config.useDirect3D = this.Direct3D_CheckBox.Checked;
+			config.OutlineSize = (float)this.OutlineSize_UpDown1.Value;
 
-			if (Conf.BeamBoxAutoPosSize && ScreenList.SelectedIndex >= 0) {
-				this.Conf.BeamBoxScreenNum = ScreenList.SelectedIndex;
+            config.BackgroundColor = this.showBeamBackground;
+            if (config.BackgroundColor.IsEmpty) config.BackgroundColor = Color.Black;
+
+            if (SizePosControl.SelectedIndex == 0) {
+                config.BeamBoxAutoPosSize = true;
+            } else {
+                config.BeamBoxAutoPosSize = false;
+            }
+
+			if (config.BeamBoxAutoPosSize && ScreenList.SelectedIndex >= 0) {
+				config.BeamBoxScreenNum = ScreenList.SelectedIndex;
 				Rectangle r = System.Windows.Forms.Screen.AllScreens[ScreenList.SelectedIndex].Bounds;
 
-				this.Conf.BeamBoxPosX = r.X;
-				this.Conf.BeamBoxPosY = r.Y;
-				this.Conf.BeamBoxSizeX = r.Width;
-				this.Conf.BeamBoxSizeY = r.Height;				
+				config.BeamBoxPosX = r.X;
+				config.BeamBoxPosY = r.Y;
+				config.BeamBoxSizeX = r.Width;
+				config.BeamBoxSizeY = r.Height;				
 			} else {
-				this.Conf.BeamBoxPosX = (int)this.BeamBox_posX.Value;
-				this.Conf.BeamBoxPosY = (int)this.BeamBox_posY.Value;
-				this.Conf.BeamBoxSizeX = (int)this.BeamBox_Width.Value;
-				this.Conf.BeamBoxSizeY = (int)this.BeamBox_Height.Value;
+				config.BeamBoxPosX = (int)this.BeamBox_posX.Value;
+				config.BeamBoxPosY = (int)this.BeamBox_posY.Value;
+				config.BeamBoxSizeX = (int)this.BeamBox_Width.Value;
+				config.BeamBoxSizeY = (int)this.BeamBox_Height.Value;
 			}
 
 			if (this._MainForm.DisplayLiveLocal != null) {
-				this._MainForm.DisplayLiveLocal.ChangeDisplayCoord(this.Conf);
+				this._MainForm.DisplayLiveLocal.ChangeDisplayCoord(config);
 			}
 
-			this.Conf.SwordPath = this.Sword_PathBox.Text;
-			this._MainForm.Check_SwordProject();
+			config.SwordPath = this.Sword_PathBox.Text;
+			this._MainForm.Check_SwordProject(config);
 
-			if (! Tools.StringIsNullOrEmpty( this.Sword_LanguageBox.Text ) ) {
-				this.Conf.BibleLang = this.Sword_LanguageBox.Text;
-				SetBibleLocale(this._MainForm.bibles, this.Conf.SwordPath, this.Conf.BibleLang);
+            if (! String.IsNullOrEmpty(this.Sword_LanguageBox.Text)) {
+				config.BibleLang = this.Sword_LanguageBox.Text;
+				SetBibleLocale(this._MainForm.bibles, config.SwordPath, config.BibleLang);
 			}
 			
-			this.Conf.HideMouse = this.BeamBox_HideMouse.Checked;
-			this.Conf.AlwaysOnTop = this.BeamBox_AlwaysOnTop.Checked;
+			config.HideMouse = this.BeamBox_HideMouse.Checked;
+			config.AlwaysOnTop = this.BeamBox_AlwaysOnTop.Checked;
 
 			switch( LanguageList.SelectedIndex) {
 			case 0:
-				Conf.Language = "en";
+				config.Language = "en";
 				break;
 			case 1:
-				Conf.Language = "de";
+				config.Language = "de";
 				break;
 			}
 
-			Conf.RememberPanelLocations = this.Options_PanelLocations_checkBox.Checked;
+			config.RememberPanelLocations = this.Options_PanelLocations_checkBox.Checked;
 
-            Conf.theme.Song.set(this.songThemeWidget.Theme);
-            Conf.theme.Bible.set(this.bibleFormatWidget.Theme);
-            Conf.theme.Sermon.set(this.sermonThemeWidget.Theme);
+            config.theme.Song = this.songThemeWidget.Theme as SongTheme;
+            config.theme.Bible = this.bibleFormatWidget.Theme as BibleTheme;
+            config.theme.Sermon = this.sermonThemeWidget.Theme as SermonTheme;
             HandleThemeChange();
 
-			Conf.ServerAddress = this.ServerAddress.Text;
-			Conf.ListeningPort = (int)this.ListeningPort.Value;
-			OperatingMode oldMode = Conf.AppOperatingMode;
+			config.ServerAddress = this.ServerAddress.Text;
+			config.ListeningPort = (int)this.ListeningPort.Value;
+			OperatingMode oldMode = config.AppOperatingMode;
 			if (this.OperatingMode_StandAlone.Checked) {
-				Conf.AppOperatingMode = OperatingMode.StandAlone;
+				config.AppOperatingMode = OperatingMode.StandAlone;
 			} else if (this.OperatingMode_Client.Checked) {
-				Conf.AppOperatingMode = OperatingMode.Client;
+				config.AppOperatingMode = OperatingMode.Client;
 			} else if (this.OperatingMode_Server.Checked) {
-				Conf.AppOperatingMode = OperatingMode.Server;
+				config.AppOperatingMode = OperatingMode.Server;
 			}
 
-			if (oldMode != Conf.AppOperatingMode) {
+			if (oldMode != config.AppOperatingMode) {
 				_MainForm.InitDisplays();
 			}
 
-			Conf.Options_DataSet = this.Options_DataSet;
+			config.Options_DataSet = this.Options_DataSet;
 			Directory.CreateDirectory( Tools.GetAppDocPath() );
 			this.Options_DataSet.WriteXml( Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".dataset.config.xml"), XmlWriteMode.WriteSchema );
 
-			Config.SerializeTo(this.Conf, Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".config.xml"));
+			Config.SerializeTo(config, Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".config.xml"));
 			this.Close();
 		}
 
         private void Options_Cancelbtn_Click(object sender, System.EventArgs e) {
-            // Restore original settings in case the user made changes
-            //_MainForm.Config = (Config)Config.DeserializeFrom(new Config(),
-            //    Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".config.xml"));
-            //this.Conf = _MainForm.Config;
-
-            //HandleThemeChange();
-
-            _MainForm.Config = this.origConf;
-            this.Conf = this.origConf;
-            this.PopulateControls();
-            HandleThemeChange();
+            ComboTheme t = _MainForm.Config.theme;
+            HandleThemeChange(t.Song, t.Bible, t.Sermon);
             this.Close();
         }
 
@@ -175,52 +197,53 @@ namespace DreamBeam {
 		}
 
 		private void Options_Load(object sender, System.EventArgs e) {
-			this.PopulateControls();
+			this.PopulateControls(_MainForm.Config);
 		}
 
-		private void PopulateControls() {
-			//this.Conf = _MainForm.Config;
-			this.SetLanguage();
-			this.Sword_PathBox.Text = this.Conf.SwordPath;
-			this.Sword_LanguageBox.SelectedItem = this.Conf.BibleLang;
-			this.OutlineSize_UpDown1.Value = (int)this.Conf.OutlineSize;
-			this.BeamBox_posX.Value = (int)this.Conf.BeamBoxPosX;
-			this.BeamBox_posY.Value = (int)this.Conf.BeamBoxPosY;
-			this.BeamBox_Width.Value = (int)this.Conf.BeamBoxSizeX;
-			this.BeamBox_Height.Value = (int)this.Conf.BeamBoxSizeY;
-			this.BeamBox_HideMouse.Checked = this.Conf.HideMouse;
-			this.Alpha_CheckBox.Checked = this.Conf.Alphablending;
-			this.PreRendercheckBox.Checked = this.Conf.PreRender;
-			this.Direct3D_CheckBox.Checked = this.Conf.useDirect3D;
-			this.BeamBox_AlwaysOnTop.Checked = this.Conf.AlwaysOnTop;
-			Speed_Updown.Value = this.Conf.BlendSpeed;
+		private void PopulateControls(Config config) {
+			this.SetLanguage(config);
+			this.Sword_PathBox.Text = config.SwordPath;
+			this.Sword_LanguageBox.SelectedItem = config.BibleLang;
+			this.OutlineSize_UpDown1.Value = (int)config.OutlineSize;
+			this.BeamBox_posX.Value = (int)config.BeamBoxPosX;
+			this.BeamBox_posY.Value = (int)config.BeamBoxPosY;
+			this.BeamBox_Width.Value = (int)config.BeamBoxSizeX;
+			this.BeamBox_Height.Value = (int)config.BeamBoxSizeY;
+			this.BeamBox_HideMouse.Checked = config.HideMouse;
+			this.Alpha_CheckBox.Checked = config.Alphablending;
+			this.PreRendercheckBox.Checked = config.PreRender;
+			this.Direct3D_CheckBox.Checked = config.useDirect3D;
+			this.BeamBox_AlwaysOnTop.Checked = config.AlwaysOnTop;
+			this.Speed_Updown.Value = config.BlendSpeed;
+            this.showBeamBackground = config.BackgroundColor;
 
-			switch(Conf.Language.Substring(0,2)) {
-			case "en":
-				LanguageList.SelectedIndex = 0;
-				break;
-			case "de":
-				LanguageList.SelectedIndex = 1;
-				break;
+
+			switch(config.Language.Substring(0,2)) {
+			    case "en":
+				    LanguageList.SelectedIndex = 0;
+				    break;
+			    case "de":
+				    LanguageList.SelectedIndex = 1;
+				    break;
 			}
 
-			if(this.Conf.BeamBoxAutoPosSize) {
+			if (config.BeamBoxAutoPosSize) {
 				this.SizePosControl.SelectedIndex = 0;
 			} else {
 				this.SizePosControl.SelectedIndex = 1;
 			}
-			GetScreens();
+			GetScreens(config);
 
 
-            if(ScreenList.Items.Count > this.Conf.BeamBoxScreenNum) {
-                ScreenList.SelectedIndex = this.Conf.BeamBoxScreenNum;
+            if(ScreenList.Items.Count > config.BeamBoxScreenNum) {
+                ScreenList.SelectedIndex = config.BeamBoxScreenNum;
             }
 
-			this.Options_PanelLocations_checkBox.Checked = this.Conf.RememberPanelLocations;
+			this.Options_PanelLocations_checkBox.Checked = config.RememberPanelLocations;
 
-			this.ServerAddress.Text = this.Conf.ServerAddress;
-			this.ListeningPort.Value = this.Conf.ListeningPort;
-			switch( this.Conf.AppOperatingMode ) {
+			this.ServerAddress.Text = config.ServerAddress;
+			this.ListeningPort.Value = config.ListeningPort;
+			switch( config.AppOperatingMode ) {
 				case OperatingMode.StandAlone:
 					this.OperatingMode_StandAlone.Checked = true;
 					break;
@@ -233,30 +256,31 @@ namespace DreamBeam {
 			}
 
 			if ( !Tools.StringIsNullOrEmpty(this.Sword_LanguageBox.Text) ) {
-				SetBibleLocale(this._MainForm.bibles, this.Conf.SwordPath, this.Sword_LanguageBox.Text);
+				SetBibleLocale(this._MainForm.bibles, config.SwordPath, this.Sword_LanguageBox.Text);
 			}
 
-            this.songThemeWidget.Theme = Conf.theme.Song as Theme;
-            this.bibleFormatWidget.Theme = Conf.theme.Bible as Theme;
-            this.sermonThemeWidget.Theme = Conf.theme.Sermon as Theme;
+            this.songThemeWidget.Theme = config.theme.Song;
+            this.bibleFormatWidget.Theme = config.theme.Bible;
+            this.sermonThemeWidget.Theme = config.theme.Sermon;
+
+            this.loadComplete = true;
         }
 
         private void BeamBox_ColorButton_Click(object sender, System.EventArgs e) {
-            this.colorDialog1.Color = this.Conf.BackgroundColor;
+            this.colorDialog1.Color = this.showBeamBackground;
 			if (this.colorDialog1.ShowDialog() == DialogResult.OK) {
-				this.Conf.BackgroundColor = this.colorDialog1.Color;
+				this.showBeamBackground = this.colorDialog1.Color;
 			}
-			if (this.Conf.BackgroundColor.IsEmpty) this.Conf.BackgroundColor = Color.Black;
         }
 
 		#region SizePosition
 
-        public void GetScreens() {
+        public void GetScreens(Config config) {
             this.ScreenList.Items.Clear();
 
             // Find second monitor
             int i = 0;
-            int FirstSecundary = -1;
+            int FirstSecondary = -1;
             foreach(System.Windows.Forms.Screen s in System.Windows.Forms.Screen.AllScreens) {
                 if (s == System.Windows.Forms.Screen.PrimaryScreen) {
                     this.ScreenList.Items.Add ("Primary Screen");
@@ -264,23 +288,23 @@ namespace DreamBeam {
                 } else {
 					this.ScreenList.Items.Add ("Secondary Screen " + (i + 1).ToString());
 					i++;
-                    if (FirstSecundary == -1) {
-                        FirstSecundary = i;
+                    if (FirstSecondary == -1) {
+                        FirstSecondary = i;
                     }
                 }
                 //if no Secundary Found take the Primary (in this case, the only one found)
-				if (FirstSecundary == -1) {
-                    FirstSecundary = 0;
+				if (FirstSecondary == -1) {
+                    FirstSecondary = 0;
                 }
 
-				if (Conf.BeamBoxScreenNum < 0) { Conf.BeamBoxScreenNum = 0; }
+				if (config.BeamBoxScreenNum < 0) { config.BeamBoxScreenNum = 0; }
 
-                if (Conf.BeamBoxAutoPosSize) {
-                    if (Conf.BeamBoxScreenNum < ScreenList.Items.Count) {
-                        ScreenList.SelectedIndex = Conf.BeamBoxScreenNum;
+                if (config.BeamBoxAutoPosSize) {
+                    if (config.BeamBoxScreenNum < ScreenList.Items.Count) {
+                        ScreenList.SelectedIndex = config.BeamBoxScreenNum;
                     }
                 } else {
-                    ScreenList.SelectedIndex = FirstSecundary - 1;
+                    ScreenList.SelectedIndex = FirstSecondary - 1;
                 }
 
             }
@@ -297,21 +321,13 @@ namespace DreamBeam {
             }
         }
 
-        private void SizePosControl_Click(object sender, System.EventArgs e) {
-            if (SizePosControl.SelectedIndex == 0) {
-                Conf.BeamBoxAutoPosSize = true;
-            } else {
-                Conf.BeamBoxAutoPosSize = false;
-            }
-        }
-
 
 		#endregion
 
 		#region Language
-		void SetLanguage(){
+		void SetLanguage(Config config){
 
-			Lang.setCulture(Conf.Language);
+			Lang.setCulture(config.Language);
 			#region Tabs
 			Common_Tab.Text = Lang.say("Options.Tabs.Common");
 			Graphics_tab.Text = Lang.say("Options.Tabs.Graphics");

@@ -464,7 +464,6 @@ namespace DreamBeam {
             this.SizePosControl.Size = new System.Drawing.Size(392, 129);
             this.SizePosControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.SizePosControl.TabIndex = 6;
-            this.SizePosControl.Click += new System.EventHandler(this.SizePosControl_Click);
             // 
             // tabPage1
             // 
