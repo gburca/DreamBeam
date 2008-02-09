@@ -52,7 +52,8 @@ using CookComputing.XmlRpc;
 using Utils;
 using Utils.MessageBoxExLib;
 using cs_IniHandlerDevelop;
-using ControlLib;								// Provides databound TreeView control
+using ControlLib;
+using Controls.Development;
 //using Microsoft.DirectX.Direct3D;
 
 namespace DreamBeam {
@@ -4791,10 +4792,15 @@ namespace DreamBeam {
 				this.Presentation_PreviewBox.Hide();
 				this.axShockwaveFlash.Hide();
 				if (!LoadingVideo) {
-					Thread_LoadMovie = new Thread(new ThreadStart(LoadVideo));
-					Thread_LoadMovie.IsBackground = true;
-					Thread_LoadMovie.Name = "LoadVideo";
-					Thread_LoadMovie.Start();
+					LoadVideo();
+
+					/* Can't use a separate thread without ensuring that all UI interaction
+					 * is done on the main UI thread.
+					 */
+					//Thread_LoadMovie = new Thread(new ThreadStart(LoadVideo));
+					//Thread_LoadMovie.IsBackground = true;
+					//Thread_LoadMovie.Name = "LoadVideo";
+					//Thread_LoadMovie.Start();
 				}
 			}
 			GC.Collect();
@@ -5903,6 +5909,36 @@ namespace DreamBeam {
 			}
 		}
 
+		#region UI thread access
+		// We can't modify UI controls from a different thread, so we do it like this:
+
+		private delegate void ImageListBoxUpdateDelegate(ImageListBox box, ImageListBoxItem item);
+		/// <summary>
+		/// Ensures that the ImageListBox is only updated on the UI thread.
+		/// </summary>
+		/// <param name="box">The box to update</param>
+		/// <param name="item">If the item parameter is null, the items will be cleared</param>
+		public void ImageListBoxUpdate(ImageListBox box, ImageListBoxItem item) {
+			if (box.InvokeRequired) {
+				box.Invoke(new ImageListBoxUpdateDelegate(this.ImageListBoxUpdate), new object[]{box, item});
+			} else {
+				if (item == null) {
+					box.Items.Clear();
+				} else {
+					box.Items.Add(item);
+				}
+			}
+		}
+
+		private delegate void UpdateStatusPanelDelegate(string msg);
+		public void UpdateStatusPanel(String msg) {
+			if (this.InvokeRequired) {
+				this.Invoke(new UpdateStatusPanelDelegate(this.UpdateStatusPanel), msg);
+			} else {
+				this.StatusPanel.Text = msg;
+			}
+		}
+		#endregion
 
 	}
 

@@ -70,7 +70,6 @@ namespace DreamBeam {
 			if (g_Bg_Directory == null && LoadingBGThumbs == false) {
 				this.g_Bg_Directory = directory;
 				_MainForm.RightDocks_imageList.Images.Clear();
-				_MainForm.RightDocks_ImageListBox.Items.Clear();
 
 				Thread_BgImage = new Thread(new ThreadStart(ListImages_Threader));
 				Thread_BgImage.IsBackground = true;
@@ -83,6 +82,10 @@ namespace DreamBeam {
 		public void ListImages_Threader() {
 			try {
 				LoadingBGThumbs = true;
+
+				// _MainForm.RightDocks_ImageListBox.Items.Clear()
+				_MainForm.ImageListBoxUpdate(_MainForm.RightDocks_ImageListBox, null);
+
 				string strImageDir = Path.Combine(Tools.GetAppDocPath(), g_Bg_Directory);
 				if (!System.IO.Directory.Exists(strImageDir)) {
 					System.IO.Directory.CreateDirectory(strImageDir);
@@ -107,18 +110,15 @@ namespace DreamBeam {
 						// Add to ImageList
 						AddImage(dir);
 						intImageCount++;
-						UpdateStatusPanel(_MainForm.Lang.say("Status.LoadingImages", Convert.ToString(100 * i_file / filecount)));
+						_MainForm.UpdateStatusPanel(_MainForm.Lang.say("Status.LoadingImages", Convert.ToString(100 * i_file / filecount)));
 						i_file++;
 					}
 				}
-				UpdateStatusPanel(_MainForm.Lang.say("Status.ImagesLoaded"));
+				_MainForm.UpdateStatusPanel(_MainForm.Lang.say("Status.ImagesLoaded"));
 				g_Bg_Directory = null;
 				LoadingBGThumbs = false;
 			} catch (Exception doh) { MessageBox.Show(doh.Message); }
 		}
-
-
-
 
 		/// <summary></summary>
 		public void ListDirectories(string directory) {
@@ -193,31 +193,8 @@ namespace DreamBeam {
 			try {
 				_MainForm.RightDocks_imageList.Images.Add(_ShowBeam.Resizer(dir, 80, 60));
 				Controls.Development.ImageListBoxItem x = new Controls.Development.ImageListBoxItem(Path.GetFileName(dir), _MainForm.RightDocks_imageList.Images.Count - 1);
-				AddImageItem(x);
+				_MainForm.ImageListBoxUpdate(_MainForm.RightDocks_ImageListBox, x);
 			} catch (Exception doh) { MessageBox.Show(doh.Message); }
-		}
-		#endregion
-
-
-		#region UI thread access
-		// We can't modify UI controls from a different thread, so we do it like this:
-		private delegate void AddImageDelegate(Controls.Development.ImageListBoxItem item);
-		private void AddImageItem(Controls.Development.ImageListBoxItem item) {
-			if (_MainForm.RightDocks_ImageListBox.InvokeRequired) {
-				// This is a worker thread so delegate the UI task
-				_MainForm.RightDocks_ImageListBox.Invoke(new AddImageDelegate(this.AddImageItem), item);
-			} else {
-				// This is the UI thread so we can add the item directly
-				_MainForm.RightDocks_ImageListBox.Items.Add(item);
-			}
-		}
-		private delegate void UpdateStatusPanelDelegate(string msg);
-		private void UpdateStatusPanel(String msg) {
-			if (_MainForm.InvokeRequired) {
-				_MainForm.Invoke(new UpdateStatusPanelDelegate(this.UpdateStatusPanel), msg);
-			} else {
-				_MainForm.StatusPanel.Text = msg;
-			}
 		}
 		#endregion
 

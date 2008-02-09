@@ -14,6 +14,7 @@ namespace DreamBeam {
 		string LoadingMediaList = "";
 		static Thread Thread_MediaLoader = null;
 		Array DragDropArray = null;
+
 		public MediaListTools(MainForm impForm, ShowBeam impShowBeam)
 			: base(impForm, impShowBeam) {
 			MediaList = _MainForm.MediaList;
@@ -42,38 +43,52 @@ namespace DreamBeam {
 		}
 
 		public void DragDropThread() {
+			DialogResult answer = MessageBox.Show(_MainForm.Lang.say("Message.ImportMedia"), _MainForm.Lang.say("Message.ImportMediaTitle"), MessageBoxButtons.YesNo);
+
+			if (answer == DialogResult.No) {
+				LoadingMediaList = "";
+				return;
+			}
+
 			try {
-				DialogResult answer = MessageBox.Show(_MainForm.Lang.say("Message.ImportMedia"), _MainForm.Lang.say("Message.ImportMediaTitle"), MessageBoxButtons.YesNo);
+
 				int i = 0;
-				foreach (string s in DragDropArray) {
+				foreach (string dropFile in DragDropArray) {
 					foreach (string ex in _MainForm.GuiTools.Presentation.filetypes) {
-						if (Path.GetExtension(s).ToLower() == ex) {
-							string FilePath = s;
-							if (answer == DialogResult.Yes) {
-								string MediaFolder = Tools.GetAppDocPath() + "\\MediaFiles";
-								if (System.IO.Directory.Exists(MediaFolder) == false) {
-									System.IO.Directory.CreateDirectory(MediaFolder);
-								}
-								if (System.IO.Directory.Exists(MediaFolder + "\\" + this.MediaList.Name) == false) {
-									System.IO.Directory.CreateDirectory(MediaFolder + "\\" + this.MediaList.Name);
-								}
-								if (File.Exists(MediaFolder + "\\" + this.MediaList.Name + "\\" + Path.GetFileName(s)) == false) {
-									System.IO.File.Copy(s, MediaFolder + "\\" + this.MediaList.Name + "\\" + Path.GetFileName(s), true);
-								}
-								FilePath = MediaFolder + "\\" + this.MediaList.Name + "\\" + Path.GetFileName(s);
+						if (Path.GetExtension(dropFile).ToLower() == ex) {
+
+							string MediaFolder = Path.Combine(Tools.GetAppDocPath(), "MediaFiles");
+							if (Directory.Exists(MediaFolder) == false) {
+								Directory.CreateDirectory(MediaFolder);
 							}
-							if (System.IO.File.Exists(FilePath)) {
-								AddMedia(FilePath);
+
+							MediaFolder = Path.Combine(MediaFolder, this.MediaList.Name);
+							if (Directory.Exists(MediaFolder) == false) {
+								Directory.CreateDirectory(MediaFolder);
+							}
+
+							string fileName = Path.Combine(MediaFolder, Path.GetFileName(dropFile));
+							if (File.Exists(fileName) == false) {
+								File.Copy(dropFile, fileName, true);
+							}
+
+							if (File.Exists(fileName)) {
+								AddMedia(fileName);
 							}
 						}
 					}
-					_MainForm.StatusPanel.Text = _MainForm.Lang.say("Status.LoadingMediaFiles", Convert.ToString(100 * i / DragDropArray.Length));
+
+					_MainForm.UpdateStatusPanel(_MainForm.Lang.say("Status.LoadingMediaFiles", Convert.ToString(100 * i / DragDropArray.Length)));
 					i++;
 				}
-				_MainForm.StatusPanel.Text = _MainForm.Lang.say("Status.MediaFilesLoaded");
+
+				_MainForm.UpdateStatusPanel(_MainForm.Lang.say("Status.MediaFilesLoaded"));
 				LoadingMediaList = "";
-				_MainForm.GuiTools.RightDock.MediaListTools.Refresh_MediaListBox();
-			} catch (Exception doh) { MessageBox.Show(doh.Message); }
+				Refresh_MediaListBox();
+
+			} catch (Exception ex) {
+				MessageBox.Show(ex.Message);
+			}
 
 		}
 
@@ -116,8 +131,6 @@ namespace DreamBeam {
 			}
 		}
 
-
-
 		public void LoaderThread() {
 			try {
 				string FileName = LoadingMediaList;
@@ -140,13 +153,14 @@ namespace DreamBeam {
 						_MainForm.Media_ImageList.Images.Add(_MainForm.Media_Logos.Images[1]);
 						_MainForm.MediaList.iItem[i].Thumb = i;
 					}
-					_MainForm.StatusPanel.Text = _MainForm.Lang.say("Status.LoadingMediaFiles", Convert.ToString(100 * i / _MainForm.MediaList.Count));
+					_MainForm.UpdateStatusPanel(_MainForm.Lang.say("Status.LoadingMediaFiles", Convert.ToString(100 * i / _MainForm.MediaList.Count)));
 				}
+
 				Refresh_MediaListBox();
 				GC.Collect();
 				_MainForm.GuiTools.ChangeTitle();
 				LoadingMediaList = "";
-				_MainForm.StatusPanel.Text = _MainForm.Lang.say("Status.MediaFilesLoaded");
+				_MainForm.UpdateStatusPanel(_MainForm.Lang.say("Status.MediaFilesLoaded"));
 			} catch (Exception doh) { MessageBox.Show(doh.Message); }
 		}
 		#endregion
@@ -191,15 +205,16 @@ namespace DreamBeam {
 					_MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex = tmp;
 			}
 		}
+		#endregion
 
 		public void Refresh_MediaListBox() {
-			_MainForm.RightDocks_BottomPanel_MediaList.Items.Clear();
+			// Clear the ImageListBox
+			_MainForm.ImageListBoxUpdate(_MainForm.RightDocks_BottomPanel_MediaList, null);
 			for (int i = 0; i < this.MediaList.Count; i++) {
 				Controls.Development.ImageListBoxItem x = new Controls.Development.ImageListBoxItem(this.MediaList.iItem[i].Name, this.MediaList.iItem[i].Thumb);
-				_MainForm.RightDocks_BottomPanel_MediaList.Items.Insert(i, x);
+				_MainForm.ImageListBoxUpdate(_MainForm.RightDocks_BottomPanel_MediaList, x);
 			}
 		}
-		#endregion
 
 	}
 }

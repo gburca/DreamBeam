@@ -8,6 +8,7 @@ namespace DreamBeam {
 	/// </summary>
 	public class ImageList {
 
+		// TODO: Change this to a variable size structure
 		public ImageListItem2[] iItem = new ImageListItem2[5000];
 		private ImageListItem2 tempItem = new ImageListItem2();
 		public string Name = "Default";
