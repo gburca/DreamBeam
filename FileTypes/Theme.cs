@@ -36,7 +36,7 @@ namespace DreamBeam {
 			dialog.DefaultExt = "xml";
 			dialog.Filter = FileDialogFilter;
 			dialog.FilterIndex = 1;
-			dialog.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Themes");
+			dialog.InitialDirectory = Tools.GetDirectory(DirType.Themes);
 			dialog.Title = "Open Theme";
 			dialog.Multiselect = false;
 
@@ -54,7 +54,7 @@ namespace DreamBeam {
 			dialog.DefaultExt = "xml";
 			dialog.Filter = FileDialogFilter;
 			dialog.FilterIndex = 1;
-			dialog.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Themes");
+			dialog.InitialDirectory = Tools.GetDirectory(DirType.Themes);
 			dialog.Title = "Save Theme As";
 
 			Directory.CreateDirectory(dialog.InitialDirectory);
@@ -95,7 +95,7 @@ namespace DreamBeam {
 		public static object DeserializeFrom(Type type, string file) {
 			XmlSerializer xs = null;
 
-			file = Tools.GetFullPathOrNull(file);
+			file = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Themes), file);
 			if (file == null) { return null; }
 			try {
 				xs = new XmlSerializer(type);

@@ -31,6 +31,16 @@ namespace DreamBeam {
 		MAP_FOLDDIGITS = 0x00000080 // all digits to ASCII 0-9
 	}
 
+	public enum DirType {
+		Songs,
+		Backgrounds,
+		MediaLists,
+		MediaFiles,
+		Themes,
+		Config,
+		Sermon,
+		Logs
+	}
 
 
 	/// <summary>
@@ -157,15 +167,53 @@ namespace DreamBeam {
 			return fullPath;
 		}
 
+		public static string GetDirectory(DirType type, string file) {
+			return Path.Combine(GetDirectory(type), file);
+		}
 
 		/// <summary>
-		/// If the FileName is not an absolute path, it assumes it is relative to the application data directory
+		/// This function provides the location of the directory type requested.
+		/// Ex. All songs should be saved in GetDirectory(DirType.Songs)
+		/// </summary>
+		/// <param name="type">The directory type to return</param>
+		/// <returns>The specified directory is created if it does not already exist</returns>
+		public static string GetDirectory(DirType type) {
+			string dir;
+			switch (type) {
+				case DirType.Backgrounds:
+					dir = Path.Combine(GetAppDocPath(), "Backgrounds");
+					break;
+				case DirType.MediaFiles:
+					dir = Path.Combine(GetAppDocPath(), "MediaFiles");
+					break;
+				case DirType.MediaLists:
+					dir = Path.Combine(GetAppDocPath(), "MediaLists");
+					break;
+				case DirType.Songs:
+					dir = Path.Combine(GetAppDocPath(), "Songs");
+					break;
+				case DirType.Themes:
+					dir = Path.Combine(GetAppDocPath(), "Songs");
+					break;
+				default:
+					dir = GetAppDocPath();
+					break;
+			}
+			if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+			return dir;
+		}
+
+
+
+		/// <summary>
+		/// If the FileName is not an absolute path, it assumes it is relative to the possibleRoot directory
 		/// and generates the full path based on that assumption. This function is used primarily to obtain
 		/// the full path of background images that could be stored in various places as relative paths.
 		/// </summary>
+		/// <param name="PossibleRoot">The directory to prepend if FileName is not found</param>
 		/// <param name="FileName"></param>
 		/// <returns>The filename (if the file exists), or NULL if the file does not exist.</returns>
-		public static string GetFullPathOrNull(string FileName) {
+		public static string GetFullPathOrNull(string PossibleRoot, string FileName) {
 			// We need at least 1 char for file name + 4 chars for extension ".jpg"
 			if (FileName == null || FileName.Length < 5) return null;
 			FileInfo fi = new FileInfo(FileName);
@@ -173,7 +221,7 @@ namespace DreamBeam {
 				return fi.FullName;
 			}
 
-			fi = new FileInfo(Path.Combine(Tools.GetAppDocPath(), FileName));
+			fi = new FileInfo(Path.Combine(PossibleRoot, FileName));
 			if (FileExists(fi.FullName)) {
 				return fi.FullName;
 			}

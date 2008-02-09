@@ -27,7 +27,7 @@ namespace DreamBeam {
 
 			PopulateBibleCacheTab();
 
-			string DataSetFile = Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".dataset.config.xml");
+			string DataSetFile = Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml");
 			if (Tools.FileExists(DataSetFile)) {
 				this.Options_DataSet.ReadXml(DataSetFile, XmlReadMode.ReadSchema);
 			}
@@ -174,10 +174,9 @@ namespace DreamBeam {
 			}
 
 			config.Options_DataSet = this.Options_DataSet;
-			Directory.CreateDirectory(Tools.GetAppDocPath());
-			this.Options_DataSet.WriteXml(Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".dataset.config.xml"), XmlWriteMode.WriteSchema);
+			this.Options_DataSet.WriteXml(Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml"), XmlWriteMode.WriteSchema);
 
-			Config.SerializeTo(config, Path.Combine(Tools.GetAppDocPath(), _MainForm.ConfigSet + ".config.xml"));
+			Config.SerializeTo(config, Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".config.xml"));
 			this.Close();
 		}
 

@@ -100,7 +100,7 @@ namespace DreamBeam {
 		private void bgImageBrowse_Click(object sender, EventArgs e) {
 			OpenFileDialog ofd = new OpenFileDialog();
 			ofd.Filter = ImageFileFilter;
-			ofd.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Backgrounds");
+			ofd.InitialDirectory = Tools.GetDirectory(DirType.Backgrounds);
 			if (ofd.ShowDialog() != DialogResult.Cancel) {
 				this.BgImagePath.Text = ofd.FileName;
 			}

@@ -299,16 +299,19 @@ namespace DreamBeam {
 				} else {
 					this.bg_image = null;
 					// Define Directory and ImageTypes
-					string strImageDir = Tools.GetAppDocPath() + @"\Backgrounds";
+					string strImageDir = Tools.GetDirectory(DirType.Backgrounds);
 					string[] folders = Directory.GetDirectories(@strImageDir);
 
 					string tmpfilename = Path.GetFileName(n.InnerText);
-					if (System.IO.File.Exists(Tools.GetAppDocPath() + @"\Backgrounds\" + tmpfilename)) {
-						this.bg_image = Tools.GetAppDocPath() + @"\Backgrounds\" + tmpfilename;
+					if (File.Exists(Tools.GetDirectory(DirType.Backgrounds, tmpfilename))) {
+						this.bg_image = Tools.GetDirectory(DirType.Backgrounds, tmpfilename);
 					} else {
 						foreach (string folder in folders) {
-							if (System.IO.File.Exists(folder + @"\" + tmpfilename)) {
-								this.bg_image = Tools.GetAppDocPath() + @"\Backgrounds\" + Tools.Reverse(Tools.Reverse(folder).Substring(0, Tools.Reverse(folder).IndexOf(@"\"))) + "\\" + tmpfilename;
+							if (File.Exists(Path.Combine(folder, tmpfilename))) {
+								this.bg_image = Tools.GetDirectory(DirType.Backgrounds)
+									+ Tools.Reverse(Tools.Reverse(folder).Substring(0, Tools.Reverse(folder).IndexOf(@"\")))
+									+ "\\"
+									+ tmpfilename;
 							}
 						}
 					}

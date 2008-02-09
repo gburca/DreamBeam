@@ -1035,12 +1035,12 @@ namespace DreamBeam {
 		public Bitmap DrawProportionalBitmap(System.Drawing.Size Size, string Path) {
 			Bitmap bm = null;
 
-
 			try {
 				Image tmpImage = Image.FromFile(Path);
 
 				bm = DrawProportionalBitmap(Size, tmpImage);
 			} catch { }
+
 			return bm;
 
 		}

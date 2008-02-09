@@ -472,7 +472,7 @@ namespace DreamBeam {
 
 			// Make sure we do the same thing when the Options dialog is "cancelled"
 			this.Config = (Config)Config.DeserializeFrom(new Config(),
-				Path.Combine(Tools.GetAppDocPath(), ConfigSet + ".config.xml"));
+				Tools.GetDirectory(DirType.Config, ConfigSet + ".config.xml"));
 
 			ShowBeam.LogFile = new LogFile(ConfigSet);
 
@@ -531,7 +531,8 @@ namespace DreamBeam {
 			this.tabControl1.ItemSize = new Size(1, 1);
 
 			// Restore the SermonTool documents
-			SermonToolDocuments sermon = (SermonToolDocuments)SermonToolDocuments.DeserializeFrom(typeof(SermonToolDocuments), Path.Combine(Tools.GetAppDocPath(), ConfigSet + ".SermonDocs.xml"));
+			SermonToolDocuments sermon = (SermonToolDocuments)SermonToolDocuments.DeserializeFrom(typeof(SermonToolDocuments),
+				Tools.GetDirectory(DirType.Sermon, ConfigSet + ".SermonDocs.xml"));
 			if (sermon != null) {
 				foreach (string doc in sermon.Documents) {
 					DocumentManager.Document d = Sermon_NewDocument();
@@ -568,7 +569,7 @@ namespace DreamBeam {
 				Application.Run(new MainForm(args));
 			} catch (Exception e) {
 				StreamWriter SW;
-				SW = File.AppendText(Path.Combine(Tools.GetAppDocPath(), "LogFile.txt"));
+				SW = File.AppendText(Tools.GetDirectory(DirType.Logs, "LogFile.txt"));
 				SW.WriteLine(e.Message);
 				SW.WriteLine(e.StackTrace);
 				if (e.InnerException != null) {
@@ -1736,6 +1737,7 @@ namespace DreamBeam {
 			// SongShow_HideText_Button
 			// 
 			this.SongShow_HideText_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.SongShow_HideText_Button.bottomColor = System.Drawing.Color.DarkBlue;
 			this.SongShow_HideText_Button.BottomTransparent = 64;
 			this.SongShow_HideText_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.SongShow_HideText_Button.LEDColor = System.Drawing.Color.SteelBlue;
@@ -3680,7 +3682,7 @@ namespace DreamBeam {
 
 			// We first load the relevant information from each song into the SongListTable of the GlobalDataSet
 			try {
-				songFiles = Directory.GetFiles(Tools.GetAppDocPath() + @"\Songs", "*.xml");
+				songFiles = Directory.GetFiles(Tools.GetDirectory(DirType.Songs), "*.xml");
 			} catch { return; }
 			foreach (string songFile in songFiles) {
 				NewSong song = NewSong.DeserializeFrom(songFile, 0, this.Config) as NewSong;
@@ -3805,10 +3807,10 @@ namespace DreamBeam {
 			this.LoadSettings();
 			GuiTools.ShowTab(MainTab.ShowSongs);
 			Splash.SetStatus("Reading Background Images");
-			this.GuiTools.RightDock.BGImageTools.ListDirectories(@"Backgrounds\");
+			this.GuiTools.RightDock.BGImageTools.ListDirectories();
 
 			//				this.ListImages(@"Backgrounds\");
-			this.GuiTools.RightDock.BGImageTools.ListImages(@"Backgrounds\");
+			this.GuiTools.RightDock.BGImageTools.ListImages(Tools.GetDirectory(DirType.Backgrounds));
 			Splash.SetStatus("Reading Songs");
 			this.ListSongs();
 			Splash.SetStatus("Reading MediaLists");
@@ -3843,7 +3845,7 @@ namespace DreamBeam {
 					sermons.Documents.Add(d.Control.Text);
 				}
 			}
-			SermonToolDocuments.SerializeTo(sermons, Path.Combine(Tools.GetAppDocPath(), ConfigSet + ".SermonDocs.xml"));
+			SermonToolDocuments.SerializeTo(sermons, Tools.GetDirectory(DirType.Sermon, ConfigSet + ".SermonDocs.xml"));
 
 			if (bibles.IsDirty) {
 				bibles.SerializeNow(this.bibleLibFile);
@@ -3854,7 +3856,7 @@ namespace DreamBeam {
 			}
 
 			// This is only needed if we make changes to the conf programatically.
-			Config.SerializeTo(this.Config, Path.Combine(Tools.GetAppDocPath(), ConfigSet + ".config.xml"));
+			Config.SerializeTo(this.Config, Tools.GetDirectory(DirType.Config, ConfigSet + ".config.xml"));
 		}
 
 
@@ -3922,13 +3924,15 @@ namespace DreamBeam {
 			InputBoxResult result = InputBox.Show(Lang.say("Message.MediaListName"), Lang.say("Message.RenameMediaListTitle", MediaList.Name), "", null);
 			if (result.OK) {
 				if (result.Text.Length > 0) {
-					if (!System.IO.File.Exists("MediaLists\\" + result.Text + ".xml") && System.IO.File.Exists("MediaLists\\" + MediaList.Name + ".xml")) {
+					if (!File.Exists(Tools.GetDirectory(DirType.MediaLists, result.Text + ".xml"))
+						&& File.Exists(Tools.GetDirectory(DirType.MediaLists, MediaList.Name + ".xml"))) {
 						try {
-							File.Move(Tools.GetAppDocPath() + "\\MediaLists\\" + MediaList.Name + ".xml", "MediaLists\\" + result.Text + ".xml");
+							File.Move(Tools.GetDirectory(DirType.MediaLists, MediaList.Name + ".xml"),
+								Tools.GetDirectory(DirType.MediaLists, result.Text + ".xml"));
 							MediaList.Name = result.Text;
 							this.ListMediaLists();
 
-							string MediaFolder = Tools.GetAppDocPath() + "\\MediaFiles\\";
+							string MediaFolder = Tools.GetDirectory(DirType.MediaFiles);
 							//rename MediaFolder if existing
 							if (File.Exists(MediaFolder + MediaList.Name)) {
 								try {
@@ -4163,7 +4167,7 @@ namespace DreamBeam {
 			this.SaveFileDialog.DefaultExt = "xml";
 			this.SaveFileDialog.Filter = @"DreamBeam songs (*.xml)|*.xml|All (*.*)|*.*";
 			this.SaveFileDialog.FilterIndex = 1;
-			this.SaveFileDialog.InitialDirectory = Path.Combine(Tools.GetAppDocPath(), "Songs");
+			this.SaveFileDialog.InitialDirectory = Tools.GetDirectory(DirType.Songs);
 			this.SaveFileDialog.Title = "Save Song As";
 
 			if (!Tools.StringIsNullOrEmptyTrim(this.songEditor.Song.FileName)) {
@@ -4901,11 +4905,10 @@ namespace DreamBeam {
 		///<summary>Reads all MediaLists in Directory, validates if it is a MediaList and put's them into the RightDocks_SongList Box </summary>
 		public void ListMediaLists() {
 			this.RightDocks_MediaLists.Items.Clear();
-			string strSongDir = Tools.GetAppDocPath() + "\\MediaLists";
-			if (!System.IO.Directory.Exists(strSongDir)) {
-				System.IO.Directory.CreateDirectory(strSongDir);
-			}
-			string[] dirs2 = Directory.GetFiles(@strSongDir, "*.xml");
+			string strSongDir = Tools.GetDirectory(DirType.MediaLists);
+
+			// TODO: What is this code doing?
+			string[] dirs2 = Directory.GetFiles(strSongDir, "*.xml");
 			foreach (string dir2 in dirs2) {
 				if (Song.isSong(Path.GetFileName(dir2))) {
 					string temp = Path.GetFileName(dir2);
@@ -5252,7 +5255,7 @@ namespace DreamBeam {
 		/// </summary>
 		/// <returns></returns>
 		public bool Check_SwordProject(Config config) {
-			string strSwordConfDir = Path.Combine(Directory.GetDirectoryRoot(Tools.GetAppDocPath()), "etc");
+			string strSwordConfDir = Path.Combine(Directory.GetDirectoryRoot(Application.StartupPath), "etc");
 			string strSwordConfPath = Path.Combine(strSwordConfDir, "sword.conf");
 			string pathSeparator = Path.DirectorySeparatorChar.ToString();
 
@@ -5290,27 +5293,17 @@ namespace DreamBeam {
 			return this.SwordProject_Found = false;
 		}
 
-
-		/*
-				 private void Sermon_BibleKey_KeyDown1(object sender, System.Windows.Forms.KeyEventArgs e) {
-					 if (e.KeyValue == 13) {
-						 this.Diatheke.book = Sermon_Books.Items[Sermon_Books.SelectedIndex].ToString();
-						 Diatheke.query();
-					 }
-				 }
-		*/
-
 		#endregion
 
 		#region ContextMenu Things
 
 		private void ImageContextItemManage_Click(object sender, System.EventArgs e) {
-			System.Diagnostics.Process.Start("explorer", " " + Tools.GetAppDocPath() + "\\Backgrounds");
+			System.Diagnostics.Process.Start("explorer", Tools.GetDirectory(DirType.Backgrounds));
 		}
 
 		private void ImageContextItemReload_Click(object sender, System.EventArgs e) {
-			GuiTools.RightDock.BGImageTools.ListDirectories(@"Backgrounds\");
-			GuiTools.RightDock.BGImageTools.ListImages(@"Backgrounds\");
+			GuiTools.RightDock.BGImageTools.ListDirectories();
+			GuiTools.RightDock.BGImageTools.ListImages(Tools.GetDirectory(DirType.Backgrounds));
 		}
 
 		#endregion

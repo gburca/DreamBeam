@@ -158,17 +158,17 @@ namespace DreamBeam {
 		/// <param name="Height"></param>
 		public void RenderBGImage(string ConfigBGImagePath, Graphics graphics, int Width, int Height) {
 			if (this.HideBG == false) {
-				string fullPath = Tools.GetFullPathOrNull(this.BGImagePath);
+				string fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Backgrounds), this.BGImagePath);
 				if (Tools.FileExists(fullPath)) {
 					if (this.bgImage == null) {
 						try {
 							this.bgImage = Image.FromFile(fullPath);
 						} catch { }
 					}
-				} else if (Tools.FileExists(Tools.GetFullPathOrNull(ConfigBGImagePath))) {
+				} else if (Tools.FileExists(Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Backgrounds), ConfigBGImagePath))) {
 					if (this.bgImage == null) {
 						try {
-							this.bgImage = Image.FromFile(Tools.GetFullPathOrNull(ConfigBGImagePath));
+							this.bgImage = Image.FromFile(Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Backgrounds), ConfigBGImagePath));
 						} catch { }
 					}
 				}
@@ -207,7 +207,7 @@ namespace DreamBeam {
 			#region Render background image
 			// Draw background image
 			if (this.HideBG == false) {
-				string fullPath = Tools.GetFullPathOrNull(this.BGImagePath);
+				string fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Backgrounds), this.BGImagePath);
 				if (Tools.FileExists(fullPath)) {
 					if (this.bgImage == null) {
 						try {
@@ -396,8 +396,7 @@ namespace DreamBeam {
 						(newContent as TextToolContents).song.strophe = identity.SongStrophe;
 						break;
 					case ContentType.Song:
-						//string songFile = Path.Combine(Tools.GetAppDocPath(), Path.Combine("Songs", identity.SongName));
-						string songFile = Tools.CombinePaths(Tools.GetAppDocPath(), "Songs", identity.SongName);
+						string songFile = Tools.GetDirectory(DirType.Songs, identity.SongName);
 						newContent = (NewSong)NewSong.DeserializeFrom(songFile, identity.SongStrophe, Display.config);
 						break;
 				}

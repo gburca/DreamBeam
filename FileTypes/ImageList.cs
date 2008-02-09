@@ -98,7 +98,7 @@ namespace DreamBeam {
 
 		///<summary>Saves the ImageList</summary>
 		public void Save() {
-			XmlTextWriter tw = new XmlTextWriter(Tools.GetAppDocPath() + @"\MediaLists\" + Name + ".xml", null);
+			XmlTextWriter tw = new XmlTextWriter(Tools.GetDirectory(DirType.MediaLists, Name + ".xml"), null);
 			tw.Formatting = Formatting.Indented;
 			tw.WriteStartDocument();
 			tw.WriteStartElement("MediaList");
@@ -120,7 +120,7 @@ namespace DreamBeam {
 			Count = 0;
 			XmlDocument document = new XmlDocument();
 			try {
-				document.Load(Tools.GetAppDocPath() + @"\MediaLists\" + filename + ".xml");
+				document.Load(Tools.GetDirectory(DirType.MediaLists, filename + ".xml"));
 			} catch (XmlException xmle) {
 				MessageBox.Show(xmle.Message);
 			}

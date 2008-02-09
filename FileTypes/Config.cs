@@ -152,7 +152,7 @@ namespace DreamBeam {
 		}
 
 		string GetLocation(Type type) {
-			return Tools.CombinePaths(Tools.GetAppDocPath(), type.Name + ".xml");
+			return Tools.GetDirectory(DirType.Config, type.Name + ".xml");
 		}
 
 		/// <summary>
@@ -196,7 +196,7 @@ namespace DreamBeam {
 		public static object DeserializeFrom(Config instance, string file) {
 			Type type = instance.GetType();
 			XmlSerializer xs = null;
-			string fullPath = Tools.GetFullPathOrNull(file);
+			string fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Config), file);
 
 
 			try {

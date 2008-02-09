@@ -30,25 +30,23 @@ namespace DreamBeam {
 
 					foreach (string ex in filetypes) {
 						if (Path.GetExtension(s).ToLower() == ex) {
-							string strImageDir = Tools.GetAppDocPath() + "\\" + GetCurrentPath();
+							string destination = Path.Combine(GetCurrentPath(), Path.GetFileName(s));
 							bool doCopy = true;
 
 							//Check if File Exists
-							if (System.IO.File.Exists(strImageDir + Path.GetFileName(s)) == false) {
-							} else {
-								MessageBox.Show("File Already Exists");
+							if (File.Exists(destination) == true) {
+								MessageBox.Show("File Already Exists: " + destination);
 								doCopy = false;
 							}
 
 							//Copy File and Add Image
 							if (doCopy) {
 								try {
-									System.IO.File.Copy(s, strImageDir + Path.GetFileName(s), true);
+									File.Copy(s, destination, true);
 								} catch (Exception doh) { MessageBox.Show(doh.Message); }
-								if (System.IO.File.Exists(strImageDir + Path.GetFileName(s))) {
-									AddImage(strImageDir + Path.GetFileName(s));
+								if (File.Exists(destination)) {
+									AddImage(destination);
 								}
-
 							}
 						}
 					}
@@ -86,9 +84,9 @@ namespace DreamBeam {
 				// _MainForm.RightDocks_ImageListBox.Items.Clear()
 				_MainForm.ImageListBoxUpdate(_MainForm.RightDocks_ImageListBox, null);
 
-				string strImageDir = Path.Combine(Tools.GetAppDocPath(), g_Bg_Directory);
-				if (!System.IO.Directory.Exists(strImageDir)) {
-					System.IO.Directory.CreateDirectory(strImageDir);
+				string strImageDir = g_Bg_Directory;
+				if (!Directory.Exists(strImageDir)) {
+					Directory.CreateDirectory(strImageDir);
 				}
 
 				int intImageCount = 0;
@@ -121,12 +119,9 @@ namespace DreamBeam {
 		}
 
 		/// <summary></summary>
-		public void ListDirectories(string directory) {
+		public void ListDirectories() {
 
-			string strImageDir = Path.Combine(Tools.GetAppDocPath(), directory);
-			if (!System.IO.Directory.Exists(strImageDir)) {
-				System.IO.Directory.CreateDirectory(strImageDir);
-			}
+			string strImageDir = Tools.GetDirectory(DirType.Backgrounds);
 
 			_MainForm.RightDocks_imageList.Images.Clear();
 			_MainForm.RightDocks_ImageListBox.Items.Clear();
@@ -144,13 +139,14 @@ namespace DreamBeam {
 		#region Listeners
 		///<summary>If BGImage chosen, update the current component </summary>
 		public void SelectedIndexChanged(object sender, System.EventArgs e) {
-			string path = @"Backgrounds\";
+			string path = Tools.GetDirectory(DirType.Backgrounds);
+
 			if (_MainForm.RightDocks_FolderDropdown.SelectedIndex > 0) {
-				path = path + _MainForm.RightDocks_FolderDropdown.Items[_MainForm.RightDocks_FolderDropdown.SelectedIndex].ToString() + @"\";
+				path = Path.Combine(path, _MainForm.RightDocks_FolderDropdown.Items[_MainForm.RightDocks_FolderDropdown.SelectedIndex].ToString());
 			}
 
 			if (_MainForm.RightDocks_ImageListBox.SelectedIndex >= 0) {
-				path = path + _MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text;
+				path = Path.Combine(path, _MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text);
 				if (_MainForm.selectedTab == MainTab.Presentation) {
 					_MainForm.PreviewPresentationMedia(path);
 				} else {
@@ -163,8 +159,6 @@ namespace DreamBeam {
 					}
 				}
 			}
-
-
 		}
 
 
@@ -181,9 +175,9 @@ namespace DreamBeam {
 
 		#region internalTools
 		private string GetCurrentPath() {
-			string path = @"Backgrounds\";
+			string path = Tools.GetDirectory(DirType.Backgrounds);
 			if (_MainForm.RightDocks_FolderDropdown.SelectedIndex > 0) {
-				path = path + _MainForm.RightDocks_FolderDropdown.Items[_MainForm.RightDocks_FolderDropdown.SelectedIndex].ToString() + @"\";
+				path = Path.Combine(path, _MainForm.RightDocks_FolderDropdown.Items[_MainForm.RightDocks_FolderDropdown.SelectedIndex].ToString());
 			}
 			return path;
 		}
