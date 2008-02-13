@@ -19,11 +19,20 @@ namespace DreamBeam.FileTypes {
 	/// </summary>
 	public class TextToolContents : NewSong {
 
+		public override string ThemePath {
+			set {
+				bgImage = null;
+				if (Path.GetExtension(value).EndsWith("xml")) {
+					this.Theme = (Theme)Theme.DeserializeFrom(typeof(SermonTheme), value);
+				} else {
+				}
+			}
+		}
+
 		public TextToolContents(string fullText, Config config) {
 			this.enumType = typeof(TextToolType);
 			this.config = config;
-			this.format = config.SermonTextFormat;
-			this.BGImagePath = config.TextBGImagePath;
+			this.Theme = config.theme.Sermon;
 			this.WordWrap = true;
 
 			int lineBreak = fullText.IndexOf("\n\n");
@@ -72,6 +81,10 @@ namespace DreamBeam.FileTypes {
 			ident.Text = this.Title + "\n\n" + this.GetLyrics(LyricsType.Verse);
 			ident.SongStrophe = this.CurrentLyric;
 			return ident;
+		}
+
+		public override void DefaultBackground(Config conf) {
+			this.BGImagePath = conf.theme.Sermon.BGImagePath;
 		}
 
 		#endregion

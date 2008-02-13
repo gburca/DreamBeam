@@ -622,6 +622,15 @@ namespace DreamBeam.FileTypes {
 		public Config config;
 		private Thread render;
 		private Object renderLock = new Object();
+		public override string ThemePath {
+			set {
+				bgImage = null;
+				if (Path.GetExtension(value).EndsWith("xml")) {
+					Theme = (Theme)Theme.DeserializeFrom(typeof(BibleTheme), value);
+				} else {
+				}
+			}
+		}
 
 		public ABibleVerse() : this(null) { }
 		public ABibleVerse(BibleVersion bible) : this(bible, 1) { }
@@ -630,7 +639,7 @@ namespace DreamBeam.FileTypes {
 			this.bible = bible;
 			this.verseIdx = verseIdx;
 			this.config = config;
-			if (config != null) this.format = config.BibleTextFormat;
+			if (config != null) this.Theme = config.theme.Bible;
 			this.PreRenderFrames();
 		}
 
@@ -666,6 +675,7 @@ namespace DreamBeam.FileTypes {
 				RectangleF measuredBounds;
 				Font font;
 				float fontSz;
+				BeamTextFormat[] format = this.Theme.TextFormat;
 				string[] text = new string[Enum.GetValues(typeof(BibleTextType)).Length];
 
 				graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -795,15 +805,6 @@ namespace DreamBeam.FileTypes {
 			return false;
 		}
 
-		public void ChangeBGImagePath(string newPath) {
-			this.BGImagePath = newPath;
-		}
-		public void ChangeTheme(Theme t) {
-			if (t == null) return;
-			ChangeBGImagePath(t.BGImagePath);
-			this.format = t.TextFormat;
-		}
-
 		//		public string GetIdentity() {
 		//			return this.bible.version + "\t" + this.verseIdx + " DEBUG: " + this.bible[this.verseIdx].t;
 		//		}
@@ -818,9 +819,14 @@ namespace DreamBeam.FileTypes {
 
 		private void PreRenderFramesThreaded() {
 			// We only pre-render one frame in advance
+			if (bible == null) return;
 			if (this.config != null && (this.verseIdx + 1 < bible.VerseCount)) {
 				this.GetBitmap(this.config.BeamBoxSizeX, this.config.BeamBoxSizeY, this.verseIdx + 1);
 			}
+		}
+
+		public void DefaultBackground(Config conf) {
+			this.BGImagePath = conf.theme.Bible.BGImagePath;
 		}
 
 		public void PreRenderFrames() {

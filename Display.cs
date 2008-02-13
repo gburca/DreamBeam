@@ -45,8 +45,15 @@ namespace DreamBeam {
 		Bitmap GetBitmap(int Width, int Height);
 		bool Next();
 		bool Prev();
-		void ChangeBGImagePath(string newPath);
-		void ChangeTheme(Theme theme);
+		Theme Theme {
+			get;
+			set;
+		}
+		string BGImagePath {
+			get;
+			set;
+		}
+		void DefaultBackground(Config config);
 
 		/// <summary>
 		/// When asking a remote display to show a piece of content, we don't
@@ -71,7 +78,7 @@ namespace DreamBeam {
 	public class Content {
 		// The following settings will not be saved when we serialize this class
 		[XmlIgnore()]
-		private string bgImagePath;
+		private Theme theme;
 		[XmlIgnore()]
 		public Image bgImage;
 		[XmlIgnore()]
@@ -87,22 +94,54 @@ namespace DreamBeam {
 		[XmlIgnore()]
 		private ArrayList renderedFramesOrder = new ArrayList(10);
 
-		// The following setting and properties will be serialized
-		public BeamTextFormat[] format;
 		/// <summary>Should we use the global or custom font/background/etc... format for this content</summary>
 		public bool CustomFormat = false;
 		public bool WordWrap = false;	// Bible text is word-wrapped. Songs are not.
 
-		public string BGImagePath {
-			get { return this.bgImagePath; }
+		public virtual string ThemePath {
+			get { 
+				// If the theme comes from the default config, it won't have a path
+				// That's how it should be!
+				return theme == null ? null : theme.ThemeFile;
+			}
 			set {
-				// bgImage is no longer valid when the path is changed
+				// Assume it's a song theme.
+				// bgImage is no longer valid when the theme is changed
 				bgImage = null;
-				this.bgImagePath = value;
-				// To save memory we could also clear the pre-rendered cache:
-				//this.RenderedFrames.Clear();
+				if (Path.GetExtension(value).EndsWith("xml")) {
+					this.Theme = (Theme)Theme.DeserializeFrom(typeof(SongTheme), value);
+				} else {
+					// This is an image file from the old song file
+					//bgImagePath = value;
+				}
 			}
 		}
+
+		[XmlIgnore()]
+		public Theme Theme {
+			get { return theme; }
+			set {
+				if (value != null) {
+					this.theme = (Theme)value.Clone();
+					BGImagePath = theme.BGImagePath;
+				} else {
+					this.theme = null;
+					BGImagePath = null;
+				}
+			}
+		}
+
+		[XmlIgnore()]
+		public string BGImagePath {
+			get { return theme == null ? null : theme.BGImagePath; }
+			set {
+				bgImage = null;
+				if (theme != null) {
+					theme.BGImagePath = value;
+				}
+			}
+		}
+
 
 		#region RenderedFrames wrapper functions
 		public void RenderedFramesClear() {
@@ -137,16 +176,13 @@ namespace DreamBeam {
 		/// <returns></returns>
 		public virtual int VisibleHashCode() {
 			int fh = 0;
-			if (format != null) {
-				foreach (BeamTextFormat f in format) {
-					fh += f.GetHashCode();
-				}
-			}
+			
+			if (theme != null) fh += theme.VisibleHashCode();
 
 			return
 				fh + (this.HideBG ? "HideBG".GetHashCode() : "ShowBG".GetHashCode()) +
 				(this.HideText ? "HideText".GetHashCode() : "ShowText".GetHashCode()) +
-				(this.BGImagePath != null ? this.BGImagePath.GetHashCode() : "NoBgImg".GetHashCode());
+				(this.ThemePath != null ? this.ThemePath.GetHashCode() : "NoBgImg".GetHashCode());
 		}
 
 		/// <summary>
@@ -241,14 +277,6 @@ namespace DreamBeam {
 			return true;
 		}
 
-		public void ChangeBGImagePath(string newPath) {
-			this.BGImagePath = newPath;
-		}
-		public void ChangeTheme(Theme theme) {
-			if (theme == null) return;
-			ChangeBGImagePath(theme.BGImagePath);
-		}
-
 		public ContentIdentity GetIdentity() {
 			// TODO:  Add ImageContent.GetIdentity implementation
 			ContentIdentity ident = new ContentIdentity();
@@ -260,6 +288,8 @@ namespace DreamBeam {
 			// prerendered the one and only frame as soon as we call GetBitmap
 			// the first time.
 		}
+
+		public void DefaultBackground(Config conf) {}
 
 		#endregion
 

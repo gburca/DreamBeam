@@ -150,11 +150,8 @@ namespace DreamBeam {
 				if (_MainForm.selectedTab == MainTab.Presentation) {
 					_MainForm.PreviewPresentationMedia(path);
 				} else {
-					if (_MainForm.selectedTab == MainTab.EditSongs) {
-						_MainForm.songEditor.Background.Text = path;
-					}
 					if (_MainForm.DisplayPreview.content != null) {
-						_MainForm.DisplayPreview.content.ChangeBGImagePath(path);
+						_MainForm.DisplayPreview.content.BGImagePath = path;
 						_MainForm.DisplayPreview.UpdateDisplay(true);
 					}
 				}

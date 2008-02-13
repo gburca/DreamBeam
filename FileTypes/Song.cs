@@ -308,10 +308,7 @@ namespace DreamBeam {
 					} else {
 						foreach (string folder in folders) {
 							if (File.Exists(Path.Combine(folder, tmpfilename))) {
-								this.bg_image = Tools.GetDirectory(DirType.Backgrounds)
-									+ Tools.Reverse(Tools.Reverse(folder).Substring(0, Tools.Reverse(folder).IndexOf(@"\")))
-									+ "\\"
-									+ tmpfilename;
+								this.bg_image = Path.Combine(folder, tmpfilename);
 							}
 						}
 					}
@@ -693,8 +690,7 @@ namespace DreamBeam {
 		}
 
 		#region Constructors
-		public NewSong(Song s)
-			: this() {
+		public NewSong(Config conf, Song s) : this(conf) {
 			this.Title = s.GetText(0);
 			this.FileName = s.SongName;
 			this.Author = s.GetText(2);
@@ -712,6 +708,12 @@ namespace DreamBeam {
 			this.Sequence = new ArrayList();
 			this.CurrentLyric = 0;
 			this.Version = Tools.GetAppVersion();
+		}
+
+		public NewSong(Config config) : this() {
+			if (config != null && config.theme != null) {
+				Theme = config.theme.Song;
+			}
 		}
 
 		/// <summary>
@@ -735,8 +737,7 @@ namespace DreamBeam {
 		///	This constructor is mainly used when importing songs stored in this text format.
 		/// </summary>
 		/// <param name="fileName"></param>
-		public NewSong(string fileName)
-			: this() {
+		public NewSong(string fileName) : this() {
 			// If BOM is present, read the file as Unicode, else default to UTF-8
 			string[] lines;
 			Regex r;
@@ -869,17 +870,12 @@ namespace DreamBeam {
 
 		public void Init(int strophe, Config config) {
 			this.config = config;
-			if (this.BGImagePath == null) {
-				this.BGImagePath = config.SongBGImagePath;
-			}
-			this.format = config.SongTextFormat;
 			this.CurrentLyric = strophe;
 
 			// Version 0.71 allowed the user to save files with keys such as "D# / Eb".
 			this.KeyRangeLow = this.NormalizeKey(this.KeyRangeLow);
 			this.KeyRangeHigh = this.NormalizeKey(this.KeyRangeHigh);
 		}
-
 
 		public LyricsItem GetLyrics(int seq) {
 			if (seq >= this.Sequence.Count) return null;
@@ -1024,14 +1020,18 @@ namespace DreamBeam {
 		/// </summary>
 		/// <returns>A hash code representing the current verse</returns>
 		public int VisibleHashCode(int seq) {
+			int hash = 0;
 			string h = "Hide";
 			foreach (bool b in Hide) {
 				h += (b ? "1" : "0");
 			}
 
-			return
-				base.VisibleHashCode() + this.GetLyrics(seq).Lyrics.GetHashCode() +
-				h.GetHashCode();
+			hash += h.GetHashCode() + base.VisibleHashCode();
+			if (this.GetLyrics(seq) != null) {
+				hash += this.GetLyrics(seq).Lyrics.GetHashCode();
+			}
+
+			return hash;
 		}
 
 		#region IContentOperations Members
@@ -1063,6 +1063,7 @@ namespace DreamBeam {
 				RectangleF measuredBounds;
 				Font font;
 				float fontSz;
+				BeamTextFormat[] format = this.Theme.TextFormat;
 				string[] text = new string[Enum.GetValues(typeof(SongTextType)).Length];
 
 				graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -1071,7 +1072,7 @@ namespace DreamBeam {
 				graphics.SmoothingMode = SmoothingMode.HighQuality;
 				graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-				this.RenderBGImage(config.SongBGImagePath, graphics, Width, Height);
+				this.RenderBGImage(this.BGImagePath, graphics, Width, Height);
 
 				if (HideText) {
 					graphics.Dispose();
@@ -1194,14 +1195,6 @@ namespace DreamBeam {
 			return false;
 		}
 
-		public void ChangeBGImagePath(string newPath) {
-			this.BGImagePath = newPath;
-		}
-		public void ChangeTheme(Theme t) {
-			if (t == null) return;
-			ChangeBGImagePath(t.BGImagePath);
-			this.format = t.TextFormat;
-		}
 
 		public virtual ContentIdentity GetIdentity() {
 			ContentIdentity ident = new ContentIdentity();
@@ -1230,6 +1223,9 @@ namespace DreamBeam {
 			render.Start();
 		}
 
+		public virtual void DefaultBackground(Config conf) {
+			this.BGImagePath = conf.theme.Song.BGImagePath;
+		}
 		#endregion
 
 		#region ICloneable Members
@@ -1263,7 +1259,6 @@ namespace DreamBeam {
 			// We need to save these and restore them after serializing, or else whoever is holding
 			// a reference to this "instance" will end up with a broken object because we set these
 			// to "null" below so that we don't serialize them.
-			BeamTextFormat[] savedFormat = instance.format;
 			string savedBGImagePath = instance.BGImagePath;
 
 			Type type = instance.GetType();
@@ -1273,7 +1268,6 @@ namespace DreamBeam {
 			FileStream fs = null;
 
 			if (!instance.CustomFormat) {
-				instance.format = null;
 				instance.BGImagePath = null;
 			}
 
@@ -1288,7 +1282,6 @@ namespace DreamBeam {
 				if (fs != null) {
 					fs.Close();
 				}
-				instance.format = savedFormat;
 				instance.BGImagePath = savedBGImagePath;
 			}
 		}
@@ -1342,45 +1335,56 @@ namespace DreamBeam {
 			try {
 				xmlDoc.Load(file);
 			} catch {
-				return new NewSong();
+				return new NewSong(config);
 			}
 
 			NewSong s = null;
 			//XmlNodeList nodes = xmlDoc.GetElementsByTagName("Version");
-			XmlNode version = xmlDoc.SelectSingleNode(@"/DreamSong/Version");
-			if (version == null) {
-				version = xmlDoc.SelectSingleNode(@"/NewSong/Version");
+			XmlNode versionNode = xmlDoc.SelectSingleNode(@"/DreamSong/Version");
+			if (versionNode == null) {
+				versionNode = xmlDoc.SelectSingleNode(@"/NewSong/Version");
 			}
-			if (version != null) {
-				switch (version.InnerText) {
-					case "0.49":
-						Song oldS = new Song(file);
-						if (oldS.strophe_count > 0) {
-							s = new NewSong(oldS);
-						} else {
-							s = new NewSong();
-						}
-						break;
+			if (versionNode != null) {
+				float version;
+				try {
+					version = float.Parse(versionNode.InnerText);
+				} catch {
+					version = 0;
+				}
 
-					case "0.60":
-						// Fix old songs that were saved with NewSong XML root instead of DreamSong
-						XmlNode root = xmlDoc.DocumentElement;
-						if (root.Name.Equals("NewSong")) {
-							Tools.RenameXmlNode(root, root.NamespaceURI, "DreamSong");
-							s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), new StringReader(xmlDoc.OuterXml));
-						} else {
-							s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
+				if (version <= 0.49F) {
+					Song oldS = new Song(file);
+					if (oldS.strophe_count > 0) {
+						s = new NewSong(config, oldS);
+					} else {
+						s = new NewSong(config);
+					}
+				} else if (version <= 0.71F) {
+					/* Prior to version 0.72 old songs were saved with NewSong XML root
+					 * instead of DreamSong and contained an node called BGImagePath. The
+					 * BGImagePath has now been generalized to ThemePath.
+					 */
+					XmlNode root = xmlDoc.DocumentElement;
+					if (root.Name.Equals("NewSong")) {
+						Tools.RenameXmlNode(root, root.NamespaceURI, "DreamSong");
+						XmlNode bgImageNode = xmlDoc.SelectSingleNode(@"/DreamSong/BGImagePath");
+						if (bgImageNode != null) {
+							Tools.RenameXmlNode(bgImageNode, root.NamespaceURI, "ThemePath");
 						}
-						break;
-
-					//case "0.72":
-					default:
+						s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), new StringReader(xmlDoc.OuterXml));
+					} else {
 						s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
-						break;
+					}
+				} else { // version >= 0.72
+					s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
 				}
 			}
 
 			if (s != null) {
+				// If we don't clone the theme, background changes will be saved as part of the default theme.
+				if (s.Theme == null) {
+					s.Theme = (Theme)config.theme.Song.Clone();
+				}
 				if (!s.CustomFormat) {
 					s.Init(strophe, config);
 				} else {
@@ -1390,7 +1394,7 @@ namespace DreamBeam {
 				s.FileName = file;
 				return s;
 			} else {
-				return new NewSong();
+				return new NewSong(config);
 			}
 		}
 		#endregion

@@ -14,7 +14,8 @@
 !macro CheckerWeb
 Section "-hidden CheckDependencies"
 
-!define NET_URL "http://download.microsoft.com/download/a/a/c/aac39226-8825-44ce-90e3-bf8203e74006/dotnetfx.exe"
+!define NET1_URL "http://download.microsoft.com/download/a/a/c/aac39226-8825-44ce-90e3-bf8203e74006/dotnetfx.exe"
+!define NET_URL "http://www.microsoft.com/downloads/details.aspx?familyid=0856eacb-4362-4b0d-8edd-aab15c5e04f5&displaylang=en"
 !define DX_URL "http://download.microsoft.com/download/8/1/e/81ed90eb-dd87-4a23-aedc-298a9603b4e4/directx_9c_redist.exe"
 !define DX_MANAGED_URL "http://download.microsoft.com/download/3/9/7/3972f80c-5711-4e14-9483-959d48a2d03b/directx_apr2006_redist.exe"
 !define SWORD_URL "http://crosswire.org/ftpmirror/pub/sword/frontend/win32/v1.5/sword-starter-win32-1.5.6.exe"
@@ -26,9 +27,9 @@ Section "-hidden CheckDependencies"
 
 	;DotNet:
 	;MessageBox MB_OK "Checking for .NET"
-	IfFileExists "$WINDIR\Microsoft.NET\Framework\v1.1.4322\installUtil.exe" FinishDotNet
+	IfFileExists "$WINDIR\Microsoft.NET\Framework\v2.0.50727\InstallUtil.exe" FinishDotNet
 		MessageBox MB_YESNOCANCEL|MB_ICONEXCLAMATION \
-			"Microsoft .NET Framework 1.1 is required by Dreambeam. \
+			"Microsoft .NET Framework 2.0 is required by Dreambeam. \
 			$\n$\n Allow Setup to download and install the Framework? (~23 MB)" \
 			/SD IDYES IDCANCEL AbortInstall IDNO FinishDotNet
 
@@ -46,7 +47,7 @@ Section "-hidden CheckDependencies"
 		InstallNet:
 		Banner::show /NOUNLOAD /set 76 "Installing Microsoft .Net Framework." \
 			"Please wait ..."
-		ExecWait '"$TEMP\dotnetfx.exe" /q:a /c:"install /q"'	
+		ExecWait '"$TEMP\dotnetfx.exe" /q:a /c:"install /q"'
 		Delete "$TEMP\dotnetfx.exe"
 		Banner::destroy
 		
@@ -172,19 +173,18 @@ Section "-hidden CheckDependencies" ;
 ;============================= Microsof .Net Framework ===================================
 ;=========================================================================================
 	DotNet:
-	IfFileExists "$WINDIR\Microsoft.NET\Framework\v1.1.4322\installUtil.exe" FinishDotNet
+	IfFileExists "$WINDIR\Microsoft.NET\Framework\v2.0.50727\InstallUtil.exe" FinishDotNet
 
 		MessageBox MB_YESNOCANCEL|MB_ICONEXCLAMATION \
-			"Microsoft .NET Framework 1.1 is required by Dreambeam. \
+			"Microsoft .NET Framework 2.0 is required by Dreambeam. \
 			$\n$\n Allow Setup to install the Framework?" \
 			/SD IDYES IDCANCEL AbortInstall IDNO FinishDotNet
 
-		;File /oname=$TEMP\dotnetfx.exe SupportFiles\dotnetfx.exe		
-		SetOutPath "$TEMP\dotNet1.1"
-		File /x content.txt "SupportFiles\dotNet1.1\*.*"
+		SetOutPath "$TEMP\dotNet2.0"
+		File /x content.txt "SupportFiles\dotNet2.0\*.*"
 		Banner::show /NOUNLOAD /set 76 "Installing Microsoft .Net Framework." "Please wait ..."
-		ExecWait '"$TEMP\dotNet1.1\install.exe" /q'
-		RMDir /r "$TEMP\dotNet1.1"
+		ExecWait '"$TEMP\dotNet2.0\dotnetfx.exe" /q:a /c:"install /q"'
+		RMDir /r "$TEMP\dotNet2.0"
 		Banner::destroy	
 
 	FinishDotNet:

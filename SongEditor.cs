@@ -35,7 +35,7 @@ namespace DreamBeam {
 		private TD.SandDock.DockContainer bottomSandDock;
 		private TD.SandDock.DockContainer topSandDock;
 		private TD.SandDock.SandDockManager sandDockManager0;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button BrowseTheme;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label4;
@@ -46,7 +46,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.ToolTip ToolTip;
 		private System.Windows.Forms.RichTextBox ChorusLyrics;
-		public System.Windows.Forms.TextBox Background;
+		public System.Windows.Forms.TextBox Theme;
 		private System.Windows.Forms.ComboBox KeyRangeLow;
 		private System.Windows.Forms.ComboBox KeyRangeHigh;
 		private System.Windows.Forms.CheckBox MinorKey;
@@ -102,7 +102,7 @@ namespace DreamBeam {
 			this.MinorKey.Checked = song.MinorKey;
 			this.CustomFormat.Checked = song.CustomFormat;
 			this.DualLanguage.Checked = song.DualLanguage;
-			this.Background.Text = song.BGImagePath;
+			this.Theme.Text = song.ThemePath;
 
 			// If we don't Clear, old RTF formatting codes from the previous Paste operation
 			// remain in the control and cause the new text to take on that formatting
@@ -177,8 +177,8 @@ namespace DreamBeam {
 			this.General_Tab = new System.Windows.Forms.TabPage();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.CustomFormat = new System.Windows.Forms.CheckBox();
-			this.button1 = new System.Windows.Forms.Button();
-			this.Background = new System.Windows.Forms.TextBox();
+			this.BrowseTheme = new System.Windows.Forms.Button();
+			this.Theme = new System.Windows.Forms.TextBox();
 			this.label7 = new System.Windows.Forms.Label();
 			this.MinorKey = new System.Windows.Forms.CheckBox();
 			this.KeyRangeHigh = new System.Windows.Forms.ComboBox();
@@ -300,8 +300,8 @@ namespace DreamBeam {
 			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBox1.Controls.Add(this.CustomFormat);
-			this.groupBox1.Controls.Add(this.button1);
-			this.groupBox1.Controls.Add(this.Background);
+			this.groupBox1.Controls.Add(this.BrowseTheme);
+			this.groupBox1.Controls.Add(this.Theme);
 			this.groupBox1.Controls.Add(this.label7);
 			this.groupBox1.Location = new System.Drawing.Point(6, 270);
 			this.groupBox1.Name = "groupBox1";
@@ -318,33 +318,34 @@ namespace DreamBeam {
 			this.CustomFormat.TabIndex = 18;
 			this.CustomFormat.Text = "Use custom configuration";
 			// 
-			// button1
+			// BrowseTheme
 			// 
-			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.button1.Location = new System.Drawing.Point(256, 64);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(62, 23);
-			this.button1.TabIndex = 7;
-			this.button1.Text = "Browse...";
+			this.BrowseTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.BrowseTheme.Location = new System.Drawing.Point(256, 64);
+			this.BrowseTheme.Name = "BrowseTheme";
+			this.BrowseTheme.Size = new System.Drawing.Size(62, 23);
+			this.BrowseTheme.TabIndex = 7;
+			this.BrowseTheme.Text = "Browse...";
+			this.BrowseTheme.Click += new System.EventHandler(this.BrowseTheme_Click);
 			// 
-			// Background
+			// Theme
 			// 
-			this.Background.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			this.Theme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.Background.Location = new System.Drawing.Point(88, 66);
-			this.Background.Name = "Background";
-			this.Background.Size = new System.Drawing.Size(162, 20);
-			this.Background.TabIndex = 6;
-			this.ToolTip.SetToolTip(this.Background, "Leave blank to use the default background");
+			this.Theme.Location = new System.Drawing.Point(53, 66);
+			this.Theme.Name = "Theme";
+			this.Theme.Size = new System.Drawing.Size(197, 20);
+			this.Theme.TabIndex = 6;
+			this.ToolTip.SetToolTip(this.Theme, "Leave blank to use the default theme");
 			// 
 			// label7
 			// 
-			this.label7.Location = new System.Drawing.Point(6, 66);
+			this.label7.Location = new System.Drawing.Point(4, 67);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(70, 16);
+			this.label7.Size = new System.Drawing.Size(48, 16);
 			this.label7.TabIndex = 16;
-			this.label7.Text = "Background:";
-			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.label7.Text = "Theme:";
+			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// MinorKey
 			// 
@@ -586,7 +587,6 @@ namespace DreamBeam {
 			// DualLanguage
 			// 
 			this.DualLanguage.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			//this.DualLanguage.Appearance = System.Windows.Forms.Appearance.Button;
 			this.DualLanguage.bottomColor = System.Drawing.Color.DarkBlue;
 			this.DualLanguage.BottomTransparent = 64;
 			this.DualLanguage.LEDColor = System.Drawing.Color.Green;
@@ -774,6 +774,15 @@ namespace DreamBeam {
 		private void ListEx_Sequence_PressIcon(int Index) {
 			this.ListEx_Sequence.Remove(Index);
 			this.sequence.RemoveAt(Index);
+		}
+
+		private void BrowseTheme_Click(object sender, EventArgs e) {
+			SongTheme theme = SongTheme.OpenFile();
+			if (theme != null) {
+				this.Theme.Text = theme.ThemeFile;
+			} else {
+				this.Theme.Text = "";
+			}
 		}
 
 	}

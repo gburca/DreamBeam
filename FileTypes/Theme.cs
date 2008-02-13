@@ -13,6 +13,8 @@ namespace DreamBeam {
 		public string Version;
 		public string BGImagePath = null;
 		public BeamTextFormat[] TextFormat;
+		[XmlIgnore]
+		public string ThemeFile = null;
 
 		public Theme() {
 			Version = Tools.GetAppVersion();
@@ -41,7 +43,11 @@ namespace DreamBeam {
 			dialog.Multiselect = false;
 
 			if (dialog.ShowDialog() == DialogResult.OK) {
-				return DeserializeFrom(type, dialog.FileName) as Theme;
+				Theme t = DeserializeFrom(type, dialog.FileName) as Theme;
+				if (t != null) {
+					t.ThemeFile = dialog.FileName;
+				}
+				return t;
 			} else {
 				return null;
 			}
@@ -63,6 +69,7 @@ namespace DreamBeam {
 				string fileName = dialog.FileName;
 				try {
 					SerializeTo(this, fileName);
+					this.ThemeFile = fileName;
 					//this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.SaveFileDialog.FileName);
 				} catch (Exception ex) {
 					MessageBox.Show("Theme not saved: " + ex.Message);
@@ -118,6 +125,22 @@ namespace DreamBeam {
 			}
 
 			return null;
+		}
+
+		/// <summary>
+		/// This is not a true hash code. It is only used to determine if any
+		/// graphically visible characteristics of the object have changed.
+		/// </summary>
+		/// <returns></returns>
+		public virtual int VisibleHashCode() {
+			int fh = 0;
+			if (BGImagePath != null) fh += BGImagePath.GetHashCode();
+			if (TextFormat != null) {
+				foreach (BeamTextFormat f in TextFormat) {
+					fh += f.GetHashCode();
+				}
+			}
+			return fh;
 		}
 
 

@@ -5310,12 +5310,9 @@ namespace DreamBeam {
 
 		private void RightDocks_Backgrounds_UseDefault_Click(object sender, System.EventArgs e) {
 			if (DisplayPreview.content != null) {
-				DisplayPreview.content.ChangeBGImagePath(null);
+				DisplayPreview.content.BGImagePath = null;
+				DisplayPreview.content.DefaultBackground(Config);
 				DisplayPreview.UpdateDisplay(true);
-			}
-
-			if (this.selectedTab == MainTab.EditSongs) {
-				this.songEditor.Background.Text = "";
 			}
 
 			if (this.RightDocks_ImageListBox.SelectedIndex >= 0) {
@@ -5565,6 +5562,7 @@ namespace DreamBeam {
 		}
 
 		private void BibleText_Results_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e) {
+			if (this.BibleText_Bible == null) return;
 			switch (e.KeyCode) {
 				case Keys.A:	// Find first
 					BibleText_FindFirst_button_Click(sender, null);
@@ -5590,6 +5588,7 @@ namespace DreamBeam {
 		}
 
 		private int BibleText_Query(bool dirFwd) {
+			if (BibleText_Translations.Items.Count == 0 || BibleText_Translations.SelectedIndices.Count == 0) return -1;
 			string translation = BibleText_Translations.SelectedItem.ToString();
 			if (!bibles.TranslationExists(translation)) return -1;
 			int index = BibleText_Results.Find(bibles[translation], dirFwd, BibleText_RegEx_ComboBox.Text);
@@ -5729,7 +5728,9 @@ namespace DreamBeam {
 			if (BibleText_Bookmarks.SelectedItems.Count == 1) {
 				BibleText_RegEx_ComboBox.Text = "^" + this.BibleText_Bible.GetSimpleRef(BibleText_Bookmarks.SelectedItem.ToString(), true) + @"\s+.*";
 				int vidx = BibleText_Query(true);
-				DisplayPreview.SetContent(new ABibleVerse(this.BibleText_Bible, vidx, this.Config));
+				if (vidx >= 0) {
+					DisplayPreview.SetContent(new ABibleVerse(this.BibleText_Bible, vidx, this.Config));
+				}
 			}
 		}
 

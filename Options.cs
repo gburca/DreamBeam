@@ -78,15 +78,15 @@ namespace DreamBeam {
 
 				switch ((ContentType)content.GetIdentity().Type) {
 					case ContentType.Song:
-						content.ChangeTheme(song);
+						content.Theme = song;
 						break;
 					case ContentType.PlainText:
-						content.ChangeTheme(sermon);
+						content.Theme = sermon;
 						break;
 					case ContentType.BibleVerseIdx:
 					case ContentType.BibleVerseRef:
 					case ContentType.BibleVerse:
-						content.ChangeTheme(bible);
+						content.Theme = bible;
 						break;
 				}
 				_MainForm.DisplayPreview.UpdateDisplay(true);
