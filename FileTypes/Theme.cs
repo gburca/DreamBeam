@@ -44,9 +44,9 @@ namespace DreamBeam {
 
 			if (dialog.ShowDialog() == DialogResult.OK) {
 				Theme t = DeserializeFrom(type, dialog.FileName) as Theme;
-				if (t != null) {
-					t.ThemeFile = dialog.FileName;
-				}
+				//if (t != null) {
+				//    t.ThemeFile = dialog.FileName;
+				//}
 				return t;
 			} else {
 				return null;
@@ -114,7 +114,11 @@ namespace DreamBeam {
 			if (xs != null) {
 				try {
 					using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
-						return xs.Deserialize(fs);
+						Theme t = (Theme)xs.Deserialize(fs);
+						if (t != null) {
+							t.ThemeFile = file;
+						}
+						return t;
 					}
 				} catch (FileNotFoundException) {
 					return null;

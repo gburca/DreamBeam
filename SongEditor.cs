@@ -136,6 +136,9 @@ namespace DreamBeam {
 			song.MinorKey = this.MinorKey.Checked;
 			song.DualLanguage = this.DualLanguage.Checked;
 			song.CustomFormat = this.CustomFormat.Checked;
+			if (song.CustomFormat == true) {
+				song.ThemePath = this.Theme.Text;
+			}
 
 			song.SetLyrics(LyricsType.Verse, this.VerseLyrics.Text);
 			song.SetLyrics(LyricsType.Chorus, this.ChorusLyrics.Text);

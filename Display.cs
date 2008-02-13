@@ -100,9 +100,15 @@ namespace DreamBeam {
 
 		public virtual string ThemePath {
 			get { 
-				// If the theme comes from the default config, it won't have a path
-				// That's how it should be!
-				return theme == null ? null : theme.ThemeFile;
+				if (theme == null) {
+					return null;
+				} else if (CustomFormat == false) {
+					return null;
+				} else {
+					// If the theme comes from the default config, it won't have a path
+					// That's how it should be!
+					return theme.ThemeFile;
+				}
 			}
 			set {
 				// Assume it's a song theme.

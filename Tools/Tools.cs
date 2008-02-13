@@ -193,7 +193,7 @@ namespace DreamBeam {
 					dir = Path.Combine(GetAppDocPath(), "Songs");
 					break;
 				case DirType.Themes:
-					dir = Path.Combine(GetAppDocPath(), "Songs");
+					dir = Path.Combine(GetAppDocPath(), "Themes");
 					break;
 				default:
 					dir = GetAppDocPath();
