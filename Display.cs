@@ -226,6 +226,7 @@ namespace DreamBeam {
 	public class ImageContent : Content, IContentOperations {
 		public ImageContent() { }
 		public ImageContent(string Path) {
+			this.Theme = new SermonTheme();
 			this.BGImagePath = Path;
 		}
 
