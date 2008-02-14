@@ -429,7 +429,7 @@ namespace DreamBeam {
 						break;
 					case ContentType.Song:
 						string songFile = Tools.GetDirectory(DirType.Songs, identity.SongName);
-						newContent = (NewSong)NewSong.DeserializeFrom(songFile, identity.SongStrophe, Display.config);
+						newContent = (Song)Song.DeserializeFrom(songFile, identity.SongStrophe, Display.config);
 						break;
 				}
 			} catch { }	// Covers a multitude of sins (non-existent translation, or song, or verse, etc...)

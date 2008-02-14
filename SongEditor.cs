@@ -13,7 +13,7 @@ namespace DreamBeam {
 	public class SongEditor : System.Windows.Forms.UserControl {
 		private ArrayList sequenceAvailable = new ArrayList();
 		private ArrayList sequence = new ArrayList();
-		private NewSong song;
+		private Song song;
 
 		#region Designer variables
 		private System.Windows.Forms.TextBox Title;
@@ -68,8 +68,8 @@ namespace DreamBeam {
 
 		}
 
-		public NewSong Song {
-			set { song = (NewSong)value; PopulateControls(song); }
+		public Song Song {
+			set { song = (Song)value; PopulateControls(song); }
 			get { return ReadControls(); }
 		}
 
@@ -90,7 +90,7 @@ namespace DreamBeam {
 			}
 		}
 
-		public void PopulateControls(NewSong song) {
+		public void PopulateControls(Song song) {
 			this.Title.Text = song.Title;
 			this.Author.Text = song.Author;
 			this.Collection.Text = song.Collection;
@@ -121,8 +121,8 @@ namespace DreamBeam {
 			this.UpdateAvailableLyrics();
 		}
 
-		public NewSong ReadControls() {
-			if (song == null) song = new NewSong();
+		public Song ReadControls() {
+			if (song == null) song = new Song();
 
 			song.Title = this.Title.Text;
 			song.Author = this.Author.Text;
@@ -741,7 +741,7 @@ namespace DreamBeam {
 		}
 
 		private void UpdateAvailableLyrics() {
-			NewSong s = this.ReadControls();
+			Song s = this.ReadControls();
 
 			this.ListEx_Available.Items.Clear();
 

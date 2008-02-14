@@ -17,7 +17,7 @@ namespace DreamBeam.FileTypes {
 	/// <summary>
 	/// Summary description for TextTool.
 	/// </summary>
-	public class TextToolContents : NewSong {
+	public class TextToolContents : Song {
 
 		public override string ThemePath {
 			set {

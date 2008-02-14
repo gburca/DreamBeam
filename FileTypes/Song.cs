@@ -59,7 +59,7 @@ namespace DreamBeam {
 
 	/// <summary>
 	/// LyricsSequenceItem (LSI) is like a pointer to a LyricsItem. The order in
-	/// which these LSI objects are added to the NewSong.Sequence array
+	/// which these LSI objects are added to the Song.Sequence array
 	/// determines the order in which the parts of a song are displayed when the
 	/// user requests the "Next" slide.
 	/// </summary>
@@ -138,7 +138,7 @@ namespace DreamBeam {
 
 	[Serializable()]
 	[XmlRoot(ElementName = "DreamSong")]
-	public class NewSong : Content, IContentOperations {
+	public class Song : Content, IContentOperations {
 		// The following setting and properties will be serialized
 		public string Version;
 		public string Title;
@@ -192,7 +192,7 @@ namespace DreamBeam {
 		}
 
 		#region Constructors
-		public NewSong(Config conf, OldSong s) : this(conf) {
+		public Song(Config conf, OldSong s) : this(conf) {
 			this.Title = s.GetText(0);
 			this.FileName = s.SongName;
 			this.Author = s.GetText(2);
@@ -204,7 +204,7 @@ namespace DreamBeam {
 			CreateSimpleSequence();
 		}
 
-		public NewSong() {
+		public Song() {
 			this.enumType = typeof(SongTextType);
 			this.SongLyrics = new ArrayList();
 			this.Sequence = new ArrayList();
@@ -212,7 +212,7 @@ namespace DreamBeam {
 			this.Version = Tools.GetAppVersion();
 		}
 
-		public NewSong(Config config) : this() {
+		public Song(Config config) : this() {
 			if (config != null && config.theme != null) {
 				Theme = config.theme.Song;
 				// This is not a custom theme, so null the ThemePath so it doesn't get saved.
@@ -241,7 +241,7 @@ namespace DreamBeam {
 		///	This constructor is mainly used when importing songs stored in this text format.
 		/// </summary>
 		/// <param name="fileName"></param>
-		public NewSong(string fileName) : this() {
+		public Song(string fileName) : this() {
 			// If BOM is present, read the file as Unicode, else default to UTF-8
 			string[] lines;
 			Regex r;
@@ -729,9 +729,9 @@ namespace DreamBeam {
 			return this.Clone();
 		}
 
-		public virtual NewSong Clone() {
+		public virtual Song Clone() {
 			// TODO: Make a proper clone, or else the Live screen will show updates made to preview screen.
-			NewSong s = this.MemberwiseClone() as NewSong;
+			Song s = this.MemberwiseClone() as Song;
 			s.SongLyrics = (ArrayList)this.SongLyrics.Clone();
 			s.Sequence = (ArrayList)this.Sequence.Clone();
 
@@ -750,7 +750,7 @@ namespace DreamBeam {
 		/// </summary>
 		/// <param name="instance">The instance to serialize</param>
 		/// <param name="file">The XML file to serialize to</param>
-		public static void SerializeTo(NewSong instance, string file) {
+		public static void SerializeTo(Song instance, string file) {
 			// We need to save these and restore them after serializing, or else whoever is holding
 			// a reference to this "instance" will end up with a broken object because we set these
 			// to "null" below so that we don't serialize them.
@@ -778,7 +778,7 @@ namespace DreamBeam {
 		}
 
 		/// <summary>
-		/// Handles deserialization of the NewSong class, or of any types derived from it.
+		/// Handles deserialization of the Song class, or of any types derived from it.
 		/// </summary>
 		/// <param name="type">The type of class to deserialize. Allows this function to be used in derived classes.</param>
 		/// <param name="tr">A TextReader containing the document to deserialize</param>
@@ -805,7 +805,7 @@ namespace DreamBeam {
 		}
 
 		/// <summary>
-		/// Handles deserialization of the NewSong class, or of any types derived from it.
+		/// Handles deserialization of the Song class, or of any types derived from it.
 		/// </summary>
 		/// <param name="type">The type of class to deserialize. Allows this function to be used in derived classes.</param>
 		/// <param name="file">The full path to the XML file to deserialize</param>
@@ -826,10 +826,10 @@ namespace DreamBeam {
 			try {
 				xmlDoc.Load(file);
 			} catch {
-				return new NewSong(config);
+				return new Song(config);
 			}
 
-			NewSong s = null;
+			Song s = null;
 			//XmlNodeList nodes = xmlDoc.GetElementsByTagName("Version");
 			XmlNode versionNode = xmlDoc.SelectSingleNode(@"/DreamSong/Version");
 			if (versionNode == null) {
@@ -846,9 +846,9 @@ namespace DreamBeam {
 				if (version <= 0.49F) {
 					OldSong oldS = new OldSong(file);
 					if (oldS.strophe_count > 0) {
-						s = new NewSong(config, oldS);
+						s = new Song(config, oldS);
 					} else {
-						s = new NewSong(config);
+						s = new Song(config);
 					}
 				} else if (version <= 0.71F) {
 					/* Prior to version 0.72 old songs were saved with NewSong XML root
@@ -862,9 +862,9 @@ namespace DreamBeam {
 						if (bgImageNode != null) {
 							Tools.RenameXmlNode(bgImageNode, root.NamespaceURI, "ThemePath");
 						}
-						s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), new StringReader(xmlDoc.OuterXml));
+						s = (Song)Song.DeserializeFrom(typeof(Song), new StringReader(xmlDoc.OuterXml));
 					} else {
-						s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
+						s = (Song)Song.DeserializeFrom(typeof(Song), file);
 					}
 					if (s != null) {
 						// Version 0.71 allowed the user to save files with keys such as "D# / Eb".
@@ -872,7 +872,7 @@ namespace DreamBeam {
 						s.KeyRangeHigh = NormalizeKey(s.KeyRangeHigh);
 					}
 				} else { // version >= 0.72
-					s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
+					s = (Song)Song.DeserializeFrom(typeof(Song), file);
 				}
 			}
 
@@ -889,7 +889,7 @@ namespace DreamBeam {
 				s.FileName = file;
 				return s;
 			} else {
-				return new NewSong(config);
+				return new Song(config);
 			}
 		}
 		#endregion

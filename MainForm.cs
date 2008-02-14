@@ -93,7 +93,6 @@ namespace DreamBeam {
 		public string ConfigSet = "default";
 		public Bitmap memoryBitmap = null;
 		public ShowBeam ShowBeam = new ShowBeam();
-		private OldSong Song = new OldSong();
 		public Options Options = null;
 		public Config Config;
 		public MainTab selectedTab = MainTab.ShowSongs;
@@ -103,7 +102,7 @@ namespace DreamBeam {
 
 		private Splash Splash = null;
 		public bool LoadingBGThumbs = false;
-		static Thread Thread_LoadMovie = null;
+		static Thread Thread_LoadMovie;
 
 		public DirectoryInfo folder;
 
@@ -3591,7 +3590,7 @@ namespace DreamBeam {
 		public void SaveSettings() {
 
 			this.Config.PlayListString = "";
-			foreach (NewSong song in this.Config.PlayList) {
+			foreach (Song song in this.Config.PlayList) {
 				this.Config.PlayListString += song.FileName + "\n";
 			}
 
@@ -3652,7 +3651,7 @@ namespace DreamBeam {
 			if (this.Config.PlayListString != null && this.Config.PlayListString.Length > 0) {
 				foreach (string fileName in this.Config.PlayListString.Split('\n')) {
 					try {
-						NewSong song = NewSong.DeserializeFrom(fileName, 0, this.Config) as NewSong;
+						Song song = Song.DeserializeFrom(fileName, 0, this.Config) as Song;
 						if (song != null) this.Config.PlayList.Add(song);
 					} catch { }
 				}
@@ -3685,7 +3684,7 @@ namespace DreamBeam {
 				songFiles = Directory.GetFiles(Tools.GetDirectory(DirType.Songs), "*.xml");
 			} catch { return; }
 			foreach (string songFile in songFiles) {
-				NewSong song = NewSong.DeserializeFrom(songFile, 0, this.Config) as NewSong;
+				Song song = Song.DeserializeFrom(songFile, 0, this.Config) as Song;
 				if (song != null) {
 					DataRow r = t.NewRow();
 					r["Number"] = song.Number;
@@ -3760,7 +3759,7 @@ namespace DreamBeam {
 
 		/// <summary>Loads the song into the ListEx control</summary>
 		/// <param name="song">The song to load</param>
-		public void LoadSongShow(NewSong song) {
+		public void LoadSongShow(Song song) {
 			this.SongShow_StropheList_ListEx.Items.Clear();
 			foreach (LyricsSequenceItem item in song.Sequence) {
 				this.SongShow_StropheList_ListEx.Add(song.GetLyrics(item), 0);
@@ -3877,7 +3876,7 @@ namespace DreamBeam {
 
 		///<summary> new Song from Menu</summary>
 		private void ToolBars_MenuBar_Song_New_Activate(object sender, System.EventArgs e) {
-			this.songEditor.Song = new NewSong();
+			this.songEditor.Song = new Song();
 		}
 
 		/// <summary>Saves the Selected Song</summary>
@@ -4154,10 +4153,10 @@ namespace DreamBeam {
 		}
 
 		void SaveSong() {
-			NewSong s = this.songEditor.Song;
+			Song s = this.songEditor.Song;
 
 			if (Tools.FileExists(s.FileName)) {
-				NewSong.SerializeTo(s, s.FileName);
+				Song.SerializeTo(s, s.FileName);
 				this.ListSongs();
 				this.StatusPanel.Text = Lang.say("Status.SongSavedAs", s.FileName);
 			} else {
@@ -4172,7 +4171,7 @@ namespace DreamBeam {
 			this.SaveFileDialog.InitialDirectory = Tools.GetDirectory(DirType.Songs);
 			this.SaveFileDialog.Title = "Save Song As";
 
-			NewSong s = this.songEditor.Song;
+			Song s = this.songEditor.Song;
 
 			if (!Tools.StringIsNullOrEmptyTrim(s.FileName)) {
 				this.SaveFileDialog.FileName = s.FileName;
@@ -4185,7 +4184,7 @@ namespace DreamBeam {
 			if (this.SaveFileDialog.ShowDialog() == DialogResult.OK) {
 				s.FileName = this.SaveFileDialog.FileName;
 				try {
-					NewSong.SerializeTo(s, this.SaveFileDialog.FileName);
+					Song.SerializeTo(s, this.SaveFileDialog.FileName);
 					this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.SaveFileDialog.FileName);
 				} catch (Exception ex) {
 					MessageBox.Show(Lang.say("Message.SongNotSaved") + "\nReason: " + ex.Message);
@@ -4255,12 +4254,12 @@ namespace DreamBeam {
 
 		private void LoadSongFromFile(string FileName) {
 			if (FileName == null) return;
-			NewSong song = (NewSong)NewSong.DeserializeFrom(FileName, 0, this.Config);
+			Song song = (Song)Song.DeserializeFrom(FileName, 0, this.Config);
 			this.songEditor.Song = song;
 			DisplayPreview.SetContent(song);
-			this.LoadSongShow(DisplayPreview.content as NewSong);
+			this.LoadSongShow(DisplayPreview.content as Song);
 			this.SongShow_HideElement_UpdateButtons();
-			this.StatusPanel.Text = Lang.say("Status.SongLoaded", FileName);
+			this.StatusPanel.Text = Lang.say("Status.SongLoaded", Tools.GetRelativePath(DirType.Songs, FileName));
 			GC.Collect();
 			song.PreRenderFrames();
 		}
@@ -4283,11 +4282,11 @@ namespace DreamBeam {
 
 		///<summary> Add a Song to a PlayList</summary>
 		private void btnRightDocks_SongList2PlayList_Click(object sender, System.EventArgs e) {
-			NewSong song;
+			Song song;
 			string FileName = GetSelectedSongFileName();
 
 			try {
-				song = NewSong.DeserializeFrom(FileName, 0, this.Config) as NewSong;
+				song = Song.DeserializeFrom(FileName, 0, this.Config) as Song;
 			} catch { return; }
 
 			if (song == null) return;
@@ -4353,7 +4352,7 @@ namespace DreamBeam {
 			try {
 				int i = this.RightDocks_PlayList.SelectedIndex;
 				if (i >= 0 && i < this.Config.PlayList.Count) {
-					this.LoadSongFromFile((this.Config.PlayList[i] as NewSong).FileName);
+					this.LoadSongFromFile((this.Config.PlayList[i] as Song).FileName);
 				}
 			} catch (Exception ex) {
 				Console.WriteLine("PlayList_MouseUp exception: " + ex.Message);
@@ -4364,7 +4363,7 @@ namespace DreamBeam {
 			int index = this.RightDocks_PlayList.SelectedIndex;
 			if (index >= 0 && index < this.Config.PlayList.Count) {
 				this.RightDocks_PlayList.SetSelected(index, false);	// If we don't do this, BAD things happen
-				this.StatusPanel.Text = Lang.say("Status.PlaylistSongRemoved", (this.Config.PlayList[index] as NewSong).FullName);
+				this.StatusPanel.Text = Lang.say("Status.PlaylistSongRemoved", (this.Config.PlayList[index] as Song).FullName);
 				this.Config.PlayList.RemoveAt(index);
 				this.SaveSettings();
 				this.RightDocks_PlayList_Reload();
@@ -4436,13 +4435,13 @@ namespace DreamBeam {
 
 		private void SongShow_StropheList_ListEx_SelectedIndexChanged(object sender, System.EventArgs e) {
 			// Update the preview screen when the index changes
-			NewSong s = DisplayPreview.content as NewSong;
+			Song s = DisplayPreview.content as Song;
 			if (s != null) {
 				s.CurrentLyric = this.SongShow_StropheList_ListEx.SelectedIndex;
 				DisplayPreview.UpdateDisplay(false);
 			} else if (this.SongShow_StropheList_ListEx.SelectedIndex >= 0) {
 				// If we come back from BibleText to the song,
-				// DisplayPreview.content will not be a NewSong and the
+				// DisplayPreview.content will not be a Song and the
 				// typecasting above will give us a null, so we need to re-load
 				// the song.
 				string FileName = this.songEditor.Song.FileName;
@@ -4454,7 +4453,7 @@ namespace DreamBeam {
 
 				//string FileName = GetSelectedSongFileName();
 				if (Tools.FileExists(FileName)) {
-					NewSong song = NewSong.DeserializeFrom(FileName, this.SongShow_StropheList_ListEx.SelectedIndex, this.Config) as NewSong;
+					Song song = Song.DeserializeFrom(FileName, this.SongShow_StropheList_ListEx.SelectedIndex, this.Config) as Song;
 					DisplayPreview.SetContent(song);
 					this.SongShow_HideElement_UpdateButtons();
 				}
@@ -4914,10 +4913,8 @@ namespace DreamBeam {
 			// TODO: What is this code doing?
 			string[] dirs2 = Directory.GetFiles(strSongDir, "*.xml");
 			foreach (string dir2 in dirs2) {
-				if (Song.isSong(Path.GetFileName(dir2))) {
-					string temp = Path.GetFileName(dir2);
-					this.RightDocks_MediaLists.Items.Add(temp.Substring(0, temp.Length - 4));
-				}
+				string temp = Path.GetFileName(dir2);
+				this.RightDocks_MediaLists.Items.Add(temp.Substring(0, temp.Length - 4));
 			}
 		}
 
@@ -5447,7 +5444,7 @@ namespace DreamBeam {
 		#region Hide Elements
 
 		private bool SongShow_HideElement(SongTextType type) {
-			NewSong s = DisplayPreview.content as NewSong;
+			Song s = DisplayPreview.content as Song;
 			if (s != null) {
 				if (s.Hide[(int)type]) {
 					s.Hide[(int)type] = false;
@@ -5464,7 +5461,7 @@ namespace DreamBeam {
 		/// Updates the HideElement radio boxes to match what's in the DisplayPreview content
 		/// </summary>
 		private void SongShow_HideElement_UpdateButtons() {
-			NewSong s = DisplayPreview.content as NewSong;
+			Song s = DisplayPreview.content as Song;
 			if (s == null) {
 				SongShow_HideTitle_Button.Checked = false;
 				SongShow_HideText_Button.Checked = false;
@@ -5865,7 +5862,7 @@ namespace DreamBeam {
 					Console.WriteLine("Importing from: " + fileName);
 					this.StatusPanel.Text = "Importing from: " + fileName;
 					if (Tools.FileExists(fileName)) {
-						NewSong song = new NewSong(fileName);
+						Song song = new Song(fileName);
 						if (Tools.FileExists(song.FileName)) {
 							MessageBoxEx msgBox = MessageBoxExManager.GetMessageBox("SongImportOverwrite");
 							if (msgBox == null) {
@@ -5885,7 +5882,7 @@ namespace DreamBeam {
 						}
 
 						if (song.FileName != null && song.SongLyrics.Count > 0) {
-							NewSong.SerializeTo(song, song.FileName);
+							Song.SerializeTo(song, song.FileName);
 						} else {
 							DialogResult result = MessageBox.Show("No song lyrics could be found in " + fileName +
 								"\nMake sure the file has the correct format" +
