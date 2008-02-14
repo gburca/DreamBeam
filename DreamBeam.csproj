@@ -108,10 +108,6 @@
       <Name>DragNDrop</Name>
       <HintPath>libs\DragNDrop.dll</HintPath>
     </Reference>
-    <Reference Include="LEDRadioButton">
-      <Name>LEDRadioButton</Name>
-      <HintPath>libs\LEDRadioButton.dll</HintPath>
-    </Reference>
     <Reference Include="ListControls">
       <Name>ListControls</Name>
       <HintPath>libs\ListControls.dll</HintPath>
@@ -194,6 +190,10 @@
       <Name>ExRichTextBox</Name>
       <Project>{1A63B1D0-D2F0-4F8C-B242-863E83E1419C}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="libs\LEDRadioButton\LEDRadioButton.csproj">
+      <Project>{98096340-5853-42D0-8B2F-1CD364C5A152}</Project>
+      <Name>LEDRadioButton</Name>
     </ProjectReference>
     <ProjectReference Include="libs\Lister\Lister.csproj">
       <Name>Lister</Name>

@@ -29,8 +29,8 @@ namespace ctlLEDRadioButton {
 		[EditorBrowsable(EditorBrowsableState.Never)]
 
 		public new Appearance Appearance {  
-		get{return Appearance.Button; }
-			
+			get { return Appearance.Button; }
+			set { base.Appearance = value; }
 		}
 		[
 		Bindable(true),
