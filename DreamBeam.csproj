@@ -237,6 +237,7 @@
     <Compile Include="FileTypes\Song.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FileTypes\SongOld.cs" />
     <Compile Include="FileTypes\TextTool.cs">
       <SubType>Code</SubType>
     </Compile>
