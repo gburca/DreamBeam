@@ -37,7 +37,7 @@ namespace DreamBeam {
 
 	//Contains all Song Information and Methods
 	[Serializable()]
-	public class Song {
+	public class OldSong {
 
 
 		public string SongName;//The Song's Name and Filename (+.xml)
@@ -69,10 +69,10 @@ namespace DreamBeam {
 		public string strSeperator = "\n\n\n";
 		public bool[] Hide = new bool[Enum.GetValues(typeof(SongTextType)).Length];
 
-		public virtual Song Clone() {
-			Song s = new Song();
+		public virtual OldSong Clone() {
+			OldSong s = new OldSong();
 
-			s = this.MemberwiseClone() as Song;
+			s = this.MemberwiseClone() as OldSong;
 
 			// Do we need to do this for each array?
 			//s.Text = this.Text.Clone;
@@ -373,16 +373,16 @@ namespace DreamBeam {
 
 		#region Constructors
 		///<summary>Main Class</summary>
-		public Song() {
+		public OldSong() {
 			this.Init("New Song");
 		}
 
-		public Song(System.Windows.Forms.Form Form) {
+		public OldSong(System.Windows.Forms.Form Form) {
 			this.SizeForm = Form;
 			this.Init("New Song");
 		}
 
-		public Song(string filename) {
+		public OldSong(string filename) {
 			this.Init("New Song");
 			this.Load(filename);
 		}

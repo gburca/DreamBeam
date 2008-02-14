@@ -7,7 +7,7 @@ namespace DreamBeam {
 	public class GuiTemplate {
 
 		protected MainForm _MainForm = null;
-		protected Song _Song = null;
+		protected OldSong _Song = null;
 		protected ShowBeam _ShowBeam = null;
 
 

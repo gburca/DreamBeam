@@ -69,10 +69,10 @@ namespace DreamBeam {
 		public string strImageLoaded = null;
 
 
-		public Song Song = new Song();  //The Song with all it's information
+		public OldSong Song = new OldSong();  //The Song with all it's information
 
 		///<summary>The Sermon will be a castradet Song</summary>
-		public Song Sermon = new Song();
+		public OldSong Sermon = new OldSong();
 
 		///<summary>The Background Image </summary>
 		public Image curImage;
@@ -192,7 +192,7 @@ namespace DreamBeam {
 			//Color.FromArgb(10,11,12);
 			Sermon.TextEffect[1] = "Filled Outline";
 			Sermon.FontSize[1] = 48;
-			Song = new Song(this);
+			Song = new OldSong(this);
 			TextGraphics = new TextGraphics(this, Song);
 
 			ShowSongPanel.Location = new Point(0, 0);

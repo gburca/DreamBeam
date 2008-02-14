@@ -23,12 +23,12 @@ namespace DreamBeam {
 	public class TextGraphics {
 
 		protected ShowBeam _ShowBeam = null;
-		protected Song _Song = null;
+		protected OldSong _Song = null;
 
 		public Image curImage;
 		public Image curImage4Thread;
 
-		public TextGraphics(ShowBeam impShowBeam, Song impSong) {
+		public TextGraphics(ShowBeam impShowBeam, OldSong impSong) {
 			_ShowBeam = impShowBeam;
 			_Song = impSong;
 		}
@@ -245,7 +245,7 @@ namespace DreamBeam {
 
 								pth.AddString(strLine,
 								  new FontFamily(_Song.FontFace[j]), Convert.ToInt32(_Song.FontStyle[j]), _Song.FontSize[j],
-									//											  new FontFamily(Song.FontFace[j]),0,Song.FontSize[j],
+									//											  new FontFamily(OldSong.FontFace[j]),0,OldSong.FontSize[j],
 									new Point(x, y + (int)(i * (LineStringSize.Height * 1))), sf);
 
 							}

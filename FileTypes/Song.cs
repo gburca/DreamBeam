@@ -1,6 +1,6 @@
 /*
 
-DreamBeam - a Church Song Presentation Program
+DreamBeam - a Church OldSong Presentation Program
 Copyright (C) 2004 Stefan Kaufmann
  
 This program is free software; you can redistribute it and/or
@@ -164,7 +164,7 @@ namespace DreamBeam {
 		private Thread render;
 		private Object renderLock = new Object();
 		[XmlIgnore]
-		public Song song;
+		public OldSong song;
 		[XmlIgnore]
 		public Config config;
 		[XmlIgnore]
@@ -192,7 +192,7 @@ namespace DreamBeam {
 		}
 
 		#region Constructors
-		public NewSong(Config conf, Song s) : this(conf) {
+		public NewSong(Config conf, OldSong s) : this(conf) {
 			this.Title = s.GetText(0);
 			this.FileName = s.SongName;
 			this.Author = s.GetText(2);
@@ -224,7 +224,7 @@ namespace DreamBeam {
 		/// This constructor creates a new song out of a plain text file. The file must contain a single
 		/// song in the following format:
 		/// ===
-		/// Number. Song title (key)
+		/// Number. OldSong title (key)
 		/// 
 		/// verse 1:
 		/// Line 1 of verse 1
@@ -844,7 +844,7 @@ namespace DreamBeam {
 				}
 
 				if (version <= 0.49F) {
-					Song oldS = new Song(file);
+					OldSong oldS = new OldSong(file);
 					if (oldS.strophe_count > 0) {
 						s = new NewSong(config, oldS);
 					} else {
@@ -878,7 +878,7 @@ namespace DreamBeam {
 
 			if (s != null) {
 				if (s.Theme == null) {
-					// Song did not have a custom theme. Give it the default theme.
+					// OldSong did not have a custom theme. Give it the default theme.
 					// If we don't clone the theme, background changes will be saved as part of the default theme.
 					s.Theme = (Theme)config.theme.Song.Clone();
 					// Hide the theme path so it doesn't look like the song has a custom theme.

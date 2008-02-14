@@ -93,7 +93,7 @@ namespace DreamBeam {
 		public string ConfigSet = "default";
 		public Bitmap memoryBitmap = null;
 		public ShowBeam ShowBeam = new ShowBeam();
-		private Song Song = new Song();
+		private OldSong Song = new OldSong();
 		public Options Options = null;
 		public Config Config;
 		public MainTab selectedTab = MainTab.ShowSongs;
@@ -3897,12 +3897,12 @@ namespace DreamBeam {
 
 			// TODO: Remove or update this to match the NewSong way of doing things.
 			return;
-			//					InputBoxResult result = InputBox.Show(Lang.say("Message.EnterSongName"), Lang.say("Message.RenameSongTitle",ShowBeam.Song.SongName),"", null);
+			//					InputBoxResult result = InputBox.Show(Lang.say("Message.EnterSongName"), Lang.say("Message.RenameSongTitle",ShowBeam.OldSong.SongName),"", null);
 			//					if (result.OK) {
 			//						if (result.Text.Length > 0){
 			//							if (!System.IO.File.Exists("Songs\\"+result.Text+".xml")) {
-			//								System.IO.File.Move("Songs\\"+ShowBeam.Song.SongName+".xml", "Songs\\"+result.Text+".xml");
-			//								ShowBeam.Song.SongName = result.Text;
+			//								System.IO.File.Move("Songs\\"+ShowBeam.OldSong.SongName+".xml", "Songs\\"+result.Text+".xml");
+			//								ShowBeam.OldSong.SongName = result.Text;
 			//								this.ListSongs();
 			//								this.StatusPanel.Text = Lang.say("Status.SongRenamed",result.Text);
 			//							}else{
