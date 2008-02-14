@@ -93,16 +93,11 @@ namespace DreamBeam {
 		private Hashtable renderedFrames = new Hashtable();
 		[XmlIgnore()]
 		private ArrayList renderedFramesOrder = new ArrayList(10);
-
-		/// <summary>Should we use the global or custom font/background/etc... format for this content</summary>
-		public bool CustomFormat = false;
 		public bool WordWrap = false;	// Bible text is word-wrapped. Songs are not.
 
 		public virtual string ThemePath {
-			get { 
+			get {
 				if (theme == null) {
-					return null;
-				} else if (CustomFormat == false) {
 					return null;
 				} else {
 					// If the theme comes from the default config, it won't have a path

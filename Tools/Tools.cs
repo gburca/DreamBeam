@@ -31,6 +31,10 @@ namespace DreamBeam {
 		MAP_FOLDDIGITS = 0x00000080 // all digits to ASCII 0-9
 	}
 
+	/// <summary>
+	/// These are the various directories used to store data for DreamBeam.
+	/// They are used in the Tools.GetDirectory and Tools.GetRelativePath functions.
+	/// </summary>
 	public enum DirType {
 		Songs,
 		Backgrounds,
@@ -104,6 +108,8 @@ namespace DreamBeam {
 			}
 			return (WindowSize);
 		}
+
+		#region Directories and Paths
 
 		/// <summary>
 		/// This is the directory that contains the song files, backgrounds, configs, etc...
@@ -229,6 +235,27 @@ namespace DreamBeam {
 			return null;
 		}
 
+		/// <summary>
+		/// Attempts to create a relative path name that is relative to the PossibleRoot.
+		/// 
+		/// Unless the file is close to the root, showing the full path of a filename in the UI
+		/// is often not very useful because the end of the filename is often obscured. Storing
+		/// the full path to a background or a theme (in a theme file, or a song file) is also
+		/// not desirable from a portability stand point.
+		/// </summary>
+		/// <param name="PossibleRoot">The path root to attempt to remove</param>
+		/// <param name="FileName">The full path to remove the root from</param>
+		/// <returns>The FileName with the PossibleRoot removed, or the original FileName
+		/// if it does not start with PossibleRoot</returns>
+		public static string GetRelativePath(DirType PossibleRoot, string FileName) {
+			string root = GetDirectory(PossibleRoot) + Path.DirectorySeparatorChar;
+			if (FileName.StartsWith(root)) {
+				return FileName.Substring(root.Length);
+			} else {
+				return FileName;
+			}
+		}
+
 		public static string CombinePaths(params string[] paths) {
 			string path = "";
 			foreach (string p in paths) {
@@ -236,6 +263,8 @@ namespace DreamBeam {
 			}
 			return path;
 		}
+
+		#endregion
 
 		public static string GetAppVersion() {
 			Version vrs = new Version(Application.ProductVersion);
@@ -257,6 +286,11 @@ namespace DreamBeam {
 			return false;
 		}
 
+		/// <summary>
+		/// Attempts to see if there are any characters left after trimming the string.
+		/// </summary>
+		/// <param name="str">The (possibly null) string to test</param>
+		/// <returns>True if the string is null, or empty after trimming.</returns>
 		public static bool StringIsNullOrEmptyTrim(string str) {
 			if (str == null || str.Trim().Length == 0) return true;
 			return false;

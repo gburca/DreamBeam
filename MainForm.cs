@@ -4154,10 +4154,12 @@ namespace DreamBeam {
 		}
 
 		void SaveSong() {
-			if (Tools.FileExists(this.songEditor.Song.FileName)) {
-				NewSong.SerializeTo(this.songEditor.Song, this.songEditor.Song.FileName);
+			NewSong s = this.songEditor.Song;
+
+			if (Tools.FileExists(s.FileName)) {
+				NewSong.SerializeTo(s, s.FileName);
 				this.ListSongs();
-				this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.songEditor.Song.FileName);
+				this.StatusPanel.Text = Lang.say("Status.SongSavedAs", s.FileName);
 			} else {
 				SaveSongAs();
 			}
@@ -4170,18 +4172,20 @@ namespace DreamBeam {
 			this.SaveFileDialog.InitialDirectory = Tools.GetDirectory(DirType.Songs);
 			this.SaveFileDialog.Title = "Save Song As";
 
-			if (!Tools.StringIsNullOrEmptyTrim(this.songEditor.Song.FileName)) {
-				this.SaveFileDialog.FileName = this.songEditor.Song.FileName;
-			} else if (!Tools.StringIsNullOrEmptyTrim(this.songEditor.Song.Title)) {
-				this.SaveFileDialog.FileName = this.songEditor.Song.Title + ".xml";
+			NewSong s = this.songEditor.Song;
+
+			if (!Tools.StringIsNullOrEmptyTrim(s.FileName)) {
+				this.SaveFileDialog.FileName = s.FileName;
+			} else if (!Tools.StringIsNullOrEmptyTrim(s.Title)) {
+				this.SaveFileDialog.FileName = s.Title + ".xml";
 			} else {
 				this.SaveFileDialog.FileName = "New Song.xml";
 			}
 
 			if (this.SaveFileDialog.ShowDialog() == DialogResult.OK) {
-				this.songEditor.Song.FileName = this.SaveFileDialog.FileName;
+				s.FileName = this.SaveFileDialog.FileName;
 				try {
-					NewSong.SerializeTo(this.songEditor.Song, this.SaveFileDialog.FileName);
+					NewSong.SerializeTo(s, this.SaveFileDialog.FileName);
 					this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.SaveFileDialog.FileName);
 				} catch (Exception ex) {
 					MessageBox.Show(Lang.say("Message.SongNotSaved") + "\nReason: " + ex.Message);

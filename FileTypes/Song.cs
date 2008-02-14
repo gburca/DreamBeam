@@ -713,6 +713,8 @@ namespace DreamBeam {
 		public NewSong(Config config) : this() {
 			if (config != null && config.theme != null) {
 				Theme = config.theme.Song;
+				// This is not a custom theme, so null the ThemePath so it doesn't get saved.
+				Theme.ThemeFile = null;
 			}
 		}
 
@@ -868,15 +870,6 @@ namespace DreamBeam {
 			}
 		}
 
-		public void Init(int strophe, Config config) {
-			this.config = config;
-			this.CurrentLyric = strophe;
-
-			// Version 0.71 allowed the user to save files with keys such as "D# / Eb".
-			this.KeyRangeLow = this.NormalizeKey(this.KeyRangeLow);
-			this.KeyRangeHigh = this.NormalizeKey(this.KeyRangeHigh);
-		}
-
 		public LyricsItem GetLyrics(int seq) {
 			if (seq >= this.Sequence.Count) return null;
 			LyricsSequenceItem current = (LyricsSequenceItem)this.Sequence[seq];
@@ -993,7 +986,7 @@ namespace DreamBeam {
 		/// Returns a normalized textual song key (converts "D# / Eb" to Eb)...
 		/// </summary>
 		/// <returns></returns>
-		public string NormalizeKey(string keyStr) {
+		public static string NormalizeKey(string keyStr) {
 			if (keyStr == null) { return ""; }
 
 			if (keyStr.Contains(@"/")) {
@@ -1267,10 +1260,6 @@ namespace DreamBeam {
 			Directory.CreateDirectory(Path.GetDirectoryName(file));
 			FileStream fs = null;
 
-			if (!instance.CustomFormat) {
-				instance.BGImagePath = null;
-			}
-
 			// When files are de-serialized, they retain the version they were
 			// originally serialized under. We need to update it here.
 			instance.Version = Tools.GetAppVersion();
@@ -1375,22 +1364,26 @@ namespace DreamBeam {
 					} else {
 						s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
 					}
+					if (s != null) {
+						// Version 0.71 allowed the user to save files with keys such as "D# / Eb".
+						s.KeyRangeLow = NormalizeKey(s.KeyRangeLow);
+						s.KeyRangeHigh = NormalizeKey(s.KeyRangeHigh);
+					}
 				} else { // version >= 0.72
 					s = (NewSong)NewSong.DeserializeFrom(typeof(NewSong), file);
 				}
 			}
 
 			if (s != null) {
-				// If we don't clone the theme, background changes will be saved as part of the default theme.
 				if (s.Theme == null) {
+					// Song did not have a custom theme. Give it the default theme.
+					// If we don't clone the theme, background changes will be saved as part of the default theme.
 					s.Theme = (Theme)config.theme.Song.Clone();
+					// Hide the theme path so it doesn't look like the song has a custom theme.
+					s.Theme.ThemeFile = null;
 				}
-				if (!s.CustomFormat) {
-					s.Init(strophe, config);
-				} else {
-					s.config = config;
-					s.CurrentLyric = strophe;
-				}
+				s.config = config;
+				s.CurrentLyric = strophe;
 				s.FileName = file;
 				return s;
 			} else {

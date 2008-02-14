@@ -71,7 +71,7 @@ namespace DreamBeam {
 				if (value == null | value.TextFormat == null) return;
 
 				this.themeType = value.GetType();
-				this.BgImagePath.Text = value.BGImagePath;
+				this.BgImagePath.Text = Tools.GetRelativePath(DirType.Backgrounds, value.BGImagePath);
 				for (int i = 0; i < Math.Min(value.TextFormat.Length, tabControl.TabPages.Count); i++) {
 					getFormatControl(i).Format = value.TextFormat[i];
 				}
@@ -84,7 +84,7 @@ namespace DreamBeam {
 				} else {
 					theme = new SongTheme();
 				}
-				theme.BGImagePath = BgImagePath.Text;
+				theme.BGImagePath = Tools.GetRelativePath(DirType.Backgrounds, BgImagePath.Text);
 				for (int i = 0; i < Math.Min(tabs, theme.TextFormat.Length); i++) {
 					theme.TextFormat[i] = getFormatControl(i).Format;
 				}
@@ -102,7 +102,7 @@ namespace DreamBeam {
 			ofd.Filter = ImageFileFilter;
 			ofd.InitialDirectory = Tools.GetDirectory(DirType.Backgrounds);
 			if (ofd.ShowDialog() != DialogResult.Cancel) {
-				this.BgImagePath.Text = ofd.FileName;
+				this.BgImagePath.Text = Tools.GetRelativePath(DirType.Backgrounds, ofd.FileName);
 			}
 		}
 
@@ -111,7 +111,9 @@ namespace DreamBeam {
 		}
 
 		private void openBtn_Click(object sender, EventArgs e) {
-			this.Theme = (Theme)this.themeType.GetMethod("OpenFile").Invoke(null, null);
+			// If the user cancels the "OpenFile", or the file is bad, we'll get a null theme
+			Theme t = (Theme)this.themeType.GetMethod("OpenFile").Invoke(null, null);
+			if (t != null) this.Theme = t;
 		}
 
 

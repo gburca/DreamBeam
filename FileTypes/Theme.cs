@@ -44,9 +44,6 @@ namespace DreamBeam {
 
 			if (dialog.ShowDialog() == DialogResult.OK) {
 				Theme t = DeserializeFrom(type, dialog.FileName) as Theme;
-				//if (t != null) {
-				//    t.ThemeFile = dialog.FileName;
-				//}
 				return t;
 			} else {
 				return null;
@@ -69,7 +66,7 @@ namespace DreamBeam {
 				string fileName = dialog.FileName;
 				try {
 					SerializeTo(this, fileName);
-					this.ThemeFile = fileName;
+					this.ThemeFile = Tools.GetRelativePath(DirType.Themes, fileName);
 					//this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.SaveFileDialog.FileName);
 				} catch (Exception ex) {
 					MessageBox.Show("Theme not saved: " + ex.Message);
@@ -116,7 +113,7 @@ namespace DreamBeam {
 					using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
 						Theme t = (Theme)xs.Deserialize(fs);
 						if (t != null) {
-							t.ThemeFile = file;
+							t.ThemeFile = Tools.GetRelativePath(DirType.Themes, file);
 						}
 						return t;
 					}
