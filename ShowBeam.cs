@@ -113,8 +113,6 @@ namespace DreamBeam {
 		public int[] tmpPosX = new int[3];
 		public int[] tmpPosY = new int[3];
 
-		public TextGraphics TextGraphics = null;
-
 		public ImageList MediaList = new ImageList();
 		bool FlashPlaying = false;
 		bool VideoPlaying = false;
@@ -193,7 +191,6 @@ namespace DreamBeam {
 			Sermon.TextEffect[1] = "Filled Outline";
 			Sermon.FontSize[1] = 48;
 			Song = new OldSong(this);
-			TextGraphics = new TextGraphics(this, Song);
 
 			ShowSongPanel.Location = new Point(0, 0);
 			ShowSongPanel.Size = this.Size;

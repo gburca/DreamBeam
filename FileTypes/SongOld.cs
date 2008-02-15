@@ -395,6 +395,18 @@ namespace DreamBeam {
 			return (Tools.Count(Text[1], strSeperator));
 		}
 
+		public static int GetLongestLine(string Text) {
+			int length = 0;
+			Text = Text + "\n";
+			do {
+				string tmp = Text.Substring(0, Text.IndexOf("\n"));
+				Text = Text.Substring(Text.IndexOf("\n") + 1, Text.Length - Text.IndexOf("\n") - 1);
+				if (tmp.Length > length)
+					length = tmp.Length;
+			} while (Text.IndexOf("\n") != -1);
+			return length;
+		}
+
 		public string GetStrophe(int StropheNumber) {
 
 			if (StropheNumber == -1)
@@ -431,7 +443,7 @@ namespace DreamBeam {
 					}
 
 					//check if this is the widest strophe
-					tmp = TextGraphics.GetLongestLine(temp.Substring(0, temp.IndexOf(strSeperator)));
+					tmp = GetLongestLine(temp.Substring(0, temp.IndexOf(strSeperator)));
 					if (tmp > intSWidth) {
 						intSWidth = tmp;
 						WidestStrophe = temp.Substring(0, temp.IndexOf(strSeperator));
@@ -456,7 +468,7 @@ namespace DreamBeam {
 					}
 
 					//check if this is the widest strophe
-					tmp = TextGraphics.GetLongestLine(temp);
+					tmp = GetLongestLine(temp);
 					if (tmp > intSWidth) {
 						intSWidth = tmp;
 						WidestStrophe = temp;

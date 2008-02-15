@@ -248,9 +248,6 @@
     <Compile Include="Graphics\ScreenCapture.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Graphics\TextGraphics.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="GuiTools\BibleRTF.cs">
       <SubType>Component</SubType>
     </Compile>

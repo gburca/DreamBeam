@@ -58,6 +58,171 @@ using Controls.Development;
 namespace DreamBeam {
 	public partial class MainForm : System.Windows.Forms.Form {
 
+
+		#region Toolbars and other System.Windows.Forms Declarations
+
+		private System.Windows.Forms.StatusBar statusBar;
+		public System.Windows.Forms.StatusBarPanel StatusPanel;
+		private System.Windows.Forms.Timer TextTypedTimer;
+
+		#region Menu Bar
+		private TD.SandBar.MenuBar ToolBars_MenuBar;
+
+		private TD.SandBar.MenuBarItem ToolBars_MenuBar_File;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_File_Import;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Import_Song;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_File_Exit;
+
+		public TD.SandBar.MenuBarItem ToolBars_MenuBar_Song;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Song_New;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Song_Save;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Song_SaveAs;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Song_Rename;
+
+		public TD.SandBar.MenuBarItem ToolBars_MenuBar_MediaList;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_MediaList_New;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Media_Save;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Media_SaveAs;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Media_Rename;
+
+		private TD.SandBar.MenuBarItem ToolBars_MenuBar_Edit;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Edit_Options;
+
+		private TD.SandBar.MenuBarItem ToolBars_MenuBar_View;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_ShowSongs;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_EditSongs;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_Presentation;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_TextTool;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_BibleText;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_PreviewTab;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_LiveTab;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_BackgroundsTab;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_MediaListTab;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_SongsTab;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_PlaylistTab;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_MediaTab;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_BibleToolsTab;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_SongToolsTab;
+
+		private TD.SandBar.MenuBarItem ToolBars_MenuBar_Help;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Help_Intro;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Help_About;
+		#endregion
+
+		#region Main Toolbar
+		public TD.SandBar.ToolBar ToolBars_MainToolbar;
+		public TD.SandBar.ButtonItem ToolBars_MainToolbar_ShowBeamBox;
+		public TD.SandBar.ButtonItem ToolBars_MainToolbar_SizePosition;
+		public TD.SandBar.ButtonItem ToolBars_MainToolbar_SaveSong;
+		public TD.SandBar.ButtonItem ToolBars_MainToolbar_SaveMediaList;
+		public TD.SandBar.ButtonItem ToolBars_MainToolbar_HideBG;
+		public TD.SandBar.ButtonItem ToolBars_MainToolbar_HideText;
+		#endregion
+
+		#region Component Bar
+		public TD.SandBar.ToolBar ToolBars_ComponentBar;
+		public TD.SandBar.ButtonItem ShowSongs_Button;
+		public TD.SandBar.ButtonItem EditSongs_Button;
+		public TD.SandBar.ButtonItem Presentation_Button;
+		public TD.SandBar.ButtonItem Sermon_Button;
+		public TD.SandBar.ButtonItem BibleText_Button;
+		#endregion
+
+		#region Docking panel controls
+
+		#region Docking panels
+		private TD.SandBar.SandBarManager ToolBars_sandBarManager1;
+		private TD.SandBar.ToolBarContainer ToolBars_leftSandBarDock;
+		private TD.SandBar.ToolBarContainer ToolBars_bottomSandBarDock;
+		private TD.SandBar.ToolBarContainer ToolBars_topSandBarDock;
+
+		public TD.SandDock.SandDockManager sandDockManager1;
+		private TD.SandDock.DockContainer leftSandDock;
+		private TD.SandDock.DockContainer rightSandDock;
+		private TD.SandDock.DockContainer bottomSandDock;
+		private TD.SandDock.DockContainer topSandDock;
+
+		public TD.SandDock.DockControl DockControl_Songs;
+		public TD.SandDock.DockControl DockControl_Backgrounds;
+		public TD.SandDock.DockControl DockControl_PlayList;
+		public TD.SandDock.DockControl DockControl_PreviewScreen;
+		public TD.SandDock.DockControl DockControl_LiveScreen;
+		public TD.SandDock.DockControl DockControl_MediaLists;
+		public TD.SandDock.DockControl DockControl_Media;
+		#endregion
+
+		#region SongList
+		private System.Windows.Forms.TextBox RightDocks_SongListSearch;
+		private System.Windows.Forms.Button btnRightDocks_SongList2PlayList;
+		private System.Windows.Forms.Button btnRightDocks_SongListDelete;
+		#endregion
+
+		#region PlayList
+		private System.Windows.Forms.ListBox RightDocks_PlayList;
+		private System.Windows.Forms.Button RightDocks_PlayList_Load_Button;
+		private System.Windows.Forms.Button RightDocks_PlayList_Remove_Button;
+		private System.Windows.Forms.Button RightDocks_PlayList_Up_Button;
+		private System.Windows.Forms.Button RightDocks_PlayList_Down_Button;
+		#endregion
+
+		#region Media List
+		private System.Windows.Forms.Panel RightDocks_SongList_ButtonPanel;
+		private System.Windows.Forms.Panel RightDocks_Songlist_SearchPanel;
+		private System.Windows.Forms.Panel RightDocks_BottomPanel2_TopPanel;
+
+		public System.Windows.Forms.Panel RightDocks_BottomPanel_Media_Bottom;
+		private System.Windows.Forms.Button RightDocks_BottomPanel_Media_ShowNext;
+		private System.Windows.Forms.Button RightDocks_BottomPanel_Media_Down;
+		private System.Windows.Forms.Button RightDocks_BottomPanel_Media_Up;
+		private System.Windows.Forms.Button RightDocks_BottomPanel_Media_Remove;
+
+		private System.Windows.Forms.Timer Presentation_AutoPlayTimer;
+		private System.Windows.Forms.Button RightDocks_BottomPanel_Media_FadePanelButton;
+		public Controls.Development.ImageListBox RightDocks_BottomPanel_MediaList;
+		private System.Windows.Forms.Panel RightDocks_TopPanel_PlayList_Button_Panel;
+		private System.Windows.Forms.Panel RightDocks_BottomPanel_Media_Top;
+		private System.Windows.Forms.Panel RightDocks_BottomPanel_MediaLists_BottomPanel;
+		private System.Windows.Forms.Panel RightDocks_BottomPanel_MediaListsTopPanel;
+		private System.Windows.Forms.GroupBox RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox;
+		private System.Windows.Forms.Label RightDocks_BottomPanel_MediaList_BottomPanel_Label;
+		private System.Windows.Forms.NumericUpDown RightDocks_BottomPanel_MediaLists_Numeric;
+		private System.Windows.Forms.Label RightDocks_BottomPanel_MediaLists_BottomPanel_Label2;
+		private System.Windows.Forms.Button RightDocks_BottomPanel_Media_AutoPlay;
+		private System.Windows.Forms.CheckBox RightDocks_BottomPanel_MediaLists_LoopCheckBox;
+		private System.Windows.Forms.Panel RightDocks_BottomPanel_MediaListsTop_Control_Panel;
+		private System.Windows.Forms.ListBox RightDocks_MediaLists;
+		private System.Windows.Forms.Button RightDocks_MediaLists_LoadButton;
+		private System.Windows.Forms.Button RightDocks_MediaLists_DeleteButton;
+		#endregion
+
+		#region ImageBox (Backgrounds)
+		public Controls.Development.ImageListBox RightDocks_ImageListBox;
+		public System.Windows.Forms.ImageList RightDocks_imageList;
+
+		// Context Menu
+		private System.Windows.Forms.ContextMenu ImageContext;
+		private System.Windows.Forms.MenuItem ImageContextItemManage;
+		private System.Windows.Forms.MenuItem ImageContextItemReload;
+		public System.Windows.Forms.ComboBox RightDocks_FolderDropdown;
+		#endregion
+
+		#endregion // Docking panel controls
+
+		#region Presentation (video preview)
+		private System.Windows.Forms.ImageList imageList_Folders;
+		private System.Windows.Forms.ImageList Presentation_Fade_ImageList;
+		public System.Windows.Forms.ImageList Media_ImageList;
+		public System.Windows.Forms.ImageList Media_Logos;
+		private System.Windows.Forms.Timer PlayProgress;
+		private System.Windows.Forms.ImageList PlayButtons_ImageList;
+		private System.Windows.Forms.Timer VideoLoadTimer;
+		#endregion
+
+		private Control ErrorProvider_LastControl = null;
+
+		#endregion
+
+
 		#region Designer variables and objects
 
 		private Salamander.Windows.Forms.CollapsiblePanelBar SongShow_CollapsPanel;
@@ -198,8 +363,6 @@ namespace DreamBeam {
 			this.ImageContextItemManage = new System.Windows.Forms.MenuItem();
 			this.ImageContextItemReload = new System.Windows.Forms.MenuItem();
 			this.RightDocks_imageList = new System.Windows.Forms.ImageList(this.components);
-			this.SongEdit_OutlineColorDialog = new System.Windows.Forms.ColorDialog();
-			this.SongEdit_TextColorDialog = new System.Windows.Forms.ColorDialog();
 			this.RightDocks_Songlist_SearchPanel = new System.Windows.Forms.Panel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.RightDocks_SongListSearch = new System.Windows.Forms.TextBox();
@@ -544,10 +707,6 @@ namespace DreamBeam {
 			this.RightDocks_imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
 			this.RightDocks_imageList.ImageSize = new System.Drawing.Size(80, 60);
 			this.RightDocks_imageList.TransparentColor = System.Drawing.Color.Pink;
-			// 
-			// SongEdit_TextColorDialog
-			// 
-			this.SongEdit_TextColorDialog.Color = System.Drawing.Color.White;
 			// 
 			// RightDocks_Songlist_SearchPanel
 			// 
