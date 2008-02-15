@@ -132,6 +132,7 @@ namespace DreamBeam {
 
 		#region Toolbars and others Declarations
 
+		#region Docking panels
 		private TD.SandBar.SandBarManager ToolBars_sandBarManager1;
 		private TD.SandBar.ToolBarContainer ToolBars_leftSandBarDock;
 		private TD.SandBar.ToolBarContainer ToolBars_bottomSandBarDock;
@@ -148,12 +149,16 @@ namespace DreamBeam {
 		public TD.SandDock.DockControl DockControl_PlayList;
 		public TD.SandDock.DockControl DockControl_PreviewScreen;
 		public TD.SandDock.DockControl DockControl_LiveScreen;
-
+		public TD.SandDock.DockControl DockControl_MediaLists;
+		public TD.SandDock.DockControl DockControl_Media;
+		#endregion
 
 		#region Menu Bar
 		private TD.SandBar.MenuBar ToolBars_MenuBar;
 
 		private TD.SandBar.MenuBarItem ToolBars_MenuBar_File;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_File_Import;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Import_Song;
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_File_Exit;
 
 		public TD.SandBar.MenuBarItem ToolBars_MenuBar_Song;
@@ -184,7 +189,8 @@ namespace DreamBeam {
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_SongsTab;
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_PlaylistTab;
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_MediaTab;
-
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_BibleToolsTab;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_SongToolsTab;
 
 		private TD.SandBar.MenuBarItem ToolBars_MenuBar_Help;
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Help_Intro;
@@ -192,7 +198,6 @@ namespace DreamBeam {
 		#endregion
 
 		#region Main Toolbar
-
 		public TD.SandBar.ToolBar ToolBars_MainToolbar;
 		public TD.SandBar.ButtonItem ToolBars_MainToolbar_ShowBeamBox;
 		public TD.SandBar.ButtonItem ToolBars_MainToolbar_SizePosition;
@@ -200,16 +205,18 @@ namespace DreamBeam {
 		public TD.SandBar.ButtonItem ToolBars_MainToolbar_SaveMediaList;
 		public TD.SandBar.ButtonItem ToolBars_MainToolbar_HideBG;
 		public TD.SandBar.ButtonItem ToolBars_MainToolbar_HideText;
-
 		#endregion
 
 		#region Component Bar
 		public TD.SandBar.ToolBar ToolBars_ComponentBar;
 		public TD.SandBar.ButtonItem ShowSongs_Button;
 		public TD.SandBar.ButtonItem EditSongs_Button;
+		public TD.SandBar.ButtonItem Presentation_Button;
+		public TD.SandBar.ButtonItem Sermon_Button;
+		public TD.SandBar.ButtonItem BibleText_Button;
 		#endregion
 
-		#region Right Docks
+		#region Docking panel controls
 
 		#region SongList
 		private System.Windows.Forms.TextBox RightDocks_SongListSearch;
@@ -225,12 +232,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.Button RightDocks_PlayList_Down_Button;
 		#endregion
 
-		#region SearchList
-
-		#endregion
-
 		#region Media List
-
 		private System.Windows.Forms.Panel RightDocks_SongList_ButtonPanel;
 		private System.Windows.Forms.Panel RightDocks_Songlist_SearchPanel;
 		private System.Windows.Forms.Panel RightDocks_BottomPanel2_TopPanel;
@@ -246,7 +248,6 @@ namespace DreamBeam {
 		public Controls.Development.ImageListBox RightDocks_BottomPanel_MediaList;
 		private System.Windows.Forms.Panel RightDocks_TopPanel_PlayList_Button_Panel;
 		private System.Windows.Forms.Panel RightDocks_BottomPanel_Media_Top;
-		public TD.SandDock.DockControl RightDocks_BottomPanel_MediaLists;
 		private System.Windows.Forms.Panel RightDocks_BottomPanel_MediaLists_BottomPanel;
 		private System.Windows.Forms.Panel RightDocks_BottomPanel_MediaListsTopPanel;
 		private System.Windows.Forms.GroupBox RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox;
@@ -261,7 +262,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.Button RightDocks_MediaLists_DeleteButton;
 		#endregion
 
-		#region ImageBox
+		#region ImageBox (Backgrounds)
 		public Controls.Development.ImageListBox RightDocks_ImageListBox;
 		public System.Windows.Forms.ImageList RightDocks_imageList;
 
@@ -271,7 +272,8 @@ namespace DreamBeam {
 		private System.Windows.Forms.MenuItem ImageContextItemReload;
 		public System.Windows.Forms.ComboBox RightDocks_FolderDropdown;
 		#endregion
-		#endregion
+
+		#endregion // Docking panel controls
 
 		private System.Windows.Forms.StatusBar statusBar;
 		public System.Windows.Forms.StatusBarPanel StatusPanel;
@@ -281,7 +283,6 @@ namespace DreamBeam {
 		#region Edit Songs_Declarations
 
 		// The Dialogs
-		private System.Windows.Forms.FontDialog SongEdit_fontDialog;
 		private System.Windows.Forms.ColorDialog SongEdit_OutlineColorDialog;
 		private System.Windows.Forms.ColorDialog SongEdit_TextColorDialog;
 		private System.Windows.Forms.Timer TextTypedTimer;
@@ -290,13 +291,11 @@ namespace DreamBeam {
 
 		#endregion
 
-		public TD.SandDock.DockControl DockControl_Media;
 
 		#region Presentation
 
 		private System.Windows.Forms.ImageList imageList_Folders;
 		private System.Windows.Forms.ImageList Presentation_Fade_ImageList;
-		public TD.SandBar.ButtonItem Presentation_Button;
 		public System.Windows.Forms.ImageList Media_ImageList;
 		public System.Windows.Forms.ImageList Media_Logos;
 		private System.Windows.Forms.Timer PlayProgress;
@@ -308,7 +307,6 @@ namespace DreamBeam {
 
 		string[] BibleBooks = new string[2];
 		public AxACTIVEDIATHEKELib.AxActiveDiatheke Diatheke;
-		public TD.SandBar.ButtonItem Sermon_Button;
 		private string Sermon_BibleLang = "en";
 		private bool Sermon_ShowBibleTranslation = false;
 		private bool SwordProject_Found = false;
@@ -1149,7 +1147,7 @@ namespace DreamBeam {
 		}
 
 		private void ToolBars_MenuBar_Open_MediaListTab_Activate(object sender, System.EventArgs e) {
-			this.RightDocks_BottomPanel_MediaLists.Open();
+			this.DockControl_MediaLists.Open();
 		}
 
 		private void ToolBars_MenuBar_Open_BibleToolsTab_Activate(object sender, System.EventArgs e) {

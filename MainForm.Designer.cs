@@ -72,7 +72,6 @@ namespace DreamBeam {
 		private System.Windows.Forms.Panel panel3;
 
 		public System.Windows.Forms.ProgressBar RenderStatus;
-		public TD.SandBar.ButtonItem BibleText_Button;
 		private System.Windows.Forms.ListBox BibleText_Translations;
 		private System.Windows.Forms.ListBox BibleText_Bookmarks;
 		private System.Windows.Forms.PictureBox RightDocks_LiveScreen_PictureBox;
@@ -87,11 +86,9 @@ namespace DreamBeam {
 		private TD.SandDock.DockControl DockControl_BibleTools;
 		private Salamander.Windows.Forms.CollapsiblePanel BibleBookmarks_CollapsiblePanel;
 		private Salamander.Windows.Forms.CollapsiblePanel BibleTranslations_CollapsiblePanel;
-		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_BibleToolsTab;
 		private Salamander.Windows.Forms.CollapsiblePanelBar BibleTools_CollapsiblePanelBar;
 		private System.Windows.Forms.ToolTip MainForm_ToolTip;
 		private TD.SandDock.DockControl Dock_SongTools;
-		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_SongToolsTab;
 		private System.Windows.Forms.ErrorProvider Main_ErrorProvider;
 		private System.Windows.Forms.Button RightDocks_Backgrounds_UseDefault;
 		private System.Windows.Forms.Panel panel6;
@@ -164,8 +161,6 @@ namespace DreamBeam {
 		private System.Windows.Forms.ComboBox BibleText_RegEx_ComboBox;
 		private System.Windows.Forms.Label label1;
 		public System.Windows.Forms.TabControl tabControl1;
-		private TD.SandBar.MenuButtonItem menuButtonItem1;
-		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Import_Song;
 		private System.Windows.Forms.OpenFileDialog OpenFileDialog;
 		private ControlLib.dbTreeViewCtrl SongList_Tree;
 		private System.Data.DataSet GlobalDataSet;
@@ -203,7 +198,6 @@ namespace DreamBeam {
 			this.ImageContextItemManage = new System.Windows.Forms.MenuItem();
 			this.ImageContextItemReload = new System.Windows.Forms.MenuItem();
 			this.RightDocks_imageList = new System.Windows.Forms.ImageList(this.components);
-			this.SongEdit_fontDialog = new System.Windows.Forms.FontDialog();
 			this.SongEdit_OutlineColorDialog = new System.Windows.Forms.ColorDialog();
 			this.SongEdit_TextColorDialog = new System.Windows.Forms.ColorDialog();
 			this.RightDocks_Songlist_SearchPanel = new System.Windows.Forms.Panel();
@@ -238,7 +232,7 @@ namespace DreamBeam {
 			this.ToolBars_MainToolbar_SaveSong = new TD.SandBar.ButtonItem();
 			this.ToolBars_MenuBar = new TD.SandBar.MenuBar();
 			this.ToolBars_MenuBar_File = new TD.SandBar.MenuBarItem();
-			this.menuButtonItem1 = new TD.SandBar.MenuButtonItem();
+			this.ToolBars_MenuBar_File_Import = new TD.SandBar.MenuButtonItem();
 			this.ToolBars_MenuBar_Import_Song = new TD.SandBar.MenuButtonItem();
 			this.ToolBars_MenuBar_File_Exit = new TD.SandBar.MenuButtonItem();
 			this.ToolBars_MenuBar_Edit = new TD.SandBar.MenuBarItem();
@@ -306,7 +300,7 @@ namespace DreamBeam {
 			this.RightDocks_BottomPanel_Media_ShowNext = new System.Windows.Forms.Button();
 			this.RightDocks_BottomPanel_Media_Top = new System.Windows.Forms.Panel();
 			this.RightDocks_BottomPanel_Media_FadePanelButton = new System.Windows.Forms.Button();
-			this.RightDocks_BottomPanel_MediaLists = new TD.SandDock.DockControl();
+			this.DockControl_MediaLists = new TD.SandDock.DockControl();
 			this.RightDocks_BottomPanel_MediaListsTopPanel = new System.Windows.Forms.Panel();
 			this.RightDocks_MediaLists = new System.Windows.Forms.ListBox();
 			this.RightDocks_BottomPanel_MediaListsTop_Control_Panel = new System.Windows.Forms.Panel();
@@ -448,7 +442,7 @@ namespace DreamBeam {
 			this.DockControl_Media.SuspendLayout();
 			this.RightDocks_BottomPanel_Media_Bottom.SuspendLayout();
 			this.RightDocks_BottomPanel_Media_Top.SuspendLayout();
-			this.RightDocks_BottomPanel_MediaLists.SuspendLayout();
+			this.DockControl_MediaLists.SuspendLayout();
 			this.RightDocks_BottomPanel_MediaListsTopPanel.SuspendLayout();
 			this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.SuspendLayout();
 			this.RightDocks_BottomPanel_MediaLists_BottomPanel.SuspendLayout();
@@ -550,12 +544,6 @@ namespace DreamBeam {
 			this.RightDocks_imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
 			this.RightDocks_imageList.ImageSize = new System.Drawing.Size(80, 60);
 			this.RightDocks_imageList.TransparentColor = System.Drawing.Color.Pink;
-			// 
-			// SongEdit_fontDialog
-			// 
-			this.SongEdit_fontDialog.AllowVectorFonts = false;
-			this.SongEdit_fontDialog.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.SongEdit_fontDialog.ShowEffects = false;
 			// 
 			// SongEdit_TextColorDialog
 			// 
@@ -906,19 +894,19 @@ namespace DreamBeam {
 			// 
 			this.ToolBars_MenuBar_File.Icon = null;
 			this.ToolBars_MenuBar_File.MenuItems.AddRange(new TD.SandBar.MenuButtonItem[] {
-            this.menuButtonItem1,
+            this.ToolBars_MenuBar_File_Import,
             this.ToolBars_MenuBar_File_Exit});
 			this.ToolBars_MenuBar_File.Tag = null;
 			this.ToolBars_MenuBar_File.Text = "&File";
 			// 
-			// menuButtonItem1
+			// ToolBars_MenuBar_File_Import
 			// 
-			this.menuButtonItem1.Icon = null;
-			this.menuButtonItem1.MenuItems.AddRange(new TD.SandBar.MenuButtonItem[] {
+			this.ToolBars_MenuBar_File_Import.Icon = null;
+			this.ToolBars_MenuBar_File_Import.MenuItems.AddRange(new TD.SandBar.MenuButtonItem[] {
             this.ToolBars_MenuBar_Import_Song});
-			this.menuButtonItem1.Shortcut = System.Windows.Forms.Shortcut.None;
-			this.menuButtonItem1.Tag = null;
-			this.menuButtonItem1.Text = "Import";
+			this.ToolBars_MenuBar_File_Import.Shortcut = System.Windows.Forms.Shortcut.None;
+			this.ToolBars_MenuBar_File_Import.Tag = null;
+			this.ToolBars_MenuBar_File_Import.Text = "Import";
 			// 
 			// ToolBars_MenuBar_Import_Song
 			// 
@@ -1467,7 +1455,7 @@ namespace DreamBeam {
 			// rightSandDock
 			// 
 			this.rightSandDock.Controls.Add(this.DockControl_Media);
-			this.rightSandDock.Controls.Add(this.RightDocks_BottomPanel_MediaLists);
+			this.rightSandDock.Controls.Add(this.DockControl_MediaLists);
 			this.rightSandDock.Controls.Add(this.DockControl_Backgrounds);
 			this.rightSandDock.Controls.Add(this.DockControl_Songs);
 			this.rightSandDock.Controls.Add(this.DockControl_PlayList);
@@ -1493,7 +1481,7 @@ namespace DreamBeam {
                                     ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(182, 412, new TD.SandDock.DockControl[] {
                                                 this.DockControl_Backgrounds,
                                                 this.DockControl_Media,
-                                                this.RightDocks_BottomPanel_MediaLists}, this.DockControl_Backgrounds)))})))})))});
+                                                this.DockControl_MediaLists}, this.DockControl_Backgrounds)))})))})))});
 			this.rightSandDock.Location = new System.Drawing.Point(586, 50);
 			this.rightSandDock.Manager = this.sandDockManager1;
 			this.rightSandDock.MaximumSize = 600;
@@ -1620,17 +1608,17 @@ namespace DreamBeam {
 			this.RightDocks_BottomPanel_Media_FadePanelButton.Text = "Add Media...";
 			this.RightDocks_BottomPanel_Media_FadePanelButton.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_FadePanelButton_Click);
 			// 
-			// RightDocks_BottomPanel_MediaLists
+			// DockControl_MediaLists
 			// 
-			this.RightDocks_BottomPanel_MediaLists.BackColor = System.Drawing.SystemColors.Control;
-			this.RightDocks_BottomPanel_MediaLists.Controls.Add(this.RightDocks_BottomPanel_MediaListsTopPanel);
-			this.RightDocks_BottomPanel_MediaLists.Controls.Add(this.RightDocks_BottomPanel_MediaLists_BottomPanel);
-			this.RightDocks_BottomPanel_MediaLists.Guid = new System.Guid("3429dfd5-f5ba-4785-ac79-49140d88b66b");
-			this.RightDocks_BottomPanel_MediaLists.Location = new System.Drawing.Point(208, 343);
-			this.RightDocks_BottomPanel_MediaLists.Name = "RightDocks_BottomPanel_MediaLists";
-			this.RightDocks_BottomPanel_MediaLists.Size = new System.Drawing.Size(182, 365);
-			this.RightDocks_BottomPanel_MediaLists.TabIndex = 5;
-			this.RightDocks_BottomPanel_MediaLists.Text = "MediaLists";
+			this.DockControl_MediaLists.BackColor = System.Drawing.SystemColors.Control;
+			this.DockControl_MediaLists.Controls.Add(this.RightDocks_BottomPanel_MediaListsTopPanel);
+			this.DockControl_MediaLists.Controls.Add(this.RightDocks_BottomPanel_MediaLists_BottomPanel);
+			this.DockControl_MediaLists.Guid = new System.Guid("3429dfd5-f5ba-4785-ac79-49140d88b66b");
+			this.DockControl_MediaLists.Location = new System.Drawing.Point(208, 343);
+			this.DockControl_MediaLists.Name = "DockControl_MediaLists";
+			this.DockControl_MediaLists.Size = new System.Drawing.Size(182, 365);
+			this.DockControl_MediaLists.TabIndex = 5;
+			this.DockControl_MediaLists.Text = "MediaLists";
 			// 
 			// RightDocks_BottomPanel_MediaListsTopPanel
 			// 
@@ -2912,7 +2900,7 @@ namespace DreamBeam {
 			this.DockControl_Media.ResumeLayout(false);
 			this.RightDocks_BottomPanel_Media_Bottom.ResumeLayout(false);
 			this.RightDocks_BottomPanel_Media_Top.ResumeLayout(false);
-			this.RightDocks_BottomPanel_MediaLists.ResumeLayout(false);
+			this.DockControl_MediaLists.ResumeLayout(false);
 			this.RightDocks_BottomPanel_MediaListsTopPanel.ResumeLayout(false);
 			this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.ResumeLayout(false);
 			this.RightDocks_BottomPanel_MediaLists_BottomPanel.ResumeLayout(false);
