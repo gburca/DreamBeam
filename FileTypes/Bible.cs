@@ -684,7 +684,7 @@ namespace DreamBeam.FileTypes {
 				graphics.SmoothingMode = SmoothingMode.HighQuality;
 				graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-				this.RenderBGImage(config.BibleBGImagePath, graphics, Width, Height);
+				this.RenderBGImage(config.theme.Bible.BGImagePath, graphics, Width, Height);
 
 				if (HideText) {
 					return bmp;

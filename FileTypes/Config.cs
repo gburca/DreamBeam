@@ -84,35 +84,6 @@ namespace DreamBeam {
 
 		[XmlElement("Theme")]
 		public ComboTheme theme;
-		#region Theme accessors
-		[XmlIgnore]
-		public string BibleBGImagePath {
-			get { return theme.Bible == null ? null : theme.Bible.BGImagePath; }
-			set { if (theme.Bible != null) theme.Bible.BGImagePath = value; }
-		}
-		[XmlIgnore]
-		public string SongBGImagePath {
-			get { return theme.Song == null ? null : theme.Song.BGImagePath; }
-			set { if (theme.Song != null) theme.Song.BGImagePath = value; }
-		}
-		[XmlIgnore]
-		public string TextBGImagePath {
-			get { return theme.Sermon == null ? null : theme.Sermon.BGImagePath; }
-			set { if (theme.Sermon != null) theme.Sermon.BGImagePath = value; }
-		}
-		[XmlIgnore]
-		public BeamTextFormat[] BibleTextFormat {
-			get { return theme.Bible == null ? null : theme.Bible.TextFormat; }
-		}
-		[XmlIgnore]
-		public BeamTextFormat[] SongTextFormat {
-			get { return theme.Song == null ? null : theme.Song.TextFormat; }
-		}
-		[XmlIgnore]
-		public BeamTextFormat[] SermonTextFormat {
-			get { return theme.Sermon == null ? null : theme.Sermon.TextFormat; }
-		}
-		#endregion
 
 		public OperatingMode AppOperatingMode;
 

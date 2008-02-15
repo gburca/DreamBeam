@@ -1,6 +1,6 @@
 /*
 DreamBeam - a Church Song Presentation Program
-Copyright (C) 2006 Gabriel Burca
+Copyright (C) 2008 Gabriel Burca
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
