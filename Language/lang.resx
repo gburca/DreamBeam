@@ -163,7 +163,7 @@
     <value>OK</value>
   </data>
   <data name="Help.Intro.5" xml:space="preserve">
-    <value>The ‘PlayList’ is used to put  in all Songs needed for the Worship Session. No need for hectically Song searches. Use the ‘UP’and ‘DOWN’ Buttons to order your PlayList. The ‘REMOVE’ Button removes the Song from the PlayList, without deleting it from the SongList.</value>
+    <value>The ‘PlayList’ is used to collect together all the Songs needed for the worship session so that they are readily available. Use the ‘UP’and ‘DOWN’ Buttons to order your PlayList. The ‘REMOVE’ Button removes the Song from the PlayList, without deleting it from the SongList.</value>
   </data>
   <data name="Left.EditSongs" xml:space="preserve">
     <value>Edit Songs</value>

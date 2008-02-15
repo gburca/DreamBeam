@@ -12,7 +12,7 @@
 ; General
 
         ; Name and file
-        !define VERSION "0.72"
+        !define VERSION "0.73"
         !define PRODUCT "DreamBeam"
 	Name "${PRODUCT} ${VERSION}"
 	
@@ -157,6 +157,11 @@ SectionGroup /e "Sample Files" SSampleFiles
 		SetOutPath "$USERFILES\MediaLists"
 		File /r /x .svn SampleFiles\MediaLists\*.*
 	SectionEnd
+
+	Section /o "Themes" SThemes
+		SetOutPath "$USERFILES\Themes"
+		File /nonfatal /r /x .svn SampleFiles\Themes\*.*
+	SectionEnd
 SectionGroupEnd
 
 ;--------------------------------
@@ -245,6 +250,12 @@ SectionGroup /e "un.Uninstall Application Files" SUnAppFiles
 		RMDir "$USERFILES" ; Remove user directory (only if empty)
 	SectionEnd
 
+	Section /o "un.Themes" SUnThemes
+		Call un.Read_USERFILES
+		RMDir /r "$USERFILES\Themes"
+		RMDir "$USERFILES" ; Remove user directory (only if empty)
+	SectionEnd
+
 SectionGroupEnd
 
 
@@ -257,6 +268,7 @@ LangString DESC_SSongs		${LANG_ENGLISH} "Song files"
 LangString DESC_SBackgrounds	${LANG_ENGLISH} "Background graphic files"
 LangString DESC_SMediaFiles	${LANG_ENGLISH} "Multimedia files"
 LangString DESC_SMediaLists	${LANG_ENGLISH} "Multimedia lists"
+LangString DESC_SThemes		${LANG_ENGLISH} "Theme files"
 ; The Uninstall sections
 LangString DESC_SUnDreamBeam	${LANG_ENGLISH} "Main application"
 LangString DESC_SUnAppFiles	${LANG_ENGLISH} "Uninstall/delete various files created by DreamBeam"
@@ -265,6 +277,7 @@ LangString DESC_SUnSongs	${LANG_ENGLISH} "Uninstall/delete sample and user-creat
 LangString DESC_SUnBackgrounds	${LANG_ENGLISH} "Uninstall/delete background graphic files"
 LangString DESC_SUnMediaFiles	${LANG_ENGLISH} "Uninstall/delete multimedia files"
 LangString DESC_SUnMediaLists	${LANG_ENGLISH} "Uninstall/delete multimedia lists"
+LangString DESC_SUnThemes	${LANG_ENGLISH} "Uninstall/delete theme files"
 
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -276,6 +289,7 @@ LangString DESC_SUnMediaLists	${LANG_ENGLISH} "Uninstall/delete multimedia lists
   !insertmacro MUI_DESCRIPTION_TEXT ${SBackgrounds}	$(DESC_SBackgrounds)
   !insertmacro MUI_DESCRIPTION_TEXT ${SMediaFiles}	$(DESC_SMediaFiles)
   !insertmacro MUI_DESCRIPTION_TEXT ${SMediaLists}	$(DESC_SMediaLists)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SThemes}		$(DESC_SThemes)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 !insertmacro MUI_UNFUNCTION_DESCRIPTION_BEGIN
@@ -287,7 +301,7 @@ LangString DESC_SUnMediaLists	${LANG_ENGLISH} "Uninstall/delete multimedia lists
   !insertmacro MUI_DESCRIPTION_TEXT ${SUnBackgrounds}	$(DESC_SUnBackgrounds)
   !insertmacro MUI_DESCRIPTION_TEXT ${SUnMediaFiles}	$(DESC_SUnMediaFiles)
   !insertmacro MUI_DESCRIPTION_TEXT ${SUnMediaLists}	$(DESC_SUnMediaLists)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SUnThemes}	$(DESC_SUnThemes)
 !insertmacro MUI_UNFUNCTION_DESCRIPTION_END
-
 
 
