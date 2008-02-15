@@ -11,13 +11,12 @@ namespace DreamBeam {
 	/// Zusammenfassende Beschreibung für Class
 	/// </summary>
 	public class Presentation : GuiTemplate {
-		public string strMediaPath;
+		public string strMediaPath = "";
 		private ImageList MediaList = new ImageList();
 		public string[] filetypes = { ".bmp", ".jpg", ".png", ".gif", ".jpeg", ".swf", ".avi", ".mpeg", ".wmv", ".mpg", ".vob", ".mov" };
 
 		public Presentation(MainForm impForm, ShowBeam impShowBeam)
 			: base(impForm, impShowBeam) {
-			strMediaPath = _MainForm.strMediaPath;
 			MediaList = _MainForm.MediaList;
 		}
 
@@ -49,7 +48,7 @@ namespace DreamBeam {
 			for (int i = 0; i < _MainForm.Presentation_Fade_ListView.SelectedItems.Count; i++) {
 
 				//				   string MediaType = "";
-				string sPath = strMediaPath + "\\" + _MainForm.Presentation_Fade_ListView.SelectedItems[i].Text;
+				string sPath = Path.Combine(strMediaPath, _MainForm.Presentation_Fade_ListView.SelectedItems[i].Text);
 				_MainForm.GuiTools.RightDock.MediaListTools.AddMedia(sPath);
 			}
 

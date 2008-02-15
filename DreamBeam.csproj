@@ -266,7 +266,7 @@
     <Compile Include="GuiTools\RightDock\BGImageTools.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GuiTools\RightDock\MediaListTools.cs">
+    <Compile Include="GuiTools\MediaListTools.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GuiTools\ShowBeamTools.cs">

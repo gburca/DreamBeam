@@ -106,7 +106,6 @@ namespace DreamBeam {
 		public DirectoryInfo folder;
 
 		private System.ComponentModel.IContainer components;
-		public string strMediaPath = "";
 		bool MediaPreview = false;
 		private int indexOfItemUnderMouseToDrag;
 		private Rectangle dragBoxFromMouseDown;

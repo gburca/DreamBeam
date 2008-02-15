@@ -23,37 +23,6 @@ and move it below this.Controls.Add(this.ToolBars_topSandBarDock);
 
 */
 
-using System;
-using System.IO;
-using System.Threading;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Diagnostics;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
-using System.Data;
-using System.Reflection;
-using System.Globalization;
-using System.Xml;
-using Rilling.Common.UI.Forms;
-using Microsoft.DirectX;
-using System.Text;
-using System.Text.RegularExpressions;
-using DreamBeam.FileTypes;
-using DreamBeam.Bible;
-using Lister;
-using CommandLine.Utility;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Channels;
-using System.Runtime.Remoting.Channels.Http;
-using CookComputing.XmlRpc;
-using Utils;
-using Utils.MessageBoxExLib;
-using cs_IniHandlerDevelop;
-using ControlLib;
-using Controls.Development;
 
 namespace DreamBeam {
 	public partial class MainForm : System.Windows.Forms.Form {
@@ -218,7 +187,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.Timer VideoLoadTimer;
 		#endregion
 
-		private Control ErrorProvider_LastControl = null;
+		private System.Windows.Forms.Control ErrorProvider_LastControl = null;
 
 		#endregion
 
