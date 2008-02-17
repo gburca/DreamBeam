@@ -60,8 +60,8 @@ namespace DreamBeam {
 		private TD.SandBar.MenuBarItem ToolBars_MenuBar_View;
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_ShowSongs;
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_EditSongs;
-		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_Presentation;
-		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_TextTool;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_Multimedia;
+		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_SermonTool;
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_View_BibleText;
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_PreviewTab;
 		private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_LiveTab;
@@ -382,8 +382,8 @@ namespace DreamBeam {
 			this.ToolBars_MenuBar_View = new TD.SandBar.MenuBarItem();
 			this.ToolBars_MenuBar_View_ShowSongs = new TD.SandBar.MenuButtonItem();
 			this.ToolBars_MenuBar_View_EditSongs = new TD.SandBar.MenuButtonItem();
-			this.ToolBars_MenuBar_View_Presentation = new TD.SandBar.MenuButtonItem();
-			this.ToolBars_MenuBar_View_TextTool = new TD.SandBar.MenuButtonItem();
+			this.ToolBars_MenuBar_View_Multimedia = new TD.SandBar.MenuButtonItem();
+			this.ToolBars_MenuBar_View_SermonTool = new TD.SandBar.MenuButtonItem();
 			this.ToolBars_MenuBar_View_BibleText = new TD.SandBar.MenuButtonItem();
 			this.ToolBars_MenuBar_Open_SongsTab = new TD.SandBar.MenuButtonItem();
 			this.ToolBars_MenuBar_Open_PlaylistTab = new TD.SandBar.MenuButtonItem();
@@ -1162,8 +1162,8 @@ namespace DreamBeam {
 			this.ToolBars_MenuBar_View.MenuItems.AddRange(new TD.SandBar.MenuButtonItem[] {
             this.ToolBars_MenuBar_View_ShowSongs,
             this.ToolBars_MenuBar_View_EditSongs,
-            this.ToolBars_MenuBar_View_Presentation,
-            this.ToolBars_MenuBar_View_TextTool,
+            this.ToolBars_MenuBar_View_Multimedia,
+            this.ToolBars_MenuBar_View_SermonTool,
             this.ToolBars_MenuBar_View_BibleText,
             this.ToolBars_MenuBar_Open_SongsTab,
             this.ToolBars_MenuBar_Open_PlaylistTab,
@@ -1193,21 +1193,21 @@ namespace DreamBeam {
 			this.ToolBars_MenuBar_View_EditSongs.Text = "Edit Songs";
 			this.ToolBars_MenuBar_View_EditSongs.Activate += new TD.SandBar.MenuButtonItem.ActivateEventHandler(this.ToolBars_MenuBar_View_EditSongs_Activate);
 			// 
-			// ToolBars_MenuBar_View_Presentation
+			// ToolBars_MenuBar_View_Multimedia
 			// 
-			this.ToolBars_MenuBar_View_Presentation.Icon = ((System.Drawing.Icon)(resources.GetObject("ToolBars_MenuBar_View_Presentation.Icon")));
-			this.ToolBars_MenuBar_View_Presentation.Shortcut = System.Windows.Forms.Shortcut.F11;
-			this.ToolBars_MenuBar_View_Presentation.Tag = null;
-			this.ToolBars_MenuBar_View_Presentation.Text = "Presentation";
-			this.ToolBars_MenuBar_View_Presentation.Activate += new TD.SandBar.MenuButtonItem.ActivateEventHandler(this.ToolBars_MenuBar_View_Presentation_Activate);
+			this.ToolBars_MenuBar_View_Multimedia.Icon = ((System.Drawing.Icon)(resources.GetObject("ToolBars_MenuBar_View_Multimedia.Icon")));
+			this.ToolBars_MenuBar_View_Multimedia.Shortcut = System.Windows.Forms.Shortcut.F11;
+			this.ToolBars_MenuBar_View_Multimedia.Tag = null;
+			this.ToolBars_MenuBar_View_Multimedia.Text = "Multimedia";
+			this.ToolBars_MenuBar_View_Multimedia.Activate += new TD.SandBar.MenuButtonItem.ActivateEventHandler(this.ToolBars_MenuBar_View_Presentation_Activate);
 			// 
-			// ToolBars_MenuBar_View_TextTool
+			// ToolBars_MenuBar_View_SermonTool
 			// 
-			this.ToolBars_MenuBar_View_TextTool.Icon = ((System.Drawing.Icon)(resources.GetObject("ToolBars_MenuBar_View_TextTool.Icon")));
-			this.ToolBars_MenuBar_View_TextTool.Shortcut = System.Windows.Forms.Shortcut.F12;
-			this.ToolBars_MenuBar_View_TextTool.Tag = null;
-			this.ToolBars_MenuBar_View_TextTool.Text = "Text Tool";
-			this.ToolBars_MenuBar_View_TextTool.Activate += new TD.SandBar.MenuButtonItem.ActivateEventHandler(this.ToolBars_MenuBar_View_TextTool_Activate);
+			this.ToolBars_MenuBar_View_SermonTool.Icon = ((System.Drawing.Icon)(resources.GetObject("ToolBars_MenuBar_View_SermonTool.Icon")));
+			this.ToolBars_MenuBar_View_SermonTool.Shortcut = System.Windows.Forms.Shortcut.F12;
+			this.ToolBars_MenuBar_View_SermonTool.Tag = null;
+			this.ToolBars_MenuBar_View_SermonTool.Text = "Sermon Tool";
+			this.ToolBars_MenuBar_View_SermonTool.Activate += new TD.SandBar.MenuButtonItem.ActivateEventHandler(this.ToolBars_MenuBar_View_TextTool_Activate);
 			// 
 			// ToolBars_MenuBar_View_BibleText
 			// 

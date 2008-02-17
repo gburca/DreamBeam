@@ -199,7 +199,7 @@
     <value>&amp;About DreamBeam</value>
   </data>
   <data name="Menu.Help.Intro" xml:space="preserve">
-    <value>&amp;Intro and Main Components</value>
+    <value>&amp;Help contents</value>
   </data>
   <data name="Menu.MediaList" xml:space="preserve">
     <value>&amp;MediaList</value>

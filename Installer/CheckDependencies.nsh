@@ -14,13 +14,15 @@
 !macro CheckerWeb
 Section "-hidden CheckDependencies"
 
+; .NET 1.0
 !define NET1_URL "http://download.microsoft.com/download/a/a/c/aac39226-8825-44ce-90e3-bf8203e74006/dotnetfx.exe"
-!define NET_URL "http://www.microsoft.com/downloads/details.aspx?familyid=0856eacb-4362-4b0d-8edd-aab15c5e04f5&displaylang=en"
+; .NET 2.0
+!define NET_URL "http://download.microsoft.com/download/5/6/7/567758a3-759e-473e-bf8f-52154438565a/dotnetfx.exe"
+
 !define DX_URL "http://download.microsoft.com/download/8/1/e/81ed90eb-dd87-4a23-aedc-298a9603b4e4/directx_9c_redist.exe"
 !define DX_MANAGED_URL "http://download.microsoft.com/download/3/9/7/3972f80c-5711-4e14-9483-959d48a2d03b/directx_apr2006_redist.exe"
 
 !define SWORD_URL "http://crosswire.org/ftpmirror/pub/sword/frontend/win32/v1.5/sword-starter-win32-1.5.9.exe"
-!define sword_file "sword-starter-win32-1.5.9.exe"
 
 
 ;=========================================================================================
@@ -143,6 +145,7 @@ Section "-hidden CheckDependencies"
 
                 ;================ DOWNLOAD ==================
 		DownloadSword:
+		!define sword_file "sword-starter-win32-1.5.9.exe"
 		NSISdl::download /TIMEOUT=30000 ${SWORD_URL} "$TEMP\${sword_file}"
 			Pop $0 ;Get the return value
 			StrCmp $0 "success" InstallSword 0
@@ -154,6 +157,9 @@ Section "-hidden CheckDependencies"
 			
 		;================ Install ==================
 		InstallSword:
+		MessageBox MB_OK "Please close the windows that open up\
+			$\n as a result of installing SWORD so that\
+			$\n DreamBeam can continue with the install."
 		Banner::show /NOUNLOAD /set 76 "Installing The SWORD Project." \
 			"Please be patient..."
 		ExecWait "$TEMP\${sword_file} /S"
@@ -175,7 +181,7 @@ Section "-hidden CheckDependencies"
 	Push "flash.ocx"
 	Call "GetFlashVER"
 	Pop $1
-	MessageBox MB_OK "The flash version was: $1"
+	;MessageBox MB_OK "The flash version was: $1"
 	IntCmp $1 2 FinishFlash 0 FinishFlash
 	MessageBox MB_YESNOCANCEL|MB_ICONEXCLAMATION \
 		"Dreambeam requires Macromedia Flash Player 7 or later. \
@@ -328,6 +334,10 @@ Section "-hidden CheckDependencies" ;
 		SetOutPath "$TEMP"
 		File "SupportFiles\${sword_file}"
 
+		MessageBox MB_OK "Please close the windows that open up\
+			$\n as a result of installing SWORD so that\
+			$\n DreamBeam can continue with the install."
+
 		Banner::show /NOUNLOAD /set 76 "Installing SWORD" ""
 		ExecWait "$TEMP\${sword_file} /S"
 		Banner::destroy
@@ -345,7 +355,7 @@ Section "-hidden CheckDependencies" ;
 	Push "flash.ocx"
 	Call "GetFlashVER"
 	Pop $1
-	MessageBox MB_OK "The flash version was: $1"
+	;MessageBox MB_OK "The flash version was: $1"
 	IntCmp $1 2 FinishFlash 0 FinishFlash
 	MessageBox MB_YESNOCANCEL|MB_ICONEXCLAMATION \
 		"Dreambeam requires Macromedia Flash Player 7 or later. \

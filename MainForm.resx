@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="ImageContext.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="RightDocks_imageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>139, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ImageContext.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="RightDocks_imageList.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>139, 17</value>
+  </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -149,12 +149,12 @@
         /nwynBCvcXI8LlwILuiefHH/xfx/9/4BUgqURRgevsYAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="MainForm_ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="MainForm_ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>209, 128</value>
-  </metadata>
-  <metadata name="ToolBars_sandBarManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="ToolBars_sandBarManager1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 54</value>
-  </metadata>
+  </data>
   <data name="ShowSongs_Button.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAQAEBAAAAEAIAAABQAARgAAACAgAAABACAAABEAAEYFAAAwMAAAAQAgAAAmAABGFgAAgAAAAAEA
@@ -5889,9 +5889,10 @@
         AAA=
 </value>
   </data>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
     <value>123</value>
-  </metadata>
+  </data>
   <data name="StatusPanel.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAkAEBAAAAEACABoBQAAlgAAABAQAAABACAAaAQAAP4FAAAYGAAAAQAgAIgJAABmCgAAICAAAAEA
@@ -7722,9 +7723,9 @@
         ///8AAAAP////////////////AAAAf///////////////w==
 </value>
   </data>
-  <metadata name="sandDockManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="sandDockManager1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>304, 91</value>
-  </metadata>
+  </data>
   <data name="DockControl_Media.TabImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -28686,7 +28687,7 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
-  <data name="ToolBars_MenuBar_View_Presentation.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ToolBars_MenuBar_View_Multimedia.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAQAEBAAAAEAIAAABQAARgAAACAgAAABACAAABEAAEYFAAAwMAAAAQAgAAAmAABGFgAAgAAAAAEA
         IAAACQEARjwAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -30078,7 +30079,7 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
-  <data name="ToolBars_MenuBar_View_TextTool.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ToolBars_MenuBar_View_SermonTool.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAQAEBAAAAEAIAAABQAARgAAACAgAAABACAAABEAAEYFAAAwMAAAAQAgAAAmAABGFgAAgAAAAAEA
         IAAACQEARjwAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -31590,9 +31591,9 @@
         AAAAAAAAgAEAAA==
 </value>
   </data>
-  <metadata name="SongShow_ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="SongShow_ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>207, 54</value>
-  </metadata>
+  </data>
   <data name="SongShow_ImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
@@ -31635,9 +31636,9 @@
         AQMGAAHgAQMGAAHwAQcGAAH4AR8GAAL/BgAC/wYACw==
 </value>
   </data>
-  <metadata name="Presentation_Fade_ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="Presentation_Fade_ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>366, 54</value>
-  </metadata>
+  </data>
   <data name="Presentation_Fade_ImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
@@ -31694,9 +31695,9 @@
         A/+BAAs=
 </value>
   </data>
-  <metadata name="imageList_Folders.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="imageList_Folders.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>565, 54</value>
-  </metadata>
+  </data>
   <data name="imageList_Folders.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
@@ -31744,9 +31745,9 @@
         Af8B4AH/BAAE/wQACw==
 </value>
   </data>
-  <metadata name="PlayButtons_ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="PlayButtons_ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>706, 54</value>
-  </metadata>
+  </data>
   <data name="PlayButtons_ImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
@@ -31760,15 +31761,15 @@
         AgAB/QH/AfMBnwHwAQ8CAAb/AgAG/wIABv8CAAs=
 </value>
   </data>
-  <metadata name="TextTypedTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="TextTypedTimer.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>171, 91</value>
-  </metadata>
-  <metadata name="Media_ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="Media_ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>453, 91</value>
-  </metadata>
-  <metadata name="Media_Logos.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="Media_Logos.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>589, 91</value>
-  </metadata>
+  </data>
   <data name="Media_Logos.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
@@ -32335,18 +32336,15 @@
         ATwBDxYAA///AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wBMAAs=
 </value>
   </data>
-  <metadata name="PlayProgress.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="PlayProgress.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>705, 91</value>
-  </metadata>
-  <metadata name="VideoLoadTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="VideoLoadTimer.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>819, 91</value>
-  </metadata>
-  <metadata name="Presentation_AutoPlayTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="Presentation_AutoPlayTimer.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 128</value>
-  </metadata>
-  <metadata name="MainForm_ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>209, 128</value>
-  </metadata>
+  </data>
   <data name="BibleText_FindLast_button.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -32455,12 +32453,12 @@
         9ibTW0ynmV5jolfjieNA/wK/14ojYjrDhAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="Main_ErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="Main_ErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>353, 128</value>
-  </metadata>
-  <metadata name="SaveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="SaveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>500, 128</value>
-  </metadata>
+  </data>
   <data name="axShockwaveFlash.OcxState" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
@@ -32472,13 +32470,13 @@
         AgAAAAAACAACAAAAAAANAAAAAAAAAAAAAAAAAAAAAAALAAEACwAAAAgAAAAAAAMAAAAAAAs=
 </value>
   </data>
-  <metadata name="OpenFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="OpenFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>623, 128</value>
-  </metadata>
-  <metadata name="GlobalDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="GlobalDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>749, 128</value>
-  </metadata>
-  <metadata name="SongListDataView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="SongListDataView.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 165</value>
-  </metadata>
+  </data>
 </root>

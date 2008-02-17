@@ -2021,7 +2021,7 @@ namespace DreamBeam {
 		private void Diatheke_ValueChanged(object sender, System.EventArgs e) {
 			if (this.SwordProject_Found) {
 				string strTempText = Tools.Diatheke_ConvertEncoding(Diatheke.value);
-				this.StatusPanel.Text = strTempText.Substring(0, Math.Min(strTempText.Length, 200));
+				//this.StatusPanel.Text = strTempText.Substring(0, Math.Min(strTempText.Length, 200));
 
 				// filter out the Verses
 				string needle = strTempText.Substring(0, strTempText.IndexOf(":"));

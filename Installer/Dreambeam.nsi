@@ -33,6 +33,9 @@
 	; ProgramFiles directory or the user won't be able to modify them.
 	Var /GLOBAL USERFILES
 
+	; Used for the uninstaller
+	Var /GLOBAL ShouldCleanRegistry
+
 	SetCompressor lzma
 	ShowInstDetails show
 
@@ -182,6 +185,7 @@ FunctionEnd
 UninstallText "This will uninstall ${PRODUCT} and delete all files created by ${PRODUCT}. Please backup all files you wish to keep. Hit Uninstall to continue."
 
 Section "un.Uninstall DreamBeam" SUnDreamBeam
+	;Var /GLOBAL ShouldCleanRegistry
 	SetShellVarContext all
 	Call un.Read_USERFILES
 	
@@ -192,11 +196,10 @@ Section "un.Uninstall DreamBeam" SUnDreamBeam
 	Delete "$DESKTOP\DreamBeam.lnk"
 
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}"
+	StrCpy $ShouldCleanRegistry "YES"
 
 	; Delete Startmenu Entries
 	RMDir /r "$SMPROGRAMS\${PRODUCT}"
-	DeleteRegValue HKLM "Software\${PRODUCT}" "UserFilesDir"	; Remove $USERFILES entry
-	DeleteRegKey /ifempty HKLM "Software\${PRODUCT}"
 
 	; Delete Uninstaller
 	Delete "$INSTDIR\Uninstall.exe"
@@ -257,6 +260,23 @@ SectionGroup /e "un.Uninstall Application Files" SUnAppFiles
 	SectionEnd
 
 SectionGroupEnd
+
+Section "-hidden un.Registry entries"
+	; This section must be the last uninstall section
+
+	; We must wait until the end to clean the registry because SUnAppFiles
+	; needs it to figure out where all the user files are.
+
+	; We only clean the regitry if the main application is being uninstalled
+	StrCmp $ShouldCleanRegistry "YES" CleanRegistry CleanRegistryDone
+
+	CleanRegistry:
+	DeleteRegValue HKLM "Software\${PRODUCT}" "UserFilesDir"	; Remove $USERFILES entry
+	DeleteRegKey /ifempty HKLM "Software\${PRODUCT}"
+
+	CleanRegistryDone:
+
+SectionEnd
 
 
 ;--------------------------------
