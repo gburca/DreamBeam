@@ -48,9 +48,17 @@ namespace DreamBeam {
 		[XmlIgnore]
 		public ArrayList PlayList = new ArrayList();
 
+		[XmlIgnore]
+		public static string defaultSwordPath = @"C:\Program Files\CrossWire\The SWORD Project";
 		private string swordPath = "";
 		public string SwordPath {
-			get { return swordPath; }
+			get {
+				if (swordPath == null || swordPath.Length < 4) {
+					// We don't have a reasonable path for Sword. Try using the default.
+					this.SwordPath = defaultSwordPath;
+				}
+				return swordPath;
+			}
 			set {
 				// The "value" could be null, or not of a legal form
 				try {
@@ -155,6 +163,7 @@ namespace DreamBeam {
 
 		public static Config DeserializeCleanup(Config config) {
 			if (config.BackgroundColor.IsEmpty) config.BackgroundColor = Color.Black;
+			
 			return config;
 		}
 

@@ -12,14 +12,14 @@
 ; General
 
         ; Name and file
-        !define VERSION "0.73"
+        !define VERSION "0.74"
         !define PRODUCT "DreamBeam"
 	Name "${PRODUCT} ${VERSION}"
 	
 	!ifdef FullInstall
-		OutFile "Installer\${PRODUCT}_Full_${VERSION}.exe"
+		OutFile "InstallerOutput\${PRODUCT}_Full_${VERSION}.exe"
 	!else
-		OutFile "Installer\${PRODUCT}_${VERSION}.exe"
+		OutFile "InstallerOutput\${PRODUCT}_${VERSION}.exe"
 	!endif
 
 	

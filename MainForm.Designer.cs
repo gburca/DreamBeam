@@ -1308,7 +1308,7 @@ namespace DreamBeam {
 			this.ToolBars_MenuBar_Help_Intro.Icon = null;
 			this.ToolBars_MenuBar_Help_Intro.Shortcut = System.Windows.Forms.Shortcut.None;
 			this.ToolBars_MenuBar_Help_Intro.Tag = null;
-			this.ToolBars_MenuBar_Help_Intro.Text = "Intro and Main Components";
+			this.ToolBars_MenuBar_Help_Intro.Text = "Help Documentation";
 			this.ToolBars_MenuBar_Help_Intro.Activate += new TD.SandBar.MenuButtonItem.ActivateEventHandler(this.HelpIntro_Activate);
 			// 
 			// ToolBars_MenuBar_Help_About
@@ -2996,7 +2996,7 @@ namespace DreamBeam {
 			this.Controls.Add(this.ToolBars_topSandBarDock);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("DreamBeam.Icon")));
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.KeyPreview = true;
 			this.Location = new System.Drawing.Point(50, 0);
 			this.Name = "MainForm";

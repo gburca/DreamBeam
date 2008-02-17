@@ -466,6 +466,29 @@ namespace DreamBeam {
 			return Regex.Replace(sb.ToString(), @"\p{Sk}", "");
 		}
 
+		public static string Diatheke_ConvertEncoding(string text) {
+			Encoding utf8 = Encoding.GetEncoding("UTF-8");
+
+			/* TODO: This should be detected somehow automatically.
+			 * On MS-Vista, if the local setting for non-unicode programs
+			 * is set to anything other than english, this will not work.
+			 * 
+			 * Settings - Regional and Language Options - Administrative
+			 *	Current language for non-Unicode programs:
+			 *		English (United States)
+			 */
+			Encoding win1252 = Encoding.GetEncoding("Windows-1252");
+
+			byte[] rawBytes = win1252.GetBytes(text);
+
+			return utf8.GetString(rawBytes);
+		}
+
+		// Convert a string to a byte array.
+		public static byte[] StrToByteArray(string str) {
+			return (new UnicodeEncoding()).GetBytes(str);
+		}
+
 		public static XmlNode RenameXmlNode(XmlNode node, string namespaceURI, string qualifiedName) {
 			if (node.NodeType == XmlNodeType.Element) {
 				XmlElement oldElement = (XmlElement)node;

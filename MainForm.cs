@@ -2020,7 +2020,7 @@ namespace DreamBeam {
 
 		private void Diatheke_ValueChanged(object sender, System.EventArgs e) {
 			if (this.SwordProject_Found) {
-				string strTempText = Diatheke_ConvertEncoding(Diatheke.value);
+				string strTempText = Tools.Diatheke_ConvertEncoding(Diatheke.value);
 				this.StatusPanel.Text = strTempText.Substring(0, Math.Min(strTempText.Length, 200));
 
 				// filter out the Verses
@@ -2408,14 +2408,6 @@ namespace DreamBeam {
 		#endregion
 
 		#region Diatheke and Sword
-		private string Diatheke_ConvertEncoding(string text) {
-			Encoding utf8 = Encoding.GetEncoding("UTF-8");
-			Encoding win1252 = Encoding.GetEncoding("Windows-1252");
-
-			byte[] rawBytes = win1252.GetBytes(text);
-			return utf8.GetString(rawBytes);
-		}
-
 		public ArrayList DiathekeBooks(bool BiblesOnly) {
 			ArrayList BookList = new ArrayList();
 			if (Diatheke == null) return BookList;

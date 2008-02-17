@@ -427,8 +427,8 @@ namespace DreamBeam {
 		private void BiblesAvailable_listEx_PressIcon(int Index) {
 			string tr = BiblesAvailable_listEx.Items[Index].ToString();
 
-			BibleCache_progressBar.Value = BibleCache_progressBar.Maximum / 10;
 			BibleCache_Message.Visible = true;
+			BibleCache_progressBar.Value = BibleCache_progressBar.Maximum / 10;
 
 			if (_MainForm.bibles.Add(_MainForm.Diatheke, tr, Options_RegEx_Table, new EventHandler(this.onProgress))) {
 				BiblesAvailable_listEx.Remove(Index);

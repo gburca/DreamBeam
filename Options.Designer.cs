@@ -828,7 +828,7 @@ namespace DreamBeam {
 			// BibleCache_Cached_Label
 			// 
 			this.BibleCache_Cached_Label.AutoSize = true;
-			this.BibleCache_Cached_Label.Location = new System.Drawing.Point(8, 8);
+			this.BibleCache_Cached_Label.Location = new System.Drawing.Point(6, 7);
 			this.BibleCache_Cached_Label.Name = "BibleCache_Cached_Label";
 			this.BibleCache_Cached_Label.Size = new System.Drawing.Size(100, 13);
 			this.BibleCache_Cached_Label.TabIndex = 13;

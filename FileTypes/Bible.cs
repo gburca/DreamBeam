@@ -127,9 +127,6 @@ namespace DreamBeam.FileTypes {
 			diathekeThread.Start();
 			diathekeThread.Join();
 
-			// Restore the previous setting
-			Diatheke.autoupdate = diathekeAutoupdate;
-
 			//if (onProgress != null) { Console.WriteLine("Stop thread"); timerThread = null; }
 			if (Diatheke.value.Length > 100) {
 				BibleVersion b = new BibleVersion(version, Diatheke.value, replacements, onProgress);
@@ -140,6 +137,10 @@ namespace DreamBeam.FileTypes {
 					return true;
 				}
 			}
+
+			// Restore the previous setting
+			Diatheke.autoupdate = diathekeAutoupdate;
+
 			return false;
 		}
 
@@ -467,14 +468,6 @@ namespace DreamBeam.FileTypes {
 			return text;
 		}
 
-		private static string Diatheke_ConvertEncoding(string text) {
-			Encoding utf8 = Encoding.GetEncoding("UTF-8");
-			Encoding win1252 = Encoding.GetEncoding("Windows-1252");
-
-			byte[] rawBytes = win1252.GetBytes(text);
-			return utf8.GetString(rawBytes);
-		}
-
 		/// <summary>
 		/// Parse the "plain" Diatheke output format into separate verses.
 		/// </summary>
@@ -485,7 +478,7 @@ namespace DreamBeam.FileTypes {
 			Regex r = new Regex(@"^(\d*[^:\d]+)(\d+):(\d+):\W+(.*)", RegexOptions.Compiled);
 			Match m;
 
-			foreach (string verse in Diatheke_ConvertEncoding(diathekeText).Split('\n')) {
+			foreach (string verse in Tools.Diatheke_ConvertEncoding(diathekeText).Split('\n')) {
 				if (onProgress != null && ((i % 200) == 0)) { onProgress(this, e); }
 				if (i >= 31102) {
 					break;
@@ -510,6 +503,7 @@ namespace DreamBeam.FileTypes {
 			this._VerseCount = i;
 
 			for (i = 0; i < this.BibleBooks.Length; i++) {
+				if (BibleBooks[i].Long == null) BibleBooks[i].Long = "";
 				string bk = BibleBooks[i].Long;
 				bk = Regex.Replace(bk.Trim(), @"^III ", "3 ");
 				bk = Regex.Replace(bk, @"^II ", "2 ");

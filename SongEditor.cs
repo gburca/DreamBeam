@@ -579,6 +579,7 @@ namespace DreamBeam {
 			// DualLanguage
 			// 
 			this.DualLanguage.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.DualLanguage.Appearance = System.Windows.Forms.Appearance.Button;
 			this.DualLanguage.bottomColor = System.Drawing.Color.DarkBlue;
 			this.DualLanguage.BottomTransparent = 64;
 			this.DualLanguage.LEDColor = System.Drawing.Color.Green;
@@ -590,6 +591,7 @@ namespace DreamBeam {
 			this.DualLanguage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.DualLanguage.topColor = System.Drawing.Color.LightGreen;
 			this.DualLanguage.TopTransparent = 64;
+			this.DualLanguage.Visible = false;
 			// 
 			// Sequence_Tab
 			// 

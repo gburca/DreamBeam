@@ -26,7 +26,7 @@
     </UpgradeBackupLocation>
     <ManifestCertificateThumbprint>225D6D11BF776BBED790C80109F3CEBCD4E0D55C</ManifestCertificateThumbprint>
     <ManifestKeyFile>DreamBeam_TemporaryKey.pfx</ManifestKeyFile>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
     <SignManifests>true</SignManifests>
     <PublishUrl>D:\VisualStudioProjects\DreamBeam-0.72\Installer\DreamBeam2\</PublishUrl>
     <Install>true</Install>
@@ -41,6 +41,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>Installer\Dreambeam\</OutputPath>
@@ -408,6 +409,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DreamBeam_TemporaryKey.pfx" />
+    <BaseApplicationManifest Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
