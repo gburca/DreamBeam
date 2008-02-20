@@ -268,12 +268,6 @@ namespace DreamBeam {
 		private System.Windows.Forms.Panel Presentation_MovieControlPanelBottom;
 		private System.Windows.Forms.CheckBox Presentation_MediaLoop_Checkbox;
 		private System.Windows.Forms.Panel Presentation_MovieControl_PreviewButtonPanel;
-		private System.Windows.Forms.Button Presentation_MoviePreviewButton;
-		private System.Windows.Forms.Panel Presentation_MovieControlPanelBottomLeft;
-		private System.Windows.Forms.ToolBar Presentation_PlayBar;
-		private System.Windows.Forms.ToolBarButton Presentation_PlayButton;
-		private System.Windows.Forms.ToolBarButton Presentation_PauseButton;
-		private System.Windows.Forms.ToolBarButton Presentation_StopButton;
 		private System.Windows.Forms.Panel Presentation_MovieControlPanel_Top;
 		private System.Windows.Forms.TrackBar Media_TrackBar;
 		private System.Windows.Forms.Panel Presentation_MovieControlPanel_Right;
@@ -505,8 +499,8 @@ namespace DreamBeam {
 			this.Presentation_Tab = new System.Windows.Forms.TabPage();
 			this.Presentation_FadePanel = new System.Windows.Forms.Panel();
 			this.Fade_panel = new System.Windows.Forms.Panel();
-			this.Presentation_Fade_ListView = new System.Windows.Forms.ListView();
 			this.Fade_Top_Panel = new System.Windows.Forms.Panel();
+			this.Presentation_Fade_ListView = new System.Windows.Forms.ListView();
 			this.Presentation_Fade_Refresh_Button = new System.Windows.Forms.Button();
 			this.Presentation_Fade_ToPlaylist_Button = new System.Windows.Forms.Button();
 			this.Presentation_Fade_preview = new System.Windows.Forms.PictureBox();
@@ -518,17 +512,14 @@ namespace DreamBeam {
 			this.Presentation_PreviewBox = new System.Windows.Forms.PictureBox();
 			this.Presentation_MovieControlPanel = new System.Windows.Forms.Panel();
 			this.Presentation_MovieControlPanelBottom = new System.Windows.Forms.Panel();
+			this.liveMediaControls = new DreamBeam.MediaControls();
 			this.Presentation_MediaLoop_Checkbox = new System.Windows.Forms.CheckBox();
 			this.Presentation_MovieControl_PreviewButtonPanel = new System.Windows.Forms.Panel();
-			this.Presentation_MoviePreviewButton = new System.Windows.Forms.Button();
-			this.Presentation_MovieControlPanelBottomLeft = new System.Windows.Forms.Panel();
-			this.Presentation_PlayBar = new System.Windows.Forms.ToolBar();
-			this.Presentation_PlayButton = new System.Windows.Forms.ToolBarButton();
-			this.Presentation_PauseButton = new System.Windows.Forms.ToolBarButton();
-			this.Presentation_StopButton = new System.Windows.Forms.ToolBarButton();
+			this.previewMediaControls = new DreamBeam.MediaControls();
 			this.Presentation_MovieControlPanel_Top = new System.Windows.Forms.Panel();
 			this.Media_TrackBar = new System.Windows.Forms.TrackBar();
 			this.Presentation_MovieControlPanel_Right = new System.Windows.Forms.Panel();
+			this.button1 = new System.Windows.Forms.Button();
 			this.AudioBar = new System.Windows.Forms.TrackBar();
 			this.EditSongs2_Tab = new System.Windows.Forms.TabPage();
 			this.songEditor = new DreamBeam.SongEditor();
@@ -617,7 +608,6 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanel.SuspendLayout();
 			this.Presentation_MovieControlPanelBottom.SuspendLayout();
 			this.Presentation_MovieControl_PreviewButtonPanel.SuspendLayout();
-			this.Presentation_MovieControlPanelBottomLeft.SuspendLayout();
 			this.Presentation_MovieControlPanel_Top.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Media_TrackBar)).BeginInit();
 			this.Presentation_MovieControlPanel_Right.SuspendLayout();
@@ -1609,7 +1599,7 @@ namespace DreamBeam {
                                     ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(182, 412, new TD.SandDock.DockControl[] {
                                                 this.DockControl_Backgrounds,
                                                 this.DockControl_Media,
-                                                this.DockControl_MediaLists}, this.DockControl_Backgrounds)))})))})))});
+                                                this.DockControl_MediaLists}, this.DockControl_Media)))})))})))});
 			this.rightSandDock.Location = new System.Drawing.Point(586, 50);
 			this.rightSandDock.Manager = this.sandDockManager1;
 			this.rightSandDock.MaximumSize = 600;
@@ -2484,15 +2474,14 @@ namespace DreamBeam {
 			this.Presentation_FadePanel.Controls.Add(this.Fade_panel);
 			this.Presentation_FadePanel.Controls.Add(this.treeView1);
 			this.Presentation_FadePanel.Dock = System.Windows.Forms.DockStyle.Right;
-			this.Presentation_FadePanel.Location = new System.Drawing.Point(498, 0);
+			this.Presentation_FadePanel.Location = new System.Drawing.Point(505, 0);
 			this.Presentation_FadePanel.Name = "Presentation_FadePanel";
 			this.Presentation_FadePanel.Padding = new System.Windows.Forms.Padding(2);
-			this.Presentation_FadePanel.Size = new System.Drawing.Size(8, 691);
+			this.Presentation_FadePanel.Size = new System.Drawing.Size(1, 691);
 			this.Presentation_FadePanel.TabIndex = 3;
 			// 
 			// Fade_panel
 			// 
-			this.Fade_panel.Controls.Add(this.Presentation_Fade_ListView);
 			this.Fade_panel.Controls.Add(this.Fade_Top_Panel);
 			this.Fade_panel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.Fade_panel.Location = new System.Drawing.Point(192, 2);
@@ -2500,25 +2489,9 @@ namespace DreamBeam {
 			this.Fade_panel.Size = new System.Drawing.Size(0, 685);
 			this.Fade_panel.TabIndex = 4;
 			// 
-			// Presentation_Fade_ListView
-			// 
-			this.Presentation_Fade_ListView.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-			this.Presentation_Fade_ListView.AllowColumnReorder = true;
-			this.Presentation_Fade_ListView.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Presentation_Fade_ListView.FullRowSelect = true;
-			this.Presentation_Fade_ListView.GridLines = true;
-			this.Presentation_Fade_ListView.Location = new System.Drawing.Point(0, 152);
-			this.Presentation_Fade_ListView.Name = "Presentation_Fade_ListView";
-			this.Presentation_Fade_ListView.Size = new System.Drawing.Size(0, 533);
-			this.Presentation_Fade_ListView.SmallImageList = this.Presentation_Fade_ImageList;
-			this.Presentation_Fade_ListView.TabIndex = 3;
-			this.Presentation_Fade_ListView.UseCompatibleStateImageBehavior = false;
-			this.Presentation_Fade_ListView.View = System.Windows.Forms.View.List;
-			this.Presentation_Fade_ListView.DoubleClick += new System.EventHandler(this.Presentation_Fade_ListView_DoubleClick);
-			this.Presentation_Fade_ListView.Click += new System.EventHandler(this.Presentation_Fade_ListView_Click);
-			// 
 			// Fade_Top_Panel
 			// 
+			this.Fade_Top_Panel.Controls.Add(this.Presentation_Fade_ListView);
 			this.Fade_Top_Panel.Controls.Add(this.Presentation_Fade_Refresh_Button);
 			this.Fade_Top_Panel.Controls.Add(this.Presentation_Fade_ToPlaylist_Button);
 			this.Fade_Top_Panel.Controls.Add(this.Presentation_Fade_preview);
@@ -2527,6 +2500,23 @@ namespace DreamBeam {
 			this.Fade_Top_Panel.Name = "Fade_Top_Panel";
 			this.Fade_Top_Panel.Size = new System.Drawing.Size(0, 152);
 			this.Fade_Top_Panel.TabIndex = 6;
+			// 
+			// Presentation_Fade_ListView
+			// 
+			this.Presentation_Fade_ListView.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+			this.Presentation_Fade_ListView.AllowColumnReorder = true;
+			this.Presentation_Fade_ListView.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Presentation_Fade_ListView.FullRowSelect = true;
+			this.Presentation_Fade_ListView.GridLines = true;
+			this.Presentation_Fade_ListView.Location = new System.Drawing.Point(0, 0);
+			this.Presentation_Fade_ListView.Name = "Presentation_Fade_ListView";
+			this.Presentation_Fade_ListView.Size = new System.Drawing.Size(0, 152);
+			this.Presentation_Fade_ListView.SmallImageList = this.Presentation_Fade_ImageList;
+			this.Presentation_Fade_ListView.TabIndex = 3;
+			this.Presentation_Fade_ListView.UseCompatibleStateImageBehavior = false;
+			this.Presentation_Fade_ListView.View = System.Windows.Forms.View.List;
+			this.Presentation_Fade_ListView.DoubleClick += new System.EventHandler(this.Presentation_Fade_ListView_DoubleClick);
+			this.Presentation_Fade_ListView.Click += new System.EventHandler(this.Presentation_Fade_ListView_Click);
 			// 
 			// Presentation_Fade_Refresh_Button
 			// 
@@ -2593,7 +2583,7 @@ namespace DreamBeam {
 			// 
 			// Presentation_PreviewPanel
 			// 
-			this.Presentation_PreviewPanel.BackColor = System.Drawing.Color.Black;
+			this.Presentation_PreviewPanel.BackColor = System.Drawing.Color.DarkRed;
 			this.Presentation_PreviewPanel.Controls.Add(this.Presentation_VideoPanel);
 			this.Presentation_PreviewPanel.Controls.Add(this.axShockwaveFlash);
 			this.Presentation_PreviewPanel.Controls.Add(this.Presentation_PreviewBox);
@@ -2601,13 +2591,13 @@ namespace DreamBeam {
 			this.Presentation_PreviewPanel.Location = new System.Drawing.Point(0, 0);
 			this.Presentation_PreviewPanel.Name = "Presentation_PreviewPanel";
 			this.Presentation_PreviewPanel.Padding = new System.Windows.Forms.Padding(10);
-			this.Presentation_PreviewPanel.Size = new System.Drawing.Size(506, 631);
+			this.Presentation_PreviewPanel.Size = new System.Drawing.Size(506, 542);
 			this.Presentation_PreviewPanel.TabIndex = 2;
 			this.Presentation_PreviewPanel.Resize += new System.EventHandler(this.Presentation_PreviewPanel_Resize);
 			// 
 			// Presentation_VideoPanel
 			// 
-			this.Presentation_VideoPanel.BackColor = System.Drawing.Color.White;
+			this.Presentation_VideoPanel.BackColor = System.Drawing.Color.Silver;
 			this.Presentation_VideoPanel.Location = new System.Drawing.Point(32, 32);
 			this.Presentation_VideoPanel.Name = "Presentation_VideoPanel";
 			this.Presentation_VideoPanel.Size = new System.Drawing.Size(424, 176);
@@ -2627,11 +2617,11 @@ namespace DreamBeam {
 			// 
 			// Presentation_PreviewBox
 			// 
-			this.Presentation_PreviewBox.BackColor = System.Drawing.Color.White;
+			this.Presentation_PreviewBox.BackColor = System.Drawing.Color.PeachPuff;
 			this.Presentation_PreviewBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.Presentation_PreviewBox.Location = new System.Drawing.Point(10, 10);
 			this.Presentation_PreviewBox.Name = "Presentation_PreviewBox";
-			this.Presentation_PreviewBox.Size = new System.Drawing.Size(486, 611);
+			this.Presentation_PreviewBox.Size = new System.Drawing.Size(486, 522);
 			this.Presentation_PreviewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.Presentation_PreviewBox.TabIndex = 0;
 			this.Presentation_PreviewBox.TabStop = false;
@@ -2645,97 +2635,68 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanel.Controls.Add(this.Presentation_MovieControlPanel_Top);
 			this.Presentation_MovieControlPanel.Controls.Add(this.Presentation_MovieControlPanel_Right);
 			this.Presentation_MovieControlPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.Presentation_MovieControlPanel.Location = new System.Drawing.Point(0, 631);
+			this.Presentation_MovieControlPanel.Location = new System.Drawing.Point(0, 542);
 			this.Presentation_MovieControlPanel.Name = "Presentation_MovieControlPanel";
-			this.Presentation_MovieControlPanel.Size = new System.Drawing.Size(506, 60);
+			this.Presentation_MovieControlPanel.Size = new System.Drawing.Size(506, 149);
 			this.Presentation_MovieControlPanel.TabIndex = 3;
 			// 
 			// Presentation_MovieControlPanelBottom
 			// 
+			this.Presentation_MovieControlPanelBottom.Controls.Add(this.liveMediaControls);
 			this.Presentation_MovieControlPanelBottom.Controls.Add(this.Presentation_MediaLoop_Checkbox);
 			this.Presentation_MovieControlPanelBottom.Controls.Add(this.Presentation_MovieControl_PreviewButtonPanel);
-			this.Presentation_MovieControlPanelBottom.Controls.Add(this.Presentation_MovieControlPanelBottomLeft);
 			this.Presentation_MovieControlPanelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.Presentation_MovieControlPanelBottom.Location = new System.Drawing.Point(0, 28);
+			this.Presentation_MovieControlPanelBottom.Location = new System.Drawing.Point(0, 40);
 			this.Presentation_MovieControlPanelBottom.Name = "Presentation_MovieControlPanelBottom";
-			this.Presentation_MovieControlPanelBottom.Size = new System.Drawing.Size(456, 30);
+			this.Presentation_MovieControlPanelBottom.Size = new System.Drawing.Size(469, 107);
 			this.Presentation_MovieControlPanelBottom.TabIndex = 4;
+			// 
+			// liveMediaControls
+			// 
+			this.liveMediaControls.BackColor = System.Drawing.Color.Maroon;
+			this.liveMediaControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.liveMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.liveMediaControls.LabelColor = System.Drawing.Color.White;
+			this.liveMediaControls.LabelText = "Live Window";
+			this.liveMediaControls.Location = new System.Drawing.Point(0, 26);
+			this.liveMediaControls.Name = "liveMediaControls";
+			this.liveMediaControls.Size = new System.Drawing.Size(250, 81);
+			this.liveMediaControls.TabIndex = 5;
+			this.liveMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.liveMediaControls_MediaButtonPressed);
 			// 
 			// Presentation_MediaLoop_Checkbox
 			// 
+			this.Presentation_MediaLoop_Checkbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.Presentation_MediaLoop_Checkbox.Checked = true;
 			this.Presentation_MediaLoop_Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.Presentation_MediaLoop_Checkbox.Location = new System.Drawing.Point(80, 5);
+			this.Presentation_MediaLoop_Checkbox.Location = new System.Drawing.Point(9, 3);
 			this.Presentation_MediaLoop_Checkbox.Name = "Presentation_MediaLoop_Checkbox";
-			this.Presentation_MediaLoop_Checkbox.Size = new System.Drawing.Size(96, 24);
+			this.Presentation_MediaLoop_Checkbox.Size = new System.Drawing.Size(59, 24);
 			this.Presentation_MediaLoop_Checkbox.TabIndex = 4;
 			this.Presentation_MediaLoop_Checkbox.Text = "Loop";
 			this.Presentation_MediaLoop_Checkbox.CheckedChanged += new System.EventHandler(this.Presentation_MediaLoop_Checkbox_CheckedChanged);
 			// 
 			// Presentation_MovieControl_PreviewButtonPanel
 			// 
-			this.Presentation_MovieControl_PreviewButtonPanel.Controls.Add(this.Presentation_MoviePreviewButton);
+			this.Presentation_MovieControl_PreviewButtonPanel.Controls.Add(this.previewMediaControls);
 			this.Presentation_MovieControl_PreviewButtonPanel.Dock = System.Windows.Forms.DockStyle.Right;
-			this.Presentation_MovieControl_PreviewButtonPanel.Location = new System.Drawing.Point(256, 0);
+			this.Presentation_MovieControl_PreviewButtonPanel.Location = new System.Drawing.Point(250, 0);
 			this.Presentation_MovieControl_PreviewButtonPanel.Name = "Presentation_MovieControl_PreviewButtonPanel";
-			this.Presentation_MovieControl_PreviewButtonPanel.Size = new System.Drawing.Size(200, 30);
+			this.Presentation_MovieControl_PreviewButtonPanel.Size = new System.Drawing.Size(219, 107);
 			this.Presentation_MovieControl_PreviewButtonPanel.TabIndex = 3;
 			// 
-			// Presentation_MoviePreviewButton
+			// previewMediaControls
 			// 
-			this.Presentation_MoviePreviewButton.Enabled = false;
-			this.Presentation_MoviePreviewButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.Presentation_MoviePreviewButton.Location = new System.Drawing.Point(128, 1);
-			this.Presentation_MoviePreviewButton.Name = "Presentation_MoviePreviewButton";
-			this.Presentation_MoviePreviewButton.Size = new System.Drawing.Size(72, 23);
-			this.Presentation_MoviePreviewButton.TabIndex = 1;
-			this.Presentation_MoviePreviewButton.Text = "Preview";
-			this.Presentation_MoviePreviewButton.Click += new System.EventHandler(this.Presentation_MoviePreviewButton_Click);
-			// 
-			// Presentation_MovieControlPanelBottomLeft
-			// 
-			this.Presentation_MovieControlPanelBottomLeft.Controls.Add(this.Presentation_PlayBar);
-			this.Presentation_MovieControlPanelBottomLeft.Dock = System.Windows.Forms.DockStyle.Left;
-			this.Presentation_MovieControlPanelBottomLeft.Location = new System.Drawing.Point(0, 0);
-			this.Presentation_MovieControlPanelBottomLeft.Name = "Presentation_MovieControlPanelBottomLeft";
-			this.Presentation_MovieControlPanelBottomLeft.Size = new System.Drawing.Size(72, 30);
-			this.Presentation_MovieControlPanelBottomLeft.TabIndex = 2;
-			// 
-			// Presentation_PlayBar
-			// 
-			this.Presentation_PlayBar.Appearance = System.Windows.Forms.ToolBarAppearance.Flat;
-			this.Presentation_PlayBar.Buttons.AddRange(new System.Windows.Forms.ToolBarButton[] {
-            this.Presentation_PlayButton,
-            this.Presentation_PauseButton,
-            this.Presentation_StopButton});
-			this.Presentation_PlayBar.ButtonSize = new System.Drawing.Size(23, 22);
-			this.Presentation_PlayBar.DropDownArrows = true;
-			this.Presentation_PlayBar.ImageList = this.PlayButtons_ImageList;
-			this.Presentation_PlayBar.Location = new System.Drawing.Point(0, 0);
-			this.Presentation_PlayBar.Name = "Presentation_PlayBar";
-			this.Presentation_PlayBar.ShowToolTips = true;
-			this.Presentation_PlayBar.Size = new System.Drawing.Size(72, 28);
-			this.Presentation_PlayBar.TabIndex = 0;
-			this.Presentation_PlayBar.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.Presentation_PlayBar_ButtonClick);
-			// 
-			// Presentation_PlayButton
-			// 
-			this.Presentation_PlayButton.Enabled = false;
-			this.Presentation_PlayButton.ImageIndex = 0;
-			this.Presentation_PlayButton.Name = "Presentation_PlayButton";
-			this.Presentation_PlayButton.ToolTipText = "Play On Projector";
-			// 
-			// Presentation_PauseButton
-			// 
-			this.Presentation_PauseButton.Enabled = false;
-			this.Presentation_PauseButton.ImageIndex = 1;
-			this.Presentation_PauseButton.Name = "Presentation_PauseButton";
-			// 
-			// Presentation_StopButton
-			// 
-			this.Presentation_StopButton.Enabled = false;
-			this.Presentation_StopButton.ImageIndex = 2;
-			this.Presentation_StopButton.Name = "Presentation_StopButton";
+			this.previewMediaControls.BackColor = System.Drawing.SystemColors.Control;
+			this.previewMediaControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.previewMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.previewMediaControls.LabelColor = System.Drawing.SystemColors.ControlText;
+			this.previewMediaControls.LabelText = "Preview Window";
+			this.previewMediaControls.Location = new System.Drawing.Point(0, 26);
+			this.previewMediaControls.Name = "previewMediaControls";
+			this.previewMediaControls.Size = new System.Drawing.Size(219, 81);
+			this.previewMediaControls.TabIndex = 2;
+			this.previewMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.previewMediaControls_MediaButtonPressed);
 			// 
 			// Presentation_MovieControlPanel_Top
 			// 
@@ -2743,7 +2704,7 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanel_Top.Dock = System.Windows.Forms.DockStyle.Top;
 			this.Presentation_MovieControlPanel_Top.Location = new System.Drawing.Point(0, 0);
 			this.Presentation_MovieControlPanel_Top.Name = "Presentation_MovieControlPanel_Top";
-			this.Presentation_MovieControlPanel_Top.Size = new System.Drawing.Size(456, 30);
+			this.Presentation_MovieControlPanel_Top.Size = new System.Drawing.Size(469, 30);
 			this.Presentation_MovieControlPanel_Top.TabIndex = 3;
 			// 
 			// Media_TrackBar
@@ -2752,29 +2713,45 @@ namespace DreamBeam {
 			this.Media_TrackBar.Enabled = false;
 			this.Media_TrackBar.Location = new System.Drawing.Point(0, 0);
 			this.Media_TrackBar.Name = "Media_TrackBar";
-			this.Media_TrackBar.Size = new System.Drawing.Size(456, 30);
+			this.Media_TrackBar.Size = new System.Drawing.Size(469, 30);
 			this.Media_TrackBar.TabIndex = 0;
 			this.Media_TrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
 			this.Media_TrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Media_TrackBar_Up);
 			// 
 			// Presentation_MovieControlPanel_Right
 			// 
+			this.Presentation_MovieControlPanel_Right.Controls.Add(this.button1);
 			this.Presentation_MovieControlPanel_Right.Controls.Add(this.AudioBar);
 			this.Presentation_MovieControlPanel_Right.Dock = System.Windows.Forms.DockStyle.Right;
-			this.Presentation_MovieControlPanel_Right.Location = new System.Drawing.Point(456, 0);
+			this.Presentation_MovieControlPanel_Right.Location = new System.Drawing.Point(469, 0);
 			this.Presentation_MovieControlPanel_Right.Name = "Presentation_MovieControlPanel_Right";
-			this.Presentation_MovieControlPanel_Right.Size = new System.Drawing.Size(48, 58);
+			this.Presentation_MovieControlPanel_Right.Size = new System.Drawing.Size(35, 147);
 			this.Presentation_MovieControlPanel_Right.TabIndex = 2;
+			// 
+			// button1
+			// 
+			this.button1.BackgroundImage = global::DreamBeam.Properties.Resources.audio_volume_high;
+			this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.button1.FlatAppearance.BorderSize = 0;
+			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button1.Location = new System.Drawing.Point(0, 124);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(35, 23);
+			this.button1.TabIndex = 1;
+			this.button1.UseVisualStyleBackColor = true;
 			// 
 			// AudioBar
 			// 
+			this.AudioBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.AudioBar.AutoSize = false;
 			this.AudioBar.Enabled = false;
-			this.AudioBar.Location = new System.Drawing.Point(10, -6);
+			this.AudioBar.Location = new System.Drawing.Point(5, 0);
 			this.AudioBar.Maximum = 0;
 			this.AudioBar.Minimum = -10000;
 			this.AudioBar.Name = "AudioBar";
 			this.AudioBar.Orientation = System.Windows.Forms.Orientation.Vertical;
-			this.AudioBar.Size = new System.Drawing.Size(45, 71);
+			this.AudioBar.Size = new System.Drawing.Size(25, 121);
 			this.AudioBar.TabIndex = 0;
 			this.AudioBar.TickStyle = System.Windows.Forms.TickStyle.None;
 			this.AudioBar.ValueChanged += new System.EventHandler(this.AudioBar_ValueChanged);
@@ -3072,13 +3049,10 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanel.ResumeLayout(false);
 			this.Presentation_MovieControlPanelBottom.ResumeLayout(false);
 			this.Presentation_MovieControl_PreviewButtonPanel.ResumeLayout(false);
-			this.Presentation_MovieControlPanelBottomLeft.ResumeLayout(false);
-			this.Presentation_MovieControlPanelBottomLeft.PerformLayout();
 			this.Presentation_MovieControlPanel_Top.ResumeLayout(false);
 			this.Presentation_MovieControlPanel_Top.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Media_TrackBar)).EndInit();
 			this.Presentation_MovieControlPanel_Right.ResumeLayout(false);
-			this.Presentation_MovieControlPanel_Right.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.AudioBar)).EndInit();
 			this.EditSongs2_Tab.ResumeLayout(false);
 			this.BibleText_Tab.ResumeLayout(false);
@@ -3093,6 +3067,10 @@ namespace DreamBeam {
 
 		}
 		#endregion
+
+		private MediaControls previewMediaControls;
+		private System.Windows.Forms.Button button1;
+		private MediaControls liveMediaControls;
 
 
 	}

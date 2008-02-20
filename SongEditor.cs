@@ -68,6 +68,7 @@ namespace DreamBeam {
 
 		}
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Song Song {
 			set { song = (Song)value; PopulateControls(song); }
 			get { return ReadControls(); }
@@ -773,7 +774,7 @@ namespace DreamBeam {
 		private void BrowseTheme_Click(object sender, EventArgs e) {
 			SongTheme theme = SongTheme.OpenFile();
 			if (theme != null) {
-				this.ThemePath.Text = Tools.GetRelativePath(DirType.Themes, theme.ThemeFile);
+				this.ThemePath.Text = Tools.GetRelativePath(DirType.DataRoot, theme.ThemeFile);
 			} else {
 				this.ThemePath.Text = "";
 			}

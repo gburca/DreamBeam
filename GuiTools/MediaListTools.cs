@@ -97,11 +97,11 @@ namespace DreamBeam {
 		#region AddMediaAndLoad
 		public void AddMedia(string sPath) {
 			int index = 0;
-			if (_MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex > -1) {
-				index = _MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex;
-			} else {
-				index = MediaList.Count - 1;
-			}
+			//if (_MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex > -1) {
+			//    index = _MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex;
+			//} else {
+			    index = MediaList.Count - 1;
+			//}
 
 			if (MediaList.GetType(sPath) == "image") {
 				try {

@@ -36,6 +36,7 @@ namespace DreamBeam {
 	/// They are used in the Tools.GetDirectory and Tools.GetRelativePath functions.
 	/// </summary>
 	public enum DirType {
+		DataRoot,	// The root of the user-data directories below
 		Songs,
 		Backgrounds,
 		MediaLists,

@@ -195,17 +195,17 @@ namespace DreamBeam {
 		/// <param name="Height"></param>
 		public void RenderBGImage(string ConfigBGImagePath, Graphics graphics, int Width, int Height) {
 			if (this.HideBG == false) {
-				string fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Backgrounds), this.BGImagePath);
+				string fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), this.BGImagePath);
 				if (Tools.FileExists(fullPath)) {
 					if (this.bgImage == null) {
 						try {
 							this.bgImage = Image.FromFile(fullPath);
 						} catch { }
 					}
-				} else if (Tools.FileExists(Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Backgrounds), ConfigBGImagePath))) {
+				} else if (Tools.FileExists(Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), ConfigBGImagePath))) {
 					if (this.bgImage == null) {
 						try {
-							this.bgImage = Image.FromFile(Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Backgrounds), ConfigBGImagePath));
+							this.bgImage = Image.FromFile(Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), ConfigBGImagePath));
 						} catch { }
 					}
 				}
@@ -245,7 +245,7 @@ namespace DreamBeam {
 			#region Render background image
 			// Draw background image
 			if (this.HideBG == false) {
-				string fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Backgrounds), this.BGImagePath);
+				string fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), this.BGImagePath);
 				if (Tools.FileExists(fullPath)) {
 					if (this.bgImage == null) {
 						try {

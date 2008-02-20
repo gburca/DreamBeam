@@ -27,7 +27,7 @@
   <Theme>
     <Song>
       <Version>0.72</Version>
-      <BGImagePath>red.jpg</BGImagePath>
+      <BGImagePath>Backgrounds\red.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>
@@ -108,7 +108,7 @@
     </Song>
     <Bible>
       <Version>0.72</Version>
-      <BGImagePath>TilesBlue.jpg</BGImagePath>
+      <BGImagePath>Backgrounds\TilesBlue.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>
@@ -189,7 +189,7 @@
     </Bible>
     <Sermon>
       <Version>0.72</Version>
-      <BGImagePath>white.jpg</BGImagePath>
+      <BGImagePath>Backgrounds\white.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>

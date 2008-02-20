@@ -275,6 +275,9 @@
     <Compile Include="GuiTools\GuiTools.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GuiTools\MediaControls.Designer.cs">
+      <DependentUpon>MediaControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="GuiTools\Presentation.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -302,6 +305,9 @@
     <Compile Include="GuiTools\ThemeWidget.Designer.cs">
       <DependentUpon>ThemeWidget.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuiTools\MediaControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,6 +328,11 @@
     </Compile>
     <Compile Include="Options.Designer.cs">
       <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ShowBeam.cs">
       <SubType>Form</SubType>
@@ -360,6 +371,10 @@
     <EmbeddedResource Include="GuiTools\BibleRTF.resx">
       <DependentUpon>BibleRTF.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\MediaControls.resx">
+      <DependentUpon>MediaControls.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="GuiTools\TextFormatOptions.resx">
       <DependentUpon>TextFormatOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -389,6 +404,11 @@
       <DependentUpon>Options.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ShowBeam.resx">
       <DependentUpon>ShowBeam.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -406,6 +426,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="ChangeLog.txt" />
+    <None Include="Icons\audio-volume-high.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DreamBeam_TemporaryKey.pfx" />

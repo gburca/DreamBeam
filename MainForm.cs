@@ -409,7 +409,7 @@ namespace DreamBeam {
 
 			#region MediaPresentation
 			Presentation_MediaLoop_Checkbox.Text = Lang.say("MediaPresentation.Loop");
-			Presentation_MoviePreviewButton.Text = Lang.say("MediaPresentation.Preview");
+			previewMediaControls.LabelText = Lang.say("MediaPresentation.Preview");
 			#endregion
 
 			#region TextTool
@@ -1398,21 +1398,14 @@ namespace DreamBeam {
 		private void MovieControlPanelWipe(string direction) {
 			if (direction == "in") {
 				Media_TrackBar.Enabled = false;
-				Presentation_MoviePreviewButton.Enabled = false;
-				Presentation_MoviePreviewButton.Enabled = false;
-				Presentation_PlayButton.Enabled = false;
-				Presentation_PauseButton.Enabled = false;
-				Presentation_StopButton.Enabled = false;
 				if (Presentation_MovieControlPanel.Size.Height != 0) {
 					Presentation_MovieControlPanel.Size = new System.Drawing.Size(Presentation_MovieControlPanel.Size.Width, 0);
 				}
 			} else {
+				int height = 160;
 				Media_TrackBar.Enabled = true;
-				Presentation_MoviePreviewButton.Enabled = true;
-				Presentation_PlayButton.Enabled = true;
-				Presentation_MoviePreviewButton.Enabled = true;
-				if (Presentation_MovieControlPanel.Size.Height != 60) {
-					Presentation_MovieControlPanel.Size = new System.Drawing.Size(Presentation_MovieControlPanel.Size.Width, 60);
+				if (Presentation_MovieControlPanel.Size.Height != height) {
+					Presentation_MovieControlPanel.Size = new System.Drawing.Size(Presentation_MovieControlPanel.Size.Width, height);
 				}
 			}
 		}
@@ -1421,16 +1414,14 @@ namespace DreamBeam {
 		/// <summary>on Progress-Timer Tick, set mediaTrackbar to MediaPlayPosition</summary>
 		private void PlayProgress_Tick(object sender, System.EventArgs e) {
 			if (this.ShowBeam.strMediaPlaying == null) {
-				if (MediaPreview) {
-					if (MediaList.GetType(MediaFile) == "flash") {
-						Media_TrackBar.Value = axShockwaveFlash.FrameNum;
-					}
-					if (MediaList.GetType(MediaFile) == "movie") {
-						try {
-							Media_TrackBar.Maximum = (int)video.Duration;
-							Media_TrackBar.Value = (int)video.CurrentPosition;
-						} catch { }
-					}
+				if (MediaList.GetType(MediaFile) == "flash") {
+					Media_TrackBar.Value = axShockwaveFlash.FrameNum;
+				}
+				if (MediaList.GetType(MediaFile) == "movie") {
+					try {
+						Media_TrackBar.Maximum = (int)video.Duration;
+						Media_TrackBar.Value = (int)video.CurrentPosition;
+					} catch { }
 				}
 			} else if (this.ShowBeam.strMediaPlaying == "flash") {
 				Media_TrackBar.Value = this.ShowBeam.axShockwaveFlash.FrameNum;
@@ -1470,27 +1461,6 @@ namespace DreamBeam {
 			}
 		}
 
-		/// <summary>On Click, Play, Stop or Pause Media</summary>
-		private void Presentation_PlayBar_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e) {
-			string MediaName = this.MediaList.iItem[RightDocks_BottomPanel_MediaList.SelectedIndex].Path;
-			if (e.Button == Presentation_PlayButton) {
-				this.Media2BeamBox();
-			}
-			if (e.Button == Presentation_PauseButton) {
-				PlayProgress.Enabled = false;
-				Presentation_PauseButton.Enabled = false;
-				Presentation_PlayButton.Enabled = true;
-				this.ShowBeam.PauseMedia();
-			}
-			if (e.Button == Presentation_StopButton) {
-				PlayProgress.Enabled = false;
-				Presentation_StopButton.Enabled = false;
-				Presentation_PauseButton.Enabled = false;
-				Presentation_PlayButton.Enabled = true;
-				ShowBeam.StopMedia();
-			}
-		}
-
 
 		/// <summary>If Loop Media Checkbox changed, copy it's value to showbeam</summary>
 		private void Presentation_MediaLoop_Checkbox_CheckedChanged(object sender, System.EventArgs e) {
@@ -1499,38 +1469,6 @@ namespace DreamBeam {
 		}
 		#endregion
 
-		/// <summary>Starts and Stop's the local Media Preview</summary>
-		private void Presentation_MoviePreviewButton_Click(object sender, System.EventArgs e) {
-			if (!MediaPreview) {
-				if (MediaList.GetType(MediaFile) == "flash") {
-					try {
-						Media_TrackBar.Maximum = axShockwaveFlash.TotalFrames;
-						PlayProgress.Enabled = true;
-						axShockwaveFlash.Play();
-					} catch { MessageBox.Show("Can not play this Flash File"); }
-				}
-				if (MediaList.GetType(MediaFile) == "movie") {
-					Media_TrackBar.Maximum = (int)video.Duration;
-					PlayProgress.Enabled = true;
-					try {
-						video.Audio.Volume = -10000;
-					} catch { }
-					Thread.Sleep(1000);
-					this.video.Play();
-				}
-				MediaPreview = true;
-			} else {
-				if (MediaList.GetType(MediaFile) == "flash") {
-					axShockwaveFlash.Stop();
-					axShockwaveFlash.Back();
-					PlayProgress.Enabled = false;
-				}
-				if (MediaList.GetType(MediaFile) == "movie") {
-					this.video.Stop();
-				}
-				MediaPreview = false;
-			}
-		}
 		#endregion
 
 
@@ -1677,8 +1615,6 @@ namespace DreamBeam {
 			if (axShockwaveFlash.Playing)
 				axShockwaveFlash.Stop();
 
-			Presentation_StopButton.Enabled = false;
-			Presentation_PauseButton.Enabled = false;
 			axShockwaveFlash.SendToBack();
 			axShockwaveFlash.Movie = "";
 			this.MediaPreview = false;
@@ -1701,6 +1637,7 @@ namespace DreamBeam {
 				axShockwaveFlash.Movie = MediaFile;
 				axShockwaveFlash.Playing = false;
 				axShockwaveFlash.Stop();
+				axShockwaveFlash.FrameNum = 1;
 				this.Presentation_Resize();
 			}
 			if (MediaList.GetType(MediaFile) == "movie") {
@@ -1716,6 +1653,7 @@ namespace DreamBeam {
 					//Thread_LoadMovie.IsBackground = true;
 					//Thread_LoadMovie.Name = "LoadVideo";
 					//Thread_LoadMovie.Start();
+					video.SeekCurrentPosition(0.1, Microsoft.DirectX.AudioVideoPlayback.SeekPositionFlags.AbsolutePositioning);
 				}
 			}
 			GC.Collect();
@@ -1728,14 +1666,10 @@ namespace DreamBeam {
 		private void LoadVideo() {
 			LoadingVideo = true;
 			VideoProblem = false;
-			if (this.ShowBeam.strMediaPlaying != null) {
-				Presentation_StopButton.Enabled = true;
-			}
 			MovieControlPanelWipe("out");
-			Presentation_MoviePreviewButton.Enabled = false;
 			AudioBar.Enabled = false;
 			Media_TrackBar.Enabled = false;
-			Presentation_MoviePreviewButton.Text = "Loading...";
+			previewMediaControls.LabelText = "Loading...";
 			Presentation_VideoPanel.BringToFront();
 
 			if (this.video == null) {
@@ -1761,14 +1695,9 @@ namespace DreamBeam {
 				this.Presentation_VideoPanel.Show();
 				this.Presentation_VideoPanel.BringToFront();
 				this.Presentation_Resize();
-				Presentation_MoviePreviewButton.Text = "Preview";
-				Presentation_MoviePreviewButton.Enabled = true;
+				this.previewMediaControls.LabelText = Lang.say("MediaPresentation.Preview");
 				AudioBar.Enabled = true;
 				Media_TrackBar.Enabled = true;
-			} else {
-				Presentation_StopButton.Enabled = false;
-				Presentation_PauseButton.Enabled = false;
-				Presentation_PlayButton.Enabled = false;
 			}
 			this.VideoLoaded = true;
 			LoadingVideo = false;
@@ -1907,9 +1836,6 @@ namespace DreamBeam {
 			}
 
 			ShowBeam.strMediaPlaying = null;
-			Presentation_PauseButton.Enabled = true;
-			Presentation_StopButton.Enabled = true;
-			Presentation_PlayButton.Enabled = false;
 
 			if (MediaList.GetType(MediaFile) == "movie" && this.LoadingVideo) {
 				this.VideoLoadTimer.Enabled = true;
@@ -2834,6 +2760,90 @@ namespace DreamBeam {
 			}
 		}
 		#endregion
+
+		private void liveMediaControls_MediaButtonPressed(object sender, MediaControlsEvent e) {
+			switch (e.button) {
+				case MediaButton.Play:
+					this.Media2BeamBox();
+					break;
+				case MediaButton.Pause:
+					PlayProgress.Enabled = false;
+					this.ShowBeam.PauseMedia();
+					break;
+				case MediaButton.SkipBk:
+				case MediaButton.SkipFw:
+				case MediaButton.Stop:
+					PlayProgress.Enabled = false;
+					ShowBeam.StopMedia();
+					break;
+			}
+		}
+
+		private void previewMediaControls_MediaButtonPressed(object sender, MediaControlsEvent e) {
+			switch (e.button) {
+				case MediaButton.Play:
+					if (MediaList.GetType(MediaFile) == "flash") {
+						try {
+							Media_TrackBar.Maximum = axShockwaveFlash.TotalFrames;
+							PlayProgress.Enabled = true;
+							axShockwaveFlash.Play();
+						} catch { MessageBox.Show("Can not play this Flash File"); }
+					} else if (MediaList.GetType(MediaFile) == "movie") {
+						Media_TrackBar.Maximum = (int)video.Duration;
+						PlayProgress.Enabled = true;
+						try {
+							video.Audio.Volume = -10000;
+						} catch { }
+						Thread.Sleep(1000);
+						this.video.Play();
+					}
+					break;
+
+				case MediaButton.Pause:
+					if (MediaList.GetType(MediaFile) == "flash") {
+						axShockwaveFlash.Stop();
+					} else if (MediaList.GetType(MediaFile) == "movie") {
+						video.Pause();
+					}
+					break;
+
+				case MediaButton.SeekBk:
+				case MediaButton.SeekFw:
+					if (MediaList.GetType(MediaFile) == "flash") {
+						Boolean wasPlaying = axShockwaveFlash.Playing;
+						axShockwaveFlash.Stop();
+						int current = axShockwaveFlash.CurrentFrame();
+						int total = axShockwaveFlash.TotalFrames;
+						int seekAmt = 10;
+						int targetFrame = current + (e.button == MediaButton.SeekBk ? -seekAmt : seekAmt);
+						axShockwaveFlash.FrameNum = Math.Max(1, Math.Min(targetFrame, total));
+						if (wasPlaying)	axShockwaveFlash.Play();
+					} else if (MediaList.GetType(MediaFile) == "movie") {
+						Boolean wasPlaying = video.Playing;
+						video.Pause();
+						double current = video.CurrentPosition;
+						double seekAmt = 1;
+						double target = current + (e.button == MediaButton.SeekBk ? -seekAmt : seekAmt);
+						double total = video.Duration;
+						video.CurrentPosition = Math.Max(0, Math.Min(target, total));
+						if (wasPlaying) video.Play();
+					}
+					break;
+
+				case MediaButton.SkipBk:
+				case MediaButton.SkipFw:
+				case MediaButton.Stop:
+					if (MediaList.GetType(MediaFile) == "flash") {
+						axShockwaveFlash.Stop();
+						axShockwaveFlash.Back();
+						PlayProgress.Enabled = false;
+					} else if (MediaList.GetType(MediaFile) == "movie") {
+						this.video.Stop();
+						//video.SeekCurrentPosition(0.1, Microsoft.DirectX.AudioVideoPlayback.SeekPositionFlags.AbsolutePositioning);
+					}
+					break;
+			}
+		}
 
 	}
 

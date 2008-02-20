@@ -66,7 +66,7 @@ namespace DreamBeam {
 				string fileName = dialog.FileName;
 				try {
 					SerializeTo(this, fileName);
-					this.ThemeFile = Tools.GetRelativePath(DirType.Themes, fileName);
+					this.ThemeFile = Tools.GetRelativePath(DirType.DataRoot, fileName);
 					//this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.SaveFileDialog.FileName);
 				} catch (Exception ex) {
 					MessageBox.Show("Theme not saved: " + ex.Message);
@@ -99,7 +99,7 @@ namespace DreamBeam {
 		public static object DeserializeFrom(Type type, string file) {
 			XmlSerializer xs = null;
 
-			file = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Themes), file);
+			file = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), file);
 			if (file == null) { return null; }
 			try {
 				xs = new XmlSerializer(type);
@@ -113,7 +113,7 @@ namespace DreamBeam {
 					using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
 						Theme t = (Theme)xs.Deserialize(fs);
 						if (t != null) {
-							t.ThemeFile = Tools.GetRelativePath(DirType.Themes, file);
+							t.ThemeFile = Tools.GetRelativePath(DirType.DataRoot, file);
 						}
 						return t;
 					}
