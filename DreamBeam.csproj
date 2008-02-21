@@ -252,6 +252,7 @@
     <Compile Include="FileTypes\LogFile.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FileTypes\Media.cs" />
     <Compile Include="FileTypes\Song.cs">
       <SubType>Code</SubType>
     </Compile>

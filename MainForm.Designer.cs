@@ -316,11 +316,11 @@ namespace DreamBeam {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node2");
-			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
-            treeNode5});
+			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node2");
+			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
+            treeNode2});
 			this.RightDocks_ImageListBox = new Controls.Development.ImageListBox();
 			this.ImageContext = new System.Windows.Forms.ContextMenu();
 			this.ImageContextItemManage = new System.Windows.Forms.MenuItem();
@@ -519,7 +519,7 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanel_Top = new System.Windows.Forms.Panel();
 			this.Media_TrackBar = new System.Windows.Forms.TrackBar();
 			this.Presentation_MovieControlPanel_Right = new System.Windows.Forms.Panel();
-			this.button1 = new System.Windows.Forms.Button();
+			this.muteButton = new System.Windows.Forms.Button();
 			this.AudioBar = new System.Windows.Forms.TrackBar();
 			this.EditSongs2_Tab = new System.Windows.Forms.TabPage();
 			this.songEditor = new DreamBeam.SongEditor();
@@ -2145,7 +2145,7 @@ namespace DreamBeam {
 			// 
 			// PlayProgress
 			// 
-			this.PlayProgress.Interval = 1000;
+			this.PlayProgress.Interval = 500;
 			this.PlayProgress.Tick += new System.EventHandler(this.PlayProgress_Tick);
 			// 
 			// VideoLoadTimer
@@ -2556,14 +2556,14 @@ namespace DreamBeam {
 			this.treeView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
 			this.treeView1.Location = new System.Drawing.Point(2, 2);
 			this.treeView1.Name = "treeView1";
-			treeNode4.Name = "";
-			treeNode4.Text = "Node2";
-			treeNode5.Name = "";
-			treeNode5.Text = "Node1";
-			treeNode6.Name = "";
-			treeNode6.Text = "Node0";
+			treeNode1.Name = "";
+			treeNode1.Text = "Node2";
+			treeNode2.Name = "";
+			treeNode2.Text = "Node1";
+			treeNode3.Name = "";
+			treeNode3.Text = "Node0";
 			this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode3});
 			this.treeView1.SelectedImageIndex = 0;
 			this.treeView1.Size = new System.Drawing.Size(190, 685);
 			this.treeView1.TabIndex = 2;
@@ -2720,7 +2720,7 @@ namespace DreamBeam {
 			// 
 			// Presentation_MovieControlPanel_Right
 			// 
-			this.Presentation_MovieControlPanel_Right.Controls.Add(this.button1);
+			this.Presentation_MovieControlPanel_Right.Controls.Add(this.muteButton);
 			this.Presentation_MovieControlPanel_Right.Controls.Add(this.AudioBar);
 			this.Presentation_MovieControlPanel_Right.Dock = System.Windows.Forms.DockStyle.Right;
 			this.Presentation_MovieControlPanel_Right.Location = new System.Drawing.Point(469, 0);
@@ -2728,18 +2728,19 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanel_Right.Size = new System.Drawing.Size(35, 135);
 			this.Presentation_MovieControlPanel_Right.TabIndex = 2;
 			// 
-			// button1
+			// muteButton
 			// 
-			this.button1.BackgroundImage = global::DreamBeam.Properties.Resources.audio_volume_high;
-			this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.button1.FlatAppearance.BorderSize = 0;
-			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button1.Location = new System.Drawing.Point(0, 112);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(35, 23);
-			this.button1.TabIndex = 1;
-			this.button1.UseVisualStyleBackColor = true;
+			this.muteButton.BackgroundImage = global::DreamBeam.Properties.Resources.audio_volume_high;
+			this.muteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.muteButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.muteButton.Enabled = false;
+			this.muteButton.FlatAppearance.BorderSize = 0;
+			this.muteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.muteButton.Location = new System.Drawing.Point(0, 112);
+			this.muteButton.Name = "muteButton";
+			this.muteButton.Size = new System.Drawing.Size(35, 23);
+			this.muteButton.TabIndex = 1;
+			this.muteButton.UseVisualStyleBackColor = true;
 			// 
 			// AudioBar
 			// 
@@ -3069,7 +3070,7 @@ namespace DreamBeam {
 		#endregion
 
 		private MediaControls previewMediaControls;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button muteButton;
 		private MediaControls liveMediaControls;
 
 
