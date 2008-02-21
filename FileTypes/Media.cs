@@ -33,10 +33,19 @@ namespace DreamBeam {
 		void SeekFw();
 		void SkipFw();
 
-		void SkipTo(double location);
-
 		// Maybe these should go in a IMediaProperties interface
 		double Duration();
+		int Volume {
+			get;
+			set;
+		}
+		Boolean Playing {
+			get;
+		}
+		double CurrentLocation {
+			get;
+			set;
+		}
 	}
 
 	public class MediaFlash : IMediaOperations {
@@ -50,7 +59,7 @@ namespace DreamBeam {
 		protected void Seek(int amount) {
 			if (flash == null) return;
 			Boolean wasPlaying = flash.Playing;
-			Stop();
+			Pause();
 
 			int current = flash.CurrentFrame();
 			int total = flash.TotalFrames;
@@ -79,21 +88,39 @@ namespace DreamBeam {
 		public void SeekFw() { Seek(seekAmount); }
 		public void SkipFw() { Stop(); }
 
-		public void SkipTo(double location) {
-			if (flash == null) return;
-			Seek(location - flash.CurrentFrame());
-		}
-
 		public double Duration() {
 			if (flash == null) return 0;
 			return flash.TotalFrames;
+		}
+
+		public int Volume {
+			get { return 0; }
+			set { }
+		}
+
+		public Boolean Playing {
+			get {
+				if (flash == null) return false;
+				return flash.Playing;
+			}
+		}
+
+		public double CurrentLocation {
+			get {
+				if (flash == null) return 0;
+				return flash.CurrentFrame();
+			}
+			set {
+				if (flash == null) return;
+				Seek((int)(value - flash.CurrentFrame()));
+			}
 		}
 		#endregion
 	}
 
 	public class MediaMovie : IMediaOperations {
 		Video video = null;
-		public double seekAmount = 0;
+		public double seekAmount = 1;
 
 		public MediaMovie(Video video) {
 			this.video = video;
@@ -102,7 +129,7 @@ namespace DreamBeam {
 		protected void Seek(double amount) {
 			if (video == null) return;
 			Boolean wasPlaying = video.Playing;
-			video.Pause();
+			Pause();
 
 			double current = video.CurrentPosition;
 			double total = video.Duration;
@@ -138,6 +165,37 @@ namespace DreamBeam {
 		public double Duration() {
 			if (video == null) return 0;
 			return video.Duration;
+		}
+
+		public int Volume {
+			get {
+				if (video == null) return 0;
+				return video.Audio.Volume;
+			}
+			set {
+				if (video == null) return;
+				try {
+					video.Audio.Volume = value;
+				} catch { }
+			}
+		}
+
+		public Boolean Playing {
+			get {
+				if (video == null) return false;
+				return video.Playing;
+			}
+		}
+
+		public double CurrentLocation {
+			get {
+				if (video == null) return 0;
+				return video.CurrentPosition;
+			}
+			set {
+				if (video == null) return;
+				video.CurrentPosition = value;
+			}
 		}
 		#endregion
 	}

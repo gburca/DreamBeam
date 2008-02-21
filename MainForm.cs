@@ -2774,74 +2774,43 @@ namespace DreamBeam {
 		}
 
 		private void previewMediaControls_MediaButtonPressed(object sender, MediaControlsEvent e) {
+			if (this.MediaFile1 == null) return;
+
 			switch (e.button) {
 				case MediaButton.Play:
-					if (MediaList.GetType(MediaFile) == "flash") {
-						try {
-							Media_TrackBar.Maximum = axShockwaveFlash.TotalFrames;
-							PlayProgress.Enabled = true;
-							axShockwaveFlash.Play();
-						} catch { MessageBox.Show("Can not play this Flash File"); }
-					} else if (MediaList.GetType(MediaFile) == "movie") {
-						Media_TrackBar.Maximum = (int)video.Duration;
-						PlayProgress.Enabled = true;
-						try {
-							video.Audio.Volume = -10000;
-						} catch { }
-						Thread.Sleep(1000);
-						video.Play();
-					}
+					Media_TrackBar.Maximum = (int)MediaFile1.Duration();
+					MediaFile1.Volume = -10000;
+					Thread.Sleep(100);
+					MediaFile1.Play();
 					break;
 
 				case MediaButton.Pause:
-					if (MediaList.GetType(MediaFile) == "flash") {
-						PlayProgress.Enabled = false;
-						axShockwaveFlash.Stop();
-					} else if (MediaList.GetType(MediaFile) == "movie") {
-						PlayProgress.Enabled = false;
-						video.Pause();
-					}
+					MediaFile1.Pause();
 					break;
-
 				case MediaButton.SeekBk:
-				case MediaButton.SeekFw:
-					if (MediaList.GetType(MediaFile) == "flash") {
-						Boolean wasPlaying = axShockwaveFlash.Playing;
-						axShockwaveFlash.Stop();
-						int current = axShockwaveFlash.CurrentFrame();
-						int total = axShockwaveFlash.TotalFrames;
-						int seekAmt = 10;
-						int targetFrame = current + (e.button == MediaButton.SeekBk ? -seekAmt : seekAmt);
-						axShockwaveFlash.FrameNum = Math.Max(0, Math.Min(targetFrame, total));
-						if (wasPlaying)	axShockwaveFlash.Play();
-					} else if (MediaList.GetType(MediaFile) == "movie") {
-						Boolean wasPlaying = video.Playing;
-						video.Pause();
-						double current = video.CurrentPosition;
-						double seekAmt = 1;
-						double target = current + (e.button == MediaButton.SeekBk ? -seekAmt : seekAmt);
-						double total = video.Duration;
-						video.CurrentPosition = Math.Max(0, Math.Min(target, total));
-						if (wasPlaying) video.Play();
-					}
+					MediaFile1.SeekBk();
 					break;
-
+				case MediaButton.SeekFw:
+					MediaFile1.SeekFw();
+					break;
 				case MediaButton.SkipBk:
+					MediaFile1.SkipBk();
+					break;
 				case MediaButton.SkipFw:
+					MediaFile1.SkipFw();
+					break;
 				case MediaButton.Stop:
-					if (MediaList.GetType(MediaFile) == "flash") {
-						PlayProgress.Enabled = false;
-						axShockwaveFlash.Stop();
-						axShockwaveFlash.Rewind();
-					} else if (MediaList.GetType(MediaFile) == "movie") {
-						PlayProgress.Enabled = false;
-						this.video.Stop();
-						// TODO: How can we show the first frame?
-						//video.SeekCurrentPosition(0.1, Microsoft.DirectX.AudioVideoPlayback.SeekPositionFlags.AbsolutePositioning);
-					}
-					Media_TrackBar.Value = 0;
+					MediaFile1.Stop();
 					break;
 			}
+
+			PlayProgress.Enabled = MediaFile1.Playing;
+			try {
+				Media_TrackBar.Value = (int)MediaFile1.CurrentLocation;
+			} catch {
+				Media_TrackBar.Value = 0;
+			}
+
 		}
 
 	}
