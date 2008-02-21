@@ -97,6 +97,7 @@ namespace DreamBeam {
 		#region AddMediaAndLoad
 		public void AddMedia(string sPath) {
 			int index = 0;
+			// TODO: Can't access these from non-UI thread. Must be fixed.
 			//if (_MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex > -1) {
 			//    index = _MainForm.RightDocks_BottomPanel_MediaList.SelectedIndex;
 			//} else {

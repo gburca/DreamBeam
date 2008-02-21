@@ -106,7 +106,6 @@ namespace DreamBeam {
 		public DirectoryInfo folder;
 
 		private System.ComponentModel.IContainer components;
-		bool MediaPreview = false;
 		private int indexOfItemUnderMouseToDrag;
 		private Rectangle dragBoxFromMouseDown;
 		private Point screenOffset;
@@ -1402,7 +1401,7 @@ namespace DreamBeam {
 					Presentation_MovieControlPanel.Size = new System.Drawing.Size(Presentation_MovieControlPanel.Size.Width, 0);
 				}
 			} else {
-				int height = 160;
+				int height = 137;
 				Media_TrackBar.Enabled = true;
 				if (Presentation_MovieControlPanel.Size.Height != height) {
 					Presentation_MovieControlPanel.Size = new System.Drawing.Size(Presentation_MovieControlPanel.Size.Width, height);
@@ -1617,7 +1616,6 @@ namespace DreamBeam {
 
 			axShockwaveFlash.SendToBack();
 			axShockwaveFlash.Movie = "";
-			this.MediaPreview = false;
 			MediaFile = mediaFile;
 			if (MediaList.GetType(MediaFile) == "image") {
 				MovieControlPanelWipe("in");
@@ -2767,13 +2765,11 @@ namespace DreamBeam {
 					this.Media2BeamBox();
 					break;
 				case MediaButton.Pause:
-					PlayProgress.Enabled = false;
 					this.ShowBeam.PauseMedia();
 					break;
 				case MediaButton.SkipBk:
 				case MediaButton.SkipFw:
 				case MediaButton.Stop:
-					PlayProgress.Enabled = false;
 					ShowBeam.StopMedia();
 					break;
 			}

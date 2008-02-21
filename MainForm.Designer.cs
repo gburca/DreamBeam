@@ -316,11 +316,11 @@ namespace DreamBeam {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node2");
-			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node2");
+			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
+            treeNode5});
 			this.RightDocks_ImageListBox = new Controls.Development.ImageListBox();
 			this.ImageContext = new System.Windows.Forms.ContextMenu();
 			this.ImageContextItemManage = new System.Windows.Forms.MenuItem();
@@ -2556,14 +2556,14 @@ namespace DreamBeam {
 			this.treeView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
 			this.treeView1.Location = new System.Drawing.Point(2, 2);
 			this.treeView1.Name = "treeView1";
-			treeNode1.Name = "";
-			treeNode1.Text = "Node2";
-			treeNode2.Name = "";
-			treeNode2.Text = "Node1";
-			treeNode3.Name = "";
-			treeNode3.Text = "Node0";
+			treeNode4.Name = "";
+			treeNode4.Text = "Node2";
+			treeNode5.Name = "";
+			treeNode5.Text = "Node1";
+			treeNode6.Name = "";
+			treeNode6.Text = "Node0";
 			this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode6});
 			this.treeView1.SelectedImageIndex = 0;
 			this.treeView1.Size = new System.Drawing.Size(190, 685);
 			this.treeView1.TabIndex = 2;
@@ -2591,7 +2591,7 @@ namespace DreamBeam {
 			this.Presentation_PreviewPanel.Location = new System.Drawing.Point(0, 0);
 			this.Presentation_PreviewPanel.Name = "Presentation_PreviewPanel";
 			this.Presentation_PreviewPanel.Padding = new System.Windows.Forms.Padding(10);
-			this.Presentation_PreviewPanel.Size = new System.Drawing.Size(506, 542);
+			this.Presentation_PreviewPanel.Size = new System.Drawing.Size(506, 554);
 			this.Presentation_PreviewPanel.TabIndex = 2;
 			this.Presentation_PreviewPanel.Resize += new System.EventHandler(this.Presentation_PreviewPanel_Resize);
 			// 
@@ -2621,7 +2621,7 @@ namespace DreamBeam {
 			this.Presentation_PreviewBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.Presentation_PreviewBox.Location = new System.Drawing.Point(10, 10);
 			this.Presentation_PreviewBox.Name = "Presentation_PreviewBox";
-			this.Presentation_PreviewBox.Size = new System.Drawing.Size(486, 522);
+			this.Presentation_PreviewBox.Size = new System.Drawing.Size(486, 534);
 			this.Presentation_PreviewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.Presentation_PreviewBox.TabIndex = 0;
 			this.Presentation_PreviewBox.TabStop = false;
@@ -2635,9 +2635,9 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanel.Controls.Add(this.Presentation_MovieControlPanel_Top);
 			this.Presentation_MovieControlPanel.Controls.Add(this.Presentation_MovieControlPanel_Right);
 			this.Presentation_MovieControlPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.Presentation_MovieControlPanel.Location = new System.Drawing.Point(0, 542);
+			this.Presentation_MovieControlPanel.Location = new System.Drawing.Point(0, 554);
 			this.Presentation_MovieControlPanel.Name = "Presentation_MovieControlPanel";
-			this.Presentation_MovieControlPanel.Size = new System.Drawing.Size(506, 149);
+			this.Presentation_MovieControlPanel.Size = new System.Drawing.Size(506, 137);
 			this.Presentation_MovieControlPanel.TabIndex = 3;
 			// 
 			// Presentation_MovieControlPanelBottom
@@ -2646,7 +2646,7 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanelBottom.Controls.Add(this.Presentation_MediaLoop_Checkbox);
 			this.Presentation_MovieControlPanelBottom.Controls.Add(this.Presentation_MovieControl_PreviewButtonPanel);
 			this.Presentation_MovieControlPanelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.Presentation_MovieControlPanelBottom.Location = new System.Drawing.Point(0, 40);
+			this.Presentation_MovieControlPanelBottom.Location = new System.Drawing.Point(0, 28);
 			this.Presentation_MovieControlPanelBottom.Name = "Presentation_MovieControlPanelBottom";
 			this.Presentation_MovieControlPanelBottom.Size = new System.Drawing.Size(469, 107);
 			this.Presentation_MovieControlPanelBottom.TabIndex = 4;
@@ -2725,7 +2725,7 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanel_Right.Dock = System.Windows.Forms.DockStyle.Right;
 			this.Presentation_MovieControlPanel_Right.Location = new System.Drawing.Point(469, 0);
 			this.Presentation_MovieControlPanel_Right.Name = "Presentation_MovieControlPanel_Right";
-			this.Presentation_MovieControlPanel_Right.Size = new System.Drawing.Size(35, 147);
+			this.Presentation_MovieControlPanel_Right.Size = new System.Drawing.Size(35, 135);
 			this.Presentation_MovieControlPanel_Right.TabIndex = 2;
 			// 
 			// button1
@@ -2735,7 +2735,7 @@ namespace DreamBeam {
 			this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.button1.FlatAppearance.BorderSize = 0;
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button1.Location = new System.Drawing.Point(0, 124);
+			this.button1.Location = new System.Drawing.Point(0, 112);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(35, 23);
 			this.button1.TabIndex = 1;
@@ -2751,7 +2751,7 @@ namespace DreamBeam {
 			this.AudioBar.Minimum = -10000;
 			this.AudioBar.Name = "AudioBar";
 			this.AudioBar.Orientation = System.Windows.Forms.Orientation.Vertical;
-			this.AudioBar.Size = new System.Drawing.Size(25, 121);
+			this.AudioBar.Size = new System.Drawing.Size(25, 109);
 			this.AudioBar.TabIndex = 0;
 			this.AudioBar.TickStyle = System.Windows.Forms.TickStyle.None;
 			this.AudioBar.ValueChanged += new System.EventHandler(this.AudioBar_ValueChanged);
