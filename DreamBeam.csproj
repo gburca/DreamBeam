@@ -291,9 +291,6 @@
     <Compile Include="GuiTools\MediaListTools.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GuiTools\ShowBeamTools.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="GuiTools\SongEdit.cs">
       <SubType>Code</SubType>
     </Compile>

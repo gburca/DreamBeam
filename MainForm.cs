@@ -543,8 +543,6 @@ namespace DreamBeam {
 			ShowBeam.useDirect3d = this.Config.useDirect3D;
 			// Outline Size
 			ShowBeam.OutlineSize = this.Config.OutlineSize;
-			// BG Color
-			ShowBeam.BackgroundColor = this.Config.BackgroundColor;
 
 			// BibleStuff
 			this.Sermon_BibleLang = this.Config.BibleLang;
@@ -1030,7 +1028,7 @@ namespace DreamBeam {
 
 			// HIDE BG
 			if (e.Item == ToolBars_MainToolbar_HideBG) {
-				this.GuiTools.ShowBeamTools.HideBg();
+				this.ToolBars_MainToolbar_HideBG.Checked = !this.ToolBars_MainToolbar_HideBG.Checked;
 				// TODO: Make this work in all AppOperatingModes
 				if (this.DisplayLiveLocal.content != null) {
 					(this.DisplayLiveLocal.content as Content).HideBG =

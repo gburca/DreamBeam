@@ -13,7 +13,6 @@ namespace DreamBeam {
 		public RightDock RightDock = null;
 		public SongEdit SongEdit = null;
 		public Presentation Presentation = null;
-		public ShowBeamTools ShowBeamTools = null;
 		private Hashtable SandDockLayouts = null;
 		private bool firstShowing = true;
 
@@ -21,7 +20,6 @@ namespace DreamBeam {
 			this.RightDock = new RightDock(impForm, impShowBeam);
 			this.SongEdit = new SongEdit(impForm, impShowBeam);
 			this.Presentation = new Presentation(impForm, impShowBeam);
-			this.ShowBeamTools = new ShowBeamTools(impForm, impShowBeam);
 			this.SandDockLayouts = new Hashtable();
 
 			ReadSandDockLayouts();
@@ -146,28 +144,28 @@ namespace DreamBeam {
 		public void KeyListner(System.Windows.Forms.KeyEventArgs e){
 			switch(e.KeyCode){
 				case Keys.F1:
-					this.ShowBeamTools.ShowStrophe(0); 			e.Handled = true;
+					ShowStrophe(0);			e.Handled = true;
 					break;
 				case Keys.F2:
-					this.ShowBeamTools.ShowStrophe(1);			e.Handled = true;
+					ShowStrophe(1);			e.Handled = true;
 					break;
 				case Keys.F3:
-					this.ShowBeamTools.ShowStrophe(2);			e.Handled = true;
+					ShowStrophe(2);			e.Handled = true;
 					break;
 				case Keys.F4:
-					this.ShowBeamTools.ShowStrophe(3);			e.Handled = true;
+					ShowStrophe(3);			e.Handled = true;
 					break;
 				case Keys.F5:
-					this.ShowBeamTools.ShowStrophe(4);			e.Handled = true;
+					ShowStrophe(4);			e.Handled = true;
 					break;
 				case Keys.F6:
-					this.ShowBeamTools.ShowStrophe(5);			e.Handled = true;
+					ShowStrophe(5);			e.Handled = true;
 					break;
 				case Keys.F7:
-					this.ShowBeamTools.ShowStrophe(6);			e.Handled = true;
+					ShowStrophe(6);			e.Handled = true;
 					break;
 				case Keys.F8:
-					this.ShowBeamTools.ShowStrophe(7);			e.Handled = true;
+					ShowStrophe(7);			e.Handled = true;
 					break;
 				case Keys.F9:
 					this.ShowTab(MainTab.ShowSongs);			e.Handled = true;
@@ -199,6 +197,13 @@ namespace DreamBeam {
 			}
 
 
+		}
+
+		public void ShowStrophe(int Number) {
+			if (_MainForm.SongShow_StropheList_ListEx.Items.Count > Number) {
+				_MainForm.SongShow_StropheList_ListEx.SetSelected(Number, true);
+				_MainForm.RightDocks_Preview_GoLive_Click(null, null);
+			}
 		}
 
 		#endregion

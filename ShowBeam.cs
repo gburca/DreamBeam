@@ -47,35 +47,14 @@ namespace DreamBeam {
 
 		public Config Config;
 		public MainForm _MainForm = null;
-		///<summary>The Separator for the strophes - 2 Blank Lines </summary>
-		//        public string strSeperator = "\r\n\r\n\r\n";
-
-		///<summary>Has Text changed? Needed to avoid unnecessary Redraws.(</summary>
-		public bool newText = false;
-
-		///<summary>If this is true, take ImageOverWritePath -Image as Background </summary>
-		public bool OverWriteBG = false;
-
-		///<summary>alternate Background Image Path </summary>
-		public String ImageOverWritePath = "";
-
-		///<summary>Background Image Path for Sermon Texts</summary>
-		public String SermonImagePath = null;
 
 		///<summary> the size for the Outlines (will be loaded from the MainForm.ConfigSet) </summary>
 		public float OutlineSize = 5.0f;
-
-		///<summary>the name of the actually used BG Image </summary>
-		public string strImageLoaded = null;
-
 
 		public OldSong Song = new OldSong();  //The Song with all it's information
 
 		///<summary>The Sermon will be a castradet Song</summary>
 		public OldSong Sermon = new OldSong();
-
-		///<summary>The Background Image </summary>
-		public Image curImage;
 
 		///<summary>Graphics</summary>
 		public Graphics graphics;
@@ -88,19 +67,10 @@ namespace DreamBeam {
 
 		///<summary>Temporary bitmap</summary>
 		public Bitmap bmp = null;
-		public bool DrawnMainBitmap = false;
 
 		///<summary>User Direct X? (not used yet)</summary>
 		public bool useDirectX = false;
 
-		///<summary>Draw Song, Text... </summary>
-		public int DrawWhat = 0;
-
-		public bool DrawingSong = false;
-
-		public System.Drawing.Color BackgroundColor = new System.Drawing.Color();
-
-		public bool HideText = false;
 		public bool HideBG = false;
 		public bool HideMouse = false;
 
