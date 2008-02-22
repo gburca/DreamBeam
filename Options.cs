@@ -101,7 +101,6 @@ namespace DreamBeam {
 			config.PreRender = this.PreRendercheckBox.Checked;
 			config.BlendSpeed = (int)Speed_Updown.Value;
 			config.useDirect3D = this.Direct3D_CheckBox.Checked;
-			config.OutlineSize = (float)this.OutlineSize_UpDown1.Value;
 
 			config.BackgroundColor = this.showBeamBackground;
 			if (config.BackgroundColor.IsEmpty) config.BackgroundColor = Color.Black;
@@ -203,7 +202,6 @@ namespace DreamBeam {
 			this.SetLanguage(config);
 			this.Sword_PathBox.Text = config.SwordPath;
 			this.Sword_LanguageBox.SelectedItem = config.BibleLang;
-			this.OutlineSize_UpDown1.Value = (int)config.OutlineSize;
 			this.BeamBox_posX.Value = (int)config.BeamBoxPosX;
 			this.BeamBox_posY.Value = (int)config.BeamBoxPosY;
 			this.BeamBox_Width.Value = (int)config.BeamBoxSizeX;
@@ -342,7 +340,6 @@ namespace DreamBeam {
 			#region Graphics
 			Alpha_groupBox1.Text = Lang.say("Options.Graphics.AlphaBlending");
 			Alpha_CheckBox.Text = Lang.say("Options.Graphics.AlphaCheckBox");
-			Grafics_Outline.Text = Lang.say("Options.Graphics.Outline");
 			SpeedLabel.Text = Lang.say("Options.Graphics.AlphaSpeed");
 
 			PreRenderBox.Text = Lang.say("Options.Graphics.PreRenderTitle");

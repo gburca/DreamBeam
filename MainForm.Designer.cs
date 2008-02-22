@@ -544,6 +544,7 @@ namespace DreamBeam {
 			this.dataColumn1 = new System.Data.DataColumn();
 			this.dataColumn2 = new System.Data.DataColumn();
 			this.SongListDataView = new System.Data.DataView();
+			this.bibleTextControl = new DreamBeam.BibleText();
 			this.RightDocks_Songlist_SearchPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.RightDocks_SongList_ButtonPanel.SuspendLayout();
@@ -2786,6 +2787,7 @@ namespace DreamBeam {
 			// 
 			// BibleText_panelLeft
 			// 
+			this.BibleText_panelLeft.Controls.Add(this.bibleTextControl);
 			this.BibleText_panelLeft.Controls.Add(this.BibleText_Results);
 			this.BibleText_panelLeft.Controls.Add(this.panel8);
 			this.BibleText_panelLeft.Controls.Add(this.panel7);
@@ -2803,10 +2805,10 @@ namespace DreamBeam {
 			this.BibleText_Results.CurrentVerse = 0;
 			this.BibleText_Results.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.BibleText_Results.HiglightColor = Khendys.Controls.RtfColor.White;
-			this.BibleText_Results.Location = new System.Drawing.Point(8, 80);
+			this.BibleText_Results.Location = new System.Drawing.Point(8, 573);
 			this.BibleText_Results.Name = "BibleText_Results";
 			this.BibleText_Results.ReadOnly = true;
-			this.BibleText_Results.Size = new System.Drawing.Size(484, 602);
+			this.BibleText_Results.Size = new System.Drawing.Size(484, 109);
 			this.BibleText_Results.TabIndex = 2;
 			this.BibleText_Results.Text = "";
 			this.BibleText_Results.TextColor = Khendys.Controls.RtfColor.Black;
@@ -2958,6 +2960,16 @@ namespace DreamBeam {
 			// 
 			this.SongListDataView.Table = this.SongListTable;
 			// 
+			// bibleTextControl
+			// 
+			this.bibleTextControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.bibleTextControl.Location = new System.Drawing.Point(0, 80);
+			this.bibleTextControl.Name = "bibleTextControl";
+			this.bibleTextControl.Size = new System.Drawing.Size(503, 472);
+			this.bibleTextControl.TabIndex = 3;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -3072,6 +3084,7 @@ namespace DreamBeam {
 		private MediaControls previewMediaControls;
 		private System.Windows.Forms.Button muteButton;
 		private MediaControls liveMediaControls;
+		private BibleText bibleTextControl;
 
 
 	}

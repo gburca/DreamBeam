@@ -510,7 +510,6 @@ namespace DreamBeam {
 			this.Config.BeamBoxScreenNum = ShowBeam.BeamBoxScreenNum;
 
 			this.Config.Alphablending = ShowBeam.transit;
-			this.Config.OutlineSize = ShowBeam.OutlineSize;
 			this.Config.BibleLang = this.Sermon_BibleLang;
 			this.Config.ShowBibleTranslation = this.Sermon_ShowBibleTranslation;
 
@@ -541,8 +540,6 @@ namespace DreamBeam {
 			ShowBeam.transit = this.Config.Alphablending;
 			// Direct3D
 			ShowBeam.useDirect3d = this.Config.useDirect3D;
-			// Outline Size
-			ShowBeam.OutlineSize = this.Config.OutlineSize;
 
 			// BibleStuff
 			this.Sermon_BibleLang = this.Config.BibleLang;
@@ -724,7 +721,6 @@ namespace DreamBeam {
 			this.LoadDefaultMediaList();
 			Splash.SetStatus("Initializing Bible");
 			this.BibleInit();
-			ShowBeam.Song.version = Tools.GetAppVersion();
 			Splash.CloseForm();
 			System.Threading.Thread.Sleep(900);
 			this.getSong();
@@ -1869,6 +1865,9 @@ namespace DreamBeam {
 
 			bibles = BibleLib.DeserializeNow(bibleLibFile);
 
+			// this.bibles must be deserialized prior to calling Setup
+			bibleTextControl.Setup(this, BibleText_Bible, BibleText_Bookmarks, BibleText_Translations, bibles);
+
 			if (bibles == null) {
 				bibles = new BibleLib();
 			}
@@ -2531,10 +2530,13 @@ namespace DreamBeam {
 			Console.WriteLine("Selected index changed sender: " + sender.ToString() + " Event: " + e.ToString() + " Type: " + e.GetType().ToString());
 			BibleText_Bible = bibles[BibleText_Translations.SelectedItem.ToString()];
 			BibleText_Results_Update();
+			bibleTextControl.BibleVersion = BibleText_Bible;
 			this.Config.LastBibleUsed = BibleText_Translations.SelectedItem.ToString();
 		}
 
 		private void BibleText_Bookmarks_SelectedIndexChanged(object sender, System.EventArgs e) {
+			bibleTextControl.goToBookmark(BibleText_Bookmarks.SelectedItem.ToString());
+
 			if (BibleText_Bible == null) return;
 
 			//BibleText_Results.Populate(BibleText_Bible, BibleText_Bible.GetVerseIndex(BibleText_Bookmarks.SelectedItem.ToString()));

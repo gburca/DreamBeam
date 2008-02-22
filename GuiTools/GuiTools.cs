@@ -11,14 +11,12 @@ namespace DreamBeam {
 
 	public class GuiTools: GuiTemplate {
 		public RightDock RightDock = null;
-		public SongEdit SongEdit = null;
 		public Presentation Presentation = null;
 		private Hashtable SandDockLayouts = null;
 		private bool firstShowing = true;
 
 		public GuiTools(MainForm impForm, ShowBeam impShowBeam) :  base(impForm,impShowBeam) {
 			this.RightDock = new RightDock(impForm, impShowBeam);
-			this.SongEdit = new SongEdit(impForm, impShowBeam);
 			this.Presentation = new Presentation(impForm, impShowBeam);
 			this.SandDockLayouts = new Hashtable();
 

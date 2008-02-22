@@ -38,7 +38,7 @@ namespace DreamBeam {
 		public bool Alphablending = false;
 		public int BlendSpeed = 10;
 		public bool useDirect3D = false;
-		public float OutlineSize = 3;
+		//public float OutlineSize = 3;
 		public string BibleLang = "en";
 		public string LastBibleUsed = "";
 		public bool ShowBibleTranslation = false;

@@ -291,9 +291,6 @@
     <Compile Include="GuiTools\MediaListTools.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GuiTools\SongEdit.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="GuiTools\TextFormatOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -434,6 +431,11 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="ChangeLog.txt" />
+    <None Include="Icons\go-top.png" />
+    <None Include="Icons\go-bottom.png" />
+    <None Include="Icons\go-up.png" />
+    <None Include="Icons\go-down.png" />
+    <None Include="Icons\bookmark-new.png" />
     <None Include="Icons\audio-volume-high.png" />
   </ItemGroup>
   <ItemGroup>

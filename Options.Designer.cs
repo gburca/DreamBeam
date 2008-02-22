@@ -17,9 +17,6 @@ namespace DreamBeam {
 		public System.Windows.Forms.ComboBox Sword_LanguageBox;
 		private System.Windows.Forms.GroupBox SwordLangGroupBox;
 		public System.Windows.Forms.TabPage Graphics_tab;
-
-		private System.Windows.Forms.GroupBox Grafics_Outline;
-		private System.Windows.Forms.NumericUpDown OutlineSize_UpDown1;
 		public System.Windows.Forms.TabPage BeamBox_tab;
 		private System.Windows.Forms.GroupBox BeamBox_PosBox;
 		private System.Windows.Forms.GroupBox BeamBox_SizeBox;
@@ -177,8 +174,6 @@ namespace DreamBeam {
 			this.Speed_Updown = new System.Windows.Forms.NumericUpDown();
 			this.Direct3D_CheckBox = new System.Windows.Forms.CheckBox();
 			this.Alpha_CheckBox = new System.Windows.Forms.CheckBox();
-			this.Grafics_Outline = new System.Windows.Forms.GroupBox();
-			this.OutlineSize_UpDown1 = new System.Windows.Forms.NumericUpDown();
 			this.SongFormat_Tab = new System.Windows.Forms.TabPage();
 			this.songThemeWidget = new DreamBeam.ThemeWidget();
 			this.BibleFormat_Tab = new System.Windows.Forms.TabPage();
@@ -222,8 +217,6 @@ namespace DreamBeam {
 			this.PreRenderBox.SuspendLayout();
 			this.Alpha_groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Speed_Updown)).BeginInit();
-			this.Grafics_Outline.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.OutlineSize_UpDown1)).BeginInit();
 			this.SongFormat_Tab.SuspendLayout();
 			this.BibleFormat_Tab.SuspendLayout();
 			this.TextToolFormat_Tab.SuspendLayout();
@@ -966,7 +959,6 @@ namespace DreamBeam {
 			// 
 			this.Graphics_tab.Controls.Add(this.PreRenderBox);
 			this.Graphics_tab.Controls.Add(this.Alpha_groupBox1);
-			this.Graphics_tab.Controls.Add(this.Grafics_Outline);
 			this.Graphics_tab.Location = new System.Drawing.Point(4, 40);
 			this.Graphics_tab.Name = "Graphics_tab";
 			this.Graphics_tab.Size = new System.Drawing.Size(515, 302);
@@ -1051,30 +1043,6 @@ namespace DreamBeam {
 			this.Alpha_CheckBox.Size = new System.Drawing.Size(176, 24);
 			this.Alpha_CheckBox.TabIndex = 4;
 			this.Alpha_CheckBox.Text = "AlphaBlending";
-			// 
-			// Grafics_Outline
-			// 
-			this.Grafics_Outline.Controls.Add(this.OutlineSize_UpDown1);
-			this.Grafics_Outline.Location = new System.Drawing.Point(8, 72);
-			this.Grafics_Outline.Name = "Grafics_Outline";
-			this.Grafics_Outline.Size = new System.Drawing.Size(408, 64);
-			this.Grafics_Outline.TabIndex = 0;
-			this.Grafics_Outline.TabStop = false;
-			this.Grafics_Outline.Text = "Outline Size";
-			this.Grafics_Outline.Visible = false;
-			// 
-			// OutlineSize_UpDown1
-			// 
-			this.OutlineSize_UpDown1.Location = new System.Drawing.Point(16, 24);
-			this.OutlineSize_UpDown1.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-			this.OutlineSize_UpDown1.Name = "OutlineSize_UpDown1";
-			this.OutlineSize_UpDown1.Size = new System.Drawing.Size(104, 20);
-			this.OutlineSize_UpDown1.TabIndex = 0;
-			this.OutlineSize_UpDown1.Tag = "";
 			// 
 			// SongFormat_Tab
 			// 
@@ -1212,8 +1180,6 @@ namespace DreamBeam {
 			this.PreRenderBox.ResumeLayout(false);
 			this.Alpha_groupBox1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.Speed_Updown)).EndInit();
-			this.Grafics_Outline.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.OutlineSize_UpDown1)).EndInit();
 			this.SongFormat_Tab.ResumeLayout(false);
 			this.BibleFormat_Tab.ResumeLayout(false);
 			this.TextToolFormat_Tab.ResumeLayout(false);

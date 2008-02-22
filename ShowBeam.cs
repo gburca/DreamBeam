@@ -48,14 +48,6 @@ namespace DreamBeam {
 		public Config Config;
 		public MainForm _MainForm = null;
 
-		///<summary> the size for the Outlines (will be loaded from the MainForm.ConfigSet) </summary>
-		public float OutlineSize = 5.0f;
-
-		public OldSong Song = new OldSong();  //The Song with all it's information
-
-		///<summary>The Sermon will be a castradet Song</summary>
-		public OldSong Sermon = new OldSong();
-
 		///<summary>Graphics</summary>
 		public Graphics graphics;
 
@@ -143,9 +135,6 @@ namespace DreamBeam {
 			SetSizePosValues();
 			//   BackgroundColor =
 			//Color.FromArgb(10,11,12);
-			Sermon.TextEffect[1] = "Filled Outline";
-			Sermon.FontSize[1] = 48;
-			Song = new OldSong(this);
 
 			ShowSongPanel.Location = new Point(0, 0);
 			ShowSongPanel.Size = this.Size;

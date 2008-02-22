@@ -16,25 +16,48 @@ namespace DreamBeam {
 		protected ListBox BibleText_Bookmarks, BibleText_Translations;
 		protected BibleLib bibles;
 
-		public BibleText(MainForm mf, BibleVersion bible, ListBox btb, ListBox btt, BibleLib bibles) {
+		public BibleText() {
 			InitializeComponent();
+			BibleText_RegEx_ComboBox_EventHandler = new EventHandler(BibleText_RegEx_ComboBox_TimedOut);
+		}
 
+		public void Setup(MainForm mf, BibleVersion bible, ListBox btb, ListBox btt, BibleLib bibles) {
 			mainForm = mf;
 			BibleText_Bible = bible;
 			BibleText_Bookmarks = btb;
+			BibleText_Translations = btt;
 			this.bibles = bibles;
-
-			BibleText_RegEx_ComboBox_EventHandler = new EventHandler(BibleText_RegEx_ComboBox_TimedOut);
-
 		}
+
+		public BibleVersion BibleVersion {
+			get { return BibleText_Bible; }
+			set {
+				BibleText_Bible = value;
+				BibleText_Results_Update();
+			}
+		}
+
+		public void goToBookmark(String bookmark) {
+			if (BibleText_Bible == null) return;
+
+			BibleText_RegEx_ComboBox.Text = "^" + this.BibleText_Bible.GetSimpleRef(bookmark, true) + @"\s+.*";
+			int vidx = BibleText_Query(true);
+			if (vidx >= 0) {
+				mainForm.DisplayPreview.SetContent(new ABibleVerse(this.BibleText_Bible, vidx, mainForm.Config));
+			}
+		}
+
+
 
 		#region BibleText_Results RichTextBox
 
 		private void BibleText_Results_Update() {
-			string translation = BibleText_Translations.SelectedItem.ToString();
-			if (bibles.TranslationExists(translation)) {
-				BibleText_Results.Populate(bibles[translation], BibleText_Results.CurrentVerse);
-			}
+			try {
+				string translation = BibleText_Translations.SelectedItem.ToString();
+				if (bibles.TranslationExists(translation)) {
+					BibleText_Results.Populate(bibles[translation], BibleText_Results.CurrentVerse);
+				}
+			} catch { }
 		}
 
 		private void BibleText_Results_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e) {
@@ -84,17 +107,16 @@ namespace DreamBeam {
 		}
 
 		private int BibleText_Query(bool dirFwd) {
-			//if (BibleText_Translations.Items.Count == 0 || BibleText_Translations.SelectedIndices.Count == 0) return -1;
-			//string translation = BibleText_Translations.SelectedItem.ToString();
-			//if (!bibles.TranslationExists(translation)) return -1;
-			//int index = BibleText_Results.Find(bibles[translation], dirFwd, BibleText_RegEx_ComboBox.Text);
-			//// Force an update
-			//BibleText_Results.Focus();
-			//BibleText_RegEx_ComboBox.Focus();
-			//// Remove selection, or else we'll type over it
-			//BibleText_RegEx_ComboBox.SelectionStart = BibleText_RegEx_ComboBox.Text.Length;
-			//return index;
-			return 0;
+			if (BibleText_Translations.Items.Count == 0 || BibleText_Translations.SelectedIndices.Count == 0) return -1;
+			string translation = BibleText_Translations.SelectedItem.ToString();
+			if (!bibles.TranslationExists(translation)) return -1;
+			int index = BibleText_Results.Find(bibles[translation], dirFwd, BibleText_RegEx_ComboBox.Text);
+			// Force an update
+			BibleText_Results.Focus();
+			BibleText_RegEx_ComboBox.Focus();
+			// Remove selection, or else we'll type over it
+			BibleText_RegEx_ComboBox.SelectionStart = BibleText_RegEx_ComboBox.Text.Length;
+			return index;
 		}
 		#endregion
 

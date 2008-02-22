@@ -121,4 +121,19 @@
   <data name="audio-volume-high" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\audio-volume-high.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bookmark-new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\bookmark-new.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="go-down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\go-down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="go-up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\go-up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="go-bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\go-bottom.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="go-top" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\go-top.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
