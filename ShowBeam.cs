@@ -71,17 +71,7 @@ namespace DreamBeam {
 		///<summary>User Direct X? (not used yet)</summary>
 		public bool useDirectX = false;
 
-		public bool HideBG = false;
 		public bool HideMouse = false;
-
-		public bool HideTitle = false;
-		public bool HideVerse = false;
-		public bool HideAuthor = false;
-
-		public bool Songupdate = true;
-
-		public int[] tmpPosX = new int[3];
-		public int[] tmpPosY = new int[3];
 
 		public ImageList MediaList = new ImageList();
 		string PlayWhat = "";
@@ -100,14 +90,10 @@ namespace DreamBeam {
 		MyPerPixelAlphaForm AlphaForm = new MyPerPixelAlphaForm();
 		byte AlphaOpacity;
 
-		public LogFile LogFile;
-		StringFormat sf = new StringFormat();
-
 		//		DirectShowLib Lib = new DirectShowLib();
-
 		private FXLib FXLib = new FXLib();
 
-		public MediaOperations MediaFile1 = null;
+		public MediaOperations liveMedia = null;
 		#endregion
 
 		#region Controls
@@ -1064,7 +1050,7 @@ namespace DreamBeam {
 					this.axShockwaveFlash.Play();
 					this.axShockwaveFlash.Loop = this.LoopMedia;
 
-					this.MediaFile1 = new MediaFlash(axShockwaveFlash);
+					this.liveMedia = new MediaFlash(axShockwaveFlash);
 				} else if (PlayWhat == "movie") {
 					this.VideoProblem = false;
 					strMediaPlaying = MediaList.GetType(Path);
@@ -1112,7 +1098,7 @@ namespace DreamBeam {
 						this.video.Play();
 					}
 
-					this.MediaFile1 = new MediaMovie(video);
+					this.liveMedia = new MediaMovie(video);
 
 				} else if (PlayWhat == "image") {
 					StopMedia();
@@ -1126,7 +1112,7 @@ namespace DreamBeam {
 						_MainForm.DisplayLiveLocal.SetContent(new ImageContent(Path));
 					}
 
-					this.MediaFile1 = null;
+					this.liveMedia = null;
 				}
 
 			} else if (this.strMediaPlaying == "flash") {
@@ -1138,9 +1124,9 @@ namespace DreamBeam {
 
 
 		public void StopMedia() {
-			if (this.MediaFile1 == null) return;
+			if (this.liveMedia == null) return;
 
-			this.MediaFile1.Stop();
+			this.liveMedia.Stop();
 			ShowSongPanel.Show();
 			axShockwaveFlash.Hide();
 			VideoPanel.Hide();

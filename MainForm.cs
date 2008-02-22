@@ -113,7 +113,7 @@ namespace DreamBeam {
 		private Cursor MyNormalCursor;
 		public ImageList MediaList = new ImageList();
 		public string MediaFile;
-		public MediaOperations MediaFile1;
+		public MediaOperations previewMedia;
 		bool VideoLoaded = false;
 		bool VideoProblem = false;
 		bool LoadingVideo = false;
@@ -172,12 +172,12 @@ namespace DreamBeam {
 			this.Config = (Config)Config.DeserializeFrom(new Config(),
 				Tools.GetDirectory(DirType.Config, ConfigSet + ".config.xml"));
 
-			ShowBeam.LogFile = new LogFile(ConfigSet);
+			//logFile = new LogFile(ConfigSet);
+			//if (CommandLine["log"] != null) {
+			//    logFile.doLog = true;
+			//    logFile.BigHeader("Start");
+			//}
 
-			if (CommandLine["log"] != null) {
-				ShowBeam.LogFile.doLog = true;
-				ShowBeam.LogFile.BigHeader("Start");
-			}
 			ShowBeam.Config = this.Config;
 			ShowBeam._MainForm = this;
 			LyricsSequenceItem.lang = this.Lang;
@@ -1621,7 +1621,7 @@ namespace DreamBeam {
 				Presentation_PreviewBox.Show();
 				Presentation_PreviewBox.BringToFront();
 				Presentation_PreviewBox.Image = this.ShowBeam.DrawProportionalBitmap(Presentation_PreviewBox.Size, MediaFile);
-				this.MediaFile1 = null;
+				this.previewMedia = null;
 			} else if (MediaList.GetType(MediaFile) == "flash") {
 				MovieControlPanelWipe("out");
 				AudioBar.Enabled = false;
@@ -1634,7 +1634,7 @@ namespace DreamBeam {
 				axShockwaveFlash.Stop();
 				axShockwaveFlash.FrameNum = 1;
 				this.Presentation_Resize();
-				this.MediaFile1 = new MediaFlash(axShockwaveFlash);
+				this.previewMedia = new MediaFlash(axShockwaveFlash);
 			} else if (MediaList.GetType(MediaFile) == "movie") {
 				this.Presentation_PreviewBox.Hide();
 				this.axShockwaveFlash.Hide();
@@ -1649,7 +1649,7 @@ namespace DreamBeam {
 					//Thread_LoadMovie.Name = "LoadVideo";
 					//Thread_LoadMovie.Start();
 					video.SeekCurrentPosition(0.1, Microsoft.DirectX.AudioVideoPlayback.SeekPositionFlags.AbsolutePositioning);
-					this.MediaFile1 = new MediaMovie(video);
+					this.previewMedia = new MediaMovie(video);
 				}
 			}
 			GC.Collect();
@@ -1843,8 +1843,6 @@ namespace DreamBeam {
 						Media_TrackBar.Maximum = (int)video.Duration;
 						PlayProgress.Enabled = true;
 					} catch { }
-				} else if (MediaList.GetType(MediaFile) == "image") {
-					ShowBeam.Songupdate = true;
 				}
 				ShowBeam.AudioVolume = AudioBar.Value;
 				ShowBeam.ShowMedia(MediaFile);
@@ -2755,7 +2753,7 @@ namespace DreamBeam {
 		private void liveMediaControls_MediaButtonPressed(object sender, MediaControlsEvent e) {
 			if (e.button == MediaButton.Play) this.Media2BeamBox();
 
-			MediaOperations media = ShowBeam.MediaFile1;
+			MediaOperations media = ShowBeam.liveMedia;
 			if (media == null) return;
 
 			switch (e.button) {
@@ -2779,23 +2777,23 @@ namespace DreamBeam {
 		}
 
 		private void previewMediaControls_MediaButtonPressed(object sender, MediaControlsEvent e) {
-			if (this.MediaFile1 == null) return;
+			if (this.previewMedia == null) return;
 
 			switch (e.button) {
 				case MediaButton.Play:
-					Media_TrackBar.Maximum = (int)MediaFile1.Duration();
-					MediaFile1.Volume = -10000;
+					Media_TrackBar.Maximum = (int)previewMedia.Duration();
+					previewMedia.Volume = -10000;
 					Thread.Sleep(100);
-					MediaFile1.Play();
+					previewMedia.Play();
 					break;
 				default:
-					MediaFile1.Operation(e.button);
+					previewMedia.Operation(e.button);
 					break;
 			}
 
-			PlayProgress.Enabled = MediaFile1.Playing;
+			PlayProgress.Enabled = previewMedia.Playing;
 			try {
-				Media_TrackBar.Value = (int)MediaFile1.CurrentLocation;
+				Media_TrackBar.Value = (int)previewMedia.CurrentLocation;
 			} catch {
 				Media_TrackBar.Value = 0;
 			}

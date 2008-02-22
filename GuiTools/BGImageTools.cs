@@ -160,7 +160,6 @@ namespace DreamBeam {
 
 
 		public void SelectionChangeCommitted(object sender, System.EventArgs e) {
-			_ShowBeam.LogFile.Log("\n ImageList Dropdown changed");
 			/*			   string path = @"Backgrounds\";
 						   if (_MainForm.RightDocks_FolderDropdown.SelectedIndex > 0){
 								path = path + _MainForm.RightDocks_FolderDropdown.Items[_MainForm.RightDocks_FolderDropdown.SelectedIndex].ToString() + @"\";
