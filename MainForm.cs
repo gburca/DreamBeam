@@ -1860,7 +1860,7 @@ namespace DreamBeam {
 			bibles = BibleLib.DeserializeNow(bibleLibFile);
 
 			// this.bibles must be deserialized prior to calling Setup
-			bibleTextControl.Setup(this, BibleText_Bookmarks, BibleText_Translations, bibles);
+			bibleTextControl.Setup(this, BibleText_Bookmarks, bibles);
 
 			if (bibles == null) {
 				bibles = new BibleLib();
@@ -2352,7 +2352,9 @@ namespace DreamBeam {
 		}
 
 		private void BibleText_Bookmarks_SelectedIndexChanged(object sender, System.EventArgs e) {
-			bibleTextControl.goToBookmark(BibleText_Bookmarks.SelectedItem.ToString());
+			if (BibleText_Bookmarks.SelectedIndices.Count > 0) {
+				bibleTextControl.goToBookmark(BibleText_Bookmarks.SelectedItem.ToString());
+			}
 		}
 
 		private void BibleText_Bookmarks_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e) {
