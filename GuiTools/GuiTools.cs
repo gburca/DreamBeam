@@ -95,8 +95,7 @@ namespace DreamBeam {
 					_MainForm.ToolBars_MenuBar_Song.Visible = true;
 					_MainForm.ToolBars_MenuBar_MediaList.Visible = false;
 
-					_MainForm.tabControl1.Controls.Add(_MainForm.EditSongs2_Tab);
-					//_MainForm.tabControl1.Controls.Add(_MainForm.EditSongs_Tab);
+					_MainForm.tabControl1.Controls.Add(_MainForm.EditSongs_Tab);
 					_MainForm.ToolBars_MainToolbar_SaveSong.Visible = true;
 //					_MainForm.PreviewUpdateTimer.Enabled = true;
 					break;

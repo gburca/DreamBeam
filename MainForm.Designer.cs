@@ -272,7 +272,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.TrackBar Media_TrackBar;
 		private System.Windows.Forms.Panel Presentation_MovieControlPanel_Right;
 		private System.Windows.Forms.TrackBar AudioBar;
-		public System.Windows.Forms.TabPage EditSongs2_Tab;
+		public System.Windows.Forms.TabPage EditSongs_Tab;
 		public DreamBeam.SongEditor songEditor;
 		public System.Windows.Forms.TabPage BibleText_Tab;
 		private System.Windows.Forms.Panel BibleText_panelLeft;
@@ -521,7 +521,7 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanel_Right = new System.Windows.Forms.Panel();
 			this.muteButton = new System.Windows.Forms.Button();
 			this.AudioBar = new System.Windows.Forms.TrackBar();
-			this.EditSongs2_Tab = new System.Windows.Forms.TabPage();
+			this.EditSongs_Tab = new System.Windows.Forms.TabPage();
 			this.songEditor = new DreamBeam.SongEditor();
 			this.BibleText_Tab = new System.Windows.Forms.TabPage();
 			this.BibleText_panelLeft = new System.Windows.Forms.Panel();
@@ -612,7 +612,7 @@ namespace DreamBeam {
 			((System.ComponentModel.ISupportInitialize)(this.Media_TrackBar)).BeginInit();
 			this.Presentation_MovieControlPanel_Right.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.AudioBar)).BeginInit();
-			this.EditSongs2_Tab.SuspendLayout();
+			this.EditSongs_Tab.SuspendLayout();
 			this.BibleText_Tab.SuspendLayout();
 			this.BibleText_panelLeft.SuspendLayout();
 			this.panel8.SuspendLayout();
@@ -2757,14 +2757,14 @@ namespace DreamBeam {
 			this.AudioBar.TickStyle = System.Windows.Forms.TickStyle.None;
 			this.AudioBar.ValueChanged += new System.EventHandler(this.AudioBar_ValueChanged);
 			// 
-			// EditSongs2_Tab
+			// EditSongs_Tab
 			// 
-			this.EditSongs2_Tab.Controls.Add(this.songEditor);
-			this.EditSongs2_Tab.Location = new System.Drawing.Point(4, 14);
-			this.EditSongs2_Tab.Name = "EditSongs2_Tab";
-			this.EditSongs2_Tab.Size = new System.Drawing.Size(506, 691);
-			this.EditSongs2_Tab.TabIndex = 6;
-			this.EditSongs2_Tab.Text = "Edit Songs";
+			this.EditSongs_Tab.Controls.Add(this.songEditor);
+			this.EditSongs_Tab.Location = new System.Drawing.Point(4, 14);
+			this.EditSongs_Tab.Name = "EditSongs_Tab";
+			this.EditSongs_Tab.Size = new System.Drawing.Size(506, 691);
+			this.EditSongs_Tab.TabIndex = 6;
+			this.EditSongs_Tab.Text = "Edit Songs";
 			// 
 			// songEditor
 			// 
@@ -2886,7 +2886,7 @@ namespace DreamBeam {
 			// tabControl1
 			// 
 			this.tabControl1.Controls.Add(this.ShowSong_Tab);
-			this.tabControl1.Controls.Add(this.EditSongs2_Tab);
+			this.tabControl1.Controls.Add(this.EditSongs_Tab);
 			this.tabControl1.Controls.Add(this.Presentation_Tab);
 			this.tabControl1.Controls.Add(this.SermonTools_Tab);
 			this.tabControl1.Controls.Add(this.BibleText_Tab);
@@ -3055,7 +3055,7 @@ namespace DreamBeam {
 			((System.ComponentModel.ISupportInitialize)(this.Media_TrackBar)).EndInit();
 			this.Presentation_MovieControlPanel_Right.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.AudioBar)).EndInit();
-			this.EditSongs2_Tab.ResumeLayout(false);
+			this.EditSongs_Tab.ResumeLayout(false);
 			this.BibleText_Tab.ResumeLayout(false);
 			this.BibleText_panelLeft.ResumeLayout(false);
 			this.panel8.ResumeLayout(false);
