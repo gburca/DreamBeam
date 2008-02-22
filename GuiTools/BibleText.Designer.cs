@@ -73,7 +73,7 @@ namespace DreamBeam {
 			this.versePanel.Location = new System.Drawing.Point(0, 38);
 			this.versePanel.Name = "versePanel";
 			this.versePanel.Size = new System.Drawing.Size(506, 36);
-			this.versePanel.TabIndex = 3;
+			this.versePanel.TabIndex = 1;
 			// 
 			// label1
 			// 
@@ -93,7 +93,7 @@ namespace DreamBeam {
 			this.BibleText_Verse_ComboBox.Location = new System.Drawing.Point(56, 7);
 			this.BibleText_Verse_ComboBox.Name = "BibleText_Verse_ComboBox";
 			this.BibleText_Verse_ComboBox.Size = new System.Drawing.Size(274, 21);
-			this.BibleText_Verse_ComboBox.TabIndex = 1;
+			this.BibleText_Verse_ComboBox.TabIndex = 0;
 			this.BibleText_Verse_ComboBox.SelectedIndexChanged += new System.EventHandler(this.BibleText_Verse_ComboBox_SelectedIndexChanged);
 			this.BibleText_Verse_ComboBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BibleText_Verse_ComboBox_KeyUp);
 			// 
@@ -104,7 +104,7 @@ namespace DreamBeam {
 			this.BibleText_FindNext_button.Location = new System.Drawing.Point(340, 2);
 			this.BibleText_FindNext_button.Name = "BibleText_FindNext_button";
 			this.BibleText_FindNext_button.Size = new System.Drawing.Size(32, 32);
-			this.BibleText_FindNext_button.TabIndex = 3;
+			this.BibleText_FindNext_button.TabIndex = 1;
 			this.toolTip.SetToolTip(this.BibleText_FindNext_button, "Find next occurance of the RegEx");
 			this.BibleText_FindNext_button.UseVisualStyleBackColor = true;
 			this.BibleText_FindNext_button.Click += new System.EventHandler(this.BibleText_FindNext_button_Click);
@@ -128,7 +128,7 @@ namespace DreamBeam {
 			this.BibleText_FindLast_button.Location = new System.Drawing.Point(460, 2);
 			this.BibleText_FindLast_button.Name = "BibleText_FindLast_button";
 			this.BibleText_FindLast_button.Size = new System.Drawing.Size(32, 32);
-			this.BibleText_FindLast_button.TabIndex = 0;
+			this.BibleText_FindLast_button.TabIndex = 4;
 			this.toolTip.SetToolTip(this.BibleText_FindLast_button, "Find last occurance of the RegEx");
 			this.BibleText_FindLast_button.Click += new System.EventHandler(this.BibleText_FindLast_button_Click);
 			// 
@@ -139,7 +139,7 @@ namespace DreamBeam {
 			this.BibleText_FindFirst_button.Location = new System.Drawing.Point(420, 2);
 			this.BibleText_FindFirst_button.Name = "BibleText_FindFirst_button";
 			this.BibleText_FindFirst_button.Size = new System.Drawing.Size(32, 32);
-			this.BibleText_FindFirst_button.TabIndex = 1;
+			this.BibleText_FindFirst_button.TabIndex = 3;
 			this.toolTip.SetToolTip(this.BibleText_FindFirst_button, "Find first occurance of the RegEx");
 			this.BibleText_FindFirst_button.Click += new System.EventHandler(this.BibleText_FindFirst_button_Click);
 			// 
@@ -152,7 +152,7 @@ namespace DreamBeam {
 			this.searchPanel.Location = new System.Drawing.Point(0, 0);
 			this.searchPanel.Name = "searchPanel";
 			this.searchPanel.Size = new System.Drawing.Size(506, 38);
-			this.searchPanel.TabIndex = 4;
+			this.searchPanel.TabIndex = 0;
 			// 
 			// label2
 			// 
@@ -172,7 +172,7 @@ namespace DreamBeam {
 			this.BibleText_RegEx_ComboBox.Location = new System.Drawing.Point(56, 9);
 			this.BibleText_RegEx_ComboBox.Name = "BibleText_RegEx_ComboBox";
 			this.BibleText_RegEx_ComboBox.Size = new System.Drawing.Size(338, 21);
-			this.BibleText_RegEx_ComboBox.TabIndex = 1;
+			this.BibleText_RegEx_ComboBox.TabIndex = 0;
 			this.BibleText_RegEx_ComboBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BibleText_RegEx_ComboBox_KeyUp);
 			this.BibleText_RegEx_ComboBox.TextChanged += new System.EventHandler(this.BibleText_RegEx_ComboBox_TextChanged);
 			// 
@@ -184,7 +184,7 @@ namespace DreamBeam {
 			this.BibleText_Bookmark_button.Location = new System.Drawing.Point(404, 4);
 			this.BibleText_Bookmark_button.Name = "BibleText_Bookmark_button";
 			this.BibleText_Bookmark_button.Size = new System.Drawing.Size(88, 32);
-			this.BibleText_Bookmark_button.TabIndex = 0;
+			this.BibleText_Bookmark_button.TabIndex = 1;
 			this.BibleText_Bookmark_button.Text = "Bookmark";
 			this.BibleText_Bookmark_button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.toolTip.SetToolTip(this.BibleText_Bookmark_button, "Bookmark the current verse");

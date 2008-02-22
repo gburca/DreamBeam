@@ -275,19 +275,6 @@ namespace DreamBeam {
 		public System.Windows.Forms.TabPage EditSongs_Tab;
 		public DreamBeam.SongEditor songEditor;
 		public System.Windows.Forms.TabPage BibleText_Tab;
-		private System.Windows.Forms.Panel BibleText_panelLeft;
-		private DreamBeam.Bible.BibleRTF BibleText_Results;
-		private System.Windows.Forms.Panel panel8;
-		private System.Windows.Forms.Button BibleText_FindLast_button;
-		private System.Windows.Forms.Button BibleText_FindFirst_button;
-		private System.Windows.Forms.Button BibleText_FindPrev_button;
-		private System.Windows.Forms.Button BibleText_FindNext_button;
-		private System.Windows.Forms.ComboBox BibleText_Verse_ComboBox;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Panel panel7;
-		private System.Windows.Forms.Button BibleText_Bookmark_button;
-		private System.Windows.Forms.ComboBox BibleText_RegEx_ComboBox;
-		private System.Windows.Forms.Label label1;
 		public System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.OpenFileDialog OpenFileDialog;
 		private ControlLib.dbTreeViewCtrl SongList_Tree;
@@ -316,11 +303,11 @@ namespace DreamBeam {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node2");
-			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node2");
+			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
+            treeNode5});
 			this.RightDocks_ImageListBox = new Controls.Development.ImageListBox();
 			this.ImageContext = new System.Windows.Forms.ContextMenu();
 			this.ImageContextItemManage = new System.Windows.Forms.MenuItem();
@@ -468,11 +455,6 @@ namespace DreamBeam {
 			this.Presentation_AutoPlayTimer = new System.Windows.Forms.Timer(this.components);
 			this.MainForm_ToolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.Sermon_BibleKey = new System.Windows.Forms.TextBox();
-			this.BibleText_FindLast_button = new System.Windows.Forms.Button();
-			this.BibleText_FindFirst_button = new System.Windows.Forms.Button();
-			this.BibleText_FindPrev_button = new System.Windows.Forms.Button();
-			this.BibleText_FindNext_button = new System.Windows.Forms.Button();
-			this.BibleText_Bookmark_button = new System.Windows.Forms.Button();
 			this.Main_ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
 			this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.ShowSong_Tab = new System.Windows.Forms.TabPage();
@@ -524,14 +506,7 @@ namespace DreamBeam {
 			this.EditSongs_Tab = new System.Windows.Forms.TabPage();
 			this.songEditor = new DreamBeam.SongEditor();
 			this.BibleText_Tab = new System.Windows.Forms.TabPage();
-			this.BibleText_panelLeft = new System.Windows.Forms.Panel();
-			this.BibleText_Results = new DreamBeam.Bible.BibleRTF();
-			this.panel8 = new System.Windows.Forms.Panel();
-			this.BibleText_Verse_ComboBox = new System.Windows.Forms.ComboBox();
-			this.label2 = new System.Windows.Forms.Label();
-			this.panel7 = new System.Windows.Forms.Panel();
-			this.BibleText_RegEx_ComboBox = new System.Windows.Forms.ComboBox();
-			this.label1 = new System.Windows.Forms.Label();
+			this.bibleTextControl = new DreamBeam.BibleText();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.GlobalDataSet = new System.Data.DataSet();
@@ -544,7 +519,6 @@ namespace DreamBeam {
 			this.dataColumn1 = new System.Data.DataColumn();
 			this.dataColumn2 = new System.Data.DataColumn();
 			this.SongListDataView = new System.Data.DataView();
-			this.bibleTextControl = new DreamBeam.BibleText();
 			this.RightDocks_Songlist_SearchPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.RightDocks_SongList_ButtonPanel.SuspendLayout();
@@ -615,9 +589,6 @@ namespace DreamBeam {
 			((System.ComponentModel.ISupportInitialize)(this.AudioBar)).BeginInit();
 			this.EditSongs_Tab.SuspendLayout();
 			this.BibleText_Tab.SuspendLayout();
-			this.BibleText_panelLeft.SuspendLayout();
-			this.panel8.SuspendLayout();
-			this.panel7.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.GlobalDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.SongListTable)).BeginInit();
@@ -2168,68 +2139,6 @@ namespace DreamBeam {
 			this.Sermon_BibleKey.TextChanged += new System.EventHandler(this.Sermon_BibleKey_TextChanged);
 			this.Sermon_BibleKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Sermon_BibleKey_KeyDown);
 			// 
-			// BibleText_FindLast_button
-			// 
-			this.BibleText_FindLast_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BibleText_FindLast_button.BackColor = System.Drawing.SystemColors.Control;
-			this.BibleText_FindLast_button.Image = ((System.Drawing.Image)(resources.GetObject("BibleText_FindLast_button.Image")));
-			this.BibleText_FindLast_button.Location = new System.Drawing.Point(460, 2);
-			this.BibleText_FindLast_button.Name = "BibleText_FindLast_button";
-			this.BibleText_FindLast_button.Size = new System.Drawing.Size(32, 32);
-			this.BibleText_FindLast_button.TabIndex = 5;
-			this.MainForm_ToolTip.SetToolTip(this.BibleText_FindLast_button, "Find last occurance of the RegEx");
-			this.BibleText_FindLast_button.UseVisualStyleBackColor = false;
-			this.BibleText_FindLast_button.Click += new System.EventHandler(this.BibleText_FindLast_button_Click);
-			// 
-			// BibleText_FindFirst_button
-			// 
-			this.BibleText_FindFirst_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BibleText_FindFirst_button.Image = ((System.Drawing.Image)(resources.GetObject("BibleText_FindFirst_button.Image")));
-			this.BibleText_FindFirst_button.Location = new System.Drawing.Point(420, 2);
-			this.BibleText_FindFirst_button.Name = "BibleText_FindFirst_button";
-			this.BibleText_FindFirst_button.Size = new System.Drawing.Size(32, 32);
-			this.BibleText_FindFirst_button.TabIndex = 4;
-			this.MainForm_ToolTip.SetToolTip(this.BibleText_FindFirst_button, "Find first occurance of the RegEx");
-			this.BibleText_FindFirst_button.Click += new System.EventHandler(this.BibleText_FindFirst_button_Click);
-			// 
-			// BibleText_FindPrev_button
-			// 
-			this.BibleText_FindPrev_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BibleText_FindPrev_button.Image = ((System.Drawing.Image)(resources.GetObject("BibleText_FindPrev_button.Image")));
-			this.BibleText_FindPrev_button.Location = new System.Drawing.Point(380, 2);
-			this.BibleText_FindPrev_button.Name = "BibleText_FindPrev_button";
-			this.BibleText_FindPrev_button.Size = new System.Drawing.Size(32, 32);
-			this.BibleText_FindPrev_button.TabIndex = 3;
-			this.MainForm_ToolTip.SetToolTip(this.BibleText_FindPrev_button, "Find previous occurance of the RegEx");
-			this.BibleText_FindPrev_button.Click += new System.EventHandler(this.BibleText_FindPrev_button_Click);
-			// 
-			// BibleText_FindNext_button
-			// 
-			this.BibleText_FindNext_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BibleText_FindNext_button.BackColor = System.Drawing.SystemColors.Control;
-			this.BibleText_FindNext_button.Image = ((System.Drawing.Image)(resources.GetObject("BibleText_FindNext_button.Image")));
-			this.BibleText_FindNext_button.Location = new System.Drawing.Point(340, 2);
-			this.BibleText_FindNext_button.Name = "BibleText_FindNext_button";
-			this.BibleText_FindNext_button.Size = new System.Drawing.Size(32, 32);
-			this.BibleText_FindNext_button.TabIndex = 2;
-			this.MainForm_ToolTip.SetToolTip(this.BibleText_FindNext_button, "Find next occurance of the RegEx");
-			this.BibleText_FindNext_button.UseVisualStyleBackColor = false;
-			this.BibleText_FindNext_button.Click += new System.EventHandler(this.BibleText_FindNext_button_Click);
-			// 
-			// BibleText_Bookmark_button
-			// 
-			this.BibleText_Bookmark_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BibleText_Bookmark_button.Image = ((System.Drawing.Image)(resources.GetObject("BibleText_Bookmark_button.Image")));
-			this.BibleText_Bookmark_button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.BibleText_Bookmark_button.Location = new System.Drawing.Point(404, 4);
-			this.BibleText_Bookmark_button.Name = "BibleText_Bookmark_button";
-			this.BibleText_Bookmark_button.Size = new System.Drawing.Size(88, 32);
-			this.BibleText_Bookmark_button.TabIndex = 2;
-			this.BibleText_Bookmark_button.Text = "Bookmark";
-			this.BibleText_Bookmark_button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.MainForm_ToolTip.SetToolTip(this.BibleText_Bookmark_button, "Bookmark the current verse");
-			this.BibleText_Bookmark_button.Click += new System.EventHandler(this.BibleText_Bookmark_button_Click);
-			// 
 			// Main_ErrorProvider
 			// 
 			this.Main_ErrorProvider.ContainerControl = this;
@@ -2557,14 +2466,14 @@ namespace DreamBeam {
 			this.treeView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
 			this.treeView1.Location = new System.Drawing.Point(2, 2);
 			this.treeView1.Name = "treeView1";
-			treeNode1.Name = "";
-			treeNode1.Text = "Node2";
-			treeNode2.Name = "";
-			treeNode2.Text = "Node1";
-			treeNode3.Name = "";
-			treeNode3.Text = "Node0";
+			treeNode4.Name = "";
+			treeNode4.Text = "Node2";
+			treeNode5.Name = "";
+			treeNode5.Text = "Node1";
+			treeNode6.Name = "";
+			treeNode6.Text = "Node0";
 			this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode6});
 			this.treeView1.SelectedImageIndex = 0;
 			this.treeView1.Size = new System.Drawing.Size(190, 685);
 			this.treeView1.TabIndex = 2;
@@ -2778,112 +2687,21 @@ namespace DreamBeam {
 			// 
 			// BibleText_Tab
 			// 
-			this.BibleText_Tab.Controls.Add(this.BibleText_panelLeft);
+			this.BibleText_Tab.Controls.Add(this.bibleTextControl);
 			this.BibleText_Tab.Location = new System.Drawing.Point(4, 14);
 			this.BibleText_Tab.Name = "BibleText_Tab";
 			this.BibleText_Tab.Size = new System.Drawing.Size(506, 691);
 			this.BibleText_Tab.TabIndex = 5;
 			this.BibleText_Tab.Text = "Bible Text";
 			// 
-			// BibleText_panelLeft
+			// bibleTextControl
 			// 
-			this.BibleText_panelLeft.Controls.Add(this.bibleTextControl);
-			this.BibleText_panelLeft.Controls.Add(this.BibleText_Results);
-			this.BibleText_panelLeft.Controls.Add(this.panel8);
-			this.BibleText_panelLeft.Controls.Add(this.panel7);
-			this.BibleText_panelLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BibleText_panelLeft.Location = new System.Drawing.Point(0, 0);
-			this.BibleText_panelLeft.Name = "BibleText_panelLeft";
-			this.BibleText_panelLeft.Size = new System.Drawing.Size(506, 691);
-			this.BibleText_panelLeft.TabIndex = 0;
-			// 
-			// BibleText_Results
-			// 
-			this.BibleText_Results.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.BibleText_Results.CurrentVerse = 0;
-			this.BibleText_Results.Cursor = System.Windows.Forms.Cursors.Arrow;
-			this.BibleText_Results.HiglightColor = Khendys.Controls.RtfColor.White;
-			this.BibleText_Results.Location = new System.Drawing.Point(8, 573);
-			this.BibleText_Results.Name = "BibleText_Results";
-			this.BibleText_Results.ReadOnly = true;
-			this.BibleText_Results.Size = new System.Drawing.Size(484, 109);
-			this.BibleText_Results.TabIndex = 2;
-			this.BibleText_Results.Text = "";
-			this.BibleText_Results.TextColor = Khendys.Controls.RtfColor.Black;
-			this.BibleText_Results.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BibleText_Results_KeyDown);
-			this.BibleText_Results.MouseEnter += new System.EventHandler(this.BibleText_Results_MouseEnter);
-			this.BibleText_Results.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BibleText_Results_MouseDown);
-			// 
-			// panel8
-			// 
-			this.panel8.BackColor = System.Drawing.SystemColors.Control;
-			this.panel8.Controls.Add(this.BibleText_FindLast_button);
-			this.panel8.Controls.Add(this.BibleText_FindFirst_button);
-			this.panel8.Controls.Add(this.BibleText_FindPrev_button);
-			this.panel8.Controls.Add(this.BibleText_FindNext_button);
-			this.panel8.Controls.Add(this.BibleText_Verse_ComboBox);
-			this.panel8.Controls.Add(this.label2);
-			this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel8.Location = new System.Drawing.Point(0, 38);
-			this.panel8.Name = "panel8";
-			this.panel8.Size = new System.Drawing.Size(506, 36);
-			this.panel8.TabIndex = 1;
-			// 
-			// BibleText_Verse_ComboBox
-			// 
-			this.BibleText_Verse_ComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.BibleText_Verse_ComboBox.DropDownWidth = 186;
-			this.BibleText_Verse_ComboBox.Location = new System.Drawing.Point(56, 7);
-			this.BibleText_Verse_ComboBox.Name = "BibleText_Verse_ComboBox";
-			this.BibleText_Verse_ComboBox.Size = new System.Drawing.Size(274, 21);
-			this.BibleText_Verse_ComboBox.TabIndex = 1;
-			this.BibleText_Verse_ComboBox.SelectedIndexChanged += new System.EventHandler(this.BibleText_Verse_ComboBox_SelectedIndexChanged);
-			this.BibleText_Verse_ComboBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BibleText_Verse_ComboBox_KeyUp);
-			// 
-			// label2
-			// 
-			this.label2.Location = new System.Drawing.Point(8, 11);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(40, 16);
-			this.label2.TabIndex = 0;
-			this.label2.Text = "Verse:";
-			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// panel7
-			// 
-			this.panel7.BackColor = System.Drawing.SystemColors.Control;
-			this.panel7.Controls.Add(this.BibleText_Bookmark_button);
-			this.panel7.Controls.Add(this.BibleText_RegEx_ComboBox);
-			this.panel7.Controls.Add(this.label1);
-			this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel7.Location = new System.Drawing.Point(0, 0);
-			this.panel7.Name = "panel7";
-			this.panel7.Size = new System.Drawing.Size(506, 38);
-			this.panel7.TabIndex = 0;
-			// 
-			// BibleText_RegEx_ComboBox
-			// 
-			this.BibleText_RegEx_ComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.BibleText_RegEx_ComboBox.DropDownWidth = 250;
-			this.BibleText_RegEx_ComboBox.Location = new System.Drawing.Point(56, 9);
-			this.BibleText_RegEx_ComboBox.Name = "BibleText_RegEx_ComboBox";
-			this.BibleText_RegEx_ComboBox.Size = new System.Drawing.Size(338, 21);
-			this.BibleText_RegEx_ComboBox.TabIndex = 1;
-			this.BibleText_RegEx_ComboBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BibleText_RegEx_ComboBox_KeyUp);
-			this.BibleText_RegEx_ComboBox.TextChanged += new System.EventHandler(this.BibleText_RegEx_ComboBox_TextChanged);
-			// 
-			// label1
-			// 
-			this.label1.Location = new System.Drawing.Point(8, 10);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(48, 24);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Search:";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.bibleTextControl.BibleVersion = null;
+			this.bibleTextControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.bibleTextControl.Location = new System.Drawing.Point(0, 0);
+			this.bibleTextControl.Name = "bibleTextControl";
+			this.bibleTextControl.Size = new System.Drawing.Size(506, 691);
+			this.bibleTextControl.TabIndex = 3;
 			// 
 			// tabControl1
 			// 
@@ -2959,16 +2777,6 @@ namespace DreamBeam {
 			// SongListDataView
 			// 
 			this.SongListDataView.Table = this.SongListTable;
-			// 
-			// bibleTextControl
-			// 
-			this.bibleTextControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.bibleTextControl.Location = new System.Drawing.Point(0, 80);
-			this.bibleTextControl.Name = "bibleTextControl";
-			this.bibleTextControl.Size = new System.Drawing.Size(503, 472);
-			this.bibleTextControl.TabIndex = 3;
 			// 
 			// MainForm
 			// 
@@ -3069,9 +2877,6 @@ namespace DreamBeam {
 			((System.ComponentModel.ISupportInitialize)(this.AudioBar)).EndInit();
 			this.EditSongs_Tab.ResumeLayout(false);
 			this.BibleText_Tab.ResumeLayout(false);
-			this.BibleText_panelLeft.ResumeLayout(false);
-			this.panel8.ResumeLayout(false);
-			this.panel7.ResumeLayout(false);
 			this.tabControl1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.GlobalDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.SongListTable)).EndInit();

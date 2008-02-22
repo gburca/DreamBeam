@@ -21,9 +21,8 @@ namespace DreamBeam {
 			BibleText_RegEx_ComboBox_EventHandler = new EventHandler(BibleText_RegEx_ComboBox_TimedOut);
 		}
 
-		public void Setup(MainForm mf, BibleVersion bible, ListBox btb, ListBox btt, BibleLib bibles) {
+		public void Setup(MainForm mf, ListBox btb, ListBox btt, BibleLib bibles) {
 			mainForm = mf;
-			BibleText_Bible = bible;
 			BibleText_Bookmarks = btb;
 			BibleText_Translations = btt;
 			this.bibles = bibles;
