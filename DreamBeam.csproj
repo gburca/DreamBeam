@@ -306,6 +306,12 @@
     <Compile Include="GuiTools\MediaControls.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="GuiTools\BibleText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GuiTools\BibleText.Designer.cs">
+      <DependentUpon>BibleText.cs</DependentUpon>
+    </Compile>
     <Compile Include="InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -379,6 +385,10 @@
     <EmbeddedResource Include="GuiTools\ThemeWidget.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ThemeWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\BibleText.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>BibleText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
