@@ -10,39 +10,40 @@ using DreamBeam.FileTypes;
 namespace DreamBeam {
 	public partial class BibleText : UserControl {
 		protected MainForm mainForm;
-		public BibleVersion BibleText_Bible;
+		public BibleVersion bibleVersion;
 		private Timer TextTypedTimer = new Timer();
-		public EventHandler BibleText_RegEx_ComboBox_EventHandler;
+		public EventHandler RegEx_ComboBox_EventHandler;
 		protected ListBox BibleText_Bookmarks, BibleText_Translations;
-		protected BibleLib bibles;
+		protected BibleLib bibleLib;
 
 		public BibleText() {
 			InitializeComponent();
-			BibleText_RegEx_ComboBox_EventHandler = new EventHandler(BibleText_RegEx_ComboBox_TimedOut);
+			RegEx_ComboBox_EventHandler = new EventHandler(BibleText_RegEx_ComboBox_TimedOut);
 		}
 
 		public void Setup(MainForm mf, ListBox btb, ListBox btt, BibleLib bibles) {
 			mainForm = mf;
 			BibleText_Bookmarks = btb;
 			BibleText_Translations = btt;
-			this.bibles = bibles;
+			this.bibleLib = bibles;
 		}
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public BibleVersion BibleVersion {
-			get { return BibleText_Bible; }
+			get { return bibleVersion; }
 			set {
-				BibleText_Bible = value;
+				bibleVersion = value;
 				BibleText_Results_Update();
 			}
 		}
 
 		public void goToBookmark(String bookmark) {
-			if (BibleText_Bible == null) return;
+			if (bibleVersion == null) return;
 
-			BibleText_RegEx_ComboBox.Text = "^" + this.BibleText_Bible.GetSimpleRef(bookmark, true) + @"\s+.*";
+			BibleText_RegEx_ComboBox.Text = "^" + this.bibleVersion.GetSimpleRef(bookmark, true) + @"\s+.*";
 			int vidx = BibleText_Query(true);
 			if (vidx >= 0) {
-				mainForm.DisplayPreview.SetContent(new ABibleVerse(this.BibleText_Bible, vidx, mainForm.Config));
+				mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, vidx, mainForm.Config));
 			}
 		}
 
@@ -53,8 +54,8 @@ namespace DreamBeam {
 		private void BibleText_Results_Update() {
 			try {
 				string translation = BibleText_Translations.SelectedItem.ToString();
-				if (bibles.TranslationExists(translation)) {
-					BibleText_Results.Populate(bibles[translation], BibleText_Results.CurrentVerse);
+				if (bibleLib.TranslationExists(translation)) {
+					BibleText_Results.Populate(bibleLib[translation], BibleText_Results.CurrentVerse);
 				}
 			} catch { }
 		}
@@ -67,11 +68,11 @@ namespace DreamBeam {
 			int l = BibleText_Results.GetLineFromCharIndex(idx);
 			int vidx = BibleText_Results.GetVerseIndexFromSelection(idx);
 			BibleText_Results.CurrentVerse = vidx;
-			mainForm.DisplayPreview.SetContent(new ABibleVerse(BibleText_Bible, vidx, mainForm.Config));
+			mainForm.DisplayPreview.SetContent(new ABibleVerse(bibleVersion, vidx, mainForm.Config));
 
 			//Console.WriteLine("Clicked " + pt + " on line " + l + " at character number " +idx + "(" + c + ").");
 			//Console.WriteLine("Clicked {0} on line {1} at character number {2} ({3}).", pt, l, idx, c);
-			//Console.WriteLine("Verse: " + BibleText_Bible[vidx].ToString());
+			//Console.WriteLine("Verse: " + bibleVersion[vidx].ToString());
 		}
 
 		private void BibleText_Results_MouseEnter(object sender, System.EventArgs e) {
@@ -80,7 +81,7 @@ namespace DreamBeam {
 		}
 
 		private void BibleText_Results_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e) {
-			if (this.BibleText_Bible == null) return;
+			if (this.bibleVersion == null) return;
 			switch (e.KeyCode) {
 				case Keys.A:	// Find first
 					BibleText_FindFirst_button_Click(sender, null);
@@ -97,7 +98,7 @@ namespace DreamBeam {
 				case Keys.Enter:
 					int vidx = BibleText_Results.GetVerseIndexFromSelection(BibleText_Results.SelectionStart);
 					BibleText_Results.CurrentVerse = vidx;
-					mainForm.DisplayPreview.SetContent(new ABibleVerse(this.BibleText_Bible, vidx, mainForm.Config));
+					mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, vidx, mainForm.Config));
 					mainForm.RightDocks_Preview_GoLive_Click(sender, null);
 					break;
 			}
@@ -108,8 +109,8 @@ namespace DreamBeam {
 		private int BibleText_Query(bool dirFwd) {
 			if (BibleText_Translations.Items.Count == 0 || BibleText_Translations.SelectedIndices.Count == 0) return -1;
 			string translation = BibleText_Translations.SelectedItem.ToString();
-			if (!bibles.TranslationExists(translation)) return -1;
-			int index = BibleText_Results.Find(bibles[translation], dirFwd, BibleText_RegEx_ComboBox.Text);
+			if (!bibleLib.TranslationExists(translation)) return -1;
+			int index = BibleText_Results.Find(bibleLib[translation], dirFwd, BibleText_RegEx_ComboBox.Text);
 			// Force an update
 			BibleText_Results.Focus();
 			BibleText_RegEx_ComboBox.Focus();
@@ -125,7 +126,7 @@ namespace DreamBeam {
 			Console.WriteLine("Timer fired!");
 			TextTypedTimer.Stop();
 			TextTypedTimer.Enabled = false;
-			TextTypedTimer.Tick -= BibleText_RegEx_ComboBox_EventHandler;
+			TextTypedTimer.Tick -= RegEx_ComboBox_EventHandler;
 			BibleText_Query(true);
 		}
 
@@ -145,7 +146,7 @@ namespace DreamBeam {
 					TextTypedTimer.Start();
 				} else {
 					Console.WriteLine("Time disabled");
-					TextTypedTimer.Tick += BibleText_RegEx_ComboBox_EventHandler;
+					TextTypedTimer.Tick += RegEx_ComboBox_EventHandler;
 					TextTypedTimer.Interval = 300;
 					TextTypedTimer.Start();
 				}
@@ -160,36 +161,36 @@ namespace DreamBeam {
 		}
 
 		private void BibleText_Verse_ComboBox_SelectedIndexChanged(object sender, System.EventArgs e) {
-			if (BibleText_Bible == null) return;
+			if (bibleVersion == null) return;
 
-			BibleText_RegEx_ComboBox.Text = "^" + BibleText_Bible.NormalizeRef(BibleText_Verse_ComboBox.SelectedIndex.ToString()) + @"\s+.*";
+			BibleText_RegEx_ComboBox.Text = "^" + bibleVersion.NormalizeRef(BibleText_Verse_ComboBox.SelectedIndex.ToString()) + @"\s+.*";
 			BibleText_Query(true);
 		}
 
 		private void BibleText_Verse_ComboBox_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e) {
 			if (e.KeyCode == Keys.Enter) {
-				if (BibleText_Bible == null) return;
+				if (bibleVersion == null) return;
 
 				string reference = BibleText_Verse_ComboBox.Text;
 				string normReference;
-				normReference = BibleText_Bible.NormalizeRef(reference);
+				normReference = bibleVersion.NormalizeRef(reference);
 				if (normReference.Length == 0) {
 					// Maybe the user forgot to enter the verse. Default to the first verse of the chapter.
-					normReference = BibleText_Bible.NormalizeRef(reference + " 1");
+					normReference = bibleVersion.NormalizeRef(reference + " 1");
 				}
 
-				int index = BibleText_Bible.GetVerseIndex(normReference);
+				int index = bibleVersion.GetVerseIndex(normReference);
 				if (index >= 0) {
-					BibleText_RegEx_ComboBox.Text = "^" + this.BibleText_Bible.GetSimpleRef(normReference, true) + @"\s+.*";
+					BibleText_RegEx_ComboBox.Text = "^" + this.bibleVersion.GetSimpleRef(normReference, true) + @"\s+.*";
 					BibleText_Query(true);
-					mainForm.DisplayPreview.SetContent(new ABibleVerse(this.BibleText_Bible, index, mainForm.Config));
+					mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, index, mainForm.Config));
 					if (!BibleText_Verse_ComboBox.Items.Contains(reference)) {
 						BibleText_Verse_ComboBox.Items.Insert(0, reference);
 					}
 					BibleText_Results.Focus();
 				} else {
 					BibleText_RegEx_ComboBox.Text = "";
-					BibleText_Results.Populate(BibleText_Bible, 0);
+					BibleText_Results.Populate(bibleVersion, 0);
 					BibleText_Results.Focus();
 					BibleText_Verse_ComboBox.Focus();
 				}
@@ -201,9 +202,9 @@ namespace DreamBeam {
 
 		#region BibleText RegEx buttons
 		private void BibleText_Bookmark_button_Click(object sender, System.EventArgs e) {
-			if (BibleText_Bible == null) return;
+			if (bibleVersion == null) return;
 
-			string reference = BibleText_Bible.GetRef(BibleText_Results.CurrentVerse);
+			string reference = bibleVersion.GetRef(BibleText_Results.CurrentVerse);
 			if (reference.Length > 0) {
 				BibleText_Bookmarks.Items.Insert(0, reference);
 			}
@@ -223,8 +224,8 @@ namespace DreamBeam {
 		}
 
 		private void BibleText_FindLast_button_Click(object sender, System.EventArgs e) {
-			if (BibleText_Bible == null) return;
-			BibleText_Results.CurrentVerse = BibleText_Bible.VerseCount - 1;
+			if (bibleVersion == null) return;
+			BibleText_Results.CurrentVerse = bibleVersion.VerseCount - 1;
 			BibleText_Query(false);
 		}
 
