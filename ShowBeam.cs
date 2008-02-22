@@ -114,10 +114,7 @@ namespace DreamBeam {
 		public int[] tmpPosY = new int[3];
 
 		public ImageList MediaList = new ImageList();
-		bool FlashPlaying = false;
-		bool VideoPlaying = false;
 		string PlayWhat = "";
-		string PrePlaying = "";
 
 		public string strMediaPlaying = null;
 		public Microsoft.DirectX.AudioVideoPlayback.Video video = null;
@@ -139,6 +136,8 @@ namespace DreamBeam {
 		//		DirectShowLib Lib = new DirectShowLib();
 
 		private FXLib FXLib = new FXLib();
+
+		public MediaOperations MediaFile1 = null;
 		#endregion
 
 		#region Controls
@@ -681,20 +680,6 @@ namespace DreamBeam {
 			this.DrawWhat = 0;
 
 			this.GDIDraw();
-			//this.DXDraw();
-		}
-
-		public bool DrawSongItem(int j) {
-			if (j == 0 && this.HideTitle) {
-				return false;
-			}
-			if (j == 1 && this.HideVerse) {
-				return false;
-			}
-			if (j == 2 && this.HideAuthor) {
-				return false;
-			}
-			return true;
 		}
 
 		#endregion
@@ -704,7 +689,6 @@ namespace DreamBeam {
 		public void PaintSermon() {
 			this.DrawWhat = 1;
 			this.GDIDraw();
-			//this.DXDraw();
 		}
 
 		///<summary>Paints a Bitmap from the Sermon Contents</summary>
@@ -1021,14 +1005,6 @@ namespace DreamBeam {
 			return ResizeBMP;
 		}
 
-		public void GetVideoFrame(string Path) {
-			Microsoft.DirectX.AudioVideoPlayback.Video tmpvideo = null;
-
-			tmpvideo = new Microsoft.DirectX.AudioVideoPlayback.Video(Path, false);
-			tmpvideo.Dispose();
-			tmpvideo = null;
-		}
-
 		public Bitmap DrawProportionalBitmap(System.Drawing.Size Size, string Path) {
 			Bitmap bm = null;
 
@@ -1339,13 +1315,11 @@ namespace DreamBeam {
 		#region MediaStuff
 		public void ShowMedia(string Path) {
 			//this.StopMedia();
-			PrePlaying = PlayWhat;
 			PlayWhat = MediaList.GetType(Path);
 			if (this.strMediaPlaying == null) {
 
 				if (PlayWhat == "flash") {
 					strMediaPlaying = MediaList.GetType(Path);
-					this.FlashPlaying = true;
 					this.axShockwaveFlash.Show();
 					this.ShowSongPanel.Hide();
 					this.VideoPanel.Hide();
@@ -1357,9 +1331,9 @@ namespace DreamBeam {
 					this.axShockwaveFlash.Movie = Path;
 					this.axShockwaveFlash.Play();
 					this.axShockwaveFlash.Loop = this.LoopMedia;
-				}
 
-				if (PlayWhat == "movie") {
+					this.MediaFile1 = new MediaFlash(axShockwaveFlash);
+				} else if (PlayWhat == "movie") {
 					this.VideoProblem = false;
 					strMediaPlaying = MediaList.GetType(Path);
 					axShockwaveFlash.Stop();
@@ -1404,18 +1378,12 @@ namespace DreamBeam {
 							this.video.Audio.Volume = this.AudioVolume;
 						} catch { }
 						this.video.Play();
-						this.VideoPlaying = true;
 					}
 
-				}
-				if (PlayWhat == "image") {
-					if (video != null) {
-						video.Stop();
-						PlayBackTimer.Enabled = false;
-					}
+					this.MediaFile1 = new MediaMovie(video);
+
+				} else if (PlayWhat == "image") {
 					StopMedia();
-					this.axShockwaveFlash.Hide();
-					this.VideoPanel.Hide();
 					this.ShowSongPanel.Show();
 					this.ShowSongPanel.Size = this.Size;
 					this.ShowSongPanel.Location = new Point(0, 0);
@@ -1425,6 +1393,8 @@ namespace DreamBeam {
 					} else {
 						_MainForm.DisplayLiveLocal.SetContent(new ImageContent(Path));
 					}
+
+					this.MediaFile1 = null;
 				}
 
 			} else if (this.strMediaPlaying == "flash") {
@@ -1436,47 +1406,19 @@ namespace DreamBeam {
 
 
 		public void StopMedia() {
+			if (this.MediaFile1 == null) return;
 
-			if (this.FlashPlaying) {
-				axShockwaveFlash.Stop();
-				axShockwaveFlash.Rewind();
-				this.FlashPlaying = false;
-				if (PrePlaying != PlayWhat) {
-					axShockwaveFlash.Hide();
-				}
-			}
+			this.MediaFile1.Stop();
+			ShowSongPanel.Show();
+			axShockwaveFlash.Hide();
+			VideoPanel.Hide();
 
-			if (PlayWhat != "image") {
-				if (PrePlaying != PlayWhat) {
-					this.bmp = this.DrawBlackBitmap(ShowSongPanel.Size.Width, ShowSongPanel.Size.Height);
-					this.DrawWhat = 777;
-					this.GDIDraw();
-				}
-			}
+			this.bmp = this.DrawBlackBitmap(ShowSongPanel.Size.Width, ShowSongPanel.Size.Height);
+			this.GDIDraw(bmp);
 
-			if (this.VideoPlaying) {
-				video.Stop();
-				PlayBackTimer.Enabled = false;
-				VideoPlaying = false;
-				if (PrePlaying != PlayWhat) {
-					this.VideoPanel.Hide();
-				}
-			}
-
+			PlayBackTimer.Enabled = false;
 			strMediaPlaying = null;
 		}
-
-		public void PauseMedia() {
-			if (strMediaPlaying == "flash") {
-				axShockwaveFlash.Stop();
-			}
-			if (strMediaPlaying == "movie") {
-				try {
-					video.Pause();
-				} catch { }
-			}
-		}
-
 
 		private void PlayBackTimer_Tick(object sender, System.EventArgs e) {
 			try {

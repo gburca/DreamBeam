@@ -24,31 +24,60 @@ using AxShockwaveFlashObjects;
 
 namespace DreamBeam {
 
-	public interface IMediaOperations {
-		void SkipBk();
-		void SeekBk();
-		void Play();
-		void Pause();
-		void Stop();
-		void SeekFw();
-		void SkipFw();
+	public abstract class MediaOperations {
+		public abstract void SkipBk();
+		public abstract void SeekBk();
+		public abstract void Play();
+		public abstract void Pause();
+		public abstract void Stop();
+		public abstract void SeekFw();
+		public abstract void SkipFw();
+
+		public virtual void Operation(MediaButton button) {
+			switch (button) {
+				case MediaButton.SkipBk:
+					SkipBk();
+					break;
+				case MediaButton.SeekBk:
+					SeekBk();
+					break;
+				case MediaButton.Play:
+					Play();
+					break;
+				case MediaButton.Pause:
+					Pause();
+					break;
+				case MediaButton.Stop:
+					Stop();
+					break;
+				case MediaButton.SeekFw:
+					SeekFw();
+					break;
+				case MediaButton.SkipFw:
+					SkipFw();
+					break;
+			}
+		}
 
 		// Maybe these should go in a IMediaProperties interface
-		double Duration();
-		int Volume {
+		public abstract double Duration();
+		public abstract int Volume {
 			get;
 			set;
 		}
-		Boolean Playing {
+		public abstract Boolean Playing {
 			get;
 		}
-		double CurrentLocation {
+		public abstract double CurrentLocation {
 			get;
 			set;
 		}
 	}
 
-	public class MediaFlash : IMediaOperations {
+	//public abstract class MediaBase : MediaOperations {
+	//}
+
+	public class MediaFlash : MediaOperations {
 		AxShockwaveFlash flash = null;
 		public int seekAmount = 10;
 
@@ -69,43 +98,43 @@ namespace DreamBeam {
 			if (wasPlaying) Play();
 		}
 
-		#region IMediaOperations
-		public void SkipBk() { Stop(); }
-		public void SeekBk() { Seek(-seekAmount); }
-		public void Play() {
+		#region MediaOperations
+		public override void SkipBk() { Stop(); }
+		public override void SeekBk() { Seek(-seekAmount); }
+		public override void Play() {
 			if (flash == null) return;
 			flash.Play();
 		}
-		public void Pause() {
+		public override void Pause() {
 			if (flash == null) return; 
 			flash.Stop();
 		}
-		public void Stop() {
+		public override void Stop() {
 			if (flash == null) return; 
 			flash.Stop();
 			flash.Rewind();
 		}
-		public void SeekFw() { Seek(seekAmount); }
-		public void SkipFw() { Stop(); }
+		public override void SeekFw() { Seek(seekAmount); }
+		public override void SkipFw() { Stop(); }
 
-		public double Duration() {
+		public override double Duration() {
 			if (flash == null) return 0;
 			return flash.TotalFrames;
 		}
 
-		public int Volume {
+		public override int Volume {
 			get { return 0; }
 			set { }
 		}
 
-		public Boolean Playing {
+		public override Boolean Playing {
 			get {
 				if (flash == null) return false;
 				return flash.Playing;
 			}
 		}
 
-		public double CurrentLocation {
+		public override double CurrentLocation {
 			get {
 				if (flash == null) return 0;
 				return flash.CurrentFrame();
@@ -118,7 +147,7 @@ namespace DreamBeam {
 		#endregion
 	}
 
-	public class MediaMovie : IMediaOperations {
+	public class MediaMovie : MediaOperations {
 		Video video = null;
 		public double seekAmount = 1;
 
@@ -139,35 +168,30 @@ namespace DreamBeam {
 			if (wasPlaying) Play();
 		}
 
-		#region IMediaOperations
-		public void SkipBk() { Stop(); }
-		public void SeekBk() { Seek(-seekAmount); }
-		public void Play() {
+		#region MediaOperations
+		public override void SkipBk() { Stop(); }
+		public override void SeekBk() { Seek(-seekAmount); }
+		public override void Play() {
 			if (video == null) return;
 			video.Play();
 		}
-		public void Pause() {
+		public override void Pause() {
 			if (video == null) return;
 			video.Pause();
 		}
-		public void Stop() {
+		public override void Stop() {
 			if (video == null) return;
 			video.Stop();
 		}
-		public void SeekFw() { Seek(seekAmount); }
-		public void SkipFw() { Stop(); }
+		public override void SeekFw() { Seek(seekAmount); }
+		public override void SkipFw() { Stop(); }
 
-		public void SkipTo(double location) {
-			if (video == null) return;
-			Seek(location - video.CurrentPosition);
-		}
-
-		public double Duration() {
+		public override double Duration() {
 			if (video == null) return 0;
 			return video.Duration;
 		}
 
-		public int Volume {
+		public override int Volume {
 			get {
 				if (video == null) return 0;
 				return video.Audio.Volume;
@@ -180,14 +204,14 @@ namespace DreamBeam {
 			}
 		}
 
-		public Boolean Playing {
+		public override Boolean Playing {
 			get {
 				if (video == null) return false;
 				return video.Playing;
 			}
 		}
 
-		public double CurrentLocation {
+		public override double CurrentLocation {
 			get {
 				if (video == null) return 0;
 				return video.CurrentPosition;

@@ -113,7 +113,7 @@ namespace DreamBeam {
 		private Cursor MyNormalCursor;
 		public ImageList MediaList = new ImageList();
 		public string MediaFile;
-		public IMediaOperations MediaFile1;
+		public MediaOperations MediaFile1;
 		bool VideoLoaded = false;
 		bool VideoProblem = false;
 		bool LoadingVideo = false;
@@ -2755,21 +2755,28 @@ namespace DreamBeam {
 		#endregion
 
 		private void liveMediaControls_MediaButtonPressed(object sender, MediaControlsEvent e) {
+			if (e.button == MediaButton.Play) this.Media2BeamBox();
+
+			MediaOperations media = ShowBeam.MediaFile1;
+			if (media == null) return;
+
 			switch (e.button) {
 				case MediaButton.Play:
-					this.Media2BeamBox();
+					// handled above by this.Media2BeamBox();
 					break;
-				case MediaButton.Pause:
-					PlayProgress.Enabled = false;
-					this.ShowBeam.PauseMedia();
-					break;
-				case MediaButton.SkipBk:
-				case MediaButton.SkipFw:
 				case MediaButton.Stop:
-					PlayProgress.Enabled = false;
-					Media_TrackBar.Value = 0;
 					ShowBeam.StopMedia();
 					break;
+				default:
+					media.Operation(e.button);
+					break;
+			}
+
+			PlayProgress.Enabled = media.Playing;
+			try {
+				Media_TrackBar.Value = (int)media.CurrentLocation;
+			} catch {
+				Media_TrackBar.Value = 0;
 			}
 		}
 
@@ -2783,24 +2790,8 @@ namespace DreamBeam {
 					Thread.Sleep(100);
 					MediaFile1.Play();
 					break;
-
-				case MediaButton.Pause:
-					MediaFile1.Pause();
-					break;
-				case MediaButton.SeekBk:
-					MediaFile1.SeekBk();
-					break;
-				case MediaButton.SeekFw:
-					MediaFile1.SeekFw();
-					break;
-				case MediaButton.SkipBk:
-					MediaFile1.SkipBk();
-					break;
-				case MediaButton.SkipFw:
-					MediaFile1.SkipFw();
-					break;
-				case MediaButton.Stop:
-					MediaFile1.Stop();
+				default:
+					MediaFile1.Operation(e.button);
 					break;
 			}
 
