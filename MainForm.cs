@@ -2592,7 +2592,7 @@ namespace DreamBeam {
 			bool success = DisplayPreview.ContentPrev();
 			//		if (! success) this.ShowError(this.RightDocks_Preview_Prev, "Could not switch to the previous one");
 		}
-		private void RightDocks_Preview_GoLive_Click(object sender, System.EventArgs e) {
+		public void RightDocks_Preview_GoLive_Click(object sender, System.EventArgs e) {
 			if (DisplayPreview.content != null) {
 				ToolBars_MainToolbar_HideBG.Checked = false;
 				ToolBars_MainToolbar_HideText.Checked = false;

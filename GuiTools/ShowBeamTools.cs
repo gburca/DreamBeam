@@ -24,18 +24,6 @@ namespace DreamBeam {
 				_MainForm.ToolBars_MainToolbar_HideBG.Checked = true;
 				_ShowBeam.HideBG = true;
 			}
-
-			// Repaint Image
-			if (_MainForm.selectedTab == MainTab.ShowSongs || _MainForm.selectedTab == MainTab.EditSongs) {
-				//							_MainForm.Draw_Song_Preview_Image();
-				_ShowBeam.PaintSong();
-			}
-			if (_MainForm.selectedTab == MainTab.SermonTools) {
-				//							_MainForm.Draw_Song_Preview_Image();
-				_ShowBeam.PaintSermon();
-			}
-
-
 		}
 
 		public void HideText() {
@@ -47,36 +35,13 @@ namespace DreamBeam {
 				_MainForm.ToolBars_MainToolbar_HideText.Checked = true;
 				_ShowBeam.HideText = true;
 			}
-
-			// Repaint Image
-			if (_MainForm.selectedTab == MainTab.ShowSongs || _MainForm.selectedTab == MainTab.EditSongs) {
-				//							_MainForm.Draw_Song_Preview_Image();
-				_ShowBeam.PaintSong();
-			}
-			if (_MainForm.selectedTab == MainTab.SermonTools) {
-				//							_MainForm.Draw_Song_Preview_Image();
-				_ShowBeam.PaintSermon();
-			}
 		}
 
-
-		public void ShowSong() {
-			_ShowBeam.Songupdate = true;
-			if (_MainForm.ToolBars_MainToolbar_ShowBeamBox.Checked == false) {
-				_MainForm.ToolBars_MainToolbar_ShowBeamBox.Checked = true;
-				_ShowBeam.Show();
-			}
-			_ShowBeam.Song.strophe = _MainForm.SongShow_StropheList_ListEx.SelectedIndex;
-			_ShowBeam.newText = true;
-			_ShowBeam.Songupdate = true;
-			_ShowBeam.PaintSong();
-			//		   _MainForm.Draw_Song_Preview_Image();
-		}
 
 		public void ShowStrophe(int Number) {
 			if (_MainForm.SongShow_StropheList_ListEx.Items.Count > Number) {
 				_MainForm.SongShow_StropheList_ListEx.SetSelected(Number, true);
-				ShowSong();
+				_MainForm.RightDocks_Preview_GoLive_Click(null, null);
 			}
 		}
 
