@@ -1054,7 +1054,7 @@ namespace DreamBeam {
 			if (Tools.FileExists(s.FileName)) {
 				Song.SerializeTo(s, s.FileName);
 				this.ListSongs();
-				this.StatusPanel.Text = Lang.say("Status.SongSavedAs", s.FileName);
+				this.StatusPanel.Text = Lang.say("Status.SongSavedAs", Tools.GetRelativePath(DirType.DataRoot, s.FileName));
 			} else {
 				SaveSongAs();
 			}
@@ -1080,8 +1080,8 @@ namespace DreamBeam {
 			if (this.SaveFileDialog.ShowDialog() == DialogResult.OK) {
 				s.FileName = this.SaveFileDialog.FileName;
 				try {
-					Song.SerializeTo(s, this.SaveFileDialog.FileName);
-					this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.SaveFileDialog.FileName);
+					Song.SerializeTo(s, s.FileName);
+					this.StatusPanel.Text = Lang.say("Status.SongSavedAs", Tools.GetRelativePath(DirType.DataRoot, s.FileName));
 				} catch (Exception ex) {
 					MessageBox.Show(Lang.say("Message.SongNotSaved") + "\nReason: " + ex.Message);
 				}

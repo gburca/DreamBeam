@@ -39,7 +39,8 @@ namespace DreamBeam {
 	public enum SongTextType {
 		Title,
 		Verse,
-		Author
+		Author,
+		Key
 	}
 
 	public enum SongSearchType {
@@ -479,12 +480,26 @@ namespace DreamBeam {
 		}
 
 		public string GetKey() {
-			if (this.KeyRangeLow == null) { return ""; }
-			return NormalizeKey(this.KeyRangeLow) + (this.MinorKey ? "m" : "");
+			String low = NormalizeKey(KeyRangeLow);
+			String high = NormalizeKey(KeyRangeHigh);
+
+			String key;
+			if (low.Length > 0 && high.Length > 0) {
+				key = low + " - " + high;
+			} else if (low.Length > 0) {
+				key = low;
+			} else {
+				key = high;
+			}
+
+			return key + (this.MinorKey ? "m" : "");
 		}
 
 		/// <summary>
-		/// Returns a normalized textual song key (converts "D# / Eb" to Eb)...
+		/// Returns a normalized textual song key (converts "D# / Eb" to Eb) for
+		/// older song versions:
+		///   In version 0.7x, the key was saved as "D# / Eb".
+		///   In version 0.8x there is a separate emtry for D# and Eb.
 		/// </summary>
 		/// <returns></returns>
 		public static string NormalizeKey(string keyStr) {
@@ -577,13 +592,7 @@ namespace DreamBeam {
 				text[(int)SongTextType.Title] = (this.Title == null) ? "" : this.Title;
 				text[(int)SongTextType.Verse] = (lyrics == null) ? "" : lyrics.Lyrics;
 				text[(int)SongTextType.Author] = (this.Author == null) ? "" : this.Author;
-
-
-				string songKey = this.GetKey();
-				if (songKey.Length > 0) {
-					// Add the key to the author field?
-					text[(int)SongTextType.Author] += " (" + songKey + ")";
-				}
+				text[(int)SongTextType.Key] = this.GetKey();
 
 				pth = new GraphicsPath();
 
@@ -596,8 +605,10 @@ namespace DreamBeam {
 						(int)(format[type].Bounds.Width / 100 * Width),
 						(int)(format[type].Bounds.Height / 100 * Height));
 
+					p = new Pen(format[type].TextColor, 1.0F);
+					if (showRectangles == true) graphics.DrawRectangle(p, bounds);
+
 					if (text[type].Length > 0) {
-						p = new Pen(format[type].TextColor, 1.0F);
 						p.LineJoin = LineJoin.Round;
 						StringFormat sf = new StringFormat();
 						sf.Alignment = format[type].HAlignment;
@@ -689,6 +700,10 @@ namespace DreamBeam {
 			return false;
 		}
 
+		public bool ShowRectangles {
+			get { return showRectangles; }
+			set { showRectangles = value; }
+		}
 
 		public virtual ContentIdentity GetIdentity() {
 			ContentIdentity ident = new ContentIdentity();

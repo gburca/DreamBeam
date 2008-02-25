@@ -19,18 +19,34 @@ namespace DreamBeam {
 		public Theme() {
 			Version = Tools.GetAppVersion();
 		}
-		public Theme(int formats)
-			: this() {
-			CreateTextFormats(formats);
-		}
+		//public Theme(int formats)
+		//    : this() {
+		//    CreateTextFormats(formats);
+		//}
 
-		protected void CreateTextFormats(int size) {
+		/// <summary>
+		/// When themes are first created, or if the deserialized theme has
+		/// fewer elements than needed (ex. older version) this function
+		/// ensures that enough array elements are created.
+		/// </summary>
+		/// <param name="size"></param>
+		public void CreateTextFormats(int size) {
 			// Create the array
-			TextFormat = new BeamTextFormat[size];
+			BeamTextFormat[] textFormat = new BeamTextFormat[size];
 			// Populate the array
 			for (int i = 0; i < size; i++) {
-				TextFormat[i] = new BeamTextFormat();
+				textFormat[i] = new BeamTextFormat();
 			}
+
+			if (TextFormat != null) {
+				for (int i = 0; i < Math.Min(size, TextFormat.Length); i++) {
+					if (TextFormat[i] != null) {
+						textFormat[i] = TextFormat[i];
+					}
+				}
+			}
+
+			TextFormat = textFormat;
 		}
 
 		public static Theme OpenFile(string FileDialogFilter, Type type) {
@@ -114,6 +130,13 @@ namespace DreamBeam {
 						Theme t = (Theme)xs.Deserialize(fs);
 						if (t != null) {
 							t.ThemeFile = Tools.GetRelativePath(DirType.DataRoot, file);
+							if (type == typeof(SongTheme)) {
+								t.CreateTextFormats(Enum.GetValues(typeof(SongTextType)).Length);
+							} else if (type == typeof(BibleTheme)) {
+								t.CreateTextFormats(Enum.GetValues(typeof(BibleTextType)).Length);
+							} else if (type == typeof(SermonTheme)) {
+								t.CreateTextFormats(Enum.GetValues(typeof(TextToolType)).Length);
+							}
 						}
 						return t;
 					}
@@ -225,6 +248,7 @@ namespace DreamBeam {
 			TextFormat[(int)SongTextType.Title].Bounds = new RectangleF(5F, 2F, 90F, 8F);
 			TextFormat[(int)SongTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
 			TextFormat[(int)SongTextType.Author].Bounds = new RectangleF(80F, 95F, 15F, 4F);
+			TextFormat[(int)SongTextType.Key].Bounds = new RectangleF(70F, 80F, 15F, 4F);
 			TextFormat[(int)SongTextType.Verse].HAlignment = StringAlignment.Near;
 		}
 

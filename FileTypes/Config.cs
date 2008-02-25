@@ -163,6 +163,11 @@ namespace DreamBeam {
 
 		public static Config DeserializeCleanup(Config config) {
 			if (config.BackgroundColor.IsEmpty) config.BackgroundColor = Color.Black;
+
+			// Versions prior to 0.72 had fewer TextFormats
+			config.theme.Bible.CreateTextFormats(Enum.GetValues(typeof(BibleTextType)).Length);
+			config.theme.Song.CreateTextFormats(Enum.GetValues(typeof(SongTextType)).Length);
+			config.theme.Sermon.CreateTextFormats(Enum.GetValues(typeof(TextToolType)).Length);
 			
 			return config;
 		}

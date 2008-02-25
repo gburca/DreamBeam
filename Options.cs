@@ -155,6 +155,10 @@ namespace DreamBeam {
 			config.theme.Song = this.songThemeWidget.Theme as SongTheme;
 			config.theme.Bible = this.bibleFormatWidget.Theme as BibleTheme;
 			config.theme.Sermon = this.sermonThemeWidget.Theme as SermonTheme;
+
+			IContentOperations content = _MainForm.DisplayPreview.content;
+			if (content != null) content.ShowRectangles = false;
+
 			HandleThemeChange();
 
 			config.ServerAddress = this.ServerAddress.Text;
@@ -180,6 +184,9 @@ namespace DreamBeam {
 		}
 
 		private void Options_Cancelbtn_Click(object sender, System.EventArgs e) {
+			IContentOperations content = _MainForm.DisplayPreview.content;
+			if (content != null) content.ShowRectangles = false;
+
 			ComboTheme t = _MainForm.Config.theme;
 			HandleThemeChange(t.Song, t.Bible, t.Sermon);
 			this.Close();
@@ -195,6 +202,10 @@ namespace DreamBeam {
 		}
 
 		private void Options_Load(object sender, System.EventArgs e) {
+			IContentOperations content = _MainForm.DisplayPreview.content;
+			if (content != null) content.ShowRectangles = true;
+			_MainForm.DisplayPreview.UpdateDisplay(true);
+
 			this.PopulateControls(_MainForm.Config);
 		}
 

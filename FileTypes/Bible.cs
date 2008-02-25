@@ -711,8 +711,10 @@ namespace DreamBeam.FileTypes {
 					};
 					*/
 
+					p = new Pen(format[type].TextColor, 1.0F);
+					if (showRectangles == true) graphics.DrawRectangle(p, bounds);
+
 					if (text[type].Length > 0) {
-						p = new Pen(format[type].TextColor, 1.0F);
 						p.LineJoin = LineJoin.Round;
 						StringFormat sf = new StringFormat();
 						sf.Alignment = format[type].HAlignment;
@@ -797,6 +799,11 @@ namespace DreamBeam.FileTypes {
 				return true;
 			}
 			return false;
+		}
+
+		public bool ShowRectangles {
+			get { return showRectangles; }
+			set { showRectangles = value; }
 		}
 
 		//		public string GetIdentity() {

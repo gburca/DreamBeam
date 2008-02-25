@@ -55,6 +55,10 @@ namespace DreamBeam {
 		}
 		void DefaultBackground(Config config);
 
+		bool ShowRectangles {
+			get;
+			set;
+		}
 		/// <summary>
 		/// When asking a remote display to show a piece of content, we don't
 		/// want to send the actual content across. Instead we send just enough
@@ -85,6 +89,8 @@ namespace DreamBeam {
 		public bool HideBG = false;
 		[XmlIgnore()]
 		public bool HideText = false;
+		[XmlIgnore()]
+		protected bool showRectangles = false;
 
 		/// <summary>The maximum number of pre-rendered frames to retain.</summary>
 		[XmlIgnore()]
@@ -277,6 +283,11 @@ namespace DreamBeam {
 		public bool Prev() {
 			// Nothing to do.
 			return true;
+		}
+
+		public bool ShowRectangles {
+			get { return showRectangles; }
+			set { showRectangles = value; }
 		}
 
 		public ContentIdentity GetIdentity() {

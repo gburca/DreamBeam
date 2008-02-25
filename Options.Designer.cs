@@ -1062,7 +1062,8 @@ namespace DreamBeam {
 			this.songThemeWidget.TabNames = new string[] {
         "Title",
         "Verse",
-        "Author"};
+        "Author",
+		"Key"};
 			this.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
 			// 
 			// BibleFormat_Tab
