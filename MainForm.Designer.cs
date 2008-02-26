@@ -2696,7 +2696,6 @@ namespace DreamBeam {
 			// 
 			// bibleTextControl
 			// 
-			this.bibleTextControl.BibleVersion = null;
 			this.bibleTextControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.bibleTextControl.Location = new System.Drawing.Point(0, 0);
 			this.bibleTextControl.Name = "bibleTextControl";

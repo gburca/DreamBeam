@@ -236,6 +236,10 @@ namespace DreamBeam {
 				} catch { }
 			}
 
+			// Change the Multimedia panels to black. They're using color for ease of design.
+			this.Presentation_PreviewPanel.BackColor = Color.Black;
+			this.axShockwaveFlash.BackgroundColor = Color.Black.ToArgb();
+			this.Presentation_PreviewBox.BackColor = Color.Black;
 		}
 
 
@@ -1622,7 +1626,7 @@ namespace DreamBeam {
 				axShockwaveFlash.Movie = MediaFile;
 				axShockwaveFlash.Playing = false;
 				axShockwaveFlash.Stop();
-				axShockwaveFlash.FrameNum = 1;
+				axShockwaveFlash.FrameNum = 0;
 				this.Presentation_Resize();
 				this.previewMedia = new MediaFlash(axShockwaveFlash);
 			} else if (MediaList.GetType(MediaFile) == "movie") {

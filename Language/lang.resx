@@ -184,7 +184,7 @@
     <value>Loop</value>
   </data>
   <data name="MediaPresentation.Preview" xml:space="preserve">
-    <value>Preview</value>
+    <value>Preview Window</value>
   </data>
   <data name="Menu.Edit" xml:space="preserve">
     <value>&amp;Edit</value>
