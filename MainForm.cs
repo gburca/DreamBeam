@@ -1133,6 +1133,25 @@ namespace DreamBeam {
 			this.SongShow_HideElement_UpdateButtons();
 		}
 
+		/// <summary>
+		/// See SongList_Tree_AfterSelect for why this is needed.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void SongList_Tree_MouseClick(object sender, MouseEventArgs e) {
+			this.SongList_Tree.SelectedNode = null;
+			this.SongList_Tree.SelectedNode = this.SongList_Tree.GetNodeAt(e.Location);
+		}
+
+
+		/// <summary>
+		/// This event fires only the first time the node is selected. If the same node is
+		/// selected for the second time (ex. after loading a bible verse and then returning to
+		/// the song) the event will not fire again. We force the node to be re-selected in the
+		/// MouseClick handling above.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SongList_Tree_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e) {
 			//ControlLib.dbTreeNode node = (ControlLib.dbTreeNode) e.Node;
 			this.LoadSongFromFile(GetSelectedSongFileName());

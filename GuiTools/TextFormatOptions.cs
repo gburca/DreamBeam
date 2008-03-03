@@ -683,6 +683,27 @@ namespace DreamBeam {
 			return (BeamTextFormat)clone;
 		}
 
+		/// <summary>
+		/// This is not a true hash code. It is only used to determine if any
+		/// graphically visible characteristics of the object have changed.
+		/// </summary>
+		/// <returns></returns>
+		public virtual int VisibleHashCode() {
+			int h = 0;
+			h += TextColor.GetHashCode();
+			h += OutlineColor.GetHashCode();
+			h += OutlineSize;
+			h += HAlignment.GetHashCode();
+			h += VAlignment.GetHashCode();
+			h += Bounds.GetHashCode();
+			h += Effects.GetHashCode();
+			h += FontFamily.GetHashCode();
+			h += FontEmSize.GetHashCode();
+			h += FontStyle.GetHashCode();
+			return h;
+		}
+
+
 		#endregion
 	}
 

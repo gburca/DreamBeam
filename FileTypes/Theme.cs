@@ -161,7 +161,7 @@ namespace DreamBeam {
 			if (BGImagePath != null) fh += BGImagePath.GetHashCode();
 			if (TextFormat != null) {
 				foreach (BeamTextFormat f in TextFormat) {
-					fh += f.GetHashCode();
+					fh += f.VisibleHashCode();
 				}
 			}
 			return fh;
