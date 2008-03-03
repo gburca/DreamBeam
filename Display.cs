@@ -189,6 +189,7 @@ namespace DreamBeam {
 			return
 				fh + (this.HideBG ? "HideBG".GetHashCode() : "ShowBG".GetHashCode()) +
 				(this.HideText ? "HideText".GetHashCode() : "ShowText".GetHashCode()) +
+				(this.showRectangles ? "ShowRect".GetHashCode() : "HideRect".GetHashCode()) +
 				(this.ThemePath != null ? this.ThemePath.GetHashCode() : "NoBgImg".GetHashCode());
 		}
 

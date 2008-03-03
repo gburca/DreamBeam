@@ -1,9 +1,15 @@
 <?xml version="1.0"?>
-<SermonToolDocuments xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<SermonToolDocuments xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Documents>
-    <Document>test stuff
-And on the east side toward the rising of the sun shall they of the standard of the camp of Judah pitch throughout their armies: and Nahshon the son of Amminadab shall be captain of the children of Judah.
-For our exhortation was not of deceit, nor of uncleanness, nor in guile:
-Căci propovăduirea noastră nu se întemeiază nici pe rătăcire, nici pe necurăţie, nici pe viclenie.</Document>
+    <Document>To insert Bible text in this "document":
+
+- click inside the document at the location where you want the text to appear
+- type the Bible book name in the "Find Verse" box exactly as it appears in the list below (or select the Bible book from the list)
+- add the chapter and verse after the book name, in the format c:v where c = chapter number and v = verse number
+- press [Enter] to insert the verse
+
+- Instead of a verse number, a verse range can be used. Ex: "John 1:1-12"
+
+</Document>
   </Documents>
 </SermonToolDocuments>

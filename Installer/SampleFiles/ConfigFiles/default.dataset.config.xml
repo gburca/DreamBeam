@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="yes"?>
+<Options_DataSet>
+  <xs:schema id="Options_DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="Options_DataSet" msdata:IsDataSet="true" msdata:Locale="en-US">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Options_RegEx">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Find" type="xs:string" minOccurs="0" />
+                <xs:element name="Replace" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Options_RegEx>
+    <Find>[ăâ]</Find>
+    <Replace>a</Replace>
+  </Options_RegEx>
+  <Options_RegEx>
+    <Find>[ĂÂ]</Find>
+    <Replace>A</Replace>
+  </Options_RegEx>
+  <Options_RegEx>
+    <Find>Ş</Find>
+    <Replace>S</Replace>
+  </Options_RegEx>
+  <Options_RegEx>
+    <Find>ş</Find>
+    <Replace>s</Replace>
+  </Options_RegEx>
+  <Options_RegEx>
+    <Find>Ţ</Find>
+    <Replace>T</Replace>
+  </Options_RegEx>
+  <Options_RegEx>
+    <Find>ţ</Find>
+    <Replace>t</Replace>
+  </Options_RegEx>
+  <Options_RegEx>
+    <Find>Î</Find>
+    <Replace>I</Replace>
+  </Options_RegEx>
+  <Options_RegEx>
+    <Find>î</Find>
+    <Replace>i</Replace>
+  </Options_RegEx>
+  <Options_RegEx>
+    <Find>[^a-zA-Z0-9 ]</Find>
+    <Replace />
+  </Options_RegEx>
+</Options_DataSet>

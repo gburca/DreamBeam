@@ -225,9 +225,9 @@ namespace DreamBeam {
 
 		public BibleTheme() {
 			CreateTextFormats(Enum.GetValues(typeof(BibleTextType)).Length);
-			TextFormat[(int)BibleTextType.Reference].Bounds = new RectangleF(5F, 2F, 90F, 8F);
 			TextFormat[(int)BibleTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
-			TextFormat[(int)BibleTextType.Translation].Bounds = new RectangleF(80F, 95F, 15F, 4F);
+			TextFormat[(int)BibleTextType.Reference].Bounds = new RectangleF(5F, 2F, 90F, 8F);
+			TextFormat[(int)BibleTextType.Translation].Bounds = new RectangleF(80F, 96F, 15F, 4F);
 		}
 
 		public static BibleTheme OpenFile() {
@@ -246,9 +246,9 @@ namespace DreamBeam {
 		public SongTheme() {
 			CreateTextFormats(Enum.GetValues(typeof(SongTextType)).Length);
 			TextFormat[(int)SongTextType.Title].Bounds = new RectangleF(5F, 2F, 90F, 8F);
-			TextFormat[(int)SongTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 83F);
+			TextFormat[(int)SongTextType.Verse].Bounds = new RectangleF(5F, 12F, 90F, 81F);
 			TextFormat[(int)SongTextType.Author].Bounds = new RectangleF(80F, 95F, 15F, 4F);
-			TextFormat[(int)SongTextType.Key].Bounds = new RectangleF(70F, 80F, 15F, 4F);
+			TextFormat[(int)SongTextType.Key].Bounds = new RectangleF(0F, 95F, 10F, 5F);
 			TextFormat[(int)SongTextType.Verse].HAlignment = StringAlignment.Near;
 		}
 

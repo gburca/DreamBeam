@@ -71,7 +71,11 @@ namespace DreamBeam {
 				if (value == null | value.TextFormat == null) return;
 
 				this.themeType = value.GetType();
-				this.BgImagePath.Text = Tools.GetRelativePath(DirType.DataRoot, value.BGImagePath);
+				if (value.BGImagePath != null) {
+					this.BgImagePath.Text = Tools.GetRelativePath(DirType.DataRoot, value.BGImagePath);
+				} else {
+					this.BgImagePath.Text = "";
+				}
 				for (int i = 0; i < Math.Min(value.TextFormat.Length, tabControl.TabPages.Count); i++) {
 					getFormatControl(i).Format = value.TextFormat[i];
 				}

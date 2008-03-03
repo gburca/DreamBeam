@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
 <Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Version>0.72</Version>
+  <Version>0.80</Version>
   <BeamBoxPosX>0</BeamBoxPosX>
   <BeamBoxPosY>0</BeamBoxPosY>
   <BeamBoxSizeX>800</BeamBoxSizeX>
   <BeamBoxSizeY>600</BeamBoxSizeY>
   <BeamBoxAutoPosSize>false</BeamBoxAutoPosSize>
-  <BeamBoxScreenNum>0</BeamBoxScreenNum>
+  <BeamBoxScreenNum>-1</BeamBoxScreenNum>
   <PreRender>true</PreRender>
   <Alphablending>true</Alphablending>
   <BlendSpeed>10</BlendSpeed>
   <useDirect3D>false</useDirect3D>
-  <OutlineSize>3</OutlineSize>
   <BibleLang>en</BibleLang>
   <LastBibleUsed />
   <ShowBibleTranslation>false</ShowBibleTranslation>
@@ -19,40 +18,39 @@
   <RememberPanelLocations>false</RememberPanelLocations>
   <HideMouse>true</HideMouse>
   <AlwaysOnTop>false</AlwaysOnTop>
-  <BackgroundColor />
   <LoopMedia>false</LoopMedia>
   <LoopAutoPlay>false</LoopAutoPlay>
   <AutoPlayChangeTime>2</AutoPlayChangeTime>
   <Language>auto</Language>
   <Theme>
     <Song>
-      <Version>0.72</Version>
-      <BGImagePath>Backgrounds\red.jpg</BGImagePath>
+      <Version>0.80</Version>
+      <BGImagePath>Backgrounds\photos\DewDrop.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
-          <OutlineSize>1</OutlineSize>
-          <HAlignment>Center</HAlignment>
+          <OutlineSize>3</OutlineSize>
+          <HAlignment>Near</HAlignment>
           <VAlignment>Center</VAlignment>
           <Bounds>
             <Location>
-              <X>5</X>
-              <Y>2</Y>
+              <X>2</X>
+              <Y>5</Y>
             </Location>
             <Size>
-              <Width>90</Width>
-              <Height>8</Height>
+              <Width>73</Width>
+              <Height>15</Height>
             </Size>
-            <X>5</X>
-            <Y>2</Y>
-            <Width>90</Width>
-            <Height>8</Height>
+            <X>2</X>
+            <Y>5</Y>
+            <Width>73</Width>
+            <Height>15</Height>
           </Bounds>
-          <Effects>Normal</Effects>
+          <Effects>Outline</Effects>
           <FontFamily>Arial</FontFamily>
-          <FontEmSize>36</FontEmSize>
+          <FontEmSize>72</FontEmSize>
           <FontStyle>Regular</FontStyle>
           <XmlTextColor>NamedColor:White</XmlTextColor>
-          <XmlOutlineColor>NamedColor:Red</XmlOutlineColor>
+          <XmlOutlineColor>NamedColor:Silver</XmlOutlineColor>
         </BeamTextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>
@@ -60,46 +58,71 @@
           <VAlignment>Center</VAlignment>
           <Bounds>
             <Location>
-              <X>5</X>
-              <Y>12</Y>
+              <X>15</X>
+              <Y>37</Y>
             </Location>
             <Size>
-              <Width>90</Width>
-              <Height>83</Height>
+              <Width>82</Width>
+              <Height>60</Height>
             </Size>
-            <X>5</X>
-            <Y>12</Y>
-            <Width>90</Width>
-            <Height>83</Height>
+            <X>15</X>
+            <Y>37</Y>
+            <Width>82</Width>
+            <Height>60</Height>
+          </Bounds>
+          <Effects>Normal</Effects>
+          <FontFamily>Arial Unicode MS</FontFamily>
+          <FontEmSize>36</FontEmSize>
+          <FontStyle>Regular</FontStyle>
+          <XmlTextColor>ARGBColor:255:255:255:159</XmlTextColor>
+          <XmlOutlineColor>NamedColor:Red</XmlOutlineColor>
+        </BeamTextFormat>
+        <BeamTextFormat>
+          <OutlineSize>1</OutlineSize>
+          <HAlignment>Far</HAlignment>
+          <VAlignment>Near</VAlignment>
+          <Bounds>
+            <Location>
+              <X>80</X>
+              <Y>2</Y>
+            </Location>
+            <Size>
+              <Width>18</Width>
+              <Height>16</Height>
+            </Size>
+            <X>80</X>
+            <Y>2</Y>
+            <Width>18</Width>
+            <Height>16</Height>
           </Bounds>
           <Effects>Normal</Effects>
           <FontFamily>Arial</FontFamily>
-          <FontEmSize>36</FontEmSize>
+          <FontEmSize>21.75</FontEmSize>
           <FontStyle>Regular</FontStyle>
           <XmlTextColor>NamedColor:White</XmlTextColor>
           <XmlOutlineColor>NamedColor:Red</XmlOutlineColor>
         </BeamTextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>
-          <HAlignment>Center</HAlignment>
-          <VAlignment>Center</VAlignment>
+          <HAlignment>Near</HAlignment>
+          <VAlignment>Far</VAlignment>
           <Bounds>
             <Location>
-              <X>80</X>
-              <Y>95</Y>
+              <X>0</X>
+              <Y>90</Y>
             </Location>
             <Size>
               <Width>15</Width>
-              <Height>4</Height>
+              <Height>10</Height>
             </Size>
-            <X>80</X>
-            <Y>95</Y>
+            <X>0</X>
+            <Y>90</Y>
             <Width>15</Width>
-            <Height>4</Height>
+            <Height>10</Height>
           </Bounds>
           <Effects>Normal</Effects>
           <FontFamily>Arial</FontFamily>
-          <FontEmSize>36</FontEmSize>
+          <FontEmSize>18</FontEmSize>
           <FontStyle>Regular</FontStyle>
           <XmlTextColor>NamedColor:White</XmlTextColor>
           <XmlOutlineColor>NamedColor:Red</XmlOutlineColor>
@@ -107,8 +130,8 @@
       </TextFormat>
     </Song>
     <Bible>
-      <Version>0.72</Version>
-      <BGImagePath>Backgrounds\TilesBlue.jpg</BGImagePath>
+      <Version>0.80</Version>
+      <BGImagePath>Backgrounds\DSC04773-s1.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>
@@ -116,17 +139,17 @@
           <VAlignment>Center</VAlignment>
           <Bounds>
             <Location>
-              <X>5</X>
-              <Y>12</Y>
+              <X>26</X>
+              <Y>3</Y>
             </Location>
             <Size>
-              <Width>90</Width>
-              <Height>83</Height>
+              <Width>72</Width>
+              <Height>70</Height>
             </Size>
-            <X>5</X>
-            <Y>12</Y>
-            <Width>90</Width>
-            <Height>83</Height>
+            <X>26</X>
+            <Y>3</Y>
+            <Width>72</Width>
+            <Height>70</Height>
           </Bounds>
           <Effects>Normal</Effects>
           <FontFamily>Arial</FontFamily>
@@ -141,46 +164,46 @@
           <VAlignment>Center</VAlignment>
           <Bounds>
             <Location>
-              <X>5</X>
-              <Y>2</Y>
+              <X>35</X>
+              <Y>76</Y>
             </Location>
             <Size>
-              <Width>90</Width>
-              <Height>8</Height>
+              <Width>63</Width>
+              <Height>11</Height>
             </Size>
-            <X>5</X>
-            <Y>2</Y>
-            <Width>90</Width>
-            <Height>8</Height>
+            <X>35</X>
+            <Y>76</Y>
+            <Width>63</Width>
+            <Height>11</Height>
           </Bounds>
           <Effects>Normal</Effects>
           <FontFamily>Arial</FontFamily>
-          <FontEmSize>36</FontEmSize>
+          <FontEmSize>48</FontEmSize>
           <FontStyle>Regular</FontStyle>
           <XmlTextColor>NamedColor:White</XmlTextColor>
           <XmlOutlineColor>NamedColor:Red</XmlOutlineColor>
         </BeamTextFormat>
         <BeamTextFormat>
           <OutlineSize>1</OutlineSize>
-          <HAlignment>Center</HAlignment>
+          <HAlignment>Far</HAlignment>
           <VAlignment>Center</VAlignment>
           <Bounds>
             <Location>
-              <X>80</X>
+              <X>70</X>
               <Y>95</Y>
             </Location>
             <Size>
-              <Width>15</Width>
+              <Width>28</Width>
               <Height>4</Height>
             </Size>
-            <X>80</X>
+            <X>70</X>
             <Y>95</Y>
-            <Width>15</Width>
+            <Width>28</Width>
             <Height>4</Height>
           </Bounds>
           <Effects>Normal</Effects>
           <FontFamily>Arial</FontFamily>
-          <FontEmSize>36</FontEmSize>
+          <FontEmSize>21.75</FontEmSize>
           <FontStyle>Regular</FontStyle>
           <XmlTextColor>NamedColor:White</XmlTextColor>
           <XmlOutlineColor>NamedColor:Red</XmlOutlineColor>
@@ -188,7 +211,7 @@
       </TextFormat>
     </Bible>
     <Sermon>
-      <Version>0.72</Version>
+      <Version>0.80</Version>
       <BGImagePath>Backgrounds\white.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
@@ -249,17 +272,18 @@
   <ListeningPort>50000</ListeningPort>
   <AppDesktopLocation>
     <Location>
-      <X>468</X>
-      <Y>179</Y>
+      <X>348</X>
+      <Y>104</Y>
     </Location>
     <Size>
-      <Width>984</Width>
-      <Height>808</Height>
+      <Width>978</Width>
+      <Height>816</Height>
     </Size>
-    <X>468</X>
-    <Y>179</Y>
-    <Width>984</Width>
-    <Height>808</Height>
+    <X>348</X>
+    <Y>104</Y>
+    <Width>978</Width>
+    <Height>816</Height>
   </AppDesktopLocation>
-  <SwordPath />
+  <SwordPath>C:\Program Files\CrossWire\The SWORD Project</SwordPath>
+  <XmlBackgroundColor>NamedColor:Black</XmlBackgroundColor>
 </Config>
