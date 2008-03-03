@@ -7,6 +7,7 @@
 	!include "versions.nsh"
 	!include "GetVersions.nsh"
 	!include "CheckDependencies.nsh"
+	!include "UAC.nsh"
 
 ;--------------------------------
 ; General
@@ -21,7 +22,8 @@
 	!else
 		OutFile "InstallerOutput\${PRODUCT}_${VERSION}.exe"
 	!endif
-
+	
+  RequestExecutionLevel user    /* RequestExecutionLevel REQUIRED! */
 	
 	; Default installation folder
 	InstallDir "$PROGRAMFILES\DreamBeam"
@@ -93,8 +95,31 @@ Function .onInit
 
 	; C:\Documents and Settings\All Users\DreamBeam
 	StrCpy $USERFILES "$DOCUMENTS\${PRODUCT}"
-FunctionEnd
 
+; Attempt to give the UAC plug-in a user process and an admin process.
+UAC_Elevate:
+    UAC::RunElevated 
+    StrCmp 1223 $0 UAC_ElevationAborted ; UAC dialog aborted by user?
+    StrCmp 0 $0 0 UAC_Err ; Error?
+    StrCmp 1 $1 0 UAC_Success ;Did everything worked correctly ?
+    Quit
+    
+UAC_Err:
+    MessageBox mb_iconstop "Unable to elevate, error $0"
+    Abort
+
+UAC_ElevationAborted:
+    # elevation was aborted, run as normal?
+    MessageBox mb_iconstop "This installer requires admin access, aborting!"
+    Abort
+
+UAC_Success:
+    StrCmp 1 $3 +4 ;Admin?
+    StrCmp 3 $1 0 UAC_ElevationAborted ;Try again?
+    MessageBox mb_iconstop "This installer requires admin access, try again"
+    goto UAC_Elevate 
+    
+FunctionEnd
 
 Section "DreamBeam" SDreamBeam
 
@@ -277,6 +302,14 @@ Section "-hidden un.Registry entries"
 	CleanRegistryDone:
 
 SectionEnd
+
+Function .OnInstFailed
+    UAC::Unload ;Must call unload!
+FunctionEnd
+
+Function .OnInstSuccess
+    UAC::Unload ;Must call unload!
+FunctionEnd
 
 
 ;--------------------------------
