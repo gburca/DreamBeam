@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="Presentation_MovieControl_LiveButtonPanel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <metadata name="ImageContext.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>315, 3</value>
   </metadata>
@@ -127,8 +130,8 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAN0wAA
-        DdMBvdUcagAABEVJREFUSEutlW1MW1UYx+e74tuMIZma+PZdDR+cug9L/GL6wUScm9UpuBXW9eW2pV0p
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAN0QAA
+        DdEBwivf4wAABEVJREFUSEutlW1MW1UYx+e74tuMIZma+PZdDR+cug9L/GL6wUScm9UpuBXW9eW2pV0p
         DbLxIp2CRDY1VFbtXSOBNks1jrkMgxSbMuBCW9pK6W270l5aCrROWuigQO/xOaQkxJiWD97kn557nuf5
         PS/ntN23r8jD4XDuKuazZ7tKXWuS1RCZGrmEldaIkUxO5CQy0Wp9g1q7Z8huxzp17WGJjFifmKRYfyCI
         /vTSrGuaznl9fjQDoqhxlpCK1yDBoT0naGxueBUqA2AAdZn+yEq0I6lag3NDQTpZJenYEHxjTenM1mwo
@@ -5997,7 +6000,7 @@
 </value>
   </data>
   <metadata name="imageList_Folders.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>331, 30</value>
+    <value>565, 54</value>
   </metadata>
   <data name="imageList_Folders.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -6058,9 +6061,6 @@
         bABsAAAACAAMAAAAZgBhAGwAcwBlAAAACw==
 </value>
   </data>
-  <metadata name="Presentation_MovieControl_LiveButtonPanel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="StatusPanel.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAkAEBAAAAEACABoBQAAlgAAABAQAAABACAAaAQAAP4FAAAYGAAAAQAgAIgJAABmCgAAICAAAAEA
@@ -7897,8 +7897,8 @@
   <data name="DockControl_PreviewScreen.TabImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAN0wAA
-        DdMBvdUcagAAAZ5JREFUOE+tU7tqAkEU1T9IijR+RKqQIpCNumtK36KiBGyMBNFGfEUb4+MXgghWErCz
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAN0QAA
+        DdEBwivf4wAAAZ5JREFUOE+tU7tqAkEU1T9IijR+RKqQIpCNumtK36KiBGyMBNFGfEUb4+MXgghWErCz
         1dq/sLS1EMQiPk72XJk1Qoq8hj1778ycc+7MXdZ+eXX9eHF+9mozxx58cxwSMPIB5/bDiuQ223a73b9v
         Ns820wDD4RDL5RKTyQS6rp/MNU37cr/dboNaMTDdsFgs4HA4QMF35q1W6x8N/nwF3XMPwmUoeMzcA6dh
         wKkbuHPrJg5Rc7kFN7fazurBQyqFYDD4I5iajWWQzmREvF6v0ev1EI/HEYvFEI1G0e/3EYlEEA6HJQ+F
@@ -7911,8 +7911,8 @@
   <data name="DockControl_LiveScreen.TabImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAN0wAA
-        DdMBvdUcagAAAXtJREFUOE+dUk1LAlEUNRDa9Cf8FRJBm6AWBiViOmobyTYmKghRkGDSl+ZsWrlp0aZF
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAN0QAA
+        DdEBwivf4wAAAXtJREFUOE+dUk1LAlEUNRDa9Cf8FRJBm6AWBiViOmobyTYmKghRkGDSl+ZsWrlp0aZF
         bcJAaxP51aZFA0pUow7iB7lohAGJGjj5XtkimdE8cHgf953DvffdMcZu2ZBleVczArRa7abGbDGh3W6D
         4x7+xVQqCaLV2JeZONmMQqKlie9HdtBoNMDzPCrlMoQun4tFPHEc3QuVCqrVKmq1Gur1OgiI5rdqciAQ
         BAGZSASPRiNkrxey2w3eYEAmFILQNSdMp2+VDe6TSbz7/YDPhw+XC5LNhreFRbzOzuHC6aQGqhlcsyw6
@@ -7935,8 +7935,8 @@
   <data name="DockControl_Songs.TabImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALEQAA
-        CxEBf2RfkQAAAydJREFUOE99kllME1EUhgdKoQbBlBYIuCAgCJhCi0CtoGURlSpIpcqSIosslk1WrSwG
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALCwAA
+        CwsBbQSEtwAAAydJREFUOE99kllME1EUhgdKoQbBlBYIuCAgCJhCi0CtoGURlSpIpcqSIosslk1WrSwG
         CLIIgmIASdAqi2g0alyicUl4wfhmSIyJDz5pxIAREWxAnfk9g0qUGCf5MjPnnv8/955zLZglj41IlL9e
         FlQzPzcv/c6xLMdyDMuyDMdxDBiGo3SzwNLCYnZ66u3HiXcHl+q36TJLzT03nqGgeQj6Yz3QFrUhOrMO
         4alViEo/ju1ZdYjJroM8bBcEQpvjfxnY2osvnzx/C6Vtw4gvbMX2g3VQJVZAHpuPgN15hAEhCcUIjMmA
@@ -7955,8 +7955,8 @@
   <data name="DockControl_PlayList.TabImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALEQAA
-        CxEBf2RfkQAAAsNJREFUOE+FkmtIk2EUx3ff2LTL1nIqVpKERmITUScOu0gXzZBqrBJd2Aj6lklCREJp
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALCwAA
+        CwsBbQSEtwAAAsNJREFUOE+FkmtIk2EUx3ff2LTL1nIqVpKERmITUScOu0gXzZBqrBJd2Aj6lklCREJp
         peQQxDINUUuLwKYttCtr1pptYy1LrNX6EEaKTlebq81dTuedW0lZPvDjeXne8/+f85znkEjzFp+/gpGc
         IuzMzBJ7KGRyEf6iIeT5Mf/9XsbjN5+vb4LPYxPA5kQMY/CqkMniHnQWu7la0QTTdjtYrVZ/WXmFG1UV
         CHPRKqhMTuOZi40wMTEJr8xmMJlM0NOrsnN5fGOoin9XQGOwLlXVX4GpaXtgePgN6HQ60Ov1YDAYHIV7
@@ -7972,13 +7972,13 @@
 </value>
   </data>
   <metadata name="Media_ImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>792, 31</value>
+    <value>453, 91</value>
   </metadata>
   <data name="DockControl_Media.TabImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALEQAA
-        CxEBf2RfkQAAAWFJREFUOE+tk89Kw0AQxuMr+CBe9E2kKCJCblIEQUTEUvWi1H8IYlHw4E0Qe65YEcFL
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALCwAA
+        CwsBbQSEtwAAAWFJREFUOE+tk89Kw0AQxuMr+CBe9E2kKCJCblIEQUTEUvWi1H8IYlHw4E0Qe65YEcFL
         RQuVFi0aokUPkkh8gsA6v3VTTIMYqAsfw8x88+3s7myf1bUK6yu2hDKCIUG/4FNQE5zMz+UOu/kdXwoH
         BNWzyql6fWurIPjoAJ84eXgJEVPsua6jPP9duS9P6uGxoZqturb4Oi554XoJEZRJPrcddXl1rlFv3moB
         bBQjb0SqP1u3aY8dIFYuymqnuK3WNle1ABafOHl45jjclWXJ7mXOSJsQIGdGhtXick4LYPGJk4cHn7pI

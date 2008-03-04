@@ -302,9 +302,11 @@ namespace DreamBeam {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.Panel Presentation_MovieControl_LiveButtonPanel;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
-			System.Windows.Forms.Panel Presentation_MovieControl_LiveButtonPanel;
+			this.liveMediaControls = new DreamBeam.MediaControls();
+			this.Presentation_MediaLoop_Checkbox = new System.Windows.Forms.CheckBox();
 			this.RightDocks_ImageListBox = new Controls.Development.ImageListBox();
 			this.ImageContext = new System.Windows.Forms.ContextMenu();
 			this.ImageContextItemManage = new System.Windows.Forms.MenuItem();
@@ -491,8 +493,6 @@ namespace DreamBeam {
 			this.Presentation_PreviewBox = new System.Windows.Forms.PictureBox();
 			this.Presentation_MovieControlPanel = new System.Windows.Forms.Panel();
 			this.Presentation_MovieControlPanelBottom = new System.Windows.Forms.Panel();
-			this.liveMediaControls = new DreamBeam.MediaControls();
-			this.Presentation_MediaLoop_Checkbox = new System.Windows.Forms.CheckBox();
 			this.Presentation_MovieControl_PreviewButtonPanel = new System.Windows.Forms.Panel();
 			this.previewMediaControls = new DreamBeam.MediaControls();
 			this.Presentation_MovieControlPanel_Top = new System.Windows.Forms.Panel();
@@ -517,6 +517,7 @@ namespace DreamBeam {
 			this.dataColumn2 = new System.Data.DataColumn();
 			this.SongListDataView = new System.Data.DataView();
 			Presentation_MovieControl_LiveButtonPanel = new System.Windows.Forms.Panel();
+			Presentation_MovieControl_LiveButtonPanel.SuspendLayout();
 			this.RightDocks_Songlist_SearchPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.RightDocks_SongList_ButtonPanel.SuspendLayout();
@@ -591,8 +592,39 @@ namespace DreamBeam {
 			((System.ComponentModel.ISupportInitialize)(this.GlobalDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.SongListTable)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.SongListDataView)).BeginInit();
-			Presentation_MovieControl_LiveButtonPanel.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// Presentation_MovieControl_LiveButtonPanel
+			// 
+			Presentation_MovieControl_LiveButtonPanel.Controls.Add(this.liveMediaControls);
+			Presentation_MovieControl_LiveButtonPanel.Location = new System.Drawing.Point(234, 8);
+			Presentation_MovieControl_LiveButtonPanel.Name = "Presentation_MovieControl_LiveButtonPanel";
+			Presentation_MovieControl_LiveButtonPanel.Size = new System.Drawing.Size(234, 95);
+			Presentation_MovieControl_LiveButtonPanel.TabIndex = 6;
+			// 
+			// liveMediaControls
+			// 
+			this.liveMediaControls.BackColor = System.Drawing.Color.Maroon;
+			this.liveMediaControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.liveMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.liveMediaControls.LabelColor = System.Drawing.Color.White;
+			this.liveMediaControls.LabelText = "Live Window";
+			this.liveMediaControls.Location = new System.Drawing.Point(0, 24);
+			this.liveMediaControls.Name = "liveMediaControls";
+			this.liveMediaControls.Size = new System.Drawing.Size(234, 71);
+			this.liveMediaControls.TabIndex = 5;
+			this.liveMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.liveMediaControls_MediaButtonPressed);
+			// 
+			// Presentation_MediaLoop_Checkbox
+			// 
+			this.Presentation_MediaLoop_Checkbox.Checked = true;
+			this.Presentation_MediaLoop_Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.Presentation_MediaLoop_Checkbox.Location = new System.Drawing.Point(9, 3);
+			this.Presentation_MediaLoop_Checkbox.Name = "Presentation_MediaLoop_Checkbox";
+			this.Presentation_MediaLoop_Checkbox.Size = new System.Drawing.Size(59, 24);
+			this.Presentation_MediaLoop_Checkbox.TabIndex = 4;
+			this.Presentation_MediaLoop_Checkbox.Text = "Loop";
+			this.Presentation_MediaLoop_Checkbox.CheckedChanged += new System.EventHandler(this.Presentation_MediaLoop_Checkbox_CheckedChanged);
 			// 
 			// RightDocks_ImageListBox
 			// 
@@ -2548,6 +2580,7 @@ namespace DreamBeam {
 			// 
 			// Presentation_MovieControlPanelBottom
 			// 
+			this.Presentation_MovieControlPanelBottom.Controls.Add(this.Presentation_MediaLoop_Checkbox);
 			this.Presentation_MovieControlPanelBottom.Controls.Add(Presentation_MovieControl_LiveButtonPanel);
 			this.Presentation_MovieControlPanelBottom.Controls.Add(this.Presentation_MovieControl_PreviewButtonPanel);
 			this.Presentation_MovieControlPanelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -2556,37 +2589,12 @@ namespace DreamBeam {
 			this.Presentation_MovieControlPanelBottom.Size = new System.Drawing.Size(469, 107);
 			this.Presentation_MovieControlPanelBottom.TabIndex = 4;
 			// 
-			// liveMediaControls
-			// 
-			this.liveMediaControls.BackColor = System.Drawing.Color.Maroon;
-			this.liveMediaControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.liveMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.liveMediaControls.LabelColor = System.Drawing.Color.White;
-			this.liveMediaControls.LabelText = "Live Window";
-			this.liveMediaControls.Location = new System.Drawing.Point(0, 26);
-			this.liveMediaControls.Name = "liveMediaControls";
-			this.liveMediaControls.Size = new System.Drawing.Size(234, 81);
-			this.liveMediaControls.TabIndex = 5;
-			this.liveMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.liveMediaControls_MediaButtonPressed);
-			// 
-			// Presentation_MediaLoop_Checkbox
-			// 
-			this.Presentation_MediaLoop_Checkbox.Checked = true;
-			this.Presentation_MediaLoop_Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.Presentation_MediaLoop_Checkbox.Location = new System.Drawing.Point(5, 0);
-			this.Presentation_MediaLoop_Checkbox.Name = "Presentation_MediaLoop_Checkbox";
-			this.Presentation_MediaLoop_Checkbox.Size = new System.Drawing.Size(59, 24);
-			this.Presentation_MediaLoop_Checkbox.TabIndex = 4;
-			this.Presentation_MediaLoop_Checkbox.Text = "Loop";
-			this.Presentation_MediaLoop_Checkbox.CheckedChanged += new System.EventHandler(this.Presentation_MediaLoop_Checkbox_CheckedChanged);
-			// 
 			// Presentation_MovieControl_PreviewButtonPanel
 			// 
 			this.Presentation_MovieControl_PreviewButtonPanel.Controls.Add(this.previewMediaControls);
-			this.Presentation_MovieControl_PreviewButtonPanel.Dock = System.Windows.Forms.DockStyle.Right;
-			this.Presentation_MovieControl_PreviewButtonPanel.Location = new System.Drawing.Point(235, 0);
+			this.Presentation_MovieControl_PreviewButtonPanel.Location = new System.Drawing.Point(2, 8);
 			this.Presentation_MovieControl_PreviewButtonPanel.Name = "Presentation_MovieControl_PreviewButtonPanel";
-			this.Presentation_MovieControl_PreviewButtonPanel.Size = new System.Drawing.Size(234, 107);
+			this.Presentation_MovieControl_PreviewButtonPanel.Size = new System.Drawing.Size(229, 95);
 			this.Presentation_MovieControl_PreviewButtonPanel.TabIndex = 3;
 			// 
 			// previewMediaControls
@@ -2596,9 +2604,9 @@ namespace DreamBeam {
 			this.previewMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.previewMediaControls.LabelColor = System.Drawing.SystemColors.ControlText;
 			this.previewMediaControls.LabelText = "Preview Window";
-			this.previewMediaControls.Location = new System.Drawing.Point(0, 26);
+			this.previewMediaControls.Location = new System.Drawing.Point(0, 25);
 			this.previewMediaControls.Name = "previewMediaControls";
-			this.previewMediaControls.Size = new System.Drawing.Size(234, 81);
+			this.previewMediaControls.Size = new System.Drawing.Size(229, 70);
 			this.previewMediaControls.TabIndex = 2;
 			this.previewMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.previewMediaControls_MediaButtonPressed);
 			// 
@@ -2771,16 +2779,6 @@ namespace DreamBeam {
 			// 
 			this.SongListDataView.Table = this.SongListTable;
 			// 
-			// Presentation_MovieControl_LiveButtonPanel
-			// 
-			Presentation_MovieControl_LiveButtonPanel.Controls.Add(this.Presentation_MediaLoop_Checkbox);
-			Presentation_MovieControl_LiveButtonPanel.Controls.Add(this.liveMediaControls);
-			Presentation_MovieControl_LiveButtonPanel.Dock = System.Windows.Forms.DockStyle.Left;
-			Presentation_MovieControl_LiveButtonPanel.Location = new System.Drawing.Point(0, 0);
-			Presentation_MovieControl_LiveButtonPanel.Name = "Presentation_MovieControl_LiveButtonPanel";
-			Presentation_MovieControl_LiveButtonPanel.Size = new System.Drawing.Size(234, 107);
-			Presentation_MovieControl_LiveButtonPanel.TabIndex = 6;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -2807,6 +2805,7 @@ namespace DreamBeam {
 			this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
 			this.Closing += new System.ComponentModel.CancelEventHandler(this.MainForm_Closing);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+			Presentation_MovieControl_LiveButtonPanel.ResumeLayout(false);
 			this.RightDocks_Songlist_SearchPanel.ResumeLayout(false);
 			this.RightDocks_Songlist_SearchPanel.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -2884,7 +2883,6 @@ namespace DreamBeam {
 			((System.ComponentModel.ISupportInitialize)(this.GlobalDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.SongListTable)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.SongListDataView)).EndInit();
-			Presentation_MovieControl_LiveButtonPanel.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

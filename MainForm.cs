@@ -2627,7 +2627,7 @@ namespace DreamBeam {
 			} catch {
 				Media_TrackBar.Value = 0;
 			}
-
+		
 		}
 
 	}
