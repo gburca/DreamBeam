@@ -52,9 +52,9 @@ namespace DreamBeam {
             this.seekFwButton,
             this.skipFwButton});
 			this.buttons.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-			this.buttons.Location = new System.Drawing.Point(6, 28);
+			this.buttons.Location = new System.Drawing.Point(6, 24);
 			this.buttons.Name = "buttons";
-			this.buttons.Size = new System.Drawing.Size(186, 26);
+			this.buttons.Size = new System.Drawing.Size(186, 33);
 			this.buttons.Stretch = true;
 			this.buttons.TabIndex = 1;
 			this.buttons.Text = "buttons";
@@ -163,7 +163,7 @@ namespace DreamBeam {
 			this.Controls.Add(this.label);
 			this.Controls.Add(this.buttons);
 			this.Name = "MediaControls";
-			this.Size = new System.Drawing.Size(199, 61);
+			this.Size = new System.Drawing.Size(199, 69);
 			this.buttons.ResumeLayout(false);
 			this.buttons.PerformLayout();
 			this.ResumeLayout(false);
