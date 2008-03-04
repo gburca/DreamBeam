@@ -592,7 +592,7 @@ namespace DreamBeam {
 			this.DualLanguage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.DualLanguage.topColor = System.Drawing.Color.LightGreen;
 			this.DualLanguage.TopTransparent = 64;
-			this.DualLanguage.Visible = false;
+			this.DualLanguage.Visible = true;
 			// 
 			// Sequence_Tab
 			// 
