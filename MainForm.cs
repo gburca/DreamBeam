@@ -2630,11 +2630,6 @@ namespace DreamBeam {
 
 		}
 
-        private void songEditor_Load(object sender, EventArgs e)
-        {
-
-        }
-
 	}
 
 }

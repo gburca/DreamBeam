@@ -2678,7 +2678,6 @@ namespace DreamBeam {
 			this.songEditor.Name = "songEditor";
 			this.songEditor.Size = new System.Drawing.Size(506, 691);
 			this.songEditor.TabIndex = 0;
-			this.songEditor.Load += new System.EventHandler(this.songEditor_Load);
 			// 
 			// BibleText_Tab
 			// 

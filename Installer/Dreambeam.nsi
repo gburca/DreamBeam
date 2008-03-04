@@ -13,7 +13,7 @@
 ; General
 
         ; Name and file
-        !define VERSION "0.74"
+        !define VERSION "0.80"
         !define PRODUCT "DreamBeam"
 	Name "${PRODUCT} ${VERSION}"
 	
@@ -22,8 +22,6 @@
 	!else
 		OutFile "InstallerOutput\${PRODUCT}_${VERSION}.exe"
 	!endif
-	
-  RequestExecutionLevel user    /* RequestExecutionLevel REQUIRED! */
 	
 	; Default installation folder
 	InstallDir "$PROGRAMFILES\DreamBeam"
@@ -96,30 +94,45 @@ Function .onInit
 	; C:\Documents and Settings\All Users\DreamBeam
 	StrCpy $USERFILES "$DOCUMENTS\${PRODUCT}"
 
-; Attempt to give the UAC plug-in a user process and an admin process.
-UAC_Elevate:
-    UAC::RunElevated 
-    StrCmp 1223 $0 UAC_ElevationAborted ; UAC dialog aborted by user?
-    StrCmp 0 $0 0 UAC_Err ; Error?
-    StrCmp 1 $1 0 UAC_Success ;Did everything worked correctly ?
-    Quit
-    
-UAC_Err:
-    MessageBox mb_iconstop "Unable to elevate, error $0"
-    Abort
-
-UAC_ElevationAborted:
-    # elevation was aborted, run as normal?
-    MessageBox mb_iconstop "This installer requires admin access, aborting!"
-    Abort
-
-UAC_Success:
-    StrCmp 1 $3 +4 ;Admin?
-    StrCmp 3 $1 0 UAC_ElevationAborted ;Try again?
-    MessageBox mb_iconstop "This installer requires admin access, try again"
-    goto UAC_Elevate 
+	; Attempt to give the UAC plug-in a user process and an admin process.
+	UAC_Elevate:
+	    UAC::RunElevated 
+	    StrCmp 1223 $0 UAC_ElevationAborted ; UAC dialog aborted by user?
+	    StrCmp 0 $0 0 UAC_Err ; Error?
+	    StrCmp 1 $1 0 UAC_Success ;Did everything worked correctly ?
+	    Quit
+	    
+	UAC_Err:
+	    MessageBox mb_iconstop "Unable to elevate, error $0"
+	    Abort
+	
+	UAC_ElevationAborted:
+	    # elevation was aborted, run as normal?
+	    MessageBox mb_iconstop "This installer requires admin access, aborting!"
+	    Abort
+	
+	UAC_Success:
+	    StrCmp 1 $3 +4 ;Admin?
+	    StrCmp 3 $1 0 UAC_ElevationAborted ;Try again?
+	    MessageBox mb_iconstop "This installer requires admin access, try again"
+	    goto UAC_Elevate 
     
 FunctionEnd
+
+Function .OnInstFailed
+    UAC::Unload ;Must call unload!
+FunctionEnd
+Function .OnInstSuccess
+    UAC::Unload ;Must call unload!
+FunctionEnd
+
+;Function un.OnUnInstFailed
+;    UAC::Unload ;Must call unload!
+;FunctionEnd
+;Function un.OnUnInstSuccess
+;    UAC::Unload ;Must call unload!
+;FunctionEnd
+
 
 Section "DreamBeam" SDreamBeam
 
@@ -286,7 +299,7 @@ SectionGroup /e "un.Uninstall Application Files" SUnAppFiles
 
 SectionGroupEnd
 
-Section "-hidden un.Registry entries"
+Section "-un.Registry entries"
 	; This section must be the last uninstall section
 
 	; We must wait until the end to clean the registry because SUnAppFiles
@@ -297,20 +310,12 @@ Section "-hidden un.Registry entries"
 
 	CleanRegistry:
 	DeleteRegValue HKLM "Software\${PRODUCT}" "UserFilesDir"	; Remove $USERFILES entry
+	DeleteRegValue HKLM "Software\${PRODUCT}" ""			; Remove default entry
 	DeleteRegKey /ifempty HKLM "Software\${PRODUCT}"
 
 	CleanRegistryDone:
 
 SectionEnd
-
-Function .OnInstFailed
-    UAC::Unload ;Must call unload!
-FunctionEnd
-
-Function .OnInstSuccess
-    UAC::Unload ;Must call unload!
-FunctionEnd
-
 
 ;--------------------------------
 ; Section descriptions
