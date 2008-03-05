@@ -304,7 +304,7 @@ namespace DreamBeam {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.Panel Presentation_MovieControl_LiveButtonPanel;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
+			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node0");
 			this.liveMediaControls = new DreamBeam.MediaControls();
 			this.Presentation_MediaLoop_Checkbox = new System.Windows.Forms.CheckBox();
 			this.RightDocks_ImageListBox = new Controls.Development.ImageListBox();
@@ -597,7 +597,7 @@ namespace DreamBeam {
 			// Presentation_MovieControl_LiveButtonPanel
 			// 
 			Presentation_MovieControl_LiveButtonPanel.Controls.Add(this.liveMediaControls);
-			Presentation_MovieControl_LiveButtonPanel.Location = new System.Drawing.Point(234, 8);
+			Presentation_MovieControl_LiveButtonPanel.Location = new System.Drawing.Point(3, 8);
 			Presentation_MovieControl_LiveButtonPanel.Name = "Presentation_MovieControl_LiveButtonPanel";
 			Presentation_MovieControl_LiveButtonPanel.Size = new System.Drawing.Size(234, 95);
 			Presentation_MovieControl_LiveButtonPanel.TabIndex = 6;
@@ -2498,10 +2498,10 @@ namespace DreamBeam {
 			this.treeView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
 			this.treeView1.Location = new System.Drawing.Point(2, 2);
 			this.treeView1.Name = "treeView1";
-			treeNode1.Name = "";
-			treeNode1.Text = "Node0";
+			treeNode2.Name = "";
+			treeNode2.Text = "Node0";
 			this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
 			this.treeView1.SelectedImageIndex = 0;
 			this.treeView1.Size = new System.Drawing.Size(190, 685);
 			this.treeView1.TabIndex = 2;
@@ -2592,7 +2592,7 @@ namespace DreamBeam {
 			// Presentation_MovieControl_PreviewButtonPanel
 			// 
 			this.Presentation_MovieControl_PreviewButtonPanel.Controls.Add(this.previewMediaControls);
-			this.Presentation_MovieControl_PreviewButtonPanel.Location = new System.Drawing.Point(2, 8);
+			this.Presentation_MovieControl_PreviewButtonPanel.Location = new System.Drawing.Point(239, 8);
 			this.Presentation_MovieControl_PreviewButtonPanel.Name = "Presentation_MovieControl_PreviewButtonPanel";
 			this.Presentation_MovieControl_PreviewButtonPanel.Size = new System.Drawing.Size(229, 95);
 			this.Presentation_MovieControl_PreviewButtonPanel.TabIndex = 3;
@@ -2604,9 +2604,9 @@ namespace DreamBeam {
 			this.previewMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.previewMediaControls.LabelColor = System.Drawing.SystemColors.ControlText;
 			this.previewMediaControls.LabelText = "Preview Window";
-			this.previewMediaControls.Location = new System.Drawing.Point(0, 25);
+			this.previewMediaControls.Location = new System.Drawing.Point(0, 24);
 			this.previewMediaControls.Name = "previewMediaControls";
-			this.previewMediaControls.Size = new System.Drawing.Size(229, 70);
+			this.previewMediaControls.Size = new System.Drawing.Size(229, 71);
 			this.previewMediaControls.TabIndex = 2;
 			this.previewMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.previewMediaControls_MediaButtonPressed);
 			// 
