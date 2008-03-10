@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using Microsoft.Win32;
+using System.Globalization;
 
 namespace DreamBeam {
 
@@ -452,19 +453,39 @@ namespace DreamBeam {
 			return Color.Empty;
 		}
 
-
+		/*
 		[DllImport("kernel32.dll", SetLastError = true)]
 		static extern int FoldString(MapFlags dwMapFlags, string lpSrcStr, int cchSrc,
 			[Out] StringBuilder lpDestStr, int cchDest);
 
-
-		public static string RemoveDiacritics(string stIn) {
+		public static string RemoveDiacritics1(string stIn) {
 			// "sb" must be large enough to store the converted string, else we'll get an exception.
 			StringBuilder sb = new StringBuilder(stIn.Length * 2 + 10);
 
 			int ret = FoldString(MapFlags.MAP_COMPOSITE, stIn, stIn.Length, sb, stIn.Length * 2);
 			sb.Length = ret;	// Otherwise we end up with garbage at the end because of "Length * 2" above
 			return Regex.Replace(sb.ToString(), @"\p{Sk}", "");
+		}
+		*/
+
+		/// <summary>
+		/// Removes all diacritics from the given string. Works better than the FoldString from
+		/// kernel32.dll because it handles "t with comma below" correctly.
+		/// </summary>
+		/// <param name="stIn"></param>
+		/// <returns></returns>
+		public static string RemoveDiacritics(string stIn) {
+			string stFormD = stIn.Normalize(NormalizationForm.FormD);
+			StringBuilder sb = new StringBuilder();
+
+			for (int ich = 0; ich < stFormD.Length; ich++) {
+				UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(stFormD[ich]);
+				if (uc != UnicodeCategory.NonSpacingMark) {
+					sb.Append(stFormD[ich]);
+				}
+			}
+
+			return (sb.ToString().Normalize(NormalizationForm.FormC));
 		}
 
 		public static string Diatheke_ConvertEncoding(string text) {

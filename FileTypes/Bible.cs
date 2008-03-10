@@ -1,3 +1,23 @@
+/*
+DreamBeam - a Church Song Presentation Program
+Copyright (C) 2008 Gabriel Burca
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+*/
+
 using System;
 using System.Collections;
 using System.Text;
@@ -685,7 +705,8 @@ namespace DreamBeam.FileTypes {
 				}
 
 				string vText = bible[vIdx].t;
-				// Non-breaking hyphen gets displayed with too much space after it. Change it to regular hyphen.
+				// Non-breaking hyphen gets displayed with too much space after it in Arial Unicode
+				// and with empty glyph box on other fonts. Change it to regular hyphen.
 				vText = Regex.Replace(vText, "\u2011", "\u00ad");
 				text[(int)BibleTextType.Reference] = bible.GetRef(vIdx);
 				text[(int)BibleTextType.Verse] = vText;
@@ -728,6 +749,8 @@ namespace DreamBeam.FileTypes {
 						// We start with the user-specified font size ...
 						fontSz = format[type].TextFont.Size;
 
+						//pth = WordWrap.GetPath(text[type], format[type].TextFont, sf, bounds);
+
 						// ... and decrease the size (if needed) until it fits within the user-specified boundaries
 						do {
 							font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
@@ -742,6 +765,7 @@ namespace DreamBeam.FileTypes {
 						pth.Reset();
 						pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, bounds, sf);
 
+						//pth = WordWrapNone.GetPath(text[type], graphics, font, sf, bounds);
 						brush = new SolidBrush(format[type].TextColor);
 
 						#region Add special effects

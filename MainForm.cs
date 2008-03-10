@@ -610,7 +610,9 @@ namespace DreamBeam {
 					// from the lyrics.
 					StringBuilder lyrics = new StringBuilder();
 					foreach (LyricsItem l in song.SongLyrics) {
-						lyrics.Append(l.Lyrics + " ");
+						// We need to replace end of lines with spaces or else the last word on a line and
+						// the first word on the second line will be combined into a single word
+						lyrics.Append(Regex.Replace(l.Lyrics, @"[\n\r]+", " ") + " ");
 					}
 					r["FoldedText"] = Regex.Replace(Tools.RemoveDiacritics(lyrics.ToString()), @"[^a-zA-Z ]", "");
 
@@ -1379,14 +1381,6 @@ namespace DreamBeam {
 				GC.Collect();
 			}
 		}
-
-		//		///<summary>Redraw Panel 8 on Click </summary>
-		//		private void SongShow_Preview_Panel_Click(object sender, System.EventArgs e){
-		//
-		//			Draw_Song_Preview_Image_Threaded();
-		//		}
-
-
 
 		#endregion
 
@@ -2592,6 +2586,9 @@ namespace DreamBeam {
 					break;
 				case MediaButton.Stop:
 					ShowBeam.StopMedia();
+					break;
+				case MediaButton.SkipFw:
+					RightDocks_BottomPanel_Media_ShowNext_Click(null, null);
 					break;
 				default:
 					media.Operation(e.button);

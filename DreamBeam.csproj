@@ -261,6 +261,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FileTypes\Theme.cs" />
+    <Compile Include="Graphics\WordWrap.cs" />
     <Compile Include="Graphics\PerPixelAlphaForm.cs">
       <SubType>Form</SubType>
     </Compile>
