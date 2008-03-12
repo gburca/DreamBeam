@@ -27,78 +27,115 @@ using System.Collections;
 
 namespace DreamBeam {
 
+	/// <summary>
+	/// An interface implemented by word-wrap (line-break) algorithms
+	/// </summary>
 	public interface IWordWrap {
-		string[] Wrap(string document);
-		GraphicsPath GetPath(string doc, Font font, Rectangle bounds);
+		GraphicsPath GetPath(string doc, Font font, StringFormat sf, RectangleF bounds);
 	}
 
-	public class WordWrapNone /*: IWordWrap*/ {
-		public string[] Wrap(string doc) {
-			return Regex.Split(doc, "[\r\n]+");
-			//return doc.Split(new char[] { '\n', '\r' });
+	/// <summary>
+	/// The default word-wrapping used by GraphicsPath. This results in rather poor
+	/// word wrapping, because it ignores (non-breaking) hyphens, can insert a break
+	/// between a word and the closing or opening quote, etc...
+	/// </summary>
+	public class WordWrapDefault : IWordWrap {
 
+		public GraphicsPath GetPath(string doc, Font font, StringFormat sf, RectangleF bounds) {
+			GraphicsPath pth = new GraphicsPath();
+			RectangleF measuredBounds, pathRect;
+			Font pthFont;
+
+			// Make a rectangle that is very tall to see how far down the text would stretch.
+			pathRect = bounds;
+			pathRect.Height *= 2;
+
+			// We start with the user-specified font size ...
+			float fontSz = font.Size;
+
+			// ... and decrease the size (if needed) until it fits within the user-specified boundaries
+			do {
+				pthFont = new Font(font.FontFamily, fontSz, font.Style);
+				pth.Reset();
+				pth.AddString(doc, font.FontFamily, (int)font.Style, font.Size, pathRect, sf);
+				measuredBounds = pth.GetBounds();
+				fontSz--;
+				if (fontSz == 0) break;
+			} while (measuredBounds.Height > bounds.Height);
+
+			// We need to re-create the path. For some reason the do-while loop puts it in the wrong place.
+			pth.Reset();
+			pth.AddString(doc, font.FontFamily, (int)font.Style, font.Size, bounds, sf);
+
+			return pth;
 		}
+	}
 
-		static string[] GetWords(string doc) {
+	/// <summary>
+	/// An improved word-wrap algorithm that only allows line-breaks where spaces are located.
+	/// Further enhancements could include hyphenation support.
+	/// </summary>
+	public class WordWrapAtSpace : IWordWrap {
+
+		string[] GetWords(string doc) {
 			return doc.Split(' ');
 		}
 
-		public static RectangleF measure(String s, Font f) {
-			GraphicsPath p = new GraphicsPath();
-			p.AddString(s, f.FontFamily, (int)f.Style, f.Size, new Point(), new StringFormat());
-			return p.GetBounds();
+		public GraphicsPath GetPath(string doc, Font f, StringFormat sf, RectangleF bounds) {
+			GraphicsPath path = null;
+			while (true) {
+				path = getPath(doc, f, sf, bounds);
+
+				if (path != null) {
+					return path;
+				} else {
+					if (f.Size > 1) {
+						f = new Font(f.FontFamily, f.Size - 1, f.Style);
+					} else {
+						return new GraphicsPath();
+					}
+				}
+			}
 		}
 
-		public static void measure(Line line, Font f) {
-			line.size = measure(line.words, f).Size;
-		}
-
-		public static GraphicsPath GetPath(string doc, Graphics g, Font font, StringFormat sf, Rectangle bounds) {
+		private GraphicsPath getPath(string doc, Font font, StringFormat sf, RectangleF bounds) {
 			GraphicsPath pth = new GraphicsPath();
 			if (doc == null || doc.Length == 0) return pth;
 
 			String[] w = GetWords(doc);
 			if (w.Length == 0) return pth;
 
-			float lineH;
-			SizeF size;
-			String test, fullLine;
+			float lineH = font.GetHeight() * 0.7F;
+			if (lineH > bounds.Height) return null;
+
 			List<Line> lines = new List<Line>();
+			Line line = new Line();
+			lines.Add(line);
 
-			do {
-				lineH = font.GetHeight(g);
-				int start = 0;
-				int count = 1;
-				lines.Clear();
+			for (int i = 0; i < w.Length; ) {
+				if (line.add(w[i], font, bounds.Width)) {
+					// Word was successfully added
+					i++;
 
-				while ((start + count + 1 <= w.Length) && 
-					(lineH * lines.Count <= bounds.Height)) {
-
-					test = String.Join(" ", w, start, count + 1);
-					size = measure(test, font).Size;
-
-					if (size.Width <= bounds.Width) {
-						count++;
+					// Check the height after every word to make sure descenders (gjpqy)
+					// don't cause text to be too tall
+					float ht = (lines.Count - 1) * lineH;
+					ht += line.rect.Height;
+					if (ht > bounds.Height) {
+						return null;
+					}
+				} else {
+					// Word did not fit on the previous line
+					if (line.words.Length == 0) {
+						// Font is too big to add this word even by itself
+						// i.e. bounds width would be exceeded
+						return null;
 					} else {
-						fullLine = String.Join(" ", w, start, count);
-						size = measure(fullLine, font).Size;
-						lines.Add(new Line(fullLine, size));
-						start += count;
-						count = 1;
+						line = new Line();
+						lines.Add(line);
 					}
 				}
-
-				if (true) {
-					fullLine = String.Join(" ", w, start, count);
-					size = measure(fullLine, font).Size;
-					lines.Add(new Line(fullLine, size));
-				}
-
-				if (lineH * lines.Count > bounds.Height) {
-					font = new Font(font.FontFamily, font.Size - 1, font.Style);
-				}
-			} while (font.Size > 0 && lineH * lines.Count > bounds.Height);
-
+			}
 
 			StringFormat strF = new StringFormat();
 			strF.Alignment = StringAlignment.Near;
@@ -106,33 +143,77 @@ namespace DreamBeam {
 			PointF p = new PointF();
 
 			p.Y = 0;
+			float y = 0;
 			foreach (Line l in lines) {
-				switch (sf.LineAlignment) {
+				switch (sf.Alignment) { // Left, Center, Right
 					case StringAlignment.Near:
 						p.X = 0;
 						break;
 					case StringAlignment.Center:
-						p.X = (bounds.Width - l.size.Width) / 2;
+						p.X = (bounds.Width - l.rect.Width) / 2;
 						break;
 					case StringAlignment.Far:
-						p.X = bounds.Width - l.size.Width;
+						p.X = bounds.Width - l.rect.Width;
 						break;
 				}
 
+				p.Y = y;
+				p.X += bounds.X - l.rect.X;
+				p.Y += bounds.Y - l.rect.Y;
+
 				pth.AddString(l.words, font.FontFamily, (int)font.Style, font.Size, p, strF);
-				p.Y += lineH;
+
+				y += lineH;
+			}
+
+			RectangleF pathBounds = pth.GetBounds();
+			Matrix matrix = new Matrix();
+
+			switch (sf.LineAlignment) { // Top, Center, Bottom
+				case StringAlignment.Near:
+					// Nothing to do
+					break;
+				case StringAlignment.Center:
+					matrix.Translate(0, (bounds.Height - pathBounds.Height) / 2);
+					pth.Transform(matrix);
+					break;
+				case StringAlignment.Far:
+					matrix.Translate(0, bounds.Height - pathBounds.Height);
+					pth.Transform(matrix);
+					break;
 			}
 
 			return pth;
 		}
 
-
 		public class Line {
 			public String words = "";
-			public SizeF size;
-			public Line(String words, SizeF size) {
-				this.words = words;
-				this.size = size;
+			public RectangleF rect = new RectangleF();
+
+			public RectangleF measure(String s, Font f) {
+				GraphicsPath p = new GraphicsPath();
+				p.AddString(s, f.FontFamily, (int)f.Style, f.Size, new Point(), new StringFormat());
+				return p.GetBounds();
+			}
+
+			public bool add(String word, Font f, float maxWidth) {
+				RectangleF newBounds;
+				String newWords;
+
+				if (words.Length == 0) {
+					newWords = word;
+				} else {
+					newWords = words + " " + word;
+				}
+
+				newBounds = measure(newWords, f);
+				if (newBounds.Width <= maxWidth) {
+					words = newWords;
+					rect = newBounds;
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
 	}

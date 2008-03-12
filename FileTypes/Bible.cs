@@ -685,11 +685,9 @@ namespace DreamBeam.FileTypes {
 				Bitmap bmp = new Bitmap(Width, Height);
 				Graphics graphics = Graphics.FromImage(bmp);
 				GraphicsPath pth, pth2;
-				Rectangle pathRect, bounds;
-				RectangleF measuredBounds;
-				Font font;
-				float fontSz;
+				RectangleF bounds;
 				BeamTextFormat[] format = this.Theme.TextFormat;
+				IWordWrap wrapper = new WordWrapAtSpace();
 				string[] text = new string[Enum.GetValues(typeof(BibleTextType)).Length];
 
 				graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -715,25 +713,15 @@ namespace DreamBeam.FileTypes {
 
 				foreach (int type in Enum.GetValues(typeof(BibleTextType))) {
 					// We have to keep the text within these user-specified boundaries
-					bounds = new System.Drawing.Rectangle(
-						(int)(format[type].Bounds.X / 100 * Width),
-						(int)(format[type].Bounds.Y / 100 * Height),
-						(int)(format[type].Bounds.Width / 100 * Width),
-						(int)(format[type].Bounds.Height / 100 * Height));
-
-					/*
-					// For debug:
-					graphics.DrawRectangle(new Pen(format[type].OutlineColor, 2), bounds);
-					Rectangle rect = new Rectangle((int)(Width/2), (int)(Height/2), 0, 0);
-					int i = 25;
-					while (rect.Width < Width) {
-						graphics.DrawRectangle(new Pen(Color.Gray, 1), rect);
-						rect.Inflate(i, i);
-					};
-					*/
+					bounds = new RectangleF(
+						format[type].Bounds.X / 100 * Width,
+						format[type].Bounds.Y / 100 * Height,
+						format[type].Bounds.Width / 100 * Width,
+						format[type].Bounds.Height / 100 * Height);
 
 					p = new Pen(format[type].TextColor, 1.0F);
-					if (showRectangles == true) graphics.DrawRectangle(p, bounds);
+					if (showRectangles == true)
+						graphics.DrawRectangle(p, bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
 					if (text[type].Length > 0) {
 						p.LineJoin = LineJoin.Round;
@@ -742,30 +730,8 @@ namespace DreamBeam.FileTypes {
 						sf.LineAlignment = format[type].VAlignment;
 						sf.FormatFlags = StringFormatFlags.NoFontFallback;
 
-						// Make a rectangle that is very tall to see how far down the text would stretch.
-						pathRect = bounds;
-						pathRect.Height *= 2;
+						pth = wrapper.GetPath(text[type], format[type].TextFont, sf, bounds);
 
-						// We start with the user-specified font size ...
-						fontSz = format[type].TextFont.Size;
-
-						//pth = WordWrap.GetPath(text[type], format[type].TextFont, sf, bounds);
-
-						// ... and decrease the size (if needed) until it fits within the user-specified boundaries
-						do {
-							font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
-							pth.Reset();
-							pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, pathRect, sf);
-							measuredBounds = pth.GetBounds();
-							fontSz--;
-							if (fontSz == 0) break;
-						} while (measuredBounds.Height > bounds.Height);
-
-						// We need to re-create the path. For some reason the do-while loop puts it in the wrong place.
-						pth.Reset();
-						pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, bounds, sf);
-
-						//pth = WordWrapNone.GetPath(text[type], graphics, font, sf, bounds);
 						brush = new SolidBrush(format[type].TextColor);
 
 						#region Add special effects
