@@ -69,7 +69,7 @@ namespace DreamBeam {
 		public TextFormatOptions() {
 			// This call is required by the Windows.Forms Form Designer.
 			InitializeComponent();
-			// TODO: Add any initialization after the InitializeComponent call
+
 			SetControls(new BeamTextFormat());
 
 			Bounds1.ValueChanged += new EventHandler(ControlChanged);
@@ -339,6 +339,7 @@ namespace DreamBeam {
 			// 
 			// Bounds4
 			// 
+			this.Bounds4.DecimalPlaces = 1;
 			this.Bounds4.Location = new System.Drawing.Point(56, 122);
 			this.Bounds4.Name = "Bounds4";
 			this.Bounds4.Size = new System.Drawing.Size(48, 20);
@@ -352,6 +353,7 @@ namespace DreamBeam {
 			// 
 			// Bounds3
 			// 
+			this.Bounds3.DecimalPlaces = 1;
 			this.Bounds3.Location = new System.Drawing.Point(98, 80);
 			this.Bounds3.Name = "Bounds3";
 			this.Bounds3.Size = new System.Drawing.Size(48, 20);
@@ -365,6 +367,7 @@ namespace DreamBeam {
 			// 
 			// Bounds2
 			// 
+			this.Bounds2.DecimalPlaces = 1;
 			this.Bounds2.Location = new System.Drawing.Point(56, 38);
 			this.Bounds2.Name = "Bounds2";
 			this.Bounds2.Size = new System.Drawing.Size(48, 20);
@@ -378,6 +381,7 @@ namespace DreamBeam {
 			// 
 			// Bounds1
 			// 
+			this.Bounds1.DecimalPlaces = 1;
 			this.Bounds1.Location = new System.Drawing.Point(6, 78);
 			this.Bounds1.Name = "Bounds1";
 			this.Bounds1.Size = new System.Drawing.Size(48, 20);
