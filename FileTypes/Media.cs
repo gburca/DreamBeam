@@ -207,6 +207,7 @@ namespace DreamBeam {
 		public override Boolean Playing {
 			get {
 				if (video == null) return false;
+				if (video.Disposed) return false;
 				return video.Playing;
 			}
 		}

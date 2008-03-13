@@ -1738,12 +1738,59 @@ namespace DreamBeam {
 			}
 		}
 
+		private void liveMediaControls_MediaButtonPressed(object sender, MediaControlsEvent e) {
+			if (e.button == MediaButton.Play) this.Media2BeamBox();
 
+			MediaOperations media = ShowBeam.liveMedia;
+			if (media == null) return;
 
-		#endregion
+			switch (e.button) {
+				case MediaButton.Play:
+					// handled above by this.Media2BeamBox();
+					break;
+				case MediaButton.Stop:
+					ShowBeam.StopMedia();
+					break;
+				case MediaButton.SkipFw:
+					RightDocks_BottomPanel_Media_ShowNext_Click(null, null);
+					break;
+				default:
+					media.Operation(e.button);
+					break;
+			}
 
+			PlayProgress.Enabled = media.Playing;
+			try {
+				Media_TrackBar.Value = (int)media.CurrentLocation;
+			} catch {
+				Media_TrackBar.Value = 0;
+			}
+		}
 
-		#region MediaList
+		private void previewMediaControls_MediaButtonPressed(object sender, MediaControlsEvent e) {
+			if (this.previewMedia == null) return;
+
+			switch (e.button) {
+				case MediaButton.Play:
+					Media_TrackBar.Maximum = (int)previewMedia.Duration();
+					previewMedia.Volume = -10000;
+					Thread.Sleep(100);
+					previewMedia.Play();
+					break;
+				default:
+					previewMedia.Operation(e.button);
+					break;
+			}
+
+			PlayProgress.Enabled = previewMedia.Playing;
+			try {
+				Media_TrackBar.Value = (int)previewMedia.CurrentLocation;
+			} catch {
+				Media_TrackBar.Value = 0;
+			}
+
+		}
+
 
 		///<summary>Reads all MediaLists in Directory, validates if it is a MediaList and put's them into the RightDocks_SongList Box </summary>
 		public void ListMediaLists() {
@@ -2573,59 +2620,6 @@ namespace DreamBeam {
 			}
 		}
 		#endregion
-
-		private void liveMediaControls_MediaButtonPressed(object sender, MediaControlsEvent e) {
-			if (e.button == MediaButton.Play) this.Media2BeamBox();
-
-			MediaOperations media = ShowBeam.liveMedia;
-			if (media == null) return;
-
-			switch (e.button) {
-				case MediaButton.Play:
-					// handled above by this.Media2BeamBox();
-					break;
-				case MediaButton.Stop:
-					ShowBeam.StopMedia();
-					break;
-				case MediaButton.SkipFw:
-					RightDocks_BottomPanel_Media_ShowNext_Click(null, null);
-					break;
-				default:
-					media.Operation(e.button);
-					break;
-			}
-
-			PlayProgress.Enabled = media.Playing;
-			try {
-				Media_TrackBar.Value = (int)media.CurrentLocation;
-			} catch {
-				Media_TrackBar.Value = 0;
-			}
-		}
-
-		private void previewMediaControls_MediaButtonPressed(object sender, MediaControlsEvent e) {
-			if (this.previewMedia == null) return;
-
-			switch (e.button) {
-				case MediaButton.Play:
-					Media_TrackBar.Maximum = (int)previewMedia.Duration();
-					previewMedia.Volume = -10000;
-					Thread.Sleep(100);
-					previewMedia.Play();
-					break;
-				default:
-					previewMedia.Operation(e.button);
-					break;
-			}
-
-			PlayProgress.Enabled = previewMedia.Playing;
-			try {
-				Media_TrackBar.Value = (int)previewMedia.CurrentLocation;
-			} catch {
-				Media_TrackBar.Value = 0;
-			}
-		
-		}
 
 	}
 
