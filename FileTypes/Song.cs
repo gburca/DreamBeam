@@ -30,6 +30,7 @@ using System.Collections;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Runtime.Serialization.Formatters.Binary;
 
 
 namespace DreamBeam {
@@ -161,6 +162,7 @@ namespace DreamBeam {
 
 		// The following settings will not be saved when we serialize this class
 		private string fileName;
+		[NonSerializedAttribute]
 		private Thread render;
 		private Object renderLock = new Object();
 		[XmlIgnore]
@@ -744,19 +746,24 @@ namespace DreamBeam {
 		}
 
 		public virtual Song Clone() {
-			// TODO: Make a proper clone, or else the Live screen will show updates made to preview screen.
-			Song s = this.MemberwiseClone() as Song;
-			s.SongLyrics = (ArrayList)this.SongLyrics.Clone();
-			s.Sequence = (ArrayList)this.Sequence.Clone();
-
-			// We must use a separate song, so that we can change strophes independently. Otherwise the
-			// MemberwiseClone above will give us two content objects that refer to the same song object.
-			//s.song = this.song.Clone();
-
-			return s;
+			// Make a proper clone, or else the Live screen will show updates made to preview screen.
+			return DeepClone();
 		}
 
 		#endregion
+
+
+		/// Returns a deep-copy clone of the object.
+		public virtual Song DeepClone() {
+			MemoryStream ms = new MemoryStream();
+			BinaryFormatter bf = new BinaryFormatter();
+			bf.Serialize(ms, this);
+			ms.Position = 0;
+			object clone = bf.Deserialize(ms);
+			ms.Close();
+			return (Song)clone;
+		}
+
 
 		#region Serialization and Deserialization
 		/// <summary>

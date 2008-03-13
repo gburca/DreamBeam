@@ -3,51 +3,51 @@ using System.Resources;
 using System.Globalization;
 using System.Windows.Forms;
 
-namespace DreamBeam
-{
+namespace DreamBeam {
 	/// <summary>
-	/// Zusammenfassende Beschreibung für Class
+	/// 
 	/// </summary>
-	public class Language
-	{
+	public class Language {
 
-//		public string Lang;
-		private CultureInfo Culture;
+		private CultureInfo Culture, CultureEn;
 		ResourceManager rm;
 
 
-		public Language()
-		{
-			rm = new ResourceManager("DreamBeam.Language.lang",typeof(Language).Assembly);
-			//
-			// TODO: Hier die Konstruktorlogik einfügen
-			//
+		public Language() {
+			rm = new ResourceManager("DreamBeam.Language.lang", typeof(Language).Assembly);
+			CultureEn = CultureInfo.CreateSpecificCulture("en-US");
 		}
 
-		public string say(string what){
-
-			if(what==""){
-			 return "";
+		public string say(string what) {
+			if (what == "") {
+				return "";
 			}
-			return rm.GetString(what,Culture);
+
+			string res = rm.GetString(what, Culture);
+
+			if (res == null || res.Length == 0) {
+				return rm.GetString(what, CultureEn);
+			} else {
+				return res;
+			}
 		}
 
-		public string say(string what, string arg1){
-			return  say(what).Replace(@"%1%",arg1);
+		public string say(string what, string arg1) {
+			return say(what).Replace(@"%1%", arg1);
 		}
 
-		public string say(string what, string arg1, string arg2){
-			return  say(what,arg1).Replace(@"%2%",arg2);
+		public string say(string what, string arg1, string arg2) {
+			return say(what, arg1).Replace(@"%2%", arg2);
 		}
 
-		public void setCulture(string Lang){
+		public void setCulture(string Lang) {
 
-			Culture=CultureInfo.CurrentCulture;
+			Culture = CultureInfo.CurrentCulture;
 
-			if(Lang == "auto")
+			if (Lang == "auto")
 				Lang = Culture.ToString();
 
-			Culture=CultureInfo.CreateSpecificCulture(Lang);
+			Culture = CultureInfo.CreateSpecificCulture(Lang);
 		}
 
 	}

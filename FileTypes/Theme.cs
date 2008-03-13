@@ -181,41 +181,6 @@ namespace DreamBeam {
 		}
 
 		#endregion
-
-		/// 
-		/// Function for doing a deep clone of an object.
-		/// 
-		/// Returns a deep-copy clone of the object.
-		//    public virtual T DeepClone() {
-		//        //First do a shallow copy.
-		//        THData returnData = (THData)this.MemberwiseClone();
-
-		//        //Get the type.
-		//        Type type = returnData.GetType();
-
-		//        //Now get all the member variables.
-		//        FieldInfo[] fieldInfoArray = type.GetFields();
-
-		//        //Deepclone members that extend THData.
-		//        //This will ensure we get everything we need.
-		//        foreach (FieldInfo fieldInfo in fieldInfoArray) {
-		//            //This gets the actual object in that field.
-		//            object sourceFieldValue = fieldInfo.GetValue(this);
-
-		//            //See if this member is THData
-		//            if (sourceFieldValue is THData) {
-		//                //If so, cast as a THData.
-		//                THData sourceTHData = (THData)sourceFieldValue;
-
-		//                //Create a clone of it.
-		//                THData clonedTHData = sourceTHData.DeepClone();
-
-		//                //Within the cloned containig class.
-		//                fieldInfo.SetValue(returnData, clonedTHData);
-		//            }
-		//        }
-		//        return returnData;
-		//    }
 	}
 
 	[Serializable()]

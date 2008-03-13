@@ -14,13 +14,14 @@ namespace DreamBeam {
 
 	public partial class Options : System.Windows.Forms.Form {
 
-		private Language Lang = new Language();
+		private Language Lang;
 		public MainForm _MainForm;
 		private Color showBeamBackground;
 		private Boolean loadComplete = false;
 
 		public Options(MainForm mainForm) {
 			_MainForm = mainForm;
+			Lang = mainForm.Lang;
 
 			InitializeComponent();
 			this.DataDirectory.Text = Tools.GetAppDocPath();
