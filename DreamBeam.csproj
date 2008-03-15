@@ -440,7 +440,6 @@
     <None Include="Icons\audio-volume-high.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DreamBeam_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
