@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<DreamSong xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <WordWrap>false</WordWrap>
+  <ThemePath>Themes\Demo.SongTheme.xml</ThemePath>
+  <Version>0.80</Version>
+  <Title>Great Is Thy Faithfulness</Title>
+  <Author />
+  <Collection />
+  <Number />
+  <Notes />
+  <KeyRangeLow />
+  <KeyRangeHigh />
+  <MinorKey>false</MinorKey>
+  <DualLanguage>false</DualLanguage>
+  <SongLyrics>
+    <LyricsItem Type="Verse" Number="1">Great is Thy faithfulness, O God my Father;
+There is no shadow of turning with Thee;
+Thou changest not, Thy compassions, they fail not;
+As Thou hast been, Thou forever will be.</LyricsItem>
+    <LyricsItem Type="Verse" Number="2">Summer and winter and springtime and harvest,
+Sun, moon and stars in their courses above
+Join with all nature in manifold witness
+To Thy great faithfulness, mercy and love.</LyricsItem>
+    <LyricsItem Type="Verse" Number="3">Pardon for sin and a peace that endureth
+Thine own dear presence to cheer and to guide;
+Strength for today and bright hope for tomorrow,
+Blessings all mine, with ten thousand beside!</LyricsItem>
+    <LyricsItem Type="Chorus" Number="1">Great is Thy faithfulness!
+Great is Thy faithfulness!
+Morning by morning new mercies I see.
+All I have needed Thy hand hath provided;
+Great is Thy faithfulness, Lord, unto me!</LyricsItem>
+  </SongLyrics>
+  <Sequence>
+    <LyricsSequenceItem Type="Verse" Number="1" />
+    <LyricsSequenceItem Type="Chorus" Number="1" />
+    <LyricsSequenceItem Type="Verse" Number="2" />
+    <LyricsSequenceItem Type="Chorus" Number="1" />
+    <LyricsSequenceItem Type="Verse" Number="3" />
+  </Sequence>
+  <ShowRectangles>false</ShowRectangles>
+</DreamSong>

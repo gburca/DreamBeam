@@ -50,7 +50,7 @@ Section "-hidden CheckDependencies"
 		;================ Install ==================	
 		InstallNet:
 		Banner::show /NOUNLOAD /set 76 "Installing Microsoft .Net Framework." \
-			"Please wait. This takes a very looooong time ..."
+			"Please wait. This is slow!" \
 		ExecWait '"$TEMP\dotnetfx.exe" /q:a /c:"install /q"'
 		Delete "$TEMP\dotnetfx.exe"
 		Banner::destroy

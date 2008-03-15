@@ -39,7 +39,7 @@ namespace DreamBeam {
 			// buttons
 			// 
 			this.buttons.AllowMerge = false;
-			this.buttons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.buttons.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.buttons.AutoSize = false;
 			this.buttons.Dock = System.Windows.Forms.DockStyle.None;
 			this.buttons.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;

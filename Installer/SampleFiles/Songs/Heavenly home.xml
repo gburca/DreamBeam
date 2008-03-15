@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<DreamSong>
+  <Version>0.49</Version>
+  <image>C:\DreamBeam\Versions\Dreambeam 0.50\Backgrounds\Nature\FLOWERS.jpg</image>
+  <TextAlign>left</TextAlign>
+  <MultiLang>False</MultiLang>
+  <TextStyle>0</TextStyle>
+  <windowHeight>480</windowHeight>
+  <windowWidth>640</windowWidth>
+  <Text0>
+    <Text>Heavenly home</Text>
+    <Font>Verdana</Font>
+    <FontStyle>0</FontStyle>
+    <FontSize>30</FontSize>
+    <TextColor>-1</TextColor>
+    <OutlineColor>-16777216</OutlineColor>
+    <posX>25</posX>
+    <posY>12</posY>
+    <TextEffect>Filled Outline</TextEffect>
+    <AutoPos>True</AutoPos>
+  </Text0>
+  <Text1>
+    <Text>None of my words can describe
+How worthy you are to receive
+Our honour and praise
+You are my father - I want to trust
+And everything I have is from you
+Can’t do anything without your strength
+
+
+1. Ref.:
+Lead me to depend on you
+In every little step I do
+Lead me to overcome
+So that I one day see my heavenly home
+I’ll never understand your ways
+But I want to trust
+Please raise my faith
+For you are the almighty One
+Alpha and omega- father and son!
+
+
+2. Ref.:
+Lead me to overcome
+So that I one day see my heavenly home
+
+</Text>
+    <Font>Verdana</Font>
+    <FontStyle>0</FontStyle>
+    <FontSize>27</FontSize>
+    <TextColor>-1</TextColor>
+    <OutlineColor>-16777216</OutlineColor>
+    <posX>25</posX>
+    <posY>56</posY>
+    <TextEffect>Filled Outline</TextEffect>
+    <AutoPos>True</AutoPos>
+  </Text1>
+  <Text2>
+    <Text>© Andrea Neuhaus / Jesus Freaks Stuttgart</Text>
+    <Font>Times New Roman</Font>
+    <FontStyle>0</FontStyle>
+    <FontSize>12</FontSize>
+    <TextColor>-1</TextColor>
+    <OutlineColor>-8355712</OutlineColor>
+    <posX>281</posX>
+    <posY>359</posY>
+    <TextEffect>Normal</TextEffect>
+    <AutoPos>True</AutoPos>
+  </Text2>
+  <MultiLangSettings>
+    <Font>Arial</Font>
+    <FontStyle>0</FontStyle>
+    <FontSize>30</FontSize>
+    <TextColor>-1</TextColor>
+    <OutlineColor>-16777216</OutlineColor>
+    <TextEffect>Normal</TextEffect>
+  </MultiLangSettings>
+</DreamSong>

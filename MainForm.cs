@@ -1795,10 +1795,9 @@ namespace DreamBeam {
 		///<summary>Reads all MediaLists in Directory, validates if it is a MediaList and put's them into the RightDocks_SongList Box </summary>
 		public void ListMediaLists() {
 			this.RightDocks_MediaLists.Items.Clear();
-			string strSongDir = Tools.GetDirectory(DirType.MediaLists);
+			string strMediaListsDir = Tools.GetDirectory(DirType.MediaLists);
 
-			// TODO: What is this code doing?
-			string[] dirs2 = Directory.GetFiles(strSongDir, "*.xml");
+			string[] dirs2 = Directory.GetFiles(strMediaListsDir, "*.xml");
 			foreach (string dir2 in dirs2) {
 				string temp = Path.GetFileName(dir2);
 				this.RightDocks_MediaLists.Items.Add(temp.Substring(0, temp.Length - 4));
@@ -1808,7 +1807,7 @@ namespace DreamBeam {
 
 		/// <summary>Loads Default MediaList on Startup</summary>
 		void LoadDefaultMediaList() {
-			if (File.Exists("MediaLists\\Default.xml")) {
+			if (File.Exists(Tools.GetDirectory(DirType.MediaLists, "Default.xml"))) {
 				GuiTools.RightDock.MediaListTools.LoadSelectedMediaList("Default");
 			}
 		}
@@ -1833,10 +1832,14 @@ namespace DreamBeam {
 		/// <summary>Deletes the Selected MediaList, after Userconfirmation</summary>
 		private void RightDocks_MediaLists_DeleteButton_Click(object sender, System.EventArgs e) {
 			if (this.RightDocks_MediaLists.SelectedIndex >= 0) {
-				if (System.IO.File.Exists("MediaLists\\" + RightDocks_MediaLists.SelectedItem.ToString() + ".xml")) {
-					DialogResult answer = MessageBox.Show(RightDocks_MediaLists.SelectedItem.ToString() + " wirklich löschen?", "MediaList löschen..", MessageBoxButtons.YesNo);
+				string fileName = RightDocks_MediaLists.SelectedItem.ToString() + ".xml";
+				fileName = Tools.GetDirectory(DirType.MediaLists, fileName);
+
+				if (File.Exists(fileName)) {
+					DialogResult answer = MessageBox.Show("Delete " + Tools.GetRelativePath(DirType.MediaLists, fileName) + " ?",
+						"Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 					if (answer == DialogResult.Yes) {
-						System.IO.File.Delete("MediaLists\\" + RightDocks_MediaLists.SelectedItem.ToString() + ".xml");
+						File.Delete(fileName);
 					}
 				}
 				this.ListMediaLists();

@@ -37,14 +37,32 @@ namespace DreamBeam {
 	/// They are used in the Tools.GetDirectory and Tools.GetRelativePath functions.
 	/// </summary>
 	public enum DirType {
-		DataRoot,	// The root of the user-data directories below
+		// Summary:
+		//	The root of the user-data directories below
+		DataRoot,
+		// Summary:
+		//  The directory where songs are saved
 		Songs,
+		// Summary:
+		//  The directory where backgrounds are saved
 		Backgrounds,
+		// Summary:
+		//  The directory where media lists are saved
 		MediaLists,
+		// Summary:
+		//  The directory where media files (found in media lists) are saved
 		MediaFiles,
+		// Summary:
+		//  The directory where themes are saved
 		Themes,
+		// Summary:
+		//  The directory where the *.config.xml app config files are saved
 		Config,
+		// Summary:
+		//  The directory where the contents of the sermon tool are saved
 		Sermon,
+		// Summary:
+		//  The directory where logs are saved
 		Logs
 	}
 

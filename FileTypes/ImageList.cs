@@ -12,11 +12,7 @@ namespace DreamBeam {
 		public ImageListItem2[] iItem = new ImageListItem2[5000];
 		private ImageListItem2 tempItem = new ImageListItem2();
 		public string Name = "Default";
-		private string version = "1";
-
-
 		public int Count = 0;
-
 
 		public ImageList() {
 
@@ -102,10 +98,10 @@ namespace DreamBeam {
 			tw.Formatting = Formatting.Indented;
 			tw.WriteStartDocument();
 			tw.WriteStartElement("MediaList");
-			tw.WriteElementString("Version", this.version);
+			tw.WriteElementString("Version", Tools.GetAppVersion());
 			for (int i = 0; i < Count; i++) {
-				tw.WriteStartElement("MediaItem" + i);
-				tw.WriteElementString("Path", this.iItem[i].Path);
+				tw.WriteStartElement("MediaItem");
+				tw.WriteElementString("Path", Tools.GetRelativePath(DirType.DataRoot, this.iItem[i].Path));
 				tw.WriteEndElement();
 			}
 			tw.WriteEndElement();
@@ -126,12 +122,14 @@ namespace DreamBeam {
 			}
 
 			XmlNodeList list = null;
+			string fullPath;
 
 			// Get the Path
 			list = document.GetElementsByTagName("Path");
 			foreach (XmlNode n in list) {
-				if (File.Exists(n.InnerText)) {
-					this.iItem[Count].Path = n.InnerText;
+				fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), n.InnerText);
+				if (fullPath != null && File.Exists(fullPath)) {
+					this.iItem[Count].Path = fullPath;
 					this.iItem[Count].Name = Path.GetFileName(this.iItem[Count].Path);
 					Count++;
 				}

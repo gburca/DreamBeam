@@ -215,7 +215,7 @@
       <BGImagePath>Backgrounds\white.jpg</BGImagePath>
       <TextFormat>
         <BeamTextFormat>
-          <OutlineSize>1</OutlineSize>
+          <OutlineSize>4</OutlineSize>
           <HAlignment>Center</HAlignment>
           <VAlignment>Center</VAlignment>
           <Bounds>
@@ -232,7 +232,7 @@
             <Width>90</Width>
             <Height>8</Height>
           </Bounds>
-          <Effects>Normal</Effects>
+          <Effects>Filled Outline</Effects>
           <FontFamily>Arial</FontFamily>
           <FontEmSize>36</FontEmSize>
           <FontStyle>Regular</FontStyle>
@@ -240,7 +240,7 @@
           <XmlOutlineColor>NamedColor:Red</XmlOutlineColor>
         </BeamTextFormat>
         <BeamTextFormat>
-          <OutlineSize>1</OutlineSize>
+          <OutlineSize>30</OutlineSize>
           <HAlignment>Near</HAlignment>
           <VAlignment>Center</VAlignment>
           <Bounds>
@@ -257,12 +257,12 @@
             <Width>90</Width>
             <Height>85</Height>
           </Bounds>
-          <Effects>Normal</Effects>
+          <Effects>Filled Outline</Effects>
           <FontFamily>Arial</FontFamily>
           <FontEmSize>36</FontEmSize>
           <FontStyle>Regular</FontStyle>
           <XmlTextColor>NamedColor:White</XmlTextColor>
-          <XmlOutlineColor>NamedColor:Red</XmlOutlineColor>
+          <XmlOutlineColor>NamedColor:Black</XmlOutlineColor>
         </BeamTextFormat>
       </TextFormat>
     </Sermon>
