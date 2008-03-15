@@ -632,7 +632,6 @@ namespace DreamBeam.FileTypes {
 	public class ABibleVerse : Content, IContentOperations {
 		public int verseIdx;
 		private BibleVersion bible;
-		//public Bitmap bitmap;	// This doesn't really belong here...
 		public Config config;
 		private Thread render;
 		private Object renderLock = new Object();

@@ -17,6 +17,7 @@ namespace DreamBeam.FileTypes {
 	/// <summary>
 	/// Summary description for TextTool.
 	/// </summary>
+	[Serializable()]	// Needed for the DeepCopy binary serialization
 	public class TextToolContents : Song {
 
 		public override string ThemePath {

@@ -264,15 +264,17 @@ namespace DreamBeam {
 			try {
 				Application.Run(new MainForm(args));
 			} catch (Exception e) {
-				StreamWriter SW;
-				SW = File.AppendText(Tools.GetDirectory(DirType.Logs, "LogFile.txt"));
-				SW.WriteLine(e.Message);
-				SW.WriteLine(e.StackTrace);
-				if (e.InnerException != null) {
-					SW.WriteLine(e.InnerException.Message);
-					SW.WriteLine(e.InnerException.StackTrace);
+				string logFile = Tools.GetDirectory(DirType.Logs, "LogFile.txt");
+
+				using (StreamWriter SW = File.AppendText(logFile)) {
+					SW.WriteLine(e.Message);
+					SW.WriteLine(e.StackTrace);
+					if (e.InnerException != null) {
+						SW.WriteLine(e.InnerException.Message);
+						SW.WriteLine(e.InnerException.StackTrace);
+					}
+					SW.Close();
 				}
-				SW.Close();
 			}
 		}
 
@@ -1356,10 +1358,15 @@ namespace DreamBeam {
 
 		private void SongShow_StropheList_ListEx_SelectedIndexChanged(object sender, System.EventArgs e) {
 			// Update the preview screen when the index changes
-			Song s = DisplayPreview.content as Song;
-			if (s != null) {
-				s.CurrentLyric = this.SongShow_StropheList_ListEx.SelectedIndex;
-				DisplayPreview.UpdateDisplay(false);
+
+			if (DisplayPreview.content != null &&
+				DisplayPreview.content.GetType() == typeof(Song)) {
+
+				Song s = DisplayPreview.content as Song;
+				if (s != null) {
+					s.CurrentLyric = this.SongShow_StropheList_ListEx.SelectedIndex;
+					DisplayPreview.UpdateDisplay(false);
+				}
 			} else if (this.SongShow_StropheList_ListEx.SelectedIndex >= 0) {
 				// If we come back from BibleText to the song,
 				// DisplayPreview.content will not be a Song and the
