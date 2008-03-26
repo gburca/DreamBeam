@@ -40,6 +40,9 @@ namespace DreamBeam {
 			return say(what, arg1).Replace(@"%2%", arg2);
 		}
 
+		public string say(string what, string arg1, string arg2, string arg3) {
+			return say(what, arg1, arg2).Replace(@"%3%", arg3);
+		}
 		public void setCulture(string Lang) {
 
 			Culture = CultureInfo.CurrentCulture;

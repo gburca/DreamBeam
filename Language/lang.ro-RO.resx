@@ -118,217 +118,217 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EditSongs.Author" xml:space="preserve">
-    <value>Author</value>
+    <value>Autor</value>
   </data>
   <data name="EditSongs.AutoPos" xml:space="preserve">
-    <value>Auto Position</value>
+    <value>Poziție Automată</value>
   </data>
   <data name="EditSongs.BackgroundImage" xml:space="preserve">
-    <value>Background Image:</value>
+    <value>Imagine de fond:</value>
   </data>
   <data name="EditSongs.ColorButton" xml:space="preserve">
-    <value>Color</value>
+    <value>Culoare</value>
   </data>
   <data name="EditSongs.FontButton" xml:space="preserve">
     <value>Font</value>
   </data>
   <data name="EditSongs.NextVerse" xml:space="preserve">
-    <value>Next Verse</value>
+    <value>Versul Următor</value>
   </data>
   <data name="EditSongs.OutlineColor" xml:space="preserve">
-    <value>Outline Color</value>
+    <value>Culoare Contur</value>
   </data>
   <data name="EditSongs.PreviousVerse" xml:space="preserve">
-    <value>Previous Verse</value>
+    <value>Versul Anterior</value>
   </data>
   <data name="EditSongs.TextOutline" xml:space="preserve">
-    <value>Text Outline</value>
+    <value>Contur Text</value>
   </data>
   <data name="EditSongs.Title" xml:space="preserve">
-    <value>Title</value>
+    <value>Titlu</value>
   </data>
   <data name="EditSongs.Verses" xml:space="preserve">
-    <value>Verses</value>
+    <value>Versuri</value>
   </data>
   <data name="Global.Buttons.Back" xml:space="preserve">
-    <value>Back</value>
+    <value>Înapoi</value>
   </data>
   <data name="Global.Buttons.Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="Global.Buttons.Next" xml:space="preserve">
-    <value>Next</value>
+    <value>Urmatorul</value>
   </data>
   <data name="Global.Buttons.OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Help.Intro.5" xml:space="preserve">
-    <value>The ‘PlayList’ is used to collect together all the Songs needed for the worship session so that they are readily available. Use the ‘UP’and ‘DOWN’ Buttons to order your PlayList. The ‘REMOVE’ Button removes the Song from the PlayList, without deleting it from the SongList.</value>
+    <value>PlayLista este folosită pentru colectarea cântecelor necesare pentru o sesiune fiind gata de acces. Folosește butoanele "Sus" și "Jos" ca să aranjezi lista. Butonul "Șterge" , șterge cântecele din PlayList făra ca să fie șterse din Lista de Cântece.</value>
   </data>
   <data name="Left.EditSongs" xml:space="preserve">
-    <value>Edit Songs</value>
+    <value>Editare Cântece</value>
   </data>
   <data name="Left.Presentation" xml:space="preserve">
-    <value>Media Presentation</value>
+    <value>Prezentare Media</value>
   </data>
   <data name="Left.Presentation 1" xml:space="preserve">
-    <value>Media Presentation</value>
+    <value>Prezentare Media</value>
   </data>
   <data name="Left.ShowSongs" xml:space="preserve">
-    <value>Show Songs</value>
+    <value>Arată Cântece</value>
   </data>
   <data name="Left.TextTool" xml:space="preserve">
-    <value>Text Tool</value>
+    <value>Unelte Text</value>
   </data>
   <data name="MediaPresentation.Loop" xml:space="preserve">
-    <value>Loop</value>
+    <value>Repetă..</value>
   </data>
   <data name="MediaPresentation.Preview" xml:space="preserve">
-    <value>Preview Window</value>
+    <value>Fereastră Previzualizare</value>
   </data>
   <data name="Menu.Edit" xml:space="preserve">
-    <value>&amp;Edit</value>
+    <value>&amp;Editare</value>
   </data>
   <data name="Menu.Edit.Options" xml:space="preserve">
-    <value>&amp;Options</value>
+    <value>&amp;Opținui</value>
   </data>
   <data name="Menu.Help" xml:space="preserve">
-    <value>&amp;Help</value>
+    <value>&amp;Ajutor</value>
   </data>
   <data name="Menu.Help.About" xml:space="preserve">
-    <value>&amp;About DreamBeam</value>
+    <value>&amp;Despre DreamBeam</value>
   </data>
   <data name="Menu.Help.Intro" xml:space="preserve">
-    <value>&amp;Help contents</value>
+    <value>&amp;Documentație</value>
   </data>
   <data name="Menu.MediaList" xml:space="preserve">
-    <value>&amp;MediaList</value>
+    <value>&amp;Listă Media</value>
   </data>
   <data name="Menu.MediaList.Exit" xml:space="preserve">
-    <value>E&amp;xit DreamBeam</value>
+    <value>I&amp;eșire DreamBeam</value>
   </data>
   <data name="Menu.MediaList.New" xml:space="preserve">
-    <value>&amp;New...</value>
+    <value>&amp;Nou...</value>
   </data>
   <data name="Menu.MediaList.Rename" xml:space="preserve">
-    <value>&amp;Rename...</value>
+    <value>&amp;Redenumire...</value>
   </data>
   <data name="Menu.MediaList.Save" xml:space="preserve">
-    <value>&amp;Save</value>
+    <value>&amp;Salvează</value>
   </data>
   <data name="Menu.MediaList.SaveAs" xml:space="preserve">
-    <value>Save &amp;As...</value>
+    <value>Salvează &amp;Ca...</value>
   </data>
   <data name="Menu.Song" xml:space="preserve">
-    <value>&amp;Song</value>
+    <value>&amp;Cântec</value>
   </data>
   <data name="Menu.Song.Exit" xml:space="preserve">
-    <value>E&amp;xit DreamBeam</value>
+    <value>I&amp;eșire DreamBeam</value>
   </data>
   <data name="Menu.Song.New" xml:space="preserve">
-    <value>&amp;New...</value>
+    <value>&amp;Nou...</value>
   </data>
   <data name="Menu.Song.Rename" xml:space="preserve">
-    <value>&amp;Rename...</value>
+    <value>&amp;Redenumire...</value>
   </data>
   <data name="Menu.Song.Save" xml:space="preserve">
-    <value>&amp;Save</value>
+    <value>&amp;Salvează</value>
   </data>
   <data name="Menu.Song.SaveAs" xml:space="preserve">
-    <value>Save &amp;As...</value>
+    <value>Salvează &amp;Ca...</value>
   </data>
   <data name="Menu.View" xml:space="preserve">
-    <value>&amp;View</value>
+    <value>&amp;Arată</value>
   </data>
   <data name="Message.DeleteSongTitle" xml:space="preserve">
-    <value>Delete Song ...</value>
+    <value>Șterge Cântec ...</value>
   </data>
   <data name="Message.EnterSongName" xml:space="preserve">
-    <value>Enter a name for the Song</value>
+    <value>Introdu un nume pentru cântec</value>
   </data>
   <data name="Message.ImportMedia" xml:space="preserve">
-    <value>Press "Yes" to copy the file(s) into Dreambeam's Media Folder, or "No" to create link(s) to the original location ?</value>
+    <value>Apasă "Da" ca să copiezi fișier(ele) în directorul Media, sau "Nu" ca să creezi extensii locul original ?</value>
   </data>
   <data name="Message.ImportMediaTitle" xml:space="preserve">
-    <value>Import or Link?</value>
+    <value>Importă sau Atașeată ?</value>
   </data>
   <data name="Message.MediaListExits" xml:space="preserve">
-    <value>This MediaList already exists.</value>
+    <value>Această Listă Media există deja.</value>
   </data>
   <data name="Message.MediaListName" xml:space="preserve">
-    <value>Enter a name for the MediaList:</value>
+    <value>Introdu un nume pentru Lista Media:</value>
   </data>
   <data name="Message.MediaListNotRenamed" xml:space="preserve">
-    <value>No Name defined - MediaList hasn't been renamed.</value>
+    <value>Nici un nume definit - Lista Media nu a fost modificată.</value>
   </data>
   <data name="Message.MediaListNotSaved" xml:space="preserve">
-    <value>No Name defined - MediaList hasn't been saved.</value>
+    <value>Nici un nume definit - Lista Media nu a fost salvată.</value>
   </data>
   <data name="Message.MediaListNotSavedYet" xml:space="preserve">
-    <value>MediaList is not saved, yet.</value>
+    <value>Lista Media nu este salvată încă.</value>
   </data>
   <data name="Message.NewMediaListTitle" xml:space="preserve">
-    <value>New MediaList..</value>
+    <value>Listă Media Nouă..</value>
   </data>
   <data name="Message.NewSongTitle" xml:space="preserve">
-    <value>New Song..</value>
+    <value>Cântec Nou..</value>
   </data>
   <data name="Message.NoNameEntered" xml:space="preserve">
-    <value>No name defined.</value>
+    <value>Nici un nume definit.</value>
   </data>
   <data name="Message.RenameMediaListTitle" xml:space="preserve">
-    <value>Rename MediaList "%1%" to ...</value>
+    <value>Redenumește Lista Media "%1%" în ...</value>
   </data>
   <data name="Message.RenameSongTitle" xml:space="preserve">
-    <value>Rename Song "%1%" to ...</value>
+    <value>Redenumește Cântecul "%1%" în ...</value>
   </data>
   <data name="Message.SaveMediaListAs" xml:space="preserve">
-    <value>Save MediaList as...</value>
+    <value>Salvează Lista Media ca...</value>
   </data>
   <data name="Message.SaveSongAs" xml:space="preserve">
-    <value>Save song as..</value>
+    <value>Salvează Cântecul ca..</value>
   </data>
   <data name="Message.SongExists" xml:space="preserve">
-    <value>This song already exists.</value>
+    <value>Acest Cântec există deja.</value>
   </data>
   <data name="Message.SongNotRenamed" xml:space="preserve">
-    <value>No name defined - Song has not been renamed.</value>
+    <value>Nici un nume definit - Cântecul nu a fost modificat.</value>
   </data>
   <data name="Message.SongNotSaved" xml:space="preserve">
-    <value>No name defined - Song hasn't been saved.</value>
+    <value>Nici un nume definit - Cântecul nu a fost salvat.</value>
   </data>
   <data name="Message.SongNotSavedYet" xml:space="preserve">
-    <value>Song has not been saved yet.</value>
+    <value>Cântecul nu a fost salvat încă.</value>
   </data>
   <data name="Message.WantDeleteSong" xml:space="preserve">
-    <value>Do you really want to delete "%1%" ?</value>
+    <value>Chiar vrei să ștergi "%1%" ?</value>
   </data>
   <data name="Options.BeamBox.BackgroundGroup" xml:space="preserve">
-    <value>Background Color:</value>
+    <value>Culoare de Fond:</value>
   </data>
   <data name="Options.BeamBox.BGColorButton" xml:space="preserve">
-    <value>Set Color</value>
+    <value>Setează Culoarea</value>
   </data>
   <data name="Options.BeamBox.Height" xml:space="preserve">
-    <value>Height</value>
+    <value>Înălțime</value>
   </data>
   <data name="Options.BeamBox.HideMouseCheckBox" xml:space="preserve">
-    <value>Hide Mouse Cursor</value>
+    <value>Ascunde Cursorul</value>
   </data>
   <data name="Options.BeamBox.MouseGroup" xml:space="preserve">
-    <value>Window and Mouse:</value>
+    <value>Cursor Mouse</value>
   </data>
   <data name="Options.BeamBox.OnTopCheckBox" xml:space="preserve">
-    <value>Window always on top</value>
+    <value>Fereastra întotdeauna deasupra</value>
   </data>
   <data name="Options.BeamBox.PositionGroup" xml:space="preserve">
-    <value>Position:</value>
+    <value>Poziție:</value>
   </data>
   <data name="Options.BeamBox.PositionTitle" xml:space="preserve">
-    <value>Set Position:</value>
+    <value>Setează Poziția:</value>
   </data>
   <data name="Options.BeamBox.SizeGroup" xml:space="preserve">
-    <value>Size:</value>
+    <value>Marime:</value>
   </data>
   <data name="Options.BeamBox.tabpage1" xml:space="preserve">
     <value>Auto</value>
@@ -337,25 +337,25 @@
     <value>Manual</value>
   </data>
   <data name="Options.BeamBox.Width" xml:space="preserve">
-    <value>Width</value>
+    <value>Lățime</value>
   </data>
   <data name="Options.Bible.SwordFolderButton" xml:space="preserve">
-    <value>Browse...</value>
+    <value>Răsfoiește...</value>
   </data>
   <data name="Options.Bible.SwordFolderGroup" xml:space="preserve">
-    <value>Sword Project Folder</value>
+    <value>Dosar Program Sword</value>
   </data>
   <data name="Options.Bible.SwordLanguage" xml:space="preserve">
-    <value>Sword Language</value>
+    <value>Limbă Sword</value>
   </data>
   <data name="Options.Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="Options.Common.Language" xml:space="preserve">
-    <value>Language</value>
+    <value>Limbă</value>
   </data>
   <data name="Options.Common.Translate" xml:space="preserve">
-    <value>If you like to translate this Software into another Language, you are very welcome!</value>
+    <value>Dacă vrei să traduci acest Program în altă Limbă ești binevenit!</value>
   </data>
   <data name="Options.Graphics.AlphaBlending" xml:space="preserve">
     <value>Alpha Blending:</value>
@@ -364,313 +364,313 @@
     <value>Alpha Blending</value>
   </data>
   <data name="Options.Graphics.AlphaSpeed" xml:space="preserve">
-    <value>Speed</value>
+    <value>Viteză</value>
   </data>
   <data name="Options.Graphics.Outline" xml:space="preserve">
-    <value>Text Outline Size</value>
+    <value>Mărime Contur Text</value>
   </data>
   <data name="Options.Okay" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Options.Graphics.PreRender" xml:space="preserve">
-    <value>Pre-Render</value>
+    <value>Pre-Redare</value>
   </data>
   <data name="Options.Graphics.PreRenderDescription" xml:space="preserve">
-    <value>All verse-images will be rendered in background and stored in memory. This increases the display Speed enormous. The only drawback is a higher memory usage, with about 2 MB per verse.</value>
+    <value>Toate imaginile și versetele vor fi redate și păstrate în memorie. Această metodă mărește viteza de afișare pe ecran. Singura diferență e consumarea de memorie, cam 2MB pe verset.</value>
   </data>
   <data name="Options.Graphics.PreRenderTitle" xml:space="preserve">
-    <value>Pre-Render Verses</value>
+    <value>Pre-Redare Versete</value>
   </data>
   <data name="Options.Tabs.BeamBox" xml:space="preserve">
-    <value>Projector Window</value>
+    <value>Fereastră Projector</value>
   </data>
   <data name="Options.Tabs.Bible" xml:space="preserve">
-    <value>Bible</value>
+    <value>Biblia</value>
   </data>
   <data name="Options.Tabs.Bible.SwordFolderGroup" xml:space="preserve">
-    <value>Sword Project Ordner</value>
+    <value>Dosar Sword </value>
   </data>
   <data name="Options.Tabs.Browse" xml:space="preserve">
-    <value>Browse...</value>
+    <value>Răsfoiește...</value>
   </data>
   <data name="Options.Tabs.Common" xml:space="preserve">
-    <value>Common Settings</value>
+    <value>Setări Comune</value>
   </data>
   <data name="Options.Tabs.Graphics" xml:space="preserve">
-    <value>Graphics</value>
+    <value>Grafică</value>
   </data>
   <data name="Options.Tabs.SwordLanguageGroup" xml:space="preserve">
-    <value>Sword Language</value>
+    <value>Limbă Sword</value>
   </data>
   <data name="Right.Backgrounds" xml:space="preserve">
-    <value>Backgrounds</value>
+    <value>Imagini de Fond</value>
   </data>
   <data name="Right.Backgrounds.Manage" xml:space="preserve">
-    <value>Manage Images</value>
+    <value>Manage Image</value>
   </data>
   <data name="Right.Backgrounds.Reload" xml:space="preserve">
-    <value>Reload Images</value>
+    <value>Reîncărcare Imagini</value>
   </data>
   <data name="Right.Media" xml:space="preserve">
     <value>Media</value>
   </data>
   <data name="Right.Media.Add" xml:space="preserve">
-    <value>Add Media...</value>
+    <value>Adaugă Media...</value>
   </data>
   <data name="Right.Media.AutoPlay" xml:space="preserve">
     <value>Auto Play</value>
   </data>
   <data name="Right.Media.Down" xml:space="preserve">
-    <value>Down</value>
+    <value>Jos</value>
   </data>
   <data name="Right.Media.Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>Șterge</value>
   </data>
   <data name="Right.Media.Show" xml:space="preserve">
-    <value>Show&amp;Next</value>
+    <value>Arată&amp;Următor</value>
   </data>
   <data name="Right.Media.Up" xml:space="preserve">
-    <value>Up</value>
+    <value>Sus</value>
   </data>
   <data name="Right.MediaLists" xml:space="preserve">
-    <value>Media Lists</value>
+    <value>Liste Media</value>
   </data>
   <data name="Right.MediaLists.Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Șterge</value>
   </data>
   <data name="Right.MediaLists.Load" xml:space="preserve">
-    <value>&lt;- Load</value>
+    <value>Încarcă</value>
   </data>
   <data name="Right.MediaLists.Loop" xml:space="preserve">
-    <value>Loop Media List</value>
+    <value>Repetă Lista Media</value>
   </data>
   <data name="Right.MediaLists.Seconds" xml:space="preserve">
-    <value>seconds.</value>
+    <value>secunde.</value>
   </data>
   <data name="Right.MediaLists.TimerCaption" xml:space="preserve">
-    <value>Set Auto Play-Timer</value>
+    <value>Setare Auto Play-Timp</value>
   </data>
   <data name="Right.MediaLists.TimerText" xml:space="preserve">
-    <value>Change Media Item after:</value>
+    <value>Schimbă fișierul Media după:</value>
   </data>
   <data name="Right.Playlist" xml:space="preserve">
     <value>Playlist</value>
   </data>
   <data name="Right.Playlist.Down" xml:space="preserve">
-    <value>Down</value>
+    <value>Jos</value>
   </data>
   <data name="Right.Playlist.Load" xml:space="preserve">
-    <value>&lt;- Load</value>
+    <value>Încarcă</value>
   </data>
   <data name="Right.Playlist.Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>Șterge</value>
   </data>
   <data name="Right.Playlist.Up" xml:space="preserve">
-    <value>Up</value>
+    <value>Sus</value>
   </data>
   <data name="Right.Search" xml:space="preserve">
-    <value>Search</value>
+    <value>Caută</value>
   </data>
   <data name="Right.Search.Load" xml:space="preserve">
-    <value>&lt;- Load</value>
+    <value>Încarcă</value>
   </data>
   <data name="Right.Search.Phrase" xml:space="preserve">
-    <value>Phrase</value>
+    <value>Frază</value>
   </data>
   <data name="Right.Search.sAllSongs" xml:space="preserve">
-    <value>All Songs</value>
+    <value>Toate Cântecele</value>
   </data>
   <data name="Right.Search.Search" xml:space="preserve">
-    <value>Search</value>
+    <value>Caută</value>
   </data>
   <data name="Right.Search.Words" xml:space="preserve">
-    <value>Words</value>
+    <value>Cuvinte</value>
   </data>
   <data name="Right.Songs" xml:space="preserve">
-    <value>Songs</value>
+    <value>Cântece</value>
   </data>
   <data name="Right.Songs.Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Șterge</value>
   </data>
   <data name="Right.Songs.Load" xml:space="preserve">
-    <value>&lt;- Load</value>
+    <value>Încarcă</value>
   </data>
   <data name="Right.Songs.Playlist" xml:space="preserve">
-    <value>Add to Playlist</value>
+    <value>Adaugă</value>
   </data>
   <data name="ShowSongs.BackgroundPanel" xml:space="preserve">
-    <value>Background</value>
+    <value>Decor</value>
   </data>
   <data name="ShowSongs.HideAuthor_Button" xml:space="preserve">
-    <value>Hide Author</value>
+    <value>Ascunde Autor</value>
   </data>
   <data name="ShowSongs.HideElementsPanel" xml:space="preserve">
-    <value>Hide Elements</value>
+    <value>Ascunde Elemente</value>
   </data>
   <data name="ShowSongs.HideText_Button" xml:space="preserve">
-    <value>Hide Verses</value>
+    <value>Ascunde Versuri</value>
   </data>
   <data name="ShowSongs.HideTitle_Button" xml:space="preserve">
-    <value>Hide Title</value>
+    <value>Ascunde Titlu</value>
   </data>
   <data name="ShowSongs.OverwriteBG_Button" xml:space="preserve">
-    <value>Overwrite</value>
+    <value>Rescrie</value>
   </data>
   <data name="ShowSongs.ToProjector" xml:space="preserve">
-    <value>Live</value>
+    <value>În Direct</value>
   </data>
   <data name="SongEdit.BG_DecscriptionLabel" xml:space="preserve">
-    <value>Background Image</value>
+    <value>Imagine de Fond</value>
   </data>
   <data name="SongEdit.ML_Button" xml:space="preserve">
     <value>Enable</value>
   </data>
   <data name="SongEdit.MultiLangPanel" xml:space="preserve">
-    <value>Multi-Language</value>
+    <value>Multi-Limbă</value>
   </data>
   <data name="SongEdit.TextAlignPanel" xml:space="preserve">
-    <value>Text Align</value>
+    <value>Alinează Text</value>
   </data>
   <data name="Status.ImagesLoaded" xml:space="preserve">
-    <value>Background Images Loaded.</value>
+    <value>Imagini de fond încărcate.</value>
   </data>
   <data name="Status.LoadingImages" xml:space="preserve">
-    <value>Laoding Background Images ... "%1%"%</value>
+    <value>Încărcare imagini de fond ... "%1%"%</value>
   </data>
   <data name="Status.LoadingMediaFiles" xml:space="preserve">
-    <value>Loading Media-Files ... "%1%"%</value>
+    <value>Încărcare fișiere media ... "%1%"%</value>
   </data>
   <data name="Status.MediaFilesLoaded" xml:space="preserve">
-    <value>Media-Files loaded.</value>
+    <value>Fișiere media încărcate.</value>
   </data>
   <data name="Status.MediaListRenamed" xml:space="preserve">
-    <value>MediaList has been renamed to "%1%".</value>
+    <value>Lista media a fost redenumită în "%1%".</value>
   </data>
   <data name="Status.MediaListSavedAs" xml:space="preserve">
-    <value>MediaList saved as "%1%".</value>
+    <value>Lista media salvată ca "%1%".</value>
   </data>
   <data name="Status.PlaylistSongRemoved" xml:space="preserve">
-    <value>Song "%1%" removed from playlist.</value>
+    <value>Cântecul "%1%" a fost șters.</value>
   </data>
   <data name="Status.SongDeleted" xml:space="preserve">
-    <value>Song "%1%" deleted.</value>
+    <value>Cântecul "%1%" șters.</value>
   </data>
   <data name="Status.SongLoaded" xml:space="preserve">
-    <value>Song "%1%" loaded.</value>
+    <value>Cântecul "%1%" încărcat.</value>
   </data>
   <data name="Status.SongRenamed" xml:space="preserve">
-    <value>Song has been renamed to "%1%".</value>
+    <value>Cântecul a fost redenumit în "%1%".</value>
   </data>
   <data name="Status.SongSavedAs" xml:space="preserve">
-    <value>Song saved as "%1%".</value>
+    <value>Cântecul salvat ca "%1%".</value>
   </data>
   <data name="Status.SongToPlayList" xml:space="preserve">
-    <value>Song "%1%" added to playlist.</value>
+    <value>Cântecul "%1%" a fost adăugat.</value>
   </data>
   <data name="TabPages.Bible" xml:space="preserve">
-    <value>Bible</value>
+    <value>Text Biblic</value>
   </data>
   <data name="TabPages.EditSongs" xml:space="preserve">
-    <value>Edit Songs</value>
+    <value>Editare Cântece</value>
   </data>
   <data name="TabPages.Presentation" xml:space="preserve">
-    <value>Media Presentation</value>
+    <value>Prezentare Media</value>
   </data>
   <data name="TabPages.ShowSongs" xml:space="preserve">
-    <value>Show Songs</value>
+    <value>Arată Cântece</value>
   </data>
   <data name="TabPages.TextTool" xml:space="preserve">
-    <value>Text Tool</value>
+    <value>Unealtă Text</value>
   </data>
   <data name="TextTool.Bible.Books" xml:space="preserve">
-    <value>Books</value>
+    <value>Cărți</value>
   </data>
   <data name="TextTool.Bible.FindVerse" xml:space="preserve">
-    <value>Find Verse</value>
+    <value>Caută Verset</value>
   </data>
   <data name="TextTool.Bible.GetSword" xml:space="preserve">
-    <value>Get the Sword Bible</value>
+    <value>Obține Biblia Sword</value>
   </data>
   <data name="TextTool.Bible.NewTestament" xml:space="preserve">
-    <value>New Testament</value>
+    <value>Noul Testament</value>
   </data>
   <data name="TextTool.Bible.OldTestament" xml:space="preserve">
-    <value>Old Testament</value>
+    <value>Vechiul Testament</value>
   </data>
   <data name="TextTool.Bible.Translation" xml:space="preserve">
-    <value>Translation</value>
+    <value>Translatare</value>
   </data>
   <data name="TextTool.NewDocument" xml:space="preserve">
-    <value>New Document</value>
+    <value>Document Nou</value>
   </data>
   <data name="Toolbar.HideBackground" xml:space="preserve">
-    <value>Hide Background</value>
+    <value>Ascunde Fond</value>
   </data>
   <data name="Toolbar.HideText" xml:space="preserve">
-    <value>Hide Text</value>
+    <value>Ascunde Text</value>
   </data>
   <data name="Toolbar.SaveMediaList" xml:space="preserve">
-    <value>Save MediaList</value>
+    <value>Salvează Lista Media</value>
   </data>
   <data name="Toolbar.SaveSong" xml:space="preserve">
-    <value>Save Song</value>
+    <value>Salvează Cântec</value>
   </data>
   <data name="Toolbar.ShowBeamBox" xml:space="preserve">
-    <value>Show Projector Window</value>
+    <value>Arată Fereastră Projector</value>
   </data>
   <data name="Toolbar.SizePosition" xml:space="preserve">
-    <value>Size/Position</value>
+    <value>Mărime/Poziție</value>
   </data>
   <data name="EditSongs.LyricTypeVerse" xml:space="preserve">
-    <value>Verse</value>
+    <value>Vers</value>
   </data>
   <data name="EditSongs.LyricTypeChorus" xml:space="preserve">
-    <value>Chorus</value>
+    <value>Cor</value>
   </data>
   <data name="EditSongs.LyricTypeOther" xml:space="preserve">
-    <value>Other</value>
+    <value>Altul</value>
   </data>
   <data name="Right.Media.Add.Close" xml:space="preserve">
-    <value>Close media browser</value>
+    <value>Închide Directorul Media</value>
   </data>
   <data name="Menu.File.Import.Song" xml:space="preserve">
-    <value>Songs</value>
+    <value>Cântece</value>
   </data>
   <data name="Menu.Song.File" xml:space="preserve">
-    <value>&amp;File</value>
+    <value>&amp;Fișier</value>
   </data>
   <data name="SongEditor.Lyrics" xml:space="preserve">
-    <value>Lyrics</value>
+    <value>Cuvinte</value>
   </data>
   <data name="MediaPresentation.Live" xml:space="preserve">
-    <value>Live</value>
+    <value>Fereastră Live</value>
   </data>
   <data name="Dock.Preview.Screen.Live" xml:space="preserve">
-    <value>Live</value>
+    <value>În Direct</value>
   </data>
   <data name="Dock.Preview.Screen.Preview" xml:space="preserve">
-    <value>Preview</value>
+    <value>Previzualizare</value>
   </data>
   <data name="Menu.File" xml:space="preserve">
-    <value>File</value>
+    <value>Fișier</value>
   </data>
   <data name="Menu.File.Import" xml:space="preserve">
-    <value>Import</value>
+    <value>Importă</value>
   </data>
   <data name="Options.AutoSizeLabel.Height" xml:space="preserve">
-    <value>Height</value>
+    <value>Înălțime</value>
   </data>
   <data name="Options.AutoSizeLabel.Width" xml:space="preserve">
-    <value>Width</value>
+    <value>Lățime</value>
   </data>
   <data name="Options.Bible" xml:space="preserve">
     <value>Biblia</value>
   </data>
   <data name="Options.GroupBox.OperatingMode" xml:space="preserve">
-    <value>Operation Mode (Requires Restart )</value>
+    <value>Mod de Operare ( Implică Restart )</value>
   </data>
   <data name="Options.label5.ListeningOnPort" xml:space="preserve">
-    <value>Listening On Port :</value>
+    <value>Port Comunicații :</value>
   </data>
   <data name="Options.Mode.Client" xml:space="preserve">
     <value>Client</value>
@@ -679,117 +679,117 @@
     <value>Server</value>
   </data>
   <data name="Options.Mode.StandAlone" xml:space="preserve">
-    <value>Stand Alone</value>
+    <value>Independent</value>
   </data>
   <data name="Options.RememberPanelLocations" xml:space="preserve">
-    <value>Remember Locations</value>
+    <value>Memoriază pozițiile ferestrelor</value>
   </data>
   <data name="Options.label3.DataDirectory" xml:space="preserve">
-    <value>Data Directory:</value>
+    <value>Dosar Date :</value>
   </data>
   <data name="Options.label4.ServerAddress" xml:space="preserve">
-    <value>Server Address :</value>
+    <value>Adresă Server :</value>
   </data>
   <data name="SongEditor.Author" xml:space="preserve">
     <value>Autor</value>
   </data>
   <data name="SongEditor.Title" xml:space="preserve">
-    <value>Title</value>
+    <value>Titlu</value>
   </data>
   <data name="Options.BibleCache.Available" xml:space="preserve">
-    <value>Not yet cached</value>
+    <value>Neînregistrate</value>
   </data>
   <data name="Options.BibleCache.MessageText" xml:space="preserve">
-    <value>Please wait. Extracting Bible verses from Sword. This operation can take a few minutes.</value>
+    <value>Te rog așteaptă. Se încarcă versetele din biblie. Această operațiune poate dura câteva minute.</value>
   </data>
   <data name="Options.BibleCache.Replacements" xml:space="preserve">
-    <value>Replacements when searching</value>
+    <value>Înlocuire prin căutare</value>
   </data>
   <data name="Options.BibleCache.Translations" xml:space="preserve">
-    <value>Cached translations</value>
+    <value>Translatări Înregistrate</value>
   </data>
   <data name="Options.Tabs.BibleCache" xml:space="preserve">
-    <value>Bible Cache</value>
+    <value>Biblii</value>
   </data>
   <data name="Options.Tabs.BibleFormat" xml:space="preserve">
-    <value>Bible Format</value>
+    <value>Setări Biblie</value>
   </data>
   <data name="Options.Tabs.SongFormat" xml:space="preserve">
-    <value>Song Format</value>
+    <value>Setări Cântece</value>
   </data>
   <data name="Options.Tabs.TextToolFormat" xml:space="preserve">
-    <value>Text Tool Format</value>
+    <value>Setări Unelte </value>
   </data>
   <data name="SongEditor.Collection" xml:space="preserve">
-    <value>Collection</value>
+    <value>Colecția</value>
   </data>
   <data name="SongEditor.Notes" xml:space="preserve">
-    <value>Notes</value>
+    <value>Gama</value>
   </data>
   <data name="SongEditor.Number" xml:space="preserve">
-    <value>Number</value>
+    <value>Număr</value>
   </data>
   <data name="TabPages.Bible.Button" xml:space="preserve">
-    <value>Bible</value>
+    <value>Biblia</value>
   </data>
   <data name="TabPages.EditSongs.Button" xml:space="preserve">
-    <value>Edit Songs</value>
+    <value>Editare Cântece</value>
   </data>
   <data name="TabPages.Presentation.Button" xml:space="preserve">
     <value>Multimedia</value>
   </data>
   <data name="TabPages.ShowSongs.Button" xml:space="preserve">
-    <value>Show Songs</value>
+    <value>Cântece</value>
   </data>
   <data name="TabPages.TextTool.Button" xml:space="preserve">
-    <value>Text Tool</value>
+    <value>Unelte</value>
   </data>
   <data name="Menu.View.BackgroundsTab" xml:space="preserve">
-    <value>Backgrounds Tab</value>
+    <value>Imagini de Fond</value>
   </data>
   <data name="Menu.View.BibleText" xml:space="preserve">
-    <value>Bible Tab</value>
+    <value>Tab Biblia</value>
   </data>
   <data name="Menu.View.BibleToolsTab" xml:space="preserve">
-    <value>Bible Tools</value>
+    <value>Unelte Biblie</value>
   </data>
   <data name="Menu.View.EditSongs" xml:space="preserve">
-    <value>Edit Songs Tab</value>
+    <value>Tab Editare Cântece</value>
   </data>
   <data name="Menu.View.LiveScreenTab" xml:space="preserve">
-    <value>Live Screen</value>
+    <value>Tab În Direct</value>
   </data>
   <data name="Menu.View.MediaListTab" xml:space="preserve">
-    <value>MediaList Tab</value>
+    <value>Lista Media</value>
   </data>
   <data name="Menu.View.MediaTab" xml:space="preserve">
-    <value>Media Tab</value>
+    <value>Tab Media</value>
   </data>
   <data name="Menu.View.Multimedia" xml:space="preserve">
-    <value>Multimedia</value>
+    <value>Tab Multimedia</value>
   </data>
   <data name="Menu.View.PlaylistTab" xml:space="preserve">
-    <value>Playlist</value>
+    <value>PlayListă</value>
   </data>
   <data name="Menu.View.PreviewTab" xml:space="preserve">
-    <value>Preview</value>
+    <value>Tab Previzualizare</value>
   </data>
   <data name="Menu.View.SermonTool" xml:space="preserve">
-    <value>Sermon Tool</value>
+    <value>Tab Unelte</value>
   </data>
   <data name="Menu.View.ShowSongs" xml:space="preserve">
-    <value>Show Songs Tab</value>
+    <value>Arată Cântece</value>
   </data>
   <data name="Menu.View.SongsTab" xml:space="preserve">
-    <value>Songs Tab</value>
+    <value>Tab Cântece</value>
   </data>
   <data name="Menu.View.SongToolsTab" xml:space="preserve">
-    <value>Song Tools</value>
+    <value>Unelte Cântece</value>
   </data>
   <data name="Sermon.PreviewButton" xml:space="preserve">
-    <value>Preview</value>
+    <value>Previzualizare</value>
   </data>
   <data name="SongEditor.General.Title" xml:space="preserve">
-    <value>Title</value>
+    <value>Titlu</value>
   </data>
 </root>
