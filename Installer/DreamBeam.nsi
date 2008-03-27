@@ -148,6 +148,8 @@ Section "DreamBeam" SDreamBeam
 	RegDll "$INSTDIR\ActiveDiatheke.ocx"
 	
 	; Create desktop and start menu entries
+	; Apparently the OutPath determines the "Start in" directory used for the shortcut.
+	SetOutPath "$INSTDIR"
 	CreateDirectory "$SMPROGRAMS\${PRODUCT}"
 	CreateShortCut "$SMPROGRAMS\DreamBeam\DreamBeam.lnk" "$INSTDIR\DreamBeam.exe"
 	CreateShortCut "$SMPROGRAMS\DreamBeam\Uninstall.lnk" "$INSTDIR\Uninstall.exe"

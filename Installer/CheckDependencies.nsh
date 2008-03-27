@@ -120,7 +120,7 @@ Section "-hidden CheckDependencies"
 		;================ Install ==================
 		InstallDXManaged:
 		Banner::show /NOUNLOAD /set 76 "Installing Microsoft DirectX." \
-			"Please wait... $\n$\n This takes a very loooooong time to install."
+			"Please wait. This is SLOOOOW."
 		ExecWait '"$TEMP\${directx_file}" /q:a /t:"$TEMP\DirectXManaged"'
 		ExecWait '"$TEMP\DirectXManaged\dxsetup.exe" /silent'
 
@@ -243,7 +243,7 @@ Section "-hidden CheckDependencies" ;
 		SetOutPath "$TEMP\dotNet2.0"
 		File /x content.txt "SupportFiles\dotNet2.0\*.*"
 		Banner::show /NOUNLOAD /set 76 "Installing Microsoft .Net Framework." \
-			"Please wait. This takes a very looooong time ..."
+			"Please wait. This is SLOOOOW."
 		ExecWait '"$TEMP\dotNet2.0\dotnetfx.exe" /q:a /c:"install /q"'
 		RMDir /r "$TEMP\dotNet2.0"
 		Banner::destroy	
@@ -304,7 +304,7 @@ Section "-hidden CheckDependencies" ;
 		;MessageBox MB_OK "Extracted DirectX Managed"
 		
 		Banner::show /NOUNLOAD /set 76 "Installing Microsoft DirectX." \
-			"Please wait... $\n$\n This takes a very loooooong time to install."
+			"Please wait. This is SLOOOOW."
 		ExecWait '"$TEMP\DirectXManaged\dxsetup.exe" /silent'
 		Banner::destroy
 		;MessageBox MB_OK "Installed directx managed"

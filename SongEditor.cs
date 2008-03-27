@@ -14,6 +14,7 @@ namespace DreamBeam {
 		private ArrayList sequenceAvailable = new ArrayList();
 		private ArrayList sequence = new ArrayList();
 		private Song song;
+		private SongVerseSeparator verseSeparator = SongVerseSeparator.OneBlankLine;
 
 		#region Designer variables
 		private System.Windows.Forms.TextBox Title;
@@ -103,14 +104,16 @@ namespace DreamBeam {
 			this.DualLanguage.Checked = song.DualLanguage;
 			this.ThemePath.Text = song.ThemePath;
 
+			verseSeparator = song.config.SongVerseSeparator;
+
 			// If we don't Clear, old RTF formatting codes from the previous Paste operation
 			// remain in the control and cause the new text to take on that formatting
 			this.VerseLyrics.Clear();
 			this.ChorusLyrics.Clear();
 			this.OtherLyrics.Clear();
-			this.VerseLyrics.Text = song.GetLyrics(LyricsType.Verse);
-			this.ChorusLyrics.Text = song.GetLyrics(LyricsType.Chorus);
-			this.OtherLyrics.Text = song.GetLyrics(LyricsType.Other);
+			this.VerseLyrics.Text = song.GetLyrics(LyricsType.Verse, verseSeparator);
+			this.ChorusLyrics.Text = song.GetLyrics(LyricsType.Chorus, verseSeparator);
+			this.OtherLyrics.Text = song.GetLyrics(LyricsType.Other, verseSeparator);
 
 			this.ListEx_Sequence.Items.Clear();
 			this.sequence.Clear();
@@ -140,9 +143,9 @@ namespace DreamBeam {
 				song.Theme.ThemeFile = null;
 			}
 
-			song.SetLyrics(LyricsType.Verse, this.VerseLyrics.Text);
-			song.SetLyrics(LyricsType.Chorus, this.ChorusLyrics.Text);
-			song.SetLyrics(LyricsType.Other, this.OtherLyrics.Text);
+			song.SetLyrics(LyricsType.Verse, this.VerseLyrics.Text, verseSeparator);
+			song.SetLyrics(LyricsType.Chorus, this.ChorusLyrics.Text, verseSeparator);
+			song.SetLyrics(LyricsType.Other, this.OtherLyrics.Text, verseSeparator);
 
 			song.Sequence = new ArrayList();
 			foreach (LyricsSequenceItem item in this.sequence) {

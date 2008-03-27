@@ -139,6 +139,12 @@ namespace DreamBeam {
 				SetBibleLocale(this._MainForm.bibles, config.SwordPath, config.BibleLang);
 			}
 
+			if (this.verseSep2L.Checked) {
+				config.SongVerseSeparator = SongVerseSeparator.TwoBlankLines;
+			} else {
+				config.SongVerseSeparator = SongVerseSeparator.OneBlankLine;
+			}
+
 			config.HideMouse = this.BeamBox_HideMouse.Checked;
 			config.AlwaysOnTop = this.BeamBox_AlwaysOnTop.Checked;
 
@@ -246,6 +252,15 @@ namespace DreamBeam {
 
 			if (ScreenList.Items.Count > config.BeamBoxScreenNum) {
 				ScreenList.SelectedIndex = config.BeamBoxScreenNum;
+			}
+
+			switch (config.SongVerseSeparator) {
+				case SongVerseSeparator.OneBlankLine:
+					this.verseSep1L.Checked = true;
+					break;
+				case SongVerseSeparator.TwoBlankLines:
+					this.verseSep2L.Checked = true;
+					break;
 			}
 
 			this.Options_PanelLocations_checkBox.Checked = config.RememberPanelLocations;

@@ -20,6 +20,11 @@ namespace DreamBeam {
 		Client,
 		Server
 	}
+
+	public enum SongVerseSeparator {
+		OneBlankLine,
+		TwoBlankLines
+	}
 	#endregion
 
 
@@ -93,6 +98,7 @@ namespace DreamBeam {
 		[XmlElement("Theme")]
 		public ComboTheme theme;
 
+		public SongVerseSeparator SongVerseSeparator = SongVerseSeparator.OneBlankLine;
 		public OperatingMode AppOperatingMode;
 
 		/// <summary>

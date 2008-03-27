@@ -144,6 +144,9 @@ namespace DreamBeam {
 			this.BeamBox_AlwaysOnTop = new System.Windows.Forms.CheckBox();
 			this.BeamBox_HideMouse = new System.Windows.Forms.CheckBox();
 			this.Bible_Tab = new System.Windows.Forms.TabPage();
+			this.songVerseSeparatorGroup = new System.Windows.Forms.GroupBox();
+			this.verseSep2L = new System.Windows.Forms.RadioButton();
+			this.verseSep1L = new System.Windows.Forms.RadioButton();
 			this.SwordLangGroupBox = new System.Windows.Forms.GroupBox();
 			this.Sword_LanguageBox = new System.Windows.Forms.ComboBox();
 			this.SwordFolderGroupBox = new System.Windows.Forms.GroupBox();
@@ -208,6 +211,7 @@ namespace DreamBeam {
 			this.Background_groupBox3.SuspendLayout();
 			this.Mouse_groupBox2.SuspendLayout();
 			this.Bible_Tab.SuspendLayout();
+			this.songVerseSeparatorGroup.SuspendLayout();
 			this.SwordLangGroupBox.SuspendLayout();
 			this.SwordFolderGroupBox.SuspendLayout();
 			this.BibleCache_Tab.SuspendLayout();
@@ -270,6 +274,7 @@ namespace DreamBeam {
 			this.Common_Tab.Size = new System.Drawing.Size(515, 302);
 			this.Common_Tab.TabIndex = 0;
 			this.Common_Tab.Text = "Common Settings";
+			this.Common_Tab.UseVisualStyleBackColor = true;
 			// 
 			// DataDirectory
 			// 
@@ -434,6 +439,7 @@ namespace DreamBeam {
 			this.BeamBox_tab.Size = new System.Drawing.Size(515, 302);
 			this.BeamBox_tab.TabIndex = 2;
 			this.BeamBox_tab.Text = "Projector Window";
+			this.BeamBox_tab.UseVisualStyleBackColor = true;
 			// 
 			// Position_Title_GroupBox
 			// 
@@ -726,13 +732,51 @@ namespace DreamBeam {
 			// 
 			// Bible_Tab
 			// 
+			this.Bible_Tab.Controls.Add(this.songVerseSeparatorGroup);
 			this.Bible_Tab.Controls.Add(this.SwordLangGroupBox);
 			this.Bible_Tab.Controls.Add(this.SwordFolderGroupBox);
 			this.Bible_Tab.Location = new System.Drawing.Point(4, 40);
 			this.Bible_Tab.Name = "Bible_Tab";
 			this.Bible_Tab.Size = new System.Drawing.Size(515, 302);
 			this.Bible_Tab.TabIndex = 3;
-			this.Bible_Tab.Text = "Bible";
+			this.Bible_Tab.Text = "Misc";
+			this.Bible_Tab.UseVisualStyleBackColor = true;
+			// 
+			// songVerseSeparatorGroup
+			// 
+			this.songVerseSeparatorGroup.Controls.Add(this.verseSep2L);
+			this.songVerseSeparatorGroup.Controls.Add(this.verseSep1L);
+			this.songVerseSeparatorGroup.Location = new System.Drawing.Point(8, 62);
+			this.songVerseSeparatorGroup.Name = "songVerseSeparatorGroup";
+			this.songVerseSeparatorGroup.Size = new System.Drawing.Size(200, 68);
+			this.songVerseSeparatorGroup.TabIndex = 9;
+			this.songVerseSeparatorGroup.TabStop = false;
+			this.songVerseSeparatorGroup.Text = "Song Verse Separator";
+			// 
+			// verseSep2L
+			// 
+			this.verseSep2L.AutoSize = true;
+			this.verseSep2L.Location = new System.Drawing.Point(8, 42);
+			this.verseSep2L.Name = "verseSep2L";
+			this.verseSep2L.Size = new System.Drawing.Size(99, 17);
+			this.verseSep2L.TabIndex = 1;
+			this.verseSep2L.Text = "Two blank lines";
+			this.Options_ToolTip.SetToolTip(this.verseSep2L, "A single blank line will show up on the live screen as a blank line.");
+			this.verseSep2L.UseVisualStyleBackColor = true;
+			// 
+			// verseSep1L
+			// 
+			this.verseSep1L.AutoSize = true;
+			this.verseSep1L.Checked = true;
+			this.verseSep1L.Location = new System.Drawing.Point(8, 19);
+			this.verseSep1L.Name = "verseSep1L";
+			this.verseSep1L.Size = new System.Drawing.Size(93, 17);
+			this.verseSep1L.TabIndex = 0;
+			this.verseSep1L.TabStop = true;
+			this.verseSep1L.Text = "One blank line";
+			this.Options_ToolTip.SetToolTip(this.verseSep1L, "To create blank lines that don\'t split the verse, add a space at the beginning of" +
+					" the line.");
+			this.verseSep1L.UseVisualStyleBackColor = true;
 			// 
 			// SwordLangGroupBox
 			// 
@@ -817,6 +861,7 @@ namespace DreamBeam {
 			this.BibleCache_Tab.Size = new System.Drawing.Size(515, 302);
 			this.BibleCache_Tab.TabIndex = 4;
 			this.BibleCache_Tab.Text = "Bible Cache";
+			this.BibleCache_Tab.UseVisualStyleBackColor = true;
 			// 
 			// BibleCache_Cached_Label
 			// 
@@ -964,6 +1009,7 @@ namespace DreamBeam {
 			this.Graphics_tab.Size = new System.Drawing.Size(515, 302);
 			this.Graphics_tab.TabIndex = 1;
 			this.Graphics_tab.Text = "Graphics";
+			this.Graphics_tab.UseVisualStyleBackColor = true;
 			// 
 			// PreRenderBox
 			// 
@@ -1052,6 +1098,7 @@ namespace DreamBeam {
 			this.SongFormat_Tab.Size = new System.Drawing.Size(515, 302);
 			this.SongFormat_Tab.TabIndex = 6;
 			this.SongFormat_Tab.Text = "Song Format";
+			this.SongFormat_Tab.UseVisualStyleBackColor = true;
 			// 
 			// songThemeWidget
 			// 
@@ -1063,7 +1110,7 @@ namespace DreamBeam {
         "Title",
         "Verse",
         "Author",
-		"Key"};
+        "Key"};
 			this.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
 			// 
 			// BibleFormat_Tab
@@ -1074,6 +1121,7 @@ namespace DreamBeam {
 			this.BibleFormat_Tab.Size = new System.Drawing.Size(515, 302);
 			this.BibleFormat_Tab.TabIndex = 5;
 			this.BibleFormat_Tab.Text = "Bible Format";
+			this.BibleFormat_Tab.UseVisualStyleBackColor = true;
 			// 
 			// bibleFormatWidget
 			// 
@@ -1095,6 +1143,7 @@ namespace DreamBeam {
 			this.TextToolFormat_Tab.Size = new System.Drawing.Size(515, 302);
 			this.TextToolFormat_Tab.TabIndex = 7;
 			this.TextToolFormat_Tab.Text = "Sermon Tool Format";
+			this.TextToolFormat_Tab.UseVisualStyleBackColor = true;
 			// 
 			// sermonThemeWidget
 			// 
@@ -1170,6 +1219,8 @@ namespace DreamBeam {
 			this.Background_groupBox3.ResumeLayout(false);
 			this.Mouse_groupBox2.ResumeLayout(false);
 			this.Bible_Tab.ResumeLayout(false);
+			this.songVerseSeparatorGroup.ResumeLayout(false);
+			this.songVerseSeparatorGroup.PerformLayout();
 			this.SwordLangGroupBox.ResumeLayout(false);
 			this.SwordFolderGroupBox.ResumeLayout(false);
 			this.SwordFolderGroupBox.PerformLayout();
@@ -1198,6 +1249,9 @@ namespace DreamBeam {
 		private Label BibleCache_Cached_Label;
 		private Label label3;
 		private TextBox DataDirectory;
+		private GroupBox songVerseSeparatorGroup;
+		private RadioButton verseSep2L;
+		private RadioButton verseSep1L;
 
 	}
 }

@@ -118,6 +118,7 @@ namespace DreamBeam.FileTypes {
 			//TimerThreadHelper threadHelper;
 			DiathekeThreadHelper diathekeHelper;
 			bool diathekeAutoupdate = Diatheke.autoupdate;
+			bool result = false;
 
 			//System.EventArgs e = new System.EventArgs();
 			Diatheke.autoupdate = false;
@@ -154,14 +155,14 @@ namespace DreamBeam.FileTypes {
 					this.IsDirty = true;
 					this.Remove(version);
 					versions.Add(version, b);
-					return true;
+					result = true;
 				}
 			}
 
 			// Restore the previous setting
 			Diatheke.autoupdate = diathekeAutoupdate;
 
-			return false;
+			return result;
 		}
 
 

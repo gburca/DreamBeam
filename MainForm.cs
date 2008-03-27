@@ -1927,9 +1927,10 @@ namespace DreamBeam {
 			if (Config.BibleLang == "de") {
 				BibleBooks[0] = "1. Mose,2. Mose,3. Mose,4. Mose,5. Mose,Josua,Richter,Rut,1. Samuel,2. Samuel,1. Könige,2. Könige,1. Chronik,2. Chronik,Esra,Nehemia,Ester,Hiob,Psalmen,Prediger,Prediger,Hoheslied,Jesaja,Jeremia,Klagelieder,Hesekiel,Daniel,Hosea,Joel,Amos,Obadja,Jona,Micha,Nahum,Habakuk,Zefanja,Haggai,Sacharja,Maleachi";
 				BibleBooks[1] = "Matthäus,Markus,Lukas,Johannes,Apostelgeschichte,Römer,1. Korinther,2. Korinther,Galater,Epheser,Philipper,Kolosser,1. Thessalonicher,2. Thessalonicher,1. Timotheus,2. Timotheus,Titus,Philemon,Hebräer,Jakobus,1. Petrus,2. Petrus,1. Johannes,2. Johannes,3. Johannes,Judas,Offenbahrung";
+			} else {
+				BibleBooks[0] = "Genesis,Exodus,Leviticus,Numbers,Deuteronomy,Joshua,Judges,Ruth,1 Samuel,2 Samuel,I Kings,II Kings,1 Chronicles,2 Chronicles,Ezra,Nehemiah,Esther,Job,Psalm,Proverbs,Ecclesiastes,Song of Solomon,Isaiah,Jeremiah,Lamentations,Ezekiel,Daniel,Hosea,Joel,Amos,Obadiah,Jonah,Micah,Nahum,Habakkuk,Zephaniah,Haggai,Zechariah,Malachi";
+				BibleBooks[1] = "Matthew,Mark,Luke,John,Acts,Romans,1 Corinthians,2 Corinthians,Galatians,Ephesians,Philippians,Colossians,1 Thessalonians,2 Thessalonians,1 Timothy,2 Timothy,Titus,Philemon,Hebrews,James,1 Peter,2 Peter,1 John,2 John,3 John,Jude,Revelation";
 			}
-			BibleBooks[0] = "Genesis,Exodus,Leviticus,Numbers,Deuteronomy,Joshua,Judges,Ruth,1 Samuel,2 Samuel,I Kings,II Kings,1 Chronicles,2 Chronicles,Ezra,Nehemiah,Esther,Job,Psalm,Proverbs,Ecclesiastes,Song of Solomon,Isaiah,Jeremiah,Lamentations,Ezekiel,Daniel,Hosea,Joel,Amos,Obadiah,Jonah,Micah,Nahum,Habakkuk,Zephaniah,Haggai,Zechariah,Malachi";
-			BibleBooks[1] = "Matthew,Mark,Luke,John,Acts,Romans,1 Corinthians,2 Corinthians,Galatians,Ephesians,Philippians,Colossians,1 Thessalonians,2 Thessalonians,1 Timothy,2 Timothy,Titus,Philemon,Hebrews,James,1 Peter,2 Peter,1 John,2 John,3 John,Jude,Revelation";
 
 			bibles = BibleLib.DeserializeNow(bibleLibFile);
 
@@ -1979,8 +1980,12 @@ namespace DreamBeam {
 				if (this.Sermon_Books.Items.Count > 0) {
 					this.Sermon_Books.SelectedIndex = match;
 				}
-				Diatheke.autoupdate = true;
-				this.Diatheke.ValueChanged += new System.EventHandler(this.Diatheke_ValueChanged);
+
+				Diatheke.autoupdate = false;
+				// We can't use the Diatheke.ValueChanged event, or we'll get the whole bible in the
+				// sermon tool document when the user tries to do bible caching.
+				//NO GOOD: this.Diatheke.ValueChanged += new System.EventHandler(this.Diatheke_ValueChanged);
+
 				BibleText_Translations.SelectedIndexChanged += new EventHandler(BibleText_Translations_SelectedIndexChanged);
 
 				//split the book list by line into an array
@@ -2000,7 +2005,7 @@ namespace DreamBeam {
 			}
 		}
 
-		private void Diatheke_ValueChanged(object sender, System.EventArgs e) {
+		private void Diatheke_ValueChanged() {
 			if (this.SwordProject_Found) {
 				string strTempText = Tools.Diatheke_ConvertEncoding(Diatheke.value);
 				//this.StatusPanel.Text = strTempText.Substring(0, Math.Min(strTempText.Length, 200));
@@ -2018,6 +2023,17 @@ namespace DreamBeam {
 				}
 				strTempText.Replace("{~}", "");
 
+				// Make sure we have a FocusedDocument to add the text to...
+				if (Sermon_DocManager.FocusedDocument == null) {
+					if (Sermon_DocManager.TabStrips.Count > 0 &&
+						Sermon_DocManager.TabStrips[0].Documents.Count > 0) {
+						// Set the focus to the first document
+						Sermon_DocManager.FocusedDocument = Sermon_DocManager.TabStrips[0].Documents[0];
+					} else {
+						Sermon_NewDocument();
+					}
+				}
+
 				// if not ShowBibleTranslation Hide the Translation Text
 				if (this.Sermon_ShowBibleTranslation) {
 					Sermon_DocManager.FocusedDocument.Control.Text += "\n" + strTempText;
@@ -2031,10 +2047,17 @@ namespace DreamBeam {
 
 		private void Sermon_BibleKey_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e) {
 			if (this.SwordProject_Found) {
-				if (e.KeyValue == 13) {
+				if (e.KeyCode == Keys.Enter) {
 					this.Diatheke.book = Sermon_Books.Items[Sermon_Books.SelectedIndex].ToString();
-					Diatheke.autoupdate = true;
+					Diatheke.query();
+					Diatheke_ValueChanged();
 				}
+			}
+		}
+		private void Sermon_BibleKey_TextChanged(object sender, System.EventArgs e) {
+			if (this.SwordProject_Found) {
+				this.Diatheke.autoupdate = false;
+				this.Diatheke.key = Sermon_BibleKey.Text;
 			}
 		}
 
@@ -2046,7 +2069,8 @@ namespace DreamBeam {
 			t.Multiline = true;
 			t.AcceptsTab = true;
 			t.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Both;
-			t.Font = new Font("Courier New", 10, FontStyle.Regular);
+			//t.Font = new Font("Courier New", 10, FontStyle.Regular);
+			t.Font = new Font("Arial Unicode MS", 12, FontStyle.Regular);
 			t.TextChanged += new System.EventHandler(this.Sermon_DocManager_Control_TextChanged);
 			DocumentManager.Document document = new DocumentManager.Document(t, "Document ");
 			Sermon_DocManager.AddDocument(document);
@@ -2073,33 +2097,20 @@ namespace DreamBeam {
 			if (e.Item == Sermon_ToolBar_NewDoc_Button) {
 				this.Sermon_NewDocument();
 			}
-
 		}
 
 		private void Sermon_DocManager_CloseButtonPressed(object sender, DocumentManager.CloseButtonPressedEventArgs e) {
 			Sermon_DocManager.RemoveDocument(Sermon_DocManager.FocusedDocument);
-		}
 
-		private void Sermon_BibleKey_TextChanged(object sender, System.EventArgs e) {
-			GC.Collect();
-			if (this.SwordProject_Found) {
-				this.Diatheke.autoupdate = false;
-				this.Diatheke.key = Sermon_BibleKey.Text;
-				//this.Diatheke.query();
-				this.Diatheke.autoupdate = true;
+			// Make sure we have at least 1 document open at all times
+			if (Sermon_DocManager.TabStrips.Count == 0 || Sermon_DocManager.TabStrips[0].Documents.Count == 0) {
+				Sermon_NewDocument();
 			}
 		}
 
 		private void Sermon_BookList_SelectedIndexChanged(object sender, System.EventArgs e) {
 			this.Sermon_BibleKey.Text = Sermon_BookList.SelectedItem.ToString();
 		}
-
-		private void Sermon_Books_SelectedIndexChanged(object sender, System.EventArgs e) {
-			if (this.SwordProject_Found) {
-				//      this.Diatheke.book = Sermon_Books.Items[Sermon_Books.SelectedIndex].ToString();
-			}
-		}
-
 
 		private void Sermon_BeamBox_Button_Click(object sender, System.EventArgs e) {
 			//			if(ToolBars_MainToolbar_ShowBeamBox.Checked == false) {

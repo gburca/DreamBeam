@@ -199,7 +199,7 @@ namespace DreamBeam {
 			this.FileName = s.SongName;
 			this.Author = s.GetText(2);
 			this.BGImagePath = s.bg_image;
-			this.SetLyrics(LyricsType.Verse, s.GetText(1));
+			this.SetLyrics(LyricsType.Verse, s.GetText(1), conf.SongVerseSeparator);
 			this.DualLanguage = s.MultiLang;
 			this.Collection = "Version 0.60 Format";
 
@@ -390,7 +390,7 @@ namespace DreamBeam {
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="text"></param>
-		public void SetLyrics(LyricsType type, string text) {
+		public void SetLyrics(LyricsType type, string text, SongVerseSeparator sep) {
 			ArrayList toRemove = new ArrayList();
 			foreach (LyricsItem item in this.SongLyrics) {
 				if (item.Type == type) toRemove.Add(item);
@@ -400,7 +400,19 @@ namespace DreamBeam {
 			}
 
 			int num = 1;
-			foreach (string v in Regex.Split(text, "\n\n")) {
+			string separator;
+
+			switch (sep) {
+				case SongVerseSeparator.TwoBlankLines:
+					separator = "\n\n\n";
+					break;
+				case SongVerseSeparator.OneBlankLine:
+				default:
+					separator = "\n\n";
+					break;
+			}
+
+			foreach (string v in Regex.Split(text, separator)) {
 				string l = v.Trim();
 				if (l.Length == 0) continue;	// Don't add blank verses
 				this.SongLyrics.Add(new LyricsItem(type, num++, l));
@@ -413,12 +425,23 @@ namespace DreamBeam {
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public string GetLyrics(LyricsType type) {
+		public string GetLyrics(LyricsType type, SongVerseSeparator sep) {
 			StringBuilder s = new StringBuilder("");
+
+			string separator;
+			switch (sep) {
+				case SongVerseSeparator.TwoBlankLines:
+					separator = "\n\n\n";
+					break;
+				case SongVerseSeparator.OneBlankLine:
+				default:
+					separator = "\n\n";
+					break;
+			}
 
 			this.SongLyrics.Sort();
 			foreach (LyricsItem item in this.SongLyrics) {
-				if (item.Type == type) s.Append(item.Lyrics + "\n\n");
+				if (item.Type == type) s.Append(item.Lyrics + separator);
 			}
 
 			return SanitizeLyrics(s.ToString());
@@ -462,7 +485,7 @@ namespace DreamBeam {
 			s.Append(Tools.StringIsNullOrEmpty(this.Title) ? " " : this.Title + " ");
 			s.Append(Tools.StringIsNullOrEmpty(this.Notes) ? " " : this.Notes + " ");
 			foreach (LyricsType type in Enum.GetValues(typeof(LyricsType))) {
-				s.Append(this.GetLyrics(type));
+				s.Append(this.GetLyrics(type, SongVerseSeparator.OneBlankLine));
 			}
 
 			string fullText = s.ToString().ToLower();

@@ -2389,7 +2389,6 @@ namespace DreamBeam {
 			this.Sermon_Books.Name = "Sermon_Books";
 			this.Sermon_Books.Size = new System.Drawing.Size(120, 21);
 			this.Sermon_Books.TabIndex = 1;
-			this.Sermon_Books.SelectedIndexChanged += new System.EventHandler(this.Sermon_Books_SelectedIndexChanged);
 			// 
 			// Sermon_BookList
 			// 

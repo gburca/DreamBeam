@@ -41,10 +41,12 @@ namespace DreamBeam.FileTypes {
 			if (lineBreak > 1) {
 				this.Title = fullText.Substring(0, lineBreak);
 				lineBreak += 2;
-				this.SetLyrics(LyricsType.Verse, fullText.Substring(lineBreak, fullText.Length - lineBreak));
+				this.SetLyrics(LyricsType.Verse,
+					fullText.Substring(lineBreak, fullText.Length - lineBreak),
+					SongVerseSeparator.OneBlankLine);
 			} else {
 				this.Title = "";
-				this.SetLyrics(LyricsType.Verse, fullText);
+				this.SetLyrics(LyricsType.Verse, fullText, SongVerseSeparator.OneBlankLine);
 			}
 
 			for (int num = 1; num <= this.SongLyrics.Count; num++) {
@@ -79,7 +81,7 @@ namespace DreamBeam.FileTypes {
 		public override ContentIdentity GetIdentity() {
 			ContentIdentity ident = new ContentIdentity();
 			ident.Type = (int)ContentType.PlainText;
-			ident.Text = this.Title + "\n\n" + this.GetLyrics(LyricsType.Verse);
+			ident.Text = this.Title + "\n\n" + this.GetLyrics(LyricsType.Verse, SongVerseSeparator.OneBlankLine);
 			ident.SongStrophe = this.CurrentLyric;
 			return ident;
 		}
