@@ -84,6 +84,7 @@ namespace DreamBeam {
 		[XmlIgnore()]
 		private Theme theme;
 		[XmlIgnore()]
+		[NonSerializedAttribute]	// If this is removed, make sure double-click on a song works
 		public Image bgImage;
 		[XmlIgnore()]
 		public bool HideBG = false;

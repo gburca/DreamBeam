@@ -132,7 +132,7 @@
   <data name="EditSongs.BackgroundImage" xml:space="preserve">
     <value>Hintergrund Bild:</value>
   </data>
-  <data name="Options.Tabs.Bible" xml:space="preserve">
+  <data name="Options.Tabs.Misc" xml:space="preserve">
     <value>Bibel</value>
   </data>
   <data name="Status.LoadingImages" xml:space="preserve">

@@ -48,7 +48,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.Label AutoSizeLabelW;
 		private System.Windows.Forms.Label AutoSizeLabelH;
 		private System.Windows.Forms.GroupBox Position_Title_GroupBox;
-		public System.Windows.Forms.TabPage Bible_Tab;
+		public System.Windows.Forms.TabPage Misc_Tab;
 		private System.Windows.Forms.GroupBox LanguageBox;
 		private System.Windows.Forms.ListBox LanguageList;
 		private System.Windows.Forms.Label TranslateLabel;
@@ -143,7 +143,7 @@ namespace DreamBeam {
 			this.Mouse_groupBox2 = new System.Windows.Forms.GroupBox();
 			this.BeamBox_AlwaysOnTop = new System.Windows.Forms.CheckBox();
 			this.BeamBox_HideMouse = new System.Windows.Forms.CheckBox();
-			this.Bible_Tab = new System.Windows.Forms.TabPage();
+			this.Misc_Tab = new System.Windows.Forms.TabPage();
 			this.songVerseSeparatorGroup = new System.Windows.Forms.GroupBox();
 			this.verseSep2L = new System.Windows.Forms.RadioButton();
 			this.verseSep1L = new System.Windows.Forms.RadioButton();
@@ -210,7 +210,7 @@ namespace DreamBeam {
 			((System.ComponentModel.ISupportInitialize)(this.BeamBox_Height)).BeginInit();
 			this.Background_groupBox3.SuspendLayout();
 			this.Mouse_groupBox2.SuspendLayout();
-			this.Bible_Tab.SuspendLayout();
+			this.Misc_Tab.SuspendLayout();
 			this.songVerseSeparatorGroup.SuspendLayout();
 			this.SwordLangGroupBox.SuspendLayout();
 			this.SwordFolderGroupBox.SuspendLayout();
@@ -247,7 +247,7 @@ namespace DreamBeam {
 			// 
 			this.tabControl.Controls.Add(this.Common_Tab);
 			this.tabControl.Controls.Add(this.BeamBox_tab);
-			this.tabControl.Controls.Add(this.Bible_Tab);
+			this.tabControl.Controls.Add(this.Misc_Tab);
 			this.tabControl.Controls.Add(this.BibleCache_Tab);
 			this.tabControl.Controls.Add(this.Graphics_tab);
 			this.tabControl.Controls.Add(this.SongFormat_Tab);
@@ -730,17 +730,17 @@ namespace DreamBeam {
 			this.BeamBox_HideMouse.TabIndex = 0;
 			this.BeamBox_HideMouse.Text = "Hide Mouse Cursor";
 			// 
-			// Bible_Tab
+			// Misc_Tab
 			// 
-			this.Bible_Tab.Controls.Add(this.songVerseSeparatorGroup);
-			this.Bible_Tab.Controls.Add(this.SwordLangGroupBox);
-			this.Bible_Tab.Controls.Add(this.SwordFolderGroupBox);
-			this.Bible_Tab.Location = new System.Drawing.Point(4, 40);
-			this.Bible_Tab.Name = "Bible_Tab";
-			this.Bible_Tab.Size = new System.Drawing.Size(515, 302);
-			this.Bible_Tab.TabIndex = 3;
-			this.Bible_Tab.Text = "Misc";
-			this.Bible_Tab.UseVisualStyleBackColor = true;
+			this.Misc_Tab.Controls.Add(this.songVerseSeparatorGroup);
+			this.Misc_Tab.Controls.Add(this.SwordLangGroupBox);
+			this.Misc_Tab.Controls.Add(this.SwordFolderGroupBox);
+			this.Misc_Tab.Location = new System.Drawing.Point(4, 40);
+			this.Misc_Tab.Name = "Misc_Tab";
+			this.Misc_Tab.Size = new System.Drawing.Size(515, 302);
+			this.Misc_Tab.TabIndex = 3;
+			this.Misc_Tab.Text = "Misc";
+			this.Misc_Tab.UseVisualStyleBackColor = true;
 			// 
 			// songVerseSeparatorGroup
 			// 
@@ -1218,7 +1218,7 @@ namespace DreamBeam {
 			((System.ComponentModel.ISupportInitialize)(this.BeamBox_Height)).EndInit();
 			this.Background_groupBox3.ResumeLayout(false);
 			this.Mouse_groupBox2.ResumeLayout(false);
-			this.Bible_Tab.ResumeLayout(false);
+			this.Misc_Tab.ResumeLayout(false);
 			this.songVerseSeparatorGroup.ResumeLayout(false);
 			this.songVerseSeparatorGroup.PerformLayout();
 			this.SwordLangGroupBox.ResumeLayout(false);

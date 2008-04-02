@@ -593,13 +593,13 @@ namespace DreamBeam {
 					r["Number"] = song.Number;
 					r["FileName"] = song.FileName;
 
-					if (!Tools.StringIsNullOrEmpty(song.Number)) {
+					if (!String.IsNullOrEmpty(song.Number)) {
 						r["Title"] = song.Number + ". " + song.Title;
 					} else {
 						r["Title"] = song.Title;
 					}
 
-					if (Tools.StringIsNullOrEmpty(r["Title"].ToString()))
+					if (String.IsNullOrEmpty(r["Title"].ToString()))
 						r["Title"] = songFile;
 
 					// Create FoldedTitle by folding (removing) diacritics

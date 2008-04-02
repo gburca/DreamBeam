@@ -279,7 +279,7 @@ namespace DreamBeam {
 					break;
 			}
 
-			if (!Tools.StringIsNullOrEmpty(this.Sword_LanguageBox.Text)) {
+			if (!String.IsNullOrEmpty(this.Sword_LanguageBox.Text)) {
 				SetBibleLocale(this._MainForm.bibles, config.SwordPath, this.Sword_LanguageBox.Text);
 			}
 
@@ -356,7 +356,7 @@ namespace DreamBeam {
 			Common_Tab.Text = Lang.say("Options.Tabs.Common");
 			Graphics_tab.Text = Lang.say("Options.Tabs.Graphics");
 			BeamBox_tab.Text = Lang.say("Options.Tabs.BeamBox");
-			Bible_Tab.Text = Lang.say("Options.Tabs.Bible");
+			Misc_Tab.Text = Lang.say("Options.Tabs.Misc");
 			#endregion
 
 			#region Common

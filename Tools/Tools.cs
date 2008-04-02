@@ -295,18 +295,6 @@ namespace DreamBeam {
 		public static extern bool Beep(int frequency, int duration);
 
 		/// <summary>
-		/// TODO: Replace calls to this function with String.IsNullOrEmpty in .NET 2.0
-		/// </summary>
-		/// <param name="str"></param>
-		/// <returns></returns>
-		public static bool StringIsNullOrEmpty(string str) {
-			if (str == null || str.Length == 0) {
-				return true;
-			}
-			return false;
-		}
-
-		/// <summary>
 		/// Attempts to see if there are any characters left after trimming the string.
 		/// </summary>
 		/// <param name="str">The (possibly null) string to test</param>

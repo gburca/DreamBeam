@@ -384,8 +384,8 @@
   <data name="Options.Tabs.BeamBox" xml:space="preserve">
     <value>Projector Window</value>
   </data>
-  <data name="Options.Tabs.Bible" xml:space="preserve">
-    <value>Bible</value>
+  <data name="Options.Tabs.Misc" xml:space="preserve">
+    <value>Misc</value>
   </data>
   <data name="Options.Tabs.Bible.SwordFolderGroup" xml:space="preserve">
     <value>Sword Project Ordner</value>

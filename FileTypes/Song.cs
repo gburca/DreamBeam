@@ -482,8 +482,8 @@ namespace DreamBeam {
 		public bool ContainsText(SongSearchType Search, string Text) {
 			StringBuilder s = new StringBuilder("");
 
-			s.Append(Tools.StringIsNullOrEmpty(this.Title) ? " " : this.Title + " ");
-			s.Append(Tools.StringIsNullOrEmpty(this.Notes) ? " " : this.Notes + " ");
+			s.Append(String.IsNullOrEmpty(this.Title) ? " " : this.Title + " ");
+			s.Append(String.IsNullOrEmpty(this.Notes) ? " " : this.Notes + " ");
 			foreach (LyricsType type in Enum.GetValues(typeof(LyricsType))) {
 				s.Append(this.GetLyrics(type, SongVerseSeparator.OneBlankLine));
 			}
