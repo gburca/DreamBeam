@@ -25,19 +25,19 @@
     <Replace>A</Replace>
   </Options_RegEx>
   <Options_RegEx>
-    <Find>Ş</Find>
+    <Find>[ŞȘ]</Find>
     <Replace>S</Replace>
   </Options_RegEx>
   <Options_RegEx>
-    <Find>ş</Find>
+    <Find>[şș]</Find>
     <Replace>s</Replace>
   </Options_RegEx>
   <Options_RegEx>
-    <Find>Ţ</Find>
+    <Find>[ŢȚ]</Find>
     <Replace>T</Replace>
   </Options_RegEx>
   <Options_RegEx>
-    <Find>ţ</Find>
+    <Find>[ţț]</Find>
     <Replace>t</Replace>
   </Options_RegEx>
   <Options_RegEx>
