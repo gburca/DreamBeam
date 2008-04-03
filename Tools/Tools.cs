@@ -497,17 +497,19 @@ namespace DreamBeam {
 		public static string Diatheke_ConvertEncoding(string text) {
 			Encoding utf8 = Encoding.GetEncoding("UTF-8");
 
-			/* TODO: This should be detected somehow automatically.
-			 * On MS-Vista, if the local setting for non-unicode programs
-			 * is set to anything other than english, this will not work.
+			/* "enc" must match the value set in:
 			 * 
 			 * Settings - Regional and Language Options - Administrative
 			 *	Current language for non-Unicode programs:
 			 *		English (United States)
+			 * 
+			 * Apparently Encoding.Default returns the "system locale"
+			 * (or "language for non-Unicode applications") that the user
+			 * set (see above).
 			 */
-			Encoding win1252 = Encoding.GetEncoding("Windows-1252");
+			Encoding enc = Encoding.Default;
 
-			byte[] rawBytes = win1252.GetBytes(text);
+			byte[] rawBytes = enc.GetBytes(text);
 
 			return utf8.GetString(rawBytes);
 		}

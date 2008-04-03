@@ -8,7 +8,7 @@
   <BeamBoxAutoPosSize>false</BeamBoxAutoPosSize>
   <BeamBoxScreenNum>-1</BeamBoxScreenNum>
   <PreRender>true</PreRender>
-  <Alphablending>true</Alphablending>
+  <Alphablending>false</Alphablending>
   <BlendSpeed>10</BlendSpeed>
   <useDirect3D>false</useDirect3D>
   <BibleLang>en</BibleLang>

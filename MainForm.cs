@@ -2100,7 +2100,11 @@ namespace DreamBeam {
 		}
 
 		private void Sermon_DocManager_CloseButtonPressed(object sender, DocumentManager.CloseButtonPressedEventArgs e) {
-			Sermon_DocManager.RemoveDocument(Sermon_DocManager.FocusedDocument);
+			if (Sermon_DocManager.FocusedDocument != null) {
+				Sermon_DocManager.RemoveDocument(Sermon_DocManager.FocusedDocument);
+			} else if (Sermon_DocManager.TabStrips.Count > 0 && Sermon_DocManager.TabStrips[0].SelectedDocument != null) {
+				Sermon_DocManager.RemoveDocument(Sermon_DocManager.TabStrips[0].SelectedDocument);
+			}
 
 			// Make sure we have at least 1 document open at all times
 			if (Sermon_DocManager.TabStrips.Count == 0 || Sermon_DocManager.TabStrips[0].Documents.Count == 0) {
