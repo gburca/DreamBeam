@@ -1928,7 +1928,7 @@ namespace DreamBeam {
 				BibleBooks[0] = "1. Mose,2. Mose,3. Mose,4. Mose,5. Mose,Josua,Richter,Rut,1. Samuel,2. Samuel,1. Könige,2. Könige,1. Chronik,2. Chronik,Esra,Nehemia,Ester,Hiob,Psalmen,Prediger,Prediger,Hoheslied,Jesaja,Jeremia,Klagelieder,Hesekiel,Daniel,Hosea,Joel,Amos,Obadja,Jona,Micha,Nahum,Habakuk,Zefanja,Haggai,Sacharja,Maleachi";
 				BibleBooks[1] = "Matthäus,Markus,Lukas,Johannes,Apostelgeschichte,Römer,1. Korinther,2. Korinther,Galater,Epheser,Philipper,Kolosser,1. Thessalonicher,2. Thessalonicher,1. Timotheus,2. Timotheus,Titus,Philemon,Hebräer,Jakobus,1. Petrus,2. Petrus,1. Johannes,2. Johannes,3. Johannes,Judas,Offenbahrung";
 			} else {
-				BibleBooks[0] = "Genesis,Exodus,Leviticus,Numbers,Deuteronomy,Joshua,Judges,Ruth,1 Samuel,2 Samuel,I Kings,II Kings,1 Chronicles,2 Chronicles,Ezra,Nehemiah,Esther,Job,Psalm,Proverbs,Ecclesiastes,Song of Solomon,Isaiah,Jeremiah,Lamentations,Ezekiel,Daniel,Hosea,Joel,Amos,Obadiah,Jonah,Micah,Nahum,Habakkuk,Zephaniah,Haggai,Zechariah,Malachi";
+				BibleBooks[0] = "Genesis,Exodus,Leviticus,Numbers,Deuteronomy,Joshua,Judges,Ruth,1 Samuel,2 Samuel,1 Kings,2 Kings,1 Chronicles,2 Chronicles,Ezra,Nehemiah,Esther,Job,Psalm,Proverbs,Ecclesiastes,Song of Solomon,Isaiah,Jeremiah,Lamentations,Ezekiel,Daniel,Hosea,Joel,Amos,Obadiah,Jonah,Micah,Nahum,Habakkuk,Zephaniah,Haggai,Zechariah,Malachi";
 				BibleBooks[1] = "Matthew,Mark,Luke,John,Acts,Romans,1 Corinthians,2 Corinthians,Galatians,Ephesians,Philippians,Colossians,1 Thessalonians,2 Thessalonians,1 Timothy,2 Timothy,Titus,Philemon,Hebrews,James,1 Peter,2 Peter,1 John,2 John,3 John,Jude,Revelation";
 			}
 
@@ -2007,39 +2007,51 @@ namespace DreamBeam {
 
 		private void Diatheke_ValueChanged() {
 			if (this.SwordProject_Found) {
-				string strTempText = Tools.Diatheke_ConvertEncoding(Diatheke.value);
-				//this.StatusPanel.Text = strTempText.Substring(0, Math.Min(strTempText.Length, 200));
+				string vText = Tools.Diatheke_ConvertEncoding(Diatheke.value);
 
-				// filter out the Verses
-				string needle = strTempText.Substring(0, strTempText.IndexOf(":"));
-				int pos;
-				while (strTempText.IndexOf(needle) >= 0) {
-					pos = strTempText.IndexOf(needle);
-					string tmp1 = strTempText.Substring(pos, strTempText.IndexOf(":", pos + needle.Length + 1) - pos + 1);
-					strTempText = strTempText.Replace(tmp1 + "   ", "");
-					strTempText = strTempText.Replace(tmp1 + "  ", "");
-					strTempText = strTempText.Replace(tmp1 + " ", "");
-					strTempText = strTempText.Replace(tmp1, "");
+				if (String.IsNullOrEmpty(vText)) return;
+				vText = vText.TrimEnd('\n');
+
+				if (!this.Sermon_ShowBibleTranslation) {
+					string tr = "\n(" + Diatheke.book + ")";
+					if (vText.EndsWith(tr)) {
+						vText = vText.Remove(vText.Length - tr.Length);
+					}
 				}
-				strTempText.Replace("{~}", "");
+
+				// We're searching for a Bible text reference. Ex: "Gen 7:4: Verse text..."
+				Regex r = new Regex(@"^[^:]+\d+:\d+:\s*(.*)");
+				Match m;
+				string result = "";
+
+				// filter out the Verse reference
+				foreach (string line in vText.Split('\n')) {
+					m = r.Match(line);
+					if (m.Success && m.Groups.Count == 2) {
+						result += "\n" + m.Groups[1].Value;
+					} else {
+						result += "\n" + line;
+					}
+				}
 
 				// Make sure we have a FocusedDocument to add the text to...
 				if (Sermon_DocManager.FocusedDocument == null) {
 					if (Sermon_DocManager.TabStrips.Count > 0 &&
 						Sermon_DocManager.TabStrips[0].Documents.Count > 0) {
-						// Set the focus to the first document
-						Sermon_DocManager.FocusedDocument = Sermon_DocManager.TabStrips[0].Documents[0];
+
+						if (Sermon_DocManager.TabStrips[0].SelectedDocument != null) {
+							Sermon_DocManager.FocusedDocument = Sermon_DocManager.TabStrips[0].SelectedDocument;
+						} else {
+							// Set the focus to the first document
+							Sermon_DocManager.FocusedDocument = Sermon_DocManager.TabStrips[0].Documents[0];
+						}
 					} else {
 						Sermon_NewDocument();
 					}
 				}
 
-				// if not ShowBibleTranslation Hide the Translation Text
-				if (this.Sermon_ShowBibleTranslation) {
-					Sermon_DocManager.FocusedDocument.Control.Text += "\n" + strTempText;
-				} else {
-					Sermon_DocManager.FocusedDocument.Control.Text += "\n" + strTempText.Substring(0, strTempText.IndexOf("(" + Diatheke.book + ")") - 1);
-				}
+				Sermon_DocManager.FocusedDocument.Control.Text += result;
+
 				// Tab text
 				Sermon_DocManager.FocusedDocument.Text = Diatheke.key;
 			}

@@ -82,6 +82,13 @@ namespace DreamBeam {
 		}
 
 		public GraphicsPath GetPath(string doc, Font f, StringFormat sf, RectangleF bounds) {
+
+			// For debug. Make sure these all work with top/center/bottom alignment
+			//doc = "mare era sarea asa ca marea care era masea ca a awuao vara";
+			//doc = "T mare era sarea asa ca marea care era masea ca a awuao vara";
+			//doc = "mare era sarea asa ca marea care era masea ca a awuao varap";
+			//doc = "Tmare era sarea asa ca marea care era masea ca a awuao varap";
+
 			GraphicsPath path = null;
 			while (true) {
 				path = getPath(doc, f, sf, bounds);
@@ -144,6 +151,7 @@ namespace DreamBeam {
 
 			p.Y = 0;
 			float y = 0;
+
 			foreach (Line l in lines) {
 				switch (sf.Alignment) { // Left, Center, Right
 					case StringAlignment.Near:
@@ -159,9 +167,19 @@ namespace DreamBeam {
 
 				p.Y = y;
 				p.X += bounds.X - l.rect.X;
-				p.Y += bounds.Y - l.rect.Y;
+				p.Y += bounds.Y - lines[0].rect.Y;
+				// For p.Y use only line[0] to maintain consistent line spacing, or else line spacing
+				// will change if there are no descenders, or no ascencers, or both, on the current line.
+				//
+				// In other words, each line is (lineH * line#) units below line[0].
+				// Only line# should change as we iterate through all the lines.
 
 				pth.AddString(l.words, font.FontFamily, (int)font.Style, font.Size, p, strF);
+
+				// For Debug...
+				//RectangleF lrect = l.rect;
+				//lrect.Offset(p);
+				//pth.AddRectangle(lrect);
 
 				y += lineH;
 			}
