@@ -1,3 +1,38 @@
+0.80
+Gabriel Burca:
+- Added Theme handling
+- Vista compatibility. User created files are now saved in the DataDirectory
+  and the installer has been updated to deal with UAC. Thanks to Danny Baies
+  for helping with the installer portion and for testing it.
+- Improved word-break when displaying Bible verses. In the past, the word-break
+  (line wrap) was left up to the .NET framework which did not handle things
+  properly. This version uses a custom line wrap algorithm which only breaks
+  lines at spaces. In the future this can be expanded to handle hyphenation.
+- Added separate theme setting/entry for the key and author data in a song.
+- Improved string folding (the ability to remove diacritics from text for
+  easier search).
+- Improved multimedia controls.
+- Fixed a number of threading issues where non-UI threads were modifying UI
+  controls
+- Fixed localization code so it falls back to English if a translation item for
+  the selected language is not available
+- Added consistent handling of file/path locations
+- Removed dependency on OPaC which was not re-painting labels properly anymore
+  (maybe due to .NET 2.0)
+- Added the source code for LEDRadioButton and fixed it so it works properly
+  with the visual designer
+- Upgraded project to VS C# 2005
+- Massive code clean-up and reorganization, including:
+	o All BibleText controls were moved out of MainForm.cs into BibleText.cs
+	o All designer code was removed from MainForm.cs
+	o A lot of dead code and files were removed
+- Many bug fixes. Many thanks to the following testers that reported bugs in the
+  pre-release version:
+	* Sergiu Burca
+	* Stefan Kaufmann
+	* Jari Strand
+	* Danny Baies
+
 0.??
 Gabriel Burca:
 - Fixed Bible text encoding for all(?) Sword modules (only tested with RomCor which is encoded in UTF8).
