@@ -622,6 +622,13 @@ namespace DreamBeam {
 		public Single FontEmSize = 36.0F;
 		public FontStyle FontStyle = FontStyle.Regular;
 
+		/* Just as the background image is scaled to cover the user's display resolution,
+		 * the font needs to be scaled along with it. The font sizes specified by the user
+		 * are assumed to be for a display of ReferenceResolutionH pixels high.
+		 */
+		[XmlIgnore()]
+		public static int ReferenceResolutionH = 600;
+
 		public BeamTextFormat() {
 			TextColor = Color.White;
 			OutlineColor = Color.Red;

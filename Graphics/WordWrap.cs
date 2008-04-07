@@ -112,7 +112,7 @@ namespace DreamBeam {
 			String[] w = GetWords(doc);
 			if (w.Length == 0) return pth;
 
-			float lineH = font.GetHeight() * 0.7F;
+			float lineH = font.GetHeight() * 0.75F;
 			if (lineH > bounds.Height) return null;
 
 			List<Line> lines = new List<Line>();

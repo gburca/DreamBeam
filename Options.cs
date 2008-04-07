@@ -79,7 +79,12 @@ namespace DreamBeam {
 
 				switch ((ContentType)content.GetIdentity().Type) {
 					case ContentType.Song:
-						content.Theme = song;
+						Song s = content as Song;
+						if (s != null && String.IsNullOrEmpty(s.ThemePath)) {
+							content.Theme = song;
+						} else {
+							// This is a song with a custom theme. Don't override with default.
+						}
 						break;
 					case ContentType.PlainText:
 						content.Theme = sermon;
@@ -127,9 +132,10 @@ namespace DreamBeam {
 				config.BeamBoxSizeY = (int)this.BeamBox_Height.Value;
 			}
 
-			if (this._MainForm.DisplayLiveLocal != null) {
-				this._MainForm.DisplayLiveLocal.ChangeDisplayCoord(config);
-			}
+
+			// We need to update all displays with the new size.
+			// They use this size to generate the bitmaps.
+			this._MainForm.UpdateDisplaySizes();
 
 			config.SwordPath = this.Sword_PathBox.Text;
 			this._MainForm.Check_SwordProject(config);

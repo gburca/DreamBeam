@@ -166,8 +166,6 @@ namespace DreamBeam {
 		private Thread render;
 		private Object renderLock = new Object();
 		[XmlIgnore]
-		public OldSong song;
-		[XmlIgnore]
 		public Config config;
 		[XmlIgnore]
 		protected System.Type enumType;
@@ -645,7 +643,7 @@ namespace DreamBeam {
 							pathRect.Height *= 2;
 
 							// We start with the user-specified font size ...
-							fontSz = format[type].TextFont.Size;
+							fontSz = format[type].TextFont.Size * ((float)Height / BeamTextFormat.ReferenceResolutionH);
 
 							// ... and decrease the size (if needed) until it fits within the user-specified boundaries
 							do {
@@ -665,7 +663,8 @@ namespace DreamBeam {
 							// Tab characters are ignored by AddString below. Converting them to spaces.
 							text[type] = Regex.Replace(text[type], "\t", "        ");
 							pth = new GraphicsPath();
-							font = new Font(format[type].TextFont.FontFamily, format[type].TextFont.Size, format[type].TextFont.Style);
+							fontSz = format[type].TextFont.Size * ((float)Height / BeamTextFormat.ReferenceResolutionH);
+							font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
 							pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, new Point(0, 0), sf);
 
 							pth.Transform(Tools.FitContents(bounds, pth.GetBounds(), sf));
@@ -725,6 +724,7 @@ namespace DreamBeam {
 			return false;
 		}
 
+		[XmlIgnore()]
 		public bool ShowRectangles {
 			get { return showRectangles; }
 			set { showRectangles = value; }
@@ -790,7 +790,7 @@ namespace DreamBeam {
 
 		#region Serialization and Deserialization
 		/// <summary>
-		/// Handles serialization of the Config class, or of any types derived from it.
+		/// Handles serialization of the Song class, or of any types derived from it.
 		/// </summary>
 		/// <param name="instance">The instance to serialize</param>
 		/// <param name="file">The XML file to serialize to</param>
@@ -874,11 +874,19 @@ namespace DreamBeam {
 			}
 
 			Song s = null;
-			//XmlNodeList nodes = xmlDoc.GetElementsByTagName("Version");
-			XmlNode versionNode = xmlDoc.SelectSingleNode(@"/DreamSong/Version");
-			if (versionNode == null) {
+			bool newSong = false;
+
+			XmlNode root = xmlDoc.DocumentElement;
+			XmlNode versionNode;
+
+			if (root.Name.Equals("NewSong")) {
+				newSong = true;
 				versionNode = xmlDoc.SelectSingleNode(@"/NewSong/Version");
+			} else {
+				versionNode = xmlDoc.SelectSingleNode(@"/DreamSong/Version");
 			}
+			//XmlNodeList nodes = xmlDoc.GetElementsByTagName("Version");
+
 			if (versionNode != null) {
 				float version;
 				try {
@@ -894,26 +902,29 @@ namespace DreamBeam {
 					} else {
 						s = new Song(config);
 					}
-				} else if (version <= 0.71F) {
+				} else if (version <= 0.71F || newSong) {
 					/* Prior to version 0.72 old songs were saved with NewSong XML root
 					 * instead of DreamSong and contained an node called BGImagePath. The
 					 * BGImagePath has now been generalized to ThemePath.
 					 */
-					XmlNode root = xmlDoc.DocumentElement;
-					if (root.Name.Equals("NewSong")) {
+					if (newSong) {
 						Tools.RenameXmlNode(root, root.NamespaceURI, "DreamSong");
 						XmlNode bgImageNode = xmlDoc.SelectSingleNode(@"/DreamSong/BGImagePath");
 						if (bgImageNode != null) {
 							Tools.RenameXmlNode(bgImageNode, root.NamespaceURI, "ThemePath");
 						}
 						s = (Song)Song.DeserializeFrom(typeof(Song), new StringReader(xmlDoc.OuterXml));
+
+						if (s != null) {
+							// There are some songs from 0.7x days with <NewSong> and version == 1.00.
+							// Let's save them back automatically with the correct version.
+							// Version 0.71 allowed the user to save files with keys such as "D# / Eb".
+							s.KeyRangeLow = NormalizeKey(s.KeyRangeLow);
+							s.KeyRangeHigh = NormalizeKey(s.KeyRangeHigh);
+							Song.SerializeTo(s, file);
+						}
 					} else {
 						s = (Song)Song.DeserializeFrom(typeof(Song), file);
-					}
-					if (s != null) {
-						// Version 0.71 allowed the user to save files with keys such as "D# / Eb".
-						s.KeyRangeLow = NormalizeKey(s.KeyRangeLow);
-						s.KeyRangeHigh = NormalizeKey(s.KeyRangeHigh);
 					}
 				} else { // version >= 0.72
 					s = (Song)Song.DeserializeFrom(typeof(Song), file);

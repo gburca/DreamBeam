@@ -730,7 +730,11 @@ namespace DreamBeam.FileTypes {
 						sf.LineAlignment = format[type].VAlignment;
 						sf.FormatFlags = StringFormatFlags.NoFontFallback;
 
-						pth = wrapper.GetPath(text[type], format[type].TextFont, sf, bounds);
+						Font origFont = format[type].TextFont;
+						float scaledFontSz = origFont.Size * ((float)Height / BeamTextFormat.ReferenceResolutionH);
+						Font resizedFont = new Font(origFont.FontFamily, scaledFontSz, origFont.Style);
+
+						pth = wrapper.GetPath(text[type], resizedFont, sf, bounds);
 
 						brush = new SolidBrush(format[type].TextColor);
 

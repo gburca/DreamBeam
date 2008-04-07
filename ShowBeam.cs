@@ -766,9 +766,9 @@ namespace DreamBeam {
 
 		///<summary>Make the BeamBox moveable</summary>
 		public void ShowMover() {
-			GetScreens();
 			if (this.BeamBoxAutoPosSize) {
 				SizePosControl.SelectedIndex = 0;
+				GetScreens();
 			} else {
 				SizePosControl.SelectedIndex = 1;
 			}
@@ -797,9 +797,8 @@ namespace DreamBeam {
 			this._MainForm.Config.BeamBoxSizeX = this.Size.Width;
 			this._MainForm.Config.BeamBoxSizeY = this.Size.Height;
 
-			// Update the local display
-			this._MainForm.DisplayLiveLocal.Size = this.Size;
-			this._MainForm.DisplayLiveLocal.Location = this.Location;
+			// Update the displays
+			this._MainForm.UpdateDisplaySizes();
 		}
 
 
@@ -888,6 +887,7 @@ namespace DreamBeam {
 		private void SizePosControl_Click(object sender, System.EventArgs e) {
 			if (SizePosControl.SelectedIndex == 0) {
 				this.BeamBoxAutoPosSize = true;
+				GetScreens();
 			} else {
 				this.BeamBoxAutoPosSize = false;
 			}

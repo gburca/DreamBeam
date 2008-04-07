@@ -287,6 +287,7 @@ namespace DreamBeam {
 			return true;
 		}
 
+		[XmlIgnore()]
 		public bool ShowRectangles {
 			get { return showRectangles; }
 			set { showRectangles = value; }
@@ -343,8 +344,6 @@ namespace DreamBeam {
 
 		public static BibleLib bibleLib;
 		public static Config config;
-
-		//Bitmap bmp;
 
 		private Size size;
 		private Point location;
@@ -438,7 +437,6 @@ namespace DreamBeam {
 						break;
 					case ContentType.PlainText:
 						newContent = new TextToolContents(identity.Text, Display.config);
-						(newContent as TextToolContents).song.strophe = identity.SongStrophe;
 						break;
 					case ContentType.Song:
 						string songFile = Tools.GetDirectory(DirType.Songs, identity.SongName);
@@ -596,6 +594,12 @@ namespace DreamBeam {
 			if (config == null) return;
 			this.Size = new Size(config.BeamBoxSizeX, config.BeamBoxSizeY);
 			this.Location = new Point(config.BeamBoxPosX, config.BeamBoxPosY);
+
+			try {
+				(content as Content).RenderedFramesClear();
+			} catch { }
+
+			this.UpdateDisplay(false);
 		}
 
 	}

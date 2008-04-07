@@ -2546,6 +2546,17 @@ namespace DreamBeam {
 		#endregion
 
 
+		public void UpdateDisplaySizes() {
+			if (DisplayPreview != null) {
+				DisplayPreview.ChangeDisplayCoord(this.Config);
+			}
+			if (DisplayLiveMini != null) {
+				DisplayLiveMini.ChangeDisplayCoord(this.Config);
+			}
+			if (DisplayLiveLocal != null) {
+				DisplayLiveLocal.ChangeDisplayCoord(this.Config);
+			}
+		}
 
 		public void ShowError(Control control, string errorMsg) {
 			this.ErrorProvider_LastControl = control;
