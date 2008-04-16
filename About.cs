@@ -40,23 +40,25 @@ namespace DreamBeam
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Label Label;
+		private System.Windows.Forms.Label DreamBeam;
 		private System.Windows.Forms.Label LabelVersion;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button OkButton;
 		public string version = "";
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.LinkLabel linkLabel1;
-		private System.Windows.Forms.LinkLabel linkLabel2;
+		private System.Windows.Forms.Label Copyright;
+		private System.Windows.Forms.LinkLabel email2;
+		private System.Windows.Forms.LinkLabel webSite1;
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.TabPage tabPage1;
-		private System.Windows.Forms.RichTextBox richTextBox1;
+		private System.Windows.Forms.RichTextBox LicenseTextBox;
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.LinkLabel linkLabel3;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.LinkLabel linkLabel4;
 		private System.Windows.Forms.Label label5;
+		private LinkLabel webSite2;
+		private Panel webSites;
+		private LinkLabel email1;
 		private System.Windows.Forms.LinkLabel linkLabel5;
 
 
@@ -68,9 +70,12 @@ namespace DreamBeam
 
 			InitializeComponent();
 
-			//
-			// TODO: Fügen Sie nach dem Aufruf von InitializeComponent() Konstruktorcode hinzu.
-			//
+			Language l = new Language();
+			this.LicenseTextBox.Text = l.say("GnuLicense");
+
+			// Keep it broken up so that spam bots do not pick it up.
+			email1.Text = "staeff" + "@" + "staeff.de";
+			email2.Text = "gburca-dreambeam" + "@" + "ebixio.com";
 		}
 
 		/// <summary>
@@ -97,7 +102,7 @@ namespace DreamBeam
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
-			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+			this.LicenseTextBox = new System.Windows.Forms.RichTextBox();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.linkLabel5 = new System.Windows.Forms.LinkLabel();
 			this.label5 = new System.Windows.Forms.Label();
@@ -105,299 +110,67 @@ namespace DreamBeam
 			this.label4 = new System.Windows.Forms.Label();
 			this.linkLabel3 = new System.Windows.Forms.LinkLabel();
 			this.label3 = new System.Windows.Forms.Label();
-			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label1 = new System.Windows.Forms.Label();
-			this.button1 = new System.Windows.Forms.Button();
+			this.webSite1 = new System.Windows.Forms.LinkLabel();
+			this.email2 = new System.Windows.Forms.LinkLabel();
+			this.Copyright = new System.Windows.Forms.Label();
 			this.LabelVersion = new System.Windows.Forms.Label();
-			this.Label = new System.Windows.Forms.Label();
+			this.OkButton = new System.Windows.Forms.Button();
+			this.DreamBeam = new System.Windows.Forms.Label();
+			this.webSite2 = new System.Windows.Forms.LinkLabel();
+			this.webSites = new System.Windows.Forms.Panel();
+			this.email1 = new System.Windows.Forms.LinkLabel();
 			this.panel1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
+			this.webSites.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
 			// 
 			this.panel1.BackColor = System.Drawing.Color.White;
 			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panel1.Controls.Add(this.webSites);
 			this.panel1.Controls.Add(this.tabControl1);
-			this.panel1.Controls.Add(this.linkLabel2);
-			this.panel1.Controls.Add(this.linkLabel1);
-			this.panel1.Controls.Add(this.label2);
-			this.panel1.Controls.Add(this.label1);
-			this.panel1.Controls.Add(this.button1);
+			this.panel1.Controls.Add(this.Copyright);
 			this.panel1.Controls.Add(this.LabelVersion);
-			this.panel1.Controls.Add(this.Label);
+			this.panel1.Controls.Add(this.OkButton);
+			this.panel1.Controls.Add(this.DreamBeam);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(450, 370);
+			this.panel1.Size = new System.Drawing.Size(495, 370);
 			this.panel1.TabIndex = 0;
-			this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
 			// 
 			// tabControl1
 			// 
 			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Controls.Add(this.tabPage2);
-			this.tabControl1.Location = new System.Drawing.Point(3, 115);
+			this.tabControl1.Location = new System.Drawing.Point(3, 135);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(444, 221);
+			this.tabControl1.Size = new System.Drawing.Size(487, 200);
 			this.tabControl1.TabIndex = 10;
 			// 
 			// tabPage1
 			// 
 			this.tabPage1.BackColor = System.Drawing.Color.White;
-			this.tabPage1.Controls.Add(this.richTextBox1);
+			this.tabPage1.Controls.Add(this.LicenseTextBox);
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.Size = new System.Drawing.Size(436, 195);
+			this.tabPage1.Size = new System.Drawing.Size(479, 174);
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "License";
 			// 
-			// richTextBox1
+			// LicenseTextBox
 			// 
-			this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(436, 195);
-			this.richTextBox1.TabIndex = 12;
-			this.richTextBox1.Text = "                              GNU GENERAL PUBLIC LICENSE\n\t\t       " +  
-				"Version 2, June 1991\n\n Copyright (C) 1989, 1991 Free Software Fou" +  
-				"ndation, Inc.\n                       59 Temple Place, Suite 330, " +  
-				"Boston, MA  02111-1307  USA\n Everyone is permitted to copy and di" +  
-				"stribute verbatim copies\n of this license document, but changing " +  
-				"it is not allowed.\n\n\t\t\t    Preamble\n\n  The licenses for most soft" +  
-				"ware are designed to take away your\nfreedom to share and change i" +  
-				"t.  By contrast, the GNU General Public\nLicense is intended to gu" +  
-				"arantee your freedom to share and change free\nsoftware--to make s" +  
-				"ure the software is free for all its users.  This\nGeneral Public " +  
-				"License applies to most of the Free Software\nFoundation\'s softwar" +  
-				"e and to any other program whose authors commit to\nusing it.  (So" +  
-				"me other Free Software Foundation software is covered by\nthe GNU " +  
-				"Library General Public License instead.)  You can apply it to\nyou" +  
-				"r programs, too.\n\n  When we speak of free software, we are referr" +  
-				"ing to freedom, not\nprice.  Our General Public Licenses are desig" +  
-				"ned to make sure that you\nhave the freedom to distribute copies o" +  
-				"f free software (and charge for\nthis service if you wish), that y" +  
-				"ou receive source code or can get it\nif you want it, that you can" +  
-				" change the software or use pieces of it\nin new free programs; an" +  
-				"d that you know you can do these things.\n\n  To protect your right" +  
-				"s, we need to make restrictions that forbid\nanyone to deny you th" +  
-				"ese rights or to ask you to surrender the rights.\nThese restricti" +  
-				"ons translate to certain responsibilities for you if you\ndistribu" +  
-				"te copies of the software, or if you modify it.\n\n  For example, i" +  
-				"f you distribute copies of such a program, whether\ngratis or for " +  
-				"a fee, you must give the recipients all the rights that\nyou have." +  
-				"  You must make sure that they, too, receive or can get the\nsourc" +  
-				"e code.  And you must show them these terms so they know their\nri" +  
-				"ghts.\n\n  We protect your rights with two steps: (1) copyright the" +  
-				" software, and\n(2) offer you this license which gives you legal p" +  
-				"ermission to copy,\ndistribute and/or modify the software.\n\n  Also" +  
-				", for each author\'s protection and ours, we want to make certain\n" +  
-				"that everyone understands that there is no warranty for this free" +  
-				"\nsoftware.  If the software is modified by someone else and passe" +  
-				"d on, we\nwant its recipients to know that what they have is not t" +  
-				"he original, so\nthat any problems introduced by others will not r" +  
-				"eflect on the original\nauthors\' reputations.\n\n  Finally, any free" +  
-				" program is threatened constantly by software\npatents.  We wish t" +  
-				"o avoid the danger that redistributors of a free\nprogram will ind" +  
-				"ividually obtain patent licenses, in effect making the\nprogram pr" +  
-				"oprietary.  To prevent this, we have made it clear that any\npaten" +  
-				"t must be licensed for everyone\'s free use or not licensed at all" +  
-				".\n\n  The precise terms and conditions for copying, distribution a" +  
-				"nd\nmodification follow.\n\n\t\t    GNU GENERAL PUBLIC LICENSE\n   TER" +  
-				"MS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n\n  0" +  
-				". This License applies to any program or other work which contain" +  
-				"s\na notice placed by the copyright holder saying it may be distri" +  
-				"buted\nunder the terms of this General Public License.  The \"Progr" +  
-				"am\", below,\nrefers to any such program or work, and a \"work based" +  
-				" on the Program\"\nmeans either the Program or any derivative work " +  
-				"under copyright law:\nthat is to say, a work containing the Progra" +  
-				"m or a portion of it,\neither verbatim or with modifications and/o" +  
-				"r translated into another\nlanguage.  (Hereinafter, translation is" +  
-				" included without limitation in\nthe term \"modification\".)  Each l" +  
-				"icensee is addressed as \"you\".\n\nActivities other than copying, di" +  
-				"stribution and modification are not\ncovered by this License; they" +  
-				" are outside its scope.  The act of\nrunning the Program is not re" +  
-				"stricted, and the output from the Program\nis covered only if its " +  
-				"contents constitute a work based on the\nProgram (independent of h" +  
-				"aving been made by running the Program).\nWhether that is true dep" +  
-				"ends on what the Program does.\n\n  1. You may copy and distribute " +  
-				"verbatim copies of the Program\'s\nsource code as you receive it, i" +  
-				"n any medium, provided that you\nconspicuously and appropriately p" +  
-				"ublish on each copy an appropriate\ncopyright notice and disclaime" +  
-				"r of warranty; keep intact all the\nnotices that refer to this Lic" +  
-				"ense and to the absence of any warranty;\nand give any other recip" +  
-				"ients of the Program a copy of this License\nalong with the Progra" +  
-				"m.\n\nYou may charge a fee for the physical act of transferring a c" +  
-				"opy, and\nyou may at your option offer warranty protection in exch" +  
-				"ange for a fee.\n\n  2. You may modify your copy or copies of the P" +  
-				"rogram or any portion\nof it, thus forming a work based on the Pro" +  
-				"gram, and copy and\ndistribute such modifications or work under th" +  
-				"e terms of Section 1\nabove, provided that you also meet all of th" +  
-				"ese conditions:\n\n    a) You must cause the modified files to carr" +  
-				"y prominent notices\n    stating that you changed the files and th" +  
-				"e date of any change.\n\n    b) You must cause any work that you di" +  
-				"stribute or publish, that in\n    whole or in part contains or is " +  
-				"derived from the Program or any\n    part thereof, to be licensed " +  
-				"as a whole at no charge to all third\n    parties under the terms " +  
-				"of this License.\n\n    c) If the modified program normally reads c" +  
-				"ommands interactively\n    when run, you must cause it, when start" +  
-				"ed running for such\n    interactive use in the most ordinary way," +  
-				" to print or display an\n    announcement including an appropriate" +  
-				" copyright notice and a\n    notice that there is no warranty (or " +  
-				"else, saying that you provide\n    a warranty) and that users may " +  
-				"redistribute the program under\n    these conditions, and telling " +  
-				"the user how to view a copy of this\n    License.  (Exception: if " +  
-				"the Program itself is interactive but\n    does not normally print" +  
-				" such an announcement, your work based on\n    the Program is not " +  
-				"required to print an announcement.)\n\nThese requirements apply to" +  
-				" the modified work as a whole.  If\nidentifiable sections of that " +  
-				"work are not derived from the Program,\nand can be reasonably cons" +  
-				"idered independent and separate works in\nthemselves, then this Li" +  
-				"cense, and its terms, do not apply to those\nsections when you dis" +  
-				"tribute them as separate works.  But when you\ndistribute the same" +  
-				" sections as part of a whole which is a work based\non the Program" +  
-				", the distribution of the whole must be on the terms of\nthis Lice" +  
-				"nse, whose permissions for other licensees extend to the\nentire w" +  
-				"hole, and thus to each and every part regardless of who wrote it." +  
-				"\n\nThus, it is not the intent of this section to claim rights or c" +  
-				"ontest\nyour rights to work written entirely by you; rather, the i" +  
-				"ntent is to\nexercise the right to control the distribution of der" +  
-				"ivative or\ncollective works based on the Program.\n\nIn addition, m" +  
-				"ere aggregation of another work not based on the Program\nwith the" +  
-				" Program (or with a work based on the Program) on a volume of\na s" +  
-				"torage or distribution medium does not bring the other work under" +  
-				"\nthe scope of this License.\n\n  3. You may copy and distribute the" +  
-				" Program (or a work based on it,\nunder Section 2) in object code " +  
-				"or executable form under the terms of\nSections 1 and 2 above prov" +  
-				"ided that you also do one of the following:\n\n    a) Accompany it " +  
-				"with the complete corresponding machine-readable\n    source code," +  
-				" which must be distributed under the terms of Sections\n    1 and " +  
-				"2 above on a medium customarily used for software interchange; or" +  
-				",\n\n    b) Accompany it with a written offer, valid for at least t" +  
-				"hree\n    years, to give any third party, for a charge no more tha" +  
-				"n your\n    cost of physically performing source distribution, a c" +  
-				"omplete\n    machine-readable copy of the corresponding source cod" +  
-				"e, to be\n    distributed under the terms of Sections 1 and 2 abov" +  
-				"e on a medium\n    customarily used for software interchange; or,\n" +  
-				"\n    c) Accompany it with the information you received as to the " +  
-				"offer\n    to distribute corresponding source code.  (This alterna" +  
-				"tive is\n    allowed only for noncommercial distribution and only " +  
-				"if you\n    received the program in object code or executable form" +  
-				" with such\n    an offer, in accord with Subsection b above.)\n\nThe" +  
-				" source code for a work means the preferred form of the work for\n" +  
-				"making modifications to it.  For an executable work, complete sou" +  
-				"rce\ncode means all the source code for all modules it contains, p" +  
-				"lus any\nassociated interface definition files, plus the scripts u" +  
-				"sed to\ncontrol compilation and installation of the executable.  H" +  
-				"owever, as a\nspecial exception, the source code distributed need " +  
-				"not include\nanything that is normally distributed (in either sour" +  
-				"ce or binary\nform) with the major components (compiler, kernel, a" +  
-				"nd so on) of the\noperating system on which the executable runs, u" +  
-				"nless that component\nitself accompanies the executable.\n\nIf distr" +  
-				"ibution of executable or object code is made by offering\naccess t" +  
-				"o copy from a designated place, then offering equivalent\naccess t" +  
-				"o copy the source code from the same place counts as\ndistribution" +  
-				" of the source code, even though third parties are not\ncompelled " +  
-				"to copy the source along with the object code.\n\n  4. You may not" +  
-				" copy, modify, sublicense, or distribute the Program\nexcept as ex" +  
-				"pressly provided under this License.  Any attempt\notherwise to co" +  
-				"py, modify, sublicense or distribute the Program is\nvoid, and wil" +  
-				"l automatically terminate your rights under this License.\nHowever" +  
-				", parties who have received copies, or rights, from you under\nthi" +  
-				"s License will not have their licenses terminated so long as such" +  
-				"\nparties remain in full compliance.\n\n  5. You are not required to" +  
-				" accept this License, since you have not\nsigned it.  However, not" +  
-				"hing else grants you permission to modify or\ndistribute the Progr" +  
-				"am or its derivative works.  These actions are\nprohibited by law " +  
-				"if you do not accept this License.  Therefore, by\nmodifying or di" +  
-				"stributing the Program (or any work based on the\nProgram), you in" +  
-				"dicate your acceptance of this License to do so, and\nall its term" +  
-				"s and conditions for copying, distributing or modifying\nthe Progr" +  
-				"am or works based on it.\n\n  6. Each time you redistribute the Pro" +  
-				"gram (or any work based on the\nProgram), the recipient automatica" +  
-				"lly receives a license from the\noriginal licensor to copy, distri" +  
-				"bute or modify the Program subject to\nthese terms and conditions." +  
-				"  You may not impose any further\nrestrictions on the recipients\' " +  
-				"exercise of the rights granted herein.\nYou are not responsible fo" +  
-				"r enforcing compliance by third parties to\nthis License.\n\n  7. If" +  
-				", as a consequence of a court judgment or allegation of patent\nin" +  
-				"fringement or for any other reason (not limited to patent issues)" +  
-				",\nconditions are imposed on you (whether by court order, agreemen" +  
-				"t or\notherwise) that contradict the conditions of this License, t" +  
-				"hey do not\nexcuse you from the conditions of this License.  If yo" +  
-				"u cannot\ndistribute so as to satisfy simultaneously your obligati" +  
-				"ons under this\nLicense and any other pertinent obligations, then " +  
-				"as a consequence you\nmay not distribute the Program at all.  For " +  
-				"example, if a patent\nlicense would not permit royalty-free redist" +  
-				"ribution of the Program by\nall those who receive copies directly " +  
-				"or indirectly through you, then\nthe only way you could satisfy bo" +  
-				"th it and this License would be to\nrefrain entirely from distribu" +  
-				"tion of the Program.\n\nIf any portion of this section is held inva" +  
-				"lid or unenforceable under\nany particular circumstance, the balan" +  
-				"ce of the section is intended to\napply and the section as a whole" +  
-				" is intended to apply in other\ncircumstances.\n\nIt is not the purp" +  
-				"ose of this section to induce you to infringe any\npatents or othe" +  
-				"r property right claims or to contest validity of any\nsuch claims" +  
-				"; this section has the sole purpose of protecting the\nintegrity o" +  
-				"f the free software distribution system, which is\nimplemented by " +  
-				"public license practices.  Many people have made\ngenerous contrib" +  
-				"utions to the wide range of software distributed\nthrough that sys" +  
-				"tem in reliance on consistent application of that\nsystem; it is u" +  
-				"p to the author/donor to decide if he or she is willing\nto distri" +  
-				"bute software through any other system and a licensee cannot\nimpo" +  
-				"se that choice.\n\nThis section is intended to make thoroughly clea" +  
-				"r what is believed to\nbe a consequence of the rest of this Licens" +  
-				"e.\n\n  8. If the distribution and/or use of the Program is restri" +  
-				"cted in\ncertain countries either by patents or by copyrighted int" +  
-				"erfaces, the\noriginal copyright holder who places the Program und" +  
-				"er this License\nmay add an explicit geographical distribution lim" +  
-				"itation excluding\nthose countries, so that distribution is permit" +  
-				"ted only in or among\ncountries not thus excluded.  In such case, " +  
-				"this License incorporates\nthe limitation as if written in the bod" +  
-				"y of this License.\n\n  9. The Free Software Foundation may publish" +  
-				" revised and/or new versions\nof the General Public License from t" +  
-				"ime to time.  Such new versions will\nbe similar in spirit to the " +  
-				"present version, but may differ in detail to\naddress new problems" +  
-				" or concerns.\n\nEach version is given a distinguishing version num" +  
-				"ber.  If the Program\nspecifies a version number of this License w" +  
-				"hich applies to it and \"any\nlater version\", you have the option o" +  
-				"f following the terms and conditions\neither of that version or of" +  
-				" any later version published by the Free\nSoftware Foundation.  If" +  
-				" the Program does not specify a version number of\nthis License, y" +  
-				"ou may choose any version ever published by the Free Software\nFou" +  
-				"ndation.\n\n  10. If you wish to incorporate parts of the Program i" +  
-				"nto other free\nprograms whose distribution conditions are differe" +  
-				"nt, write to the author\nto ask for permission.  For software whic" +  
-				"h is copyrighted by the Free\nSoftware Foundation, write to the Fr" +  
-				"ee Software Foundation; we sometimes\nmake exceptions for this.  O" +  
-				"ur decision will be guided by the two goals\nof preserving the fre" +  
-				"e status of all derivatives of our free software and\nof promoting" +  
-				" the sharing and reuse of software generally.\n\n\t\t\t    NO WARRANTY" +  
-				"\n\n  11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS " +  
-				"NO WARRANTY\nFOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABL" +  
-				"E LAW.  EXCEPT WHEN\nOTHERWISE STATED IN WRITING THE COPYRIGHT HOL" +  
-				"DERS AND/OR OTHER PARTIES\nPROVIDE THE PROGRAM \"AS IS\" WITHOUT WAR" +  
-				"RANTY OF ANY KIND, EITHER EXPRESSED\nOR IMPLIED, INCLUDING, BUT NO" +  
-				"T LIMITED TO, THE IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNE" +  
-				"SS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS\nTO THE QUALITY A" +  
-				"ND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE\nPROGRAM PR" +  
-				"OVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,\nRE" +  
-				"PAIR OR CORRECTION.\n\n  12. IN NO EVENT UNLESS REQUIRED BY APPLICA" +  
-				"BLE LAW OR AGREED TO IN WRITING\nWILL ANY COPYRIGHT HOLDER, OR ANY" +  
-				" OTHER PARTY WHO MAY MODIFY AND/OR\nREDISTRIBUTE THE PROGRAM AS PE" +  
-				"RMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,\nINCLUDING ANY GENERA" +  
-				"L, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING\nOUT OF TH" +  
-				"E USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED\n" +  
-				"TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTA" +  
-				"INED BY\nYOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERA" +  
-				"TE WITH ANY OTHER\nPROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY H" +  
-				"AS BEEN ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGES.\n\n\t\t     END O" +  
-				"F TERMS AND CONDITIONS";
+			this.LicenseTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.LicenseTextBox.Location = new System.Drawing.Point(0, 0);
+			this.LicenseTextBox.Name = "LicenseTextBox";
+			this.LicenseTextBox.Size = new System.Drawing.Size(479, 174);
+			this.LicenseTextBox.TabIndex = 12;
+			this.LicenseTextBox.Text = "GNU License text";
+			this.LicenseTextBox.WordWrap = false;
 			// 
 			// tabPage2
 			// 
@@ -410,21 +183,22 @@ namespace DreamBeam
 			this.tabPage2.Controls.Add(this.label3);
 			this.tabPage2.Location = new System.Drawing.Point(4, 22);
 			this.tabPage2.Name = "tabPage2";
-			this.tabPage2.Size = new System.Drawing.Size(436, 195);
+			this.tabPage2.Size = new System.Drawing.Size(479, 174);
 			this.tabPage2.TabIndex = 1;
 			this.tabPage2.Text = "Thanks for 3rd Party Controls and Scripts";
 			// 
 			// linkLabel5
 			// 
+			this.linkLabel5.AutoSize = true;
 			this.linkLabel5.LinkColor = System.Drawing.Color.Black;
 			this.linkLabel5.Location = new System.Drawing.Point(256, 152);
 			this.linkLabel5.Name = "linkLabel5";
-			this.linkLabel5.Size = new System.Drawing.Size(120, 16);
+			this.linkLabel5.Size = new System.Drawing.Size(144, 13);
 			this.linkLabel5.TabIndex = 14;
 			this.linkLabel5.TabStop = true;
-			this.linkLabel5.Text = "www.codeproject.com";
+			this.linkLabel5.Text = "http://www.codeproject.com";
 			this.linkLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
+			this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.www_LinkClicked);
 			// 
 			// label5
 			// 
@@ -432,20 +206,20 @@ namespace DreamBeam
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(368, 16);
 			this.label5.TabIndex = 13;
-			this.label5.Text = "And thanks to the Code Project for all their Tutorials and Code-Sn" +  
-				"ippets.";
+			this.label5.Text = "And thanks to the Code Project for all their Tutorials and Code-Snippets.";
 			// 
 			// linkLabel4
 			// 
+			this.linkLabel4.AutoSize = true;
 			this.linkLabel4.LinkColor = System.Drawing.Color.Black;
 			this.linkLabel4.Location = new System.Drawing.Point(256, 96);
 			this.linkLabel4.Name = "linkLabel4";
-			this.linkLabel4.Size = new System.Drawing.Size(136, 16);
+			this.linkLabel4.Size = new System.Drawing.Size(160, 13);
 			this.linkLabel4.TabIndex = 12;
 			this.linkLabel4.TabStop = true;
-			this.linkLabel4.Text = "www.crosswire.org/sword";
+			this.linkLabel4.Text = "http://www.crosswire.org/sword";
 			this.linkLabel4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
+			this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.www_LinkClicked);
 			// 
 			// label4
 			// 
@@ -457,15 +231,16 @@ namespace DreamBeam
 			// 
 			// linkLabel3
 			// 
+			this.linkLabel3.AutoSize = true;
 			this.linkLabel3.LinkColor = System.Drawing.Color.Black;
 			this.linkLabel3.Location = new System.Drawing.Point(256, 48);
 			this.linkLabel3.Name = "linkLabel3";
-			this.linkLabel3.Size = new System.Drawing.Size(87, 16);
+			this.linkLabel3.Size = new System.Drawing.Size(113, 13);
 			this.linkLabel3.TabIndex = 10;
 			this.linkLabel3.TabStop = true;
-			this.linkLabel3.Text = "www.divil.co.uk";
+			this.linkLabel3.Text = "http://www.divil.co.uk";
 			this.linkLabel3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+			this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.www_LinkClicked);
 			// 
 			// label3
 			// 
@@ -473,83 +248,113 @@ namespace DreamBeam
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(392, 32);
 			this.label3.TabIndex = 0;
-			this.label3.Text = "Most of those eye candy things (menus, Toolbars, Docking Panels, D" +  
-				"ocument Manager) are from Tim Dawson. Great!";
+			this.label3.Text = "Most of those eye candy things (menus, Toolbars, Docking Panels, Document Manager" +
+				") are from Tim Dawson. Great!";
 			// 
-			// linkLabel2
+			// webSite1
 			// 
-			this.linkLabel2.LinkColor = System.Drawing.Color.Black;
-			this.linkLabel2.Location = new System.Drawing.Point(182, 97);
-			this.linkLabel2.Name = "linkLabel2";
-			this.linkLabel2.Size = new System.Drawing.Size(87, 16);
-			this.linkLabel2.TabIndex = 9;
-			this.linkLabel2.TabStop = true;
-			this.linkLabel2.Text = "www.staeff.de";
-			this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+			this.webSite1.AutoSize = true;
+			this.webSite1.LinkColor = System.Drawing.Color.Blue;
+			this.webSite1.Location = new System.Drawing.Point(3, 3);
+			this.webSite1.Name = "webSite1";
+			this.webSite1.Size = new System.Drawing.Size(135, 13);
+			this.webSite1.TabIndex = 9;
+			this.webSite1.TabStop = true;
+			this.webSite1.Text = "http://www.dreambeam.de";
+			this.webSite1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.www_LinkClicked);
 			// 
-			// linkLabel1
+			// email2
 			// 
-			this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-			this.linkLabel1.Location = new System.Drawing.Point(182, 80);
-			this.linkLabel1.Name = "linkLabel1";
-			this.linkLabel1.Size = new System.Drawing.Size(87, 16);
-			this.linkLabel1.TabIndex = 6;
-			this.linkLabel1.TabStop = true;
-			this.linkLabel1.Text = "staeff@staeff.de";
-			this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+			this.email2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.email2.LinkColor = System.Drawing.Color.Blue;
+			this.email2.Location = new System.Drawing.Point(233, 19);
+			this.email2.Name = "email2";
+			this.email2.Size = new System.Drawing.Size(246, 16);
+			this.email2.TabIndex = 6;
+			this.email2.TabStop = true;
+			this.email2.Text = "email2@text";
+			this.email2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.email2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.email_LinkClicked);
 			// 
-			// label2
+			// Copyright
 			// 
-			this.label2.Location = new System.Drawing.Point(150, 64);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(151, 15);
-			this.label2.TabIndex = 5;
-			this.label2.Text = "(c)2004 by Stefan Kaufmann";
-			this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label1
-			// 
-			this.label1.Location = new System.Drawing.Point(187, 46);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(77, 16);
-			this.label1.TabIndex = 4;
-			this.label1.Text = "Free Software";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// button1
-			// 
-			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button1.Location = new System.Drawing.Point(185, 341);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(80, 23);
-			this.button1.TabIndex = 3;
-			this.button1.Text = "OK";
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.Copyright.Location = new System.Drawing.Point(140, 43);
+			this.Copyright.Name = "Copyright";
+			this.Copyright.Size = new System.Drawing.Size(213, 41);
+			this.Copyright.TabIndex = 4;
+			this.Copyright.Text = "Free Software\r\n(c)2004 by Stefan Kaufmann\r\nPortions (c)2006-2008 Gabriel Burca";
+			this.Copyright.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// LabelVersion
 			// 
 			this.LabelVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.LabelVersion.Location = new System.Drawing.Point(174, 31);
+			this.LabelVersion.Location = new System.Drawing.Point(129, 30);
 			this.LabelVersion.Name = "LabelVersion";
-			this.LabelVersion.Size = new System.Drawing.Size(106, 16);
+			this.LabelVersion.Size = new System.Drawing.Size(234, 16);
 			this.LabelVersion.TabIndex = 2;
+			this.LabelVersion.Text = "Version";
+			this.LabelVersion.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
-			// Label
+			// OkButton
 			// 
-			this.Label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			this.Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Label.Location = new System.Drawing.Point(140, 0);
-			this.Label.Name = "Label";
-			this.Label.Size = new System.Drawing.Size(171, 30);
-			this.Label.TabIndex = 1;
-			this.Label.Text = "DreamBeam";
+			this.OkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.OkButton.Location = new System.Drawing.Point(206, 341);
+			this.OkButton.Name = "OkButton";
+			this.OkButton.Size = new System.Drawing.Size(80, 23);
+			this.OkButton.TabIndex = 3;
+			this.OkButton.Text = "OK";
+			this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
+			// 
+			// DreamBeam
+			// 
+			this.DreamBeam.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.DreamBeam.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.DreamBeam.Location = new System.Drawing.Point(103, 0);
+			this.DreamBeam.Name = "DreamBeam";
+			this.DreamBeam.Size = new System.Drawing.Size(287, 30);
+			this.DreamBeam.TabIndex = 1;
+			this.DreamBeam.Text = "DreamBeam";
+			this.DreamBeam.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// webSite2
+			// 
+			this.webSite2.AutoSize = true;
+			this.webSite2.LinkColor = System.Drawing.Color.Blue;
+			this.webSite2.Location = new System.Drawing.Point(3, 21);
+			this.webSite2.Name = "webSite2";
+			this.webSite2.Size = new System.Drawing.Size(214, 13);
+			this.webSite2.TabIndex = 11;
+			this.webSite2.TabStop = true;
+			this.webSite2.Text = "http://sourceforge.net/projects/dreambeam";
+			this.webSite2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.www_LinkClicked);
+			// 
+			// webSites
+			// 
+			this.webSites.Controls.Add(this.email1);
+			this.webSites.Controls.Add(this.webSite1);
+			this.webSites.Controls.Add(this.webSite2);
+			this.webSites.Controls.Add(this.email2);
+			this.webSites.Location = new System.Drawing.Point(3, 87);
+			this.webSites.Name = "webSites";
+			this.webSites.Size = new System.Drawing.Size(487, 42);
+			this.webSites.TabIndex = 12;
+			// 
+			// email1
+			// 
+			this.email1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.email1.Location = new System.Drawing.Point(233, 3);
+			this.email1.Name = "email1";
+			this.email1.Size = new System.Drawing.Size(246, 16);
+			this.email1.TabIndex = 0;
+			this.email1.TabStop = true;
+			this.email1.Text = "email1@text";
+			this.email1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.email1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.email_LinkClicked);
 			// 
 			// About
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(450, 370);
+			this.ClientSize = new System.Drawing.Size(495, 370);
 			this.ControlBox = false;
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -566,48 +371,37 @@ namespace DreamBeam
 			this.tabControl1.ResumeLayout(false);
 			this.tabPage1.ResumeLayout(false);
 			this.tabPage2.ResumeLayout(false);
+			this.tabPage2.PerformLayout();
+			this.webSites.ResumeLayout(false);
+			this.webSites.PerformLayout();
 			this.ResumeLayout(false);
+
 		}
 		#endregion
 
 		private void WinForm_Load(object sender, System.EventArgs e)
 		{
-			this.LabelVersion.Text = "Version: " + Application.ProductVersion.Substring(0, Application.ProductVersion.Length - Tools.Reverse(Application.ProductVersion).IndexOf(".")-1);
+			//this.LabelVersion.Text = "Version: " + Application.ProductVersion.Substring(0, Application.ProductVersion.Length - Tools.Reverse(Application.ProductVersion).IndexOf(".")-1);
+			this.LabelVersion.Text = "Version: " + Application.ProductVersion;
 		}
 		
-		private void button1_Click(object sender, System.EventArgs e)
+		private void OkButton_Click(object sender, System.EventArgs e)
 		{
 			this.Hide();
 		}
 		
-		private void linkLabel1_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+		private void email_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
 		{
-			System.Diagnostics.Process.Start("mailto:"+linkLabel1.Text);
+			LinkLabel label = sender as LinkLabel;
+			if (label != null)
+				System.Diagnostics.Process.Start("mailto:" + label.Text);
 		}
 
-		private void panel1_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
-		{
-
+		private void www_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e) {
+			LinkLabel label = sender as LinkLabel;
+			if (label != null)
+				System.Diagnostics.Process.Start(label.Text);
 		}
-
-		private void linkLabel2_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
-		{
-			System.Diagnostics.Process.Start("http://"+linkLabel2.Text);
-		}
-
-		private void linkLabel3_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e) {
-			System.Diagnostics.Process.Start("http://"+linkLabel3.Text);
-		}
-
-		private void linkLabel4_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e) {
-			System.Diagnostics.Process.Start("http://"+linkLabel4.Text);
-		}
-
-		private void linkLabel5_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e) {
-			System.Diagnostics.Process.Start("http://"+linkLabel5.Text);
-		}
-
-
 
 	}
 }

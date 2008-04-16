@@ -12,9 +12,14 @@
 ;--------------------------------
 ; General
 
-        ; Name and file
+        ; Name and file.
         !define VERSION "0.80"
+
+	; This ${PRODUCT} !define is used throughout this intaller for a lot of
+	; things including install directory names and links. It should probably
+	; never be changed.
         !define PRODUCT "DreamBeam"
+
 	Name "${PRODUCT} ${VERSION}"
 	
 	!ifdef FullInstall
@@ -24,7 +29,7 @@
 	!endif
 	
 	; Default installation folder
-	InstallDir "$PROGRAMFILES\DreamBeam"
+	InstallDir "$PROGRAMFILES\${PRODUCT}"
 
 	; Get installation folder from registry if available
 	InstallDirRegKey HKLM "Software\${PRODUCT}" ""
@@ -60,13 +65,15 @@
 	!insertmacro MUI_PAGE_COMPONENTS
 	!insertmacro MUI_PAGE_DIRECTORY
 	; Sample files
-	!define MUI_DIRECTORYPAGE_TEXT_TOP "Program settings and data directory. This is where the sample files will be installed and where DreamBeam will expect to find songs and other files. All files created by DreamBeam will also be saved to this directory by default."
+	!define MUI_DIRECTORYPAGE_TEXT_TOP "Program settings and data directory. This is where the sample files will be installed and where ${PRODUCT} will expect to find songs and other files. All files created by ${PRODUCT} will also be saved to this directory by default."
 	!define MUI_DIRECTORYPAGE_TEXT_DESTINATION "Program settings and data directory"
 	!define MUI_DIRECTORYPAGE_VARIABLE $USERFILES
 	!define MUI_DIRECTORYPAGE_VERIFYONLEAVE
 	!insertmacro MUI_PAGE_DIRECTORY
 
 	!insertmacro MUI_PAGE_INSTFILES
+
+	!define MUI_FINISHPAGE_TEXT "${PRODUCT} ${VERSION} has been installed on your computer.\r\n\r\nIf upgrading from a version of ${PRODUCT} prior to 0.80, you should copy all your songs, backgrounds, etc... to the program settings and data directory you selected earlier in the installation process. The location of this directory is also shown in the Options dialog box once ${PRODUCT} is running.\r\n\r\nClick Finish to close this wizard."
 	!insertmacro MUI_PAGE_FINISH
 
 	!insertmacro MUI_UNPAGE_CONFIRM
@@ -74,7 +81,7 @@
 	!insertmacro MUI_UNPAGE_INSTFILES
   
 ;--------------------------------------
-; !insertmacro MUI_WELCOMEPAGE_TITLE "DreamBeam Installation"
+; !insertmacro MUI_WELCOMEPAGE_TITLE "${PRODUCT} Installation"
 
 ;--------------------------------
 ; Languages
@@ -151,9 +158,9 @@ Section "DreamBeam" SDreamBeam
 	; Apparently the OutPath determines the "Start in" directory used for the shortcut.
 	SetOutPath "$INSTDIR"
 	CreateDirectory "$SMPROGRAMS\${PRODUCT}"
-	CreateShortCut "$SMPROGRAMS\DreamBeam\DreamBeam.lnk" "$INSTDIR\DreamBeam.exe"
-	CreateShortCut "$SMPROGRAMS\DreamBeam\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
-	CreateShortCut "$DESKTOP\DreamBeam.lnk" "$INSTDIR\DreamBeam.exe"
+	CreateShortCut "$SMPROGRAMS\${PRODUCT}\${PRODUCT}.lnk" "$INSTDIR\DreamBeam.exe"
+	CreateShortCut "$SMPROGRAMS\${PRODUCT}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+	CreateShortCut "$DESKTOP\${PRODUCT}.lnk" "$INSTDIR\DreamBeam.exe"
 
 	
 	; Store installation folder
@@ -176,32 +183,32 @@ SectionEnd
 ; Subsections should default to optional if this is an update so that
 ; we don't overwrite the user's data with the sample files.
 SectionGroup /e "Sample Files" SSampleFiles
-	Section /o "Configuration files" SConfigFiles
+	Section "Configuration files" SConfigFiles
 	        SetOutPath "$USERFILES"
 	        File /r /x .svn SampleFiles\ConfigFiles\*.*
 	SectionEnd
 	
-	Section /o "Songs" SSongs
+	Section "Songs" SSongs
 		SetOutPath "$USERFILES\Songs"
 		File /r /x .svn SampleFiles\Songs\*.*
 	SectionEnd
 	
-	Section /o "Backgrounds" SBackgrounds
+	Section "Backgrounds" SBackgrounds
 	        SetOutPath "$USERFILES\Backgrounds"
 	        File /r /x .svn SampleFiles\Backgrounds\*.*
 	SectionEnd
 	
-	Section /o "Media files" SMediaFiles
+	Section "Media files" SMediaFiles
 	        SetOutPath "$USERFILES\MediaFiles"
 		File /r /x .svn SampleFiles\MediaFiles\*.*
 	SectionEnd
 
-	Section /o "Media lists" SMediaLists
+	Section "Media lists" SMediaLists
 		SetOutPath "$USERFILES\MediaLists"
 		File /r /x .svn SampleFiles\MediaLists\*.*
 	SectionEnd
 
-	Section /o "Themes" SThemes
+	Section "Themes" SThemes
 		SetOutPath "$USERFILES\Themes"
 		File /nonfatal /r /x .svn SampleFiles\Themes\*.*
 	SectionEnd
@@ -232,8 +239,8 @@ Section "un.Uninstall DreamBeam" SUnDreamBeam
 	UnRegDll "$INSTDIR\ActiveDiatheke.ocx"
 
 	; Delete DreamBeam Files
-	Delete "$SMPROGRAMS\DreamBeam\DreamBeam.lnk"
-	Delete "$DESKTOP\DreamBeam.lnk"
+	Delete "$SMPROGRAMS\${PRODUCT}\${PRODUCT}.lnk"
+	Delete "$DESKTOP\${PRODUCT}.lnk"
 
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}"
 	StrCpy $ShouldCleanRegistry "YES"
@@ -322,7 +329,7 @@ SectionEnd
 ;--------------------------------
 ; Section descriptions
 LangString DESC_SDreamBeam	${LANG_ENGLISH} "Main application"
-LangString DESC_SSampleFiles	${LANG_ENGLISH} "Sample files"
+LangString DESC_SSampleFiles	${LANG_ENGLISH} "Sample files. You should install all the sample files unless you already have a version >= 0.80 of ${PRODUCT} installed."
 LangString DESC_SConfigFiles	${LANG_ENGLISH} "Configuration files"
 LangString DESC_SSongs		${LANG_ENGLISH} "Song files"
 LangString DESC_SBackgrounds	${LANG_ENGLISH} "Background graphic files"
@@ -331,7 +338,7 @@ LangString DESC_SMediaLists	${LANG_ENGLISH} "Multimedia lists"
 LangString DESC_SThemes		${LANG_ENGLISH} "Theme files"
 ; The Uninstall sections
 LangString DESC_SUnDreamBeam	${LANG_ENGLISH} "Main application"
-LangString DESC_SUnAppFiles	${LANG_ENGLISH} "Uninstall/delete various files created by DreamBeam"
+LangString DESC_SUnAppFiles	${LANG_ENGLISH} "Uninstall/delete various files created by ${PRODUCT}"
 LangString DESC_SUnConfigFiles	${LANG_ENGLISH} "Uninstall/delete configuration files"
 LangString DESC_SUnSongs	${LANG_ENGLISH} "Uninstall/delete sample and user-created Song files"
 LangString DESC_SUnBackgrounds	${LANG_ENGLISH} "Uninstall/delete background graphic files"

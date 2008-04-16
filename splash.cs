@@ -20,7 +20,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Label label1;
 		public string version = "";
-		public string InfoText = " Copyright 2004 Stefan Kaufmann (with major contributions by Gabriel Burca) \n This Software is distributed under the terms of the GNU General Public License. \n";
+		public string InfoText = "Copyright 2004 Stefan Kaufmann\nPortions Copyright 2006-2008 Gabriel Burca\nThis Software is distributed under the terms of the GNU General Public License.\n";
 
 
 		// Threading
@@ -98,41 +98,42 @@ namespace DreamBeam {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(Splash));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Splash));
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
-			//
+			// 
 			// pictureBox1
-			//
+			// 
 			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
 			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(600, 371);
 			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
-			//
+			// 
 			// label1
-			//
+			// 
 			this.label1.BackColor = System.Drawing.Color.White;
 			this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.label1.Location = new System.Drawing.Point(0, 370);
+			this.label1.Location = new System.Drawing.Point(0, 368);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(600, 70);
+			this.label1.Size = new System.Drawing.Size(600, 78);
 			this.label1.TabIndex = 2;
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			//
+			// 
 			// timer1
-			//
+			// 
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-			//
+			// 
 			// Splash
-			//
+			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
 			this.BackColor = System.Drawing.Color.Black;
-			this.ClientSize = new System.Drawing.Size(600, 440);
+			this.ClientSize = new System.Drawing.Size(600, 446);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.pictureBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -140,7 +141,9 @@ namespace DreamBeam {
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "WinForm";
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
+
 		}
 		#endregion
 

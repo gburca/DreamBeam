@@ -432,6 +432,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="ChangeLog.txt" />
+    <None Include="Resources\GnuLicense.txt" />
     <None Include="Icons\go-top.png" />
     <None Include="Icons\go-bottom.png" />
     <None Include="Icons\go-up.png" />
