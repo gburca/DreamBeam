@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual C# Express 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DreamBeam", "DreamBeam.csproj", "{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}"
 	ProjectSection(ProjectDependencies) = postProject
 		{98096340-5853-42D0-8B2F-1CD364C5A152} = {98096340-5853-42D0-8B2F-1CD364C5A152}
