@@ -2170,7 +2170,6 @@ namespace DreamBeam {
 			this.Sermon_BibleKey.Size = new System.Drawing.Size(128, 20);
 			this.Sermon_BibleKey.TabIndex = 3;
 			this.MainForm_ToolTip.SetToolTip(this.Sermon_BibleKey, "You can enter a reference, or a range: \"Mat 1:1 - 1:8\"");
-			this.Sermon_BibleKey.TextChanged += new System.EventHandler(this.Sermon_BibleKey_TextChanged);
 			this.Sermon_BibleKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Sermon_BibleKey_KeyDown);
 			// 
 			// Main_ErrorProvider

@@ -18,12 +18,15 @@ namespace DreamBeam {
 		public MainForm _MainForm;
 		private Color showBeamBackground;
 		private Boolean loadComplete = false;
+        private BackgroundWorker swordWorker;
 
 		public Options(MainForm mainForm) {
 			_MainForm = mainForm;
 			Lang = mainForm.Lang;
 
 			InitializeComponent();
+            InitializeBackgroundWorker();
+
 			this.DataDirectory.Text = Tools.GetAppDocPath();
 
 			PopulateBibleCacheTab();
@@ -35,6 +38,7 @@ namespace DreamBeam {
 
 			SizeColumns(this.BibleConversions_dataGrid);
 		}
+
 
 		/// <summary>
 		/// Ressourcen nach der Verwendung bereinigen
@@ -138,7 +142,7 @@ namespace DreamBeam {
 			this._MainForm.UpdateDisplaySizes();
 
 			config.SwordPath = this.Sword_PathBox.Text;
-			this._MainForm.Check_SwordProject(config);
+			//this._MainForm.Check_SwordProject(config);
 
 			if (!String.IsNullOrEmpty(this.Sword_LanguageBox.Text)) {
 				config.BibleLang = this.Sword_LanguageBox.Text;
@@ -437,38 +441,114 @@ namespace DreamBeam {
 				BiblesAvailable_listEx.Add(book, 0);
 			}
 
-		}
+        }
 
-		private void onProgress(object sender, EventArgs sent) {
-			Console.WriteLine("onProgress");
-			if (BibleCache_progressBar.Value == BibleCache_progressBar.Maximum) {
-				BibleCache_progressBar.Value = BibleCache_progressBar.Minimum;
-			} else {
-				BibleCache_progressBar.Value++;
-			}
-		}
+        #region Sword Worker Thread
 
-		/// <summary>
+        // This event handler is where the actual,
+        // potentially time-consuming work is done.
+        private void swordWorker_DoWork(object sender,
+            DoWorkEventArgs e) {
+            // Get the BackgroundWorker that raised this event.
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            // Assign the result of the computation
+            // to the Result property of the DoWorkEventArgs
+            // object. This is will be available to the 
+            // RunWorkerCompleted eventhandler.
+            WorkerArgs wArgs = (WorkerArgs)e.Argument;
+            e.Result = _MainForm.bibles.Add(worker, e, wArgs.tr, Options_RegEx_Table, null);
+            //e.Result = _MainForm.bibles.Add(_MainForm.Diatheke, wArgs.tr, Options_RegEx_Table, new EventHandler(this.onProgress));
+        }
+
+        private void swordWorker_RunWorkerCompleted(
+            object sender,
+            RunWorkerCompletedEventArgs e) {
+
+            bool added;
+
+            // First, handle the case where an exception was thrown.
+            if (e.Error != null) {
+                MessageBox.Show(e.Error.Message);
+                added = false;
+            } else if (e.Cancelled) {
+                // Next, handle the case where the user canceled 
+                // the operation.
+                // Note that due to a race condition in 
+                // the DoWork event handler, the Cancelled
+                // flag may not have been set, even though
+                // CancelAsync was called.
+                added = false;
+            } else {
+                // Finally, handle the case where the operation 
+                // succeeded.
+
+                // e.Result.ToString();
+                added = (bool)e.Result;
+            }
+
+            if (added) {
+                int Index = BiblesAvailable_listEx.SelectedIndex;
+                string tr = BiblesAvailable_listEx.Items[Index].ToString();
+
+                BiblesAvailable_listEx.Remove(Index);
+                _MainForm.BibleText_Translations_Populate();
+                BiblesCached_listEx.Add(tr, 1);
+            }
+
+            BibleCache_progressBar.Value = BibleCache_progressBar.Maximum;
+            BibleCache_Message.Visible = false;
+            BibleCache_progressBar.Visible = false;
+        }
+
+        // This event handler updates the progress bar.
+        private void swordWorker_ProgressChanged(object sender,
+            ProgressChangedEventArgs e) {
+            BibleCache_progressBar.Value = e.ProgressPercentage;
+        }
+
+        // Set up the BackgroundWorker object by 
+        // attaching event handlers. 
+        private void InitializeBackgroundWorker() {
+            swordWorker = new BackgroundWorker();
+
+            swordWorker.WorkerReportsProgress = true;
+            swordWorker.WorkerSupportsCancellation = true;
+
+            swordWorker.DoWork +=
+                new DoWorkEventHandler(swordWorker_DoWork);
+
+            swordWorker.RunWorkerCompleted +=
+                new RunWorkerCompletedEventHandler(
+            swordWorker_RunWorkerCompleted);
+
+            swordWorker.ProgressChanged +=
+                new ProgressChangedEventHandler(
+            swordWorker_ProgressChanged);
+        }
+
+        struct WorkerArgs {
+            public string tr;
+            public System.Data.DataTable replacements;
+        }
+        #endregion
+
+        /// <summary>
 		/// Adds a bible translation to the cache
-		/// 
-		/// TODO: Make use of the progress bar because this is a very slow process.
 		/// </summary>
 		/// <param name="Index"></param>
 		private void BiblesAvailable_listEx_PressIcon(int Index) {
-			string tr = BiblesAvailable_listEx.Items[Index].ToString();
-
 			BibleCache_Message.Visible = true;
-			BibleCache_progressBar.Value = BibleCache_progressBar.Maximum / 10;
+            BibleCache_progressBar.Visible = true;
+			BibleCache_progressBar.Value = 0;
 
-			if (_MainForm.bibles.Add(_MainForm.Diatheke, tr, Options_RegEx_Table, new EventHandler(this.onProgress))) {
-				BiblesAvailable_listEx.Remove(Index);
-				_MainForm.BibleText_Translations_Populate();
-				BiblesCached_listEx.Add(tr, 1);
-			}
+            WorkerArgs wArgs;
+            wArgs.tr = BiblesAvailable_listEx.Items[Index].ToString();
+            wArgs.replacements = Options_RegEx_Table;
 
-			BibleCache_progressBar.Value = BibleCache_progressBar.Maximum;
-			BibleCache_Message.Visible = false;
+            swordWorker.RunWorkerAsync(wArgs);
 		}
+
 		private void BiblesAvailable_listEx_DoubleClick(object sender, System.EventArgs e) {
 			BiblesAvailable_listEx_PressIcon(BiblesAvailable_listEx.SelectedIndex);
 		}

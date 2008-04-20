@@ -29,6 +29,8 @@ using System.Threading;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 
 namespace DreamBeam.FileTypes {
@@ -50,6 +52,97 @@ namespace DreamBeam.FileTypes {
 		public string Long;
 	}
 	#endregion
+
+    /// <summary>
+    /// A simple wrapper around Sword
+    /// </summary>
+    public class SwordW {
+        static SwordW instance = null;
+
+        static MarkupFilterMgr filterManager = new MarkupFilterMgr((char)Sword.FMT_PLAIN, (char)Sword.ENC_UTF8);
+        SWMgr manager = new SWMgr(filterManager);
+        //SWModule module = null;
+
+        public static SwordW Instance() {
+            if (instance == null)
+                instance = new SwordW();
+            return instance;
+        }
+
+        private SwordW() {
+            GC.SuppressFinalize(filterManager); // Handled by SWMgr
+            string d = Debug();
+        }
+
+        public string Debug() {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (string s in getModules(null)) {
+                sb.Append("Module: " + s + "\n");
+            }
+            foreach (string s in getBibles()) {
+                sb.Append("Bible: " + s + "\n");
+            }
+            foreach (string s in getGlobalOptions()) {
+                sb.Append("GlobalOption: " + s + "\n");
+            }
+            foreach (string s in getBooks("KJV")) {
+                sb.Append("Book: " + s + "\n");
+            }
+
+            LocaleMgr lm = LocaleMgr.getSystemLocaleMgr();
+            sb.Append("DefaultLocale: " + lm.getDefaultLocaleName() + "\n");
+
+            return sb.ToString();
+        }
+
+        public List<string> getBibles() {
+            return getModules("Biblical Texts");
+        }
+
+        public List<string> getModules(string type) {
+            List<string> modules = new List<string>();
+
+            int numOfBibles = (int)manager.getModules().size();
+            for (int i = 0; i < numOfBibles; i++) {
+                if (String.IsNullOrEmpty(type)) {
+                    modules.Add(manager.getModuleAt(i).Name());
+                } else if (manager.getModuleAt(i).Type().Equals(type)) {
+                    modules.Add(manager.getModuleAt(i).Name());
+                }
+            }
+
+            return modules;
+        }
+
+        public SWModule getModule(string modName) {
+            return manager.getModule(modName);
+        }
+
+        public List<string> getGlobalOptions() {
+            List<string> options = new List<string>();
+            StringVector sv = manager.getGlobalOptionsVector();
+            foreach (SWBuf s in sv) {
+                options.Add(s.c_str());
+            }
+            return options;
+        }
+
+        public List<string> getBooks(string moduleName) {
+            List<string> books = new List<string>();
+
+            VerseKey verseKey = new VerseKey("Gen 1:1");
+            //SWModule module = manager.getModule(moduleName);
+
+            while (verseKey.Error() == '\0') {
+                books.Add(verseKey.getBookName());
+                verseKey.Book((char)((int)verseKey.Book() + 1));
+            }
+
+            return books;
+        }
+    }
+    
 	/// <summary>
 	/// This class is a wrapper around Diatheke and other bible sources. It
 	/// takes a long time to retrieve one bible translation in its entirety from
@@ -106,6 +199,24 @@ namespace DreamBeam.FileTypes {
 			}
 		}
 
+        public bool Add(BackgroundWorker worker, DoWorkEventArgs evArg, string version, System.Data.DataTable replacements, EventHandler onProgress) {
+            //TH1 helper = new TH1(version, replacements, onProgress);
+            //Thread thread = new Thread(new ThreadStart(helper.Run));
+            //thread.Name = "Sword reading thread";
+            //thread.Start();
+            //thread.Join();
+
+            BibleVersion b = new BibleVersion(worker, evArg, version, replacements, onProgress);
+            //BibleVersion b = helper.b;
+            if (b.VerseCount > 0) {
+                this.IsDirty = true;
+                this.Remove(version);
+                versions.Add(version, b);
+                return true;
+            }
+            return false;
+        }
+
 		public bool Add(AxACTIVEDIATHEKELib.AxActiveDiatheke Diatheke, string version) {
 			return Add(Diatheke, version, null);
 		}
@@ -113,33 +224,15 @@ namespace DreamBeam.FileTypes {
 			return Add(Diatheke, version, replacements, null);
 		}
 		public bool Add(AxACTIVEDIATHEKELib.AxActiveDiatheke Diatheke, string version, System.Data.DataTable replacements, EventHandler onProgress) {
-			//Thread timerThread = null;
 			Thread diathekeThread = null;
-			//TimerThreadHelper threadHelper;
 			DiathekeThreadHelper diathekeHelper;
 			bool diathekeAutoupdate = Diatheke.autoupdate;
 			bool result = false;
 
-			//System.EventArgs e = new System.EventArgs();
 			Diatheke.autoupdate = false;
 			Diatheke.book = version;
 			Diatheke.maxverses = -1;
-			//Diatheke.key = "Gen 1:1 - Lev 7:3";
-			//Diatheke.key = "Gen 1:1 - Gen 1:3";
 			Diatheke.key = "Gen 1:1 - Rev 22:21";
-
-			/*
-			if (onProgress != null) {
-				try {
-					threadHelper = new TimerThreadHelper(500, onProgress);
-					timerThread = new Thread( new ThreadStart(threadHelper.Run) );
-					timerThread.Name = "Timer thread";
-					//timerThread.Start();
-				} catch (Exception ex) {
-					Console.WriteLine("Thread helper: " + ex.Message);
-				}
-			}
-			*/
 
 			Tools.ElapsedTime("Retrieving bible text: " + version + "  " + Diatheke.key);
 			diathekeHelper = new DiathekeThreadHelper(Diatheke);
@@ -218,7 +311,6 @@ namespace DreamBeam.FileTypes {
 		private string _version;
 		private BibleVerse[] verses = new BibleVerse[31102];
 		private int _VerseCount;
-		//private string[] books = new string[66];
 		public BibleBook[] BibleBooks = new BibleBook[66];
 		/// <summary>
 		/// Sword uses the following book names as standard. They're needed to interpret the localization
@@ -236,7 +328,7 @@ namespace DreamBeam.FileTypes {
 			"Philemon", "Hebrews", "James", "I Peter", "II Peter", "I John", "II John", 
 			"III John", "Jude", "Revelation of John"};
 
-		private System.Data.DataTable _replacements;
+		private System.Data.DataTable _replacements = null;
 
 		public BibleVersion(string version) : this(version, null) { }
 		public BibleVersion(string version, string diathekeText) : this(version, diathekeText, null) { }
@@ -248,6 +340,58 @@ namespace DreamBeam.FileTypes {
 				ParseDiathekePlain(diathekeText, onProgress);
 			}
 		}
+
+        public BibleVersion(BackgroundWorker worker, DoWorkEventArgs evArg, string version, System.Data.DataTable replacements, EventHandler onProgress) {
+            _version = version;
+            _replacements = replacements;
+            int i = 0, b = -1, book;
+            System.EventArgs e = new System.EventArgs();
+            SWModule module = SwordW.Instance().getModule(version);
+            VerseKey vk = new VerseKey("Gen 1:1");
+
+            while (vk.Error() == '\0') {
+                if ((i % 300) == 0) {
+                    int progress = (int)(((float)i / 31102F) * 100);
+                    worker.ReportProgress(progress);
+                }
+                string t = Tools.Diatheke_ConvertEncoding(module.RenderText(vk)).Trim();
+                book = vk.Book() - 1;
+
+                // Book numbering starts back up from 1 in the New Testament
+                if (book < b) {
+                    book += 39;
+                }
+                BibleVerse v = new BibleVerse(i, book, vk.Chapter(), vk.Verse(), t);
+                if (_replacements != null) {
+                    v.t2 = Replace(v.t);
+                }
+                verses[i] = v;
+                if (b < book) {
+                    b++;
+                    BibleBooks[b].Long = vk.getBookName();
+                    Console.WriteLine("Processing " + BibleBooks[b].Long);
+                    if (worker.CancellationPending) {
+                        evArg.Cancel = true;
+                    }
+                }
+                i++;
+                vk.increment();
+            }
+
+            _VerseCount = i;
+
+            for (i = 0; i < this.BibleBooks.Length; i++) {
+                if (BibleBooks[i].Long == null) BibleBooks[i].Long = "";
+                string bk = BibleBooks[i].Long;
+                bk = Regex.Replace(bk.Trim(), @"^III ", "3 ");
+                bk = Regex.Replace(bk, @"^II ", "2 ");
+                bk = Regex.Replace(bk, @"^I ", "1 ");
+                BibleBooks[i].Long = bk;
+                BibleBooks[i].Short = bk;
+            }
+
+            worker.ReportProgress(100);
+        }
 
 		#region Properties
 		/// <summary>
@@ -586,33 +730,6 @@ namespace DreamBeam.FileTypes {
 		}
 	}
 
-	#region Experimental code. Could be removed
-	public class TimerThreadHelper {
-		private EventHandler onProgress;
-		System.Windows.Forms.Timer timer;
-
-		public TimerThreadHelper(int interval, EventHandler onProgress) {
-			this.onProgress = onProgress;
-			timer = new System.Windows.Forms.Timer();
-			timer.Interval = interval;
-			timer.Tick += onProgress;
-		}
-
-		~TimerThreadHelper() {
-			timer.Tick -= onProgress;
-			timer.Stop();
-		}
-
-		public void Run() {
-			Console.WriteLine("About to start timer");
-			timer.Enabled = true;
-			timer.Start();
-			while (timer.Enabled) {
-				Thread.Sleep(1000);
-			}
-		}
-	}
-
 	public class DiathekeThreadHelper {
 		AxACTIVEDIATHEKELib.AxActiveDiatheke Diatheke;
 
@@ -625,7 +742,6 @@ namespace DreamBeam.FileTypes {
 			Diatheke.query();
 		}
 	}
-	#endregion
 
 	/// <summary>
 	/// This class contains all the details (font, background, etc...) required to properly display a verse.

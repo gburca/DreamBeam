@@ -182,7 +182,7 @@ namespace DreamBeam {
 
 			this.Hide();
 
-			this.SwordProject_Found = this.Check_SwordProject(this.Config);
+            this.SwordProject_Found = this.Check_SwordProject(this.Config);
 			Splash.ShowSplashScreen();
 			Splash.SetStatus("Initializing");
 			InitializeComponent();
@@ -1947,16 +1947,6 @@ namespace DreamBeam {
 
 			if (this.SwordProject_Found) {
 
-				// Configure the locale. This causes Diatheke to die. Why?
-				//				 this.Options.Sword_LanguageBox.Items.Clear();
-				//				 Diatheke.book = "system";
-				//				 Diatheke.key = "localelist";
-				//				 Diatheke.locale = "en";
-				//				 Diatheke.query();
-				//				 foreach (string lang in Diatheke.value.Split('\n')) {
-				//					 if (lang != "abbr") this.Options.Sword_LanguageBox.Items.Add(lang);
-				//				 }
-
 				this.Options.Sword_LanguageBox.Items.Clear();
 				foreach (string locale in this.GetLocales()) {
 					this.Options.Sword_LanguageBox.Items.Add(locale);
@@ -1965,21 +1955,18 @@ namespace DreamBeam {
 					this.Options.Sword_LanguageBox.SelectedItem = this.Config.BibleLang;
 				} catch { }
 
-				Diatheke.locale = this.Sermon_BibleLang;
-				Diatheke.outputformat = Convert.ToInt16(DiathekeOutputFormat.PlainText);
-				// and add them each to the list control
-				int i = 0;
-				int match = 0;
-				foreach (string Book in this.DiathekeBooks(false)) {
-					Sermon_Books.Items.Add(Book);
-					if (Book == this.Config.LastBibleUsed) {
-						match = i;
-					}
-					i++;
-				}
-				if (this.Sermon_Books.Items.Count > 0) {
-					this.Sermon_Books.SelectedIndex = match;
-				}
+                int i = 0, match = 0;
+                foreach (string Book in SwordW.Instance().getBibles()) {
+                    Sermon_Books.Items.Add(Book);
+                    if (Book == this.Config.LastBibleUsed) {
+                        match = i;
+                    }
+                    i++;
+                }
+
+                if (this.Sermon_Books.Items.Count > match) {
+                    this.Sermon_Books.SelectedIndex = match;
+                }
 
 				Diatheke.autoupdate = false;
 				// We can't use the Diatheke.ValueChanged event, or we'll get the whole bible in the
@@ -1989,10 +1976,13 @@ namespace DreamBeam {
 				BibleText_Translations.SelectedIndexChanged += new EventHandler(BibleText_Translations_SelectedIndexChanged);
 
 				//split the book list by line into an array
-				String[] Books = BibleBooks[0].Split(',');
-				foreach (string Book in Books) {
-					Sermon_BookList.Items.Add(Book);
-				}
+                //String[] Books = BibleBooks[0].Split(',');
+                //foreach (string Book in Books) {
+                //    Sermon_BookList.Items.Add(Book);
+                //}
+                foreach (string s in SwordW.Instance().getBooks("KJV")) {
+                    Sermon_BookList.Items.Add(s);
+                }
 			}
 		}
 
@@ -2005,71 +1995,68 @@ namespace DreamBeam {
 			}
 		}
 
-		private void Diatheke_ValueChanged() {
-			if (this.SwordProject_Found) {
-				string vText = Tools.Diatheke_ConvertEncoding(Diatheke.value);
+        private void Sermon_AddBibleText(string reference, string version) {
+            MarkupFilterMgr filterManager = new MarkupFilterMgr((char)Sword.FMT_PLAIN, (char)Sword.ENC_UTF8);
+            GC.SuppressFinalize(filterManager); // Will be handled by SWMgr
+            SWMgr manager = new SWMgr(filterManager);
 
-				if (String.IsNullOrEmpty(vText)) return;
-				vText = vText.TrimEnd('\n');
+            SWModule module = manager.getModule(version);
+            VerseKey vk = new VerseKey(reference);
 
-				if (!this.Sermon_ShowBibleTranslation) {
-					string tr = "\n(" + Diatheke.book + ")";
-					if (vText.EndsWith(tr)) {
-						vText = vText.Remove(vText.Length - tr.Length);
-					}
-				}
+            StringBuilder sb = new StringBuilder();
+            bool finished = false;
 
-				// We're searching for a Bible text reference. Ex: "Gen 7:4: Verse text..."
-				Regex r = new Regex(@"^[^:]+\d+:\d+:\s*(.*)");
-				Match m;
-				string result = "";
+            //if (vk.Error() == '\0') {
+            while (!finished && vk.Error() == '\0') {
+                string v = module.RenderText(vk);
+                string r = vk.getShortText();
 
-				// filter out the Verse reference
-				foreach (string line in vText.Split('\n')) {
-					m = r.Match(line);
-					if (m.Success && m.Groups.Count == 2) {
-						result += "\n" + m.Groups[1].Value;
-					} else {
-						result += "\n" + line;
-					}
-				}
+                if (!String.IsNullOrEmpty(v)) {
+                    sb.Append(Tools.Diatheke_ConvertEncoding(v).Trim());
+                }
 
-				// Make sure we have a FocusedDocument to add the text to...
-				if (Sermon_DocManager.FocusedDocument == null) {
-					if (Sermon_DocManager.TabStrips.Count > 0 &&
-						Sermon_DocManager.TabStrips[0].Documents.Count > 0) {
+                //if (this.Sermon_ShowBibleTranslation && !String.IsNullOrEmpty(r)) {
+                if (!String.IsNullOrEmpty(r)) {
+                    sb.Append("\n");
+                    sb.Append("(" + Tools.Diatheke_ConvertEncoding(r) + ")");
+                }
 
-						if (Sermon_DocManager.TabStrips[0].SelectedDocument != null) {
-							Sermon_DocManager.FocusedDocument = Sermon_DocManager.TabStrips[0].SelectedDocument;
-						} else {
-							// Set the focus to the first document
-							Sermon_DocManager.FocusedDocument = Sermon_DocManager.TabStrips[0].Documents[0];
-						}
-					} else {
-						Sermon_NewDocument();
-					}
-				}
+                sb.Append("\n");
 
-				Sermon_DocManager.FocusedDocument.Control.Text += result;
+                // Make sure we have a FocusedDocument to add the text to...
+                if (Sermon_DocManager.FocusedDocument == null) {
+                    if (Sermon_DocManager.TabStrips.Count > 0 &&
+                        Sermon_DocManager.TabStrips[0].Documents.Count > 0) {
 
-				// Tab text
-				Sermon_DocManager.FocusedDocument.Text = Diatheke.key;
-			}
-		}
+                        if (Sermon_DocManager.TabStrips[0].SelectedDocument != null) {
+                            Sermon_DocManager.FocusedDocument = Sermon_DocManager.TabStrips[0].SelectedDocument;
+                        } else {
+                            // Set the focus to the first document
+                            Sermon_DocManager.FocusedDocument = Sermon_DocManager.TabStrips[0].Documents[0];
+                        }
+                    } else {
+                        Sermon_NewDocument();
+                    }
+                }
+
+                Sermon_DocManager.FocusedDocument.Control.Text += sb.ToString();
+
+                // Tab text
+                //Sermon_DocManager.FocusedDocument.Text = r;
+                if (vk.isBoundSet() && (vk.compare(vk.UpperBound()) <= 0)) {
+                    vk.increment();
+                    finished = false;
+                } else {
+                    finished = true;
+                }
+            }
+        }
 
 		private void Sermon_BibleKey_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e) {
 			if (this.SwordProject_Found) {
 				if (e.KeyCode == Keys.Enter) {
-					this.Diatheke.book = Sermon_Books.Items[Sermon_Books.SelectedIndex].ToString();
-					Diatheke.query();
-					Diatheke_ValueChanged();
-				}
-			}
-		}
-		private void Sermon_BibleKey_TextChanged(object sender, System.EventArgs e) {
-			if (this.SwordProject_Found) {
-				this.Diatheke.autoupdate = false;
-				this.Diatheke.key = Sermon_BibleKey.Text;
+                    Sermon_AddBibleText(Sermon_BibleKey.Text, Sermon_Books.Items[Sermon_Books.SelectedIndex].ToString());
+                }
 			}
 		}
 

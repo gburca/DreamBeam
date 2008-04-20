@@ -168,6 +168,10 @@
       <Name>SandDock</Name>
       <HintPath>libs\SandDock.dll</HintPath>
     </Reference>
+    <Reference Include="SwigSword, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ComImports\SwigSword.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
