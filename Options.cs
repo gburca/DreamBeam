@@ -457,8 +457,7 @@ namespace DreamBeam {
             // object. This is will be available to the 
             // RunWorkerCompleted eventhandler.
             WorkerArgs wArgs = (WorkerArgs)e.Argument;
-            e.Result = _MainForm.bibles.Add(worker, e, wArgs.tr, Options_RegEx_Table, null);
-            //e.Result = _MainForm.bibles.Add(_MainForm.Diatheke, wArgs.tr, Options_RegEx_Table, new EventHandler(this.onProgress));
+            e.Result = _MainForm.bibles.Add(worker, e, wArgs.tr, Options_RegEx_Table);
         }
 
         private void swordWorker_RunWorkerCompleted(

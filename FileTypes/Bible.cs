@@ -199,15 +199,8 @@ namespace DreamBeam.FileTypes {
 			}
 		}
 
-        public bool Add(BackgroundWorker worker, DoWorkEventArgs evArg, string version, System.Data.DataTable replacements, EventHandler onProgress) {
-            //TH1 helper = new TH1(version, replacements, onProgress);
-            //Thread thread = new Thread(new ThreadStart(helper.Run));
-            //thread.Name = "Sword reading thread";
-            //thread.Start();
-            //thread.Join();
-
-            BibleVersion b = new BibleVersion(worker, evArg, version, replacements, onProgress);
-            //BibleVersion b = helper.b;
+        public bool Add(BackgroundWorker worker, DoWorkEventArgs evArg, string version, System.Data.DataTable replacements) {
+            BibleVersion b = new BibleVersion(worker, evArg, version, replacements);
             if (b.VerseCount > 0) {
                 this.IsDirty = true;
                 this.Remove(version);
@@ -216,48 +209,6 @@ namespace DreamBeam.FileTypes {
             }
             return false;
         }
-
-		public bool Add(AxACTIVEDIATHEKELib.AxActiveDiatheke Diatheke, string version) {
-			return Add(Diatheke, version, null);
-		}
-		public bool Add(AxACTIVEDIATHEKELib.AxActiveDiatheke Diatheke, string version, System.Data.DataTable replacements) {
-			return Add(Diatheke, version, replacements, null);
-		}
-		public bool Add(AxACTIVEDIATHEKELib.AxActiveDiatheke Diatheke, string version, System.Data.DataTable replacements, EventHandler onProgress) {
-			Thread diathekeThread = null;
-			DiathekeThreadHelper diathekeHelper;
-			bool diathekeAutoupdate = Diatheke.autoupdate;
-			bool result = false;
-
-			Diatheke.autoupdate = false;
-			Diatheke.book = version;
-			Diatheke.maxverses = -1;
-			Diatheke.key = "Gen 1:1 - Rev 22:21";
-
-			Tools.ElapsedTime("Retrieving bible text: " + version + "  " + Diatheke.key);
-			diathekeHelper = new DiathekeThreadHelper(Diatheke);
-			diathekeThread = new Thread(new ThreadStart(diathekeHelper.Run));
-			diathekeThread.Name = "Diatheke reading thread";
-			diathekeThread.Start();
-			diathekeThread.Join();
-
-			//if (onProgress != null) { Console.WriteLine("Stop thread"); timerThread = null; }
-			if (Diatheke.value.Length > 100) {
-				BibleVersion b = new BibleVersion(version, Diatheke.value, replacements, onProgress);
-				if (b.VerseCount > 0) {
-					this.IsDirty = true;
-					this.Remove(version);
-					versions.Add(version, b);
-					result = true;
-				}
-			}
-
-			// Restore the previous setting
-			Diatheke.autoupdate = diathekeAutoupdate;
-
-			return result;
-		}
-
 
 		public void SerializeNow(string file) {
 			FileInfo fInfo = new FileInfo(file);
@@ -306,17 +257,17 @@ namespace DreamBeam.FileTypes {
 	}
 
 
-	[Serializable]
-	public class BibleVersion {
-		private string _version;
-		private BibleVerse[] verses = new BibleVerse[31102];
-		private int _VerseCount;
-		public BibleBook[] BibleBooks = new BibleBook[66];
-		/// <summary>
-		/// Sword uses the following book names as standard. They're needed to interpret the localization
-		/// files and determine the proper order of books.
-		/// </summary>
-		public static string[] SwordBookNames = {
+    [Serializable]
+    public class BibleVersion {
+        private string _version;
+        private BibleVerse[] verses = new BibleVerse[31102];
+        private int _VerseCount;
+        public BibleBook[] BibleBooks = new BibleBook[66];
+        /// <summary>
+        /// Sword uses the following book names as standard. They're needed to interpret the localization
+        /// files and determine the proper order of books.
+        /// </summary>
+        public static string[] SwordBookNames = {
 			"Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", 
 			"Ruth", "I Samuel", "II Samuel", "I Kings", "II Kings", "I Chronicles", "II Chronicles", 
 			"Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes", 
@@ -328,20 +279,9 @@ namespace DreamBeam.FileTypes {
 			"Philemon", "Hebrews", "James", "I Peter", "II Peter", "I John", "II John", 
 			"III John", "Jude", "Revelation of John"};
 
-		private System.Data.DataTable _replacements = null;
+        private System.Data.DataTable _replacements = null;
 
-		public BibleVersion(string version) : this(version, null) { }
-		public BibleVersion(string version, string diathekeText) : this(version, diathekeText, null) { }
-		public BibleVersion(string version, string diathekeText, System.Data.DataTable replacements) : this(version, diathekeText, replacements, null) { }
-		public BibleVersion(string version, string diathekeText, System.Data.DataTable replacements, EventHandler onProgress) {
-			_version = version;
-			_replacements = replacements;
-			if (diathekeText != null) {
-				ParseDiathekePlain(diathekeText, onProgress);
-			}
-		}
-
-        public BibleVersion(BackgroundWorker worker, DoWorkEventArgs evArg, string version, System.Data.DataTable replacements, EventHandler onProgress) {
+        public BibleVersion(BackgroundWorker worker, DoWorkEventArgs evArg, string version, System.Data.DataTable replacements) {
             _version = version;
             _replacements = replacements;
             int i = 0, b = -1, book;
@@ -393,305 +333,250 @@ namespace DreamBeam.FileTypes {
             worker.ReportProgress(100);
         }
 
-		#region Properties
-		/// <summary>
-		/// Sets the verses in this bible translation based on the string returned by Diatheke containing the whole bible text.
-		/// </summary>
-		public string diatheke {
-			set { ParseDiathekePlain(value, null); }
-		}
+        #region Properties
+        /// <summary>
+        /// Gets or sets the version (or translation) of the bible. Ex. KJV, NIV, RomCor
+        /// </summary>
+        public string version {
+            get { return _version; }
+            //set { _version = value; }
+        }
 
-		/// <summary>
-		/// Gets or sets the version (or translation) of the bible. Ex. KJV, NIV, RomCor
-		/// </summary>
-		public string version {
-			get { return _version; }
-			set { _version = value; }
-		}
+        public int VerseCount {
+            get { return _VerseCount; }
+        }
+        #endregion
 
-		public int VerseCount {
-			get { return _VerseCount; }
-		}
-		#endregion
+        #region Indexers
 
-		#region Indexers
+        /// <summary>
+        /// Returns the n-th (0-based) verse in the bible
+        /// </summary>
+        public BibleVerse this[int verseIdx] {
+            get {
+                if (verseIdx < 0 || verseIdx >= _VerseCount) return null;
+                return verses[verseIdx];
+            }
+        }
+        #endregion
 
-		/// <summary>
-		/// Returns the n-th (0-based) verse in the bible
-		/// </summary>
-		public BibleVerse this[int verseIdx] {
-			get {
-				if (verseIdx < 0 || verseIdx >= _VerseCount) return null;
-				return verses[verseIdx];
-			}
-		}
-		#endregion
+        public string getVerseText(int verseIdx) {
+            SWModule module = SwordW.Instance().getModule(version);
+            //VerseKey vk = new VerseKey("Gen 1:1");
+            //vk.increment(verseIdx);
+            //VerseKey vk = new VerseKey();
+            //verseIdx = vk.Index(verseIdx - 1);
+            BibleVerse bv = verses[verseIdx];
+            VerseKey vk = new VerseKey(SwordBookNames[bv.b] + " " + bv.c + ":" + bv.v);
+            return Tools.Diatheke_ConvertEncoding(module.RenderText(vk)).Trim();
+        }
 
-		/// <summary>
-		/// Returns a reference of the type "1 Corinthians 4:8" using the long bible book
-		/// name in whatever language the current Sword locale is set to.
-		/// </summary>
-		/// <param name="verseIdx">Zero-based verse in the bible to return the reference for</param>
-		/// <returns></returns>
-		public string GetRef(int verseIdx) {
-			if (verseIdx < 0 || verseIdx >= _VerseCount) return "";
-			return string.Format("{0} {1}:{2}",
-				BibleBooks[verses[verseIdx].b].Long,
-				verses[verseIdx].c, verses[verseIdx].v);
-		}
+        /// <summary>
+        /// Returns a reference of the type "1 Corinthians 4:8" using the long bible book
+        /// name in whatever language the current Sword locale is set to.
+        /// </summary>
+        /// <param name="verseIdx">Zero-based verse in the bible to return the reference for</param>
+        /// <returns></returns>
+        public string GetRef(int verseIdx) {
+            if (verseIdx < 0 || verseIdx >= _VerseCount) return "";
+            return string.Format("{0} {1}:{2}",
+                BibleBooks[verses[verseIdx].b].Long,
+                verses[verseIdx].c, verses[verseIdx].v);
+        }
 
-		/// <summary>
-		/// Returns a bible reference (ex. Genesis 4:7) after removing special
-		/// characters from the book name.
-		/// </summary>
-		/// <param name="verseIdx"></param>
-		/// <param name="Abbreviated">If true, returns the abbreviated name of the bible book</param>
-		/// <returns></returns>
-		public string GetSimpleRef(int verseIdx, bool Abbreviated) {
-			if (verseIdx < 0 || verseIdx >= _VerseCount) return "";
-			BibleVerse v = verses[verseIdx];
+        /// <summary>
+        /// Returns a bible reference (ex. Genesis 4:7) after removing special
+        /// characters from the book name.
+        /// </summary>
+        /// <param name="verseIdx"></param>
+        /// <param name="Abbreviated">If true, returns the abbreviated name of the bible book</param>
+        /// <returns></returns>
+        public string GetSimpleRef(int verseIdx, bool Abbreviated) {
+            if (verseIdx < 0 || verseIdx >= _VerseCount) return "";
+            BibleVerse v = verses[verseIdx];
 
-			if (Abbreviated) {
-				return string.Format("{0} {1}:{2}", Tools.RemoveDiacritics(BibleBooks[v.b].Short), v.c, v.v);
-			} else {
-				return string.Format("{0} {1}:{2}", Tools.RemoveDiacritics(BibleBooks[v.b].Long), v.c, v.v);
-			}
-		}
+            if (Abbreviated) {
+                return string.Format("{0} {1}:{2}", Tools.RemoveDiacritics(BibleBooks[v.b].Short), v.c, v.v);
+            } else {
+                return string.Format("{0} {1}:{2}", Tools.RemoveDiacritics(BibleBooks[v.b].Long), v.c, v.v);
+            }
+        }
 
-		public string GetSimpleRef(string fullRef, bool Abbreviated) {
-			return GetSimpleRef(GetVerseIndex(fullRef), Abbreviated);
-		}
+        public string GetSimpleRef(string fullRef, bool Abbreviated) {
+            return GetSimpleRef(GetVerseIndex(fullRef), Abbreviated);
+        }
 
-		public string GetVerse(int verseIdx) {
-			if (verseIdx < 0 || verseIdx >= _VerseCount) return "";
-			return this.GetRef(verseIdx) + "\t" + verses[verseIdx].t;
-		}
+        public string GetVerse(int verseIdx) {
+            if (verseIdx < 0 || verseIdx >= _VerseCount) return "";
+            return this.GetRef(verseIdx) + "\t" + verses[verseIdx].t;
+        }
 
-		public string GetSimpleVerseText(int verseIdx) {
-			if (verseIdx < 0 || verseIdx >= _VerseCount) return "";
-			if (verses[verseIdx].t2.Length > 0) {
-				return verses[verseIdx].t2;
-			} else {
-				return verses[verseIdx].t;
-			}
-		}
+        public string GetSimpleVerseText(int verseIdx) {
+            if (verseIdx < 0 || verseIdx >= _VerseCount) return "";
+            if (verses[verseIdx].t2.Length > 0) {
+                return verses[verseIdx].t2;
+            } else {
+                return verses[verseIdx].t;
+            }
+        }
 
-		public string BookName(int bookNum, bool Abbreviated) {
-			if (bookNum >= 0 && bookNum < this.BibleBooks.Length) {
-				return Abbreviated ? this.BibleBooks[bookNum].Short : this.BibleBooks[bookNum].Long;
-			}
-			return "";
-		}
+        public string BookName(int bookNum, bool Abbreviated) {
+            if (bookNum >= 0 && bookNum < this.BibleBooks.Length) {
+                return Abbreviated ? this.BibleBooks[bookNum].Short : this.BibleBooks[bookNum].Long;
+            }
+            return "";
+        }
 
-		public string BookName(int bookNum) {
-			return this.BookName(bookNum, false);
-		}
+        public string BookName(int bookNum) {
+            return this.BookName(bookNum, false);
+        }
 
-		/// <summary>
-		/// Finds the first bible book that starts with the letters passed in.
-		/// </summary>
-		/// <param name="book">The letters the book starts with.</param>
-		/// <returns>A number: 1-66, or -1 if no book starts with the letters passed in.</returns>
-		public int BookNumber(string book) {
-			int i = 0;
-			string bLC;
-			book = Tools.RemoveDiacritics(book.ToLower());
-			foreach (BibleBook b in BibleBooks) {
-				bLC = Tools.RemoveDiacritics(b.Long.ToLower());
-				if (bLC.StartsWith(book)) { return i; }
-				i++;
-			}
-			return -1;
-		}
+        /// <summary>
+        /// Finds the first bible book that starts with the letters passed in.
+        /// </summary>
+        /// <param name="book">The letters the book starts with.</param>
+        /// <returns>A number: 1-66, or -1 if no book starts with the letters passed in.</returns>
+        public int BookNumber(string book) {
+            int i = 0;
+            string bLC;
+            book = Tools.RemoveDiacritics(book.ToLower());
+            foreach (BibleBook b in BibleBooks) {
+                bLC = Tools.RemoveDiacritics(b.Long.ToLower());
+                if (bLC.StartsWith(book)) { return i; }
+                i++;
+            }
+            return -1;
+        }
 
-		/// <summary>
-		/// Take a reference such as "e 4 6" and convert it to "Exodus 4:6"
-		/// </summary>
-		/// <param name="reference"></param>
-		/// <returns></returns>
-		public string NormalizeRef(string reference) {
-			int b, c, v;
-			reference = Regex.Replace(reference.Trim(), @"\s+", " ");
-			Regex r = new Regex(@"(.*)\s+(\d+)[\s:]+(\d+)", RegexOptions.IgnoreCase);
-			Match m = r.Match(reference);
+        /// <summary>
+        /// Take a reference such as "e 4 6" and convert it to "Exodus 4:6"
+        /// </summary>
+        /// <param name="reference"></param>
+        /// <returns></returns>
+        public string NormalizeRef(string reference) {
+            int b, c, v;
+            reference = Regex.Replace(reference.Trim(), @"\s+", " ");
+            Regex r = new Regex(@"(.*)\s+(\d+)[\s:]+(\d+)", RegexOptions.IgnoreCase);
+            Match m = r.Match(reference);
 
-			if (m.Groups.Count == 4) {
-				b = BookNumber(m.Groups[1].Value);
-				c = Convert.ToInt32(m.Groups[2].Value);
-				v = Convert.ToInt32(m.Groups[3].Value);
-				if (b >= 0 && c > 0 && v > 0) {
-					return BookName(b) + " " + c.ToString() + ":" + v.ToString();
-				}
-			}
+            if (m.Groups.Count == 4) {
+                b = BookNumber(m.Groups[1].Value);
+                c = Convert.ToInt32(m.Groups[2].Value);
+                v = Convert.ToInt32(m.Groups[3].Value);
+                if (b >= 0 && c > 0 && v > 0) {
+                    return BookName(b) + " " + c.ToString() + ":" + v.ToString();
+                }
+            }
 
-			return "";
-		}
+            return "";
+        }
 
-		public int GetVerseIndex(string reference) {
-			int b, c, v;
-			reference = Regex.Replace(reference.Trim(), @"\s+", " ");
-			Regex r = new Regex(@"(.*)\s+(\d+)[\s:]+(\d+)", RegexOptions.IgnoreCase);
-			Match m = r.Match(reference);
+        public int GetVerseIndex(string reference) {
+            int b, c, v;
+            reference = Regex.Replace(reference.Trim(), @"\s+", " ");
+            Regex r = new Regex(@"(.*)\s+(\d+)[\s:]+(\d+)", RegexOptions.IgnoreCase);
+            Match m = r.Match(reference);
 
-			if (m.Groups.Count == 4) {
-				// Group[0] is the full match
-				b = BookNumber(m.Groups[1].Value);
-				c = Convert.ToInt32(m.Groups[2].Value);
-				v = Convert.ToInt32(m.Groups[3].Value);
-				return GetVerseIndex(b, c, v);
-			}
+            if (m.Groups.Count == 4) {
+                // Group[0] is the full match
+                b = BookNumber(m.Groups[1].Value);
+                c = Convert.ToInt32(m.Groups[2].Value);
+                v = Convert.ToInt32(m.Groups[3].Value);
+                return GetVerseIndex(b, c, v);
+            }
 
-			return -1;
-		}
+            return -1;
+        }
 
-		public int GetVerseIndex(int b, int c, int v) {
-			int mid, low = 0;
-			int high = _VerseCount - 1;
+        public int GetVerseIndex(int b, int c, int v) {
+            int mid, low = 0;
+            int high = _VerseCount - 1;
 
-			if (b < 0 || c < 1 || v < 1) { return -1; }
+            if (b < 0 || c < 1 || v < 1) { return -1; }
 
-			while (low <= high) {
-				mid = low + (high - low) / 2;
+            while (low <= high) {
+                mid = low + (high - low) / 2;
 
-				switch (verses[mid].CompareTo(b, c, v)) {
-					case 1:
-						high = mid - 1;
-						break;
-					case -1:
-						low = mid + 1;
-						break;
-					default:
-						return mid;
-				}
-			}
+                switch (verses[mid].CompareTo(b, c, v)) {
+                    case 1:
+                        high = mid - 1;
+                        break;
+                    case -1:
+                        low = mid + 1;
+                        break;
+                    default:
+                        return mid;
+                }
+            }
 
-			return -1;
-		}
+            return -1;
+        }
 
-		/// <summary>
-		/// Finds a verse that matches the regular expression provided.
-		/// </summary>
-		/// <param name="start_i">Verse index to start searching from.</param>
-		/// <param name="dirFwd">Direction to search in. If "true" searches forward.</param>
-		/// <param name="regex">The regular expression to search for.</param>
-		/// <returns>A negative number when a matching verse could not be found. The 0-based verse index if the verse was found.</returns>
-		public int Find(int start_i, bool dirFwd, string regex) {
-			Regex r;
-			Match m;
-			try {
-				r = new Regex(regex, RegexOptions.IgnoreCase);
-			} catch {
-				// If the user enters a regex that is not syntactically correct, just fail silently
-				return -1;
-			}
+        /// <summary>
+        /// Finds a verse that matches the regular expression provided.
+        /// </summary>
+        /// <param name="start_i">Verse index to start searching from.</param>
+        /// <param name="dirFwd">Direction to search in. If "true" searches forward.</param>
+        /// <param name="regex">The regular expression to search for.</param>
+        /// <returns>A negative number when a matching verse could not be found. The 0-based verse index if the verse was found.</returns>
+        public int Find(int start_i, bool dirFwd, string regex) {
+            Regex r;
+            Match m;
+            try {
+                r = new Regex(regex, RegexOptions.IgnoreCase);
+            } catch {
+                // If the user enters a regex that is not syntactically correct, just fail silently
+                return -1;
+            }
 
-			if (regex.Length == 0 || start_i < 0 || start_i >= _VerseCount) return -1;
+            if (regex.Length == 0 || start_i < 0 || start_i >= _VerseCount) return -1;
 
-			if (dirFwd) {
-				for (int i = start_i; i < _VerseCount; i++) {
-					m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
-					if (m.Success) { return i; }
-				}
-				for (int i = 0; i < start_i; i++) {
-					m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
-					if (m.Success) {
-						Console.WriteLine("Verse search WRAP");
-						return i;
-					}
-				}
-			} else {
-				for (int i = start_i; i >= 0; i--) {
-					m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
-					if (m.Success) return i;
-				}
-				for (int i = _VerseCount - 1; i > start_i; i--) {
-					m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
-					if (m.Success) return i;
-				}
-			}
+            if (dirFwd) {
+                for (int i = start_i; i < _VerseCount; i++) {
+                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
+                    if (m.Success) { return i; }
+                }
+                for (int i = 0; i < start_i; i++) {
+                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
+                    if (m.Success) {
+                        Console.WriteLine("Verse search WRAP");
+                        return i;
+                    }
+                }
+            } else {
+                for (int i = start_i; i >= 0; i--) {
+                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
+                    if (m.Success) return i;
+                }
+                for (int i = _VerseCount - 1; i > start_i; i--) {
+                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
+                    if (m.Success) return i;
+                }
+            }
 
-			Console.WriteLine("Search failed");
-			return -1;
-		}
+            Console.WriteLine("Search failed");
+            return -1;
+        }
 
 
-		/// <summary>
-		/// Searching with regular expressions through bible texts that contain
-		/// punctuation and foreign characters is no fun. This function strips
-		/// out or replaces all the undesirables to make searching easier.
-		/// </summary>
-		/// <param name="verses">The bible text</param>
-		/// <returns>The converted text</returns>
-		private string Replace(string text) {
-			if (_replacements == null) return text;
-			foreach (System.Data.DataRow r in _replacements.Rows) {
-				// If the user entered an invalid regex, we need to trap it
-				try {
-					text = Regex.Replace(text, r.ItemArray[0].ToString(), r.ItemArray[1].ToString());
-				} catch { }
-			}
-			return text;
-		}
-
-		/// <summary>
-		/// Parse the "plain" Diatheke output format into separate verses.
-		/// </summary>
-		private void ParseDiathekePlain(string diathekeText, EventHandler onProgress) {
-			int i = 0, b = -1;
-			string book = "no such bible book";
-			System.EventArgs e = new System.EventArgs();
-			Regex r = new Regex(@"^(\d*[^:\d]+)(\d+):(\d+):\W+(.*)", RegexOptions.Compiled);
-			Match m;
-
-			foreach (string verse in Tools.Diatheke_ConvertEncoding(diathekeText).Split('\n')) {
-				if (onProgress != null && ((i % 200) == 0)) { onProgress(this, e); }
-				if (i >= 31102) {
-					break;
-				}
-				m = r.Match(verse);
-				if (m.Groups.Count == 5) {
-					// We have a good match
-					// Groups[0] is the full match
-					if (book != m.Groups[1].Value) {
-						b++;
-						BibleBooks[b].Long = m.Groups[1].Value;
-						book = BibleBooks[b].Long;
-						Console.WriteLine("Processing " + book);
-					}
-					verses[i] = new BibleVerse(i,
-						b, Convert.ToInt32(m.Groups[2].Value), Convert.ToInt32(m.Groups[3].Value),
-						m.Groups[4].Value.Trim());
-					i++;
-				}
-			}
-
-			this._VerseCount = i;
-
-			for (i = 0; i < this.BibleBooks.Length; i++) {
-				if (BibleBooks[i].Long == null) BibleBooks[i].Long = "";
-				string bk = BibleBooks[i].Long;
-				bk = Regex.Replace(bk.Trim(), @"^III ", "3 ");
-				bk = Regex.Replace(bk, @"^II ", "2 ");
-				bk = Regex.Replace(bk, @"^I ", "1 ");
-				BibleBooks[i].Long = bk;
-				BibleBooks[i].Short = bk;
-			}
-
-			Tools.ElapsedTime("Starting conversion to ASCII");
-			i = 0;
-			// We need to do this after we clean up the book names above
-			foreach (BibleVerse v in verses) {
-				// This needs to be constructed roughly the same as the text
-				// displayed in the Results RTF control so that the user can
-				// type based on what's displayed.
-				if (v != null && _replacements != null) {
-					v.t2 = this.Replace(v.t);
-				}
-				if (onProgress != null && ((i++ % 200) == 0)) { onProgress(this, e); }
-			}
-			Tools.ElapsedTime("Finished converting to ASCII");
-		}
-	}
+        /// <summary>
+        /// Searching with regular expressions through bible texts that contain
+        /// punctuation and foreign characters is no fun. This function strips
+        /// out or replaces all the undesirables to make searching easier.
+        /// </summary>
+        /// <param name="verses">The bible text</param>
+        /// <returns>The converted text</returns>
+        private string Replace(string text) {
+            if (_replacements == null) return text;
+            foreach (System.Data.DataRow r in _replacements.Rows) {
+                // If the user entered an invalid regex, we need to trap it
+                try {
+                    text = Regex.Replace(text, r.ItemArray[0].ToString(), r.ItemArray[1].ToString());
+                } catch { }
+            }
+            return text;
+        }
+    }
 
 	/// <summary>
 	/// Represents a verse. i is the verse index (0..31102), b, c, v are the
@@ -700,7 +585,9 @@ namespace DreamBeam.FileTypes {
 	[Serializable]
 	public class BibleVerse {
 		public int i, b, c, v;
-		public string t, t2;
+        [NonSerialized]
+		public string t;
+        public string t2;
 
 		public BibleVerse() { }
 		public BibleVerse(int i, int b, int c, int v, string t) {
@@ -727,19 +614,6 @@ namespace DreamBeam.FileTypes {
 			} else {
 				return cv;
 			}
-		}
-	}
-
-	public class DiathekeThreadHelper {
-		AxACTIVEDIATHEKELib.AxActiveDiatheke Diatheke;
-
-		public DiathekeThreadHelper(AxACTIVEDIATHEKELib.AxActiveDiatheke Diatheke) {
-			this.Diatheke = Diatheke;
-		}
-
-		public void Run() {
-			Console.WriteLine("About to start query");
-			Diatheke.query();
 		}
 	}
 
@@ -818,7 +692,8 @@ namespace DreamBeam.FileTypes {
 					return bmp;
 				}
 
-				string vText = bible[vIdx].t;
+				//string vText = bible[vIdx].t;
+                string vText = bible.getVerseText(vIdx);
 				// Non-breaking hyphen gets displayed with too much space after it in Arial Unicode
 				// and with empty glyph box on other fonts. Change it to regular hyphen.
 				vText = Regex.Replace(vText, "\u2011", "\u00ad");
