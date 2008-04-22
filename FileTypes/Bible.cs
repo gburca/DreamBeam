@@ -59,6 +59,8 @@ namespace DreamBeam.FileTypes {
     public class SwordW {
         static SwordW instance = null;
 
+        /* We are accessing Sword through SWIG. Since SWIG uses NULL terminated strings to marshall data,
+         * UTF-16 encoding (in which every other byte is \0) won't work. */
         static MarkupFilterMgr filterManager = new MarkupFilterMgr((char)Sword.FMT_PLAIN, (char)Sword.ENC_UTF8);
         SWMgr manager = new SWMgr(filterManager);
         //SWModule module = null;
@@ -295,25 +297,29 @@ namespace DreamBeam.FileTypes {
                     worker.ReportProgress(progress);
                 }
                 string t = Tools.Diatheke_ConvertEncoding(module.RenderText(vk)).Trim();
-                book = vk.Book() - 1;
+                book = vk.Book();
 
-                // Book numbering starts back up from 1 in the New Testament
-                if (book < b) {
+                // Book numbering is 1-based and starts back up from 1 in the New Testament
+                // OT = 1, NT = 2
+                if (vk.Testament() == (char)2) {
                     book += 39;
                 }
-                BibleVerse v = new BibleVerse(i, book, vk.Chapter(), vk.Verse(), t);
+                BibleVerse v = new BibleVerse(i, book - 1, vk.Chapter(), vk.Verse(), t);
                 if (_replacements != null) {
                     v.t2 = Replace(v.t);
                 }
                 verses[i] = v;
-                if (b < book) {
-                    b++;
+
+                // book is 1-based, b is 0-based
+                if (b < book - 1) {
+                    b = book - 1;
                     BibleBooks[b].Long = vk.getBookName();
                     Console.WriteLine("Processing " + BibleBooks[b].Long);
                     if (worker.CancellationPending) {
                         evArg.Cancel = true;
                     }
                 }
+
                 i++;
                 vk.increment();
             }
@@ -362,12 +368,27 @@ namespace DreamBeam.FileTypes {
 
         public string getVerseText(int verseIdx) {
             SWModule module = SwordW.Instance().getModule(version);
-            //VerseKey vk = new VerseKey("Gen 1:1");
+
+            VerseKey vk = new VerseKey();
+            vk.Testament((char)1);
+
+            /* vk.Error() would return an error (non-zero) if only vk.Testament is set (even though
+             * it sets Book = Chapter = Verse = 1).
+             * 
+             * If there's an error in vk, the increment below would be ignored, so we either have
+             * to call vk.Error() to clear it, or set the Book, Chapter, and Verse. */
+            
+            vk.Error();
+            //vk.Book((char)1);
+            //vk.Chapter(1);
+            //vk.Verse(1);
+
             //vk.increment(verseIdx);
-            //VerseKey vk = new VerseKey();
-            //verseIdx = vk.Index(verseIdx - 1);
-            BibleVerse bv = verses[verseIdx];
-            VerseKey vk = new VerseKey(SwordBookNames[bv.b] + " " + bv.c + ":" + bv.v);
+            vk.Index(vk.Index() + verseIdx);
+            if (vk.Error() != '\0') {
+                // report the error
+            }
+
             return Tools.Diatheke_ConvertEncoding(module.RenderText(vk)).Trim();
         }
 
@@ -580,7 +601,7 @@ namespace DreamBeam.FileTypes {
 
 	/// <summary>
 	/// Represents a verse. i is the verse index (0..31102), b, c, v are the
-	/// book, chapter, verse numbers. t is the actual verse text.
+	/// 0-based book, 1-based chapter, 1-based verse numbers. t is the actual verse text.
 	/// </summary>
 	[Serializable]
 	public class BibleVerse {

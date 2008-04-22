@@ -104,7 +104,11 @@ namespace DreamBeam {
 			this.DualLanguage.Checked = song.DualLanguage;
 			this.ThemePath.Text = song.ThemePath;
 
-			verseSeparator = song.config.SongVerseSeparator;
+            if (song.config != null) {
+                verseSeparator = song.config.SongVerseSeparator;
+            } else {
+                verseSeparator = SongVerseSeparator.OneBlankLine;
+            }
 
 			// If we don't Clear, old RTF formatting codes from the previous Paste operation
 			// remain in the control and cause the new text to take on that formatting
