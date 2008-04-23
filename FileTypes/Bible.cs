@@ -305,9 +305,7 @@ namespace DreamBeam.FileTypes {
                     book += 39;
                 }
                 BibleVerse v = new BibleVerse(i, book - 1, vk.Chapter(), vk.Verse(), t);
-                if (_replacements != null) {
-                    v.t2 = Replace(v.t);
-                }
+                v.t2 = Replace(v.t);
                 verses[i] = v;
 
                 // book is 1-based, b is 0-based
@@ -367,24 +365,45 @@ namespace DreamBeam.FileTypes {
         #endregion
 
         public string getVerseText(int verseIdx) {
+            BibleVerse bv = this[verseIdx];
+            if (bv == null) return "";
+
             SWModule module = SwordW.Instance().getModule(version);
 
             VerseKey vk = new VerseKey();
-            vk.Testament((char)1);
+            vk.AutoNormalize((char)0);
+            // Or else it will get improperly normalized before it's fully configured.
+
+            // bv.b is 0-based
+            if (bv.b < 39) {
+                vk.Testament((char)1);
+                // OT =  0..38 -> Sword = 1..39
+                vk.Book((char)(bv.b + 1));
+            } else {
+                vk.Testament((char)2);
+                // NT = 39..65 -> Sword = 1..27
+                vk.Book((char)(bv.b - 39 + 1));
+            }
+
+            vk.Chapter(bv.c);
+            vk.Verse(bv.v);
 
             /* vk.Error() would return an error (non-zero) if only vk.Testament is set (even though
              * it sets Book = Chapter = Verse = 1).
              * 
              * If there's an error in vk, the increment below would be ignored, so we either have
              * to call vk.Error() to clear it, or set the Book, Chapter, and Verse. */
-            
-            vk.Error();
+            //vk.Error();
             //vk.Book((char)1);
             //vk.Chapter(1);
             //vk.Verse(1);
 
-            //vk.increment(verseIdx);
-            vk.Index(vk.Index() + verseIdx);
+            /* The following two don't work because incrementing the index takes us through
+             * headings and other non-verse indices:
+                    vk.increment(verseIdx);
+                    vk.Index(vk.Index() + verseIdx);
+             */
+
             if (vk.Error() != '\0') {
                 // report the error
             }
@@ -588,7 +607,10 @@ namespace DreamBeam.FileTypes {
         /// <param name="verses">The bible text</param>
         /// <returns>The converted text</returns>
         private string Replace(string text) {
-            if (_replacements == null) return text;
+            if (_replacements == null) {
+                return Tools.RemoveNonAlpha(Tools.RemoveDiacritics(text));
+            }
+
             foreach (System.Data.DataRow r in _replacements.Rows) {
                 // If the user entered an invalid regex, we need to trap it
                 try {

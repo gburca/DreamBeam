@@ -182,7 +182,7 @@ namespace DreamBeam {
 
 			this.Hide();
 
-            this.SwordProject_Found = this.Check_SwordProject(this.Config);
+            this.SwordProject_Found = true;
 			Splash.ShowSplashScreen();
 			Splash.SetStatus("Initializing");
 			InitializeComponent();
@@ -2147,55 +2147,6 @@ namespace DreamBeam {
 				}
 				DisplayPreview.SetContent(new TextToolContents(fullText, this.Config));
 			}
-		}
-
-		/// <summary>
-		/// Diatheke expects to find a sword.conf file in "C:\etc" or "D:\etc" (depending on where the DLL is located).
-		/// If it's not found, it panics and crashes DreamBeam.
-		/// For a default installation of Sword, the sword.conf file should look like:
-		///		[Install]
-		///		DataPath=C:/Program Files/CrossWire/The SWORD Project/
-		///	
-		///	This function both sets the SwordProject_Found private variable and returns its value.
-		/// </summary>
-		/// <returns></returns>
-		public bool Check_SwordProject(Config config) {
-			string strSwordConfDir = Path.Combine(Directory.GetDirectoryRoot(Application.StartupPath), "etc");
-			string strSwordConfPath = Path.Combine(strSwordConfDir, "sword.conf");
-			string pathSeparator = Path.DirectorySeparatorChar.ToString();
-
-			// Create the directory, or else creating the file (if needed) will fail.
-			if (!Directory.Exists(strSwordConfDir)) Directory.CreateDirectory(strSwordConfDir);
-
-			IniStructure swordConf = IniStructure.ReadIni(strSwordConfPath);
-			if (swordConf != null) {
-				// File exists, and contains valid "ini" style configuration
-				string swordDir = swordConf.GetValue("Install", "DataPath");
-				if (swordDir != null) {
-					string swordExe = Path.Combine(swordDir.Replace("/", pathSeparator), "sword.exe");
-					if (File.Exists(swordExe)) {
-						return this.SwordProject_Found = true;
-					}
-				}
-
-				if (File.Exists(Path.Combine(config.SwordPath, "sword.exe"))) {
-					// swordDir was null, or did not contain sword.exe, but we have the proper path in Config.SwordPath
-					swordConf.AddCategory("Install");
-					if (swordDir == null) {
-						swordConf.AddValue("Install", "DataPath", config.SwordPath.Replace(pathSeparator, "/"));
-					} else {
-						swordConf.ModifyValue("Install", "DataPath", config.SwordPath.Replace(pathSeparator, "/"));
-					}
-					return this.SwordProject_Found = IniStructure.WriteIni(swordConf, strSwordConfPath);
-				}
-			} else if (File.Exists(Path.Combine(config.SwordPath, "sword.exe"))) {
-				swordConf = new IniStructure();
-				swordConf.AddCategory("Install");
-				swordConf.AddValue("Install", "DataPath", config.SwordPath.Replace(pathSeparator, "/"));
-				return this.SwordProject_Found = IniStructure.WriteIni(swordConf, strSwordConfPath);
-			}
-
-			return this.SwordProject_Found = false;
 		}
 
 		#endregion

@@ -457,7 +457,7 @@ namespace DreamBeam {
             // object. This is will be available to the 
             // RunWorkerCompleted eventhandler.
             WorkerArgs wArgs = (WorkerArgs)e.Argument;
-            e.Result = _MainForm.bibles.Add(worker, e, wArgs.tr, Options_RegEx_Table);
+            e.Result = _MainForm.bibles.Add(worker, e, wArgs.tr, wArgs.replacements);
         }
 
         private void swordWorker_RunWorkerCompleted(
@@ -543,7 +543,14 @@ namespace DreamBeam {
 
             WorkerArgs wArgs;
             wArgs.tr = BiblesAvailable_listEx.Items[Index].ToString();
-            wArgs.replacements = Options_RegEx_Table;
+
+            bool useCustomReplacements = true;
+            //if (Options_RegEx_Table.Rows.Count > 0)
+            if (useCustomReplacements) {
+                wArgs.replacements = Options_RegEx_Table;
+            } else {
+                wArgs.replacements = null;
+            }
 
             swordWorker.RunWorkerAsync(wArgs);
 		}

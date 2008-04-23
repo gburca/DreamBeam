@@ -494,6 +494,15 @@ namespace DreamBeam {
 			return (sb.ToString().Normalize(NormalizationForm.FormC));
 		}
 
+        /// <summary>
+        /// Removes non aplha-numeric characters from the string and returns the new string.
+        /// </summary>
+        /// <param name="strIn"></param>
+        /// <returns></returns>
+        public static string RemoveNonAlpha(string strIn) {
+            return Regex.Replace(strIn, @"[^\w ]+", "");
+        }
+
 		public static string Diatheke_ConvertEncoding(string text) {
 			Encoding utf8 = Encoding.GetEncoding("UTF-8");
 
