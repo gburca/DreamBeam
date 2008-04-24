@@ -153,6 +153,9 @@ namespace DreamBeam {
             this.Sword_PathBox = new System.Windows.Forms.TextBox();
             this.Select_Sword = new System.Windows.Forms.Button();
             this.BibleCache_Tab = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BibleConversions_Custom = new System.Windows.Forms.RadioButton();
+            this.BibleConversions_Default = new System.Windows.Forms.RadioButton();
             this.BibleCache_Cached_Label = new System.Windows.Forms.Label();
             this.BibleCache_Available_Label = new System.Windows.Forms.Label();
             this.BibleCache_Replacements_Label = new System.Windows.Forms.Label();
@@ -215,6 +218,7 @@ namespace DreamBeam {
             this.SwordLangGroupBox.SuspendLayout();
             this.SwordFolderGroupBox.SuspendLayout();
             this.BibleCache_Tab.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BibleConversions_dataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Options_RegEx_Table)).BeginInit();
             this.Graphics_tab.SuspendLayout();
@@ -848,6 +852,7 @@ namespace DreamBeam {
             // 
             // BibleCache_Tab
             // 
+            this.BibleCache_Tab.Controls.Add(this.groupBox2);
             this.BibleCache_Tab.Controls.Add(this.BibleCache_Cached_Label);
             this.BibleCache_Tab.Controls.Add(this.BibleCache_Available_Label);
             this.BibleCache_Tab.Controls.Add(this.BibleCache_Replacements_Label);
@@ -862,6 +867,41 @@ namespace DreamBeam {
             this.BibleCache_Tab.TabIndex = 4;
             this.BibleCache_Tab.Text = "Bible Cache";
             this.BibleCache_Tab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.BibleConversions_Custom);
+            this.groupBox2.Controls.Add(this.BibleConversions_Default);
+            this.groupBox2.Location = new System.Drawing.Point(266, 244);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(241, 48);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Replacement type";
+            // 
+            // BibleConversions_Custom
+            // 
+            this.BibleConversions_Custom.AutoSize = true;
+            this.BibleConversions_Custom.Location = new System.Drawing.Point(110, 19);
+            this.BibleConversions_Custom.Name = "BibleConversions_Custom";
+            this.BibleConversions_Custom.Size = new System.Drawing.Size(122, 17);
+            this.BibleConversions_Custom.TabIndex = 1;
+            this.BibleConversions_Custom.TabStop = true;
+            this.BibleConversions_Custom.Text = "Custom (from above)";
+            this.BibleConversions_Custom.UseVisualStyleBackColor = true;
+            this.BibleConversions_Custom.Click += new System.EventHandler(this.BibleConversions_Type_Click);
+            // 
+            // BibleConversions_Default
+            // 
+            this.BibleConversions_Default.AutoSize = true;
+            this.BibleConversions_Default.Location = new System.Drawing.Point(6, 19);
+            this.BibleConversions_Default.Name = "BibleConversions_Default";
+            this.BibleConversions_Default.Size = new System.Drawing.Size(59, 17);
+            this.BibleConversions_Default.TabIndex = 0;
+            this.BibleConversions_Default.TabStop = true;
+            this.BibleConversions_Default.Text = "Default";
+            this.BibleConversions_Default.UseVisualStyleBackColor = true;
+            this.BibleConversions_Default.Click += new System.EventHandler(this.BibleConversions_Type_Click);
             // 
             // BibleCache_Cached_Label
             // 
@@ -903,17 +943,21 @@ namespace DreamBeam {
             // BibleConversions_dataGrid
             // 
             this.BibleConversions_dataGrid.AllowSorting = false;
+            this.BibleConversions_dataGrid.AlternatingBackColor = System.Drawing.SystemColors.Window;
             this.BibleConversions_dataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.BibleConversions_dataGrid.CaptionBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BibleConversions_dataGrid.CaptionVisible = false;
             this.BibleConversions_dataGrid.DataMember = "";
             this.BibleConversions_dataGrid.DataSource = this.Options_RegEx_Table;
+            this.BibleConversions_dataGrid.HeaderBackColor = System.Drawing.SystemColors.Control;
             this.BibleConversions_dataGrid.HeaderForeColor = System.Drawing.SystemColors.ControlText;
             this.BibleConversions_dataGrid.Location = new System.Drawing.Point(266, 24);
             this.BibleConversions_dataGrid.Name = "BibleConversions_dataGrid";
+            this.BibleConversions_dataGrid.ParentRowsBackColor = System.Drawing.SystemColors.Control;
             this.BibleConversions_dataGrid.RowHeadersVisible = false;
-            this.BibleConversions_dataGrid.Size = new System.Drawing.Size(243, 272);
+            this.BibleConversions_dataGrid.Size = new System.Drawing.Size(243, 217);
             this.BibleConversions_dataGrid.TabIndex = 3;
             this.BibleConversions_dataGrid.TableStyles.AddRange(new System.Windows.Forms.DataGridTableStyle[] {
             this.BibleConversions_GridTableStyle});
@@ -1226,6 +1270,8 @@ namespace DreamBeam {
             this.SwordFolderGroupBox.PerformLayout();
             this.BibleCache_Tab.ResumeLayout(false);
             this.BibleCache_Tab.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BibleConversions_dataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Options_RegEx_Table)).EndInit();
             this.Graphics_tab.ResumeLayout(false);
@@ -1252,6 +1298,9 @@ namespace DreamBeam {
 		private GroupBox songVerseSeparatorGroup;
 		private RadioButton verseSep2L;
 		private RadioButton verseSep1L;
+        private GroupBox groupBox2;
+        private RadioButton BibleConversions_Custom;
+        private RadioButton BibleConversions_Default;
 
 	}
 }

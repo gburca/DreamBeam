@@ -31,10 +31,17 @@ namespace DreamBeam {
 
 			PopulateBibleCacheTab();
 
-			string DataSetFile = Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml");
+            string DataSetFile = Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml");
 			if (Tools.FileExists(DataSetFile)) {
 				this.Options_DataSet.ReadXml(DataSetFile, XmlReadMode.ReadSchema);
 			}
+            if (Options_RegEx_Table.Rows.Count > 0) {
+                BibleConversions_Custom.Checked = true;
+                BibleConversions_dataGrid_enable(true);
+            } else {
+                BibleConversions_Default.Checked = true;
+                BibleConversions_dataGrid_enable(false);
+            }
 
 			SizeColumns(this.BibleConversions_dataGrid);
 		}
@@ -431,7 +438,7 @@ namespace DreamBeam {
 				BiblesCached_listEx.Add(book, 1);
 			}
 
-			foreach (string book in _MainForm.DiathekeBooks(true)) {
+			foreach (string book in SwordW.Instance().getBibles()) {
 				available.Add(book);
 			}
 
@@ -544,9 +551,7 @@ namespace DreamBeam {
             WorkerArgs wArgs;
             wArgs.tr = BiblesAvailable_listEx.Items[Index].ToString();
 
-            bool useCustomReplacements = true;
-            //if (Options_RegEx_Table.Rows.Count > 0)
-            if (useCustomReplacements) {
+            if (BibleConversions_Custom.Checked) {
                 wArgs.replacements = Options_RegEx_Table;
             } else {
                 wArgs.replacements = null;
@@ -652,7 +657,30 @@ namespace DreamBeam {
 
 		private void sermonThemeWidget_ControlChangedEvent(object sender, EventArgs e) {
 			HandleThemeChange();
-		}
+        }
+
+        private void BibleConversions_dataGrid_enable(bool enabled) {
+            if (enabled) {
+                BibleConversions_dataGrid.DataSource = Options_RegEx_Table;
+                BibleConversions_dataGrid.Enabled = true;
+                BibleConversions_dataGrid.ResetAlternatingBackColor();
+                BibleConversions_dataGrid.ResetBackColor();
+            } else {
+                // Can't get these colors to work, so we'll null out the data source
+                BibleConversions_dataGrid.AlternatingBackColor = Color.DarkGray;
+                BibleConversions_dataGrid.BackColor = Color.DarkGray;
+                BibleConversions_dataGrid.DataSource = null;
+                BibleConversions_dataGrid.Enabled = false;
+            }
+        }
+
+        private void BibleConversions_Type_Click(object sender, EventArgs e) {
+            if (sender.Equals(BibleConversions_Default)) {
+                BibleConversions_dataGrid_enable(false);
+            } else {
+                BibleConversions_dataGrid_enable(true);
+            }
+        }
 
 	}
 }

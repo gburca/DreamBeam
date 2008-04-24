@@ -94,10 +94,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxInterop.ACTIVEDIATHEKELib">
-      <Name>AxInterop.ACTIVEDIATHEKELib</Name>
-      <HintPath>ComImports\AxInterop.ACTIVEDIATHEKELib.dll</HintPath>
-    </Reference>
     <Reference Include="AxInterop.ShockwaveFlashObjects">
       <Name>AxInterop.ShockwaveFlashObjects</Name>
       <HintPath>ComImports\AxInterop.ShockwaveFlashObjects.dll</HintPath>
@@ -469,6 +465,9 @@
       <ProductName>.NET Framework 3.5</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

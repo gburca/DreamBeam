@@ -13,7 +13,7 @@
 ; General
 
         ; Name and file.
-        !define VERSION "0.80"
+        !define VERSION "0.81"
 
 	; This ${PRODUCT} !define is used throughout this intaller for a lot of
 	; things including install directory names and links. It should probably
@@ -152,8 +152,6 @@ Section "DreamBeam" SDreamBeam
 	SetOutPath "$INSTDIR\Help"
 	File /r /x .svn Help\*.*
 	
-	RegDll "$INSTDIR\ActiveDiatheke.ocx"
-	
 	; Create desktop and start menu entries
 	; Apparently the OutPath determines the "Start in" directory used for the shortcut.
 	SetOutPath "$INSTDIR"
@@ -236,8 +234,6 @@ Section "un.Uninstall DreamBeam" SUnDreamBeam
 	SetShellVarContext all
 	Call un.Read_USERFILES
 	
-	UnRegDll "$INSTDIR\ActiveDiatheke.ocx"
-
 	; Delete DreamBeam Files
 	Delete "$SMPROGRAMS\${PRODUCT}\${PRODUCT}.lnk"
 	Delete "$DESKTOP\${PRODUCT}.lnk"

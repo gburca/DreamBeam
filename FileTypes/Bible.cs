@@ -63,7 +63,6 @@ namespace DreamBeam.FileTypes {
          * UTF-16 encoding (in which every other byte is \0) won't work. */
         static MarkupFilterMgr filterManager = new MarkupFilterMgr((char)Sword.FMT_PLAIN, (char)Sword.ENC_UTF8);
         SWMgr manager = new SWMgr(filterManager);
-        //SWModule module = null;
 
         public static SwordW Instance() {
             if (instance == null)
@@ -134,7 +133,6 @@ namespace DreamBeam.FileTypes {
             List<string> books = new List<string>();
 
             VerseKey verseKey = new VerseKey("Gen 1:1");
-            //SWModule module = manager.getModule(moduleName);
 
             while (verseKey.Error() == '\0') {
                 books.Add(verseKey.getBookName());
@@ -143,12 +141,65 @@ namespace DreamBeam.FileTypes {
 
             return books;
         }
+
+
+        /// <summary>
+        /// Returns the verse text.
+        /// </summary>
+        /// <param name="version">Bible version - obtained from getBibles()</param>
+        /// <param name="b">1-based book (1..66)</param>
+        /// <param name="c">1-based chapter (1..150)</param>
+        /// <param name="v">2-based verse (1..?)</param>
+        /// <returns></returns>
+        public string getVerseText(string version, int b, int c, int v) {
+
+            SWModule module = getModule(version);
+
+            VerseKey vk = new VerseKey();
+            vk.AutoNormalize((char)0);
+            // Or else it will get improperly normalized before it's fully configured.
+
+            if (b < 40) {
+                vk.Testament((char)1);
+                // OT =  1..39 -> Sword = 1..39
+                vk.Book((char)b);
+            } else {
+                vk.Testament((char)2);
+                // NT = 40..66 -> Sword = 1..27
+                vk.Book((char)(b - 39));
+            }
+
+            vk.Chapter(c);
+            vk.Verse(v);
+
+            /* vk.Error() would return an error (non-zero) if only vk.Testament is set (even though
+             * it sets Book = Chapter = Verse = 1).
+             * 
+             * If there's an error in vk, the increment below would be ignored, so we either have
+             * to call vk.Error() to clear it, or set the Book, Chapter, and Verse.
+                vk.Error();
+                vk.Book((char)1);
+                vk.Chapter(1);
+                vk.Verse(1);
+
+             * The following two don't work because incrementing the index takes us through
+             * headings and other non-verse indices:
+                    vk.increment(verseIdx);
+                    vk.Index(vk.Index() + verseIdx);
+             */
+
+            if (vk.Error() != '\0') {
+                // report the error
+            }
+
+            return Tools.Sword_ConvertEncoding(module.RenderText(vk)).Trim();
+        }
     }
     
 	/// <summary>
-	/// This class is a wrapper around Diatheke and other bible sources. It
+	/// This class is a wrapper around Sword and other bible sources. It
 	/// takes a long time to retrieve one bible translation in its entirety from
-	/// Diatheke so once we retrieved it we want to save it to speed up
+	/// Sword so once we retrieved it we want to save it to speed up
 	/// processing subsequently.
 	/// </summary>
 	[Serializable]
@@ -296,7 +347,7 @@ namespace DreamBeam.FileTypes {
                     int progress = (int)(((float)i / 31102F) * 100);
                     worker.ReportProgress(progress);
                 }
-                string t = Tools.Diatheke_ConvertEncoding(module.RenderText(vk)).Trim();
+                string t = Tools.Sword_ConvertEncoding(module.RenderText(vk)).Trim();
                 book = vk.Book();
 
                 // Book numbering is 1-based and starts back up from 1 in the New Testament
@@ -368,47 +419,7 @@ namespace DreamBeam.FileTypes {
             BibleVerse bv = this[verseIdx];
             if (bv == null) return "";
 
-            SWModule module = SwordW.Instance().getModule(version);
-
-            VerseKey vk = new VerseKey();
-            vk.AutoNormalize((char)0);
-            // Or else it will get improperly normalized before it's fully configured.
-
-            // bv.b is 0-based
-            if (bv.b < 39) {
-                vk.Testament((char)1);
-                // OT =  0..38 -> Sword = 1..39
-                vk.Book((char)(bv.b + 1));
-            } else {
-                vk.Testament((char)2);
-                // NT = 39..65 -> Sword = 1..27
-                vk.Book((char)(bv.b - 39 + 1));
-            }
-
-            vk.Chapter(bv.c);
-            vk.Verse(bv.v);
-
-            /* vk.Error() would return an error (non-zero) if only vk.Testament is set (even though
-             * it sets Book = Chapter = Verse = 1).
-             * 
-             * If there's an error in vk, the increment below would be ignored, so we either have
-             * to call vk.Error() to clear it, or set the Book, Chapter, and Verse. */
-            //vk.Error();
-            //vk.Book((char)1);
-            //vk.Chapter(1);
-            //vk.Verse(1);
-
-            /* The following two don't work because incrementing the index takes us through
-             * headings and other non-verse indices:
-                    vk.increment(verseIdx);
-                    vk.Index(vk.Index() + verseIdx);
-             */
-
-            if (vk.Error() != '\0') {
-                // report the error
-            }
-
-            return Tools.Diatheke_ConvertEncoding(module.RenderText(vk)).Trim();
+            return SwordW.Instance().getVerseText(version, bv.b + 1, bv.c, bv.v);
         }
 
         /// <summary>

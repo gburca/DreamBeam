@@ -66,14 +66,6 @@ namespace DreamBeam {
 		Presentation = 3,
 		BibleText = 4
 	}
-
-	public enum DiathekeOutputFormat {
-		PlainText,
-		ThML,
-		GBF,
-		RTF,
-		HTML
-	}
 	#endregion
 
 	/// <summary>
@@ -133,7 +125,6 @@ namespace DreamBeam {
 
 		#region SermonTools
 		string[] BibleBooks = new string[2];
-		public AxACTIVEDIATHEKELib.AxActiveDiatheke Diatheke;
 		private string Sermon_BibleLang = "en";
 		private bool Sermon_ShowBibleTranslation = false;
 		private bool SwordProject_Found = false;
@@ -187,9 +178,9 @@ namespace DreamBeam {
 			Splash.SetStatus("Initializing");
 			InitializeComponent();
 			Splash.SetStatus("Checking for Sword Project");
-			InitializeDiatheke();
+			InitializeSword();
 
-			// Options makes use of Diatheke to get the list of bible translations available
+			// Options makes use of Sword to get the list of bible translations available
 			Options = new Options(this);
 
 			Presentation_FadePanel.Size = new System.Drawing.Size(0, Presentation_FadePanel.Size.Height);
@@ -284,24 +275,9 @@ namespace DreamBeam {
 
 		#region Inits
 
-		private void InitializeDiatheke() {
+		private void InitializeSword() {
 			if (SwordProject_Found) {
-				System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(MainForm));
-				this.Diatheke = new AxACTIVEDIATHEKELib.AxActiveDiatheke();
-				((System.ComponentModel.ISupportInitialize)(this.Diatheke)).BeginInit();
-				this.Sermon_LeftBottom_Panel.Controls.Add(this.Diatheke);
-				//
-				// Diatheke
-				//
-				this.Diatheke.ContainingControl = this;
-				this.Diatheke.Enabled = true;
-				this.Diatheke.Location = new System.Drawing.Point(144, 8);
-				this.Diatheke.Name = "Diatheke";
 
-				this.Diatheke.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("Diatheke.OcxState")));
-				this.Diatheke.Size = new System.Drawing.Size(100, 40);
-				this.Diatheke.TabIndex = 3;
-				((System.ComponentModel.ISupportInitialize)(this.Diatheke)).EndInit();
 			} else {
 				Sermon_BibleKey.Enabled = false;
 				Sermon_Books.Enabled = false;
@@ -1356,6 +1332,10 @@ namespace DreamBeam {
 			RightDocks_Preview_GoLive_Click(null, null);
 		}
 
+        private void SongShow_StropheList_ListEx_MouseDoubleClick(object sender, MouseEventArgs e) {
+            RightDocks_Preview_GoLive_Click(null, null);
+        }
+
 		private void SongShow_StropheList_ListEx_SelectedIndexChanged(object sender, System.EventArgs e) {
 			// Update the preview screen when the index changes
 
@@ -1956,7 +1936,7 @@ namespace DreamBeam {
 				} catch { }
 
                 int i = 0, match = 0;
-                foreach (string Book in SwordW.Instance().getBibles()) {
+                foreach (string Book in SwordW.Instance().getModules(null)) {
                     Sermon_Books.Items.Add(Book);
                     if (Book == this.Config.LastBibleUsed) {
                         match = i;
@@ -1967,11 +1947,6 @@ namespace DreamBeam {
                 if (this.Sermon_Books.Items.Count > match) {
                     this.Sermon_Books.SelectedIndex = match;
                 }
-
-				Diatheke.autoupdate = false;
-				// We can't use the Diatheke.ValueChanged event, or we'll get the whole bible in the
-				// sermon tool document when the user tries to do bible caching.
-				//NO GOOD: this.Diatheke.ValueChanged += new System.EventHandler(this.Diatheke_ValueChanged);
 
 				BibleText_Translations.SelectedIndexChanged += new EventHandler(BibleText_Translations_SelectedIndexChanged);
 
@@ -2012,13 +1987,13 @@ namespace DreamBeam {
                 string r = vk.getShortText();
 
                 if (!String.IsNullOrEmpty(v)) {
-                    sb.Append(Tools.Diatheke_ConvertEncoding(v).Trim());
+                    sb.Append(Tools.Sword_ConvertEncoding(v).Trim());
                 }
 
                 //if (this.Sermon_ShowBibleTranslation && !String.IsNullOrEmpty(r)) {
                 if (!String.IsNullOrEmpty(r)) {
                     sb.Append("\n");
-                    sb.Append("(" + Tools.Diatheke_ConvertEncoding(r) + ")");
+                    sb.Append("(" + Tools.Sword_ConvertEncoding(r) + " - " + version + ")");
                 }
 
                 sb.Append("\n");
@@ -2088,7 +2063,8 @@ namespace DreamBeam {
 			const int MAX_TITLE_LEN = 20;
 			text = text.Trim().Split('\n')[0];
 			text = Regex.Replace(text, @"\s+", " ");
-			return text.Substring(0, Math.Min(MAX_TITLE_LEN, text.Length));
+			text = text.Substring(0, Math.Min(MAX_TITLE_LEN, text.Length));
+            return String.IsNullOrEmpty(text) ? "Empty" : text;
 		}
 
 		private void Sermon_ToolBar_ButtonClick(object sender, TD.SandBar.ToolBarItemEventArgs e) {
@@ -2354,31 +2330,6 @@ namespace DreamBeam {
 
 		#endregion
 
-		#region Diatheke and Sword
-		public ArrayList DiathekeBooks(bool BiblesOnly) {
-			ArrayList BookList = new ArrayList();
-			if (Diatheke == null) return BookList;
-
-			Diatheke.book = "system";
-			if (BiblesOnly) {
-				Diatheke.key = "modulelist";
-				Diatheke.query();
-				foreach (string book in Diatheke.value.Trim().Split('\n')) {
-					if (Regex.IsMatch(book, "Biblical Texts")) continue;
-					if (Regex.IsMatch(book, "Commentaries|Dictionaries")) break;
-					BookList.Add(Regex.Split(book, " : ")[0]);
-				}
-			} else {
-				Diatheke.key = "modulelistnames";
-				Diatheke.query();
-				foreach (string book in Diatheke.value.Trim().Split('\n')) {
-					BookList.Add(book);
-				}
-			}
-			return BookList;
-		}
-		#endregion
-
 		#region Bible Text Component
 
 
@@ -2606,6 +2557,7 @@ namespace DreamBeam {
 			}
 		}
 		#endregion
+
 
 	}
 

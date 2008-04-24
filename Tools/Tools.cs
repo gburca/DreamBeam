@@ -503,7 +503,7 @@ namespace DreamBeam {
             return Regex.Replace(strIn, @"[^\w ]+", "");
         }
 
-		public static string Diatheke_ConvertEncoding(string text) {
+		public static string Sword_ConvertEncoding(string text) {
 			Encoding utf8 = Encoding.GetEncoding("UTF-8");
 
 			/* "enc" must match the value set in:
