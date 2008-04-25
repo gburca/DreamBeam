@@ -471,8 +471,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>cp "$(ProjectDir)\ComImports\libsword.dll" "$(TargetDir)"
+cp "$(ProjectDir)\ComImports\libsword_csharpsword.dll" "$(TargetDir)"</PreBuildEvent>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
