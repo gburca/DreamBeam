@@ -373,8 +373,7 @@ namespace DreamBeam.FileTypes {
                 if (vk.Testament() == (char)2) {
                     book += 39;
                 }
-                BibleVerse v = new BibleVerse(i, book - 1, vk.Chapter(), vk.Verse(), t);
-                v.t2 = Replace(v.t);
+                BibleVerse v = new BibleVerse(i, book - 1, vk.Chapter(), vk.Verse(), Replace(t));
                 verses[i] = v;
 
                 // book is 1-based, b is 0-based
@@ -475,18 +474,9 @@ namespace DreamBeam.FileTypes {
             return GetSimpleRef(GetVerseIndex(fullRef), Abbreviated);
         }
 
-        public string GetVerse(int verseIdx) {
-            if (verseIdx < 0 || verseIdx >= _VerseCount) return "";
-            return this.GetRef(verseIdx) + "\t" + verses[verseIdx].t;
-        }
-
         public string GetSimpleVerseText(int verseIdx) {
             if (verseIdx < 0 || verseIdx >= _VerseCount) return "";
-            if (verses[verseIdx].t2.Length > 0) {
-                return verses[verseIdx].t2;
-            } else {
-                return verses[verseIdx].t;
-            }
+            return verses[verseIdx].t;
         }
 
         public string BookName(int bookNum, bool Abbreviated) {
@@ -602,11 +592,11 @@ namespace DreamBeam.FileTypes {
 
             if (dirFwd) {
                 for (int i = start_i; i < _VerseCount; i++) {
-                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
+                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t);
                     if (m.Success) { return i; }
                 }
                 for (int i = 0; i < start_i; i++) {
-                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
+                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t);
                     if (m.Success) {
                         Console.WriteLine("Verse search WRAP");
                         return i;
@@ -614,11 +604,11 @@ namespace DreamBeam.FileTypes {
                 }
             } else {
                 for (int i = start_i; i >= 0; i--) {
-                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
+                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t);
                     if (m.Success) return i;
                 }
                 for (int i = _VerseCount - 1; i > start_i; i--) {
-                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t2);
+                    m = r.Match(GetSimpleRef(i, true) + " " + verses[i].t);
                     if (m.Success) return i;
                 }
             }
@@ -652,14 +642,16 @@ namespace DreamBeam.FileTypes {
 
 	/// <summary>
 	/// Represents a verse. i is the verse index (0..31102), b, c, v are the
-	/// 0-based book, 1-based chapter, 1-based verse numbers. t is the actual verse text.
+	/// 0-based book, 1-based chapter, 1-based verse numbers. t is the "simplified" verse text.
 	/// </summary>
 	[Serializable]
 	public class BibleVerse {
 		public int i, b, c, v;
-        [NonSerialized]
-		public string t;
-        public string t2;
+        /// <summary>
+        /// The verse text after RegEx replacements (to remove punctuation, etc...) have been made.
+        /// When a user types a RegEx to search for, this is the text the RegEx is matched against.
+        /// </summary>
+        public string t;
 
 		public BibleVerse() { }
 		public BibleVerse(int i, int b, int c, int v, string t) {
