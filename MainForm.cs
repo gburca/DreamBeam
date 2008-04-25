@@ -1928,7 +1928,7 @@ namespace DreamBeam {
 			if (this.SwordProject_Found) {
 
 				this.Options.Sword_LanguageBox.Items.Clear();
-				foreach (string locale in this.GetLocales()) {
+                foreach (string locale in SwordW.GetLocales(this.Config.SwordPath)) {
 					this.Options.Sword_LanguageBox.Items.Add(locale);
 				}
 				try {
@@ -2458,24 +2458,6 @@ namespace DreamBeam {
 		//			this.Main_ErrorProvider.SetError(this.ErrorProvider_LastControl, "");
 		//		}
 		//	}
-
-		/// <summary>
-		/// Finds a list of all the locales supported by Sword by looking for the locale .conf files
-		/// in the Sword locales.d directory.
-		/// </summary>
-		/// <returns></returns>
-		public ArrayList GetLocales() {
-			ArrayList locales = new ArrayList();
-			DirectoryInfo dir = new DirectoryInfo(Path.Combine(this.Config.SwordPath, "locales.d"));
-			if (!dir.Exists) return locales;
-			foreach (FileInfo f in dir.GetFiles("*.conf")) {
-				string locale = Regex.Replace(f.Name, @"\.conf$", "");
-				if (!Regex.IsMatch(locale, "abbr")) {
-					locales.Add(locale);
-				}
-			}
-			return locales;
-		}
 
 		private void ToolBars_MenuBar_Import_Song_Activate(object sender, System.EventArgs e) {
 			this.OpenFileDialog.Multiselect = true;

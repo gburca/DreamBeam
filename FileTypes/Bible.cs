@@ -54,7 +54,7 @@ namespace DreamBeam.FileTypes {
 	#endregion
 
     /// <summary>
-    /// A simple wrapper around Sword
+    /// A wrapper around Sword and its functionality.
     /// </summary>
     public class SwordW {
         static SwordW instance = null;
@@ -193,6 +193,24 @@ namespace DreamBeam.FileTypes {
             }
 
             return Tools.Sword_ConvertEncoding(module.RenderText(vk)).Trim();
+        }
+
+        /// <summary>
+        /// Finds a list of all the locales supported by Sword by looking for the locale .conf files
+        /// in the Sword locales.d directory.
+        /// </summary>
+        /// <returns></returns>
+        public static ArrayList GetLocales(string swordPath) {
+            ArrayList locales = new ArrayList();
+            DirectoryInfo dir = new DirectoryInfo(Path.Combine(swordPath, "locales.d"));
+            if (!dir.Exists) return locales;
+            foreach (FileInfo f in dir.GetFiles("*.conf")) {
+                string locale = Regex.Replace(f.Name, @"\.conf$", "");
+                if (!Regex.IsMatch(locale, "abbr")) {
+                    locales.Add(locale);
+                }
+            }
+            return locales;
         }
     }
     

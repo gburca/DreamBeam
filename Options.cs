@@ -149,7 +149,6 @@ namespace DreamBeam {
 			this._MainForm.UpdateDisplaySizes();
 
 			config.SwordPath = this.Sword_PathBox.Text;
-			//this._MainForm.Check_SwordProject(config);
 
 			if (!String.IsNullOrEmpty(this.Sword_LanguageBox.Text)) {
 				config.BibleLang = this.Sword_LanguageBox.Text;
@@ -623,6 +622,15 @@ namespace DreamBeam {
 			g.Dispose();
 		}
 
+        /// <summary>
+        /// When displaying bible verses (on the live screen), the reference shown comes
+        /// from the bible.BibleBooks[?].Long (or .Short) fields. This code sets those
+        /// fields for all bibles in the library to the names found in the user selected
+        /// Sword locales.d file.
+        /// </summary>
+        /// <param name="Bibles"></param>
+        /// <param name="SwordPath"></param>
+        /// <param name="locale"></param>
 		public static void SetBibleLocale(BibleLib Bibles, string SwordPath, string locale) {
 			string localeDir = Path.Combine(SwordPath, "locales.d");
 			string longFile = Path.Combine(localeDir, locale + ".conf");

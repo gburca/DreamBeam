@@ -1,3 +1,15 @@
+0.81
+Gabriel Burca:
+- Fixed the encoding of text obtained from Sword (completely replaced the old Sword
+  interface)
+- Reduced the size of the bible cache by 50% compared to 0.80.
+- Added a shortcut to the SongShow tab. A double-click on a verse/chorus will send
+  it directly to the live screen, just like the single-click on the big red dot.
+- Fixed the progress bar for caching bible texts.
+- Optimized the bible caching code.
+- Added an option to do "default" replacements when caching a bible text.
+- Fixed a major bug in 0.80 triggered when trying to create a new song.
+
 0.80
 Gabriel Burca:
 - Added Theme handling
