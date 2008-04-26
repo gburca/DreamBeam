@@ -231,7 +231,9 @@ namespace DreamBeam {
 			this.Presentation_PreviewPanel.BackColor = Color.Black;
 			this.axShockwaveFlash.BackgroundColor = Color.Black.ToArgb();
 			this.Presentation_PreviewBox.BackColor = Color.Black;
-		}
+
+            Console.WriteLine("DreamBeam starting up");
+        }
 
 
 		/// <summary>
@@ -2335,7 +2337,6 @@ namespace DreamBeam {
 
 		#region BibleText Translations and Bookmarks ListBox
 		private void BibleText_Translations_SelectedIndexChanged(object sender, System.EventArgs e) {
-			Console.WriteLine("Selected index changed sender: " + sender.ToString() + " Event: " + e.ToString() + " Type: " + e.GetType().ToString());
 			BibleVersion BibleText_Bible = bibles[BibleText_Translations.SelectedItem.ToString()];
 			bibleTextControl.BibleVersion = BibleText_Bible;
 			this.Config.LastBibleUsed = BibleText_Translations.SelectedItem.ToString();

@@ -773,14 +773,14 @@ namespace DreamBeam {
 				SizePosControl.SelectedIndex = 1;
 			}
 
-			//ResourceManager rm;
-			//rm = new ResourceManager("DreamBeam.Images",System.Reflection.Assembly.GetExecutingAssembly());
+			ResourceManager rm;
+            rm = new ResourceManager("DreamBeam.Resources.Images", System.Reflection.Assembly.GetExecutingAssembly());
 
 			TestImage.Show();
 			TestImage.Size = this.Size;
 			TestImage.Location = new Point(0, 0);
 
-			//TestImage.Image = Resizer((Image)rm.GetObject("Dreambeam_testbild.jpg"),this.Width,this.Height) ;
+			TestImage.Image = Resizer((Image)rm.GetObject("DreamBeam_TestImage.jpg"),this.Width,this.Height) ;
 
 
 			SizePosControl.Show();
