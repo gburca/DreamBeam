@@ -10,10 +10,14 @@
 !endif
 !macroend
 
+;--------------------------------
+; Things to check for:
+!define NET_TEST "$WINDIR\Microsoft.NET\Framework\v2.0.50727\InstallUtil.exe"
+!define DX_TEST "$WINDIR\assembly\GAC\Microsoft.DirectX"
+!define SWORD_TEST "$PROGRAMFILES\CrossWire\The SWORD Project\sword.exe"
 
-!macro CheckerWeb
-Section "-hidden CheckDependencies"
-
+;--------------------------------
+; URLs used below
 ; .NET 1.0
 !define NET1_URL "http://download.microsoft.com/download/a/a/c/aac39226-8825-44ce-90e3-bf8203e74006/dotnetfx.exe"
 ; .NET 2.0
@@ -25,13 +29,17 @@ Section "-hidden CheckDependencies"
 !define SWORD_URL "http://crosswire.org/ftpmirror/pub/sword/frontend/win32/v1.5/sword-starter-win32-1.5.9.exe"
 
 
+!macro CheckerWeb
+Section "-hidden CheckDependencies"
+
 ;=========================================================================================
 ;== WebInstall =============== Microsof .Net Framework ===================================
 ;=========================================================================================
 
 	;DotNet:
 	;MessageBox MB_OK "Checking for .NET"
-	IfFileExists "$WINDIR\Microsoft.NET\Framework\v2.0.50727\InstallUtil.exe" FinishDotNet
+	IfFileExists "${NET_TEST}" FinishDotNet
+
 		MessageBox MB_YESNOCANCEL|MB_ICONEXCLAMATION \
 			"Microsoft .NET Framework 2.0 is required by Dreambeam. \
 			$\n$\n Allow Setup to download and install the Framework? (~23 MB)" \
@@ -51,9 +59,17 @@ Section "-hidden CheckDependencies"
 		InstallNet:
 		Banner::show /NOUNLOAD /set 76 "Installing Microsoft .Net Framework." \
 			"Please wait. This is slow!" \
-		ExecWait '"$TEMP\dotnetfx.exe" /q:a /c:"install /q"'
-		Delete "$TEMP\dotnetfx.exe"
+		ExecWait '"$TEMP\dotnetfx.exe" /q:a /c:"install /q"' $0
 		Banner::destroy
+		IntCmp $0 0 SuccessDotNet
+		MessageBox MB_OK ".NET Framework install failed. Code: $0\
+			$\nDownload left in $TEMP\dotnetfx.exe\
+			$\nPlease install it by hand after this installer finishes."
+		Goto FinishDotNet
+
+	SuccessDotNet:
+		Delete "$TEMP\dotnetfx.exe"
+		Goto FinishDotNet
 		
 	FinishDotNet:
 
@@ -98,7 +114,7 @@ Section "-hidden CheckDependencies"
 ;=========================================================================================
 	ManagedDirectX:
 	;MessageBox MB_OK "Checking for DirectX Managed"
-	IfFileExists "$WINDIR\assembly\GAC\Microsoft.DirectX" FinishManagedDirectX
+	IfFileExists "${DX_TEST}" FinishManagedDirectX
 	;MessageBox MB_OK "Did not find the managed wrappers for DirectX"
 	MessageBox MB_YESNOCANCEL|MB_ICONEXCLAMATION \
 		"Dreambeam requires Microsoft DirectX Managed extensions. \
@@ -121,12 +137,23 @@ Section "-hidden CheckDependencies"
 		InstallDXManaged:
 		Banner::show /NOUNLOAD /set 76 "Installing Microsoft DirectX." \
 			"Please wait. This is SLOOOOW."
-		ExecWait '"$TEMP\${directx_file}" /q:a /t:"$TEMP\DirectXManaged"'
-		ExecWait '"$TEMP\DirectXManaged\dxsetup.exe" /silent'
+		;ExecWait '"$TEMP\${directx_file}" /q:a /c:"install /q"' $0
+		ExecWait '"$TEMP\${directx_file}" /q:a /t:"$TEMP\DirectXManaged"' $0
+		ExecWait '"$TEMP\DirectXManaged\dxsetup.exe" /silent' $1
+		Banner::destroy
+		IntCmp $0 0 0 FailedDirectX FailedDirectX
+		IntCmp $1 0 SuccessDirectX
 
+	FailedDirectX:
+		MessageBox MB_OK "DirectX install failed. Code: $0 and $1\
+			$\nDownload left in $TEMP\${directx_file}\
+			$\nPlease install it by hand after this installer finishes."
+		Goto FinishManagedDirectX
+
+	SuccessDirectX:
 		RMDir /r "$TEMP\DirectXManaged"
 		Delete "$TEMP\${directx_file}"
-		Banner::destroy
+		Goto FinishManagedDirectX
 
 	FinishManagedDirectX:
 
@@ -135,7 +162,7 @@ Section "-hidden CheckDependencies"
 ;=========================================================================================
 	Sword:
 	;MessageBox MB_OK "Checking for The SWORD Project"
-	IfFileExists "$PROGRAMFILES\CrossWire\The SWORD Project\sword.exe" FinishSword
+	IfFileExists "${SWORD_TEST}" FinishSword
 	;MessageBox MB_OK "Did not find The SWORD Project"
 	MessageBox MB_YESNO|MB_ICONEXCLAMATION \
 		"The Sword program was not found in the default install directory.\
@@ -162,9 +189,16 @@ Section "-hidden CheckDependencies"
 			$\n DreamBeam can continue with the install."
 		Banner::show /NOUNLOAD /set 76 "Installing The SWORD Project." \
 			"Please be patient..."
-		ExecWait "$TEMP\${sword_file} /S"
-		Delete "$TEMP\${sword_file}"
+		ExecWait "$TEMP\${sword_file} /S" $0
 		Banner::destroy
+		IntCmp $0 0 SuccessSword
+		MessageBox MB_OK "Sword install failed. Code: $0\
+			$\nDownload left in $TEMP\${sword_file}\
+			$\nPlease install it by hand after this installer finishes."
+		Goto FinishSword
+
+	SuccessSword:
+		Delete "$TEMP\${sword_file}"
 		Goto FinishSword
 
 	DownloadErrorSword:
@@ -215,6 +249,7 @@ Section "-hidden CheckDependencies"
   		Quit
 	
 	NextStep:
+		Call VerifyDependencyInstall
 
 SectionEnd ; end the section
 !macroend
@@ -233,7 +268,7 @@ Section "-hidden CheckDependencies" ;
 ;== FullInstall ============== Microsof .Net Framework ===================================
 ;=========================================================================================
 	DotNet:
-	IfFileExists "$WINDIR\Microsoft.NET\Framework\v2.0.50727\InstallUtil.exe" FinishDotNet
+	IfFileExists "${NET_TEST}" FinishDotNet
 
 		MessageBox MB_YESNOCANCEL|MB_ICONEXCLAMATION \
 			"Microsoft .NET Framework 2.0 is required by Dreambeam. \
@@ -284,7 +319,7 @@ Section "-hidden CheckDependencies" ;
 	;MessageBox MB_OK "Checking for DirectX Managed"
 	
 	; See if the directory exists ...
-	IfFileExists "$WINDIR\assembly\GAC\Microsoft.DirectX\*.*" FinishManagedDirectX
+	IfFileExists "${DX_TEST}" FinishManagedDirectX
 	;MessageBox MB_OK "Did not find the managed wrappers for DirectX"
 	
 	MessageBox MB_YESNOCANCEL|MB_ICONEXCLAMATION \
@@ -320,7 +355,7 @@ Section "-hidden CheckDependencies" ;
 
 	Sword:
 ;	MessageBox MB_OK "Checking for Sword"
-	IfFileExists "$PROGRAMFILES\CrossWire\The SWORD Project\sword.exe" FinishSword
+	IfFileExists "${SWORD_TEST}" FinishSword
 	MessageBox MB_YESNO|MB_ICONEXCLAMATION \
 		"The Sword program was not found in the default install directory.\
 		$\n$\n Should we install the version included in this installer? \
@@ -376,7 +411,7 @@ Section "-hidden CheckDependencies" ;
 ;=========================================================================================
 ;== FullInstall =============== Exit points for the installer ============================
 ;=========================================================================================
-	Goto NextStep	
+	Goto NextStep
 
 	AbortInstall:
 	        MessageBox MB_OK "The installer has been aborted. \
@@ -384,6 +419,31 @@ Section "-hidden CheckDependencies" ;
 		Quit
 
 	NextStep:
+		Call VerifyDependencyInstall
 
 SectionEnd ; end the section
 !macroend
+
+
+
+Function VerifyDependencyInstall
+	IfFileExists "${NET_TEST}" OkDotNet
+		MessageBox MB_OK "You chose to not install .NET Framework 2.0, or the install failed.\
+		$\nPlease install .NET after this installation ends from:\
+		$\n$\n ${NET_URL}"
+	OkDotNet:
+
+	IfFileExists "${DX_TEST}" OkDirectX
+		MessageBox MB_OK "You chose to not install the DirectX extensions, or the install failed.\
+		$\nPlease install DirectX after this installation ends from:\
+		$\n$\n ${DX_MANAGED_URL}"
+	OkDirectX:
+
+	IfFileExists "${SWORD_TEST}" OkSword
+		MessageBox MB_OK "You chose to not install Sword, or the install failed.\
+		$\nYou may install it after this installation ends from:\
+		$\n$\n ${SWORD_URL}"
+	OkSword:
+
+FunctionEnd
+

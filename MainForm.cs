@@ -173,7 +173,9 @@ namespace DreamBeam {
 
 			this.Hide();
 
-            this.SwordProject_Found = true;
+            if (SwordW.Instance().getModules(null).Count > 0) {
+                this.SwordProject_Found = true;
+            }
 			Splash.ShowSplashScreen();
 			Splash.SetStatus("Initializing");
 			InitializeComponent();
@@ -2031,7 +2033,7 @@ namespace DreamBeam {
 
 		private void Sermon_BibleKey_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e) {
 			if (this.SwordProject_Found) {
-				if (e.KeyCode == Keys.Enter) {
+				if (e.KeyCode == Keys.Enter && Sermon_Books.SelectedIndex >= 0) {
                     Sermon_AddBibleText(Sermon_BibleKey.Text, Sermon_Books.Items[Sermon_Books.SelectedIndex].ToString());
                 }
 			}

@@ -101,6 +101,14 @@ namespace DreamBeam.FileTypes {
             return getModules("Biblical Texts");
         }
 
+        /// <summary>
+        /// Gets all the modules of the given type.
+        /// </summary>
+        /// <param name="type">
+        /// null = gets all types
+        /// "Biblical Texts"
+        /// </param>
+        /// <returns>A list of module names</returns>
         public List<string> getModules(string type) {
             List<string> modules = new List<string>();
 
