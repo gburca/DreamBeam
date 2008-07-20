@@ -41,7 +41,11 @@ namespace DreamBeam {
 		public int BeamBoxScreenNum = -1;
 		public bool PreRender = false;
 		public bool Alphablending = false;
-		public int BlendSpeed = 10;
+		private int blendSpeed = 10;
+        public int BlendSpeed {
+            get { return blendSpeed; }
+            set { blendSpeed = Math.Min(Math.Max(1, value), 255); }
+        }
 		public bool useDirect3D = false;
 		//public float OutlineSize = 3;
 		public string BibleLang = "en";

@@ -37,7 +37,6 @@ using System.Data;
 using System.Reflection;
 using System.Globalization;
 using System.Xml;
-using Rilling.Common.UI.Forms;
 using Microsoft.DirectX;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -489,7 +488,6 @@ namespace DreamBeam {
 			this.Config.BeamBoxAutoPosSize = ShowBeam.BeamBoxAutoPosSize;
 			this.Config.BeamBoxScreenNum = ShowBeam.BeamBoxScreenNum;
 
-			this.Config.Alphablending = ShowBeam.transit;
 			this.Config.BibleLang = this.Sermon_BibleLang;
 			this.Config.ShowBibleTranslation = this.Sermon_ShowBibleTranslation;
 
@@ -517,7 +515,7 @@ namespace DreamBeam {
 			ShowBeam.TopMost = this.Config.AlwaysOnTop;
 
 			// Alphablending enabled?
-			ShowBeam.transit = this.Config.Alphablending;
+            ShowBeam.Config = this.Config;
 			// Direct3D
 			ShowBeam.useDirect3d = this.Config.useDirect3D;
 

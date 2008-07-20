@@ -5,7 +5,6 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
-using Rilling.Common.UI.Forms;
 using Lister;
 using DreamBeam.FileTypes;
 using cs_IniHandlerDevelop;
@@ -242,10 +241,10 @@ namespace DreamBeam {
 			this.BeamBox_Height.Value = (int)config.BeamBoxSizeY;
 			this.BeamBox_HideMouse.Checked = config.HideMouse;
 			this.Alpha_CheckBox.Checked = config.Alphablending;
-			this.PreRendercheckBox.Checked = config.PreRender;
+            this.Speed_Updown.Value = config.BlendSpeed;
+            this.PreRendercheckBox.Checked = config.PreRender;
 			this.Direct3D_CheckBox.Checked = config.useDirect3D;
 			this.BeamBox_AlwaysOnTop.Checked = config.AlwaysOnTop;
-			this.Speed_Updown.Value = config.BlendSpeed;
 			this.showBeamBackground = config.BackgroundColor;
 
 
@@ -585,6 +584,7 @@ namespace DreamBeam {
 			Graphics g = CreateGraphics();
 
 			DataTable dataTable = (DataTable)grid.DataSource;
+            if (dataTable == null) return; // No entries in the grid
 
 			DataGridTableStyle dataGridTableStyle = new DataGridTableStyle();
 

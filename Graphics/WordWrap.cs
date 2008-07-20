@@ -76,9 +76,26 @@ namespace DreamBeam {
 	/// Further enhancements could include hyphenation support.
 	/// </summary>
 	public class WordWrapAtSpace : IWordWrap {
-
+        /// <summary>
+        /// Breaks a string into an array of words. Turns the line terminators into
+        /// a "\n" word so we can detect them and respect the user defined line breaks.
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
 		string[] GetWords(string doc) {
-			return doc.Split(' ');
+            List<String> words = new List<String>();
+
+            string[] lines = doc.Split('\n');
+            if (lines.Length > 0) {
+                words.AddRange(lines[0].Split(' '));
+                for (int i = 1; i < lines.Length; i++) {
+                    words.Add("\n");
+                    words.AddRange(lines[i].Split(' '));
+                }
+                return words.ToArray();
+            } else {
+                return doc.Split(' ');
+            }
 		}
 
 		public GraphicsPath GetPath(string doc, Font f, StringFormat sf, RectangleF bounds) {
@@ -120,7 +137,12 @@ namespace DreamBeam {
 			lines.Add(line);
 
 			for (int i = 0; i < w.Length; ) {
-				if (line.add(w[i], font, bounds.Width)) {
+                if (w[i].Equals("\n")) {
+                    // User inserted line-break
+                    i++;
+                    line = new Line();
+                    lines.Add(line);
+                } else if (line.add(w[i], font, bounds.Width)) {
 					// Word was successfully added
 					i++;
 

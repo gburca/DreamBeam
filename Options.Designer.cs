@@ -1109,10 +1109,11 @@ namespace DreamBeam {
             // 
             this.Speed_Updown.Location = new System.Drawing.Point(296, 24);
             this.Speed_Updown.Maximum = new decimal(new int[] {
-            50,
+            75,
             0,
             0,
             0});
+            this.Speed_Updown.Minimum = 1;
             this.Speed_Updown.Name = "Speed_Updown";
             this.Speed_Updown.Size = new System.Drawing.Size(64, 20);
             this.Speed_Updown.TabIndex = 6;

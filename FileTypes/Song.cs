@@ -167,6 +167,9 @@ namespace DreamBeam {
 		private Object renderLock = new Object();
 		[XmlIgnore]
 		public Config config;
+        [XmlIgnore]
+        [NonSerializedAttribute]
+        protected IWordWrap wrapper;
 		[XmlIgnore]
 		protected System.Type enumType;
 		/// <summary>Zero based index of the current lyric (used to index this.Sequence)</summary>
@@ -210,7 +213,8 @@ namespace DreamBeam {
 			this.Sequence = new ArrayList();
 			this.CurrentLyric = 0;
 			this.Version = Tools.GetAppVersion();
-		}
+            wrapper = new WordWrapAtSpace();
+        }
 
 		public Song(Config config) : this() {
 			if (config != null && config.theme != null) {
@@ -218,7 +222,7 @@ namespace DreamBeam {
 				// This is not a custom theme, so null the ThemePath so it doesn't get saved.
 				Theme.ThemeFile = null;
 			}
-		}
+        }
 
 		/// <summary>
 		/// This constructor creates a new song out of a plain text file. The file must contain a single
@@ -507,7 +511,7 @@ namespace DreamBeam {
 			String high = NormalizeKey(KeyRangeHigh);
 
 			String key;
-			if (low.Length > 0 && high.Length > 0) {
+			if (low.Length > 0 && high.Length > 0 && !low.Equals(high)) {
 				key = low + " - " + high;
 			} else if (low.Length > 0) {
 				key = low;
@@ -591,8 +595,7 @@ namespace DreamBeam {
 				Bitmap bmp = new Bitmap(Width, Height);
 				Graphics graphics = Graphics.FromImage(bmp);
 				GraphicsPath pth, pth2;
-				Rectangle pathRect, bounds;
-				RectangleF measuredBounds;
+				Rectangle bounds;
 				Font font;
 				float fontSz;
 				BeamTextFormat[] format = this.Theme.TextFormat;
@@ -638,27 +641,10 @@ namespace DreamBeam {
 						sf.LineAlignment = format[type].VAlignment;
 
 						if (this.WordWrap) {
-							// Make a rectangle that is very tall to see how far down the text would stretch.
-							pathRect = bounds;
-							pathRect.Height *= 2;
-
-							// We start with the user-specified font size ...
+                            // Used by TextTool (which inherits from Song).
 							fontSz = format[type].TextFont.Size * ((float)Height / BeamTextFormat.ReferenceResolutionH);
-
-							// ... and decrease the size (if needed) until it fits within the user-specified boundaries
-							do {
-								font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
-								pth.Reset();
-								pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, pathRect, sf);
-								measuredBounds = pth.GetBounds();
-								fontSz--;
-								if (fontSz == 0) break;
-							} while (measuredBounds.Height > bounds.Height);
-
-							// We need to re-create the path. For some reason the do-while loop puts it in the wrong place.
-							pth.Reset();
-							pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, bounds, sf);
-
+							font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
+                            pth = wrapper.GetPath(text[type], font, sf, bounds);
 						} else {
 							// Tab characters are ignored by AddString below. Converting them to spaces.
 							text[type] = Regex.Replace(text[type], "\t", "        ");

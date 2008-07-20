@@ -10,8 +10,7 @@
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>DreamBeam</AssemblyName>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>StrongNameKey.pfx</AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
@@ -32,7 +31,8 @@
     <TargetZone>LocalIntranet</TargetZone>
     <OldToolsVersion>2.0</OldToolsVersion>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <PublishUrl>D:\VisualStudioProjects\DreamBeam-0.72\Installer\DreamBeam2\</PublishUrl>
+    <SignAssembly>false</SignAssembly>
+    <PublishUrl>Installer\PublishOutput\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -42,7 +42,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -97,10 +97,6 @@
     <Reference Include="AxInterop.ShockwaveFlashObjects">
       <Name>AxInterop.ShockwaveFlashObjects</Name>
       <HintPath>ComImports\AxInterop.ShockwaveFlashObjects.dll</HintPath>
-    </Reference>
-    <Reference Include="BalloonWindow">
-      <Name>BalloonWindow</Name>
-      <HintPath>libs\BalloonWindow.dll</HintPath>
     </Reference>
     <Reference Include="CollapsiblePanelBar">
       <Name>CollapsiblePanelBar</Name>
@@ -165,8 +161,8 @@
       <HintPath>libs\SandDock.dll</HintPath>
     </Reference>
     <Reference Include="SwigSword, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>ComImports\SwigSword.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -326,9 +322,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyBalloonWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -408,10 +401,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MyBalloonWindow.resx">
-      <DependentUpon>MyBalloonWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -445,6 +434,7 @@
     <None Include="Icons\go-down.png" />
     <None Include="Icons\bookmark-new.png" />
     <None Include="Icons\audio-volume-high.png" />
+    <None Include="StrongNameKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <BaseApplicationManifest Include="Properties\app.manifest" />
@@ -465,6 +455,17 @@
       <ProductName>.NET Framework 3.5</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="stdole">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
