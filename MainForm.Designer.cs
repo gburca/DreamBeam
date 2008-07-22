@@ -304,7 +304,7 @@ namespace DreamBeam {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Panel Presentation_MovieControl_LiveButtonPanel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node0");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
             this.Presentation_MediaLoop_Checkbox = new System.Windows.Forms.CheckBox();
             this.liveMediaControls = new DreamBeam.MediaControls();
             this.RightDocks_ImageListBox = new Controls.Development.ImageListBox();
@@ -354,6 +354,7 @@ namespace DreamBeam {
             this.ToolBars_MenuBar_Song_Save = new TD.SandBar.MenuButtonItem();
             this.ToolBars_MenuBar_Song_SaveAs = new TD.SandBar.MenuButtonItem();
             this.ToolBars_MenuBar_Song_Rename = new TD.SandBar.MenuButtonItem();
+            this.menuButtonItem1 = new TD.SandBar.MenuButtonItem();
             this.ToolBars_MenuBar_MediaList = new TD.SandBar.MenuBarItem();
             this.ToolBars_MenuBar_MediaList_New = new TD.SandBar.MenuButtonItem();
             this.ToolBars_MenuBar_Media_Save = new TD.SandBar.MenuButtonItem();
@@ -374,6 +375,7 @@ namespace DreamBeam {
             this.ToolBars_MenuBar_Open_MediaTab = new TD.SandBar.MenuButtonItem();
             this.ToolBars_MenuBar_Open_PreviewTab = new TD.SandBar.MenuButtonItem();
             this.ToolBars_MenuBar_Open_LiveTab = new TD.SandBar.MenuButtonItem();
+            this.ToolBars_MenuBar_Open_DesignTab = new TD.SandBar.MenuButtonItem();
             this.ToolBars_MenuBar_Help = new TD.SandBar.MenuBarItem();
             this.ToolBars_MenuBar_Help_Intro = new TD.SandBar.MenuButtonItem();
             this.ToolBars_MenuBar_Help_About = new TD.SandBar.MenuButtonItem();
@@ -415,6 +417,12 @@ namespace DreamBeam {
             this.Dock_SongTools = new TD.SandDock.DockControl();
             this.DockControl_BibleTools = new TD.SandDock.DockControl();
             this.BibleTools_CollapsiblePanelBar = new Salamander.Windows.Forms.CollapsiblePanelBar();
+            this.DockControl_DesignEditor = new TD.SandDock.DockControl();
+            this.DesignTabControl = new System.Windows.Forms.TabControl();
+            this.SongDesignTab = new System.Windows.Forms.TabPage();
+            this.SongThemeWidget1 = new DreamBeam.ThemeWidget();
+            this.SermonDesignTab = new System.Windows.Forms.TabPage();
+            this.BibleDesignTab = new System.Windows.Forms.TabPage();
             this.DockControl_Songs = new TD.SandDock.DockControl();
             this.SongList_Tree = new ControlLib.dbTreeViewCtrl();
             this.DockControl_PlayList = new TD.SandDock.DockControl();
@@ -516,6 +524,7 @@ namespace DreamBeam {
             this.dataColumn1 = new System.Data.DataColumn();
             this.dataColumn2 = new System.Data.DataColumn();
             this.SongListDataView = new System.Data.DataView();
+            this.songThemeWidget = new DreamBeam.ThemeWidget();
             Presentation_MovieControl_LiveButtonPanel = new System.Windows.Forms.Panel();
             Presentation_MovieControl_LiveButtonPanel.SuspendLayout();
             this.RightDocks_Songlist_SearchPanel.SuspendLayout();
@@ -546,6 +555,9 @@ namespace DreamBeam {
             this.DockControl_BibleTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BibleTools_CollapsiblePanelBar)).BeginInit();
             this.BibleTools_CollapsiblePanelBar.SuspendLayout();
+            this.DockControl_DesignEditor.SuspendLayout();
+            this.DesignTabControl.SuspendLayout();
+            this.SongDesignTab.SuspendLayout();
             this.DockControl_Songs.SuspendLayout();
             this.DockControl_PlayList.SuspendLayout();
             this.DockControl_Backgrounds.SuspendLayout();
@@ -641,7 +653,7 @@ namespace DreamBeam {
             this.RightDocks_ImageListBox.ItemHeight = 61;
             this.RightDocks_ImageListBox.Location = new System.Drawing.Point(0, 0);
             this.RightDocks_ImageListBox.Name = "RightDocks_ImageListBox";
-            this.RightDocks_ImageListBox.Size = new System.Drawing.Size(182, 307);
+            this.RightDocks_ImageListBox.Size = new System.Drawing.Size(58, 185);
             this.RightDocks_ImageListBox.TabIndex = 19;
             this.RightDocks_ImageListBox.SelectedIndexChanged += new System.EventHandler(this.RightDocks_ImageListBox_SelectedIndexChanged);
             this.RightDocks_ImageListBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.RightDocks_ImageListBox_DragDrop);
@@ -679,7 +691,7 @@ namespace DreamBeam {
             this.RightDocks_Songlist_SearchPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.RightDocks_Songlist_SearchPanel.Location = new System.Drawing.Point(0, 0);
             this.RightDocks_Songlist_SearchPanel.Name = "RightDocks_Songlist_SearchPanel";
-            this.RightDocks_Songlist_SearchPanel.Size = new System.Drawing.Size(182, 23);
+            this.RightDocks_Songlist_SearchPanel.Size = new System.Drawing.Size(58, 23);
             this.RightDocks_Songlist_SearchPanel.TabIndex = 6;
             // 
             // pictureBox1
@@ -698,7 +710,7 @@ namespace DreamBeam {
             this.RightDocks_SongListSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RightDocks_SongListSearch.Location = new System.Drawing.Point(22, 0);
             this.RightDocks_SongListSearch.Name = "RightDocks_SongListSearch";
-            this.RightDocks_SongListSearch.Size = new System.Drawing.Size(160, 20);
+            this.RightDocks_SongListSearch.Size = new System.Drawing.Size(36, 20);
             this.RightDocks_SongListSearch.TabIndex = 4;
             this.RightDocks_SongListSearch.TextChanged += new System.EventHandler(this.RightDocks_SongListSearch_TextChanged);
             // 
@@ -707,16 +719,16 @@ namespace DreamBeam {
             this.RightDocks_SongList_ButtonPanel.Controls.Add(this.btnRightDocks_SongListDelete);
             this.RightDocks_SongList_ButtonPanel.Controls.Add(this.btnRightDocks_SongList2PlayList);
             this.RightDocks_SongList_ButtonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RightDocks_SongList_ButtonPanel.Location = new System.Drawing.Point(0, 246);
+            this.RightDocks_SongList_ButtonPanel.Location = new System.Drawing.Point(0, 178);
             this.RightDocks_SongList_ButtonPanel.Name = "RightDocks_SongList_ButtonPanel";
-            this.RightDocks_SongList_ButtonPanel.Size = new System.Drawing.Size(182, 20);
+            this.RightDocks_SongList_ButtonPanel.Size = new System.Drawing.Size(58, 20);
             this.RightDocks_SongList_ButtonPanel.TabIndex = 5;
             // 
             // btnRightDocks_SongListDelete
             // 
             this.btnRightDocks_SongListDelete.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnRightDocks_SongListDelete.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRightDocks_SongListDelete.Location = new System.Drawing.Point(9, 1);
+            this.btnRightDocks_SongListDelete.Location = new System.Drawing.Point(-53, 1);
             this.btnRightDocks_SongListDelete.Name = "btnRightDocks_SongListDelete";
             this.btnRightDocks_SongListDelete.Size = new System.Drawing.Size(62, 18);
             this.btnRightDocks_SongListDelete.TabIndex = 2;
@@ -728,7 +740,7 @@ namespace DreamBeam {
             // 
             this.btnRightDocks_SongList2PlayList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRightDocks_SongList2PlayList.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRightDocks_SongList2PlayList.Location = new System.Drawing.Point(82, 1);
+            this.btnRightDocks_SongList2PlayList.Location = new System.Drawing.Point(-42, 1);
             this.btnRightDocks_SongList2PlayList.Name = "btnRightDocks_SongList2PlayList";
             this.btnRightDocks_SongList2PlayList.Size = new System.Drawing.Size(88, 18);
             this.btnRightDocks_SongList2PlayList.TabIndex = 1;
@@ -742,7 +754,7 @@ namespace DreamBeam {
             this.RightDocks_PlayList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightDocks_PlayList.Location = new System.Drawing.Point(0, 0);
             this.RightDocks_PlayList.Name = "RightDocks_PlayList";
-            this.RightDocks_PlayList.Size = new System.Drawing.Size(182, 236);
+            this.RightDocks_PlayList.Size = new System.Drawing.Size(58, 171);
             this.RightDocks_PlayList.TabIndex = 1;
             this.RightDocks_PlayList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RightDocks_PlayList_MouseUp);
             this.RightDocks_PlayList.DoubleClick += new System.EventHandler(this.RightDocks_PlayList_DoubleClick);
@@ -754,16 +766,16 @@ namespace DreamBeam {
             this.RightDocks_TopPanel_PlayList_Button_Panel.Controls.Add(this.RightDocks_PlayList_Remove_Button);
             this.RightDocks_TopPanel_PlayList_Button_Panel.Controls.Add(this.RightDocks_PlayList_Load_Button);
             this.RightDocks_TopPanel_PlayList_Button_Panel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RightDocks_TopPanel_PlayList_Button_Panel.Location = new System.Drawing.Point(0, 246);
+            this.RightDocks_TopPanel_PlayList_Button_Panel.Location = new System.Drawing.Point(0, 178);
             this.RightDocks_TopPanel_PlayList_Button_Panel.Name = "RightDocks_TopPanel_PlayList_Button_Panel";
-            this.RightDocks_TopPanel_PlayList_Button_Panel.Size = new System.Drawing.Size(182, 20);
+            this.RightDocks_TopPanel_PlayList_Button_Panel.Size = new System.Drawing.Size(58, 20);
             this.RightDocks_TopPanel_PlayList_Button_Panel.TabIndex = 8;
             // 
             // RightDocks_PlayList_Down_Button
             // 
             this.RightDocks_PlayList_Down_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RightDocks_PlayList_Down_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_PlayList_Down_Button.Location = new System.Drawing.Point(140, 2);
+            this.RightDocks_PlayList_Down_Button.Location = new System.Drawing.Point(16, 2);
             this.RightDocks_PlayList_Down_Button.Name = "RightDocks_PlayList_Down_Button";
             this.RightDocks_PlayList_Down_Button.Size = new System.Drawing.Size(40, 18);
             this.RightDocks_PlayList_Down_Button.TabIndex = 7;
@@ -774,7 +786,7 @@ namespace DreamBeam {
             // 
             this.RightDocks_PlayList_Up_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RightDocks_PlayList_Up_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_PlayList_Up_Button.Location = new System.Drawing.Point(100, 2);
+            this.RightDocks_PlayList_Up_Button.Location = new System.Drawing.Point(-24, 2);
             this.RightDocks_PlayList_Up_Button.Name = "RightDocks_PlayList_Up_Button";
             this.RightDocks_PlayList_Up_Button.Size = new System.Drawing.Size(40, 18);
             this.RightDocks_PlayList_Up_Button.TabIndex = 6;
@@ -785,7 +797,7 @@ namespace DreamBeam {
             // 
             this.RightDocks_PlayList_Remove_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.RightDocks_PlayList_Remove_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_PlayList_Remove_Button.Location = new System.Drawing.Point(50, 2);
+            this.RightDocks_PlayList_Remove_Button.Location = new System.Drawing.Point(-12, 2);
             this.RightDocks_PlayList_Remove_Button.Name = "RightDocks_PlayList_Remove_Button";
             this.RightDocks_PlayList_Remove_Button.Size = new System.Drawing.Size(54, 18);
             this.RightDocks_PlayList_Remove_Button.TabIndex = 5;
@@ -809,7 +821,7 @@ namespace DreamBeam {
             this.RightDocks_FolderDropdown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightDocks_FolderDropdown.Location = new System.Drawing.Point(0, 0);
             this.RightDocks_FolderDropdown.Name = "RightDocks_FolderDropdown";
-            this.RightDocks_FolderDropdown.Size = new System.Drawing.Size(182, 21);
+            this.RightDocks_FolderDropdown.Size = new System.Drawing.Size(58, 21);
             this.RightDocks_FolderDropdown.TabIndex = 21;
             this.RightDocks_FolderDropdown.SelectionChangeCommitted += new System.EventHandler(this.RightDocks_FolderDropdown_SelectionChangeCommitted);
             // 
@@ -824,10 +836,10 @@ namespace DreamBeam {
             // ToolBars_bottomSandBarDock
             // 
             this.ToolBars_bottomSandBarDock.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ToolBars_bottomSandBarDock.Location = new System.Drawing.Point(0, 781);
+            this.ToolBars_bottomSandBarDock.Location = new System.Drawing.Point(0, 624);
             this.ToolBars_bottomSandBarDock.Manager = this.ToolBars_sandBarManager1;
             this.ToolBars_bottomSandBarDock.Name = "ToolBars_bottomSandBarDock";
-            this.ToolBars_bottomSandBarDock.Size = new System.Drawing.Size(976, 0);
+            this.ToolBars_bottomSandBarDock.Size = new System.Drawing.Size(853, 0);
             this.ToolBars_bottomSandBarDock.TabIndex = 20;
             // 
             // ToolBars_leftSandBarDock
@@ -837,7 +849,7 @@ namespace DreamBeam {
             this.ToolBars_leftSandBarDock.Location = new System.Drawing.Point(0, 50);
             this.ToolBars_leftSandBarDock.Manager = this.ToolBars_sandBarManager1;
             this.ToolBars_leftSandBarDock.Name = "ToolBars_leftSandBarDock";
-            this.ToolBars_leftSandBarDock.Size = new System.Drawing.Size(72, 731);
+            this.ToolBars_leftSandBarDock.Size = new System.Drawing.Size(72, 574);
             this.ToolBars_leftSandBarDock.TabIndex = 18;
             // 
             // ToolBars_ComponentBar
@@ -859,7 +871,7 @@ namespace DreamBeam {
             this.ToolBars_ComponentBar.Name = "ToolBars_ComponentBar";
             this.ToolBars_ComponentBar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ToolBars_ComponentBar.ShowShortcutsInToolTips = true;
-            this.ToolBars_ComponentBar.Size = new System.Drawing.Size(72, 729);
+            this.ToolBars_ComponentBar.Size = new System.Drawing.Size(72, 572);
             this.ToolBars_ComponentBar.Stretch = true;
             this.ToolBars_ComponentBar.TabIndex = 0;
             this.ToolBars_ComponentBar.Text = "Main Tool Bar";
@@ -919,7 +931,7 @@ namespace DreamBeam {
             this.ToolBars_topSandBarDock.Location = new System.Drawing.Point(0, 0);
             this.ToolBars_topSandBarDock.Manager = this.ToolBars_sandBarManager1;
             this.ToolBars_topSandBarDock.Name = "ToolBars_topSandBarDock";
-            this.ToolBars_topSandBarDock.Size = new System.Drawing.Size(976, 50);
+            this.ToolBars_topSandBarDock.Size = new System.Drawing.Size(853, 50);
             this.ToolBars_topSandBarDock.TabIndex = 21;
             // 
             // ToolBars_MainToolbar
@@ -940,7 +952,7 @@ namespace DreamBeam {
             this.ToolBars_MainToolbar.Location = new System.Drawing.Point(2, 24);
             this.ToolBars_MainToolbar.Name = "ToolBars_MainToolbar";
             this.ToolBars_MainToolbar.ShowShortcutsInToolTips = true;
-            this.ToolBars_MainToolbar.Size = new System.Drawing.Size(974, 26);
+            this.ToolBars_MainToolbar.Size = new System.Drawing.Size(851, 26);
             this.ToolBars_MainToolbar.Stretch = true;
             this.ToolBars_MainToolbar.TabIndex = 1;
             this.ToolBars_MainToolbar.Text = "Action Tool Bar";
@@ -1070,7 +1082,8 @@ namespace DreamBeam {
             this.ToolBars_MenuBar_Song_New,
             this.ToolBars_MenuBar_Song_Save,
             this.ToolBars_MenuBar_Song_SaveAs,
-            this.ToolBars_MenuBar_Song_Rename});
+            this.ToolBars_MenuBar_Song_Rename,
+            this.menuButtonItem1});
             this.ToolBars_MenuBar_Song.Tag = null;
             this.ToolBars_MenuBar_Song.Text = "&Song";
             // 
@@ -1106,6 +1119,14 @@ namespace DreamBeam {
             this.ToolBars_MenuBar_Song_Rename.Text = "Rename Song...";
             this.ToolBars_MenuBar_Song_Rename.Visible = false;
             this.ToolBars_MenuBar_Song_Rename.Activate += new TD.SandBar.MenuButtonItem.ActivateEventHandler(this.ToolBars_MenuBar_Song_Rename_Activate);
+            // 
+            // menuButtonItem1
+            // 
+            this.menuButtonItem1.Icon = null;
+            this.menuButtonItem1.Shortcut = System.Windows.Forms.Shortcut.None;
+            this.menuButtonItem1.Tag = null;
+            this.menuButtonItem1.Text = "menuButtonItem1";
+            this.menuButtonItem1.Activate += new TD.SandBar.MenuButtonItem.ActivateEventHandler(this.menuButtonItem1_Activate);
             // 
             // ToolBars_MenuBar_MediaList
             // 
@@ -1168,7 +1189,8 @@ namespace DreamBeam {
             this.ToolBars_MenuBar_Open_MediaListTab,
             this.ToolBars_MenuBar_Open_MediaTab,
             this.ToolBars_MenuBar_Open_PreviewTab,
-            this.ToolBars_MenuBar_Open_LiveTab});
+            this.ToolBars_MenuBar_Open_LiveTab,
+            this.ToolBars_MenuBar_Open_DesignTab});
             this.ToolBars_MenuBar_View.Tag = null;
             this.ToolBars_MenuBar_View.Text = "&View";
             // 
@@ -1288,6 +1310,15 @@ namespace DreamBeam {
             this.ToolBars_MenuBar_Open_LiveTab.Text = "Live screen tab";
             this.ToolBars_MenuBar_Open_LiveTab.Activate += new TD.SandBar.MenuButtonItem.ActivateEventHandler(this.ToolBars_MenuBar_Open_LiveTab_Activate);
             // 
+            // ToolBars_MenuBar_Open_DesignTab
+            // 
+            this.ToolBars_MenuBar_Open_DesignTab.BeginGroup = true;
+            this.ToolBars_MenuBar_Open_DesignTab.Icon = null;
+            this.ToolBars_MenuBar_Open_DesignTab.Shortcut = System.Windows.Forms.Shortcut.None;
+            this.ToolBars_MenuBar_Open_DesignTab.Tag = null;
+            this.ToolBars_MenuBar_Open_DesignTab.Text = "Design tab";
+            this.ToolBars_MenuBar_Open_DesignTab.Activate += new TD.SandBar.MenuButtonItem.ActivateEventHandler(this.ToolBars_MenuBar_Open_DesignTab_Activate);
+            // 
             // ToolBars_MenuBar_Help
             // 
             this.ToolBars_MenuBar_Help.Icon = null;
@@ -1318,13 +1349,13 @@ namespace DreamBeam {
             // statusBar
             // 
             this.statusBar.Controls.Add(this.RenderStatus);
-            this.statusBar.Location = new System.Drawing.Point(72, 759);
+            this.statusBar.Location = new System.Drawing.Point(72, 602);
             this.statusBar.Name = "statusBar";
             this.statusBar.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.StatusPanel,
             this.statusBarUpdatePanel});
             this.statusBar.ShowPanels = true;
-            this.statusBar.Size = new System.Drawing.Size(514, 22);
+            this.statusBar.Size = new System.Drawing.Size(391, 22);
             this.statusBar.SizingGrip = false;
             this.statusBar.TabIndex = 22;
             // 
@@ -1341,7 +1372,7 @@ namespace DreamBeam {
             this.StatusPanel.Icon = ((System.Drawing.Icon)(resources.GetObject("StatusPanel.Icon")));
             this.StatusPanel.MinWidth = 330;
             this.StatusPanel.Name = "StatusPanel";
-            this.StatusPanel.Width = 404;
+            this.StatusPanel.Width = 330;
             // 
             // statusBarUpdatePanel
             // 
@@ -1386,7 +1417,7 @@ namespace DreamBeam {
             this.SongShow_CollapsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SongShow_CollapsPanel.Location = new System.Drawing.Point(0, 0);
             this.SongShow_CollapsPanel.Name = "SongShow_CollapsPanel";
-            this.SongShow_CollapsPanel.Size = new System.Drawing.Size(200, 385);
+            this.SongShow_CollapsPanel.Size = new System.Drawing.Size(324, 292);
             this.SongShow_CollapsPanel.Spacing = 4;
             this.SongShow_CollapsPanel.TabIndex = 27;
             // 
@@ -1403,7 +1434,7 @@ namespace DreamBeam {
             this.SongShow_HideElementsPanel.Location = new System.Drawing.Point(4, 4);
             this.SongShow_HideElementsPanel.Name = "SongShow_HideElementsPanel";
             this.SongShow_HideElementsPanel.PanelState = Salamander.Windows.Forms.PanelState.Expanded;
-            this.SongShow_HideElementsPanel.Size = new System.Drawing.Size(192, 116);
+            this.SongShow_HideElementsPanel.Size = new System.Drawing.Size(316, 116);
             this.SongShow_HideElementsPanel.StartColour = System.Drawing.Color.White;
             this.SongShow_HideElementsPanel.TabIndex = 4;
             this.SongShow_HideElementsPanel.TitleFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1417,7 +1448,7 @@ namespace DreamBeam {
             this.panel3.Controls.Add(this.SongShow_HideAuthor_Button);
             this.panel3.Location = new System.Drawing.Point(5, 85);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(184, 28);
+            this.panel3.Size = new System.Drawing.Size(308, 28);
             this.panel3.TabIndex = 5;
             // 
             // SongShow_HideAuthor_Button
@@ -1428,7 +1459,7 @@ namespace DreamBeam {
             this.SongShow_HideAuthor_Button.BottomTransparent = 64;
             this.SongShow_HideAuthor_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SongShow_HideAuthor_Button.LEDColor = System.Drawing.Color.SteelBlue;
-            this.SongShow_HideAuthor_Button.Location = new System.Drawing.Point(41, 2);
+            this.SongShow_HideAuthor_Button.Location = new System.Drawing.Point(103, 2);
             this.SongShow_HideAuthor_Button.Name = "SongShow_HideAuthor_Button";
             this.SongShow_HideAuthor_Button.Size = new System.Drawing.Size(104, 24);
             this.SongShow_HideAuthor_Button.TabIndex = 3;
@@ -1446,7 +1477,7 @@ namespace DreamBeam {
             this.panel1.Controls.Add(this.SongShow_HideText_Button);
             this.panel1.Location = new System.Drawing.Point(5, 55);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(184, 28);
+            this.panel1.Size = new System.Drawing.Size(308, 28);
             this.panel1.TabIndex = 4;
             // 
             // SongShow_HideText_Button
@@ -1457,7 +1488,7 @@ namespace DreamBeam {
             this.SongShow_HideText_Button.BottomTransparent = 64;
             this.SongShow_HideText_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SongShow_HideText_Button.LEDColor = System.Drawing.Color.SteelBlue;
-            this.SongShow_HideText_Button.Location = new System.Drawing.Point(41, 2);
+            this.SongShow_HideText_Button.Location = new System.Drawing.Point(103, 2);
             this.SongShow_HideText_Button.Name = "SongShow_HideText_Button";
             this.SongShow_HideText_Button.Size = new System.Drawing.Size(104, 24);
             this.SongShow_HideText_Button.TabIndex = 2;
@@ -1475,7 +1506,7 @@ namespace DreamBeam {
             this.SongShow_HideElementsSub1Panel.Controls.Add(this.SongShow_HideTitle_Button);
             this.SongShow_HideElementsSub1Panel.Location = new System.Drawing.Point(5, 25);
             this.SongShow_HideElementsSub1Panel.Name = "SongShow_HideElementsSub1Panel";
-            this.SongShow_HideElementsSub1Panel.Size = new System.Drawing.Size(184, 28);
+            this.SongShow_HideElementsSub1Panel.Size = new System.Drawing.Size(308, 28);
             this.SongShow_HideElementsSub1Panel.TabIndex = 3;
             // 
             // SongShow_HideTitle_Button
@@ -1486,7 +1517,7 @@ namespace DreamBeam {
             this.SongShow_HideTitle_Button.BottomTransparent = 64;
             this.SongShow_HideTitle_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SongShow_HideTitle_Button.LEDColor = System.Drawing.Color.SteelBlue;
-            this.SongShow_HideTitle_Button.Location = new System.Drawing.Point(41, 2);
+            this.SongShow_HideTitle_Button.Location = new System.Drawing.Point(103, 2);
             this.SongShow_HideTitle_Button.Name = "SongShow_HideTitle_Button";
             this.SongShow_HideTitle_Button.Size = new System.Drawing.Size(104, 24);
             this.SongShow_HideTitle_Button.TabIndex = 1;
@@ -1508,7 +1539,7 @@ namespace DreamBeam {
             this.BibleBookmarks_CollapsiblePanel.Location = new System.Drawing.Point(8, 121);
             this.BibleBookmarks_CollapsiblePanel.Name = "BibleBookmarks_CollapsiblePanel";
             this.BibleBookmarks_CollapsiblePanel.PanelState = Salamander.Windows.Forms.PanelState.Expanded;
-            this.BibleBookmarks_CollapsiblePanel.Size = new System.Drawing.Size(184, 209);
+            this.BibleBookmarks_CollapsiblePanel.Size = new System.Drawing.Size(291, 209);
             this.BibleBookmarks_CollapsiblePanel.StartColour = System.Drawing.Color.White;
             this.BibleBookmarks_CollapsiblePanel.TabIndex = 1;
             this.BibleBookmarks_CollapsiblePanel.TitleFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1520,7 +1551,7 @@ namespace DreamBeam {
             this.BibleText_Bookmarks.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BibleText_Bookmarks.Location = new System.Drawing.Point(0, 23);
             this.BibleText_Bookmarks.Name = "BibleText_Bookmarks";
-            this.BibleText_Bookmarks.Size = new System.Drawing.Size(184, 186);
+            this.BibleText_Bookmarks.Size = new System.Drawing.Size(291, 186);
             this.BibleText_Bookmarks.TabIndex = 1;
             this.MainForm_ToolTip.SetToolTip(this.BibleText_Bookmarks, "Click to preview this verse, or right-click to remove it.");
             this.BibleText_Bookmarks.SelectedIndexChanged += new System.EventHandler(this.BibleText_Bookmarks_SelectedIndexChanged);
@@ -1537,7 +1568,7 @@ namespace DreamBeam {
             this.BibleTranslations_CollapsiblePanel.Location = new System.Drawing.Point(8, 8);
             this.BibleTranslations_CollapsiblePanel.Name = "BibleTranslations_CollapsiblePanel";
             this.BibleTranslations_CollapsiblePanel.PanelState = Salamander.Windows.Forms.PanelState.Expanded;
-            this.BibleTranslations_CollapsiblePanel.Size = new System.Drawing.Size(184, 105);
+            this.BibleTranslations_CollapsiblePanel.Size = new System.Drawing.Size(291, 105);
             this.BibleTranslations_CollapsiblePanel.StartColour = System.Drawing.Color.White;
             this.BibleTranslations_CollapsiblePanel.TabIndex = 0;
             this.BibleTranslations_CollapsiblePanel.TitleFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1549,7 +1580,7 @@ namespace DreamBeam {
             this.BibleText_Translations.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BibleText_Translations.Location = new System.Drawing.Point(0, 23);
             this.BibleText_Translations.Name = "BibleText_Translations";
-            this.BibleText_Translations.Size = new System.Drawing.Size(184, 82);
+            this.BibleText_Translations.Size = new System.Drawing.Size(291, 82);
             this.BibleText_Translations.TabIndex = 1;
             this.BibleText_Translations.SelectedIndexChanged += new System.EventHandler(this.BibleText_Translations_SelectedIndexChanged);
             // 
@@ -1572,7 +1603,7 @@ namespace DreamBeam {
             this.leftSandDock.Location = new System.Drawing.Point(72, 50);
             this.leftSandDock.Manager = this.sandDockManager1;
             this.leftSandDock.Name = "leftSandDock";
-            this.leftSandDock.Size = new System.Drawing.Size(0, 731);
+            this.leftSandDock.Size = new System.Drawing.Size(0, 574);
             this.leftSandDock.TabIndex = 23;
             // 
             // rightSandDock
@@ -1581,6 +1612,7 @@ namespace DreamBeam {
             this.rightSandDock.Controls.Add(this.DockControl_LiveScreen);
             this.rightSandDock.Controls.Add(this.Dock_SongTools);
             this.rightSandDock.Controls.Add(this.DockControl_BibleTools);
+            this.rightSandDock.Controls.Add(this.DockControl_DesignEditor);
             this.rightSandDock.Controls.Add(this.DockControl_Songs);
             this.rightSandDock.Controls.Add(this.DockControl_PlayList);
             this.rightSandDock.Controls.Add(this.DockControl_Backgrounds);
@@ -1589,27 +1621,28 @@ namespace DreamBeam {
             this.rightSandDock.Dock = System.Windows.Forms.DockStyle.Right;
             this.rightSandDock.Guid = new System.Guid("a6039876-f9a8-471e-b56f-5b1bf7264f06");
             this.rightSandDock.LayoutSystem = new TD.SandDock.SplitLayoutSystem(250, 400, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
-            ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(386, 731, System.Windows.Forms.Orientation.Vertical, new TD.SandDock.LayoutSystemBase[] {
-                        ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(199, 731, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
-                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(200, 294, new TD.SandDock.DockControl[] {
+            ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(386, 574, System.Windows.Forms.Orientation.Vertical, new TD.SandDock.LayoutSystemBase[] {
+                        ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(323, 574, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
+                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(324, 230, new TD.SandDock.DockControl[] {
                                                 this.DockControl_PreviewScreen,
                                                 this.DockControl_LiveScreen}, this.DockControl_PreviewScreen))),
-                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(200, 432, new TD.SandDock.DockControl[] {
+                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(324, 339, new TD.SandDock.DockControl[] {
                                                 this.Dock_SongTools,
-                                                this.DockControl_BibleTools}, this.DockControl_BibleTools)))}))),
-                        ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(182, 731, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
-                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(182, 314, new TD.SandDock.DockControl[] {
+                                                this.DockControl_BibleTools,
+                                                this.DockControl_DesignEditor}, this.DockControl_DesignEditor)))}))),
+                        ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(58, 574, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
+                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(58, 246, new TD.SandDock.DockControl[] {
                                                 this.DockControl_Songs,
                                                 this.DockControl_PlayList}, this.DockControl_Songs))),
-                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(182, 412, new TD.SandDock.DockControl[] {
+                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(58, 323, new TD.SandDock.DockControl[] {
                                                 this.DockControl_Backgrounds,
                                                 this.DockControl_Media,
-                                                this.DockControl_MediaLists}, this.DockControl_Media)))})))})))});
-            this.rightSandDock.Location = new System.Drawing.Point(586, 50);
+                                                this.DockControl_MediaLists}, this.DockControl_Backgrounds)))})))})))});
+            this.rightSandDock.Location = new System.Drawing.Point(463, 50);
             this.rightSandDock.Manager = this.sandDockManager1;
             this.rightSandDock.MaximumSize = 600;
             this.rightSandDock.Name = "rightSandDock";
-            this.rightSandDock.Size = new System.Drawing.Size(390, 731);
+            this.rightSandDock.Size = new System.Drawing.Size(390, 574);
             this.rightSandDock.TabIndex = 24;
             // 
             // DockControl_PreviewScreen
@@ -1619,7 +1652,7 @@ namespace DreamBeam {
             this.DockControl_PreviewScreen.Guid = new System.Guid("8a7e4f9a-a6a1-48b7-a273-8494de07e6b2");
             this.DockControl_PreviewScreen.Location = new System.Drawing.Point(4, 25);
             this.DockControl_PreviewScreen.Name = "DockControl_PreviewScreen";
-            this.DockControl_PreviewScreen.Size = new System.Drawing.Size(200, 246);
+            this.DockControl_PreviewScreen.Size = new System.Drawing.Size(324, 182);
             this.DockControl_PreviewScreen.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_PreviewScreen.TabImage")));
             this.DockControl_PreviewScreen.TabIndex = 1;
             this.DockControl_PreviewScreen.Text = "Preview";
@@ -1630,7 +1663,7 @@ namespace DreamBeam {
             this.RightDocks_PreviewScreen_PictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightDocks_PreviewScreen_PictureBox.Location = new System.Drawing.Point(0, 0);
             this.RightDocks_PreviewScreen_PictureBox.Name = "RightDocks_PreviewScreen_PictureBox";
-            this.RightDocks_PreviewScreen_PictureBox.Size = new System.Drawing.Size(200, 216);
+            this.RightDocks_PreviewScreen_PictureBox.Size = new System.Drawing.Size(324, 152);
             this.RightDocks_PreviewScreen_PictureBox.TabIndex = 0;
             this.RightDocks_PreviewScreen_PictureBox.TabStop = false;
             this.RightDocks_PreviewScreen_PictureBox.SizeChanged += new System.EventHandler(this.RightDocks_PreviewScreen_PictureBox_SizeChanged);
@@ -1642,16 +1675,16 @@ namespace DreamBeam {
             this.panel5.Controls.Add(this.RightDocks_Preview_GoLive);
             this.panel5.Controls.Add(this.RightDocks_Preview_Prev);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 216);
+            this.panel5.Location = new System.Drawing.Point(0, 152);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(200, 30);
+            this.panel5.Size = new System.Drawing.Size(324, 30);
             this.panel5.TabIndex = 1;
             // 
             // RightDocks_Preview_Next
             // 
             this.RightDocks_Preview_Next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RightDocks_Preview_Next.BackColor = System.Drawing.SystemColors.Control;
-            this.RightDocks_Preview_Next.Location = new System.Drawing.Point(148, 6);
+            this.RightDocks_Preview_Next.Location = new System.Drawing.Point(272, 6);
             this.RightDocks_Preview_Next.Name = "RightDocks_Preview_Next";
             this.RightDocks_Preview_Next.Size = new System.Drawing.Size(50, 20);
             this.RightDocks_Preview_Next.TabIndex = 2;
@@ -1668,7 +1701,7 @@ namespace DreamBeam {
             this.RightDocks_Preview_GoLive.ForeColor = System.Drawing.Color.White;
             this.RightDocks_Preview_GoLive.Location = new System.Drawing.Point(70, 6);
             this.RightDocks_Preview_GoLive.Name = "RightDocks_Preview_GoLive";
-            this.RightDocks_Preview_GoLive.Size = new System.Drawing.Size(59, 20);
+            this.RightDocks_Preview_GoLive.Size = new System.Drawing.Size(183, 20);
             this.RightDocks_Preview_GoLive.TabIndex = 1;
             this.RightDocks_Preview_GoLive.Text = "Live";
             this.MainForm_ToolTip.SetToolTip(this.RightDocks_Preview_GoLive, "Show the contents on the projector");
@@ -1695,7 +1728,7 @@ namespace DreamBeam {
             this.DockControl_LiveScreen.Guid = new System.Guid("e37c7ea7-844c-4a80-baba-1b5d7ddb42e7");
             this.DockControl_LiveScreen.Location = new System.Drawing.Point(4, 25);
             this.DockControl_LiveScreen.Name = "DockControl_LiveScreen";
-            this.DockControl_LiveScreen.Size = new System.Drawing.Size(200, 246);
+            this.DockControl_LiveScreen.Size = new System.Drawing.Size(324, 182);
             this.DockControl_LiveScreen.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_LiveScreen.TabImage")));
             this.DockControl_LiveScreen.TabIndex = 2;
             this.DockControl_LiveScreen.Text = "Live";
@@ -1705,7 +1738,7 @@ namespace DreamBeam {
             this.RightDocks_LiveScreen_PictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightDocks_LiveScreen_PictureBox.Location = new System.Drawing.Point(0, 0);
             this.RightDocks_LiveScreen_PictureBox.Name = "RightDocks_LiveScreen_PictureBox";
-            this.RightDocks_LiveScreen_PictureBox.Size = new System.Drawing.Size(200, 216);
+            this.RightDocks_LiveScreen_PictureBox.Size = new System.Drawing.Size(324, 152);
             this.RightDocks_LiveScreen_PictureBox.TabIndex = 0;
             this.RightDocks_LiveScreen_PictureBox.TabStop = false;
             this.RightDocks_LiveScreen_PictureBox.SizeChanged += new System.EventHandler(this.RightDocks_LiveScreen_PictureBox_SizeChanged);
@@ -1716,16 +1749,16 @@ namespace DreamBeam {
             this.panel9.Controls.Add(this.RightDocks_Live_Next);
             this.panel9.Controls.Add(this.RightDocks_Live_Prev);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel9.Location = new System.Drawing.Point(0, 216);
+            this.panel9.Location = new System.Drawing.Point(0, 152);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(200, 30);
+            this.panel9.Size = new System.Drawing.Size(324, 30);
             this.panel9.TabIndex = 1;
             // 
             // RightDocks_Live_Next
             // 
             this.RightDocks_Live_Next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RightDocks_Live_Next.BackColor = System.Drawing.SystemColors.Control;
-            this.RightDocks_Live_Next.Location = new System.Drawing.Point(120, 6);
+            this.RightDocks_Live_Next.Location = new System.Drawing.Point(244, 6);
             this.RightDocks_Live_Next.Name = "RightDocks_Live_Next";
             this.RightDocks_Live_Next.Size = new System.Drawing.Size(75, 20);
             this.RightDocks_Live_Next.TabIndex = 1;
@@ -1749,9 +1782,9 @@ namespace DreamBeam {
             // 
             this.Dock_SongTools.Controls.Add(this.SongShow_CollapsPanel);
             this.Dock_SongTools.Guid = new System.Guid("7bae0dc0-4ef3-4da4-a888-a9cafaee19c6");
-            this.Dock_SongTools.Location = new System.Drawing.Point(4, 323);
+            this.Dock_SongTools.Location = new System.Drawing.Point(4, 259);
             this.Dock_SongTools.Name = "Dock_SongTools";
-            this.Dock_SongTools.Size = new System.Drawing.Size(200, 385);
+            this.Dock_SongTools.Size = new System.Drawing.Size(324, 292);
             this.Dock_SongTools.TabIndex = 7;
             this.Dock_SongTools.Text = "Song Tools";
             // 
@@ -1759,9 +1792,9 @@ namespace DreamBeam {
             // 
             this.DockControl_BibleTools.Controls.Add(this.BibleTools_CollapsiblePanelBar);
             this.DockControl_BibleTools.Guid = new System.Guid("226af261-a2b0-437c-8c85-a1c4d4b57298");
-            this.DockControl_BibleTools.Location = new System.Drawing.Point(4, 323);
+            this.DockControl_BibleTools.Location = new System.Drawing.Point(4, 259);
             this.DockControl_BibleTools.Name = "DockControl_BibleTools";
-            this.DockControl_BibleTools.Size = new System.Drawing.Size(200, 385);
+            this.DockControl_BibleTools.Size = new System.Drawing.Size(324, 292);
             this.DockControl_BibleTools.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_BibleTools.TabImage")));
             this.DockControl_BibleTools.TabIndex = 6;
             this.DockControl_BibleTools.Text = "Bible Tools";
@@ -1776,9 +1809,79 @@ namespace DreamBeam {
             this.BibleTools_CollapsiblePanelBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BibleTools_CollapsiblePanelBar.Location = new System.Drawing.Point(0, 0);
             this.BibleTools_CollapsiblePanelBar.Name = "BibleTools_CollapsiblePanelBar";
-            this.BibleTools_CollapsiblePanelBar.Size = new System.Drawing.Size(200, 385);
+            this.BibleTools_CollapsiblePanelBar.Size = new System.Drawing.Size(324, 292);
             this.BibleTools_CollapsiblePanelBar.Spacing = 8;
             this.BibleTools_CollapsiblePanelBar.TabIndex = 2;
+            // 
+            // DockControl_DesignEditor
+            // 
+            this.DockControl_DesignEditor.Controls.Add(this.DesignTabControl);
+            this.DockControl_DesignEditor.Guid = new System.Guid("69c6f3d1-3cc1-404c-ae1c-cf6db365a077");
+            this.DockControl_DesignEditor.Location = new System.Drawing.Point(4, 259);
+            this.DockControl_DesignEditor.Name = "DockControl_DesignEditor";
+            this.DockControl_DesignEditor.Size = new System.Drawing.Size(324, 292);
+            this.DockControl_DesignEditor.TabIndex = 8;
+            this.DockControl_DesignEditor.Text = "Song Design";
+            // 
+            // DesignTabControl
+            // 
+            this.DesignTabControl.Controls.Add(this.SongDesignTab);
+            this.DesignTabControl.Controls.Add(this.SermonDesignTab);
+            this.DesignTabControl.Controls.Add(this.BibleDesignTab);
+            this.DesignTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DesignTabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.DesignTabControl.Location = new System.Drawing.Point(0, 0);
+            this.DesignTabControl.Name = "DesignTabControl";
+            this.DesignTabControl.Padding = new System.Drawing.Point(0, 0);
+            this.DesignTabControl.SelectedIndex = 0;
+            this.DesignTabControl.Size = new System.Drawing.Size(324, 292);
+            this.DesignTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.DesignTabControl.TabIndex = 3;
+            // 
+            // SongDesignTab
+            // 
+            this.SongDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.SongDesignTab.Controls.Add(this.SongThemeWidget1);
+            this.SongDesignTab.Location = new System.Drawing.Point(4, 22);
+            this.SongDesignTab.Name = "SongDesignTab";
+            this.SongDesignTab.Padding = new System.Windows.Forms.Padding(3);
+            this.SongDesignTab.Size = new System.Drawing.Size(316, 266);
+            this.SongDesignTab.TabIndex = 0;
+            this.SongDesignTab.SizeChanged += new System.EventHandler(this.SongDesignTab_SizeChanged);
+            // 
+            // SongThemeWidget1
+            // 
+            this.SongThemeWidget1.BGImagePath = "Image";
+            this.SongThemeWidget1.Location = new System.Drawing.Point(31, 0);
+            this.SongThemeWidget1.Name = "SongThemeWidget1";
+            this.SongThemeWidget1.Size = new System.Drawing.Size(255, 420);
+            this.SongThemeWidget1.TabIndex = 2;
+            this.SongThemeWidget1.TabNames = new string[] {
+        "Title",
+        "Verse",
+        "Author",
+        "Key"};
+            this.SongThemeWidget1.ThemePath = "";
+            this.SongThemeWidget1.UseDesign = false;
+            this.SongThemeWidget1.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
+            // 
+            // SermonDesignTab
+            // 
+            this.SermonDesignTab.Location = new System.Drawing.Point(4, 22);
+            this.SermonDesignTab.Name = "SermonDesignTab";
+            this.SermonDesignTab.Padding = new System.Windows.Forms.Padding(3);
+            this.SermonDesignTab.Size = new System.Drawing.Size(316, 266);
+            this.SermonDesignTab.TabIndex = 1;
+            this.SermonDesignTab.UseVisualStyleBackColor = true;
+            // 
+            // BibleDesignTab
+            // 
+            this.BibleDesignTab.Location = new System.Drawing.Point(4, 22);
+            this.BibleDesignTab.Name = "BibleDesignTab";
+            this.BibleDesignTab.Padding = new System.Windows.Forms.Padding(3);
+            this.BibleDesignTab.Size = new System.Drawing.Size(316, 266);
+            this.BibleDesignTab.TabIndex = 2;
+            this.BibleDesignTab.UseVisualStyleBackColor = true;
             // 
             // DockControl_Songs
             // 
@@ -1786,9 +1889,9 @@ namespace DreamBeam {
             this.DockControl_Songs.Controls.Add(this.RightDocks_Songlist_SearchPanel);
             this.DockControl_Songs.Controls.Add(this.RightDocks_SongList_ButtonPanel);
             this.DockControl_Songs.Guid = new System.Guid("6044bb67-05ab-4617-bbfa-99e49388b41f");
-            this.DockControl_Songs.Location = new System.Drawing.Point(208, 25);
+            this.DockControl_Songs.Location = new System.Drawing.Point(332, 25);
             this.DockControl_Songs.Name = "DockControl_Songs";
-            this.DockControl_Songs.Size = new System.Drawing.Size(182, 266);
+            this.DockControl_Songs.Size = new System.Drawing.Size(58, 198);
             this.DockControl_Songs.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_Songs.TabImage")));
             this.DockControl_Songs.TabIndex = 0;
             this.DockControl_Songs.Text = "Songs";
@@ -1801,7 +1904,7 @@ namespace DreamBeam {
             this.SongList_Tree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SongList_Tree.Location = new System.Drawing.Point(0, 23);
             this.SongList_Tree.Name = "SongList_Tree";
-            this.SongList_Tree.Size = new System.Drawing.Size(182, 223);
+            this.SongList_Tree.Size = new System.Drawing.Size(58, 155);
             this.SongList_Tree.TabIndex = 7;
             this.SongList_Tree.ValueMember = null;
             this.SongList_Tree.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SongList_Tree_MouseClick);
@@ -1813,9 +1916,9 @@ namespace DreamBeam {
             this.DockControl_PlayList.Controls.Add(this.RightDocks_PlayList);
             this.DockControl_PlayList.Controls.Add(this.RightDocks_TopPanel_PlayList_Button_Panel);
             this.DockControl_PlayList.Guid = new System.Guid("92186926-e7f9-4850-98b8-190a99f81ea6");
-            this.DockControl_PlayList.Location = new System.Drawing.Point(208, 25);
+            this.DockControl_PlayList.Location = new System.Drawing.Point(332, 25);
             this.DockControl_PlayList.Name = "DockControl_PlayList";
-            this.DockControl_PlayList.Size = new System.Drawing.Size(182, 266);
+            this.DockControl_PlayList.Size = new System.Drawing.Size(58, 198);
             this.DockControl_PlayList.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_PlayList.TabImage")));
             this.DockControl_PlayList.TabIndex = 2;
             this.DockControl_PlayList.Text = "Playlist";
@@ -1826,9 +1929,9 @@ namespace DreamBeam {
             this.DockControl_Backgrounds.Controls.Add(this.panel6);
             this.DockControl_Backgrounds.Controls.Add(this.RightDocks_BottomPanel2_TopPanel);
             this.DockControl_Backgrounds.Guid = new System.Guid("b561dd7f-3e79-4e07-912c-18ac9600db75");
-            this.DockControl_Backgrounds.Location = new System.Drawing.Point(208, 343);
+            this.DockControl_Backgrounds.Location = new System.Drawing.Point(332, 275);
             this.DockControl_Backgrounds.Name = "DockControl_Backgrounds";
-            this.DockControl_Backgrounds.Size = new System.Drawing.Size(182, 365);
+            this.DockControl_Backgrounds.Size = new System.Drawing.Size(58, 276);
             this.DockControl_Backgrounds.TabIndex = 1;
             this.DockControl_Backgrounds.Text = "Backgrounds";
             // 
@@ -1838,23 +1941,23 @@ namespace DreamBeam {
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(182, 317);
+            this.panel2.Size = new System.Drawing.Size(58, 228);
             this.panel2.TabIndex = 25;
             // 
             // panel6
             // 
             this.panel6.Controls.Add(this.RightDocks_Backgrounds_UseDefault);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 341);
+            this.panel6.Location = new System.Drawing.Point(0, 252);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(2);
-            this.panel6.Size = new System.Drawing.Size(182, 24);
+            this.panel6.Size = new System.Drawing.Size(58, 24);
             this.panel6.TabIndex = 24;
             // 
             // RightDocks_Backgrounds_UseDefault
             // 
             this.RightDocks_Backgrounds_UseDefault.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.RightDocks_Backgrounds_UseDefault.Location = new System.Drawing.Point(53, 3);
+            this.RightDocks_Backgrounds_UseDefault.Location = new System.Drawing.Point(-9, 3);
             this.RightDocks_Backgrounds_UseDefault.Name = "RightDocks_Backgrounds_UseDefault";
             this.RightDocks_Backgrounds_UseDefault.Size = new System.Drawing.Size(75, 18);
             this.RightDocks_Backgrounds_UseDefault.TabIndex = 23;
@@ -1867,7 +1970,7 @@ namespace DreamBeam {
             this.RightDocks_BottomPanel2_TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.RightDocks_BottomPanel2_TopPanel.Location = new System.Drawing.Point(0, 0);
             this.RightDocks_BottomPanel2_TopPanel.Name = "RightDocks_BottomPanel2_TopPanel";
-            this.RightDocks_BottomPanel2_TopPanel.Size = new System.Drawing.Size(182, 24);
+            this.RightDocks_BottomPanel2_TopPanel.Size = new System.Drawing.Size(58, 24);
             this.RightDocks_BottomPanel2_TopPanel.TabIndex = 22;
             // 
             // DockControl_Media
@@ -1876,9 +1979,9 @@ namespace DreamBeam {
             this.DockControl_Media.Controls.Add(this.RightDocks_BottomPanel_Media_Bottom);
             this.DockControl_Media.Controls.Add(this.RightDocks_BottomPanel_Media_Top);
             this.DockControl_Media.Guid = new System.Guid("c9d617ca-0165-45b7-8e07-329a81273abc");
-            this.DockControl_Media.Location = new System.Drawing.Point(208, 343);
+            this.DockControl_Media.Location = new System.Drawing.Point(332, 275);
             this.DockControl_Media.Name = "DockControl_Media";
-            this.DockControl_Media.Size = new System.Drawing.Size(182, 365);
+            this.DockControl_Media.Size = new System.Drawing.Size(58, 276);
             this.DockControl_Media.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_Media.TabImage")));
             this.DockControl_Media.TabIndex = 4;
             this.DockControl_Media.Text = "Media";
@@ -1894,7 +1997,7 @@ namespace DreamBeam {
             this.RightDocks_BottomPanel_MediaList.ItemHeight = 76;
             this.RightDocks_BottomPanel_MediaList.Location = new System.Drawing.Point(0, 32);
             this.RightDocks_BottomPanel_MediaList.Name = "RightDocks_BottomPanel_MediaList";
-            this.RightDocks_BottomPanel_MediaList.Size = new System.Drawing.Size(182, 230);
+            this.RightDocks_BottomPanel_MediaList.Size = new System.Drawing.Size(58, 154);
             this.RightDocks_BottomPanel_MediaList.TabIndex = 3;
             this.RightDocks_BottomPanel_MediaList.SelectedIndexChanged += new System.EventHandler(this.RightDocks_BottomPanel_MediaList_SelectedIndexChanged);
             this.RightDocks_BottomPanel_MediaList.DragDrop += new System.Windows.Forms.DragEventHandler(this.RightDocks_BottomPanel_MediaList_DragDrop);
@@ -1915,9 +2018,9 @@ namespace DreamBeam {
             this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_Up);
             this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_ShowNext);
             this.RightDocks_BottomPanel_Media_Bottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RightDocks_BottomPanel_Media_Bottom.Location = new System.Drawing.Point(0, 309);
+            this.RightDocks_BottomPanel_Media_Bottom.Location = new System.Drawing.Point(0, 220);
             this.RightDocks_BottomPanel_Media_Bottom.Name = "RightDocks_BottomPanel_Media_Bottom";
-            this.RightDocks_BottomPanel_Media_Bottom.Size = new System.Drawing.Size(182, 56);
+            this.RightDocks_BottomPanel_Media_Bottom.Size = new System.Drawing.Size(58, 56);
             this.RightDocks_BottomPanel_Media_Bottom.TabIndex = 5;
             // 
             // RightDocks_BottomPanel_Media_AutoPlay
@@ -1976,7 +2079,7 @@ namespace DreamBeam {
             this.RightDocks_BottomPanel_Media_Top.Dock = System.Windows.Forms.DockStyle.Top;
             this.RightDocks_BottomPanel_Media_Top.Location = new System.Drawing.Point(0, 0);
             this.RightDocks_BottomPanel_Media_Top.Name = "RightDocks_BottomPanel_Media_Top";
-            this.RightDocks_BottomPanel_Media_Top.Size = new System.Drawing.Size(182, 32);
+            this.RightDocks_BottomPanel_Media_Top.Size = new System.Drawing.Size(58, 32);
             this.RightDocks_BottomPanel_Media_Top.TabIndex = 4;
             // 
             // RightDocks_BottomPanel_Media_FadePanelButton
@@ -1995,9 +2098,9 @@ namespace DreamBeam {
             this.DockControl_MediaLists.Controls.Add(this.RightDocks_BottomPanel_MediaListsTopPanel);
             this.DockControl_MediaLists.Controls.Add(this.RightDocks_BottomPanel_MediaLists_BottomPanel);
             this.DockControl_MediaLists.Guid = new System.Guid("3429dfd5-f5ba-4785-ac79-49140d88b66b");
-            this.DockControl_MediaLists.Location = new System.Drawing.Point(208, 343);
+            this.DockControl_MediaLists.Location = new System.Drawing.Point(332, 275);
             this.DockControl_MediaLists.Name = "DockControl_MediaLists";
-            this.DockControl_MediaLists.Size = new System.Drawing.Size(182, 365);
+            this.DockControl_MediaLists.Size = new System.Drawing.Size(58, 276);
             this.DockControl_MediaLists.TabIndex = 5;
             this.DockControl_MediaLists.Text = "MediaLists";
             // 
@@ -2008,7 +2111,7 @@ namespace DreamBeam {
             this.RightDocks_BottomPanel_MediaListsTopPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightDocks_BottomPanel_MediaListsTopPanel.Location = new System.Drawing.Point(0, 0);
             this.RightDocks_BottomPanel_MediaListsTopPanel.Name = "RightDocks_BottomPanel_MediaListsTopPanel";
-            this.RightDocks_BottomPanel_MediaListsTopPanel.Size = new System.Drawing.Size(182, 265);
+            this.RightDocks_BottomPanel_MediaListsTopPanel.Size = new System.Drawing.Size(58, 176);
             this.RightDocks_BottomPanel_MediaListsTopPanel.TabIndex = 1;
             // 
             // RightDocks_MediaLists
@@ -2016,7 +2119,7 @@ namespace DreamBeam {
             this.RightDocks_MediaLists.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightDocks_MediaLists.Location = new System.Drawing.Point(0, 0);
             this.RightDocks_MediaLists.Name = "RightDocks_MediaLists";
-            this.RightDocks_MediaLists.Size = new System.Drawing.Size(182, 238);
+            this.RightDocks_MediaLists.Size = new System.Drawing.Size(58, 147);
             this.RightDocks_MediaLists.TabIndex = 1;
             this.RightDocks_MediaLists.DoubleClick += new System.EventHandler(this.RightDocks_MediaLists_DoubleClick);
             // 
@@ -2025,9 +2128,9 @@ namespace DreamBeam {
             this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Controls.Add(this.RightDocks_MediaLists_DeleteButton);
             this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Controls.Add(this.RightDocks_MediaLists_LoadButton);
             this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Location = new System.Drawing.Point(0, 241);
+            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Location = new System.Drawing.Point(0, 152);
             this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Name = "RightDocks_BottomPanel_MediaListsTop_Control_Panel";
-            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Size = new System.Drawing.Size(182, 24);
+            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Size = new System.Drawing.Size(58, 24);
             this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.TabIndex = 0;
             // 
             // RightDocks_MediaLists_DeleteButton
@@ -2054,9 +2157,9 @@ namespace DreamBeam {
             // 
             this.RightDocks_BottomPanel_MediaLists_BottomPanel.Controls.Add(this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox);
             this.RightDocks_BottomPanel_MediaLists_BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Location = new System.Drawing.Point(0, 265);
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Location = new System.Drawing.Point(0, 176);
             this.RightDocks_BottomPanel_MediaLists_BottomPanel.Name = "RightDocks_BottomPanel_MediaLists_BottomPanel";
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Size = new System.Drawing.Size(182, 100);
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Size = new System.Drawing.Size(58, 100);
             this.RightDocks_BottomPanel_MediaLists_BottomPanel.TabIndex = 0;
             // 
             // RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox
@@ -2125,10 +2228,10 @@ namespace DreamBeam {
             this.bottomSandDock.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomSandDock.Guid = new System.Guid("11832edf-4b5f-4911-9e7c-da764193d89f");
             this.bottomSandDock.LayoutSystem = new TD.SandDock.SplitLayoutSystem(250, 400);
-            this.bottomSandDock.Location = new System.Drawing.Point(72, 781);
+            this.bottomSandDock.Location = new System.Drawing.Point(72, 624);
             this.bottomSandDock.Manager = this.sandDockManager1;
             this.bottomSandDock.Name = "bottomSandDock";
-            this.bottomSandDock.Size = new System.Drawing.Size(514, 0);
+            this.bottomSandDock.Size = new System.Drawing.Size(391, 0);
             this.bottomSandDock.TabIndex = 25;
             // 
             // topSandDock
@@ -2139,7 +2242,7 @@ namespace DreamBeam {
             this.topSandDock.Location = new System.Drawing.Point(72, 50);
             this.topSandDock.Manager = this.sandDockManager1;
             this.topSandDock.Name = "topSandDock";
-            this.topSandDock.Size = new System.Drawing.Size(514, 0);
+            this.topSandDock.Size = new System.Drawing.Size(391, 0);
             this.topSandDock.TabIndex = 26;
             // 
             // Media_Logos
@@ -2185,7 +2288,7 @@ namespace DreamBeam {
             this.ShowSong_Tab.Controls.Add(this.SongShow_StropheList_ListEx);
             this.ShowSong_Tab.Location = new System.Drawing.Point(4, 14);
             this.ShowSong_Tab.Name = "ShowSong_Tab";
-            this.ShowSong_Tab.Size = new System.Drawing.Size(506, 691);
+            this.ShowSong_Tab.Size = new System.Drawing.Size(383, 534);
             this.ShowSong_Tab.TabIndex = 2;
             this.ShowSong_Tab.Text = "Show Songs";
             // 
@@ -2199,7 +2302,7 @@ namespace DreamBeam {
             this.SongShow_StropheList_ListEx.Name = "SongShow_StropheList_ListEx";
             this.SongShow_StropheList_ListEx.ReadOnly = true;
             this.SongShow_StropheList_ListEx.ShowBullets = true;
-            this.SongShow_StropheList_ListEx.Size = new System.Drawing.Size(506, 691);
+            this.SongShow_StropheList_ListEx.Size = new System.Drawing.Size(383, 534);
             this.SongShow_StropheList_ListEx.TabIndex = 0;
             this.SongShow_StropheList_ListEx.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SongShow_StropheList_ListEx_MouseDoubleClick);
             this.SongShow_StropheList_ListEx.SelectedIndexChanged += new System.EventHandler(this.SongShow_StropheList_ListEx_SelectedIndexChanged);
@@ -2211,7 +2314,7 @@ namespace DreamBeam {
             this.SermonTools_Tab.Controls.Add(this.Sermon_TabControl);
             this.SermonTools_Tab.Location = new System.Drawing.Point(4, 14);
             this.SermonTools_Tab.Name = "SermonTools_Tab";
-            this.SermonTools_Tab.Size = new System.Drawing.Size(506, 691);
+            this.SermonTools_Tab.Size = new System.Drawing.Size(383, 534);
             this.SermonTools_Tab.TabIndex = 3;
             this.SermonTools_Tab.Text = "SermonTool";
             // 
@@ -2223,7 +2326,7 @@ namespace DreamBeam {
             this.Sermon_LeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Sermon_LeftPanel.Location = new System.Drawing.Point(0, 0);
             this.Sermon_LeftPanel.Name = "Sermon_LeftPanel";
-            this.Sermon_LeftPanel.Size = new System.Drawing.Size(362, 691);
+            this.Sermon_LeftPanel.Size = new System.Drawing.Size(239, 534);
             this.Sermon_LeftPanel.TabIndex = 3;
             // 
             // Sermon_LeftDoc_Panel
@@ -2232,7 +2335,7 @@ namespace DreamBeam {
             this.Sermon_LeftDoc_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Sermon_LeftDoc_Panel.Location = new System.Drawing.Point(0, 24);
             this.Sermon_LeftDoc_Panel.Name = "Sermon_LeftDoc_Panel";
-            this.Sermon_LeftDoc_Panel.Size = new System.Drawing.Size(362, 637);
+            this.Sermon_LeftDoc_Panel.Size = new System.Drawing.Size(239, 480);
             this.Sermon_LeftDoc_Panel.TabIndex = 4;
             // 
             // Sermon_DocManager
@@ -2240,7 +2343,7 @@ namespace DreamBeam {
             this.Sermon_DocManager.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Sermon_DocManager.Location = new System.Drawing.Point(0, 0);
             this.Sermon_DocManager.Name = "Sermon_DocManager";
-            this.Sermon_DocManager.Size = new System.Drawing.Size(362, 637);
+            this.Sermon_DocManager.Size = new System.Drawing.Size(239, 480);
             this.Sermon_DocManager.TabIndex = 1;
             this.Sermon_DocManager.CloseButtonPressed += new DocumentManager.DocumentManager.CloseButtonPressedEventHandler(this.Sermon_DocManager_CloseButtonPressed);
             // 
@@ -2250,7 +2353,7 @@ namespace DreamBeam {
             this.Sermon_LeftToolBar_Panel.Dock = System.Windows.Forms.DockStyle.Top;
             this.Sermon_LeftToolBar_Panel.Location = new System.Drawing.Point(0, 0);
             this.Sermon_LeftToolBar_Panel.Name = "Sermon_LeftToolBar_Panel";
-            this.Sermon_LeftToolBar_Panel.Size = new System.Drawing.Size(362, 24);
+            this.Sermon_LeftToolBar_Panel.Size = new System.Drawing.Size(239, 24);
             this.Sermon_LeftToolBar_Panel.TabIndex = 3;
             // 
             // Sermon_ToolBar
@@ -2261,7 +2364,7 @@ namespace DreamBeam {
             this.Sermon_ToolBar.ImageList = null;
             this.Sermon_ToolBar.Location = new System.Drawing.Point(0, 0);
             this.Sermon_ToolBar.Name = "Sermon_ToolBar";
-            this.Sermon_ToolBar.Size = new System.Drawing.Size(362, 24);
+            this.Sermon_ToolBar.Size = new System.Drawing.Size(239, 24);
             this.Sermon_ToolBar.TabIndex = 0;
             this.Sermon_ToolBar.Text = "toolBar1";
             this.Sermon_ToolBar.ButtonClick += new TD.SandBar.ToolBar.ButtonClickEventHandler(this.Sermon_ToolBar_ButtonClick);
@@ -2278,9 +2381,9 @@ namespace DreamBeam {
             this.Sermon_LeftBottom_Panel.Controls.Add(this.Sermon_Preview_Button);
             this.Sermon_LeftBottom_Panel.Controls.Add(this.Sermon_BeamBox_Button);
             this.Sermon_LeftBottom_Panel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Sermon_LeftBottom_Panel.Location = new System.Drawing.Point(0, 661);
+            this.Sermon_LeftBottom_Panel.Location = new System.Drawing.Point(0, 504);
             this.Sermon_LeftBottom_Panel.Name = "Sermon_LeftBottom_Panel";
-            this.Sermon_LeftBottom_Panel.Size = new System.Drawing.Size(362, 30);
+            this.Sermon_LeftBottom_Panel.Size = new System.Drawing.Size(239, 30);
             this.Sermon_LeftBottom_Panel.TabIndex = 5;
             // 
             // Sermon_Preview_Button
@@ -2298,7 +2401,7 @@ namespace DreamBeam {
             this.Sermon_BeamBox_Button.BackColor = System.Drawing.Color.Maroon;
             this.Sermon_BeamBox_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Sermon_BeamBox_Button.ForeColor = System.Drawing.Color.White;
-            this.Sermon_BeamBox_Button.Location = new System.Drawing.Point(268, 4);
+            this.Sermon_BeamBox_Button.Location = new System.Drawing.Point(145, 4);
             this.Sermon_BeamBox_Button.Name = "Sermon_BeamBox_Button";
             this.Sermon_BeamBox_Button.Size = new System.Drawing.Size(80, 23);
             this.Sermon_BeamBox_Button.TabIndex = 2;
@@ -2311,10 +2414,10 @@ namespace DreamBeam {
             this.Sermon_TabControl.Controls.Add(this.tabPage3);
             this.Sermon_TabControl.Dock = System.Windows.Forms.DockStyle.Right;
             this.Sermon_TabControl.ItemSize = new System.Drawing.Size(42, 18);
-            this.Sermon_TabControl.Location = new System.Drawing.Point(362, 0);
+            this.Sermon_TabControl.Location = new System.Drawing.Point(239, 0);
             this.Sermon_TabControl.Name = "Sermon_TabControl";
             this.Sermon_TabControl.SelectedIndex = 0;
-            this.Sermon_TabControl.Size = new System.Drawing.Size(144, 691);
+            this.Sermon_TabControl.Size = new System.Drawing.Size(144, 534);
             this.Sermon_TabControl.TabIndex = 2;
             // 
             // tabPage3
@@ -2330,7 +2433,7 @@ namespace DreamBeam {
             this.tabPage3.Controls.Add(this.Sermon_BookList);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(136, 665);
+            this.tabPage3.Size = new System.Drawing.Size(136, 508);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Bible";
             // 
@@ -2406,7 +2509,7 @@ namespace DreamBeam {
             this.Presentation_Tab.Controls.Add(this.Presentation_MainPanel);
             this.Presentation_Tab.Location = new System.Drawing.Point(4, 14);
             this.Presentation_Tab.Name = "Presentation_Tab";
-            this.Presentation_Tab.Size = new System.Drawing.Size(506, 691);
+            this.Presentation_Tab.Size = new System.Drawing.Size(383, 534);
             this.Presentation_Tab.TabIndex = 4;
             this.Presentation_Tab.Text = "Presentation";
             // 
@@ -2417,10 +2520,10 @@ namespace DreamBeam {
             this.Presentation_FadePanel.Controls.Add(this.Fade_panel);
             this.Presentation_FadePanel.Controls.Add(this.treeView1);
             this.Presentation_FadePanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Presentation_FadePanel.Location = new System.Drawing.Point(505, 0);
+            this.Presentation_FadePanel.Location = new System.Drawing.Point(382, 0);
             this.Presentation_FadePanel.Name = "Presentation_FadePanel";
             this.Presentation_FadePanel.Padding = new System.Windows.Forms.Padding(2);
-            this.Presentation_FadePanel.Size = new System.Drawing.Size(1, 691);
+            this.Presentation_FadePanel.Size = new System.Drawing.Size(1, 534);
             this.Presentation_FadePanel.TabIndex = 3;
             // 
             // Fade_panel
@@ -2429,7 +2532,7 @@ namespace DreamBeam {
             this.Fade_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Fade_panel.Location = new System.Drawing.Point(192, 2);
             this.Fade_panel.Name = "Fade_panel";
-            this.Fade_panel.Size = new System.Drawing.Size(0, 685);
+            this.Fade_panel.Size = new System.Drawing.Size(0, 528);
             this.Fade_panel.TabIndex = 4;
             // 
             // Fade_Top_Panel
@@ -2499,12 +2602,12 @@ namespace DreamBeam {
             this.treeView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.treeView1.Location = new System.Drawing.Point(2, 2);
             this.treeView1.Name = "treeView1";
-            treeNode2.Name = "";
-            treeNode2.Text = "Node0";
+            treeNode1.Name = "";
+            treeNode1.Text = "Node0";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(190, 685);
+            this.treeView1.Size = new System.Drawing.Size(190, 528);
             this.treeView1.TabIndex = 2;
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
             this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
@@ -2517,7 +2620,7 @@ namespace DreamBeam {
             this.Presentation_MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Presentation_MainPanel.Location = new System.Drawing.Point(0, 0);
             this.Presentation_MainPanel.Name = "Presentation_MainPanel";
-            this.Presentation_MainPanel.Size = new System.Drawing.Size(506, 691);
+            this.Presentation_MainPanel.Size = new System.Drawing.Size(383, 534);
             this.Presentation_MainPanel.TabIndex = 4;
             // 
             // Presentation_PreviewPanel
@@ -2530,7 +2633,7 @@ namespace DreamBeam {
             this.Presentation_PreviewPanel.Location = new System.Drawing.Point(0, 0);
             this.Presentation_PreviewPanel.Name = "Presentation_PreviewPanel";
             this.Presentation_PreviewPanel.Padding = new System.Windows.Forms.Padding(10);
-            this.Presentation_PreviewPanel.Size = new System.Drawing.Size(506, 554);
+            this.Presentation_PreviewPanel.Size = new System.Drawing.Size(383, 397);
             this.Presentation_PreviewPanel.TabIndex = 2;
             this.Presentation_PreviewPanel.Resize += new System.EventHandler(this.Presentation_PreviewPanel_Resize);
             // 
@@ -2560,7 +2663,7 @@ namespace DreamBeam {
             this.Presentation_PreviewBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Presentation_PreviewBox.Location = new System.Drawing.Point(10, 10);
             this.Presentation_PreviewBox.Name = "Presentation_PreviewBox";
-            this.Presentation_PreviewBox.Size = new System.Drawing.Size(486, 534);
+            this.Presentation_PreviewBox.Size = new System.Drawing.Size(363, 377);
             this.Presentation_PreviewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Presentation_PreviewBox.TabIndex = 0;
             this.Presentation_PreviewBox.TabStop = false;
@@ -2574,9 +2677,9 @@ namespace DreamBeam {
             this.Presentation_MovieControlPanel.Controls.Add(this.Presentation_MovieControlPanel_Top);
             this.Presentation_MovieControlPanel.Controls.Add(this.Presentation_MovieControlPanel_Right);
             this.Presentation_MovieControlPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Presentation_MovieControlPanel.Location = new System.Drawing.Point(0, 554);
+            this.Presentation_MovieControlPanel.Location = new System.Drawing.Point(0, 397);
             this.Presentation_MovieControlPanel.Name = "Presentation_MovieControlPanel";
-            this.Presentation_MovieControlPanel.Size = new System.Drawing.Size(506, 137);
+            this.Presentation_MovieControlPanel.Size = new System.Drawing.Size(383, 137);
             this.Presentation_MovieControlPanel.TabIndex = 3;
             // 
             // Presentation_MovieControlPanelBottom
@@ -2586,14 +2689,14 @@ namespace DreamBeam {
             this.Presentation_MovieControlPanelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Presentation_MovieControlPanelBottom.Location = new System.Drawing.Point(0, 28);
             this.Presentation_MovieControlPanelBottom.Name = "Presentation_MovieControlPanelBottom";
-            this.Presentation_MovieControlPanelBottom.Size = new System.Drawing.Size(469, 107);
+            this.Presentation_MovieControlPanelBottom.Size = new System.Drawing.Size(346, 107);
             this.Presentation_MovieControlPanelBottom.TabIndex = 4;
             // 
             // Presentation_MovieControl_PreviewButtonPanel
             // 
             this.Presentation_MovieControl_PreviewButtonPanel.Controls.Add(this.previewMediaControls);
             this.Presentation_MovieControl_PreviewButtonPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Presentation_MovieControl_PreviewButtonPanel.Location = new System.Drawing.Point(235, 0);
+            this.Presentation_MovieControl_PreviewButtonPanel.Location = new System.Drawing.Point(112, 0);
             this.Presentation_MovieControl_PreviewButtonPanel.Name = "Presentation_MovieControl_PreviewButtonPanel";
             this.Presentation_MovieControl_PreviewButtonPanel.Size = new System.Drawing.Size(234, 107);
             this.Presentation_MovieControl_PreviewButtonPanel.TabIndex = 3;
@@ -2617,7 +2720,7 @@ namespace DreamBeam {
             this.Presentation_MovieControlPanel_Top.Dock = System.Windows.Forms.DockStyle.Top;
             this.Presentation_MovieControlPanel_Top.Location = new System.Drawing.Point(0, 0);
             this.Presentation_MovieControlPanel_Top.Name = "Presentation_MovieControlPanel_Top";
-            this.Presentation_MovieControlPanel_Top.Size = new System.Drawing.Size(469, 30);
+            this.Presentation_MovieControlPanel_Top.Size = new System.Drawing.Size(346, 30);
             this.Presentation_MovieControlPanel_Top.TabIndex = 3;
             // 
             // Media_TrackBar
@@ -2626,7 +2729,7 @@ namespace DreamBeam {
             this.Media_TrackBar.Enabled = false;
             this.Media_TrackBar.Location = new System.Drawing.Point(0, 0);
             this.Media_TrackBar.Name = "Media_TrackBar";
-            this.Media_TrackBar.Size = new System.Drawing.Size(469, 30);
+            this.Media_TrackBar.Size = new System.Drawing.Size(346, 30);
             this.Media_TrackBar.TabIndex = 0;
             this.Media_TrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.Media_TrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Media_TrackBar_Up);
@@ -2636,7 +2739,7 @@ namespace DreamBeam {
             this.Presentation_MovieControlPanel_Right.Controls.Add(this.muteButton);
             this.Presentation_MovieControlPanel_Right.Controls.Add(this.AudioBar);
             this.Presentation_MovieControlPanel_Right.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Presentation_MovieControlPanel_Right.Location = new System.Drawing.Point(469, 0);
+            this.Presentation_MovieControlPanel_Right.Location = new System.Drawing.Point(346, 0);
             this.Presentation_MovieControlPanel_Right.Name = "Presentation_MovieControlPanel_Right";
             this.Presentation_MovieControlPanel_Right.Size = new System.Drawing.Size(35, 135);
             this.Presentation_MovieControlPanel_Right.TabIndex = 2;
@@ -2675,7 +2778,7 @@ namespace DreamBeam {
             this.EditSongs_Tab.Controls.Add(this.songEditor);
             this.EditSongs_Tab.Location = new System.Drawing.Point(4, 14);
             this.EditSongs_Tab.Name = "EditSongs_Tab";
-            this.EditSongs_Tab.Size = new System.Drawing.Size(506, 691);
+            this.EditSongs_Tab.Size = new System.Drawing.Size(383, 534);
             this.EditSongs_Tab.TabIndex = 6;
             this.EditSongs_Tab.Text = "Edit Songs";
             // 
@@ -2685,7 +2788,7 @@ namespace DreamBeam {
             this.songEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.songEditor.Location = new System.Drawing.Point(0, 0);
             this.songEditor.Name = "songEditor";
-            this.songEditor.Size = new System.Drawing.Size(506, 691);
+            this.songEditor.Size = new System.Drawing.Size(383, 534);
             this.songEditor.TabIndex = 0;
             // 
             // BibleText_Tab
@@ -2693,7 +2796,7 @@ namespace DreamBeam {
             this.BibleText_Tab.Controls.Add(this.bibleTextControl);
             this.BibleText_Tab.Location = new System.Drawing.Point(4, 14);
             this.BibleText_Tab.Name = "BibleText_Tab";
-            this.BibleText_Tab.Size = new System.Drawing.Size(506, 691);
+            this.BibleText_Tab.Size = new System.Drawing.Size(383, 534);
             this.BibleText_Tab.TabIndex = 5;
             this.BibleText_Tab.Text = "Bible Text";
             // 
@@ -2702,7 +2805,7 @@ namespace DreamBeam {
             this.bibleTextControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bibleTextControl.Location = new System.Drawing.Point(0, 0);
             this.bibleTextControl.Name = "bibleTextControl";
-            this.bibleTextControl.Size = new System.Drawing.Size(506, 691);
+            this.bibleTextControl.Size = new System.Drawing.Size(383, 534);
             this.bibleTextControl.TabIndex = 3;
             // 
             // tabControl1
@@ -2719,7 +2822,7 @@ namespace DreamBeam {
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(514, 709);
+            this.tabControl1.Size = new System.Drawing.Size(391, 552);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 2;
             // 
@@ -2780,11 +2883,26 @@ namespace DreamBeam {
             // 
             this.SongListDataView.Table = this.SongListTable;
             // 
+            // songThemeWidget
+            // 
+            this.songThemeWidget.BGImagePath = "Image";
+            this.songThemeWidget.Location = new System.Drawing.Point(-4, 20);
+            this.songThemeWidget.Name = "songThemeWidget";
+            this.songThemeWidget.Size = new System.Drawing.Size(433, 312);
+            this.songThemeWidget.TabIndex = 1;
+            this.songThemeWidget.TabNames = new string[] {
+        "Title",
+        "Verse",
+        "Author",
+        "Key"};
+            this.songThemeWidget.ThemePath = "";
+            this.songThemeWidget.UseDesign = false;
+            // 
             // MainForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(976, 781);
+            this.ClientSize = new System.Drawing.Size(853, 624);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusBar);
             this.Controls.Add(this.leftSandDock);
@@ -2836,6 +2954,9 @@ namespace DreamBeam {
             this.DockControl_BibleTools.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.BibleTools_CollapsiblePanelBar)).EndInit();
             this.BibleTools_CollapsiblePanelBar.ResumeLayout(false);
+            this.DockControl_DesignEditor.ResumeLayout(false);
+            this.DesignTabControl.ResumeLayout(false);
+            this.SongDesignTab.ResumeLayout(false);
             this.DockControl_Songs.ResumeLayout(false);
             this.DockControl_PlayList.ResumeLayout(false);
             this.DockControl_Backgrounds.ResumeLayout(false);
@@ -2892,7 +3013,16 @@ namespace DreamBeam {
 		private MediaControls previewMediaControls;
 		private System.Windows.Forms.Button muteButton;
 		private MediaControls liveMediaControls;
-		private BibleText bibleTextControl;
+        private BibleText bibleTextControl;
+        private TD.SandBar.MenuButtonItem menuButtonItem1;
+        private TD.SandDock.DockControl DockControl_DesignEditor;
+        public ThemeWidget songThemeWidget;
+        private TD.SandBar.MenuButtonItem ToolBars_MenuBar_Open_DesignTab;
+        public ThemeWidget SongThemeWidget1;
+        public System.Windows.Forms.TabPage SongDesignTab;
+        public System.Windows.Forms.TabControl DesignTabControl;
+        public System.Windows.Forms.TabPage SermonDesignTab;
+        public System.Windows.Forms.TabPage BibleDesignTab;
 
 
 	}

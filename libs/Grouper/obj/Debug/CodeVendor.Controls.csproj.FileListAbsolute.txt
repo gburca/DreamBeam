@@ -1,0 +1,16 @@
+D:\Projekte\Dreambeam\The Grouper\TestHarness\bin\Debug\CodeVendor.Controls.dll
+D:\Projekte\Dreambeam\The Grouper\TestHarness\bin\Debug\CodeVendor.Controls.pdb
+D:\Projekte\Dreambeam\The Grouper\TestHarness\bin\Debug\Grouper.xml
+D:\Projekte\Dreambeam\The Grouper\Grouper\obj\Debug\ResolveAssemblyReference.cache
+D:\Projekte\Dreambeam\The Grouper\Grouper\obj\Debug\CodeVendor.Controls.Grouper.resources
+D:\Projekte\Dreambeam\The Grouper\Grouper\obj\Debug\CodeVendor.Controls.csproj.GenerateResource.Cache
+D:\Projekte\Dreambeam\The Grouper\Grouper\obj\Debug\CodeVendor.Controls.dll
+D:\Projekte\Dreambeam\The Grouper\Grouper\obj\Debug\CodeVendor.Controls.pdb
+D:\Projekte\Dreambeam\Quellcode\libs\TestHarness\bin\Debug\CodeVendor.Controls.dll
+D:\Projekte\Dreambeam\Quellcode\libs\TestHarness\bin\Debug\CodeVendor.Controls.pdb
+D:\Projekte\Dreambeam\Quellcode\libs\TestHarness\bin\Debug\Grouper.xml
+D:\Projekte\Dreambeam\Quellcode\libs\Grouper\obj\Debug\ResolveAssemblyReference.cache
+D:\Projekte\Dreambeam\Quellcode\libs\Grouper\obj\Debug\CodeVendor.Controls.Grouper.resources
+D:\Projekte\Dreambeam\Quellcode\libs\Grouper\obj\Debug\CodeVendor.Controls.csproj.GenerateResource.Cache
+D:\Projekte\Dreambeam\Quellcode\libs\Grouper\obj\Debug\CodeVendor.Controls.dll
+D:\Projekte\Dreambeam\Quellcode\libs\Grouper\obj\Debug\CodeVendor.Controls.pdb

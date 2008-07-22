@@ -1,0 +1,10 @@
+bin\Debug\RibbonDemo.exe
+bin\Debug\RibbonDemo.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\RibbonDemo.Properties.Resources.resources
+obj\Debug\RibbonDemo.csproj.GenerateResource.Cache
+obj\Debug\RibbonDemo.exe
+obj\Debug\RibbonDemo.pdb
+bin\Debug\System.Windows.Forms.Ribbon.dll
+bin\Debug\System.Windows.Forms.Ribbon.pdb
+obj\Debug\RibbonDemo.MainForm.resources

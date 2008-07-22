@@ -19,6 +19,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoxExLib", "libs\Mes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEDRadioButton", "libs\LEDRadioButton\LEDRadioButton.csproj", "{98096340-5853-42D0-8B2F-1CD364C5A152}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FontCombo", "libs\FontCombo\FontCombo.csproj", "{E764A681-F213-4581-8492-9EE617B5E398}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficePickers", "libs\OfficePickers\OfficePickers.csproj", "{CAD56B75-481B-4C76-B090-4BC2FF5E5681}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeVendor.Controls", "libs\Grouper\CodeVendor.Controls.csproj", "{D5D88EB0-23B9-46CE-B23C-C6245ECF023C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +55,18 @@ Global
 		{98096340-5853-42D0-8B2F-1CD364C5A152}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98096340-5853-42D0-8B2F-1CD364C5A152}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98096340-5853-42D0-8B2F-1CD364C5A152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E764A681-F213-4581-8492-9EE617B5E398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E764A681-F213-4581-8492-9EE617B5E398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E764A681-F213-4581-8492-9EE617B5E398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E764A681-F213-4581-8492-9EE617B5E398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAD56B75-481B-4C76-B090-4BC2FF5E5681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD56B75-481B-4C76-B090-4BC2FF5E5681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD56B75-481B-4C76-B090-4BC2FF5E5681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD56B75-481B-4C76-B090-4BC2FF5E5681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5D88EB0-23B9-46CE-B23C-C6245ECF023C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5D88EB0-23B9-46CE-B23C-C6245ECF023C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5D88EB0-23B9-46CE-B23C-C6245ECF023C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5D88EB0-23B9-46CE-B23C-C6245ECF023C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,664 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B72F4D92-C1BB-4466-A2A1-CF1F30B0BBBE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RibbonDemo</RootNamespace>
+    <AssemblyName>RibbonDemo</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\System.Windows.Forms.Ribbon\System.Windows.Forms.Ribbon.csproj">
+      <Project>{46A18A55-5AE8-49CE-91CD-C7421B642E7E}</Project>
+      <Name>System.Windows.Forms.Ribbon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alignright16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrange32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrangebringfront16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrangebringfront32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrangedown16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrangesendback16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrangeup16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\barcode16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\barcode32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bold16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderall16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderbottom.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderbottom16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderbottomdouble16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderbottomthick.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bordereffect1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bordereffect2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bordereffect3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bordereffect4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderin16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderleft16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bordermiddlehorizontal.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bordermiddlevertical.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bordernone16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderout16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderright16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderthick.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bordertop16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderupandbottom16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brightness32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\capitalletter16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\capitalletter32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\casing16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\casing32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cellcenterbottom16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cellcentermiddle16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cellcentertop16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cellleftbottom.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cellleftmiddle16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\celllefttop16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cellrightbottom16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cellrightmiddle16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cellrighttop16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chartdraw32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clipart32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clock3e.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\contactadd32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\contrast32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copyformat3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copyformat16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cover16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cover32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cut16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\datetime16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\decreasefont16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\decreasefont23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\decreasetab16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete32.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deleteclipboard16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drawtools32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\erase16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eraseformat16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\excelsheet32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exclamation32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\favorites32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fill16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fill32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filter32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\find32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\first16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fliphorizontal16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flipvertical16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\font32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fontcolor16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\footer.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\footer16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\footer32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\formula16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\formula32.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\formula32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fx32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goforward16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\group16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\header16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\header32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\headerandfooter32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\highlight16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\horizontalspacing32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imageeffect1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\increasefont16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\increasefont32.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\increasefont32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\increasetab16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\insertobject16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\italic16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\last16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\library32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\linecolor16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\linespacing16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\linethru16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\link16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\link32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lookup16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\multilevellist16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ol16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\open16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\open32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pagefill16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pagefill32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pagejump16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pagenumber16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pagenumber32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pagerestricted32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\palette16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paly32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paragraph16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pasteall16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\preview32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previous16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\property32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quickitems16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quickitems32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redo16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refreshall32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refreshdocument32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\regional32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\removelink16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\replace16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rotateclockw16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rotateclockw32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rotatecounterclockw16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\searchweb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\select16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\select32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\selectall16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shapecurve16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shapeellipse16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shapes32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shapesquare16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\signature32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\signatureline16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\signatureline32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smartart16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smartart32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spelling16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spelling32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sql32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sqlcheck32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\style16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\style32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\subindex16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\superindex16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\symbol16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\symbol32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texteffect1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\textframe16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\textframe32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ul16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\underline16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undo16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ungroup16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\useradd32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom100_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoomfitpage32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alert32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aligncenter16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alignjustify16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alignleft16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wordart16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wordart32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pagejump32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table32.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -48,7 +48,7 @@ namespace DreamBeam {
 
 			TextFormat = textFormat;
 		}
-
+        
 		public static Theme OpenFile(string FileDialogFilter, Type type) {
 			OpenFileDialog dialog = new OpenFileDialog();
 			dialog.DefaultExt = "xml";
@@ -89,6 +89,26 @@ namespace DreamBeam {
 				}
 			}
 		}
+
+
+        /// <summary>
+        /// Saves Theme into a Directory
+        /// </summary>
+        /// <param name="fileName">Path to File</param>
+        public void SaveFile(string fileName)
+        {         
+            try
+            {
+                SerializeTo(this, fileName);
+                this.ThemeFile = Tools.GetRelativePath(DirType.DataRoot, fileName);
+                //this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.SaveFileDialog.FileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Theme not saved: " + ex.Message);
+            }
+        }
+
 
 		public static void SerializeTo(Theme instance, string file) {
 			XmlSerializer xs = new XmlSerializer(instance.GetType());
@@ -246,7 +266,7 @@ namespace DreamBeam {
 	}
 
 	[Serializable()]
-	public class ComboTheme {
+    public class ComboTheme {
 		public SongTheme Song;
 		public BibleTheme Bible;
 		public SermonTheme Sermon;
@@ -257,5 +277,20 @@ namespace DreamBeam {
 			Sermon = new SermonTheme();
 		}
 	}
+
+    [Serializable()]
+    public class ComboThemePaths
+    {
+        public string SongThemePath;
+        public string BibleThemePath;
+        public string SermonThemePath;
+
+        public ComboThemePaths()
+        {
+            SongThemePath = "";
+            BibleThemePath = "";
+            SermonThemePath = "";
+        }
+    }
 
 }

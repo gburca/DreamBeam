@@ -1,0 +1,1668 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+
+
+
+	<title>CodeProject: FontComboBox - a font listing combo box for .NET. Free source code and programming help</title>
+	
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Description" content="A fully owner drawn ComboBox derived class for enumerating and choosing fonts; Author: Nishant Sivakumar; Section: Combo &amp; List Boxes; Chapter: Desktop Development">
+<meta name="Keywords" content=".NET 1.0, VS.NET2002, C#, Windows, Dev, Intermediate,Combo &amp; List Boxes,Desktop Development,Free source code, tutorials">
+<meta name="Author" content="The Code Project">
+<meta name="Rating" content="General">
+<meta name="Robots" content="index, follow">
+<meta name="Revisit-After" content="1 days">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - All topics" href="http://www.codeproject.com/webservices/articlerss.aspx?cat=1">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - MFC / C++" href="http://www.codeproject.com/webservices/articlerss.aspx?cat=2">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - C#" href="http://www.codeproject.com/webservices/articlerss.aspx?cat=3">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - ASP.NET" href="http://www.codeproject.com/webservices/articlerss.aspx?cat=4">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - .NET" href="http://www.codeproject.com/webservices/articlerss.aspx?cat=5">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - VB.NET" href="http://www.codeproject.com/webservices/articlerss.aspx?cat=6">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Lounge Postings" href="http://www.codeproject.com/webservices/LoungeRSS.aspx">
+<link rel="search" type="application/opensearchdescription+xml" title="CodeProject" href="http://www.codeproject.com/info/OpenSearch.xml">
+	<link rel="stylesheet" type="text/css" href="nishfontcombo.aspx-Dateien/CodeProject.css">	
+	<link rel="stylesheet" type="text/css" href="nishfontcombo.aspx-Dateien/ForumClassic.css">	
+	<!-- base -->
+	
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="nishfontcombo.aspx-Dateien/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+   var pageTracker = _gat._getTracker("UA-1735123-1");
+   pageTracker._setDomainName("www.codeproject.com");
+   pageTracker._setSessionTimeout("1200"); // 20 mins
+   pageTracker._initData();
+   pageTracker._trackPageview();
+</script>
+	
+	<script type="text/javascript" language="Javascript" src="nishfontcombo.aspx-Dateien/oncopy.js"></script>
+<script type="text/javascript" language="Javascript" src="nishfontcombo.aspx-Dateien/jxs.js"></script>
+<script type="text/javascript" language="Javascript" src="nishfontcombo.aspx-Dateien/bookmark.js"></script>
+<script type="text/javascript" language="Javascript" src="nishfontcombo.aspx-Dateien/rateitem.js"></script>
+<script type="text/javascript" language="Javascript">//<![CDATA[
+function ToggleMenu(itemName)
+{
+	var elm = document.getElementById(itemName);
+	var i,others = document.getElementById('SectionMenu');
+	for(i=0; i < others.childNodes.length; i++)
+	{
+		var other = others.childNodes[i];
+		if ((other.className == 'MenuSectionBlock') && (other != elm))
+			other.style.display='none';
+	}
+	if (elm.style.display == 'block') elm.style.display='none';
+	else elm.style.display='block';
+	return false;
+}
+
+//]]></script>
+
+<script type="text/javascript" language="Javascript" src="nishfontcombo.aspx-Dateien/addto.js"></script>
+<script type="text/javascript" language="Javascript">//<![CDATA[
+function MarkAns(MemberID,MsgID,QID) {
+ document.write(unescape("%3Cdiv class=\"CallOut\"%3E"));
+ document.write("Was this a good answer to your question? ");
+ document.write(unescape("%3Ca href=\"#xx" + MsgID.toString() + "xx\" "));
+ document.write("onclick=\"RateMsg("+MemberID.toString()+", "+MsgID.toString()+",6,"+QID.toString()+");\"");
+ document.write(unescape("%3E"));
+ document.write(unescape("%3Cimg height=\"20\" width=\"20\" src=\"/script/Forums/Images/good.png\" alt=\"correct\" border=\"0\" align=\"absmiddle\" /%3E Yes%3C/a%3E"));
+ document.write(unescape("%3Ca href=\"#xx" + MsgID.toString() + "xx\" "));
+ document.write("onclick=\"RateMsg("+MemberID.toString()+","+MsgID.toString()+",7,"+QID.toString()+");\"");
+ document.write(unescape("%3E"));
+ document.write(unescape("%3Cimg height=\"20\" width=\"20\" src=\"/script/Forums/Images/bad.png\" alt=\"correct\" style=\"margin-left:10px\" border=\"0\" align=\"absmiddle\" /%3E No%3C/a%3E"));
+ document.write(unescape("%3C/div%3E"));
+}
+function MsgVFrm(MemberID,MsgID,GB,gp,bp,mt){
+ if(!GB)document.write("Rate this message: ");
+ document.write(unescape("%3Ca href=\"#xx" + MsgID.toString() + "xx\" onclick=\"RateMsg(" + MemberID.toString() + ", " + MsgID.toString() + ","));document.write((GB?"5":"1")+unescape(",0);\"%3E"));
+ if(GB) document.write(unescape("%3Cimg height=\"20\" width=\"20\" src=\"/script/Forums/Images/good.png\" alt=\"good\" border=\"0\" align=\"absmiddle\" /%3E "+gp+" "+mt+"%3C/a%3E "));
+ else document.write(unescape("%3Cimg height=\"14\" width=\"14\" src=\"/script/Forums/Images/thumbs_down.gif\" alt=\"vote 1\" border=\"0\" align=\"middle\" /%3E%3C/a%3E "));
+ if(GB)document.write(" &nbsp;"); else for(var i=1; i<=5;i++)
+  document.write(unescape("%3Ca class=\"Frm_MHL\" href=\"#xx" + MsgID.toString() + "xx\" title=\"vote this message a " + i.toString() + "\" onclick=\"RateMsg(" + MemberID.toString() + ", " + MsgID.toString() + ", " + i.toString() + ",0)\"%3E%3Cb%3E" + i.toString() + "%3C/b%3E%3C/a%3E "));
+ document.write(unescape("%3Ca href=\"#xx" + MsgID.toString() + "xx\" onclick=\"RateMsg(" + MemberID.toString() + ", " + MsgID.toString() + ","));document.write((GB?"1":"5")+unescape(",0);\"%3E"));
+ if(GB)document.write(unescape("%3Cimg height=\"20\" width=\"20\" src=\"/script/Forums/Images/bad.png\" alt=\"bad\" border=\"0\" align=\"absmiddle\" /%3E "+bp+" "+mt+"%3C/a%3E"));
+ else document.write(unescape("%3Cimg height=\"14\" width=\"14\" src=\"/script/Forums/Images/thumbs_up.gif\" border=\"0\" alt=\"vote 5\" align=\"middle\" /%3E%3C/a%3E "));
+ if(GB)document.write(" &nbsp;&nbsp; "); else document.write(unescape("%3Cbr /%3E")); document.writeln(unescape("[%3Ca href='#xx") + MsgID.toString() +"xx' title='Report as Abuse' onclick='return ReportMsg(" + MemberID.toString());
+ document.writeln(", " + MsgID.toString() + unescape(",-2)'%3EReport Message%3C/a%3E]"));
+}
+
+function ReportMsg(userid, msgid, score) {
+ if (confirm("Are you sure you want to report this message?"))
+  return RateMsg(userid, msgid, score, 0);
+ else return false;
+}
+function RateMsg(memberid, msgid, score, questionId) {
+ var req = new XMLHttpRequest();
+ req.onreadystatechange = function() {
+  if (req.readyState == 4){
+   if (req.status == 200){
+    var respText = req.responseText;
+    var re = new RegExp(unescape("\%3Cdiv\%3E([^\%3C]*)\%3C/div\%3E"), "g");
+    var match = re.exec(respText);
+    voteStatus.innerHTML = unescape("%3Cb%3E") + (match&&match[1])?match[1]:"An error occured" + unescape("%3C/b%3E");
+   } else
+    voteStatus.innerHTML = unescape("%3Cb style='color:red'%3EFailed!") + req.statusText + unescape("%3C/b%3E");
+  }
+ }
+ var voteStatus = document.getElementById("MVF" + msgid);
+ if (!voteStatus) return;
+ voteStatus.innerHTML = unescape("%3Cb style='color:green'%3EVoting...%3C/b%3E");
+ var strAction = "/script/Forums/Vote.aspx?js=1&fmid="+memberid.toString()+"&select="+msgid.toString()+"&score="+score.toString()+"&qid="+questionId.toString();
+ req.open("GET", strAction, true);
+ req.send(null);
+  return false;
+}
+//]]></script>
+
+<script type="text/javascript" language="Javascript">//<![CDATA[
+var Selected = "-1";
+
+function SwitchMessage(e, msgId)
+{
+  if (!msgId) {
+    if(!e)e=window.event;
+    var target=e.target?e.target:e.srcElement;
+    while(target&&target.id!='DynMessLink')target=target.parentNode;
+    if(!target||target.id!='DynMessLink')return;
+    msgId=target.name;
+  }
+  if(Selected&&Selected!=""){
+    var body=eval("document.getElementById('F" + Selected + "_h1')");
+    if(body) body.style.display = 'none';
+    var head=eval("document.getElementById('F" + Selected + "_h0')");
+    if(head) head.className = head.className.replace("Sel", "UnSel");
+  }
+  if(Selected==msgId.toString())
+    Selected="";
+  else {
+    Selected=msgId.toString();
+    var body=eval("document.getElementById('F" + Selected + "_h1')");
+    if(body){
+      if(body.style.display=='none') body.style.display='';
+      else body.style.display = 'none';
+    }
+    var head=eval("document.getElementById('F" + Selected + "_h0')");
+    if (head) 
+      head.className = head.className.replace("UnSel", "Sel");
+    if(body&&head&&body.style.display!='none'){
+      document.body.scrollTop = getRealPos(head, "Top") - document.body.clientHeight/10;
+      EnsureMessageVisible(Selected, true);
+    }
+  }
+  if (e){if(e.preventDefault)e.preventDefault;else e.returnValue=false;}
+  return false;
+}
+
+//]]></script>
+
+<script type="text/javascript" language="Javascript" src="nishfontcombo.aspx-Dateien/ShortCuts.js"></script>
+<link rel="icon" href="http://www.codeproject.com/favicon.ico" type="image/ico">
+<link rel="shortcut icon" href="http://www.codeproject.com/favicon.ico" type="image/ico">
+
+</head><body style="background-color: rgb(255, 255, 255);">
+
+<table id="ctl00_AT" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr valign="top">
+		<td colspan="2">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody><tr>
+			<td class="HeaderLogo"><a href="http://www.codeproject.com/"><img id="ctl00_Logo" src="nishfontcombo.aspx-Dateien/logo225x90.gif" alt="The Code Project" style="border-width: 0px; height: 90px; width: 225px;"></a></td>				 
+			<td class="HeaderBanner" align="right" width="100%">
+			<script type="text/javascript">document.write(unescape("%3ca%20href%3d%22http%3a%2f%2fwww.codeproject.com%2fRedir.aspx%3fadid%3d5301%26way%3dban%22%20target%3d%22_blank%22%20rel%3d%22nofollow%22%3e%3cimg%20src%3d%22http%3a%2f%2fwww.codeproject.com%2fscript%2fAnn%2fServeImg.aspx%3fFile%3d%252fscript%252fadmentor%252fimages%252fIBMdeveloperWorks_728x90.gif%26C%3dFalse%26id%3d5301%22%20alt%3d%22%22%20border%3d%220%22%20width%3d%22728%22%20height%3d%2290%22%3e%3c%2fa%3e"));</script><a href="http://www.codeproject.com/Redir.aspx?adid=5301&amp;way=ban" target="_blank" rel="nofollow"><img src="nishfontcombo.aspx-Dateien/ServeImg_003.htm" alt="" border="0" width="728" height="90"></a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			
+
+<table class="MemberNavBar" cellpadding="5" cellspacing="0" width="100%">
+<tbody><tr>
+<td class="SmallText" style="font-weight: bold;">5,310,869 members and growing! (26,501 online)</td>
+<td align="right">
+
+<div id="ctl00_MemberMenu_LoggedOnOptions" class="MemberNavBarText">
+			
+<a id="ctl00_MemberMenu_MyProfile" href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=777754">staeff</a> | 
+<a id="ctl00_MemberMenu_MySettings" href="http://www.codeproject.com/script/Membership/Modify.aspx">My Settings</a> |
+<a id="ctl00_MemberMenu_MyCodeProject" href="http://www.codeproject.com/script/Membership/MyCodeProject.aspx"><b>My CodeProject</b></a> |
+<a id="ctl00_MemberMenu_MyBookmarks" href="http://www.codeproject.com/script/Bookmarks/List.aspx?obtid=2"><img src="nishfontcombo.aspx-Dateien/fave.gif" align="absmiddle" border="0" width="16" height="16"> My Bookmarks</a> |
+<a id="ctl00_MemberMenu_MyArticles" href="http://www.codeproject.com/script/Articles/MemberArticles.aspx?amid=777754">My Articles</a> |
+
+<a id="ctl00_MemberMenu_Signout" href="http://www.codeproject.com/script/Membership/LogOff.aspx?rp=%2fKB%2fcombobox%2fnishfontcombo.aspx">Sign out</a>
+
+		</div>
+
+
+
+</td>
+</tr>
+</tbody></table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			
+<table class="SiteNavBar" id="tblSiteToolbar" cellpadding="0" cellspacing="0">
+<tbody><tr>
+
+<td nowrap="nowrap"><a href="http://www.codeproject.com/">Home</a></td><td> &nbsp; </td><td align="right" nowrap="nowrap">Current Site: </td><td class="SelCat" nowrap="nowrap"><a href="http://www.codeproject.com/">Main Site</a></td>
+<td nowrap="nowrap"><a href="http://java.codeproject.com/">Java</a></td>
+<td nowrap="nowrap"><a href="http://lamp.codeproject.com/">Linux Apache MySQL PHP</a></td>
+
+<td width="100%">&nbsp;</td>
+<td id="ctl00_TopNavBar_RightMenus">
+	<div id="MenuPos" style="position: relative; width: 380px; height: 22px; top: 1px;">
+	<table style="border-width: 0px; height: 20px;" cellpadding="0" cellspacing="0" width="380">
+	<tbody><tr valign="middle">
+	<td style="border-width: 0pt;" nowrap="nowrap"><a href="http://www.codeproject.com/info/FAQ.aspx">Help!</a></td>
+<td style="border-width: 0pt;" nowrap="nowrap"><a href="http://www.codeproject.com/script/Articles/Latest.aspx">Articles</a></td>
+<td style="border-width: 0pt;" nowrap="nowrap"><a href="http://www.codeproject.com/script/Forums/List.aspx">Message Boards</a></td>
+<td style="border-width: 0pt;" nowrap="nowrap"><a href="http://www.codeproject.com/script/Jobs/List.aspx">Job Board</a></td>
+<td style="border-width: 0pt;" nowrap="nowrap"><a href="http://www.codeproject.com/Lounge.aspx">Lounge</a></td>
+
+	</tr>
+	</tbody></table>
+	</div>
+</td>
+		
+</tr>
+
+</tbody></table>
+
+			</td>
+		</tr>
+		</tbody></table>
+	</td>
+	</tr>
+	<tr>
+		<td colspan="2" valign="top">
+			<a name="_top"></a>
+			<table id="ctl00_ArticleTopHeader_HeaderTable" class="ArticleHeader" border="0" cellpadding="3" cellspacing="0" width="100%">
+			<tbody><tr valign="top">
+				<td class="SmallText">
+	<a id="ctl00_ArticleTopHeader_ChapterLink" href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=1">Desktop Development</a> »
+	<a id="ctl00_ArticleTopHeader_SectionLink" href="http://www.codeproject.com/KB/combobox/">Combo &amp; List Boxes</a> »
+	<a id="ctl00_ArticleTopHeader_SubsectionLink" href="http://www.codeproject.com/KB/combobox/index.aspx?#Combo%20&amp;%20List%20Boxes%20-%20General">General</a>
+	<span id="ctl00_ArticleTopHeader_SkillLevel" class="ArticleIntermediate">&nbsp;&nbsp;&nbsp; Intermediate</span> <span id="ctl00_ArticleTopHeader_LicenceTerms"></span>
+	<br><br>
+	<h1><span id="ctl00_ArticleTopHeader_ArticleTitle" class="ArticleTopTitle">FontComboBox - a font listing combo box for .NET</span></h1>
+	<b>By <a href="http://www.codeproject.com/script/Articles/MemberArticles.aspx?amid=20248">Nishant Sivakumar</a></b><br><br>
+    <span id="ctl00_ArticleTopHeader_ArticleDescr" class="ArticleTopDescr">A fully owner drawn ComboBox derived class for enumerating and choosing fonts</span>	
+</td>
+				<td class="SmallText" style="width: 210px;">
+	<span id="ctl00_ArticleTopHeader_ArticleAttributes">C#, Windows, .NET 1.0, .NETVS, VS.NET2002, Dev</span><br><br>
+	<span style="padding-right: 2ex;">Posted</span>: <b>4 Aug 2002</b><br>
+	<span style="padding-right: 0.5ex;">Updated</span>: <b>4 Aug 2002</b>
+	<br>
+	<span style="padding-right: 3.2ex;">Views</span>: <b>109,384</b><br>
+</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+	<table width="100%">
+	<tbody><tr>
+	<td></td>
+	<td style="white-space: nowrap;" class="SmallText" align="right">
+	</td>
+	</tr>
+	</tbody></table>
+</td>
+			</tr>
+		</tbody></table>
+		
+
+		</td>
+	</tr>
+	<tr valign="top">
+		<td id="ctl00_LeftNavCell" class="LHNavBar">
+
+			
+
+<div class="FeatureBlockHeader">Announcements</div>
+<div class="FeatureBlockContent RHFeatureBar" style="margin: 0pt; padding: 0pt;">
+<table cellpadding="2">
+
+
+<tbody><tr valign="middle"><td><img src="nishfontcombo.aspx-Dateien/startrek.gif" alt="Comp" width="24" height="10"></td>
+<td><a href="http://www.codeproject.com/script/Awards/Competition.aspx?cid=274">Summer Code Competition!</a></td></tr>
+
+
+
+			
+
+<tr valign="middle"><td><img src="nishfontcombo.aspx-Dateien/info_24.png" alt="Comp" width="24" height="24"></td>
+<td><a href="http://www.codeproject.com/script/Awards/Competition.aspx?cid=270">New thawte <br>Scavenger Hunt!</a></td></tr>
+
+
+<tr valign="middle"><td><img src="nishfontcombo.aspx-Dateien/coffee_24.png" alt="Comp" align="middle" width="24" height="24"></td>
+<td><a href="http://www.codeproject.com/Zones/IBM/">Win CodeProject Coffee!</a></td></tr>
+
+<tr valign="middle"><td><img src="nishfontcombo.aspx-Dateien/info_24.png" alt="Comp" align="middle" width="24" height="24"></td>
+<td><a id="ctl00_Announcements_CompLink" href="http://www.codeproject.com/Feature/ArticleCompetition/">Monthly Competition</a></td></tr>
+
+</tbody></table>
+</div>
+			
+			
+			<div class="FeatureBlockHeader" style="margin-top: 7px;">Want a new Job?</div>
+			<div class="FeatureBlockContent RHFeatureBar">
+			<ul class="InfoList"><li><a href="http://www.codeproject.com/script/Jobs/View.aspx?jid=51">.NET Software Developer / Engineer</a> at Manticore Technology in United States</li><li><a href="http://www.codeproject.com/script/Jobs/View.aspx?jid=77">ASP.NET C# VB.NET SQL Developer</a> at High Power Consulting, Inc. in United States</li><li><a href="http://www.codeproject.com/script/Jobs/View.aspx?jid=31">Product Manager: Visual Studio Web Development</a> at Microsoft in United States</li><li><a href="http://www.codeproject.com/script/Jobs/List.aspx">View Latest Jobs...</a></li></ul>
+			</div>
+			
+			
+			
+			<div id="SectionMenu">
+<div class="MenuCat">Chapters</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=1" onclick="return ToggleMenu('Chapter1');">Desktop Development</a></div>
+<div class="MenuSectionBlock" id="Chapter1">
+<div class="MI" id="Section1"><a href="http://www.codeproject.com/KB/buttons/">Button Controls</a></div>
+<div class="MI" id="Section15"><a href="http://www.codeproject.com/KB/clipboard/">Clipboard</a></div>
+<div class="MIS" id="Section2"><a href="http://www.codeproject.com/KB/combobox/">Combo &amp; List Boxes</a></div>
+<div class="MI" id="Section67"><a href="http://www.codeproject.com/KB/dialog/">Dialogs and Windows</a></div>
+<div class="MI" id="Section107"><a href="http://www.codeproject.com/KB/gadgets/">Desktop Gadgets</a></div>
+<div class="MI" id="Section16"><a href="http://www.codeproject.com/KB/docview/">Document / View</a></div>
+<div class="MI" id="Section4"><a href="http://www.codeproject.com/KB/edit/">Edit Controls</a></div>
+<div class="MI" id="Section17"><a href="http://www.codeproject.com/KB/files/">Files and Folders</a></div>
+<div class="MI" id="Section3"><a href="http://www.codeproject.com/KB/grid/">Grid &amp; Data Controls</a></div>
+<div class="MI" id="Section5"><a href="http://www.codeproject.com/KB/list/">List Controls</a></div>
+<div class="MI" id="Section6"><a href="http://www.codeproject.com/KB/menus/">Menus</a></div>
+<div class="MI" id="Section14"><a href="http://www.codeproject.com/KB/miscctrl/">Miscellaneous</a></div>
+<div class="MI" id="Section18"><a href="http://www.codeproject.com/KB/printing/">Printing</a></div>
+<div class="MI" id="Section95"><a href="http://www.codeproject.com/KB/progress/">Progress Controls</a></div>
+<div class="MI" id="Section11"><a href="http://www.codeproject.com/KB/selection/">Selection Controls</a></div>
+<div class="MI" id="Section19"><a href="http://www.codeproject.com/KB/shell/">Shell and IE programming</a></div>
+<div class="MI" id="Section68"><a href="http://www.codeproject.com/KB/smart/">Smart Client</a></div>
+<div class="MI" id="Section8"><a href="http://www.codeproject.com/KB/splitter/">Splitter Windows</a></div>
+<div class="MI" id="Section9"><a href="http://www.codeproject.com/KB/static/">Static &amp; Panel Controls</a></div>
+<div class="MI" id="Section10"><a href="http://www.codeproject.com/KB/statusbar/">Status Bar</a></div>
+<div class="MI" id="Section7"><a href="http://www.codeproject.com/KB/tabs/">Tabs &amp; Property Pages</a></div>
+<div class="MI" id="Section12"><a href="http://www.codeproject.com/KB/toolbars/">Toolbars &amp; Docking windows</a></div>
+<div class="MI" id="Section13"><a href="http://www.codeproject.com/KB/tree/">Tree Controls</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=2" onclick="return ToggleMenu('Chapter2');">Web Development</a></div>
+<div class="MenuSectionBlock" id="Chapter2" style="display: none;">
+<div class="MI" id="Section70"><a href="http://www.codeproject.com/KB/ajax/">Ajax and Atlas</a></div>
+<div class="MI" id="Section27"><a href="http://www.codeproject.com/KB/applications/">Applications &amp; Tools</a></div>
+<div class="MI" id="Section85"><a href="http://www.codeproject.com/KB/asp/">ASP</a></div>
+<div class="MI" id="Section89"><a href="http://www.codeproject.com/KB/aspnet/">ASP.NET</a></div>
+<div class="MI" id="Section28"><a href="http://www.codeproject.com/KB/webforms/">ASP.NET Controls</a></div>
+<div class="MI" id="Section38"><a href="http://www.codeproject.com/KB/ATL-Server/">ATL Server</a></div>
+<div class="MI" id="Section29"><a href="http://www.codeproject.com/KB/web-cache/">Caching</a></div>
+<div class="MI" id="Section91"><a href="http://www.codeproject.com/KB/web-image/">Charts, Graphs and Images</a></div>
+<div class="MI" id="Section25"><a href="http://www.codeproject.com/KB/scripting/">Client side scripting</a></div>
+<div class="MI" id="Section30"><a href="http://www.codeproject.com/KB/custom-controls/">Custom Controls</a></div>
+<div class="MI" id="Section23"><a href="http://www.codeproject.com/KB/HTML/">HTML / CSS</a></div>
+<div class="MI" id="Section22"><a href="http://www.codeproject.com/KB/IP/">Internet / Network</a></div>
+<div class="MI" id="Section24"><a href="http://www.codeproject.com/KB/ISAPI/">ISAPI</a></div>
+<div class="MI" id="Section33"><a href="http://www.codeproject.com/KB/server-management/">Site &amp; Server Management</a></div>
+<div class="MI" id="Section34"><a href="http://www.codeproject.com/KB/session/">Session State</a></div>
+<div class="MI" id="Section113"><a href="http://www.codeproject.com/KB/silverlight/">Silverlight</a></div>
+<div class="MI" id="Section36"><a href="http://www.codeproject.com/KB/trace/">Trace and Logs</a></div>
+<div class="MI" id="Section31"><a href="http://www.codeproject.com/KB/user-controls/">User Controls</a></div>
+<div class="MI" id="Section37"><a href="http://www.codeproject.com/KB/validation/">Validation</a></div>
+<div class="MI" id="Section35"><a href="http://www.codeproject.com/KB/viewstate/">View State</a></div>
+<div class="MI" id="Section26"><a href="http://www.codeproject.com/KB/WAP/">WAP / WML</a></div>
+<div class="MI" id="Section32"><a href="http://www.codeproject.com/KB/web-security/">Web Security</a></div>
+<div class="MI" id="Section20"><a href="http://www.codeproject.com/KB/webservices/">Web Services</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=9" onclick="return ToggleMenu('Chapter9');">Enterprise Systems</a></div>
+<div class="MenuSectionBlock" id="Chapter9" style="display: none;">
+<div class="MI" id="Section98"><a href="http://www.codeproject.com/KB/MCMS/">Content Management Server</a></div>
+<div class="MI" id="Section99"><a href="http://www.codeproject.com/KB/biztalk/">Microsoft BizTalk Server</a></div>
+<div class="MI" id="Section102"><a href="http://www.codeproject.com/KB/exchange/">Microsoft Exchange</a></div>
+<div class="MI" id="Section90"><a href="http://www.codeproject.com/KB/office/">Office Development</a></div>
+<div class="MI" id="Section101"><a href="http://www.codeproject.com/KB/sharepoint/">SharePoint Server</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=3" onclick="return ToggleMenu('Chapter3');">Multimedia</a></div>
+<div class="MenuSectionBlock" id="Chapter3" style="display: none;">
+<div class="MI" id="Section42"><a href="http://www.codeproject.com/KB/audio-video/">Audio and Video</a></div>
+<div class="MI" id="Section44"><a href="http://www.codeproject.com/KB/directx/">DirectX</a></div>
+<div class="MI" id="Section46"><a href="http://www.codeproject.com/KB/GDI/">GDI</a></div>
+<div class="MI" id="Section47"><a href="http://www.codeproject.com/KB/GDI-plus/">GDI+</a></div>
+<div class="MI" id="Section43"><a href="http://www.codeproject.com/KB/graphics/">General Graphics</a></div>
+<div class="MI" id="Section45"><a href="http://www.codeproject.com/KB/openGL/">OpenGL</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=4" onclick="return ToggleMenu('Chapter4');">Database</a></div>
+<div class="MenuSectionBlock" id="Chapter4" style="display: none;">
+<div class="MI" id="Section66"><a href="http://www.codeproject.com/KB/database/">Database</a></div>
+<div class="MI" id="Section100"><a href="http://www.codeproject.com/KB/reporting-services/">SQL Reporting Services</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=8" onclick="return ToggleMenu('Chapter8');">Platforms, Frameworks &amp; Libraries</a></div>
+<div class="MenuSectionBlock" id="Chapter8" style="display: none;">
+<div class="MI" id="Section83"><a href="http://www.codeproject.com/KB/atl/">ATL</a></div>
+<div class="MI" id="Section117"><a href="http://www.codeproject.com/KB/MFC/">MFC</a></div>
+<div class="MI" id="Section88"><a href="http://www.codeproject.com/KB/stl/">STL</a></div>
+<div class="MI" id="Section84"><a href="http://www.codeproject.com/KB/wtl/">WTL</a></div>
+<div class="MI" id="Section49"><a href="http://www.codeproject.com/KB/COM/">COM / COM+</a></div>
+<div class="MI" id="Section76"><a href="http://www.codeproject.com/KB/dotnet/">.NET Framework</a></div>
+<div class="MI" id="Section92"><a href="http://www.codeproject.com/KB/winsdk/">Win32/64 SDK &amp; OS</a></div>
+<div class="MI" id="Section108"><a href="http://www.codeproject.com/KB/vista/">Vista API</a></div>
+<div class="MI" id="Section110"><a href="http://www.codeproject.com/KB/vista-security/">Vista Security</a></div>
+<div class="MI" id="Section82"><a href="http://www.codeproject.com/KB/cross-platform/">Cross Platform</a></div>
+<div class="MI" id="Section69"><a href="http://www.codeproject.com/KB/game/">Game Development</a></div>
+<div class="MI" id="Section73"><a href="http://www.codeproject.com/KB/mobile/">Mobile Development</a></div>
+<div class="MI" id="Section106"><a href="http://www.codeproject.com/KB/WC/">Windows CardSpace</a></div>
+<div class="MI" id="Section103"><a href="http://www.codeproject.com/KB/WCF/">Windows Communication Foundation</a></div>
+<div class="MI" id="Section104"><a href="http://www.codeproject.com/KB/WPF/">Windows Presentation Foundation</a></div>
+<div class="MI" id="Section105"><a href="http://www.codeproject.com/KB/WF/">Windows Workflow Foundation</a></div>
+<div class="MI" id="Section119"><a href="http://www.codeproject.com/KB/library/">Libraries</a></div>
+<div class="MI" id="Section122"><a href="http://www.codeproject.com/KB/powershell/">Windows Powershell</a></div>
+<div class="MI" id="Section123"><a href="http://www.codeproject.com/KB/linq/">LINQ</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=5" onclick="return ToggleMenu('Chapter5');">Languages</a></div>
+<div class="MenuSectionBlock" id="Chapter5" style="display: none;">
+<div class="MI" id="Section71"><a href="http://www.codeproject.com/KB/cpp/">C / C++ Language</a></div>
+<div class="MI" id="Section72"><a href="http://www.codeproject.com/KB/mcpp/">C++ / CLI</a></div>
+<div class="MI" id="Section93"><a href="http://www.codeproject.com/KB/cs/">C#</a></div>
+<div class="MI" id="Section78"><a href="http://www.codeproject.com/KB/msil/">MSIL</a></div>
+<div class="MI" id="Section86"><a href="http://www.codeproject.com/KB/vbscript/">VBScript</a></div>
+<div class="MI" id="Section87"><a href="http://www.codeproject.com/KB/vb/">VB.NET</a></div>
+<div class="MI" id="Section115"><a href="http://www.codeproject.com/KB/vb-interop/">VB6 Interop</a></div>
+<div class="MI" id="Section77"><a href="http://www.codeproject.com/KB/net-languages/">Other .NET Languages</a></div>
+<div class="MI" id="Section21"><a href="http://www.codeproject.com/KB/XML/">XML</a></div>
+<div class="MI" id="Section96"><a href="http://www.codeproject.com/KB/java/">Java</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=6" onclick="return ToggleMenu('Chapter6');">General Programming</a></div>
+<div class="MenuSectionBlock" id="Chapter6" style="display: none;">
+<div class="MI" id="Section57"><a href="http://www.codeproject.com/KB/recipes/">Algorithms &amp; Recipes</a></div>
+<div class="MI" id="Section64"><a href="http://www.codeproject.com/KB/bugs/">Bugs &amp; Workarounds</a></div>
+<div class="MI" id="Section79"><a href="http://www.codeproject.com/KB/collections/">Collections</a></div>
+<div class="MI" id="Section56"><a href="http://www.codeproject.com/KB/security/">Cryptography &amp; Security</a></div>
+<div class="MI" id="Section50"><a href="http://www.codeproject.com/KB/datetime/">Date and Time</a></div>
+<div class="MI" id="Section52"><a href="http://www.codeproject.com/KB/DLL/">DLLs &amp; Assemblies</a></div>
+<div class="MI" id="Section80"><a href="http://www.codeproject.com/KB/exception/">Exception Handling</a></div>
+<div class="MI" id="Section81"><a href="http://www.codeproject.com/KB/locale/">Localisation</a></div>
+<div class="MI" id="Section53"><a href="http://www.codeproject.com/KB/macros/">Macros and Add-ins</a></div>
+<div class="MI" id="Section54"><a href="http://www.codeproject.com/KB/tips/">Programming Tips</a></div>
+<div class="MI" id="Section55"><a href="http://www.codeproject.com/KB/string/">String handling</a></div>
+<div class="MI" id="Section58"><a href="http://www.codeproject.com/KB/threads/">Threads, Processes &amp; IPC</a></div>
+<div class="MI" id="Section59"><a href="http://www.codeproject.com/KB/winhelp/">WinHelp / HTMLHelp</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=10" onclick="return ToggleMenu('Chapter10');">Graphics / Design</a></div>
+<div class="MenuSectionBlock" id="Chapter10" style="display: none;">
+<div class="MI" id="Section40"><a href="http://www.codeproject.com/KB/expression/">Expression</a></div>
+<div class="MI" id="Section114"><a href="http://www.codeproject.com/KB/usability/">Usability</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=11" onclick="return ToggleMenu('Chapter11');">Development Lifecycle</a></div>
+<div class="MenuSectionBlock" id="Chapter11" style="display: none;">
+<div class="MI" id="Section51"><a href="http://www.codeproject.com/KB/debug/">Debug Tips</a></div>
+<div class="MI" id="Section39"><a href="http://www.codeproject.com/KB/architecture/">Design and Architecture</a></div>
+<div class="MI" id="Section112"><a href="http://www.codeproject.com/KB/install/">Installation</a></div>
+<div class="MI" id="Section41"><a href="http://www.codeproject.com/KB/work/">Work Issues</a></div>
+<div class="MI" id="Section126"><a href="http://www.codeproject.com/KB/codegen/">Code Generation</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=7" onclick="return ToggleMenu('Chapter7');">General Reading</a></div>
+<div class="MenuSectionBlock" id="Chapter7" style="display: none;">
+<div class="MI" id="Section60"><a href="http://www.codeproject.com/KB/books/">Book Chapters</a></div>
+<div class="MI" id="Section61"><a href="http://www.codeproject.com/KB/book-reviews/">Book Reviews</a></div>
+<div class="MI" id="Section109"><a href="http://www.codeproject.com/KB/hardware-review/">Hardware Reviews</a></div>
+<div class="MI" id="Section63"><a href="http://www.codeproject.com/KB/interviews/">Interviews</a></div>
+<div class="MI" id="Section62"><a href="http://www.codeproject.com/KB/scrapbook/">Scrapbook</a></div>
+<div class="MI" id="Section48"><a href="http://www.codeproject.com/KB/system/">Hardware &amp; System</a></div>
+</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Content/Chapter.aspx?chptId=12" onclick="return ToggleMenu('Chapter12');">Third Party Products</a></div>
+<div class="MenuSectionBlock" id="Chapter12" style="display: none;">
+<div class="MI" id="Section65"><a href="http://www.codeproject.com/KB/showcase/">Product Showcase</a></div>
+<div class="MI" id="Section124"><a href="http://www.codeproject.com/KB/solution-center/">Solution Center</a></div>
+</div>
+</div>
+<br>
+<div class="MenuCat">Services</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/script/Jobs/List.aspx">Job Board</a></div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/Services/coffee.aspx">Code Project Coffee</a></div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/Services/TradePub.aspx">Free Magazines</a></div>
+<br>
+<div class="MenuCat">Feature Zones</div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/Zones/IBM">IBM DeveloperWorks</a></div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/Zones/WhitePapers">WhitePapers</a></div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/Zones/CodeGeneration">Code Generation</a></div>
+<div class="MenuChapter"><a href="http://www.codeproject.com/Zones/QuestSQL">Quest SQL Zone</a></div>
+<br>
+
+
+			<div style="text-align: center; margin-bottom: 10px;">
+				<script type="text/javascript">document.write(unescape("%3ca%20href%3d%22http%3a%2f%2fwww.codeproject.com%2fRedir.aspx%3fadid%3d6247%26way%3dban%22%20target%3d%22_blank%22%20rel%3d%22nofollow%22%3e%3cimg%20src%3d%22http%3a%2f%2fwww.codeproject.com%2fscript%2fAnn%2fServeImg.aspx%3fFile%3d%252fscript%252fadmentor%252fimages%252fcp_daily_150x80.gif%26C%3dFalse%26id%3d6247%22%20alt%3d%22%22%20border%3d%220%22%20width%3d%22150%22%20height%3d%2280%22%3e%3c%2fa%3e"));</script><a href="http://www.codeproject.com/Redir.aspx?adid=6247&amp;way=ban" target="_blank" rel="nofollow"><img src="nishfontcombo.aspx-Dateien/ServeImg.htm" alt="" border="0" width="150" height="80"></a>
+			</div>
+			
+			<script type="text/javascript">document.write(unescape("%3ca%20href%3d%22http%3a%2f%2fwww.codeproject.com%2fRedir.aspx%3fadid%3d6278%26way%3dban%22%20target%3d%22_blank%22%20rel%3d%22nofollow%22%3e%3cimg%20src%3d%22http%3a%2f%2fwww.codeproject.com%2fscript%2fAnn%2fServeImg.aspx%3fFile%3d%252fscript%252fadmentor%252fimages%252fCodeProject20080421_160x600_ReportingApps.gif%26C%3dFalse%26id%3d6278%22%20alt%3d%22%22%20border%3d%220%22%20width%3d%22160%22%20height%3d%22600%22%3e%3c%2fa%3e"));</script><a href="http://www.codeproject.com/Redir.aspx?adid=6278&amp;way=ban" target="_blank" rel="nofollow"><img src="nishfontcombo.aspx-Dateien/ServeImg_002.htm" alt="" border="0" width="160" height="600"></a>						 
+		</td>
+		<td class="ArticlePane" valign="top">
+
+			
+<table class="SearchHeaderBar" cellspacing="0" width="100%">
+<tbody><tr>
+<td style="white-space: nowrap; width: 60%;" align="right" valign="middle">
+<form method="get" action="/info/search.aspx" name="Search" style="margin: 0pt;">
+<b>Search &nbsp;</b>
+<input class="SmallText" name="artkw" style="width: 200px;">
+<select class="SmallText" style="font-weight: bold;" name="sbo">
+<option value="kw">Articles</option>
+<!--<option value="au">Authors</option>-->
+<option value="fm">Messages</option>
+<option value="s">Jobs</option>
+</select>
+<input class="SmallText" style="font-weight: bold;" value=" Go! " type="submit"> &nbsp;
+</form>
+</td>
+
+<td class="TinyText" style="white-space: nowrap;">
+<a href="http://www.codeproject.com/info/search.aspx">Advanced Search</a><br>
+<a href="http://www.codeproject.com/script/Content/SiteMap.aspx">Sitemap</a>
+
+</td>
+</tr>
+</tbody></table>
+
+			<span id="ctl00_ResultMessage"></span>
+			
+			<div id="ctl00_ArtDiv">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">	
+			<tbody><tr valign="top">
+				<td valign="top">
+				    
+<table>
+
+</table>
+
+
+
+					
+<div class="SmallText">
+<img src="nishfontcombo.aspx-Dateien/print.gif" alt="print" style="vertical-align: middle;" width="16" height="16">
+<a id="ctl00_ArticleHeaderLinks_PrintLnk" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?display=Print">Print</a> &nbsp;
+
+<img src="nishfontcombo.aspx-Dateien/report.gif" alt="Broken Article?" style="vertical-align: middle;" width="16" height="16">
+<a id="ctl00_ArticleHeaderLinks_BrokenLnk" href="http://www.codeproject.com/script/Articles/Report.aspx?aid=2699">Report Article</a> &nbsp;
+
+
+
+<img src="nishfontcombo.aspx-Dateien/watchon.png" alt="Watch" style="vertical-align: middle;">
+
+<a href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=2699&amp;obtid=2&amp;bma=AddWatch" name="ajaxBookmarkWatchLink" id="bmw_2699,2" class="" onclick="return watchMe(2699, 2);">Watch</a>
+<span class="TinyText" style="visibility: hidden;"></span>
+<span id="ctl00_ArticleHeaderLinks_ArticleBmkWatch_Message"></span> &nbsp;
+
+<img src="nishfontcombo.aspx-Dateien/link.png" alt="Bookmark" style="vertical-align: middle;" width="16" height="16">
+
+<a href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=2699&amp;obtid=2&amp;bma=AddBookmark" name="ajaxBookmarkLink" id="bm_2699,2" class="" onclick="return bookmarkMe(2699, 2);">Bookmark</a>
+<span class="TinyText" style="visibility: hidden;"></span>
+<span id="ctl00_ArticleHeaderLinks_ArticleBmk_Message"></span>
+ &nbsp;
+
+<img src="nishfontcombo.aspx-Dateien/discuss.gif" alt="Discuss" style="vertical-align: middle;" width="15" height="16">
+<a href="#_comments">Discuss</a> &nbsp;
+
+<img src="nishfontcombo.aspx-Dateien/mail.gif" alt="Recommend Article" style="vertical-align: middle;" width="16" height="16">&nbsp;<a id="ctl00_ArticleHeaderLinks_Recommend" href="http://www.codeproject.com/script/common/TellFriend.aspx?obtid=2&amp;obid=2699">Send&nbsp;to&nbsp;a&nbsp;friend</a>	
+</div>
+				</td>
+				<td style="text-align: right; white-space: nowrap; width: 100px;">
+				<table id="CurRat"><tbody><tr><td>            
+<table><tbody><tr>
+<td style="white-space: nowrap;" class="SmallText" align="right"> 
+<span id="ctl00_ArticleRating_VoteLabel">12 votes for this Article.</span></td>
+<td><table border="1" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td bgcolor="White" width="20" height="7"><img src="nishfontcombo.aspx-Dateien/red.gif" align="center" border="0" width="20" height="7"></td>
+				<td bgcolor="White" width="20" height="7"><img src="nishfontcombo.aspx-Dateien/red.gif" align="center" border="0" width="20" height="7"></td>
+				<td bgcolor="White" width="20" height="7"><img src="nishfontcombo.aspx-Dateien/red.gif" align="center" border="0" width="20" height="7"></td>
+				<td bgcolor="White" width="20" height="7"><img src="nishfontcombo.aspx-Dateien/red.gif" align="center" border="0" width="20" height="7"></td>
+				<td bgcolor="White" width="20" height="7" nowrap="nowrap"><img src="nishfontcombo.aspx-Dateien/red.gif" align="center" border="0" width="6" height="7"></td>
+			</tr>
+		</tbody></table>
+		</td>
+</tr>
+<tr id="ctl00_ArticleRating_PopularityRow">
+			<td colspan="2" class="SmallText" align="right">
+<a id="ctl00_ArticleRating_PopularityLnk" title="Calculated as rating x Log10(# votes)" href="http://www.codeproject.com/script/Articles/TopArticles.aspx?ta_so=1">Popularity: 4.64</a>
+<span id="ctl00_ArticleRating_PopularityLbl"></span><span id="ratingVal">Rating: <b>4.30</b> out of 5</span></td>
+		</tr>
+		
+</tbody></table>
+
+
+
+</td>
+				<td>            
+<div>
+<table class="HistTable" title="Voting Distribution. Recent data only"><tbody><tr><td><img src="nishfontcombo.aspx-Dateien/pollcol.gif" alt="1 vote, 16.7%" title="1 vote, 16.7%" border="0" width="10" height="5"><br>1</td>
+<td><img src="nishfontcombo.aspx-Dateien/t.htm" alt="0 votes, 0.0%" title="0 votes, 0.0%" border="0" width="10" height="1"><br>2</td>
+<td><img src="nishfontcombo.aspx-Dateien/t.htm" alt="0 votes, 0.0%" title="0 votes, 0.0%" border="0" width="10" height="1"><br>3</td>
+<td><img src="nishfontcombo.aspx-Dateien/pollcol.gif" alt="1 vote, 16.7%" title="1 vote, 16.7%" border="0" width="10" height="5"><br>4</td>
+<td><img src="nishfontcombo.aspx-Dateien/pollcol.gif" alt="4 votes, 66.7%" title="4 votes, 66.7%" border="0" width="10" height="20"><br>5</td>
+</tr></tbody></table>
+</div>
+
+
+
+</td></tr></tbody></table>
+				</td>
+			</tr>
+			</tbody></table>
+			
+			
+			
+			
+						
+			
+			
+			
+			
+			
+			
+			
+			
+			<span id="intelliTXT">
+			<div id="contentdiv">
+			
+			<!-- Main Page Contents Start -->
+			
+
+<!-- Article Starts -->
+
+<ul class="download"> 
+<li><a href="http://www.codeproject.com/KB/combobox/nishfontcombo/FontCombo.zip">Download source project - 10 Kb</a></li>
+<li><a href="http://www.codeproject.com/KB/combobox/nishfontcombo/FontComboDemo.zip">Download demo project - 10 Kb</a></li>
+</ul>
+<p><img src="nishfontcombo.aspx-Dateien/scrshot01.jpg" border="0" width="480" height="370"></p>
+<p><img src="nishfontcombo.aspx-Dateien/scrshot02.jpg" border="0" width="480" height="305"></p>
+<h2>Overview</h2>
+<p><code>FontComboBox</code> is a <code>ComboBox</code> derived class that has been 
+wrapped&nbsp; into a .NET 
+control library. It will drop down a list of all the true type fonts installed 
+on your machine. There are two styles for the <code>FontComboBox</code> - one in which every font name is rendered 
+using it's font, and the other where every font name is shown using a default 
+font and then some text is shown using the selected font.</p>
+<h2>Using it in your project</h2>
+<h3>Add the control to your toolbox</h3>
+<p>Right click on your toolbox and choose the Customize Toolbox option. Browse 
+to the <i>FontCombo.dll</i> file and add it to your toolbox.</p>
+<p><img src="nishfontcombo.aspx-Dateien/scrshot03.jpg" border="0" width="400" height="282"></p>
+<h3>Initialize the font combo-boxes</h3>
+<p>There is a public method named <code>Populate</code> which you need to call on each of 
+your <code>FontComboBox</code> objects.</p>
+<pre lang="cs"><span class="code-keyword">public</span> Form1()
+{
+    InitializeComponent();
+    fontComboBox1.Populate(<span class="code-keyword">false</span>); <span class="code-comment">//</span><span class="code-comment">Simple
+</span>
+    fontComboBox2.Populate(<span class="code-keyword">true</span>); <span class="code-comment">//</span><span class="code-comment">Elaborate
+</span>
+}</pre>
+<h3>Retrieving the currently selected font</h3>
+<p>All you need to do is to use the <code>Text</code> property.</p>
+<pre lang="cs"><span class="code-keyword">private</span> <span class="code-keyword">void</span> button1_Click(<span class="code-keyword">object</span> sender, System.EventArgs e)
+{
+    textBox1.Font = <span class="code-keyword">new</span> Font(fontComboBox1.Text,<span class="code-digit">10</span>);
+    textBox2.Font = <span class="code-keyword">new</span> Font(fontComboBox2.Text,<span class="code-digit">10</span>);
+}</pre>
+<h2>Class reference</h2>
+<p>There is just one public method for you to use [other than any public methods 
+or properties available through the base classes]</p>
+<h3>Populate</h3>
+<p><code lang="cs"><span class="code-keyword">public</span> <span class="code-keyword">void</span> Populate(<span class="code-keyword">bool</span> b)</code></p>
+<p>This will populate the combo box with all true type fonts that are installed 
+on your machine. The <code lang="cs"><span class="code-keyword">bool</span></code> parameter determines the style of 
+the combo box. Call <code lang="cs">Populate(<span class="code-keyword">false</span>)</code> for a simple style font 
+combo box and call <code lang="cs">Populate(<span class="code-keyword">true</span>)</code> for an elaborate style 
+font combo box. In simple style each font name is rendered using it's font. In 
+elaborate style, each font name is rendered using a default font, but some 
+sample text is rendered using the specific font.</p>
+<h2>Technical details</h2>
+<p>Basically this is an owner drawn combo box with the <code lang="cs">DrawMode</code> 
+set to <code lang="cs">DrawMode.OwnerDrawVariable</code>. The first thing we need 
+to do would obviously be to enumerate the true type fonts on the machine. This 
+is done as follows [partial code snippet, refer source for complete code]</p>
+<pre lang="cs"><span class="code-keyword">foreach</span> (FontFamily ff <span class="code-keyword">in</span> FontFamily.Families)
+{
+    <span class="code-keyword">if</span>(ff.IsStyleAvailable(FontStyle.Regular))
+        Items.Add(ff.Name);                                             
+}</pre>
+<p>Now we need to override <code lang="cs">OnMeasureItem</code>. This method is 
+called when an owner-drawn combo item needs to be drawn and is called before <code lang="cs">
+OnDrawItem</code>. Here we can specify the width, height etc. We make use of <code lang="cs">
+Graphics.MeasureString</code> to get the text extend of the rendered text in a 
+specific font.</p>
+<pre lang="cs"><span class="code-keyword">protected</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> OnMeasureItem(
+                        MeasureItemEventArgs e)
+{   
+    ...
+
+    Graphics g = CreateGraphics();
+    e.ItemHeight = (<span class="code-keyword">int</span>)g.MeasureString(fontstring, 
+        <span class="code-keyword">new</span> Font(fontstring,<span class="code-digit">10</span>)).Height;
+    w = (<span class="code-keyword">int</span>)g.MeasureString(fontstring, 
+        <span class="code-keyword">new</span> Font(fontstring,<span class="code-digit">10</span>)).Width;
+    <span class="code-keyword">if</span>(both)
+    {
+        <span class="code-keyword">int</span> h1 = (<span class="code-keyword">int</span>)g.MeasureString(samplestr, 
+            <span class="code-keyword">new</span> Font(fontstring,<span class="code-digit">10</span>)).Height;
+        <span class="code-keyword">int</span> h2 = (<span class="code-keyword">int</span>)g.MeasureString(
+            Items[e.Index].ToString(), 
+            <span class="code-keyword">new</span> Font(<span class="code-string">"</span><span class="code-string">Arial"</span>,<span class="code-digit">10</span>)).Height;
+        <span class="code-keyword">int</span> w1 = (<span class="code-keyword">int</span>)g.MeasureString(samplestr, 
+            <span class="code-keyword">new</span> Font(fontstring,<span class="code-digit">10</span>)).Width;
+        <span class="code-keyword">int</span> w2 = (<span class="code-keyword">int</span>)g.MeasureString(
+            Items[e.Index].ToString(), 
+            <span class="code-keyword">new</span> Font(<span class="code-string">"</span><span class="code-string">Arial"</span>,<span class="code-digit">10</span>)).Width;
+
+        ...
+    }
+
+    ...
+}</pre>
+<p>Now obviously we handle <code lang="cs">OnDrawItem</code> where we do our 
+actual drawing stuff.</p>
+<div class="SmallText" id="premain4" style="width: 100%; cursor: pointer;"><img preid="4" src="nishfontcombo.aspx-Dateien/minus.gif" id="preimg4" width="9" height="9"><span preid="4" style="margin-bottom: 0pt;" id="precollapse4"> Collapse</span></div><pre style="margin-top: 0pt;" id="pre4" lang="cs"><span class="code-keyword">protected</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> OnDrawItem(
+                    DrawItemEventArgs e)
+{   
+    ...
+
+    <span class="code-keyword">string</span> fontstring = Items[e.Index].ToString();
+    nfont = <span class="code-keyword">new</span> Font(fontstring,<span class="code-digit">10</span>);
+    Font afont = <span class="code-keyword">new</span> Font(<span class="code-string">"</span><span class="code-string">Arial"</span>,<span class="code-digit">10</span>);
+
+    <span class="code-keyword">if</span>(both)
+    {
+        Graphics g = CreateGraphics();
+        <span class="code-keyword">int</span> w = (<span class="code-keyword">int</span>)g.MeasureString(fontstring, 
+            afont).Width;
+
+        <span class="code-keyword">if</span>((e.State &amp; DrawItemState.Focus)==0)
+        {
+            <span class="code-comment">//</span><span class="code-comment">Normal item
+</span>
+            e.Graphics.FillRectangle(<span class="code-keyword">new</span> SolidBrush(
+                SystemColors.Window),
+                e.Bounds.X+ttimg.Width,e.Bounds.Y,
+                e.Bounds.Width,e.Bounds.Height);
+            e.Graphics.DrawString(fontstring,afont,
+                <span class="code-keyword">new</span> SolidBrush(SystemColors.WindowText),
+                e.Bounds.X+ttimg.Width*2,e.Bounds.Y);   
+            e.Graphics.DrawString(samplestr,nfont,
+                <span class="code-keyword">new</span> SolidBrush(SystemColors.WindowText),
+                e.Bounds.X+w+ttimg.Width*2,e.Bounds.Y); 
+        }
+        <span class="code-keyword">else</span>
+        {
+            <span class="code-comment">//</span><span class="code-comment">Highlighted item
+</span>
+
+            ...
+        }   
+    }
+    <span class="code-keyword">else</span>
+    {
+
+        <span class="code-keyword">if</span>((e.State &amp; DrawItemState.Focus)==0)
+        {
+            <span class="code-comment">//</span><span class="code-comment">Normal item
+</span>
+            e.Graphics.FillRectangle(<span class="code-keyword">new</span> SolidBrush(
+                SystemColors.Window),
+                e.Bounds.X+ttimg.Width,e.Bounds.Y,
+                e.Bounds.Width,e.Bounds.Height);
+            e.Graphics.DrawString(fontstring,nfont,
+                <span class="code-keyword">new</span> SolidBrush(SystemColors.WindowText),
+                e.Bounds.X+ttimg.Width*2,e.Bounds.Y);
+
+        }
+        <span class="code-keyword">else</span>
+        {
+            <span class="code-comment">//</span><span class="code-comment">Highlighted item
+</span>
+
+            ...
+        }           
+
+    }
+
+    ...
+}</pre>
+<h2>Acknowledgments</h2>
+<ul>
+  <li><b>Chris Losinger</b> - I wrote this class partially due to my current 
+  project's requirements and partially because I was inspired by Chris 
+  Losinger's MFC font combo box.</li>
+  <li><b>Senkwe Chanda</b> - Senkwe's excellent beginner article for making 
+  owner drawn combo boxes helped me a great deal.</li>
+  <li><b>Nnamdi Onyeyiri</b> - Nnamdi was with me on Sonork when I wrote this 
+  class and I owe him the tip for using system font colors for highlighting . 
+  Initially I was using a hard coded color.</li>
+</ul>
+<h2>Links</h2>
+<ul>
+  <li><a href="http://www.codeproject.com/cs/miscctrl/ownerdrawncombobox.asp">
+  Implementing an OwnerDrawn ComboBox - Senkwe Chanda</a></li>
+  <li><a href="http://www.codeproject.com/combobox/fontcombo.asp">Font Combo - 
+  Chris Losinger</a></li>
+</ul>
+
+
+
+
+
+<!-- Article Ends -->
+
+
+			<!-- Main Page Contents End -->
+			
+			</div>
+			</span>
+			
+			<form name="aspnetForm" method="post" action="nishfontcombo.aspx" id="aspnetForm" style="margin: 0pt; padding: 0pt;">
+		<div>
+		<input name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEwMDUyNjYzMjhkZAZ7sIr5ADIImVudFmnlWociajIp" type="hidden">
+		</div>
+		
+
+			
+			<h2>License</h2>
+			<div id="ctl00_LicenseTerms"><p>This
+article has no explicit license attached to it but may contain usage
+terms in the article text or the download files themselves. If in doubt
+please contact the author via the discussion board below.</p><p>A list of licenses authors might use can be found <a href="http://www.codeproject.com/info/Licenses.aspx">here</a></p></div>
+			
+			<h2>About the Author</h2>
+			
+					
+            
+<table border="0" cellpadding="0" cellspacing="5" width="100%">
+<tbody><tr valign="top">
+<td id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberPhotoTable" style="width: 155px;" valign="top">
+	<b><a id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberProfileLink" href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=20248">Nishant Sivakumar</a></b><br><br>
+	<center><img id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberPhoto" src="nishfontcombo.aspx-Dateien/4042092F-4729-4864-9714-03D49519AF8A.jpg" style="border-width: 0px;"></center><br>
+	<span id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberType" class="SmallText">Sitebuilder, Mvp</span>
+		
+</td>
+		
+<td> Nish is a real nice guy living in Atlanta, who has been coding
+since 1990, when he was 13 years old. Originally from sunny Trivandrum
+in India, he recently moved to Atlanta from Toronto and is a little sad
+that he won't be able to play in snow anymore.<br><br>Nish
+has been a Microsoft Visual C++ MVP since October, 2002 - awfully nice
+of Microsoft, he thinks. He maintains an MVP tips and tricks web site -
+<a href="http://www.voidnish.com/" target="_blank">www.voidnish.com</a>
+where you can find a consolidated list of his articles, writings and
+ideas on VC++, MFC, .NET and C++/CLI. Oh, and you might want to check
+out his blog on C++/CLI, MFC, .NET and a lot of other stuff - <a href="http://blog.voidnish.com/" target="_blank">blog.voidnish.com</a><br><br>Nish
+loves reading Science Fiction, P G Wodehouse and Agatha Christie, and
+also fancies himself to be a decent writer of sorts. He has authored a
+romantic comedy <a href="http://www.vedamsbooks.com/no23584.htm" target="_blank">Summer Love and Some more Cricket</a> as well as a programming book – <a href="http://www.amazon.com/exec/obidos/ASIN/032117352X/" target="_blank">Extending MFC applications with the .NET Framework</a>.<br><br>Nish's latest book <a target="_blank" href="http://www.manning.com/sivakumar/">C++/CLI in Action</a> published by Manning Publications is now available for purchase. You can read more about the book on his blog. <br><br>Despite
+his wife's attempts to get him into cooking, his best effort so far has
+been a badly done omelette. Some day, he hopes to be a good cook, and
+to cook a tasty dinner for his wife.<br>	
+
+	<table>
+	
+
+	
+
+	<tbody><tr id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_locationRow">
+			<td class="SmallText">Location: </td>
+			<td width="100%"><span id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberLocation" class="SmallText"><img src="nishfontcombo.aspx-Dateien/US.gif" alt="United States" width="16" height="11"> United States</span></td>
+		</tr>
+		
+	</tbody></table>
+	
+</td>
+</tr>
+</tbody></table>
+
+					<br>
+				
+			
+			<table id="ctl00_PopularArticlesRow" border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tbody><tr valign="top">
+				<td style="width: 100%;">
+					<h2>Other popular Combo &amp; List Boxes articles:</h2><ul><li><a href="http://www.codeproject.com/KB/combobox/supergrid.aspx">SuperGrid - Yet Another listview control</a><div class="SmallText">A combination list control and tree control with checkbox capability</div></li><li><a href="http://www.codeproject.com/KB/combobox/listboxexByEricSanchez.aspx">Control Subclassing</a><div class="SmallText">This article explains how to subclass controls so that they act and look the way you desire. It uses a listbox as an example.</div></li><li><a href="http://www.codeproject.com/KB/combobox/advcombobox.aspx">AdvComboBox - Version 2.1</a><div class="SmallText">A Combobox in which the user can resize the drop window. Can be standard style or flat style.</div></li><li><a href="http://www.codeproject.com/KB/combobox/combobox_tut.aspx">Using the CComboBox control</a><div class="SmallText">An entry level tutorial on using the CComboBox control</div></li><li><a href="http://www.codeproject.com/KB/combobox/fontcombo.aspx">Font Combo</a><div class="SmallText">An MFC-based Font selection and preview combo</div></li></ul>
+					<h2></h2>				
+				</td>
+				<td>
+					<script type="text/javascript">document.write(unescape("%3ca%20href%3d%22http%3a%2f%2fwww.codeproject.com%2fRedir.aspx%3fadid%3d6703%26way%3dban%22%20target%3d%22_blank%22%20rel%3d%22nofollow%22%3e%3cimg%20src%3d%22http%3a%2f%2fwww.codeproject.com%2fscript%2fAnn%2fServeImg.aspx%3fFile%3d%252fscript%252fadmentor%252fimages%252fsnowbound_300x250.gif%26C%3dFalse%26id%3d6703%22%20alt%3d%22RasterMaster%20for%20.NET%22%20border%3d%220%22%20width%3d%22300%22%20height%3d%22250%22%3e%3c%2fa%3e"));</script><a href="http://www.codeproject.com/Redir.aspx?adid=6703&amp;way=ban" target="_blank" rel="nofollow"><img src="nishfontcombo.aspx-Dateien/ServeImg_004.htm" alt="RasterMaster for .NET" border="0" width="300" height="250"></a>
+				</td>
+			</tr>
+		</tbody></table>
+		
+		
+			<div id="ctl00_AddTo_AddTo" style="margin: 10px;">
+<script language="JavaScript" type="text/javascript">
+var addtoMethod=1;
+var AddURL = document.location.href;
+var AddTitle = escape(document.title);
+DrawLinks(100, 0, "SmallText Bold", "AddTo") 
+</script><span class="SmallText Bold">Add this article to: </span> <a class="AddTo" title="Add this page to Digg" onclick="return addto(0);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Digg.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Del.icio.us" onclick="return addto(1);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Delicious.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Google" onclick="return addto(2);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Google.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Windows Live" onclick="return addto(3);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Live.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Yahoo! MyWeb" onclick="return addto(4);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Yahoo.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Technorati" onclick="return addto(5);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Technorati.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Blink" onclick="return addto(6);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Blink.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Facebook" onclick="return addto(7);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Facebook.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Furl" onclick="return addto(8);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Furl.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Simpy" onclick="return addto(9);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Simpy.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Reddit" onclick="return addto(10);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Reddit.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Newsvine" onclick="return addto(11);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_Newsvine.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Stumbleupon" onclick="return addto(12);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_stumbleupon.png" align="absmiddle" border="0" width="16" height="16"></a>  <a class="AddTo" title="Add this page to Mr. Wong" onclick="return addto(13);" href="#"><img src="nishfontcombo.aspx-Dateien/AddTo_MrWong.png" align="absmiddle" border="0" width="16" height="16"></a>  
+</div>
+			
+			<table id="ctl00_RateArticleRow" class="RatingBar" border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tbody><tr>
+				<td><a href="#_top">Article Top</a></td>
+				<td align="right">            
+<table cellpadding="0" cellspacing="0" width="100%"><tbody><tr>
+
+	<td id="ctl00_RateArticle_VoteResultDiv" align="right" width="100%" nowrap="nowrap">
+		<span id="voteRes"></span>
+		<img id="loaderImg" alt="loading..." src="nishfontcombo.aspx-Dateien/ajax-loader.gif" style="display: none;" width="16" height="16"> 
+	</td>
+				
+	
+	<td id="voteTbl" style="white-space: nowrap;" class="SmallText" align="right">
+	
+		<table><tbody><tr>
+		
+		<td id="ctl00_RateArticle_RateText" style="padding-right: 5px; white-space: nowrap;"><i><b>Rate this Article for us!</b></i></td>
+				
+		<td id="ctl00_RateArticle_StartForm" align="right"><i>&nbsp;&nbsp;Poor</i></td>
+				
+		<td id="ctl00_RateArticle_VoteFormDiv" style="white-space: nowrap;" align="left">
+		<table id="ctl00_RateArticle_VoteRBL" border="0">
+					<tbody><tr>
+						<td><input id="ctl00_RateArticle_VoteRBL_0" name="ctl00$RateArticle$VoteRBL" value="1" type="radio"></td><td><input id="ctl00_RateArticle_VoteRBL_1" name="ctl00$RateArticle$VoteRBL" value="2" type="radio"></td><td><input id="ctl00_RateArticle_VoteRBL_2" name="ctl00$RateArticle$VoteRBL" value="3" type="radio"></td><td><input id="ctl00_RateArticle_VoteRBL_3" name="ctl00$RateArticle$VoteRBL" value="4" type="radio"></td><td><input id="ctl00_RateArticle_VoteRBL_4" name="ctl00$RateArticle$VoteRBL" value="5" type="radio"></td>
+					</tr>
+				</tbody></table> 
+		</td>
+				
+		<td id="ctl00_RateArticle_EndForm" align="left" nowrap="nowrap"><i>Excellent</i>
+			<input name="ctl00$RateArticle$SubmitRateBtn" value="Vote" onclick="return rateItem(2699,2);" id="ctl00_RateArticle_SubmitRateBtn" class="FormButton" type="submit"> 
+		</td>
+				
+		<td><span id="ctl00_RateArticle_ErrorMessage"></span></td>
+		</tr></tbody></table>
+	</td>
+</tr></tbody></table>
+
+
+
+</td>
+			</tr>
+		</tbody></table>
+		
+			
+		<div>
+
+			<input name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWCALBxPntCwLAlMXDBwLBlMXDBwLClMXDBwLDlMXDBwLElMXDBwLP+++tCwK5upDkC6JCCM6lXTcJTRLVHijklpGFDMlF" type="hidden">
+		</div></form>
+			
+			<div style="padding: 10px; overflow: hidden; text-align: center; white-space: nowrap;">
+				<script type="text/javascript">document.write(unescape("%3ca%20href%3d%22http%3a%2f%2fwww.codeproject.com%2fRedir.aspx%3fadid%3d6702%26way%3dban%22%20target%3d%22_blank%22%20rel%3d%22nofollow%22%3e%3cimg%20src%3d%22http%3a%2f%2fwww.codeproject.com%2fscript%2fAnn%2fServeImg.aspx%3fFile%3d%252fscript%252fadmentor%252fimages%252fsnowbound_468x60.gif%26C%3dFalse%26id%3d6702%22%20alt%3d%22RasterMaster%20for%20.NET%22%20border%3d%220%22%20width%3d%22468%22%20height%3d%2260%22%3e%3c%2fa%3e"));</script><a href="http://www.codeproject.com/Redir.aspx?adid=6702&amp;way=ban" target="_blank" rel="nofollow"><img src="nishfontcombo.aspx-Dateien/ServeImg_005.htm" alt="RasterMaster for .NET" border="0" width="468" height="60"></a>
+				<iframe src="nishfontcombo.aspx-Dateien/ServeLinks.htm" scrolling="no" width="300" frameborder="0" height="60"></iframe>					  
+			</div>
+
+			<a name="_comments"></a><!-- Forum Start -->
+<div id="_MessageBoard" onclick="return SwitchMessage(event, null)">
+	<table id="ForumTable" class="Frm_MainTable" cellpadding="0" cellspacing="0">
+		<tbody><tr>
+			<td><form action="/script/Forums/SetOptions.aspx?floc=%2fKB%2fcombobox%2fnishfontcombo.aspx&amp;fid=4478" method="get" style="margin: 0pt; padding: 0pt;">
+				<input name="fid" value="4478" type="hidden"><input name="currentQS" value="?floc=%2fKB%2fcombobox%2fnishfontcombo.aspx&amp;fid=4478" type="hidden"><input name="floc" value="/KB/combobox/nishfontcombo.aspx" type="hidden"><table border="0" cellpadding="3" cellspacing="0" width="100%">
+					<tbody><tr class="Frm_HeaderRow1">
+						<td style="white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/forum_faq.gif" alt="FAQ" align="middle" border="0" width="16" height="16">&nbsp;<a href="http://www.codeproject.com/script/Forums/FAQ.aspx"><b>FAQ</b></a>&nbsp;</td><td style="white-space: nowrap; text-align: right;">Noise Tolerance<select size="1" class="Frm_DropDown" name="noise">
+							<option value="1">Very High</option><option value="2">High</option><option selected="selected" value="3">Medium</option><option value="4">Low</option><option value="5">Very Low</option>
+						</select></td><td colspan="2" style="white-space: nowrap; text-align: right;"><img src="nishfontcombo.aspx-Dateien/forum_search.gif" alt="Search" align="top" border="0" width="16" height="15">&nbsp;<a href="http://www.codeproject.com/script/Forums/Search.aspx?fid=4478">Search Messages</a>&nbsp;</td><td style="text-align: right;"><input value="Set Options" name="submit" class="Frm_Button" type="submit"></td>
+					</tr><tr class="Frm_HeaderRow2">
+						<td style="width: 100%;">&nbsp;</td><td style="white-space: nowrap; text-align: right;">Layout<select size="1" class="Frm_DropDown" name="view">
+							<option selected="selected" value="Quick">Normal</option><option value="Topic">Expand Root Messages</option><option value="Expanded">Expand All Messages</option><option value="Thread">Thread View</option><option value="Normal">No Javascript (slow)</option><option value="Preview">No Javascript Preview</option>
+						</select>&nbsp;&nbsp;</td><td style="white-space: nowrap;">Per page<select size="1" class="Frm_DropDown" name="mpp">
+							<option value="10">10</option><option selected="selected" value="25">25</option><option value="50">50</option>
+						</select>&nbsp;&nbsp;</td><td colspan="2">&nbsp;</td>
+					</tr>
+				</tbody></table>
+			</form></td>
+		</tr><tr>
+			<td><a name="xx0xx"></a><table border="0" cellpadding="2" cellspacing="0" width="100%">
+				<tbody><tr class="Frm_NavigationBar">
+					<td><img src="nishfontcombo.aspx-Dateien/forum_newmsg.gif" alt="new" align="top" border="0" width="16" height="16"><a href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;floc=/KB/combobox/nishfontcombo.aspx" class="Frm_HL" name="Frm_HoverNL" title="Create a new message thread" target="_top"><b>New Message</b></a></td><td>Msgs 1 to 17 of 17 (Total in Forum: 17) (<a href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478">Refresh</a>)</td><td style="text-align: right; white-space: nowrap;"><span class="Frm_HL">First</span><span class="Frm_HL">Prev</span><span class="Frm_HL">Next</span></td>
+				</tr>
+			</tbody></table></td>
+		</tr><tr>
+			<td><table class="Frm_MsgTable" border="0" cellpadding="0" cellspacing="0" width="100%">
+				
+
+<!-- Column Headers -->
+
+				<tbody><tr class="Frm_ColumnHeaders">
+					<td style="width: 100%;"><table border="0" cellpadding="2" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td>Subject&nbsp;</td><td class="Frm_MsgAuthor">&nbsp;Author&nbsp;</td><td class="Frm_MsgDate">Date&nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr>
+					<td><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="5"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F2265297_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx2265297xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="2265297" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=2265297#xx2265297xx">Set Inital Value</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=4586807">YoonMi</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">9:10 10 Oct '07 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F2265297_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">Hi there,<br>   I would also like to know if you can set the intial value of this to be "Arial" or "Times New Roman".<br><br>I've tried to put <br><br>this.fontComboBox1.SelectedIndex = "Arial"; (but of course it's looking for a number)<br><br>so I've tried<br>this.fontComboBox1.SelectedText = "Arial"; again looking for a number<br><br>No one's font lists are the same so numbers wouldn't work<br><br>Is there a way to set this to a specific font, initally.<br><br>Thanks,<br>YoonMi<br> <br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=2265297&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=2265297&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=2265297" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=2265297" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=2265297&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF2265297" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(4586807,2265297,false,"","","");
+											</script>Rate this message: <a href="#xx2265297xx" onclick="RateMsg(4586807, 2265297,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx2265297xx" title="vote this message a 1" onclick="RateMsg(4586807, 2265297, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx2265297xx" title="vote this message a 2" onclick="RateMsg(4586807, 2265297, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx2265297xx" title="vote this message a 3" onclick="RateMsg(4586807, 2265297, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx2265297xx" title="vote this message a 4" onclick="RateMsg(4586807, 2265297, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx2265297xx" title="vote this message a 5" onclick="RateMsg(4586807, 2265297, 5,0)"><b>5</b></a> <a href="#xx2265297xx" onclick="RateMsg(4586807, 2265297,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx2265297xx" title="Report as Abuse" onclick="return ReportMsg(4586807
+, 2265297,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F2263946_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx2263946xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="2263946" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=2263946#xx2263946xx">Placing this FontComboBox in a ToolStrip</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=4586807">YoonMi</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">16:58 9 Oct '07 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F2263946_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">Is there any way to place this FontComboBox in a ToolStrip or ToolStripContainer?<br><br>I'm using Visual C# Express 2005, but I also have Visual C# Express 2008 loaded on my computer!<br><br>Awesome work by the way, just would like it to be placed in a ToolStrip if it's possible.<br><br>Thanks,<br>YoonMi <br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=2263946&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=2263946&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=2263946" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=2263946" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=2263946&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF2263946" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(4586807,2263946,false,"","","");
+											</script>Rate this message: <a href="#xx2263946xx" onclick="RateMsg(4586807, 2263946,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx2263946xx" title="vote this message a 1" onclick="RateMsg(4586807, 2263946, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx2263946xx" title="vote this message a 2" onclick="RateMsg(4586807, 2263946, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx2263946xx" title="vote this message a 3" onclick="RateMsg(4586807, 2263946, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx2263946xx" title="vote this message a 4" onclick="RateMsg(4586807, 2263946, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx2263946xx" title="vote this message a 5" onclick="RateMsg(4586807, 2263946, 5,0)"><b>5</b></a> <a href="#xx2263946xx" onclick="RateMsg(4586807, 2263946,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx2263946xx" title="Report as Abuse" onclick="return ReportMsg(4586807
+, 2263946,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F1418344_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx1418344xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="1418344" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=1418344#xx1418344xx">ported to vb</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=929343">halsoft</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">20:22 22 Mar '06 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F1418344_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">i have ported the modified (see below: "couple of changes") code to vb. i find it still messy, but it does the trick.<br>for vb you have to wrap it though to make it available in the form designer.<br><br><a href="http://www.codeproject.com/useritems/vbFontComboControl.asp" rel="nofollow">http://www.codeproject.com/useritems/vbFontComboControl.asp</a>[<a href="http://www.codeproject.com/useritems/vbFontComboControl.asp" target="_blank" rel="nofollow" title="New Window">^</a>]<br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=1418344&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=1418344&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=1418344" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=1418344" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=1418344&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF1418344" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(929343,1418344,false,"","","");
+											</script>Rate this message: <a href="#xx1418344xx" onclick="RateMsg(929343, 1418344,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx1418344xx" title="vote this message a 1" onclick="RateMsg(929343, 1418344, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx1418344xx" title="vote this message a 2" onclick="RateMsg(929343, 1418344, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx1418344xx" title="vote this message a 3" onclick="RateMsg(929343, 1418344, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx1418344xx" title="vote this message a 4" onclick="RateMsg(929343, 1418344, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx1418344xx" title="vote this message a 5" onclick="RateMsg(929343, 1418344, 5,0)"><b>5</b></a> <a href="#xx1418344xx" onclick="RateMsg(929343, 1418344,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx1418344xx" title="Report as Abuse" onclick="return ReportMsg(929343
+, 1418344,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F1336391_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx1336391xx"></a><img src="nishfontcombo.aspx-Dateien/msg_question.gif" alt="Question" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="1336391" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=1336391#xx1336391xx">Font Weight property for the text box control</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=1238709">Baber Saeed</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">1:36 16 Jan '06 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F1336391_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">Hi<br><br>Man
+I want to make certain portion of the text appearing in text box
+control as Bold and other as Normal. Can we do this? Any idea? <br><br>Winners Never Quit And Quitters Never Win<br><br> -- modified at 4:36 Monday 16th January, 2006<br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=1336391&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=1336391&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=1336391" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=1336391" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=1336391&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF1336391" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(1238709,1336391,false,"","","");
+											</script>Rate this message: <a href="#xx1336391xx" onclick="RateMsg(1238709, 1336391,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx1336391xx" title="vote this message a 1" onclick="RateMsg(1238709, 1336391, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx1336391xx" title="vote this message a 2" onclick="RateMsg(1238709, 1336391, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx1336391xx" title="vote this message a 3" onclick="RateMsg(1238709, 1336391, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx1336391xx" title="vote this message a 4" onclick="RateMsg(1238709, 1336391, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx1336391xx" title="vote this message a 5" onclick="RateMsg(1238709, 1336391, 5,0)"><b>5</b></a> <a href="#xx1336391xx" onclick="RateMsg(1238709, 1336391,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx1336391xx" title="Report as Abuse" onclick="return ReportMsg(1238709
+, 1336391,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F996180_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx996180xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="996180" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=996180#xx996180xx">AutoScale</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=1287444">mmcguirk1</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">9:24 15 Dec '04 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F996180_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">Since a ComboBox AutoScales (ie, if you change the font size, the size of the control changes ),<br>you would probably want to make a change to your DrawItem method, and the MeasureItem method.<br>Instead of creating the default fon as a 10pt Arial, why not incorporate the Font property already<br>included in the ComboBox.<br><br>Try this:<br>    <br>    Font font = new Font( this.Items[ e.Index ], this.Font.Size );<br><br> <br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=996180&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=996180&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=996180" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=996180" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=996180&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF996180" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(1287444,996180,false,"","","");
+											</script>Rate this message: <a href="#xx996180xx" onclick="RateMsg(1287444, 996180,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx996180xx" title="vote this message a 1" onclick="RateMsg(1287444, 996180, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx996180xx" title="vote this message a 2" onclick="RateMsg(1287444, 996180, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx996180xx" title="vote this message a 3" onclick="RateMsg(1287444, 996180, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx996180xx" title="vote this message a 4" onclick="RateMsg(1287444, 996180, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx996180xx" title="vote this message a 5" onclick="RateMsg(1287444, 996180, 5,0)"><b>5</b></a> <a href="#xx996180xx" onclick="RateMsg(1287444, 996180,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx996180xx" title="Report as Abuse" onclick="return ReportMsg(1287444
+, 996180,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F948122_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx948122xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="948122" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=948122#xx948122xx">Couple of changes</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=477645">Lorad</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">12:38 14 Oct '04 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F948122_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">I made changes to that calls to measure string are only made if the sring really needs to be created. <br>Make a member for the arial font used to display the name + example. <br>Made the size of the fonts use a constant.<br>Made the sample text constant.<br>Made it so that the both had a meaningful name to me since I could not tell without looking at the code.<br>Made it so it only created the font a single time as opposed to all the calls to create temporary fonts in the calls.<br>Changed the spacing for the sample after the font name to be next to the font. It was using X+Width*2 changed it to X*2+Width.<br><br>Oh I also removed the bitmap since in my usage it was just more noise that I did not really want.<br><br>Thanks for the example, it did pretty much everything I needed.<br><br><code><br>using System;<br>using System.Collections;<br>using System.ComponentModel;<br>using System.Drawing;<br>using System.Data;<br>using System.Windows.Forms;<br><br>namespace FontCombo<br>{&nbsp;&nbsp;<br>&nbsp;&nbsp;public class FontComboBox : ComboBox<br>&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;&nbsp;&nbsp;&nbsp;_maxWidth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;bool&nbsp;&nbsp;_displayNameNormalFont&nbsp;&nbsp;= true;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;const string SAMPLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= " - Hello World";<br>&nbsp;&nbsp;&nbsp;&nbsp;const int DEFAULT_SIZE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 10;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Font _arial&nbsp;&nbsp;&nbsp;&nbsp;= new Font("Arial", DEFAULT_SIZE);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;public FontComboBox()<br>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MaxDropDownItems = 20;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IntegralHeight = false;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sorted = false;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DropDownStyle = ComboBoxStyle.DropDownList;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DrawMode
+=
+DrawMode.OwnerDrawVariable;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;public void Populate(bool displayNameNormalFont)<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_displayNameNormalFont = displayNameNormalFont;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach (FontFamily ff in FontFamily.Families)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(ff.IsStyleAvailable(FontStyle.Regular))<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Items.Add(ff.Name);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(Items.Count &gt; 0)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SelectedIndex=0;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;protected override void OnMeasureItem(System.Windows.Forms.MeasureItemEventArgs e)<br>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(e.Index &gt; -1)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int w = 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string
+fontName&nbsp;&nbsp;=
+Items[e.Index].ToString();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Font tmpFont&nbsp;&nbsp;= new Font(fontName, DEFAULT_SIZE);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Graphics g&nbsp;&nbsp;&nbsp;&nbsp;= CreateGraphics();<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if( _displayNameNormalFont )<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SizeF
+fontSize&nbsp;&nbsp;&nbsp;&nbsp;= g.MeasureString(SAMPLE, tmpFont);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SizeF captionSize&nbsp;&nbsp;= g.MeasureString(fontName, _arial);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.ItemHeight = (int)Math.Max(fontSize.Height, captionSize.Width);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w = (int)(fontSize.Width + captionSize.Width);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SizeF
+s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= g.MeasureString(fontName,
+tmpFont);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.ItemHeight&nbsp;&nbsp;= (int)s.Height;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w = (int)s.Width;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_maxWidth = Math.Max(_maxWidth, w);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.ItemHeight = Math.Min(e.ItemHeight, 20);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base.OnMeasureItem(e);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;protected override void OnDrawItem(System.Windows.Forms.DrawItemEventArgs e)<br>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(e.Index &gt; -1)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string
+fontName&nbsp;&nbsp;=
+Items[e.Index].ToString();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Font tmpFont&nbsp;&nbsp;= new Font(fontName, DEFAULT_SIZE);<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(_displayNameNormalFont)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Graphics g = CreateGraphics();<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int w = (int)g.MeasureString(fontName, _arial).Width;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((e.State &amp; DrawItemState.Focus)==0)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.Graphics.FillRectangle(new
+SolidBrush(SystemColors.Window), e.Bounds);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.Graphics.DrawString(fontName,
+_arial, new SolidBrush(SystemColors.WindowText), e.Bounds.X*2,
+e.Bounds.Y);&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.Graphics.DrawString(SAMPLE,tmpFont,new
+SolidBrush(SystemColors.WindowText), e.Bounds.X*2+w,
+e.Bounds.Y);&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.Graphics.FillRectangle(new
+SolidBrush(SystemColors.Highlight), e.Bounds);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.Graphics.DrawString(fontName,
+_arial, new SolidBrush(SystemColors.HighlightText), e.Bounds.X*2,
+e.Bounds.Y);&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.Graphics.DrawString(SAMPLE,
+tmpFont,new SolidBrush(SystemColors.HighlightText), e.Bounds.X*2+w,
+e.Bounds.Y);&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((e.State &amp; DrawItemState.Focus)==0)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.Graphics.FillRectangle(new
+SolidBrush(SystemColors.Window), e.Bounds);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.Graphics.DrawString(fontName,tmpFont,new
+SolidBrush(SystemColors.WindowText), e.Bounds.X*2, e.Bounds.Y);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.Graphics.FillRectangle(new
+SolidBrush(SystemColors.Highlight), e.Bounds);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.Graphics.DrawString(fontName,tmpFont,new
+SolidBrush(SystemColors.HighlightText), e.Bounds.X*2, e.Bounds.Y);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base.OnDrawItem(e);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;protected override void OnDropDown(System.EventArgs e)<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.DropDownWidth = _maxWidth+30;<br>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;}<br>}<br></code><br> <br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=948122&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=948122&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=948122" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=948122" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=948122&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF948122" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(477645,948122,false,"","","");
+											</script>Rate this message: <a href="#xx948122xx" onclick="RateMsg(477645, 948122,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx948122xx" title="vote this message a 1" onclick="RateMsg(477645, 948122, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx948122xx" title="vote this message a 2" onclick="RateMsg(477645, 948122, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx948122xx" title="vote this message a 3" onclick="RateMsg(477645, 948122, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx948122xx" title="vote this message a 4" onclick="RateMsg(477645, 948122, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx948122xx" title="vote this message a 5" onclick="RateMsg(477645, 948122, 5,0)"><b>5</b></a> <a href="#xx948122xx" onclick="RateMsg(477645, 948122,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx948122xx" title="Report as Abuse" onclick="return ReportMsg(477645
+, 948122,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F609971_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx609971xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="609971" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=609971#xx609971xx">A problem of OwnerDraw ComboBox</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=151513">sarmoo</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">23:30 14 Sep '03 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F609971_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">There is a problem in my owner draw combo. I download yours and found the same problem. It is:<br>Scroll down your combo by the mouse wheel(ofcourse after drop down), you will find the items in it looked scroll incorrect.<br> <br>I trace it found that the message about the index seemed not suitable.<br>Is it a bug of the ComboBox?<br>Do you have some opinion on this?<br><br>And thanks very much for the article. <br><br>Echo<br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=609971&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=609971&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=609971" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=609971" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=609971&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF609971" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(151513,609971,false,"","","");
+											</script>Rate this message: <a href="#xx609971xx" onclick="RateMsg(151513, 609971,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx609971xx" title="vote this message a 1" onclick="RateMsg(151513, 609971, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx609971xx" title="vote this message a 2" onclick="RateMsg(151513, 609971, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx609971xx" title="vote this message a 3" onclick="RateMsg(151513, 609971, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx609971xx" title="vote this message a 4" onclick="RateMsg(151513, 609971, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx609971xx" title="vote this message a 5" onclick="RateMsg(151513, 609971, 5,0)"><b>5</b></a> <a href="#xx609971xx" onclick="RateMsg(151513, 609971,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx609971xx" title="Report as Abuse" onclick="return ReportMsg(151513
+, 609971,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd HdUnSel" id="F970606_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="34"><a name="xx970606xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="970606" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=970606#xx970606xx">Re: A problem of OwnerDraw ComboBox</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=991308">James Miles / 208109743</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">0:11 11 Nov '04 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F970606_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 34px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">I am having the same problem. <img src="nishfontcombo.aspx-Dateien/smiley_cry.gif" title="Cry" align="top"> <br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=970606&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=970606&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=609971" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=970606" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=970606&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF970606" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(991308,970606,false,"","","");
+											</script>Rate this message: <a href="#xx970606xx" onclick="RateMsg(991308, 970606,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx970606xx" title="vote this message a 1" onclick="RateMsg(991308, 970606, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx970606xx" title="vote this message a 2" onclick="RateMsg(991308, 970606, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx970606xx" title="vote this message a 3" onclick="RateMsg(991308, 970606, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx970606xx" title="vote this message a 4" onclick="RateMsg(991308, 970606, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx970606xx" title="vote this message a 5" onclick="RateMsg(991308, 970606, 5,0)"><b>5</b></a> <a href="#xx970606xx" onclick="RateMsg(991308, 970606,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx970606xx" title="Report as Abuse" onclick="return ReportMsg(991308
+, 970606,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F609578_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx609578xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="609578" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=609578#xx609578xx">Layout Mod, editable ComboBox &amp; MS look (yet no history)</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=119992">mistery22</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">8:09 14 Sep '03 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F609578_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">Hi,<br><br>I found this artical amazing<img src="nishfontcombo.aspx-Dateien/smiley_tongue.gif" title="Poke tongue" align="top">
+But I missed the posibility of typing a part of a fontname and go
+directly to it. So I made some modifications. What I still plan to do
+with this control (when I have some more time) is add a history in the
+beginning of the list. Like Word it will first repeat the 5 recently
+used and draw a double line under it.<br><br>1. Change the DropDownStyle to DropDown instead of DropDownList. This made allows owner drawed items with editable ComboBox.<br><code><br>public FontComboBox()<br>{				<br>	MaxDropDownItems = 20;<br>	IntegralHeight = false;<br>	Sorted = false;<br>	//DropDown leaves the comboBox editable<br>	DropDownStyle = ComboBoxStyle.DropDown;<br>	DrawMode = DrawMode.OwnerDrawVariable;<br><br>}<br></code><br><br>2.
+The above change gives a problem with the original code to draw the
+Highlight Items. The Combobox doesn't fire a Focus event anymore. So
+whe have to change the code with 2 separated if blocks.<br><br><code><br>protected override void OnDrawItem(System.Windows.Forms.DrawItemEventArgs e)<br>{	<br>	if(e.Index &gt; -1)<br>	{<br>		string fontstring = Items[e.Index].ToString();<br>		nfont = new Font(fontstring,10);<br>		Font afont = new Font("Arial",10);<br>		<br>		if(both)<br>		{<br>			Graphics g = CreateGraphics();<br>			int w = (int)g.MeasureString(fontstring, afont).Width;<br><br>			if((e.State &amp; DrawItemState.Focus)==0)<br>			{<br>				e.Graphics.FillRectangle(new SolidBrush(SystemColors.Window),<br>				e.Bounds.X+ttimg.Width,e.Bounds.Y,e.Bounds.Width,e.Bounds.Height);<br>				e.Graphics.DrawString(fontstring,afont,new SolidBrush(SystemColors.WindowText),<br>				e.Bounds.X+ttimg.Width*2-10,e.Bounds.Y);	//Remove 10<br>				e.Graphics.DrawString(samplestr,nfont,new SolidBrush(SystemColors.WindowText),<br>				e.Bounds.X+w+ttimg.Width*2-20,e.Bounds.Y);	//Remove 20<br>			}<br>			//Use separated if to draw the Highlight on an Item in DropDown Mode<br>			if(e.State == DrawItemState.Selected) //else<br>			{<br>				e.Graphics.FillRectangle(new SolidBrush(SystemColors.Highlight),<br>			      e.Bounds.X+ttimg.Width+2,e.Bounds.Y,e.Bounds.Width,e.Bounds.Height);<br>				e.Graphics.DrawString(fontstring,afont,new SolidBrush(SystemColors.HighlightText),<br>				e.Bounds.X+ttimg.Width*2-10,e.Bounds.Y);   //Remove 10<br>				e.Graphics.DrawString(samplestr,nfont,new SolidBrush(SystemColors.HighlightText),<br>				e.Bounds.X+w+ttimg.Width*2-20,e.Bounds.Y); //Remove 20<br>			}	<br>		}<br>		else<br>		{<br>			if((e.State &amp; DrawItemState.Focus)==0)<br>			{<br>
+e.Graphics.FillRectangle(new SolidBrush(SystemColors.Window),
+e.Bounds.X+ttimg.Width,e.Bounds.Y,e.Bounds.Width,e.Bounds.Height);<br>				e.Graphics.DrawString(fontstring,nfont,new SolidBrush(SystemColors.WindowText),<br>				e.Bounds.X+ttimg.Width*2-10,e.Bounds.Y); //Remove 10<br>		        }<br>                        //Use separated if to draw the Highlight on an Item in DropDown Mode<br>			if(e.State == DrawItemState.Selected) //else<br>			{<br>				e.Graphics.FillRectangle(new SolidBrush(SystemColors.Highlight),<br>				e.Bounds.X+ttimg.Width,e.Bounds.Y,e.Bounds.Width,e.Bounds.Height);<br>				e.Graphics.DrawString(fontstring,nfont,new SolidBrush(SystemColors.HighlightText),<br>				e.Bounds.X+ttimg.Width*2-10,e.Bounds.Y); //Remove 10<br>			}			<br>		}<br><br>		e.Graphics.DrawImage(ttimg, new Point(e.Bounds.X, e.Bounds.Y)); <br>	}<br>	base.OnDrawItem(e);<br>}<br></code><br><br>3.
+Fianally the DropDownBox becomes somtimes to large. When we see how the
+FontCombo of Word handles the, we see it cuts the rightpart of the
+preview. Then we can change to next code.<br><br><code><br>protected override void OnDropDown(System.EventArgs e)<br>{<br>	this.DropDownWidth = maxwid+30;<br>	if(this.DropDownWidth &gt; 270) //Very close the the MS dimension<br>	{<br>		this.DropDownWidth = 270;<br>	}<br>}<br></code><br><br><br>Just to demonstrate how powerfull C# is and how you can mod this code <img src="nishfontcombo.aspx-Dateien/smiley_biggrin.gif" title="Big Grin" align="top">.<br><br>Greetz<br><br>Xavier <br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=609578&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=609578&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=609578" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=609578" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=609578&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF609578" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(119992,609578,false,"","","");
+											</script>Rate this message: <a href="#xx609578xx" onclick="RateMsg(119992, 609578,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx609578xx" title="vote this message a 1" onclick="RateMsg(119992, 609578, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx609578xx" title="vote this message a 2" onclick="RateMsg(119992, 609578, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx609578xx" title="vote this message a 3" onclick="RateMsg(119992, 609578, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx609578xx" title="vote this message a 4" onclick="RateMsg(119992, 609578, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx609578xx" title="vote this message a 5" onclick="RateMsg(119992, 609578, 5,0)"><b>5</b></a> <a href="#xx609578xx" onclick="RateMsg(119992, 609578,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx609578xx" title="Report as Abuse" onclick="return ReportMsg(119992
+, 609578,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F524574_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx524574xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="524574" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=524574#xx524574xx">Any Chance....</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/usersuss.gif" alt="suss" width="14" height="15"></td><td class="Frm_MsgAuthor">Anonymous</td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">12:28 14 Jun '03 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F524574_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">Can you point me to a good VB source on something like this?...<br><br>Thanks... <br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=524574&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=524574&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=524574" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=524574" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=524574&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=524574&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=m">Edit</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=524574&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=d">Delete</a><br><span id="MVF524574" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(0,524574,false,"","","");
+											</script>Rate this message: <a href="#xx524574xx" onclick="RateMsg(0, 524574,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx524574xx" title="vote this message a 1" onclick="RateMsg(0, 524574, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx524574xx" title="vote this message a 2" onclick="RateMsg(0, 524574, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx524574xx" title="vote this message a 3" onclick="RateMsg(0, 524574, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx524574xx" title="vote this message a 4" onclick="RateMsg(0, 524574, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx524574xx" title="vote this message a 5" onclick="RateMsg(0, 524574, 5,0)"><b>5</b></a> <a href="#xx524574xx" onclick="RateMsg(0, 524574,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx524574xx" title="Report as Abuse" onclick="return ReportMsg(0
+, 524574,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F250946_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx250946xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="250946" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=250946#xx250946xx">Lekker</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/sitebuilder_sm.gif" title="sitebuilder" alt="sitebuilder" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=14040">Paul Watson</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">1:25 5 Aug '02 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F250946_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">... soes a fire krekker Nish. <img src="nishfontcombo.aspx-Dateien/smiley_wink.gif" title="Wink" align="top"> (bit of local SA flavour there.)<br><br>Definitley
+love the way you show both what the font looks like and it's name in a
+default, readable font. Word should do that without a doubt <img src="nishfontcombo.aspx-Dateien/smiley_smile.gif" title="Smile" align="top"><br><br>Also a good display of taking Senkwes article and expanding upon it, showing what can be down with ownerdrawn methods. <br><br>regards,<br>Paul Watson<br><a href="http://www.bluegrassgroup.com/">Bluegrass</a><br>Cape Town, South Africa<br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250946&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250946&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=250946" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=250946" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=250946&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF250946" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(14040,250946,false,"","","");
+											</script>Rate this message: <a href="#xx250946xx" onclick="RateMsg(14040, 250946,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx250946xx" title="vote this message a 1" onclick="RateMsg(14040, 250946, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx250946xx" title="vote this message a 2" onclick="RateMsg(14040, 250946, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx250946xx" title="vote this message a 3" onclick="RateMsg(14040, 250946, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx250946xx" title="vote this message a 4" onclick="RateMsg(14040, 250946, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx250946xx" title="vote this message a 5" onclick="RateMsg(14040, 250946, 5,0)"><b>5</b></a> <a href="#xx250946xx" onclick="RateMsg(14040, 250946,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx250946xx" title="Report as Abuse" onclick="return ReportMsg(14040
+, 250946,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F250917_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx250917xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="250917" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=250917#xx250917xx">Nice work !</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=26227"><u>Soliant</u></a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">0:13 5 Aug '02 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F250917_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">I
+could never understand why it tooks so long for applications like Adobe
+Photoshop and MS Word to add this functionality, and now you added it
+for VS.NET, great work here, very useful tool. <br><br><br><br><hr color="#80bfff" width="100%" noshade="noshade"><br><p style="border: 2px solid rgb(128, 191, 255); margin: 0px; padding: 2px; background: rgb(192, 203, 238) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 8pt; text-align: left; width: 457px;"><a style="color: white;" href="http://www.codeproject.com/script/profile/whos_who.asp?id=26227">Soliant</a>&nbsp;|&nbsp;<a href="mailto:soliant@yahoo.com">email</a><br>&nbsp;<br>"The whole of science is nothing more than a refinement of everyday thinking." -Albert E.<br></p></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250917&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250917&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=250917" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=250917" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=250917&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF250917" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(26227,250917,false,"","","");
+											</script>Rate this message: <a href="#xx250917xx" onclick="RateMsg(26227, 250917,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx250917xx" title="vote this message a 1" onclick="RateMsg(26227, 250917, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx250917xx" title="vote this message a 2" onclick="RateMsg(26227, 250917, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx250917xx" title="vote this message a 3" onclick="RateMsg(26227, 250917, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx250917xx" title="vote this message a 4" onclick="RateMsg(26227, 250917, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx250917xx" title="vote this message a 5" onclick="RateMsg(26227, 250917, 5,0)"><b>5</b></a> <a href="#xx250917xx" onclick="RateMsg(26227, 250917,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx250917xx" title="Report as Abuse" onclick="return ReportMsg(26227
+, 250917,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd HdUnSel" id="F250922_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="34"><a name="xx250922xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="250922" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=250922#xx250922xx">Re: Nice work !</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/editor_sm.gif" title="editor" alt="editor" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=20248">Nishant S</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">0:22 5 Aug '02 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F250922_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 34px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2"><small><b>Soliant wrote:</b></small><br><i>great work here, very useful tool</i><br><br>Thank you <img src="nishfontcombo.aspx-Dateien/smiley_smile.gif" title="Smile" align="top"><br><br>Nish <br><br><hr><font color="gray"><b><i>Author of the romantic comedy</i></b><br><a href="http://www.vedamsbooks.com/no23584.htm" target="_blank"><br>Summer Love and Some more Cricket [New Win]<br></a></font><br><b><font color="green">Review by <font color="blue">Shog<font color="green"><sup>9</sup></font></font></font></b><font color="green"><font color="blue"></font><br><a href="http://webpages.charter.net/shog9/review.html" target="_blank">Click here for review[NW]</a><br></font><br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250922&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250922&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=250917" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=250922" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=250922&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF250922" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(20248,250922,false,"","","");
+											</script>Rate this message: <a href="#xx250922xx" onclick="RateMsg(20248, 250922,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx250922xx" title="vote this message a 1" onclick="RateMsg(20248, 250922, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx250922xx" title="vote this message a 2" onclick="RateMsg(20248, 250922, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx250922xx" title="vote this message a 3" onclick="RateMsg(20248, 250922, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx250922xx" title="vote this message a 4" onclick="RateMsg(20248, 250922, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx250922xx" title="vote this message a 5" onclick="RateMsg(20248, 250922, 5,0)"><b>5</b></a> <a href="#xx250922xx" onclick="RateMsg(20248, 250922,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx250922xx" title="Report as Abuse" onclick="return ReportMsg(20248
+, 250922,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd Rt HdUnSel" id="F250916_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx250916xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="250916" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=250916#xx250916xx">I don't have the component FontCombo</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/usersuss.gif" alt="suss" width="14" height="15"></td><td class="Frm_MsgAuthor">Xavier LELIEVRE</td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">0:13 5 Aug '02 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F250916_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">Hello<br><br>I don't have the component FontCombo<br>My french versions : <br>Microsoft .Net Framework 1.0 Version 1.0.3705<br>Microsoft Development Environment 2002 version 7.0.9500<br>What version do you use ?<br>Thank's<br>Xavier<br> <br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250916&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250916&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=250916" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=250916" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=250916&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250916&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=m">Edit</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250916&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=d">Delete</a><br><span id="MVF250916" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(0,250916,false,"","","");
+											</script>Rate this message: <a href="#xx250916xx" onclick="RateMsg(0, 250916,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx250916xx" title="vote this message a 1" onclick="RateMsg(0, 250916, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx250916xx" title="vote this message a 2" onclick="RateMsg(0, 250916, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx250916xx" title="vote this message a 3" onclick="RateMsg(0, 250916, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx250916xx" title="vote this message a 4" onclick="RateMsg(0, 250916, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx250916xx" title="vote this message a 5" onclick="RateMsg(0, 250916, 5,0)"><b>5</b></a> <a href="#xx250916xx" onclick="RateMsg(0, 250916,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx250916xx" title="Report as Abuse" onclick="return ReportMsg(0
+, 250916,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd HdUnSel" id="F250925_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="34"><a name="xx250925xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="250925" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=250925#xx250925xx">Re: I don't have the component FontCombo</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/editor_sm.gif" title="editor" alt="editor" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=20248">Nishant S</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">0:29 5 Aug '02 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F250925_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 34px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2"><small><b>Xavier LELIEVRE wrote:</b></small><br><i><br>I don't have the component FontCombo</i><br><br>Hello Xavier<br><br>FontComboBox
+is the component that this article talks about. It's not part of the
+BCL. Both the zips in this article contain a file called <i>FontCombo.dll</i>.
+You need to add a reference to this dll in your project. Or you must
+use the toolbox customization method described in the article. You need
+to browse to the actual path of the dll.<br><br>Regards,<br>Nish <br><br><hr><font color="gray"><b><i>Author of the romantic comedy</i></b><br><a href="http://www.vedamsbooks.com/no23584.htm" target="_blank"><br>Summer Love and Some more Cricket [New Win]<br></a></font><br><b><font color="green">Review by <font color="blue">Shog<font color="green"><sup>9</sup></font></font></font></b><font color="green"><font color="blue"></font><br><a href="http://webpages.charter.net/shog9/review.html" target="_blank">Click here for review[NW]</a><br></font><br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250925&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250925&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=250916" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=250925" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=250925&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF250925" style="white-space: nowrap;"><script type="text/javascript">
+												MsgVFrm(20248,250925,false,"","","");
+											</script>Rate this message: <a href="#xx250925xx" onclick="RateMsg(20248, 250925,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx250925xx" title="vote this message a 1" onclick="RateMsg(20248, 250925, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx250925xx" title="vote this message a 2" onclick="RateMsg(20248, 250925, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx250925xx" title="vote this message a 3" onclick="RateMsg(20248, 250925, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx250925xx" title="vote this message a 4" onclick="RateMsg(20248, 250925, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx250925xx" title="vote this message a 5" onclick="RateMsg(20248, 250925, 5,0)"><b>5</b></a> <a href="#xx250925xx" onclick="RateMsg(20248, 250925,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx250925xx" title="Report as Abuse" onclick="return ReportMsg(20248
+, 250925,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgRtDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd LoVote Rt HdUnSel" id="F250882_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="16"><a name="xx250882xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="250882" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=250882#xx250882xx">Whoo hoo! another font combo :-)</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/member_sm.gif" title="member" alt="member" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=20101">Shog<font color="green"><sup>9</sup></font></a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">22:52 4 Aug '02 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F250882_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 16px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2">if i ever get into C#, this'll be there waiting for me.  makes me feel all warm &amp; happy <img src="nishfontcombo.aspx-Dateien/smiley_biggrin.gif" title="Big Grin" align="top"> <br><br><div style="border-bottom: 1px solid green; color: rgb(213, 234, 255); background-color: rgb(213, 234, 255);">---</div><br><div style="margin: -2.2em 2px -2em;" align="center"><font style="background-color: rgb(213, 234, 255);" color="blue"><b>Shog</b><font color="green"><sup>9</sup></font></font><br><font face="Palatino Linotype"><i>If I could sleep forever, I could forget about everything...</i></font></div><br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250882&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250882&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=250882" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=250882" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=250882&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF250882" style="white-space: nowrap;">2.00/5 (1 vote) <script type="text/javascript">
+												MsgVFrm(20101,250882,false,"","","");
+											</script>Rate this message: <a href="#xx250882xx" onclick="RateMsg(20101, 250882,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx250882xx" title="vote this message a 1" onclick="RateMsg(20101, 250882, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx250882xx" title="vote this message a 2" onclick="RateMsg(20101, 250882, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx250882xx" title="vote this message a 3" onclick="RateMsg(20101, 250882, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx250882xx" title="vote this message a 4" onclick="RateMsg(20101, 250882, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx250882xx" title="vote this message a 5" onclick="RateMsg(20101, 250882, 5,0)"><b>5</b></a> <a href="#xx250882xx" onclick="RateMsg(20101, 250882,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx250882xx" title="Report as Abuse" onclick="return ReportMsg(20101
+, 250882,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr class="Quick">
+					<td class="Frm_MsgDivide"><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="1"></td>
+				</tr>
+<!-- Start Message head -->
+
+				<tr class="MsgHd HdUnSel" id="F250923_h0">
+					<td width="100%"><table class="QuickHd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" width="34"><a name="xx250923xx"></a><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"></td><td class="Frm_MsgSubject"><a id="DynMessLink" name="250923" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;select=250923#xx250923xx">Re: Whoo hoo! another font combo :-)</a></td><td style="width: 20px; white-space: nowrap;"><img src="nishfontcombo.aspx-Dateien/editor_sm.gif" title="editor" alt="editor" border="0" height="16"></td><td class="Frm_MsgAuthor"><a href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=20248">Nishant S</a></td><td class="Frm_MsgDate" style="vertical-align: top; white-space: nowrap;">0:26 5 Aug '02 &nbsp;</td>
+						</tr>
+					</tbody></table></td>
+				</tr><!-- End Message head -->
+
+				<tr id="F250923_h1" style="display: none;">
+					<td style="width: 100%;"><table class="QuickBd" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody><tr>
+							<td class="Frm_MsgIndent" style="width: 34px;"></td><td class="MsgBd BdSel"><table border="0" cellpadding="0" cellspacing="5" width="100%">
+								<tbody><tr>
+									<td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tbody><tr>
+											<td colspan="2"><small><b>Shog9 wrote:</b></small><br><i>makes me feel all warm &amp; happy </i><br><br>Thanks Shog. I'd say it was about time you made your .NET dive<br><br>Nish <img src="nishfontcombo.aspx-Dateien/smiley_smile.gif" title="Smile" align="top"> <br><br><hr><font color="gray"><b><i>Author of the romantic comedy</i></b><br><a href="http://www.vedamsbooks.com/no23584.htm" target="_blank"><br>Summer Love and Some more Cricket [New Win]<br></a></font><br><b><font color="green">Review by <font color="blue">Shog<font color="green"><sup>9</sup></font></font></font></b><font color="green"><font color="blue"></font><br><a href="http://webpages.charter.net/shog9/review.html" target="_blank">Click here for review[NW]</a><br></font><br></td>
+										</tr><tr style="vertical-align: middle;">
+											<td class="Frm_MsgFt"><a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250923&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=r" title="Reply">Reply</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/Edit.aspx?fid=4478&amp;select=250923&amp;floc=/KB/combobox/nishfontcombo.aspx&amp;fa=e" title="Email">Email</a>·<a class="Frm_MHL" href="http://www.codeproject.com/KB/combobox/nishfontcombo.aspx?fid=4478&amp;tid=250882" title="View Thread">View Thread</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Forums/View.aspx?fid=4478&amp;msg=250923" title="Get permanent link">PermaLink</a>·<a class="Frm_MHL" href="http://www.codeproject.com/script/Bookmarks/Add.aspx?&amp;obid=250923&amp;obtid=3&amp;bma=AddBookmark" title="Bookmark this post">Bookmark</a></td><td class="Frm_MsgFt" style="text-align: right;"><span id="MVF250923" style="white-space: nowrap;">3.00/5 (2 votes) <script type="text/javascript">
+												MsgVFrm(20248,250923,false,"","","");
+											</script>Rate this message: <a href="#xx250923xx" onclick="RateMsg(20248, 250923,1,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_down.gif" alt="vote 1" align="middle" border="0" width="14" height="14"></a> <a class="Frm_MHL" href="#xx250923xx" title="vote this message a 1" onclick="RateMsg(20248, 250923, 1,0)"><b>1</b></a> <a class="Frm_MHL" href="#xx250923xx" title="vote this message a 2" onclick="RateMsg(20248, 250923, 2,0)"><b>2</b></a> <a class="Frm_MHL" href="#xx250923xx" title="vote this message a 3" onclick="RateMsg(20248, 250923, 3,0)"><b>3</b></a> <a class="Frm_MHL" href="#xx250923xx" title="vote this message a 4" onclick="RateMsg(20248, 250923, 4,0)"><b>4</b></a> <a class="Frm_MHL" href="#xx250923xx" title="vote this message a 5" onclick="RateMsg(20248, 250923, 5,0)"><b>5</b></a> <a href="#xx250923xx" onclick="RateMsg(20248, 250923,5,0);"><img src="nishfontcombo.aspx-Dateien/thumbs_up.gif" alt="vote 5" align="middle" border="0" width="14" height="14"></a> <br>[<a href="#xx250923xx" title="Report as Abuse" onclick="return ReportMsg(20248
+, 250923,-2)">Report Message</a>]
+</span></td>
+										</tr>
+									</tbody></table></td>
+								</tr>
+							</tbody></table></td>
+						</tr>
+					</tbody></table></td>
+				</tr><tr>
+					<td><img src="nishfontcombo.aspx-Dateien/t.gif" alt="" border="0" width="1" height="5"></td>
+				</tr>
+			</tbody></table></td>
+		</tr><tr>
+			<td><table cellpadding="2" cellspacing="0" width="100%">
+				<tbody><tr class="Frm_Footer">
+					<td>Last Visit: Thursday, July 17, 2008 5:58 AM &nbsp; &nbsp; Last Update:Thursday, July 17, 2008 8:03 AM</td><td style="text-align: right; white-space: nowrap;"></td>
+				</tr>
+			</tbody></table></td>
+		</tr>
+	</tbody></table>
+</div><p class="SmallText"><img src="nishfontcombo.aspx-Dateien/msg_general.gif" alt="General" align="top" width="16" height="16"> General &nbsp;&nbsp; <img src="nishfontcombo.aspx-Dateien/msg_news.gif" alt="News" align="top" width="16" height="16"> News &nbsp;&nbsp; <img src="nishfontcombo.aspx-Dateien/msg_question.gif" alt="Question" align="top" width="16" height="16"> Question &nbsp;&nbsp; <img src="nishfontcombo.aspx-Dateien/msg_answer.gif" alt="Answer" align="top" width="16" height="16"> Answer &nbsp;&nbsp; <img src="nishfontcombo.aspx-Dateien/msg_joke.gif" alt="Joke" align="top" width="16" height="16"> Joke &nbsp;&nbsp; <img src="nishfontcombo.aspx-Dateien/msg_rant.gif" alt="Rant" align="top" width="16" height="16"> Rant &nbsp;&nbsp; <img src="nishfontcombo.aspx-Dateien/msg_admin.gif" alt="Admin" align="top" width="16" height="16"> Admin &nbsp;&nbsp; </p>
+<!-- Forum End -->
+
+
+
+
+			
+			</div>
+			<table width="100%">
+			<tbody><tr valign="top">
+				<td class="TinyText" align="left">
+				    <a id="ctl00_PermaLink" href="http://www.codeproject.com/script/Articles/Article.aspx?aid=2699">PermaLink</a> | 
+					<a id="ctl00_PrivacyLink" href="http://www.codeproject.com/info/privacy.aspx"> 
+						Privacy </a> |
+					<a id="ctl00_TermsOfUseLink" href="http://www.codeproject.com/info/TermsOfUse.aspx">Terms 
+					of Use</a>
+					<br>Last Updated: 4 Aug 2002<br>
+					Editor: <a id="ctl00_ArticleEditor" href="http://www.codeproject.com/script/Membership/Profiles.aspx?mid=1">Chris Maunder</a><br>
+				</td>
+				<td class="TinyText" align="right" valign="top">
+					Copyright 2002 by Nishant Sivakumar<br>Everything else
+					Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2008 <br>
+					Web11 |
+					<a id="ctl00_AdvertiseLink" href="http://www.codeproject.com/info/MediaKit.aspx">Advertise on the Code Project </a>
+				</td>
+			</tr>
+			
+			</tbody></table>
+			
+			<center>
+				
+			</center>
+		</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		
+
+
+
+		</td>
+</tr>
+</tbody></table>
+
+<br>
+<script type="text/javascript" language="Javascript">//<![CDATA[
+if (document.all) try {window.attachEvent("oncopy",copyCode);}catch(e){};
+//]]></script>
+
+<script type="text/javascript" language="Javascript" src="nishfontcombo.aspx-Dateien/TogglePre.js"></script>
+<script type="text/javascript" language="Javascript" src="nishfontcombo.aspx-Dateien/menu132_com.js"></script>
+<script type="text/javascript" language="Javascript" src="nishfontcombo.aspx-Dateien/TopNavBar.js"></script>
+<script type="text/javascript" language="Javascript">//<![CDATA[
+new HVMenu(new menu_NavbarConfig());
+//]]></script>
+
+
+<div style="position: absolute; visibility: visible; z-index: 101; width: 386px; height: 22px; top: 118px; left: 750px;"><div class="NavBarMain" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 40px; height: 16px; padding-left: 5px; padding-top: 2px; left: 7px; top: 2px;">Help!</div><div class="NavBarMain" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 55px; height: 16px; padding-left: 5px; padding-top: 2px; left: 55px; top: 2px;">Articles</div><div class="NavBarMain" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 115px; height: 16px; padding-left: 5px; padding-top: 2px; left: 118px; top: 2px;">Message Boards</div><div class="NavBarMain" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 75px; height: 16px; padding-left: 5px; padding-top: 2px; left: 241px; top: 2px;">Job Board</div><div class="NavBarMain" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 55px; height: 16px; padding-left: 5px; padding-top: 2px; left: 324px; top: 2px;">Lounge</div></div><div class="NavBarCont" style="position: absolute; visibility: hidden; z-index: 102; width: 198px; height: 104px; top: 0pt; left: 0pt;"><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 183px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 5px;">What is 'The Code Project'?</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 183px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 24px;">General FAQ</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 183px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 43px;">Post a Question</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 183px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 62px;">Site Directory</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 183px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 81px;">About Us</div></div><div class="NavBarCont" style="position: absolute; visibility: hidden; z-index: 102; width: 158px; height: 161px; top: 0pt; left: 0pt;"><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 143px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 5px;">Latest</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 143px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 24px;">Search</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 143px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 43px;">Most Popular</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 143px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 62px;">Beginner Articles</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 143px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 81px;">Topic List</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 143px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 100px;">Submit an Article</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 143px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 119px;">Update an Article</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 143px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 138px;">Article Competition</div></div><div class="NavBarCont" style="position: absolute; visibility: hidden; z-index: 102; width: 183px; height: 389px; top: 0pt; left: 0pt;"><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 5px;">ASP.NET</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 24px;">ATL / WTL / STL</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 43px;">C++ / MFC</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 62px;">(Managed) C++/CLI</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 81px;">C#</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 100px;">COM</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 119px;">Hardware</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 138px;">LINQ and .NET 3.5</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 157px;">.NET Framework</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 176px;">OS / SysAdmin</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 195px;">Silverlight</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 214px;">SQL and Database</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 233px;">VB.NET</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 252px;">Web Development</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 271px;">WPF / WCF / WF</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 290px;">XML / XSL</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 309px;">General Discussions</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 328px;">Suggestions / Site Bugs</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 347px;">The Soapbox</div><div class="NavBarSub" style="overflow: hidden; position: absolute; visibility: inherit; cursor: pointer; width: 168px; height: 16px; padding-left: 5px; padding-top: 2px; left: 5px; top: 366px;">All Message Boards...</div></div></body></html>

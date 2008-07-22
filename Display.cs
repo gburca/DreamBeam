@@ -576,7 +576,7 @@ namespace DreamBeam {
 		public bool UpdateDisplay(bool cascade) {
 			if (content != null) {
 				if (pictureBox != null) {
-					// Preview, or mini-Live display
+					// Preview, or mini-Live display                    
 					pictureBox.Image = ShowBeam.DrawProportionalBitmap(pictureBox.Size, GetBitmap(this.Size));
 
 				} else if (showBeam != null && showBeam.TopLevelControl.Visible) {

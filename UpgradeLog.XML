@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="DreamBeam">
+</Property><Property Name="Projektmappendatei" Value="D:\Projekte\Dreambeam\Quellcode\DreamBeam.sln">
+</Property><Property Name="Date" Value="Donnerstag, 17. Juli 2008">
+</Property><Property Name="Time" Value="15:03:32">
+</Property></Properties><Event ErrorLevel="0" Project="FontCombo" Source="..\Fontcombo\FontCombo.csproj" Description="Projektdatei erfolgreich gesichert als D:\Projekte\Dreambeam\Quellcode\Backup\FontCombo.csproj">
+</Event><Event ErrorLevel="0" Project="FontCombo" Source="..\Fontcombo\FontCombo.csproj.user" Description="Die Projektbenutzerdatei wurde erfolgreich als &quot;D:\Projekte\Dreambeam\Quellcode\Backup\FontCombo.csproj.user&quot; gesichert.">
+</Event><Event ErrorLevel="0" Project="FontCombo" Source="..\Fontcombo\AssemblyInfo.cs" Description="Datei erfolgreich gesichert als D:\Projekte\Dreambeam\Quellcode\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="FontCombo" Source="..\Fontcombo\UserControl1.cs" Description="Datei erfolgreich gesichert als D:\Projekte\Dreambeam\Quellcode\Backup\UserControl1.cs">
+</Event><Event ErrorLevel="0" Project="FontCombo" Source="..\Fontcombo\ttfbmp.bmp" Description="Datei erfolgreich gesichert als D:\Projekte\Dreambeam\Quellcode\Backup\ttfbmp.bmp">
+</Event><Event ErrorLevel="0" Project="FontCombo" Source="..\Fontcombo\UserControl1.resx" Description="Datei erfolgreich gesichert als D:\Projekte\Dreambeam\Quellcode\Backup\UserControl1.resx">
+</Event><Event ErrorLevel="0" Project="FontCombo" Source="..\Fontcombo\FontCombo.csproj" Description="Projekt erfolgreich konvertiert">
+</Event><Event ErrorLevel="3" Project="FontCombo" Source="..\Fontcombo\FontCombo.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="FontCombo" Source="..\Fontcombo\FontCombo.csproj" Description="Überprüfung abgeschlossen: Aktualisierung von Projektdateien nicht erforderlich.">
+</Event></UpgradeLog>

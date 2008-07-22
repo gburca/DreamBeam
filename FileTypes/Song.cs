@@ -150,7 +150,7 @@ namespace DreamBeam {
 		public string KeyRangeLow, KeyRangeHigh;
 		public bool MinorKey;
 		public bool DualLanguage;
-
+        public bool UseDesign = false;
 		[XmlArrayItem(ElementName = "LyricsItem", Type = typeof(LyricsItem))]
 		[XmlArray]
 		public ArrayList SongLyrics;
@@ -203,7 +203,7 @@ namespace DreamBeam {
 			this.SetLyrics(LyricsType.Verse, s.GetText(1), conf.SongVerseSeparator);
 			this.DualLanguage = s.MultiLang;
 			this.Collection = "Version 0.60 Format";
-
+            this.UseDesign = false;
 			CreateSimpleSequence();
 		}
 
@@ -212,16 +212,16 @@ namespace DreamBeam {
 			this.SongLyrics = new ArrayList();
 			this.Sequence = new ArrayList();
 			this.CurrentLyric = 0;
-			this.Version = Tools.GetAppVersion();
+			this.Version = Tools.GetAppVersion();            
             wrapper = new WordWrapAtSpace();
         }
 
 		public Song(Config config) : this() {
 			if (config != null && config.theme != null) {
-				Theme = config.theme.Song;
+                Theme = config.theme.Song;
 				// This is not a custom theme, so null the ThemePath so it doesn't get saved.
 				Theme.ThemeFile = null;
-			}
+			}                             
         }
 
 		/// <summary>
@@ -796,6 +796,14 @@ namespace DreamBeam {
 			// originally serialized under. We need to update it here.
 			instance.Version = Tools.GetAppVersion();
 
+            if (instance.UseDesign)
+            {
+                Console.WriteLine("Saving Design..");
+                instance.Theme.SaveFile(Tools.GetDirectory(DirType.SongDesigns) + "\\" + Path.GetFileNameWithoutExtension(file) + ".SongTheme.xml");
+                instance.ThemePath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.SongDesigns), Path.GetFileNameWithoutExtension(file) + ".SongTheme.xml");
+
+            }
+
 			try {
 				fs = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Read);
 				xs.Serialize(fs, instance);
@@ -804,7 +812,8 @@ namespace DreamBeam {
 					fs.Close();
 				}
 				instance.BGImagePath = savedBGImagePath;
-			}
+                
+            }
 		}
 
 		/// <summary>
@@ -912,19 +921,31 @@ namespace DreamBeam {
 					} else {
 						s = (Song)Song.DeserializeFrom(typeof(Song), file);
 					}
-				} else { // version >= 0.72
+				} else { // version >= 0.72                                        
 					s = (Song)Song.DeserializeFrom(typeof(Song), file);
+                    
 				}
 			}
-
+          
 			if (s != null) {
-				if (s.Theme == null) {
+               
+				if (s.Theme == null) {                    
 					// OldSong did not have a custom theme. Give it the default theme.
 					// If we don't clone the theme, background changes will be saved as part of the default theme.
 					s.Theme = (Theme)config.theme.Song.Clone();
 					// Hide the theme path so it doesn't look like the song has a custom theme.
 					s.Theme.ThemeFile = null;
 				}
+
+                if (s.UseDesign)
+                {
+
+                    Console.WriteLine(s.Theme.ThemeFile);
+                    
+                    // s.Theme.
+
+                }
+
 				s.config = config;
 				s.CurrentLyric = strophe;
 				s.FileName = file;

@@ -1,0 +1,7 @@
+D:\Projekte\Dreambeam\Quellcode\libs\FontCombo\bin\Debug\FontCombo.dll
+D:\Projekte\Dreambeam\Quellcode\libs\FontCombo\bin\Debug\FontCombo.pdb
+D:\Projekte\Dreambeam\Quellcode\libs\FontCombo\obj\Debug\ResolveAssemblyReference.cache
+D:\Projekte\Dreambeam\Quellcode\libs\FontCombo\obj\Debug\FontCombo.FontComboBox.resources
+D:\Projekte\Dreambeam\Quellcode\libs\FontCombo\obj\Debug\FontCombo.csproj.GenerateResource.Cache
+D:\Projekte\Dreambeam\Quellcode\libs\FontCombo\obj\Debug\FontCombo.dll
+D:\Projekte\Dreambeam\Quellcode\libs\FontCombo\obj\Debug\FontCombo.pdb

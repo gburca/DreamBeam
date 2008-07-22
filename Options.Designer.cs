@@ -181,17 +181,18 @@ namespace DreamBeam {
             this.Direct3D_CheckBox = new System.Windows.Forms.CheckBox();
             this.Alpha_CheckBox = new System.Windows.Forms.CheckBox();
             this.SongFormat_Tab = new System.Windows.Forms.TabPage();
+            this.songThemeWidget = new DreamBeam.ThemeWidget();
             this.BibleFormat_Tab = new System.Windows.Forms.TabPage();
+            this.bibleFormatWidget = new DreamBeam.ThemeWidget();
             this.TextToolFormat_Tab = new System.Windows.Forms.TabPage();
+            this.sermonThemeWidget = new DreamBeam.ThemeWidget();
             this.Options_Cancelbtn = new System.Windows.Forms.Button();
             this.Options_Okaybtn = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.Options_ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Options_DataSet = new System.Data.DataSet();
-            this.songThemeWidget = new DreamBeam.ThemeWidget();
-            this.bibleFormatWidget = new DreamBeam.ThemeWidget();
-            this.sermonThemeWidget = new DreamBeam.ThemeWidget();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.Options_TopPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.Common_Tab.SuspendLayout();
@@ -438,9 +439,9 @@ namespace DreamBeam {
             this.BeamBox_tab.Controls.Add(this.Position_Title_GroupBox);
             this.BeamBox_tab.Controls.Add(this.Background_groupBox3);
             this.BeamBox_tab.Controls.Add(this.Mouse_groupBox2);
-            this.BeamBox_tab.Location = new System.Drawing.Point(4, 22);
+            this.BeamBox_tab.Location = new System.Drawing.Point(4, 40);
             this.BeamBox_tab.Name = "BeamBox_tab";
-            this.BeamBox_tab.Size = new System.Drawing.Size(515, 320);
+            this.BeamBox_tab.Size = new System.Drawing.Size(515, 302);
             this.BeamBox_tab.TabIndex = 2;
             this.BeamBox_tab.Text = "Projector Window";
             this.BeamBox_tab.UseVisualStyleBackColor = true;
@@ -739,9 +740,9 @@ namespace DreamBeam {
             this.Misc_Tab.Controls.Add(this.songVerseSeparatorGroup);
             this.Misc_Tab.Controls.Add(this.SwordLangGroupBox);
             this.Misc_Tab.Controls.Add(this.SwordFolderGroupBox);
-            this.Misc_Tab.Location = new System.Drawing.Point(4, 22);
+            this.Misc_Tab.Location = new System.Drawing.Point(4, 40);
             this.Misc_Tab.Name = "Misc_Tab";
-            this.Misc_Tab.Size = new System.Drawing.Size(515, 320);
+            this.Misc_Tab.Size = new System.Drawing.Size(515, 302);
             this.Misc_Tab.TabIndex = 3;
             this.Misc_Tab.Text = "Misc";
             this.Misc_Tab.UseVisualStyleBackColor = true;
@@ -1050,7 +1051,7 @@ namespace DreamBeam {
             this.Graphics_tab.Controls.Add(this.Alpha_groupBox1);
             this.Graphics_tab.Location = new System.Drawing.Point(4, 22);
             this.Graphics_tab.Name = "Graphics_tab";
-            this.Graphics_tab.Size = new System.Drawing.Size(515, 320);
+            this.Graphics_tab.Size = new System.Drawing.Size(515, 302);
             this.Graphics_tab.TabIndex = 1;
             this.Graphics_tab.Text = "Graphics";
             this.Graphics_tab.UseVisualStyleBackColor = true;
@@ -1137,23 +1138,55 @@ namespace DreamBeam {
             // 
             // SongFormat_Tab
             // 
+            this.SongFormat_Tab.Controls.Add(this.listBox1);
             this.SongFormat_Tab.Controls.Add(this.songThemeWidget);
-            this.SongFormat_Tab.Location = new System.Drawing.Point(4, 22);
+            this.SongFormat_Tab.Location = new System.Drawing.Point(4, 40);
             this.SongFormat_Tab.Name = "SongFormat_Tab";
-            this.SongFormat_Tab.Size = new System.Drawing.Size(515, 320);
+            this.SongFormat_Tab.Size = new System.Drawing.Size(515, 302);
             this.SongFormat_Tab.TabIndex = 6;
             this.SongFormat_Tab.Text = "Song Format";
             this.SongFormat_Tab.UseVisualStyleBackColor = true;
             // 
+            // songThemeWidget
+            // 
+            this.songThemeWidget.BGImagePath = "Image";
+            this.songThemeWidget.Location = new System.Drawing.Point(0, 3);
+            this.songThemeWidget.Name = "songThemeWidget";
+            this.songThemeWidget.Size = new System.Drawing.Size(266, 309);
+            this.songThemeWidget.TabIndex = 0;
+            this.songThemeWidget.TabNames = new string[] {
+        "Title",
+        "Verse",
+        "Author",
+        "Key"};
+            this.songThemeWidget.ThemePath = "";
+            this.songThemeWidget.UseDesign = false;
+            this.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
+            // 
             // BibleFormat_Tab
             // 
             this.BibleFormat_Tab.Controls.Add(this.bibleFormatWidget);
-            this.BibleFormat_Tab.Location = new System.Drawing.Point(4, 22);
+            this.BibleFormat_Tab.Location = new System.Drawing.Point(4, 40);
             this.BibleFormat_Tab.Name = "BibleFormat_Tab";
-            this.BibleFormat_Tab.Size = new System.Drawing.Size(515, 320);
+            this.BibleFormat_Tab.Size = new System.Drawing.Size(515, 302);
             this.BibleFormat_Tab.TabIndex = 5;
             this.BibleFormat_Tab.Text = "Bible Format";
             this.BibleFormat_Tab.UseVisualStyleBackColor = true;
+            // 
+            // bibleFormatWidget
+            // 
+            this.bibleFormatWidget.BGImagePath = "Image";
+            this.bibleFormatWidget.Location = new System.Drawing.Point(0, 0);
+            this.bibleFormatWidget.Name = "bibleFormatWidget";
+            this.bibleFormatWidget.Size = new System.Drawing.Size(515, 312);
+            this.bibleFormatWidget.TabIndex = 0;
+            this.bibleFormatWidget.TabNames = new string[] {
+        "Verse",
+        "Reference",
+        "Translation"};
+            this.bibleFormatWidget.ThemePath = "";
+            this.bibleFormatWidget.UseDesign = false;
+            this.bibleFormatWidget.ControlChangedEvent += new System.EventHandler(this.bibleFormatWidget_ControlChangedEvent);
             // 
             // TextToolFormat_Tab
             // 
@@ -1164,6 +1197,20 @@ namespace DreamBeam {
             this.TextToolFormat_Tab.TabIndex = 7;
             this.TextToolFormat_Tab.Text = "Sermon Tool Format";
             this.TextToolFormat_Tab.UseVisualStyleBackColor = true;
+            // 
+            // sermonThemeWidget
+            // 
+            this.sermonThemeWidget.BGImagePath = "Image";
+            this.sermonThemeWidget.Location = new System.Drawing.Point(0, 0);
+            this.sermonThemeWidget.Name = "sermonThemeWidget";
+            this.sermonThemeWidget.Size = new System.Drawing.Size(515, 312);
+            this.sermonThemeWidget.TabIndex = 0;
+            this.sermonThemeWidget.TabNames = new string[] {
+        "1st line",
+        "Other lines"};
+            this.sermonThemeWidget.ThemePath = "";
+            this.sermonThemeWidget.UseDesign = false;
+            this.sermonThemeWidget.ControlChangedEvent += new System.EventHandler(this.sermonThemeWidget_ControlChangedEvent);
             // 
             // Options_Cancelbtn
             // 
@@ -1192,41 +1239,18 @@ namespace DreamBeam {
             this.Options_DataSet.Tables.AddRange(new System.Data.DataTable[] {
             this.Options_RegEx_Table});
             // 
-            // songThemeWidget
+            // listBox1
             // 
-            this.songThemeWidget.Location = new System.Drawing.Point(0, 0);
-            this.songThemeWidget.Name = "songThemeWidget";
-            this.songThemeWidget.Size = new System.Drawing.Size(515, 312);
-            this.songThemeWidget.TabIndex = 0;
-            this.songThemeWidget.TabNames = new string[] {
-        "Title",
-        "Verse",
-        "Author",
-        "Key"};
-            this.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
-            // 
-            // bibleFormatWidget
-            // 
-            this.bibleFormatWidget.Location = new System.Drawing.Point(0, 0);
-            this.bibleFormatWidget.Name = "bibleFormatWidget";
-            this.bibleFormatWidget.Size = new System.Drawing.Size(515, 312);
-            this.bibleFormatWidget.TabIndex = 0;
-            this.bibleFormatWidget.TabNames = new string[] {
-        "Verse",
-        "Reference",
-        "Translation"};
-            this.bibleFormatWidget.ControlChangedEvent += new System.EventHandler(this.bibleFormatWidget_ControlChangedEvent);
-            // 
-            // sermonThemeWidget
-            // 
-            this.sermonThemeWidget.Location = new System.Drawing.Point(0, 0);
-            this.sermonThemeWidget.Name = "sermonThemeWidget";
-            this.sermonThemeWidget.Size = new System.Drawing.Size(515, 312);
-            this.sermonThemeWidget.TabIndex = 0;
-            this.sermonThemeWidget.TabNames = new string[] {
-        "1st line",
-        "Other lines"};
-            this.sermonThemeWidget.ControlChangedEvent += new System.EventHandler(this.sermonThemeWidget_ControlChangedEvent);
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Items.AddRange(new object[] {
+            "hhhhhhhhhhhhhhh",
+            "pppppppppppppppp",
+            "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"});
+            this.listBox1.Location = new System.Drawing.Point(325, 42);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(111, 69);
+            this.listBox1.TabIndex = 1;
+            
             // 
             // Options
             // 
@@ -1302,6 +1326,7 @@ namespace DreamBeam {
         private GroupBox groupBox2;
         private RadioButton BibleConversions_Custom;
         private RadioButton BibleConversions_Default;
+        private ListBox listBox1;
 
 	}
 }

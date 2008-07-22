@@ -10,7 +10,8 @@
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>DreamBeam</AssemblyName>
-    <AssemblyOriginatorKeyFile>StrongNameKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
@@ -26,13 +27,12 @@
     <ManifestCertificateThumbprint>225D6D11BF776BBED790C80109F3CEBCD4E0D55C</ManifestCertificateThumbprint>
     <ManifestKeyFile>DreamBeam_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetZone>LocalIntranet</TargetZone>
     <OldToolsVersion>2.0</OldToolsVersion>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <SignAssembly>false</SignAssembly>
-    <PublishUrl>Installer\PublishOutput\</PublishUrl>
+    <PublishUrl>D:\VisualStudioProjects\DreamBeam-0.72\Installer\DreamBeam2\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -42,7 +42,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -66,7 +66,7 @@
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningLevel>2</WarningLevel>
+    <WarningLevel>1</WarningLevel>
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
@@ -89,7 +89,7 @@
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>1</WarningLevel>
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
@@ -97,6 +97,10 @@
     <Reference Include="AxInterop.ShockwaveFlashObjects">
       <Name>AxInterop.ShockwaveFlashObjects</Name>
       <HintPath>ComImports\AxInterop.ShockwaveFlashObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="BalloonWindow">
+      <Name>BalloonWindow</Name>
+      <HintPath>libs\BalloonWindow.dll</HintPath>
     </Reference>
     <Reference Include="CollapsiblePanelBar">
       <Name>CollapsiblePanelBar</Name>
@@ -152,6 +156,12 @@
     <Reference Include="mscorlib">
       <Name>mscorlib</Name>
     </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="SandBar">
       <Name>SandBar</Name>
       <HintPath>libs\SandBar.dll</HintPath>
@@ -161,8 +171,8 @@
       <HintPath>libs\SandDock.dll</HintPath>
     </Reference>
     <Reference Include="SwigSword, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>ComImports\SwigSword.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>ComImports\SwigSword.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -188,17 +198,19 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="XPPanel">
       <Name>xppanel</Name>
       <HintPath>libs\xppanel.dll</HintPath>
     </Reference>
-    <COMReference Include="stdole">
-      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-    </COMReference>
     <ProjectReference Include="libs\ControlLib\ControlLib.csproj">
       <Name>ControlLib</Name>
       <Project>{94302930-4AC3-45CB-9BB6-B7D7572E95DB}</Project>
@@ -208,6 +220,14 @@
       <Name>ExRichTextBox</Name>
       <Project>{1A63B1D0-D2F0-4F8C-B242-863E83E1419C}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="libs\FontCombo\FontCombo.csproj">
+      <Project>{E764A681-F213-4581-8492-9EE617B5E398}</Project>
+      <Name>FontCombo</Name>
+    </ProjectReference>
+    <ProjectReference Include="libs\Grouper\CodeVendor.Controls.csproj">
+      <Project>{D5D88EB0-23B9-46CE-B23C-C6245ECF023C}</Project>
+      <Name>CodeVendor.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="libs\LEDRadioButton\LEDRadioButton.csproj">
       <Project>{98096340-5853-42D0-8B2F-1CD364C5A152}</Project>
@@ -222,6 +242,10 @@
       <Name>MessageBoxExLib</Name>
       <Project>{4847D05C-EB58-49D9-B280-D22F8FF01857}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="libs\OfficePickers\OfficePickers.csproj">
+      <Project>{CAD56B75-481B-4C76-B090-4BC2FF5E5681}</Project>
+      <Name>OfficePickers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +295,12 @@
     <Compile Include="GuiTools\BibleRTF.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GuiTools\GradientTab.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GuiTools\GradientTab.Designer.cs">
+      <DependentUpon>GradientTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="GuiTools\GuiTemplate.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -282,6 +312,9 @@
     </Compile>
     <Compile Include="GuiTools\Presentation.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GuiTools\RibbonMenuButton.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="GuiTools\RightDock.cs">
       <SubType>Code</SubType>
@@ -322,6 +355,9 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyBalloonWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,6 +368,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ShowBeam.cs">
       <SubType>Form</SubType>
@@ -362,6 +403,10 @@
     </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\GradientTab.resx">
+      <DependentUpon>GradientTab.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Images.resx">
@@ -401,6 +446,10 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyBalloonWindow.resx">
+      <DependentUpon>MyBalloonWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -427,6 +476,38 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="ChangeLog.txt" />
+    <None Include="Resources\stock-templates.png" />
+    <None Include="Resources\stock_text_vup16.png" />
+    <None Include="Resources\stock_text_vcenter16.png" />
+    <None Include="Resources\stock_text_vdown16.png" />
+    <None Include="Resources\stock_text_left-16.png" />
+    <None Include="Resources\stock_text_justify-16.png" />
+    <None Include="Resources\stock_text_right-16.png" />
+    <None Include="Resources\stock_text_center-16.png" />
+    <None Include="Resources\stock_text-outline.png" />
+    <None Include="Resources\stock_text-filledoutline.png" />
+    <None Include="Resources\stock_text-nonoutline.png" />
+    <None Include="Resources\_stock_text-outline.png" />
+    <None Include="Resources\stock_decrease-font-16.png" />
+    <None Include="Resources\stock_increase-font-16.png" />
+    <None Include="Resources\stock_text_bold.png" />
+    <None Include="Resources\stock_text_underlined.png" />
+    <None Include="Resources\stock_text_italic.png" />
+    <None Include="Resources\stock_text_vup.png" />
+    <None Include="Resources\stock_text_vdown.png" />
+    <None Include="Resources\stock_text_vcenter.png" />
+    <None Include="Resources\stock_text_justify.png" />
+    <None Include="Resources\stock_text_left.png" />
+    <None Include="Resources\stock_text_right.png" />
+    <None Include="Resources\stock_text_center.png" />
+    <None Include="Resources\format-justify-center.png" />
+    <None Include="Resources\format-justify-right.png" />
+    <None Include="Resources\format-justify-left.png" />
+    <None Include="Resources\format-justify-fill.png" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Resources\GnuLicense.txt" />
     <None Include="Icons\go-top.png" />
     <None Include="Icons\go-bottom.png" />
@@ -434,7 +515,6 @@
     <None Include="Icons\go-down.png" />
     <None Include="Icons\bookmark-new.png" />
     <None Include="Icons\audio-volume-high.png" />
-    <None Include="StrongNameKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <BaseApplicationManifest Include="Properties\app.manifest" />
@@ -457,20 +537,24 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="stdole">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <FileType>Assembly</FileType>
-    </PublishFile>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="GuiTools\OutlookBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>cp "$(ProjectDir)\ComImports\libsword.dll" "$(TargetDir)"
-cp "$(ProjectDir)\ComImports\libsword_csharpsword.dll" "$(TargetDir)"</PreBuildEvent>
+    <PreBuildEvent>copy "$(ProjectDir)ComImports\libsword.dll" "$(TargetDir)"
+copy "$(ProjectDir)ComImports\libsword_csharpsword.dll" "$(TargetDir)"</PreBuildEvent>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>

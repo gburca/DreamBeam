@@ -102,6 +102,9 @@ namespace DreamBeam {
 		[XmlElement("Theme")]
 		public ComboTheme theme;
 
+        [XmlElement("ThemePaths")]
+        public ComboThemePaths DefaultThemes;
+
 		public SongVerseSeparator SongVerseSeparator = SongVerseSeparator.OneBlankLine;
 		public OperatingMode AppOperatingMode;
 
@@ -135,7 +138,7 @@ namespace DreamBeam {
 		/// </summary>
 		public void Init() {
 			theme = new ComboTheme();
-
+            DefaultThemes = new ComboThemePaths();
 			AppOperatingMode = OperatingMode.StandAlone;
 			ListeningPort = 50000;
 		}

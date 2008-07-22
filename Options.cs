@@ -5,6 +5,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
+//using Rilling.Common.UI.Forms;
 using Lister;
 using DreamBeam.FileTypes;
 using cs_IniHandlerDevelop;
@@ -173,7 +174,6 @@ namespace DreamBeam {
 			}
 
 			config.RememberPanelLocations = this.Options_PanelLocations_checkBox.Checked;
-
 			config.theme.Song = this.songThemeWidget.Theme as SongTheme;
 			config.theme.Bible = this.bibleFormatWidget.Theme as BibleTheme;
 			config.theme.Sermon = this.sermonThemeWidget.Theme as SermonTheme;
@@ -197,6 +197,9 @@ namespace DreamBeam {
 			if (oldMode != config.AppOperatingMode) {
 				_MainForm.InitDisplays();
 			}
+			
+			// Temporary workaround
+            config.DefaultThemes.SongThemePath = "Themes\\Default.SongTheme.xml";
 
 			config.Options_DataSet = this.Options_DataSet;
 			this.Options_DataSet.WriteXml(Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml"), XmlWriteMode.WriteSchema);
@@ -241,8 +244,8 @@ namespace DreamBeam {
 			this.BeamBox_Height.Value = (int)config.BeamBoxSizeY;
 			this.BeamBox_HideMouse.Checked = config.HideMouse;
 			this.Alpha_CheckBox.Checked = config.Alphablending;
-            this.Speed_Updown.Value = config.BlendSpeed;
-            this.PreRendercheckBox.Checked = config.PreRender;
+            this.Speed_Updown.Value = config.BlendSpeed;			
+			this.PreRendercheckBox.Checked = config.PreRender;
 			this.Direct3D_CheckBox.Checked = config.useDirect3D;
 			this.BeamBox_AlwaysOnTop.Checked = config.AlwaysOnTop;
 			this.showBeamBackground = config.BackgroundColor;
@@ -655,7 +658,7 @@ namespace DreamBeam {
 			}
 		}
 
-		private void songThemeWidget_ControlChangedEvent(object sender, EventArgs e) {
+		private void songThemeWidget_ControlChangedEvent(object sender, EventArgs e) {            
 			HandleThemeChange();
 		}
 

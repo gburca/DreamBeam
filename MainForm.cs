@@ -115,10 +115,13 @@ namespace DreamBeam {
 
 		public BibleLib bibles = new BibleLib();
 		public EventHandler BibleText_RegEx_ComboBox_EventHandler;
-
+        public bool LoadingSong;
 		private Extensions.Set SongCollections = new Extensions.Set();
 
 		#endregion
+        
+
+        
 
 		private readonly string bibleLibFile;
 
@@ -161,8 +164,8 @@ namespace DreamBeam {
 
 			//logFile = new LogFile(ConfigSet);
 			//if (CommandLine["log"] != null) {
-			//    logFile.doLog = true;
-			//    logFile.BigHeader("Start");
+			  //      logFile.doLog = true;
+			    //logFile.BigHeader("Start");
 			//}
 
 			ShowBeam.Config = this.Config;
@@ -213,6 +216,7 @@ namespace DreamBeam {
 			// but we need them at a decent size during design. Making them
 			// disappear at run time.
 			this.tabControl1.ItemSize = new Size(1, 1);
+            this.DesignTabControl.ItemSize = new Size(1,1);
 
 			// Restore the SermonTool documents
 			SermonToolDocuments sermon = (SermonToolDocuments)SermonToolDocuments.DeserializeFrom(typeof(SermonToolDocuments),
@@ -228,7 +232,10 @@ namespace DreamBeam {
 				} catch { }
 			}
 
-			// Change the Multimedia panels to black. They're using color for ease of design.
+			// Change the Multimedia panels to black. They're using color for ease of design.            
+            //this.songEditor.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);                       
+            
+            // Change the Multimedia panels to black. They're using color for ease of design.
 			this.Presentation_PreviewPanel.BackColor = Color.Black;
 			this.axShockwaveFlash.BackgroundColor = Color.Black.ToArgb();
 			this.Presentation_PreviewBox.BackColor = Color.Black;
@@ -488,6 +495,7 @@ namespace DreamBeam {
 			this.Config.BeamBoxAutoPosSize = ShowBeam.BeamBoxAutoPosSize;
 			this.Config.BeamBoxScreenNum = ShowBeam.BeamBoxScreenNum;
 
+			this.Config.Alphablending = ShowBeam.transit;
 			this.Config.BibleLang = this.Sermon_BibleLang;
 			this.Config.ShowBibleTranslation = this.Sermon_ShowBibleTranslation;
 
@@ -515,7 +523,7 @@ namespace DreamBeam {
 			ShowBeam.TopMost = this.Config.AlwaysOnTop;
 
 			// Alphablending enabled?
-            ShowBeam.Config = this.Config;
+			ShowBeam.Config = this.Config;
 			// Direct3D
 			ShowBeam.useDirect3d = this.Config.useDirect3D;
 
@@ -657,14 +665,11 @@ namespace DreamBeam {
 		public void getSong() {
 			try {
 				// Edit Songs:
-
-				// Show Songs:
+                // Show Songs:
 				this.SongShow_StropheList_ListEx.Items.Clear();
-
 				GuiTools.ChangeTitle();
 
 			} catch { }
-
 		}
 
 		#endregion
@@ -711,8 +716,9 @@ namespace DreamBeam {
 			this.SetLanguage();
 			Display.bibleLib = this.bibles;
 			Display.config = this.Config;
-
-			ShowBeam.Show();
+            
+            // Removed it - should be off, so user can access mainwindow - "autoon" config option should be best
+			//ShowBeam.Show();
 		}
 
 		///<summarize> start SaveSettings while MainForm is closing </summarize>
@@ -758,7 +764,8 @@ namespace DreamBeam {
 
 		///<summary> new Song from Menu</summary>
 		private void ToolBars_MenuBar_Song_New_Activate(object sender, System.EventArgs e) {
-			this.songEditor.Song = new Song();
+			
+            this.songEditor.Song = new Song(this.Config);
 		}
 
 		/// <summary>Saves the Selected Song</summary>
@@ -1036,6 +1043,9 @@ namespace DreamBeam {
 
 		void SaveSong() {
 			Song s = this.songEditor.Song;
+            s.UseDesign = this.SongThemeWidget1.UseDesign;
+            s.Theme = this.SongThemeWidget1.Theme;
+            Console.WriteLine("----- Starting to save song");                                    
 
 			if (Tools.FileExists(s.FileName)) {
 				Song.SerializeTo(s, s.FileName);
@@ -1110,8 +1120,8 @@ namespace DreamBeam {
 
 		#region SongList
 
-		private void SongList_Tree_DoubleClick(object sender, System.EventArgs e) {
-			this.RightDocks_Preview_GoLive_Click(sender, e);
+		private void SongList_Tree_DoubleClick(object sender, System.EventArgs e) {            
+            this.RightDocks_Preview_GoLive_Click(sender, e);
 			this.SongShow_HideElement_UpdateButtons();
 		}
 
@@ -1121,7 +1131,8 @@ namespace DreamBeam {
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void SongList_Tree_MouseClick(object sender, MouseEventArgs e) {
-			this.SongList_Tree.SelectedNode = null;
+            Console.WriteLine("----Starting to Load Song---");
+            this.SongList_Tree.SelectedNode = null;
 			this.SongList_Tree.SelectedNode = this.SongList_Tree.GetNodeAt(e.Location);
 		}
 
@@ -1155,14 +1166,20 @@ namespace DreamBeam {
 
 		private void LoadSongFromFile(string FileName) {
 			if (FileName == null) return;
-			Song song = (Song)Song.DeserializeFrom(FileName, 0, this.Config);
-			this.songEditor.Song = song;
+            this.LoadingSong = true;
+			Song song = (Song)Song.DeserializeFrom(FileName, 0, this.Config);                       
+            this.songEditor.Song = song;
+            this.SongThemeWidget1.UseDesign = song.UseDesign;
+            if (song.ThemePath == null) {this.SongThemeWidget1.ThemePath="";}
+            else{this.SongThemeWidget1.ThemePath = song.ThemePath;}
+            SongThemeWidget1.Theme = song.Theme;
 			DisplayPreview.SetContent(song);
 			this.LoadSongShow(DisplayPreview.content as Song);
 			this.SongShow_HideElement_UpdateButtons();
 			this.StatusPanel.Text = Lang.say("Status.SongLoaded", Tools.GetRelativePath(DirType.Songs, FileName));
 			GC.Collect();
 			song.PreRenderFrames();
+            this.LoadingSong = false;
 		}
 
 		///<summary> Delete Song in List </summary>
@@ -2540,6 +2557,70 @@ namespace DreamBeam {
 			}
 		}
 		#endregion
+
+        private void songThemeWidget_ControlChangedEvent(object sender, EventArgs e)
+        {
+            
+            IContentOperations content = this.DisplayPreview.content;
+            
+            if (content != null){
+                try{
+                    (content as Content).RenderedFramesClear();
+                }catch { }
+
+                
+                switch ((ContentType)content.GetIdentity().Type)
+                {
+                    case ContentType.Song:
+                            this.songEditor.Song.UseDesign = this.SongThemeWidget1.UseDesign;
+                        
+                            Song s = content as Song;
+                            Console.WriteLine(content.GetIdentity().Type.ToString());
+                            if (s != null) //&& String.IsNullOrEmpty(s.ThemePath)
+                            {
+                                if (this.SongThemeWidget1.ThemePath == "" && !this.SongThemeWidget1.UseDesign)
+                                {
+                                    this.SongThemeWidget1.ThemePath = Config.DefaultThemes.SongThemePath;                                  
+                                    string themefile =Path.Combine(Tools.GetDirectory(DirType.DataRoot),Config.DefaultThemes.SongThemePath);    
+
+                                    if (File.Exists(themefile)) this.SongThemeWidget1.Theme=(Theme)Theme.DeserializeFrom(typeof(SongTheme), themefile);
+                                }                                
+                                content.Theme = this.SongThemeWidget1.Theme;                                
+                            }
+                            else
+                            {
+                                // This is a song with a custom theme. Don't override with default.
+                            }
+                            break;
+                        
+                }
+                DisplayPreview.UpdateDisplay(true);
+            }
+
+        }
+
+        private void menuButtonItem1_Activate(object sender, EventArgs e)
+        {            
+            Song song = new Song(this.Config);
+            try
+            {
+                this.songEditor.Song = song;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            //DisplayPreview.SetContent(song);
+        }
+
+        private void ToolBars_MenuBar_Open_DesignTab_Activate(object sender, EventArgs e)
+        {
+            this.DockControl_DesignEditor.Open();
+        }
+
+        private void SongDesignTab_SizeChanged(object sender, EventArgs e)
+        {
+            this.SongThemeWidget1.Left = this.SongDesignTab.Width / 2 - this.SongThemeWidget1.Width /2;
+            this.SongThemeWidget1.Top = this.SongDesignTab.Height / 2 - this.SongThemeWidget1.Height / 2;
+        } 
+
 
 
 	}

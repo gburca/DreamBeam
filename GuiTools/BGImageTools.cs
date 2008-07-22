@@ -140,18 +140,22 @@ namespace DreamBeam {
 		///<summary>If BGImage chosen, update the current component </summary>
 		public void SelectedIndexChanged(object sender, System.EventArgs e) {
 			string path = Tools.GetDirectory(DirType.Backgrounds);
-
+            string relativePath = "";
 			if (_MainForm.RightDocks_FolderDropdown.SelectedIndex > 0) {
 				path = Path.Combine(path, _MainForm.RightDocks_FolderDropdown.Items[_MainForm.RightDocks_FolderDropdown.SelectedIndex].ToString());
+                relativePath = _MainForm.RightDocks_FolderDropdown.Items[_MainForm.RightDocks_FolderDropdown.SelectedIndex].ToString();
 			}
 
 			if (_MainForm.RightDocks_ImageListBox.SelectedIndex >= 0) {
 				path = Path.Combine(path, _MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text);
+                relativePath = Path.Combine(relativePath ,_MainForm.RightDocks_ImageListBox.Items[_MainForm.RightDocks_ImageListBox.SelectedIndex].Text);
 				if (_MainForm.selectedTab == MainTab.Presentation) {
 					_MainForm.PreviewPresentationMedia(path);
 				} else {
 					if (_MainForm.DisplayPreview.content != null) {
 						_MainForm.DisplayPreview.content.BGImagePath = path;
+                        
+                        _MainForm.SongThemeWidget1.BGImagePath = relativePath;
 						_MainForm.DisplayPreview.UpdateDisplay(true);
 					}
 				}

@@ -63,7 +63,10 @@ namespace DreamBeam {
 		Sermon,
 		// Summary:
 		//  The directory where logs are saved
-		Logs
+		Logs,
+        // Summary:
+        // The directory where individual SongThemes are Saved
+        SongDesigns        
 	}
 
 
@@ -221,6 +224,9 @@ namespace DreamBeam {
 				case DirType.Themes:
 					dir = Path.Combine(GetAppDocPath(), "Themes");
 					break;
+                case DirType.SongDesigns:
+                    dir = Path.Combine(GetAppDocPath(), "Songs\\Designs");
+                    break;
 				default:
 					dir = GetAppDocPath();
 					break;

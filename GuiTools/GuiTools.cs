@@ -73,6 +73,10 @@ namespace DreamBeam {
 			for	(int i = _MainForm.tabControl1.TabCount-1;i>=0;i--){
 				_MainForm.tabControl1.TabPages.RemoveAt(i);
 			}
+            for (int i = _MainForm.DesignTabControl.TabCount - 1; i >= 0; i--)
+            {
+                _MainForm.DesignTabControl.TabPages.RemoveAt(i);
+            }
 			_MainForm.ToolBars_MainToolbar_SaveSong.Visible = false;
 			_MainForm.ToolBars_MainToolbar_SaveMediaList.Visible = false;
 
@@ -86,7 +90,7 @@ namespace DreamBeam {
 
 					_MainForm.ToolBars_MenuBar_Song.Visible = true;
 					_MainForm.ToolBars_MenuBar_MediaList.Visible = false;
-					_MainForm.tabControl1.Controls.Add(_MainForm.ShowSong_Tab);
+					_MainForm.tabControl1.Controls.Add(_MainForm.ShowSong_Tab);                    
 					break;
 
 				case MainTab.EditSongs:
@@ -96,6 +100,7 @@ namespace DreamBeam {
 
 					_MainForm.tabControl1.Controls.Add(_MainForm.EditSongs_Tab);
 					_MainForm.ToolBars_MainToolbar_SaveSong.Visible = true;
+                    _MainForm.DesignTabControl.Controls.Add(_MainForm.SongDesignTab);
 //					_MainForm.PreviewUpdateTimer.Enabled = true;
 					break;
 
@@ -110,6 +115,7 @@ namespace DreamBeam {
 					if(_MainForm.Sermon_DocManager.TabStrips.Count < 1){
 						_MainForm.Sermon_NewDocument();
 					}
+                    _MainForm.DesignTabControl.Controls.Add(_MainForm.SermonDesignTab);
 					break;
 
 				case MainTab.Presentation:
@@ -128,7 +134,7 @@ namespace DreamBeam {
 					// Show / hide ToolBars and Menus
 					_MainForm.ToolBars_MainToolbar_HideBG.Visible = true;
 					_MainForm.ToolBars_MainToolbar_HideText.Visible = true;
-
+                    _MainForm.DesignTabControl.Controls.Add(_MainForm.BibleDesignTab);
 					_MainForm.tabControl1.TabPages.Add(_MainForm.BibleText_Tab);
 					break;
 			}

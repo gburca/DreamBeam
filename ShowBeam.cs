@@ -54,6 +54,9 @@ namespace DreamBeam {
 		///<summary>The final Bitmap for the BeamBox </summary>
 		public Bitmap memoryBitmap = null;
 
+		///<summary>Use AlphaBlending Transitions </summary>
+		public bool transit = false;
+
 		///<summary>Temporary bitmap</summary>
 		public Bitmap bmp = null;
 
@@ -80,7 +83,7 @@ namespace DreamBeam {
 		byte AlphaOpacity;
 
 		//		DirectShowLib Lib = new DirectShowLib();
-		private FXLib FXLib;// = new FXLib();
+		private FXLib FXLib = new FXLib();
 
 		public MediaOperations liveMedia = null;
 		#endregion
@@ -121,7 +124,8 @@ namespace DreamBeam {
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Button Screen_SetSettingsButton;
 		private System.Windows.Forms.PictureBox TestImage;
-		private System.Timers.Timer AlphaTimer;
+		private System.Timers.Timer AlphaTimer2;
+		private System.Windows.Forms.Timer AlphaTimer;
 		#endregion
 
 
@@ -190,7 +194,8 @@ namespace DreamBeam {
 			this.ScreenList = new System.Windows.Forms.ListBox();
 			this.TabManSize = new System.Windows.Forms.TabPage();
 			this.TestImage = new System.Windows.Forms.PictureBox();
-			this.AlphaTimer = new System.Timers.Timer();
+			this.AlphaTimer = new System.Windows.Forms.Timer(this.components);
+			this.AlphaTimer2 = new System.Timers.Timer();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.WindowPosY)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.WindowPosX)).BeginInit();
@@ -202,7 +207,7 @@ namespace DreamBeam {
 			this.tabPage1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.TabManSize.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.AlphaTimer)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.AlphaTimer2)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -568,8 +573,13 @@ namespace DreamBeam {
 			// AlphaTimer
 			// 
 			this.AlphaTimer.Interval = 1;
-			this.AlphaTimer.SynchronizingObject = this;
-			this.AlphaTimer.Elapsed += new System.Timers.ElapsedEventHandler(this.AlphaTimer_Elapsed);
+			this.AlphaTimer.Tick += new System.EventHandler(this.AlphaTimer_Tick);
+			// 
+			// AlphaTimer2
+			// 
+			this.AlphaTimer2.Interval = 1;
+			this.AlphaTimer2.SynchronizingObject = this;
+			this.AlphaTimer2.Elapsed += new System.Timers.ElapsedEventHandler(this.AlphaTimer2_Elapsed);
 			// 
 			// ShowBeam
 			// 
@@ -603,7 +613,7 @@ namespace DreamBeam {
 			this.tabPage1.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.TabManSize.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.AlphaTimer)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.AlphaTimer2)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -646,7 +656,7 @@ namespace DreamBeam {
 			ShowSongPanel.Show();
 
 			//Draw Image on Screen, make a Alphablending if transit == true
-            if (Config.Alphablending) {
+			if (transit) {
 				// We set the new bitmap before making the form visible or else
 				// it shows up with the old bitmap for a fraction of a second
 				// and it looks like it flickers.
@@ -658,7 +668,8 @@ namespace DreamBeam {
 
 				g.DrawImage(memoryBitmap, 0, 0, this.Width, this.Height);
 				AlphaOpacity = 0;
-				AlphaTimer.Start();
+				//AlphaTimer.Start();
+				AlphaTimer2.Start();
 
 			} else {
 				memoryBitmap = bmp;
@@ -868,7 +879,6 @@ namespace DreamBeam {
 		private void ShowBeam_VisibleChanged(object sender, System.EventArgs e) {
 			SetAutoPosition();
 			if (this.useDirectX) {
-                if (FXLib == null) FXLib = new FXLib();
 				FXLib.Init3D(this.ShowSongPanel);
 			}
 		}
@@ -1148,8 +1158,7 @@ namespace DreamBeam {
 		}
 		#endregion
 
-		private void AlphaTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e) {
-            Console.WriteLine("AlphaTimer: " + AlphaOpacity);
+		private void AlphaTimer_Tick(object sender, System.EventArgs e) {
 			if (AlphaOpacity < 255) {
 
 				if (AlphaOpacity + Config.BlendSpeed > 255) AlphaOpacity = (byte)255;
@@ -1158,6 +1167,22 @@ namespace DreamBeam {
 				AlphaForm.SetBitmap(bmp, AlphaOpacity);
 			} else {
 				AlphaTimer.Stop();
+				Graphics g = Graphics.FromHwnd(ShowSongPanel.Handle);
+				memoryBitmap = bmp;
+				g.DrawImage(memoryBitmap, new Rectangle(0, 0, this.Width, this.Height), 0, 0, this.Width, this.Height, GraphicsUnit.Pixel);
+				AlphaForm.Hide();
+			}
+		}
+
+		private void AlphaTimer2_Elapsed(object sender, System.Timers.ElapsedEventArgs e) {
+			if (AlphaOpacity < 255) {
+
+				if (AlphaOpacity + Config.BlendSpeed > 255) AlphaOpacity = (byte)255;
+				else AlphaOpacity = (byte)(AlphaOpacity + Config.BlendSpeed);
+
+				AlphaForm.SetBitmap(bmp, AlphaOpacity);
+			} else {
+				AlphaTimer2.Stop();
 				Graphics g = Graphics.FromHwnd(ShowSongPanel.Handle);
 				memoryBitmap = bmp;
 				g.DrawImage(memoryBitmap, new Rectangle(0, 0, this.Width, this.Height), 0, 0, this.Width, this.Height, GraphicsUnit.Pixel);
