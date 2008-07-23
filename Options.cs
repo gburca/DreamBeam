@@ -200,6 +200,8 @@ namespace DreamBeam {
 			
 			// Temporary workaround
             config.DefaultThemes.SongThemePath = "Themes\\Default.SongTheme.xml";
+            config.DefaultThemes.SermonThemePath = "Themes\\Default.SermonTheme.xml";
+            config.DefaultThemes.BibleThemePath = "Themes\\Default.BibleTheme.xml";
 
 			config.Options_DataSet = this.Options_DataSet;
 			this.Options_DataSet.WriteXml(Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml"), XmlWriteMode.WriteSchema);

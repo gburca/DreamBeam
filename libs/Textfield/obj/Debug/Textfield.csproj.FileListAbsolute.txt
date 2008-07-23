@@ -1,10 +1,10 @@
 D:\Projekte\Dreambeam\Quellcode\libs\Textfield\bin\Debug\Textfield.exe
 D:\Projekte\Dreambeam\Quellcode\libs\Textfield\bin\Debug\Textfield.pdb
 D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\ResolveAssemblyReference.cache
-D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\WindowsFormsApplication1.Form1.resources
 D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
-D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\WindowsFormsApplication1.Textfield.resources
-D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\WindowsFormsApplication1.SongTextEditor.resources
 D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\Textfield.csproj.GenerateResource.Cache
 D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\Textfield.exe
 D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\Textfield.pdb
+D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\VerseEditor.Form1.resources
+D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\VerseEditor.Textfield.resources
+D:\Projekte\Dreambeam\Quellcode\libs\Textfield\obj\Debug\VerseEditor.SongTextEditor.resources

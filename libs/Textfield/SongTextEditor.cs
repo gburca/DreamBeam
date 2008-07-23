@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1
+namespace VerseEditor
 {
     public partial class SongTextEditor : UserControl
     {
@@ -24,6 +24,18 @@ namespace WindowsFormsApplication1
             //textbox.Multiline = true;
             //textbox.Height = 150;
             this.panel1.Controls.Add(textfield);
+            //this.panel1.set
+
+            this.ControlChangedEvent(this, e);
+        }
+
+ 
+   
+
+        public void ControlChangedEvent(object sender, EventArgs e)
+        {
+            MessageBox.Show("CHange");
+            
         }
     }
 }

@@ -240,6 +240,8 @@ namespace DreamBeam {
 			this.axShockwaveFlash.BackgroundColor = Color.Black.ToArgb();
 			this.Presentation_PreviewBox.BackColor = Color.Black;
 
+            this.songThemeWidget.Theme = Config.theme.Song;
+            this.sermonThemeWidget.Theme = Config.theme.Sermon;
             Console.WriteLine("DreamBeam starting up");
         }
 
@@ -1043,8 +1045,8 @@ namespace DreamBeam {
 
 		void SaveSong() {
 			Song s = this.songEditor.Song;
-            s.UseDesign = this.SongThemeWidget1.UseDesign;
-            s.Theme = this.SongThemeWidget1.Theme;
+            s.UseDesign = this.songThemeWidget.UseDesign;
+            s.Theme = this.songThemeWidget.Theme;
             Console.WriteLine("----- Starting to save song");                                    
 
 			if (Tools.FileExists(s.FileName)) {
@@ -1169,10 +1171,10 @@ namespace DreamBeam {
             this.LoadingSong = true;
 			Song song = (Song)Song.DeserializeFrom(FileName, 0, this.Config);                       
             this.songEditor.Song = song;
-            this.SongThemeWidget1.UseDesign = song.UseDesign;
-            if (song.ThemePath == null) {this.SongThemeWidget1.ThemePath="";}
-            else{this.SongThemeWidget1.ThemePath = song.ThemePath;}
-            SongThemeWidget1.Theme = song.Theme;
+            this.songThemeWidget.UseDesign = song.UseDesign;
+            if (song.ThemePath == null) {this.songThemeWidget.ThemePath="";}
+            else{this.songThemeWidget.ThemePath = song.ThemePath;}
+            songThemeWidget.Theme = song.Theme;
 			DisplayPreview.SetContent(song);
 			this.LoadSongShow(DisplayPreview.content as Song);
 			this.SongShow_HideElement_UpdateButtons();
@@ -2560,7 +2562,64 @@ namespace DreamBeam {
 
         private void songThemeWidget_ControlChangedEvent(object sender, EventArgs e)
         {
-            
+            IContentOperations content = DisplayPreview.content;
+            if (content != null)
+            {
+                // First, let's clear the pre-render cache
+                try
+                {
+                    (content as Content).RenderedFramesClear();
+                }
+                catch { }
+
+                switch ((ContentType)content.GetIdentity().Type)
+                {
+                    case ContentType.Song:
+                        this.songEditor.Song.UseDesign = this.songThemeWidget.UseDesign;
+                        Song s = content as Song;
+                        Console.WriteLine(content.GetIdentity().Type.ToString());
+                        if (s != null) //&& String.IsNullOrEmpty(s.ThemePath)
+                        {
+                            if (this.songThemeWidget.ThemePath == "" && !this.songThemeWidget.UseDesign)
+                            {
+                                this.songThemeWidget.ThemePath = Config.DefaultThemes.SongThemePath;
+                                string themefile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SongThemePath);
+
+                                if (File.Exists(themefile)) this.songThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(SongTheme), themefile);
+                            }
+                            content.Theme = this.songThemeWidget.Theme;
+                        }
+                        else
+                        {
+                            // This is a song with a custom theme. Don't override with default.
+                        }
+                        break;
+                    case ContentType.PlainText:
+                        if (this.sermonThemeWidget.ThemePath == "" && !this.sermonThemeWidget.UseDesign)
+                        {
+                            this.sermonThemeWidget.ThemePath = Config.DefaultThemes.SermonThemePath;
+                            string themefile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SermonThemePath);
+                            if (File.Exists(themefile)) this.sermonThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(SermonTheme), themefile);
+                        }
+
+                        content.Theme = this.sermonThemeWidget.Theme;
+                        break;
+                    case ContentType.BibleVerseIdx:
+                    case ContentType.BibleVerseRef:
+                    case ContentType.BibleVerse:
+                        if (this.bibleThemeWidget.ThemePath == "" && !this.sermonThemeWidget.UseDesign)
+                        {
+                            this.bibleThemeWidget.ThemePath = Config.DefaultThemes.BibleThemePath;
+                            string themefile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.BibleThemePath);
+                            if (File.Exists(themefile)) this.bibleThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(BibleTheme), themefile);
+                        }
+                        content.Theme = this.bibleThemeWidget.Theme;
+                        break;
+                }
+                DisplayPreview.UpdateDisplay(true);
+            }
+        
+            /*
             IContentOperations content = this.DisplayPreview.content;
             
             if (content != null){
@@ -2572,20 +2631,20 @@ namespace DreamBeam {
                 switch ((ContentType)content.GetIdentity().Type)
                 {
                     case ContentType.Song:
-                            this.songEditor.Song.UseDesign = this.SongThemeWidget1.UseDesign;
+                            this.songEditor.Song.UseDesign = this.songThemeWidget.UseDesign;
                         
                             Song s = content as Song;
                             Console.WriteLine(content.GetIdentity().Type.ToString());
                             if (s != null) //&& String.IsNullOrEmpty(s.ThemePath)
                             {
-                                if (this.SongThemeWidget1.ThemePath == "" && !this.SongThemeWidget1.UseDesign)
+                                if (this.songThemeWidget.ThemePath == "" && !this.songThemeWidget.UseDesign)
                                 {
-                                    this.SongThemeWidget1.ThemePath = Config.DefaultThemes.SongThemePath;                                  
+                                    this.songThemeWidget.ThemePath = Config.DefaultThemes.SongThemePath;                                  
                                     string themefile =Path.Combine(Tools.GetDirectory(DirType.DataRoot),Config.DefaultThemes.SongThemePath);    
 
-                                    if (File.Exists(themefile)) this.SongThemeWidget1.Theme=(Theme)Theme.DeserializeFrom(typeof(SongTheme), themefile);
+                                    if (File.Exists(themefile)) this.songThemeWidget.Theme=(Theme)Theme.DeserializeFrom(typeof(SongTheme), themefile);
                                 }                                
-                                content.Theme = this.SongThemeWidget1.Theme;                                
+                                content.Theme = this.songThemeWidget.Theme;                                
                             }
                             else
                             {
@@ -2596,8 +2655,13 @@ namespace DreamBeam {
                 }
                 DisplayPreview.UpdateDisplay(true);
             }
+             */
 
         }
+
+
+
+
 
         private void menuButtonItem1_Activate(object sender, EventArgs e)
         {            
@@ -2617,8 +2681,20 @@ namespace DreamBeam {
 
         private void SongDesignTab_SizeChanged(object sender, EventArgs e)
         {
-            this.SongThemeWidget1.Left = this.SongDesignTab.Width / 2 - this.SongThemeWidget1.Width /2;
-            this.SongThemeWidget1.Top = this.SongDesignTab.Height / 2 - this.SongThemeWidget1.Height / 2;
+           this.songThemeWidget.Left = this.SongDesignTab.Width / 2 - this.songThemeWidget.Width / 2;
+           this.songThemeWidget.Top = this.SongDesignTab.Height / 2 - this.songThemeWidget.Height / 2;
+        }
+
+        private void SermonDesignTab_SizeChanged(object sender, EventArgs e)
+        {
+            this.sermonThemeWidget.Left = this.SermonDesignTab.Width / 2 - this.sermonThemeWidget.Width / 2;
+            this.sermonThemeWidget.Top = this.SermonDesignTab.Height / 2 - this.sermonThemeWidget.Height / 2;
+        }
+
+        private void BibleDesignTab_SizeChanged(object sender, EventArgs e)
+        {
+            this.bibleThemeWidget.Left = this.BibleDesignTab.Width / 2 - this.bibleThemeWidget.Width / 2;
+            this.bibleThemeWidget.Left = this.BibleDesignTab.Height / 2 - this.bibleThemeWidget.Height / 2;
         } 
 
 

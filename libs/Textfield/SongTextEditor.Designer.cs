@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace VerseEditor
 {
     partial class SongTextEditor
     {
@@ -30,6 +30,7 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textfield1 = new VerseEditor.Textfield();
             this.SuspendLayout();
             // 
             // button1
@@ -45,19 +46,30 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.AutoScrollMinSize = new System.Drawing.Size(0, 10);
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(298, 344);
             this.panel1.TabIndex = 1;
             // 
+            // textfield1
+            // 
+            this.textfield1.Location = new System.Drawing.Point(335, 100);
+            this.textfield1.Name = "textfield1";
+            this.textfield1.Size = new System.Drawing.Size(268, 221);
+            this.textfield1.TabIndex = 0;
+                        this.textfield1.ControlChangedEvent += new VerseEditor.ControlChangeHandler(this.ControlChangedEvent);
+            // 
             // SongTextEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.textfield1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Name = "SongTextEditor";
-            this.Size = new System.Drawing.Size(429, 378);
+            this.Size = new System.Drawing.Size(627, 378);
             this.ResumeLayout(false);
 
         }
@@ -66,5 +78,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
+        private Textfield textfield1;
     }
 }

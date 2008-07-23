@@ -135,14 +135,14 @@ namespace DreamBeam {
         
         private Font CreateFont()
         {   
-            FontStyle fstyle = FontStyle.Regular;
-
+            FontStyle fstyle = FontStyle.Regular;       
+            
             if (this.fontBoldButton.Checked) fstyle = fstyle | FontStyle.Bold;
             if (this.fontItalicButton.Checked) fstyle = fstyle | FontStyle.Italic;
             if (this.fontUnderlineButton.Checked) fstyle = fstyle | FontStyle.Underline;          
             if (this.fontComboBox1.Text.Length == 0) this.fontComboBox1.Text = "Arial";
             if (this.Fontsize.Text.Length == 0) this.Fontsize.Text = "55";
-            return new Font(this.fontComboBox1.SelectedText, (float)Convert.ToDecimal(this.Fontsize.Text), fstyle);
+            return new Font(this.fontComboBox1.SelectedItem.ToString(), (float)Convert.ToDecimal(this.Fontsize.Text), fstyle);
         }
 
         private void Setfont()

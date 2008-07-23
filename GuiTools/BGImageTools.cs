@@ -155,7 +155,7 @@ namespace DreamBeam {
 					if (_MainForm.DisplayPreview.content != null) {
 						_MainForm.DisplayPreview.content.BGImagePath = path;
                         
-                        _MainForm.SongThemeWidget1.BGImagePath = relativePath;
+                        _MainForm.songThemeWidget.BGImagePath = relativePath;
 						_MainForm.DisplayPreview.UpdateDisplay(true);
 					}
 				}

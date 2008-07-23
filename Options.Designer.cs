@@ -181,6 +181,7 @@ namespace DreamBeam {
             this.Direct3D_CheckBox = new System.Windows.Forms.CheckBox();
             this.Alpha_CheckBox = new System.Windows.Forms.CheckBox();
             this.SongFormat_Tab = new System.Windows.Forms.TabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.songThemeWidget = new DreamBeam.ThemeWidget();
             this.BibleFormat_Tab = new System.Windows.Forms.TabPage();
             this.bibleFormatWidget = new DreamBeam.ThemeWidget();
@@ -192,7 +193,6 @@ namespace DreamBeam {
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.Options_ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Options_DataSet = new System.Data.DataSet();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.Options_TopPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.Common_Tab.SuspendLayout();
@@ -944,19 +944,15 @@ namespace DreamBeam {
             // BibleConversions_dataGrid
             // 
             this.BibleConversions_dataGrid.AllowSorting = false;
-            this.BibleConversions_dataGrid.AlternatingBackColor = System.Drawing.SystemColors.Window;
             this.BibleConversions_dataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.BibleConversions_dataGrid.CaptionBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BibleConversions_dataGrid.CaptionVisible = false;
             this.BibleConversions_dataGrid.DataMember = "";
             this.BibleConversions_dataGrid.DataSource = this.Options_RegEx_Table;
-            this.BibleConversions_dataGrid.HeaderBackColor = System.Drawing.SystemColors.Control;
             this.BibleConversions_dataGrid.HeaderForeColor = System.Drawing.SystemColors.ControlText;
             this.BibleConversions_dataGrid.Location = new System.Drawing.Point(266, 24);
             this.BibleConversions_dataGrid.Name = "BibleConversions_dataGrid";
-            this.BibleConversions_dataGrid.ParentRowsBackColor = System.Drawing.SystemColors.Control;
             this.BibleConversions_dataGrid.RowHeadersVisible = false;
             this.BibleConversions_dataGrid.Size = new System.Drawing.Size(243, 217);
             this.BibleConversions_dataGrid.TabIndex = 3;
@@ -1049,7 +1045,7 @@ namespace DreamBeam {
             // 
             this.Graphics_tab.Controls.Add(this.PreRenderBox);
             this.Graphics_tab.Controls.Add(this.Alpha_groupBox1);
-            this.Graphics_tab.Location = new System.Drawing.Point(4, 22);
+            this.Graphics_tab.Location = new System.Drawing.Point(4, 40);
             this.Graphics_tab.Name = "Graphics_tab";
             this.Graphics_tab.Size = new System.Drawing.Size(515, 302);
             this.Graphics_tab.TabIndex = 1;
@@ -1114,10 +1110,19 @@ namespace DreamBeam {
             0,
             0,
             0});
-            this.Speed_Updown.Minimum = 1;
+            this.Speed_Updown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.Speed_Updown.Name = "Speed_Updown";
             this.Speed_Updown.Size = new System.Drawing.Size(64, 20);
             this.Speed_Updown.TabIndex = 6;
+            this.Speed_Updown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // Direct3D_CheckBox
             // 
@@ -1146,6 +1151,18 @@ namespace DreamBeam {
             this.SongFormat_Tab.TabIndex = 6;
             this.SongFormat_Tab.Text = "Song Format";
             this.SongFormat_Tab.UseVisualStyleBackColor = true;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Items.AddRange(new object[] {
+            "hhhhhhhhhhhhhhh",
+            "pppppppppppppppp",
+            "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"});
+            this.listBox1.Location = new System.Drawing.Point(325, 42);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(111, 69);
+            this.listBox1.TabIndex = 1;
             // 
             // songThemeWidget
             // 
@@ -1178,7 +1195,7 @@ namespace DreamBeam {
             this.bibleFormatWidget.BGImagePath = "Image";
             this.bibleFormatWidget.Location = new System.Drawing.Point(0, 0);
             this.bibleFormatWidget.Name = "bibleFormatWidget";
-            this.bibleFormatWidget.Size = new System.Drawing.Size(515, 312);
+            this.bibleFormatWidget.Size = new System.Drawing.Size(251, 312);
             this.bibleFormatWidget.TabIndex = 0;
             this.bibleFormatWidget.TabNames = new string[] {
         "Verse",
@@ -1238,19 +1255,6 @@ namespace DreamBeam {
             this.Options_DataSet.Locale = new System.Globalization.CultureInfo("en-US");
             this.Options_DataSet.Tables.AddRange(new System.Data.DataTable[] {
             this.Options_RegEx_Table});
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "hhhhhhhhhhhhhhh",
-            "pppppppppppppppp",
-            "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"});
-            this.listBox1.Location = new System.Drawing.Point(325, 42);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(111, 69);
-            this.listBox1.TabIndex = 1;
-            
             // 
             // Options
             // 

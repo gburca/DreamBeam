@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace VerseEditor
 {
     partial class Form1
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.songTextEditor1 = new WindowsFormsApplication1.SongTextEditor();
+            this.songTextEditor1 = new SongTextEditor();
             this.SuspendLayout();
             // 
             // songTextEditor1
