@@ -304,7 +304,7 @@ namespace DreamBeam {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Panel Presentation_MovieControl_LiveButtonPanel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node0");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
             this.Presentation_MediaLoop_Checkbox = new System.Windows.Forms.CheckBox();
             this.RightDocks_ImageListBox = new Controls.Development.ImageListBox();
             this.ImageContext = new System.Windows.Forms.ContextMenu();
@@ -514,17 +514,17 @@ namespace DreamBeam {
             this.SongShow_HideText_Button = new ctlLEDRadioButton.LEDradioButton();
             this.SongShow_HideTitle_Button = new ctlLEDRadioButton.LEDradioButton();
             this.SongList_Tree = new ControlLib.dbTreeViewCtrl();
+            this.DockControl_DesignEditor = new TD.SandDock.DockControl();
+            this.DesignTabControl = new System.Windows.Forms.TabControl();
+            this.SongDesignTab = new System.Windows.Forms.TabPage();
+            this.SermonDesignTab = new System.Windows.Forms.TabPage();
+            this.BibleDesignTab = new System.Windows.Forms.TabPage();
             this.songEditor = new DreamBeam.SongEditor();
             this.liveMediaControls = new DreamBeam.MediaControls();
             this.previewMediaControls = new DreamBeam.MediaControls();
             this.bibleTextControl = new DreamBeam.BibleText();
-            this.DockControl_DesignEditor = new TD.SandDock.DockControl();
-            this.DesignTabControl = new System.Windows.Forms.TabControl();
-            this.SongDesignTab = new System.Windows.Forms.TabPage();
             this.songThemeWidget = new DreamBeam.ThemeWidget();
-            this.SermonDesignTab = new System.Windows.Forms.TabPage();
             this.sermonThemeWidget = new DreamBeam.ThemeWidget();
-            this.BibleDesignTab = new System.Windows.Forms.TabPage();
             this.bibleThemeWidget = new DreamBeam.ThemeWidget();
             Presentation_MovieControl_LiveButtonPanel = new System.Windows.Forms.Panel();
             Presentation_MovieControl_LiveButtonPanel.SuspendLayout();
@@ -1541,11 +1541,11 @@ namespace DreamBeam {
             // 
             // rightSandDock
             // 
-            this.rightSandDock.Controls.Add(this.DockControl_DesignEditor);
             this.rightSandDock.Controls.Add(this.DockControl_PreviewScreen);
             this.rightSandDock.Controls.Add(this.DockControl_LiveScreen);
             this.rightSandDock.Controls.Add(this.Dock_SongTools);
             this.rightSandDock.Controls.Add(this.DockControl_BibleTools);
+            this.rightSandDock.Controls.Add(this.DockControl_DesignEditor);
             this.rightSandDock.Controls.Add(this.DockControl_Songs);
             this.rightSandDock.Controls.Add(this.DockControl_PlayList);
             this.rightSandDock.Controls.Add(this.DockControl_Backgrounds);
@@ -2434,10 +2434,10 @@ namespace DreamBeam {
             this.treeView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.treeView1.Location = new System.Drawing.Point(2, 2);
             this.treeView1.Name = "treeView1";
-            treeNode2.Name = "";
-            treeNode2.Text = "Node0";
+            treeNode1.Name = "";
+            treeNode1.Text = "Node0";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(190, 528);
             this.treeView1.TabIndex = 2;
@@ -2773,6 +2773,64 @@ namespace DreamBeam {
             this.SongList_Tree.DoubleClick += new System.EventHandler(this.SongList_Tree_DoubleClick);
             this.SongList_Tree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.SongList_Tree_AfterSelect);
             // 
+            // DockControl_DesignEditor
+            // 
+            this.DockControl_DesignEditor.Controls.Add(this.DesignTabControl);
+            this.DockControl_DesignEditor.Guid = new System.Guid("69c6f3d1-3cc1-404c-ae1c-cf6db365a077");
+            this.DockControl_DesignEditor.Location = new System.Drawing.Point(4, 259);
+            this.DockControl_DesignEditor.Name = "DockControl_DesignEditor";
+            this.DockControl_DesignEditor.Size = new System.Drawing.Size(324, 292);
+            this.DockControl_DesignEditor.TabIndex = 8;
+            this.DockControl_DesignEditor.Text = "Song Design";
+            // 
+            // DesignTabControl
+            // 
+            this.DesignTabControl.Controls.Add(this.SongDesignTab);
+            this.DesignTabControl.Controls.Add(this.SermonDesignTab);
+            this.DesignTabControl.Controls.Add(this.BibleDesignTab);
+            this.DesignTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DesignTabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.DesignTabControl.Location = new System.Drawing.Point(0, 0);
+            this.DesignTabControl.Name = "DesignTabControl";
+            this.DesignTabControl.Padding = new System.Drawing.Point(0, 0);
+            this.DesignTabControl.SelectedIndex = 0;
+            this.DesignTabControl.Size = new System.Drawing.Size(324, 292);
+            this.DesignTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.DesignTabControl.TabIndex = 3;
+            // 
+            // SongDesignTab
+            // 
+            this.SongDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.SongDesignTab.Controls.Add(this.songThemeWidget);
+            this.SongDesignTab.Location = new System.Drawing.Point(4, 22);
+            this.SongDesignTab.Name = "SongDesignTab";
+            this.SongDesignTab.Padding = new System.Windows.Forms.Padding(3);
+            this.SongDesignTab.Size = new System.Drawing.Size(316, 266);
+            this.SongDesignTab.TabIndex = 0;
+            this.SongDesignTab.SizeChanged += new System.EventHandler(this.SongDesignTab_SizeChanged);
+            // 
+            // SermonDesignTab
+            // 
+            this.SermonDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.SermonDesignTab.Controls.Add(this.sermonThemeWidget);
+            this.SermonDesignTab.Location = new System.Drawing.Point(4, 22);
+            this.SermonDesignTab.Name = "SermonDesignTab";
+            this.SermonDesignTab.Padding = new System.Windows.Forms.Padding(3);
+            this.SermonDesignTab.Size = new System.Drawing.Size(316, 266);
+            this.SermonDesignTab.TabIndex = 1;
+            this.SermonDesignTab.SizeChanged += new System.EventHandler(this.SermonDesignTab_SizeChanged);
+            // 
+            // BibleDesignTab
+            // 
+            this.BibleDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.BibleDesignTab.Controls.Add(this.bibleThemeWidget);
+            this.BibleDesignTab.Location = new System.Drawing.Point(4, 22);
+            this.BibleDesignTab.Name = "BibleDesignTab";
+            this.BibleDesignTab.Padding = new System.Windows.Forms.Padding(3);
+            this.BibleDesignTab.Size = new System.Drawing.Size(316, 266);
+            this.BibleDesignTab.TabIndex = 2;
+            this.BibleDesignTab.SizeChanged += new System.EventHandler(this.BibleDesignTab_SizeChanged);
+            // 
             // songEditor
             // 
             this.songEditor.Collections = new string[0];
@@ -2816,42 +2874,6 @@ namespace DreamBeam {
             this.bibleTextControl.Size = new System.Drawing.Size(383, 534);
             this.bibleTextControl.TabIndex = 3;
             // 
-            // DockControl_DesignEditor
-            // 
-            this.DockControl_DesignEditor.Controls.Add(this.DesignTabControl);
-            this.DockControl_DesignEditor.Guid = new System.Guid("69c6f3d1-3cc1-404c-ae1c-cf6db365a077");
-            this.DockControl_DesignEditor.Location = new System.Drawing.Point(4, 259);
-            this.DockControl_DesignEditor.Name = "DockControl_DesignEditor";
-            this.DockControl_DesignEditor.Size = new System.Drawing.Size(324, 292);
-            this.DockControl_DesignEditor.TabIndex = 8;
-            this.DockControl_DesignEditor.Text = "Song Design";
-            // 
-            // DesignTabControl
-            // 
-            this.DesignTabControl.Controls.Add(this.SongDesignTab);
-            this.DesignTabControl.Controls.Add(this.SermonDesignTab);
-            this.DesignTabControl.Controls.Add(this.BibleDesignTab);
-            this.DesignTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DesignTabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.DesignTabControl.Location = new System.Drawing.Point(0, 0);
-            this.DesignTabControl.Name = "DesignTabControl";
-            this.DesignTabControl.Padding = new System.Drawing.Point(0, 0);
-            this.DesignTabControl.SelectedIndex = 0;
-            this.DesignTabControl.Size = new System.Drawing.Size(324, 292);
-            this.DesignTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.DesignTabControl.TabIndex = 3;
-            // 
-            // SongDesignTab
-            // 
-            this.SongDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.SongDesignTab.Controls.Add(this.songThemeWidget);
-            this.SongDesignTab.Location = new System.Drawing.Point(4, 22);
-            this.SongDesignTab.Name = "SongDesignTab";
-            this.SongDesignTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SongDesignTab.Size = new System.Drawing.Size(316, 266);
-            this.SongDesignTab.TabIndex = 0;
-            this.SongDesignTab.SizeChanged += new System.EventHandler(this.SongDesignTab_SizeChanged);
-            // 
             // songThemeWidget
             // 
             this.songThemeWidget.BGImagePath = "Image";
@@ -2868,17 +2890,6 @@ namespace DreamBeam {
             this.songThemeWidget.UseDesign = false;
             this.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
             // 
-            // SermonDesignTab
-            // 
-            this.SermonDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.SermonDesignTab.Controls.Add(this.sermonThemeWidget);
-            this.SermonDesignTab.Location = new System.Drawing.Point(4, 22);
-            this.SermonDesignTab.Name = "SermonDesignTab";
-            this.SermonDesignTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SermonDesignTab.Size = new System.Drawing.Size(316, 266);
-            this.SermonDesignTab.TabIndex = 1;
-            this.SermonDesignTab.SizeChanged += new System.EventHandler(this.SermonDesignTab_SizeChanged);
-            // 
             // sermonThemeWidget
             // 
             this.sermonThemeWidget.BGImagePath = "Image";
@@ -2893,23 +2904,12 @@ namespace DreamBeam {
             this.sermonThemeWidget.UseDesign = false;
             this.sermonThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
             // 
-            // BibleDesignTab
-            // 
-            this.BibleDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.BibleDesignTab.Controls.Add(this.bibleThemeWidget);
-            this.BibleDesignTab.Location = new System.Drawing.Point(4, 22);
-            this.BibleDesignTab.Name = "BibleDesignTab";
-            this.BibleDesignTab.Padding = new System.Windows.Forms.Padding(3);
-            this.BibleDesignTab.Size = new System.Drawing.Size(316, 266);
-            this.BibleDesignTab.TabIndex = 2;
-            this.BibleDesignTab.SizeChanged += new System.EventHandler(this.BibleDesignTab_SizeChanged);
-            // 
             // bibleThemeWidget
             // 
             this.bibleThemeWidget.BGImagePath = "Image";
-            this.bibleThemeWidget.Location = new System.Drawing.Point(31, 3);
+            this.bibleThemeWidget.Location = new System.Drawing.Point(31, 0);
             this.bibleThemeWidget.Name = "bibleThemeWidget";
-            this.bibleThemeWidget.Size = new System.Drawing.Size(255, 420);
+            this.bibleThemeWidget.Size = new System.Drawing.Size(255, 423);
             this.bibleThemeWidget.TabIndex = 1;
             this.bibleThemeWidget.TabNames = new string[] {
         "Verse",
@@ -3045,8 +3045,8 @@ namespace DreamBeam {
         public System.Windows.Forms.TabControl DesignTabControl;
         public System.Windows.Forms.TabPage SermonDesignTab;
         public System.Windows.Forms.TabPage BibleDesignTab;
-        private ThemeWidget sermonThemeWidget;
-        private ThemeWidget bibleThemeWidget;
+        public ThemeWidget sermonThemeWidget;
+        public ThemeWidget bibleThemeWidget;
 
 
 	}

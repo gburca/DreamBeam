@@ -711,13 +711,24 @@ namespace DreamBeam.FileTypes {
 		public ABibleVerse() : this(null) { }
 		public ABibleVerse(BibleVersion bible) : this(bible, 1) { }
 		public ABibleVerse(BibleVersion bible, int verseIdx) : this(bible, verseIdx, null) { }
-		public ABibleVerse(BibleVersion bible, int verseIdx, Config config) {
+		
+        public ABibleVerse(BibleVersion bible, int verseIdx, Config config) {
 			this.bible = bible;
 			this.verseIdx = verseIdx;
 			this.config = config;
 			if (config != null) this.Theme = config.theme.Bible;
 			this.PreRenderFrames();
 		}
+
+        public ABibleVerse(BibleVersion bible, int verseIdx, Config config, Theme theme)
+        {
+            this.bible = bible;
+            this.verseIdx = verseIdx;
+            this.config = config;
+            this.Theme = theme;
+            this.PreRenderFrames();
+        }
+
 
 		public int VisibleHashCode(int vIdx) {
 			return base.VisibleHashCode() + vIdx.ToString().GetHashCode();

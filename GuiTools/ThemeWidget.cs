@@ -203,10 +203,14 @@ namespace DreamBeam {
 		}
 
 		protected void NotifyControlChangeListeners() {
+            
             if (!this.textFormatOptions1.changingControls & ! this.changingControls)
             {
+
+                if (this.themeType == null) MessageBox.Show("Error: Themetype not defined");
                 if (ControlChangedEvent != null && this.themeType != null)
-                {                    
+                {
+                    
                     ControlChangedEvent(this, new ThemeEventArgs(this.Theme));
                 }
             }

@@ -36,23 +36,45 @@ namespace DreamBeam.FileTypes {
 			this.Theme = config.theme.Sermon;
 			this.WordWrap = true;
 
-			int lineBreak = fullText.IndexOf("\n\n");
-
-			if (lineBreak > 1) {
-				this.Title = fullText.Substring(0, lineBreak);
-				lineBreak += 2;
-				this.SetLyrics(LyricsType.Verse,
-					fullText.Substring(lineBreak, fullText.Length - lineBreak),
-					SongVerseSeparator.OneBlankLine);
-			} else {
-				this.Title = "";
-				this.SetLyrics(LyricsType.Verse, fullText, SongVerseSeparator.OneBlankLine);
-			}
-
-			for (int num = 1; num <= this.SongLyrics.Count; num++) {
-				this.Sequence.Add(new LyricsSequenceItem(LyricsType.Verse, num));
-			}
+            readText(fullText);
 		}
+
+        public TextToolContents(string fullText, Config config, Theme theme)
+        {
+            this.enumType = typeof(TextToolType);
+            this.config = config;
+            this.Theme = theme;
+            this.WordWrap = true;
+            
+            readText(fullText);
+        }
+
+
+        private void readText(string fullText)
+        {            
+            int lineBreak = fullText.IndexOf("\n\n");
+
+            if (lineBreak > 1)
+            {
+                this.Title = fullText.Substring(0, lineBreak);
+                lineBreak += 2;
+                this.SetLyrics(LyricsType.Verse,
+                    fullText.Substring(lineBreak, fullText.Length - lineBreak),
+                    SongVerseSeparator.OneBlankLine);
+            }
+            else
+            {
+                this.Title = "";
+                this.SetLyrics(LyricsType.Verse, fullText, SongVerseSeparator.OneBlankLine);
+            }
+
+            for (int num = 1; num <= this.SongLyrics.Count; num++)
+            {
+                this.Sequence.Add(new LyricsSequenceItem(LyricsType.Verse, num));
+            }
+        }
+
+     
 
 		#region IContentOperations Members
 

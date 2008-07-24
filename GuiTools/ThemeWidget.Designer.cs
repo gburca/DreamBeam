@@ -30,8 +30,8 @@ namespace DreamBeam {
             this.saveAsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.TabContainerPanel = new System.Windows.Forms.Panel();
             this.textFormatOptions1 = new DreamBeam.TextFormatOptions();
+            this.TabContainerPanel = new System.Windows.Forms.Panel();
             this.Design_checkBox = new RibbonStyle.RibbonMenuButton();
             this.TextOutlineMenuButton = new RibbonStyle.RibbonMenuButton();
             this.grouper1 = new CodeVendor.Controls.Grouper();
@@ -93,6 +93,16 @@ namespace DreamBeam {
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             // 
+            // textFormatOptions1
+            // 
+            this.textFormatOptions1.BackColor = System.Drawing.SystemColors.Control;
+            this.textFormatOptions1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textFormatOptions1.Location = new System.Drawing.Point(0, 0);
+            this.textFormatOptions1.Margin = new System.Windows.Forms.Padding(0);
+            this.textFormatOptions1.Name = "textFormatOptions1";
+            this.textFormatOptions1.Size = new System.Drawing.Size(235, 296);
+            this.textFormatOptions1.TabIndex = 0;
+            // 
             // TabContainerPanel
             // 
             this.TabContainerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -103,16 +113,6 @@ namespace DreamBeam {
             this.TabContainerPanel.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.TabContainerPanel.Size = new System.Drawing.Size(245, 329);
             this.TabContainerPanel.TabIndex = 32;
-            // 
-            // textFormatOptions1
-            // 
-            this.textFormatOptions1.BackColor = System.Drawing.SystemColors.Control;
-            this.textFormatOptions1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textFormatOptions1.Location = new System.Drawing.Point(0, 0);
-            this.textFormatOptions1.Margin = new System.Windows.Forms.Padding(0);
-            this.textFormatOptions1.Name = "textFormatOptions1";
-            this.textFormatOptions1.Size = new System.Drawing.Size(235, 296);
-            this.textFormatOptions1.TabIndex = 0;
             // 
             // Design_checkBox
             // 
@@ -266,7 +266,7 @@ namespace DreamBeam {
             this.Controls.Add(this.TextOutlineMenuButton);
             this.Controls.Add(this.grouper1);
             this.Name = "ThemeWidget";
-            this.Size = new System.Drawing.Size(250, 536);
+            this.Size = new System.Drawing.Size(250, 483);
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

@@ -42,7 +42,9 @@ namespace DreamBeam {
 			RegEx_ComboBox.Text = "^" + this.bibleVersion.GetSimpleRef(bookmark, true) + @"\s+.*";
 			int vidx = Query(true);
 			if (vidx >= 0) {
-				mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, vidx, mainForm.Config));
+				//mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, vidx, mainForm.Config));
+                mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, vidx, mainForm.Config, mainForm.bibleThemeWidget.Theme));
+                
 			}
 		}
 
@@ -63,8 +65,8 @@ namespace DreamBeam {
 			int idx = Results.GetCharIndexFromPosition(pt);
 			int l = Results.GetLineFromCharIndex(idx);
 			int vidx = Results.GetVerseIndexFromSelection(idx);
-			Results.CurrentVerse = vidx;
-			mainForm.DisplayPreview.SetContent(new ABibleVerse(bibleVersion, vidx, mainForm.Config));
+			Results.CurrentVerse = vidx;			
+            mainForm.DisplayPreview.SetContent(new ABibleVerse(bibleVersion, vidx, mainForm.Config, mainForm.bibleThemeWidget.Theme));
 
 			//Console.WriteLine("Clicked " + pt + " on line " + l + " at character number " +idx + "(" + c + ").");
 			//Console.WriteLine("Clicked {0} on line {1} at character number {2} ({3}).", pt, l, idx, c);
@@ -94,7 +96,8 @@ namespace DreamBeam {
 				case Keys.Enter:
 					int vidx = Results.GetVerseIndexFromSelection(Results.SelectionStart);
 					Results.CurrentVerse = vidx;
-					mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, vidx, mainForm.Config));
+					//mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, vidx, mainForm.Config));
+                    mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, vidx, mainForm.Config, mainForm.bibleThemeWidget.Theme));
 					mainForm.RightDocks_Preview_GoLive_Click(sender, null);
 					break;
 			}
@@ -177,7 +180,8 @@ namespace DreamBeam {
 				if (index >= 0) {
 					RegEx_ComboBox.Text = "^" + this.bibleVersion.GetSimpleRef(normReference, true) + @"\s+.*";
 					Query(true);
-					mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, index, mainForm.Config));
+					//mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, index, mainForm.Config));
+                    mainForm.DisplayPreview.SetContent(new ABibleVerse(this.bibleVersion, index, mainForm.Config, mainForm.bibleThemeWidget.Theme));
 					if (!Verse_ComboBox.Items.Contains(reference)) {
 						Verse_ComboBox.Items.Insert(0, reference);
 					}

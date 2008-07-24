@@ -242,6 +242,7 @@ namespace DreamBeam {
 
             this.songThemeWidget.Theme = Config.theme.Song;
             this.sermonThemeWidget.Theme = Config.theme.Sermon;
+            this.bibleThemeWidget.Theme = Config.theme.Bible;
             Console.WriteLine("DreamBeam starting up");
         }
 
@@ -2142,7 +2143,8 @@ namespace DreamBeam {
 				} else if (Sermon_DocManager.TabStrips[0].Documents.Count > 0) {
 					fullText = this.Sermon_DocManager.TabStrips[0].Documents[0].Control.Text;
 				}
-				DisplayPreview.SetContent(new TextToolContents(fullText, this.Config));
+                DisplayPreview.SetContent(new TextToolContents(fullText, this.Config, this.sermonThemeWidget.Theme));
+                
 			}
 		}
 
@@ -2564,16 +2566,18 @@ namespace DreamBeam {
         {
             IContentOperations content = DisplayPreview.content;
             if (content != null)
-            {
+            {                
                 // First, let's clear the pre-render cache
                 try
                 {
                     (content as Content).RenderedFramesClear();
                 }
                 catch { }
+                
 
                 switch ((ContentType)content.GetIdentity().Type)
                 {
+                        
                     case ContentType.Song:
                         this.songEditor.Song.UseDesign = this.songThemeWidget.UseDesign;
                         Song s = content as Song;
@@ -2607,56 +2611,18 @@ namespace DreamBeam {
                     case ContentType.BibleVerseIdx:
                     case ContentType.BibleVerseRef:
                     case ContentType.BibleVerse:
-                        if (this.bibleThemeWidget.ThemePath == "" && !this.sermonThemeWidget.UseDesign)
+                        if (this.bibleThemeWidget.ThemePath == "" && !this.bibleThemeWidget.UseDesign)
                         {
                             this.bibleThemeWidget.ThemePath = Config.DefaultThemes.BibleThemePath;
                             string themefile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.BibleThemePath);
                             if (File.Exists(themefile)) this.bibleThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(BibleTheme), themefile);
                         }
                         content.Theme = this.bibleThemeWidget.Theme;
+                        
                         break;
-                }
+                }                
                 DisplayPreview.UpdateDisplay(true);
-            }
-        
-            /*
-            IContentOperations content = this.DisplayPreview.content;
-            
-            if (content != null){
-                try{
-                    (content as Content).RenderedFramesClear();
-                }catch { }
-
-                
-                switch ((ContentType)content.GetIdentity().Type)
-                {
-                    case ContentType.Song:
-                            this.songEditor.Song.UseDesign = this.songThemeWidget.UseDesign;
-                        
-                            Song s = content as Song;
-                            Console.WriteLine(content.GetIdentity().Type.ToString());
-                            if (s != null) //&& String.IsNullOrEmpty(s.ThemePath)
-                            {
-                                if (this.songThemeWidget.ThemePath == "" && !this.songThemeWidget.UseDesign)
-                                {
-                                    this.songThemeWidget.ThemePath = Config.DefaultThemes.SongThemePath;                                  
-                                    string themefile =Path.Combine(Tools.GetDirectory(DirType.DataRoot),Config.DefaultThemes.SongThemePath);    
-
-                                    if (File.Exists(themefile)) this.songThemeWidget.Theme=(Theme)Theme.DeserializeFrom(typeof(SongTheme), themefile);
-                                }                                
-                                content.Theme = this.songThemeWidget.Theme;                                
-                            }
-                            else
-                            {
-                                // This is a song with a custom theme. Don't override with default.
-                            }
-                            break;
-                        
-                }
-                DisplayPreview.UpdateDisplay(true);
-            }
-             */
-
+            }                 
         }
 
 
@@ -2695,8 +2661,8 @@ namespace DreamBeam {
         {
             this.bibleThemeWidget.Left = this.BibleDesignTab.Width / 2 - this.bibleThemeWidget.Width / 2;
             this.bibleThemeWidget.Left = this.BibleDesignTab.Height / 2 - this.bibleThemeWidget.Height / 2;
-        } 
-
+        }
+     
 
 
 	}
