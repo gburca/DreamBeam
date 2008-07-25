@@ -885,6 +885,7 @@ namespace DreamBeam {
 				float version=0;
 				try {
 					version = float.Parse(versionNode.InnerText);
+                    if (version < 0) version = version * 100; // a Localization bug might exist - this would fix it
 				} catch {
 					version = 0;
 				}                                
