@@ -1,3 +1,7 @@
+0.83
+Stefan Kaufmann
+
+
 0.81
 Gabriel Burca:
 - Fixed the encoding of text obtained from Sword (completely replaced the old Sword

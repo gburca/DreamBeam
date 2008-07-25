@@ -167,11 +167,26 @@ namespace DreamBeam {
 			this.Theme.SaveAs();
 		}
 
+        public void LoadFile(Type _themetype, string path)
+        {
+            this.themeType = _themetype;
+            if (File.Exists(path))
+            {
+                Theme t = (Theme)Theme.DeserializeFrom(themeType, path);
+                if (t != null)
+                {
+                    this.Theme = t;
+                    this.UseDesign = false;
+                    this.ThemePath = t.ThemeFile;
+                    NotifyControlChangeListeners();
+                }
+            }
+        }
+
 		private void openBtn_Click(object sender, EventArgs e) {			            
             Theme t = (Theme)this.themeType.GetMethod("OpenFile").Invoke(null, null);            
             try
-            {
-                //this.Theme = new SongTheme(); 
+            {                
                 if (t != null)
                 {
                     this.Theme = t;

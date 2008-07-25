@@ -240,9 +240,12 @@ namespace DreamBeam {
 			this.axShockwaveFlash.BackgroundColor = Color.Black.ToArgb();
 			this.Presentation_PreviewBox.BackColor = Color.Black;
 
-            this.songThemeWidget.Theme = Config.theme.Song;
-            this.sermonThemeWidget.Theme = Config.theme.Sermon;
-            this.bibleThemeWidget.Theme = Config.theme.Bible;
+            
+            this.songThemeWidget.LoadFile(new SongTheme().GetType(), Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SongThemePath));
+            this.sermonThemeWidget.LoadFile(new SermonTheme().GetType(), Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SermonThemePath));
+            this.sermonThemeWidget.UseDesign = true;
+            this.bibleThemeWidget.LoadFile(new BibleTheme().GetType(), Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.BibleThemePath));
+            this.bibleThemeWidget.UseDesign = true;
             Console.WriteLine("DreamBeam starting up");
         }
 

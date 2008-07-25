@@ -46,8 +46,7 @@ namespace DreamBeam {
             get { return blendSpeed; }
             set { blendSpeed = Math.Min(Math.Max(1, value), 255); }
         }
-		public bool useDirect3D = false;
-		//public float OutlineSize = 3;
+		public bool useDirect3D = false;		
 		public string BibleLang = "en";
 		public string LastBibleUsed = "";
 		public bool ShowBibleTranslation = false;
@@ -181,7 +180,22 @@ namespace DreamBeam {
 			config.theme.Bible.CreateTextFormats(Enum.GetValues(typeof(BibleTextType)).Length);
 			config.theme.Song.CreateTextFormats(Enum.GetValues(typeof(SongTextType)).Length);
 			config.theme.Sermon.CreateTextFormats(Enum.GetValues(typeof(TextToolType)).Length);
-			
+
+
+            
+            if (config.DefaultThemes.SongThemePath != "" && File.Exists(Path.Combine(Tools.GetDirectory(DirType.DataRoot), config.DefaultThemes.SongThemePath)))
+            {
+                config.theme.Song.ThemeFile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), config.DefaultThemes.SongThemePath);
+            }
+            else if (File.Exists(Path.Combine(Tools.GetDirectory(DirType.DataRoot), "Themes\\Default.SongTheme.xml")))
+            {                
+                config.DefaultThemes.SongThemePath = "Themes\\Default.SongTheme.xml";
+                config.theme.Song.ThemeFile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), config.DefaultThemes.SongThemePath);
+            }
+
+
+
+
 			return config;
 		}
 

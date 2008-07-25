@@ -67,11 +67,11 @@ namespace DreamBeam {
 			 * After the first widget is configured, the yet-unconfigured ones will
 			 * return a "default" SongTheme which can't be typecast to a Bible or SermonTheme.
 			 */
-			if (!loadComplete) return;
+		/*	if (!loadComplete) return;
 			HandleThemeChange(
 				this.songThemeWidget.Theme as SongTheme,
 				this.bibleFormatWidget.Theme as BibleTheme,
-				this.sermonThemeWidget.Theme as SermonTheme);
+				this.sermonThemeWidget.Theme as SermonTheme);*/
 		}
 
 		/// <summary>
@@ -174,9 +174,9 @@ namespace DreamBeam {
 			}
 
 			config.RememberPanelLocations = this.Options_PanelLocations_checkBox.Checked;
-			config.theme.Song = this.songThemeWidget.Theme as SongTheme;
-			config.theme.Bible = this.bibleFormatWidget.Theme as BibleTheme;
-			config.theme.Sermon = this.sermonThemeWidget.Theme as SermonTheme;
+			//config.theme.Song = this.songThemeWidget.Theme as SongTheme;
+			//config.theme.Bible = this.bibleFormatWidget.Theme as BibleTheme;
+			//config.theme.Sermon = this.sermonThemeWidget.Theme as SermonTheme;
 
 			IContentOperations content = _MainForm.DisplayPreview.content;
 			if (content != null) content.ShowRectangles = false;
@@ -197,11 +197,14 @@ namespace DreamBeam {
 			if (oldMode != config.AppOperatingMode) {
 				_MainForm.InitDisplays();
 			}
-			
-			// Temporary workaround
-            config.DefaultThemes.SongThemePath = "Themes\\Default.SongTheme.xml";
-            config.DefaultThemes.SermonThemePath = "Themes\\Default.SermonTheme.xml";
-            config.DefaultThemes.BibleThemePath = "Themes\\Default.BibleTheme.xml";
+
+            string s = (String)DefaultSongFormatListBox.SelectedItem;
+            config.DefaultThemes.SongThemePath = Path.Combine("Themes\\",s+".SongTheme.xml");
+            s = (String)DefaultSermonFormatListBox.SelectedItem;
+            config.DefaultThemes.SermonThemePath = Path.Combine("Themes\\", s + ".SermonTheme.xml");
+            s = (String)DefaultBibleFormatListBox.SelectedItem;
+            config.DefaultThemes.BibleThemePath = Path.Combine("Themes\\", s + ".BibleTheme.xml");
+
 
 			config.Options_DataSet = this.Options_DataSet;
 			this.Options_DataSet.WriteXml(Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml"), XmlWriteMode.WriteSchema);
@@ -302,10 +305,10 @@ namespace DreamBeam {
 			if (!String.IsNullOrEmpty(this.Sword_LanguageBox.Text)) {
 				SetBibleLocale(this._MainForm.bibles, config.SwordPath, this.Sword_LanguageBox.Text);
 			}
-
-			this.songThemeWidget.Theme = config.theme.Song;
-			this.bibleFormatWidget.Theme = config.theme.Bible;
-			this.sermonThemeWidget.Theme = config.theme.Sermon;
+            this.ListThemes(config);
+			//this.songThemeWidget.Theme = config.theme.Song;
+			//this.bibleFormatWidget.Theme = config.theme.Bible;
+			//this.sermonThemeWidget.Theme = config.theme.Sermon;
 
 			this.loadComplete = true;
 		}
@@ -316,6 +319,36 @@ namespace DreamBeam {
 				this.showBeamBackground = this.colorDialog1.Color;
 			}
 		}
+
+        private void ListThemes(Config config){
+
+            this.DefaultSongFormatListBox.Items.Clear();
+            this.DefaultBibleFormatListBox.Items.Clear();
+            this.DefaultSermonFormatListBox.Items.Clear();
+            
+            DirectoryInfo di = new DirectoryInfo(Tools.GetDirectory(DirType.Themes));
+            
+            FileInfo[] rgFiles = di.GetFiles("*.SongTheme.xml");
+            foreach (FileInfo fi in rgFiles)
+            {
+                this.DefaultSongFormatListBox.Items.Add(Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(fi.Name)));
+                if (Path.GetFileName(config.DefaultThemes.SongThemePath).ToLower() == Path.GetFileName(fi.Name).ToLower()) this.DefaultSongFormatListBox.SelectedIndex = this.DefaultSongFormatListBox.Items.Count - 1;                
+            }
+
+            rgFiles = di.GetFiles("*.BibleTheme.xml");
+            foreach (FileInfo fi in rgFiles)
+            {
+                this.DefaultBibleFormatListBox.Items.Add(Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(fi.Name)));
+                if (Path.GetFileName(config.DefaultThemes.BibleThemePath).ToLower() == Path.GetFileName(fi.Name).ToLower()) this.DefaultBibleFormatListBox.SelectedIndex = this.DefaultBibleFormatListBox.Items.Count - 1;                                
+            }
+
+            rgFiles = di.GetFiles("*.SermonTheme.xml");
+            foreach (FileInfo fi in rgFiles)
+            {
+                this.DefaultSermonFormatListBox.Items.Add(Path.GetFileNameWithoutExtension((Path.GetFileNameWithoutExtension(fi.Name))));
+                if (Path.GetFileName(config.DefaultThemes.SermonThemePath).ToLower() == Path.GetFileName(fi.Name).ToLower()) this.DefaultSermonFormatListBox.SelectedIndex = this.DefaultSermonFormatListBox.Items.Count - 1;                                
+            }            
+        }
 
 		#region SizePosition
 
@@ -660,17 +693,7 @@ namespace DreamBeam {
 			}
 		}
 
-		private void songThemeWidget_ControlChangedEvent(object sender, EventArgs e) {            
-			HandleThemeChange();
-		}
-
-		private void bibleFormatWidget_ControlChangedEvent(object sender, EventArgs e) {
-			HandleThemeChange();
-		}
-
-		private void sermonThemeWidget_ControlChangedEvent(object sender, EventArgs e) {
-			HandleThemeChange();
-        }
+		
 
         private void BibleConversions_dataGrid_enable(bool enabled) {
             if (enabled) {
@@ -693,6 +716,11 @@ namespace DreamBeam {
             } else {
                 BibleConversions_dataGrid_enable(true);
             }
+        }
+
+        private void openDataDirectoryButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer", Tools.GetDirectory(DirType.DataRoot));
         }
 
 	}
