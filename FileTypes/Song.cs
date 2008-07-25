@@ -245,7 +245,7 @@ namespace DreamBeam {
 		///	This constructor is mainly used when importing songs stored in this text format.
 		/// </summary>
 		/// <param name="fileName"></param>
-		public Song(string fileName) : this() {
+		public Song(string fileName) : this() {            
 			// If BOM is present, read the file as Unicode, else default to UTF-8
 			string[] lines;
 			Regex r;
@@ -266,7 +266,7 @@ namespace DreamBeam {
 				r = new Regex(@"\s*(verse|chorus)\s+(\d+):", RegexOptions.IgnoreCase);
 				m = r.Match(line);
 
-				if (m.Success && m.Groups.Count == 3) {
+				if (m.Success && m.Groups.Count == 3) {                    
 					// This is the beginning of a verse or chorus
 					if (currItem != null) this.SongLyrics.Add(currItem);
 					if (m.Groups[1].Value.ToLower() == "verse") {
@@ -866,8 +866,7 @@ namespace DreamBeam {
 				xmlDoc.Load(file);
 			} catch {
 				return new Song(config);
-			}
-
+			}            
 			Song s = null;
 			bool newSong = false;
 
@@ -883,21 +882,21 @@ namespace DreamBeam {
 			//XmlNodeList nodes = xmlDoc.GetElementsByTagName("Version");
 
 			if (versionNode != null) {
-				float version;
+				float version=0;
 				try {
 					version = float.Parse(versionNode.InnerText);
 				} catch {
 					version = 0;
-				}
+				}                                
+				if (version < 50) {
 
-				if (version <= 0.49F) {
 					OldSong oldS = new OldSong(file);
 					if (oldS.strophe_count > 0) {
 						s = new Song(config, oldS);
 					} else {
 						s = new Song(config);
 					}
-				} else if (version <= 0.71F || newSong) {
+				} else if (version <= 71 || newSong) {
 					/* Prior to version 0.72 old songs were saved with NewSong XML root
 					 * instead of DreamSong and contained an node called BGImagePath. The
 					 * BGImagePath has now been generalized to ThemePath.
