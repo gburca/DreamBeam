@@ -306,7 +306,6 @@ namespace DreamBeam {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
             this.Presentation_MediaLoop_Checkbox = new System.Windows.Forms.CheckBox();
-            this.liveMediaControls = new DreamBeam.MediaControls();
             this.RightDocks_ImageListBox = new Controls.Development.ImageListBox();
             this.ImageContext = new System.Windows.Forms.ContextMenu();
             this.ImageContextItemManage = new System.Windows.Forms.MenuItem();
@@ -420,11 +419,8 @@ namespace DreamBeam {
             this.DockControl_DesignEditor = new TD.SandDock.DockControl();
             this.DesignTabControl = new System.Windows.Forms.TabControl();
             this.SongDesignTab = new System.Windows.Forms.TabPage();
-            this.songThemeWidget = new DreamBeam.ThemeWidget();
             this.SermonDesignTab = new System.Windows.Forms.TabPage();
-            this.sermonThemeWidget = new DreamBeam.ThemeWidget();
             this.BibleDesignTab = new System.Windows.Forms.TabPage();
-            this.bibleThemeWidget = new DreamBeam.ThemeWidget();
             this.DockControl_Songs = new TD.SandDock.DockControl();
             this.SongList_Tree = new ControlLib.dbTreeViewCtrl();
             this.DockControl_PlayList = new TD.SandDock.DockControl();
@@ -504,16 +500,13 @@ namespace DreamBeam {
             this.Presentation_MovieControlPanel = new System.Windows.Forms.Panel();
             this.Presentation_MovieControlPanelBottom = new System.Windows.Forms.Panel();
             this.Presentation_MovieControl_PreviewButtonPanel = new System.Windows.Forms.Panel();
-            this.previewMediaControls = new DreamBeam.MediaControls();
             this.Presentation_MovieControlPanel_Top = new System.Windows.Forms.Panel();
             this.Media_TrackBar = new System.Windows.Forms.TrackBar();
             this.Presentation_MovieControlPanel_Right = new System.Windows.Forms.Panel();
             this.muteButton = new System.Windows.Forms.Button();
             this.AudioBar = new System.Windows.Forms.TrackBar();
             this.EditSongs_Tab = new System.Windows.Forms.TabPage();
-            this.songEditor = new DreamBeam.SongEditor();
             this.BibleText_Tab = new System.Windows.Forms.TabPage();
-            this.bibleTextControl = new DreamBeam.BibleText();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.GlobalDataSet = new System.Data.DataSet();
@@ -526,6 +519,14 @@ namespace DreamBeam {
             this.dataColumn1 = new System.Data.DataColumn();
             this.dataColumn2 = new System.Data.DataColumn();
             this.SongListDataView = new System.Data.DataView();
+            this.HideRectanglesTimer = new System.Windows.Forms.Timer(this.components);
+            this.songEditor = new DreamBeam.SongEditor();
+            this.liveMediaControls = new DreamBeam.MediaControls();
+            this.previewMediaControls = new DreamBeam.MediaControls();
+            this.bibleTextControl = new DreamBeam.BibleText();
+            this.songThemeWidget = new DreamBeam.ThemeWidget();
+            this.sermonThemeWidget = new DreamBeam.ThemeWidget();
+            this.bibleThemeWidget = new DreamBeam.ThemeWidget();
             Presentation_MovieControl_LiveButtonPanel = new System.Windows.Forms.Panel();
             Presentation_MovieControl_LiveButtonPanel.SuspendLayout();
             this.RightDocks_Songlist_SearchPanel.SuspendLayout();
@@ -629,19 +630,6 @@ namespace DreamBeam {
             this.Presentation_MediaLoop_Checkbox.TabIndex = 4;
             this.Presentation_MediaLoop_Checkbox.Text = "Loop";
             this.Presentation_MediaLoop_Checkbox.CheckedChanged += new System.EventHandler(this.Presentation_MediaLoop_Checkbox_CheckedChanged);
-            // 
-            // liveMediaControls
-            // 
-            this.liveMediaControls.BackColor = System.Drawing.Color.Maroon;
-            this.liveMediaControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.liveMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.liveMediaControls.LabelColor = System.Drawing.Color.White;
-            this.liveMediaControls.LabelText = "Live Window";
-            this.liveMediaControls.Location = new System.Drawing.Point(0, 26);
-            this.liveMediaControls.Name = "liveMediaControls";
-            this.liveMediaControls.Size = new System.Drawing.Size(234, 81);
-            this.liveMediaControls.TabIndex = 5;
-            this.liveMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.liveMediaControls_MediaButtonPressed);
             // 
             // RightDocks_ImageListBox
             // 
@@ -1850,23 +1838,8 @@ namespace DreamBeam {
             this.SongDesignTab.Padding = new System.Windows.Forms.Padding(3);
             this.SongDesignTab.Size = new System.Drawing.Size(216, 242);
             this.SongDesignTab.TabIndex = 0;
+            this.SongDesignTab.MouseMove += new System.Windows.Forms.MouseEventHandler(this.songThemeWidget_MouseMove);
             this.SongDesignTab.SizeChanged += new System.EventHandler(this.SongDesignTab_SizeChanged);
-            // 
-            // songThemeWidget
-            // 
-            this.songThemeWidget.BGImagePath = "Image";
-            this.songThemeWidget.Location = new System.Drawing.Point(31, 0);
-            this.songThemeWidget.Name = "songThemeWidget";
-            this.songThemeWidget.Size = new System.Drawing.Size(255, 420);
-            this.songThemeWidget.TabIndex = 2;
-            this.songThemeWidget.TabNames = new string[] {
-        "Title",
-        "Verse",
-        "Author",
-        "Key"};
-            this.songThemeWidget.ThemePath = "";
-            this.songThemeWidget.UseDesign = false;
-            this.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
             // 
             // SermonDesignTab
             // 
@@ -1875,23 +1848,9 @@ namespace DreamBeam {
             this.SermonDesignTab.Location = new System.Drawing.Point(4, 22);
             this.SermonDesignTab.Name = "SermonDesignTab";
             this.SermonDesignTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SermonDesignTab.Size = new System.Drawing.Size(316, 242);
+            this.SermonDesignTab.Size = new System.Drawing.Size(216, 242);
             this.SermonDesignTab.TabIndex = 1;
             this.SermonDesignTab.SizeChanged += new System.EventHandler(this.SermonDesignTab_SizeChanged);
-            // 
-            // sermonThemeWidget
-            // 
-            this.sermonThemeWidget.BGImagePath = "Image";
-            this.sermonThemeWidget.Location = new System.Drawing.Point(29, 0);
-            this.sermonThemeWidget.Name = "sermonThemeWidget";
-            this.sermonThemeWidget.Size = new System.Drawing.Size(255, 420);
-            this.sermonThemeWidget.TabIndex = 1;
-            this.sermonThemeWidget.TabNames = new string[] {
-        "1st line",
-        "Other lines"};
-            this.sermonThemeWidget.ThemePath = "";
-            this.sermonThemeWidget.UseDesign = false;
-            this.sermonThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
             // 
             // BibleDesignTab
             // 
@@ -1900,24 +1859,9 @@ namespace DreamBeam {
             this.BibleDesignTab.Location = new System.Drawing.Point(4, 22);
             this.BibleDesignTab.Name = "BibleDesignTab";
             this.BibleDesignTab.Padding = new System.Windows.Forms.Padding(3);
-            this.BibleDesignTab.Size = new System.Drawing.Size(316, 242);
+            this.BibleDesignTab.Size = new System.Drawing.Size(216, 242);
             this.BibleDesignTab.TabIndex = 2;
             this.BibleDesignTab.SizeChanged += new System.EventHandler(this.BibleDesignTab_SizeChanged);
-            // 
-            // bibleThemeWidget
-            // 
-            this.bibleThemeWidget.BGImagePath = "Image";
-            this.bibleThemeWidget.Location = new System.Drawing.Point(31, 0);
-            this.bibleThemeWidget.Name = "bibleThemeWidget";
-            this.bibleThemeWidget.Size = new System.Drawing.Size(255, 423);
-            this.bibleThemeWidget.TabIndex = 1;
-            this.bibleThemeWidget.TabNames = new string[] {
-        "Verse",
-        "Reference",
-        "Translation"};
-            this.bibleThemeWidget.ThemePath = "";
-            this.bibleThemeWidget.UseDesign = false;
-            this.bibleThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
             // 
             // DockControl_Songs
             // 
@@ -2737,19 +2681,6 @@ namespace DreamBeam {
             this.Presentation_MovieControl_PreviewButtonPanel.Size = new System.Drawing.Size(234, 107);
             this.Presentation_MovieControl_PreviewButtonPanel.TabIndex = 3;
             // 
-            // previewMediaControls
-            // 
-            this.previewMediaControls.BackColor = System.Drawing.SystemColors.Control;
-            this.previewMediaControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.previewMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.previewMediaControls.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.previewMediaControls.LabelText = "Preview Window";
-            this.previewMediaControls.Location = new System.Drawing.Point(0, 26);
-            this.previewMediaControls.Name = "previewMediaControls";
-            this.previewMediaControls.Size = new System.Drawing.Size(234, 81);
-            this.previewMediaControls.TabIndex = 2;
-            this.previewMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.previewMediaControls_MediaButtonPressed);
-            // 
             // Presentation_MovieControlPanel_Top
             // 
             this.Presentation_MovieControlPanel_Top.Controls.Add(this.Media_TrackBar);
@@ -2818,15 +2749,6 @@ namespace DreamBeam {
             this.EditSongs_Tab.TabIndex = 6;
             this.EditSongs_Tab.Text = "Edit Songs";
             // 
-            // songEditor
-            // 
-            this.songEditor.Collections = new string[0];
-            this.songEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.songEditor.Location = new System.Drawing.Point(0, 0);
-            this.songEditor.Name = "songEditor";
-            this.songEditor.Size = new System.Drawing.Size(383, 492);
-            this.songEditor.TabIndex = 0;
-            // 
             // BibleText_Tab
             // 
             this.BibleText_Tab.Controls.Add(this.bibleTextControl);
@@ -2835,14 +2757,6 @@ namespace DreamBeam {
             this.BibleText_Tab.Size = new System.Drawing.Size(383, 492);
             this.BibleText_Tab.TabIndex = 5;
             this.BibleText_Tab.Text = "Bible Text";
-            // 
-            // bibleTextControl
-            // 
-            this.bibleTextControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bibleTextControl.Location = new System.Drawing.Point(0, 0);
-            this.bibleTextControl.Name = "bibleTextControl";
-            this.bibleTextControl.Size = new System.Drawing.Size(383, 492);
-            this.bibleTextControl.TabIndex = 3;
             // 
             // tabControl1
             // 
@@ -2918,6 +2832,100 @@ namespace DreamBeam {
             // SongListDataView
             // 
             this.SongListDataView.Table = this.SongListTable;
+            // 
+            // HideRectanglesTimer
+            // 
+            this.HideRectanglesTimer.Interval = 10000;
+            this.HideRectanglesTimer.Tick += new System.EventHandler(this.HideRectanglesTimer_Tick);
+            // 
+            // songEditor
+            // 
+            this.songEditor.Collections = new string[0];
+            this.songEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.songEditor.Location = new System.Drawing.Point(0, 0);
+            this.songEditor.Name = "songEditor";
+            this.songEditor.Size = new System.Drawing.Size(383, 492);
+            this.songEditor.TabIndex = 0;
+            // 
+            // liveMediaControls
+            // 
+            this.liveMediaControls.BackColor = System.Drawing.Color.Maroon;
+            this.liveMediaControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.liveMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.liveMediaControls.LabelColor = System.Drawing.Color.White;
+            this.liveMediaControls.LabelText = "Live Window";
+            this.liveMediaControls.Location = new System.Drawing.Point(0, 26);
+            this.liveMediaControls.Name = "liveMediaControls";
+            this.liveMediaControls.Size = new System.Drawing.Size(234, 81);
+            this.liveMediaControls.TabIndex = 5;
+            this.liveMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.liveMediaControls_MediaButtonPressed);
+            // 
+            // previewMediaControls
+            // 
+            this.previewMediaControls.BackColor = System.Drawing.SystemColors.Control;
+            this.previewMediaControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.previewMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.previewMediaControls.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.previewMediaControls.LabelText = "Preview Window";
+            this.previewMediaControls.Location = new System.Drawing.Point(0, 26);
+            this.previewMediaControls.Name = "previewMediaControls";
+            this.previewMediaControls.Size = new System.Drawing.Size(234, 81);
+            this.previewMediaControls.TabIndex = 2;
+            this.previewMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.previewMediaControls_MediaButtonPressed);
+            // 
+            // bibleTextControl
+            // 
+            this.bibleTextControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bibleTextControl.Location = new System.Drawing.Point(0, 0);
+            this.bibleTextControl.Name = "bibleTextControl";
+            this.bibleTextControl.Size = new System.Drawing.Size(383, 492);
+            this.bibleTextControl.TabIndex = 3;
+            // 
+            // songThemeWidget
+            // 
+            this.songThemeWidget.BGImagePath = "Image";
+            this.songThemeWidget.Location = new System.Drawing.Point(31, 0);
+            this.songThemeWidget.Name = "songThemeWidget";
+            this.songThemeWidget.Size = new System.Drawing.Size(255, 420);
+            this.songThemeWidget.TabIndex = 2;
+            this.songThemeWidget.TabNames = new string[] {
+        "Title",
+        "Verse",
+        "Author",
+        "Key"};
+            this.songThemeWidget.ThemePath = "";
+            this.songThemeWidget.UseDesign = false;
+            this.songThemeWidget.MouseMove += new System.Windows.Forms.MouseEventHandler(this.songThemeWidget_MouseMove);
+            this.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
+            // 
+            // sermonThemeWidget
+            // 
+            this.sermonThemeWidget.BGImagePath = "Image";
+            this.sermonThemeWidget.Location = new System.Drawing.Point(29, 0);
+            this.sermonThemeWidget.Name = "sermonThemeWidget";
+            this.sermonThemeWidget.Size = new System.Drawing.Size(255, 420);
+            this.sermonThemeWidget.TabIndex = 1;
+            this.sermonThemeWidget.TabNames = new string[] {
+        "1st line",
+        "Other lines"};
+            this.sermonThemeWidget.ThemePath = "";
+            this.sermonThemeWidget.UseDesign = false;
+            this.sermonThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
+            // 
+            // bibleThemeWidget
+            // 
+            this.bibleThemeWidget.BGImagePath = "Image";
+            this.bibleThemeWidget.Location = new System.Drawing.Point(31, 0);
+            this.bibleThemeWidget.Name = "bibleThemeWidget";
+            this.bibleThemeWidget.Size = new System.Drawing.Size(255, 423);
+            this.bibleThemeWidget.TabIndex = 1;
+            this.bibleThemeWidget.TabNames = new string[] {
+        "Verse",
+        "Reference",
+        "Translation"};
+            this.bibleThemeWidget.ThemePath = "";
+            this.bibleThemeWidget.UseDesign = false;
+            this.bibleThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
             // 
             // MainForm
             // 
@@ -3047,6 +3055,7 @@ namespace DreamBeam {
         public System.Windows.Forms.TabPage BibleDesignTab;
         public ThemeWidget sermonThemeWidget;
         public ThemeWidget bibleThemeWidget;
+        private System.Windows.Forms.Timer HideRectanglesTimer;
 
 
 	}

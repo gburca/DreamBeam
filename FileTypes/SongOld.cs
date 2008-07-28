@@ -383,6 +383,7 @@ namespace DreamBeam {
 		}
 
 		public OldSong(string filename) {
+            
 			this.Init("New Song");
 			this.Load(filename);
 		}

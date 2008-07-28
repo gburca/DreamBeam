@@ -195,17 +195,111 @@ namespace DreamBeam {
 		}
 
 		#region Constructors
-		public Song(Config conf, OldSong s) : this(conf) {
-			this.Title = s.GetText(0);
-			this.FileName = s.SongName;
-			this.Author = s.GetText(2);
-			this.BGImagePath = s.bg_image;
-			this.SetLyrics(LyricsType.Verse, s.GetText(1), conf.SongVerseSeparator);
-			this.DualLanguage = s.MultiLang;
-			this.Collection = "Version 0.60 Format";
-            this.UseDesign = false;
-			CreateSimpleSequence();
-		}
+        public Song(Config conf, OldSong s)
+            : this(conf)
+        {
+            
+            this.Title = s.GetText(0);
+            this.FileName = s.SongName;
+            this.Author = s.GetText(2);
+            this.BGImagePath = s.bg_image;
+            this.SetLyrics(LyricsType.Verse, s.GetText(1), conf.SongVerseSeparator);
+            this.DualLanguage = s.MultiLang;
+            this.Collection = "Version 0.60 Format";
+            if (s.windowHeight == null) { s.windowHeight = conf.BeamBoxSizeY; s.windowWidth = conf.BeamBoxSizeX; }
+            for (int i = 0; i < 3; i++)
+            {                
+                this.Theme.TextFormat[i].Effects = s.TextEffect[i];
+                float size = (float)conf.BeamBoxSizeY * (float)s.FontSize[i] / (float)s.windowHeight;
+                this.Theme.TextFormat[i].TextFont = new Font(s.FontFace[i], size, s.FontStyle[i]);
+                this.Theme.TextFormat[i].OutlineSize = 6 - (2 * i);
+                this.Theme.TextFormat[i].OutlineColor = s.OutlineColor[i];
+                this.Theme.TextFormat[i].TextColor = s.TextColor[i];
+                switch (s.TextAlign)
+                {
+                    case "left":
+                        this.Theme.TextFormat[i].HAlignment = StringAlignment.Near;
+                    break;
+                    case "center":
+                        this.Theme.TextFormat[i].HAlignment = StringAlignment.Center;
+                    break;
+                    case "right":
+                        this.Theme.TextFormat[i].HAlignment = StringAlignment.Far;  
+                    break;
+                }
+               
+                if (s.AutoPos[i])
+                {
+                    this.Theme.TextFormat[i].VAlignment = StringAlignment.Center;
+
+                    this.Theme.TextFormat[i].Bounds.Width = 94;
+                    this.Theme.TextFormat[i].Bounds.X = 3;
+                    switch (i)
+                    {
+                        case 0:
+                            this.Theme.TextFormat[i].Bounds.Y = 5;
+                            this.Theme.TextFormat[i].Bounds.Height = 9;
+                            break;
+                        case 1:
+
+                            this.Theme.TextFormat[i].Bounds.Y = 15;
+                            this.Theme.TextFormat[i].Bounds.Height = 80;
+
+                            break;
+                        case 2:
+                            this.Theme.TextFormat[i].Bounds.Y = 95;
+                            this.Theme.TextFormat[i].Bounds.Height = 4;
+                            break;
+                    }
+                }
+                else
+                {
+                    this.Theme.TextFormat[i].VAlignment = StringAlignment.Near;
+                    float x = (float)s.posX[i] * (float)100 / (float)s.windowWidth;                                        
+                    float y =  (float)s.posY[i] * (float)100 / (float)s.windowHeight;                    
+                    switch (this.Theme.TextFormat[i].HAlignment)
+                    {
+                        case StringAlignment.Near:
+                            this.Theme.TextFormat[i].Bounds.X = x;
+                            this.Theme.TextFormat[i].Bounds.Width = 100 - x - 1;
+                            break;
+                        case StringAlignment.Center:
+                            if (x >= 50)
+                            {
+                                
+                                this.Theme.TextFormat[i].Bounds.X = x - (100 - x);
+                                if (this.Theme.TextFormat[i].Bounds.X < 1) this.Theme.TextFormat[i].Bounds.X = 1; 
+                                this.Theme.TextFormat[i].Bounds.Width = (100 - x)*2;
+                                while (this.Theme.TextFormat[i].Bounds.Width + this.Theme.TextFormat[i].Bounds.X >99){
+                                    this.Theme.TextFormat[i].Bounds.Width--;
+                                }
+
+                            }
+                            else
+                            {
+                                this.Theme.TextFormat[i].Bounds.X = 1;
+                                this.Theme.TextFormat[i].Bounds.Width = x * 2;
+                            }
+                            break;
+                        case StringAlignment.Far:
+                            this.Theme.TextFormat[i].Bounds.X = 1;
+                            this.Theme.TextFormat[i].Bounds.Width = x-1;
+                            break;
+
+                    }
+                    this.Theme.TextFormat[i].Bounds.Y = y;
+                    this.Theme.TextFormat[i].Bounds.Height = 100-y;
+                }
+
+
+
+
+
+        //s.TextEffect
+        this.UseDesign = true;
+                CreateSimpleSequence();
+            }
+        }
 
 		public Song() {
 			this.enumType = typeof(SongTextType);
@@ -861,6 +955,7 @@ namespace DreamBeam {
 		}
 
 		public static object DeserializeFrom(string file, int strophe, Config config) {
+           
 			XmlDocument xmlDoc = new XmlDocument();
 			try {
 				xmlDoc.Load(file);
@@ -880,19 +975,19 @@ namespace DreamBeam {
 				versionNode = xmlDoc.SelectSingleNode(@"/DreamSong/Version");
 			}
 			//XmlNodeList nodes = xmlDoc.GetElementsByTagName("Version");
-
-			if (versionNode != null) {
+            Console.WriteLine("Loading: " + file);
+			if (versionNode != null) {                
 				float version=0;
 				try {
 					version = float.Parse(versionNode.InnerText);
-                    if (version < 0) version = version * 100; // a Localization bug might exist - this would fix it
+                    if (version < 5) version = version * 100; // a Localization bug might exist - this would fix it
 				} catch {
 					version = 0;
 				}                                
-				if (version < 50) {
-
-					OldSong oldS = new OldSong(file);
+				if (version < 50) {                    
+					OldSong oldS = new OldSong(file);                    
 					if (oldS.strophe_count > 0) {
+                        
 						s = new Song(config, oldS);
 					} else {
 						s = new Song(config);
@@ -936,15 +1031,6 @@ namespace DreamBeam {
 					// Hide the theme path so it doesn't look like the song has a custom theme.
 					s.Theme.ThemeFile = null;
 				}
-
-                if (s.UseDesign)
-                {
-
-                    Console.WriteLine(s.Theme.ThemeFile);
-                    
-                    // s.Theme.
-
-                }
 
 				s.config = config;
 				s.CurrentLyric = strophe;

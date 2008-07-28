@@ -120,15 +120,13 @@ namespace DreamBeam {
                     this.BGImagePathLabel.Text = "";
 				}
                 if(!UseDesign) this.ThemePath = value.ThemeFile;
-                Console.WriteLine("ThemeWidget.Theme.set");
 				for (int i = 0; i < Math.Min(value.TextFormat.Length, tabControl.TabPages.Count); i++) {
 					getFormatControl(i).Format = value.TextFormat[i];
 				}
                 this.changingControls = false;
 			}
             get
-            {
-                Console.WriteLine("ThemeWidget.Theme.get");
+            {                
                 int tabs = tabControl.TabPages.Count;
                 Theme theme;
                 if (this.themeType != null)

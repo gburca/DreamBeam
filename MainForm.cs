@@ -2576,8 +2576,8 @@ namespace DreamBeam {
                     (content as Content).RenderedFramesClear();
                 }
                 catch { }
-                
 
+                content.ShowRectangles = true;
                 switch ((ContentType)content.GetIdentity().Type)
                 {
                         
@@ -2665,6 +2665,33 @@ namespace DreamBeam {
             this.bibleThemeWidget.Left = this.BibleDesignTab.Width / 2 - this.bibleThemeWidget.Width / 2;
             this.bibleThemeWidget.Left = this.BibleDesignTab.Height / 2 - this.bibleThemeWidget.Height / 2;
         }
+
+        private void songThemeWidget_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (DisplayPreview.content != null)
+            {
+                HideRectanglesTimer.Start();
+                if (!DisplayPreview.content.ShowRectangles)
+                {
+                    DisplayPreview.content.ShowRectangles = true;
+                    DisplayPreview.UpdateDisplay(true);
+                }
+            }
+        }
+
+        private void HideRectanglesTimer_Tick(object sender, EventArgs e)
+        {
+            if (DisplayPreview.content != null)
+            {
+                if (DisplayPreview.content.ShowRectangles)
+                {
+                    DisplayPreview.content.ShowRectangles = false;
+                    DisplayPreview.UpdateDisplay(true);
+                }
+            }
+        }
+
+      
      
 
 

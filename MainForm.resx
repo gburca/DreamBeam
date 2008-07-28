@@ -32374,4 +32374,7 @@
   <metadata name="SongListDataView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>553, 62</value>
   </metadata>
+  <metadata name="HideRectanglesTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>702, 62</value>
+  </metadata>
 </root>
