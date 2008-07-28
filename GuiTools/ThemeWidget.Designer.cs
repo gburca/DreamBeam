@@ -101,7 +101,7 @@ namespace DreamBeam {
             this.textFormatOptions1.Margin = new System.Windows.Forms.Padding(0);
             this.textFormatOptions1.Name = "textFormatOptions1";
             this.textFormatOptions1.Size = new System.Drawing.Size(235, 296);
-            this.textFormatOptions1.TabIndex = 0;
+            this.textFormatOptions1.TabIndex = 0;            
             // 
             // TabContainerPanel
             // 

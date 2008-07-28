@@ -19,6 +19,7 @@ namespace DreamBeam {
 	// Mostly, we really don't care what the conditions of the
 	// change were, we just care that something was changed.
 	public delegate void ControlChangeHandler();
+    public delegate void MouseInsideHandler();
 
     
     
@@ -116,11 +117,23 @@ namespace DreamBeam {
             fontBoldButton.Click += new EventHandler(ControlChanged);
             fontItalicButton.Click += new EventHandler(ControlChanged);
             fontUnderlineButton.Click += new EventHandler(ControlChanged);
-
+           
+            MouseInsideEventMaker(this);           
             fontComboBox1.Populate(false);
             
             
 		}
+
+        private void MouseInsideEventMaker(Control obj)
+        {
+            obj.MouseMove += new MouseEventHandler(MouseInside);
+            obj.MouseHover += new EventHandler(MouseInside);
+            foreach (Control x in obj.Controls)
+            {                
+                MouseInsideEventMaker(x);
+            }
+            
+        }
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public BeamTextFormat Format {
@@ -1429,7 +1442,24 @@ namespace DreamBeam {
 			}
 		}
 
-      
+
+        // Declare the event, which is associated with our
+        // delegate SubmitClickedHandler(). Add some attributes
+        // for the Visual C# control property.
+        [Category("Action")]
+        [Description("Fires when Mouse is inside.")]
+        public event MouseInsideHandler MouseInsideEvent;
+
+        private void MouseInside(Object sender, EventArgs e)
+        {            
+               NotifyMouseInsideListeners();            
+        }
+
+        protected void NotifyMouseInsideListeners()
+        {           
+                  MouseInsideEvent();           
+        }
+
 
         private void fontComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {            

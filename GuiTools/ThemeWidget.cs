@@ -55,8 +55,10 @@ namespace DreamBeam {
         }
 
 		public ThemeWidget() {
-			InitializeComponent();
-			//BgImagePath.TextChanged += new EventHandler(ControlChanged);
+			InitializeComponent();		
+            //this.grouper1.MouseMove += new EventHandler(MouseInside);
+            MouseInsideEventMaker(this);
+
 		}
 
 		public ThemeWidget(string[] tabNames)
@@ -78,6 +80,7 @@ namespace DreamBeam {
 				textOpt.Location = new Point(0, 0);
 				//textOpt.Size = new Point(392, 206);
 				textOpt.ControlChangedEvent += new ControlChangeHandler(TextFormatOptions_ControlChangedEvent);
+                textOpt.MouseInsideEvent += new MouseInsideHandler(MouseInside);
 
 				TabPage tabPage = new TabPage();
 				tabPage.Controls.Add(textOpt);
@@ -87,6 +90,17 @@ namespace DreamBeam {
 
 			this.ResumeLayout(false);
 		}
+
+        private void MouseInsideEventMaker(Control obj)
+        {
+            obj.MouseMove += new MouseEventHandler(MouseInside);
+            obj.MouseHover += new EventHandler(MouseInside);
+            foreach (Control x in obj.Controls)
+            {
+                MouseInsideEventMaker(x);
+            }
+
+        }
 
 		public string[] getTabNames() {
 			int tabs = tabControl.TabPages.Count;
@@ -200,9 +214,33 @@ namespace DreamBeam {
 		}
 
 
-		[Category("Action")]
-		[Description("Fires when a theme setting is changed.")]
-		public event EventHandler ControlChangedEvent;
+		
+        [Category("Action")]
+        [Description("Fires when mouse is in area.")]
+        public event EventHandler MouseInsideEvent;
+
+        protected void MouseInside(Object sender, EventArgs e)
+        {
+
+            NotifyMouseInsideListeners();
+
+        }
+        public void MouseInside()
+        {
+            NotifyMouseInsideListeners();
+        }
+
+        protected void NotifyMouseInsideListeners()
+        {
+            if (MouseInsideEvent != null)
+            {
+                MouseInsideEvent(this, new EventArgs());
+            }
+        }
+
+        [Category("Action")]
+        [Description("Fires when a theme setting is changed.")]
+        public event EventHandler ControlChangedEvent;
 
 		protected void ControlChanged(Object sender, EventArgs e) {
             
@@ -249,6 +287,9 @@ namespace DreamBeam {
             this.UseDesign = Design_checkBox.Checked;
             NotifyControlChangeListeners();
         }
+
+      
+
 
 
 

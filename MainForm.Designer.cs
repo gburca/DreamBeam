@@ -389,11 +389,8 @@ namespace DreamBeam {
             this.SongShow_CollapsPanel = new Salamander.Windows.Forms.CollapsiblePanelBar();
             this.SongShow_HideElementsPanel = new Salamander.Windows.Forms.CollapsiblePanel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.SongShow_HideAuthor_Button = new ctlLEDRadioButton.LEDradioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.SongShow_HideText_Button = new ctlLEDRadioButton.LEDradioButton();
             this.SongShow_HideElementsSub1Panel = new System.Windows.Forms.Panel();
-            this.SongShow_HideTitle_Button = new ctlLEDRadioButton.LEDradioButton();
             this.BibleBookmarks_CollapsiblePanel = new Salamander.Windows.Forms.CollapsiblePanel();
             this.BibleText_Bookmarks = new System.Windows.Forms.ListBox();
             this.BibleTranslations_CollapsiblePanel = new Salamander.Windows.Forms.CollapsiblePanel();
@@ -422,7 +419,6 @@ namespace DreamBeam {
             this.SermonDesignTab = new System.Windows.Forms.TabPage();
             this.BibleDesignTab = new System.Windows.Forms.TabPage();
             this.DockControl_Songs = new TD.SandDock.DockControl();
-            this.SongList_Tree = new ControlLib.dbTreeViewCtrl();
             this.DockControl_PlayList = new TD.SandDock.DockControl();
             this.DockControl_Backgrounds = new TD.SandDock.DockControl();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -463,7 +459,6 @@ namespace DreamBeam {
             this.Main_ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ShowSong_Tab = new System.Windows.Forms.TabPage();
-            this.SongShow_StropheList_ListEx = new Lister.ListEx();
             this.SermonTools_Tab = new System.Windows.Forms.TabPage();
             this.Sermon_LeftPanel = new System.Windows.Forms.Panel();
             this.Sermon_LeftDoc_Panel = new System.Windows.Forms.Panel();
@@ -520,13 +515,18 @@ namespace DreamBeam {
             this.dataColumn2 = new System.Data.DataColumn();
             this.SongListDataView = new System.Data.DataView();
             this.HideRectanglesTimer = new System.Windows.Forms.Timer(this.components);
+            this.SongShow_StropheList_ListEx = new Lister.ListEx();
             this.songEditor = new DreamBeam.SongEditor();
             this.liveMediaControls = new DreamBeam.MediaControls();
             this.previewMediaControls = new DreamBeam.MediaControls();
             this.bibleTextControl = new DreamBeam.BibleText();
+            this.SongShow_HideAuthor_Button = new ctlLEDRadioButton.LEDradioButton();
+            this.SongShow_HideText_Button = new ctlLEDRadioButton.LEDradioButton();
+            this.SongShow_HideTitle_Button = new ctlLEDRadioButton.LEDradioButton();
             this.songThemeWidget = new DreamBeam.ThemeWidget();
             this.sermonThemeWidget = new DreamBeam.ThemeWidget();
             this.bibleThemeWidget = new DreamBeam.ThemeWidget();
+            this.SongList_Tree = new ControlLib.dbTreeViewCtrl();
             Presentation_MovieControl_LiveButtonPanel = new System.Windows.Forms.Panel();
             Presentation_MovieControl_LiveButtonPanel.SuspendLayout();
             this.RightDocks_Songlist_SearchPanel.SuspendLayout();
@@ -1442,25 +1442,6 @@ namespace DreamBeam {
             this.panel3.Size = new System.Drawing.Size(208, 28);
             this.panel3.TabIndex = 5;
             // 
-            // SongShow_HideAuthor_Button
-            // 
-            this.SongShow_HideAuthor_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.SongShow_HideAuthor_Button.Appearance = System.Windows.Forms.Appearance.Button;
-            this.SongShow_HideAuthor_Button.bottomColor = System.Drawing.Color.DarkBlue;
-            this.SongShow_HideAuthor_Button.BottomTransparent = 64;
-            this.SongShow_HideAuthor_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SongShow_HideAuthor_Button.LEDColor = System.Drawing.Color.SteelBlue;
-            this.SongShow_HideAuthor_Button.Location = new System.Drawing.Point(53, 2);
-            this.SongShow_HideAuthor_Button.Name = "SongShow_HideAuthor_Button";
-            this.SongShow_HideAuthor_Button.Size = new System.Drawing.Size(104, 24);
-            this.SongShow_HideAuthor_Button.TabIndex = 3;
-            this.SongShow_HideAuthor_Button.Text = "Hide Author";
-            this.SongShow_HideAuthor_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SongShow_HideAuthor_Button.topColor = System.Drawing.Color.Aquamarine;
-            this.SongShow_HideAuthor_Button.TopTransparent = 64;
-            this.SongShow_HideAuthor_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideAuthor_Button_MouseDown);
-            this.SongShow_HideAuthor_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideAuthor_Button_MouseUp);
-            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -1471,25 +1452,6 @@ namespace DreamBeam {
             this.panel1.Size = new System.Drawing.Size(208, 28);
             this.panel1.TabIndex = 4;
             // 
-            // SongShow_HideText_Button
-            // 
-            this.SongShow_HideText_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.SongShow_HideText_Button.Appearance = System.Windows.Forms.Appearance.Button;
-            this.SongShow_HideText_Button.bottomColor = System.Drawing.Color.DarkBlue;
-            this.SongShow_HideText_Button.BottomTransparent = 64;
-            this.SongShow_HideText_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SongShow_HideText_Button.LEDColor = System.Drawing.Color.SteelBlue;
-            this.SongShow_HideText_Button.Location = new System.Drawing.Point(53, 2);
-            this.SongShow_HideText_Button.Name = "SongShow_HideText_Button";
-            this.SongShow_HideText_Button.Size = new System.Drawing.Size(104, 24);
-            this.SongShow_HideText_Button.TabIndex = 2;
-            this.SongShow_HideText_Button.Text = "Hide Verses";
-            this.SongShow_HideText_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SongShow_HideText_Button.topColor = System.Drawing.Color.Aquamarine;
-            this.SongShow_HideText_Button.TopTransparent = 64;
-            this.SongShow_HideText_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideText_Button_MouseDown);
-            this.SongShow_HideText_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideText_Button_MouseUp);
-            // 
             // SongShow_HideElementsSub1Panel
             // 
             this.SongShow_HideElementsSub1Panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -1499,25 +1461,6 @@ namespace DreamBeam {
             this.SongShow_HideElementsSub1Panel.Name = "SongShow_HideElementsSub1Panel";
             this.SongShow_HideElementsSub1Panel.Size = new System.Drawing.Size(208, 28);
             this.SongShow_HideElementsSub1Panel.TabIndex = 3;
-            // 
-            // SongShow_HideTitle_Button
-            // 
-            this.SongShow_HideTitle_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.SongShow_HideTitle_Button.Appearance = System.Windows.Forms.Appearance.Button;
-            this.SongShow_HideTitle_Button.bottomColor = System.Drawing.Color.DarkBlue;
-            this.SongShow_HideTitle_Button.BottomTransparent = 64;
-            this.SongShow_HideTitle_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SongShow_HideTitle_Button.LEDColor = System.Drawing.Color.SteelBlue;
-            this.SongShow_HideTitle_Button.Location = new System.Drawing.Point(53, 2);
-            this.SongShow_HideTitle_Button.Name = "SongShow_HideTitle_Button";
-            this.SongShow_HideTitle_Button.Size = new System.Drawing.Size(104, 24);
-            this.SongShow_HideTitle_Button.TabIndex = 1;
-            this.SongShow_HideTitle_Button.Text = "Hide Title";
-            this.SongShow_HideTitle_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SongShow_HideTitle_Button.topColor = System.Drawing.Color.Aquamarine;
-            this.SongShow_HideTitle_Button.TopTransparent = 64;
-            this.SongShow_HideTitle_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideTitle_Button_MouseDown);
-            this.SongShow_HideTitle_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideTitle_Button_MouseUp);
             // 
             // BibleBookmarks_CollapsiblePanel
             // 
@@ -1838,7 +1781,7 @@ namespace DreamBeam {
             this.SongDesignTab.Padding = new System.Windows.Forms.Padding(3);
             this.SongDesignTab.Size = new System.Drawing.Size(216, 242);
             this.SongDesignTab.TabIndex = 0;
-            this.SongDesignTab.MouseMove += new System.Windows.Forms.MouseEventHandler(this.songThemeWidget_MouseMove);
+            
             this.SongDesignTab.SizeChanged += new System.EventHandler(this.SongDesignTab_SizeChanged);
             // 
             // SermonDesignTab
@@ -1875,21 +1818,6 @@ namespace DreamBeam {
             this.DockControl_Songs.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_Songs.TabImage")));
             this.DockControl_Songs.TabIndex = 0;
             this.DockControl_Songs.Text = "Songs";
-            // 
-            // SongList_Tree
-            // 
-            this.SongList_Tree.AutoBuildTree = true;
-            this.SongList_Tree.DataSource = null;
-            this.SongList_Tree.DisplayMember = null;
-            this.SongList_Tree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SongList_Tree.Location = new System.Drawing.Point(0, 23);
-            this.SongList_Tree.Name = "SongList_Tree";
-            this.SongList_Tree.Size = new System.Drawing.Size(158, 137);
-            this.SongList_Tree.TabIndex = 7;
-            this.SongList_Tree.ValueMember = null;
-            this.SongList_Tree.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SongList_Tree_MouseClick);
-            this.SongList_Tree.DoubleClick += new System.EventHandler(this.SongList_Tree_DoubleClick);
-            this.SongList_Tree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.SongList_Tree_AfterSelect);
             // 
             // DockControl_PlayList
             // 
@@ -2271,22 +2199,6 @@ namespace DreamBeam {
             this.ShowSong_Tab.Size = new System.Drawing.Size(383, 492);
             this.ShowSong_Tab.TabIndex = 2;
             this.ShowSong_Tab.Text = "Show Songs";
-            // 
-            // SongShow_StropheList_ListEx
-            // 
-            this.SongShow_StropheList_ListEx.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SongShow_StropheList_ListEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.SongShow_StropheList_ListEx.Imgs = this.SongShow_ImageList;
-            this.SongShow_StropheList_ListEx.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
-            this.SongShow_StropheList_ListEx.Location = new System.Drawing.Point(0, 0);
-            this.SongShow_StropheList_ListEx.Name = "SongShow_StropheList_ListEx";
-            this.SongShow_StropheList_ListEx.ReadOnly = true;
-            this.SongShow_StropheList_ListEx.ShowBullets = true;
-            this.SongShow_StropheList_ListEx.Size = new System.Drawing.Size(383, 492);
-            this.SongShow_StropheList_ListEx.TabIndex = 0;
-            this.SongShow_StropheList_ListEx.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SongShow_StropheList_ListEx_MouseDoubleClick);
-            this.SongShow_StropheList_ListEx.SelectedIndexChanged += new System.EventHandler(this.SongShow_StropheList_ListEx_SelectedIndexChanged);
-            this.SongShow_StropheList_ListEx.PressIcon += new Lister.ListEx.EventHandler(this.SongShow_StropheList_ListEx_PressIcon);
             // 
             // SermonTools_Tab
             // 
@@ -2838,6 +2750,22 @@ namespace DreamBeam {
             this.HideRectanglesTimer.Interval = 10000;
             this.HideRectanglesTimer.Tick += new System.EventHandler(this.HideRectanglesTimer_Tick);
             // 
+            // SongShow_StropheList_ListEx
+            // 
+            this.SongShow_StropheList_ListEx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SongShow_StropheList_ListEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.SongShow_StropheList_ListEx.Imgs = this.SongShow_ImageList;
+            this.SongShow_StropheList_ListEx.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
+            this.SongShow_StropheList_ListEx.Location = new System.Drawing.Point(0, 0);
+            this.SongShow_StropheList_ListEx.Name = "SongShow_StropheList_ListEx";
+            this.SongShow_StropheList_ListEx.ReadOnly = true;
+            this.SongShow_StropheList_ListEx.ShowBullets = true;
+            this.SongShow_StropheList_ListEx.Size = new System.Drawing.Size(383, 492);
+            this.SongShow_StropheList_ListEx.TabIndex = 0;
+            this.SongShow_StropheList_ListEx.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SongShow_StropheList_ListEx_MouseDoubleClick);
+            this.SongShow_StropheList_ListEx.SelectedIndexChanged += new System.EventHandler(this.SongShow_StropheList_ListEx_SelectedIndexChanged);
+            this.SongShow_StropheList_ListEx.PressIcon += new Lister.ListEx.EventHandler(this.SongShow_StropheList_ListEx_PressIcon);
+            // 
             // songEditor
             // 
             this.songEditor.Collections = new string[0];
@@ -2881,6 +2809,63 @@ namespace DreamBeam {
             this.bibleTextControl.Size = new System.Drawing.Size(383, 492);
             this.bibleTextControl.TabIndex = 3;
             // 
+            // SongShow_HideAuthor_Button
+            // 
+            this.SongShow_HideAuthor_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.SongShow_HideAuthor_Button.Appearance = System.Windows.Forms.Appearance.Button;
+            this.SongShow_HideAuthor_Button.bottomColor = System.Drawing.Color.DarkBlue;
+            this.SongShow_HideAuthor_Button.BottomTransparent = 64;
+            this.SongShow_HideAuthor_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SongShow_HideAuthor_Button.LEDColor = System.Drawing.Color.SteelBlue;
+            this.SongShow_HideAuthor_Button.Location = new System.Drawing.Point(53, 2);
+            this.SongShow_HideAuthor_Button.Name = "SongShow_HideAuthor_Button";
+            this.SongShow_HideAuthor_Button.Size = new System.Drawing.Size(104, 24);
+            this.SongShow_HideAuthor_Button.TabIndex = 3;
+            this.SongShow_HideAuthor_Button.Text = "Hide Author";
+            this.SongShow_HideAuthor_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SongShow_HideAuthor_Button.topColor = System.Drawing.Color.Aquamarine;
+            this.SongShow_HideAuthor_Button.TopTransparent = 64;
+            this.SongShow_HideAuthor_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideAuthor_Button_MouseDown);
+            this.SongShow_HideAuthor_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideAuthor_Button_MouseUp);
+            // 
+            // SongShow_HideText_Button
+            // 
+            this.SongShow_HideText_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.SongShow_HideText_Button.Appearance = System.Windows.Forms.Appearance.Button;
+            this.SongShow_HideText_Button.bottomColor = System.Drawing.Color.DarkBlue;
+            this.SongShow_HideText_Button.BottomTransparent = 64;
+            this.SongShow_HideText_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SongShow_HideText_Button.LEDColor = System.Drawing.Color.SteelBlue;
+            this.SongShow_HideText_Button.Location = new System.Drawing.Point(53, 2);
+            this.SongShow_HideText_Button.Name = "SongShow_HideText_Button";
+            this.SongShow_HideText_Button.Size = new System.Drawing.Size(104, 24);
+            this.SongShow_HideText_Button.TabIndex = 2;
+            this.SongShow_HideText_Button.Text = "Hide Verses";
+            this.SongShow_HideText_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SongShow_HideText_Button.topColor = System.Drawing.Color.Aquamarine;
+            this.SongShow_HideText_Button.TopTransparent = 64;
+            this.SongShow_HideText_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideText_Button_MouseDown);
+            this.SongShow_HideText_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideText_Button_MouseUp);
+            // 
+            // SongShow_HideTitle_Button
+            // 
+            this.SongShow_HideTitle_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.SongShow_HideTitle_Button.Appearance = System.Windows.Forms.Appearance.Button;
+            this.SongShow_HideTitle_Button.bottomColor = System.Drawing.Color.DarkBlue;
+            this.SongShow_HideTitle_Button.BottomTransparent = 64;
+            this.SongShow_HideTitle_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SongShow_HideTitle_Button.LEDColor = System.Drawing.Color.SteelBlue;
+            this.SongShow_HideTitle_Button.Location = new System.Drawing.Point(53, 2);
+            this.SongShow_HideTitle_Button.Name = "SongShow_HideTitle_Button";
+            this.SongShow_HideTitle_Button.Size = new System.Drawing.Size(104, 24);
+            this.SongShow_HideTitle_Button.TabIndex = 1;
+            this.SongShow_HideTitle_Button.Text = "Hide Title";
+            this.SongShow_HideTitle_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SongShow_HideTitle_Button.topColor = System.Drawing.Color.Aquamarine;
+            this.SongShow_HideTitle_Button.TopTransparent = 64;
+            this.SongShow_HideTitle_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideTitle_Button_MouseDown);
+            this.SongShow_HideTitle_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideTitle_Button_MouseUp);
+            // 
             // songThemeWidget
             // 
             this.songThemeWidget.BGImagePath = "Image";
@@ -2895,7 +2880,8 @@ namespace DreamBeam {
         "Key"};
             this.songThemeWidget.ThemePath = "";
             this.songThemeWidget.UseDesign = false;
-            this.songThemeWidget.MouseMove += new System.Windows.Forms.MouseEventHandler(this.songThemeWidget_MouseMove);
+            
+            this.songThemeWidget.MouseInsideEvent += new System.EventHandler(this.songThemeWidget_MouseInsideEvent);
             this.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
             // 
             // sermonThemeWidget
@@ -2926,6 +2912,21 @@ namespace DreamBeam {
             this.bibleThemeWidget.ThemePath = "";
             this.bibleThemeWidget.UseDesign = false;
             this.bibleThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
+            // 
+            // SongList_Tree
+            // 
+            this.SongList_Tree.AutoBuildTree = true;
+            this.SongList_Tree.DataSource = null;
+            this.SongList_Tree.DisplayMember = null;
+            this.SongList_Tree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SongList_Tree.Location = new System.Drawing.Point(0, 23);
+            this.SongList_Tree.Name = "SongList_Tree";
+            this.SongList_Tree.Size = new System.Drawing.Size(158, 137);
+            this.SongList_Tree.TabIndex = 7;
+            this.SongList_Tree.ValueMember = null;
+            this.SongList_Tree.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SongList_Tree_MouseClick);
+            this.SongList_Tree.DoubleClick += new System.EventHandler(this.SongList_Tree_DoubleClick);
+            this.SongList_Tree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.SongList_Tree_AfterSelect);
             // 
             // MainForm
             // 

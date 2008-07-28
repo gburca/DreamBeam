@@ -2412,6 +2412,8 @@ namespace DreamBeam {
 		}
 		public void RightDocks_Preview_GoLive_Click(object sender, System.EventArgs e) {
 			if (DisplayPreview.content != null) {
+                bool rect = DisplayPreview.content.ShowRectangles;
+                DisplayPreview.content.ShowRectangles = false;
 				ToolBars_MainToolbar_HideBG.Checked = false;
 				ToolBars_MainToolbar_HideText.Checked = false;
 				switch (Config.AppOperatingMode) {
@@ -2423,6 +2425,7 @@ namespace DreamBeam {
 						DisplayLiveClient.SetContent(DisplayPreview.content.Clone() as IContentOperations);
 						break;
 				}
+                DisplayPreview.content.ShowRectangles = rect;
 			}
 		}
 		private void RightDocks_Live_Prev_Click(object sender, System.EventArgs e) {
@@ -2666,18 +2669,7 @@ namespace DreamBeam {
             this.bibleThemeWidget.Left = this.BibleDesignTab.Height / 2 - this.bibleThemeWidget.Height / 2;
         }
 
-        private void songThemeWidget_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (DisplayPreview.content != null)
-            {
-                HideRectanglesTimer.Start();
-                if (!DisplayPreview.content.ShowRectangles)
-                {
-                    DisplayPreview.content.ShowRectangles = true;
-                    DisplayPreview.UpdateDisplay(true);
-                }
-            }
-        }
+       
 
         private void HideRectanglesTimer_Tick(object sender, EventArgs e)
         {
@@ -2686,6 +2678,19 @@ namespace DreamBeam {
                 if (DisplayPreview.content.ShowRectangles)
                 {
                     DisplayPreview.content.ShowRectangles = false;
+                    DisplayPreview.UpdateDisplay(true);
+                }
+            }
+        }
+
+        private void songThemeWidget_MouseInsideEvent(object sender, EventArgs e)
+        {
+            if (DisplayPreview.content != null)
+            {
+                HideRectanglesTimer.Start();
+                if (!DisplayPreview.content.ShowRectangles)
+                {
+                    DisplayPreview.content.ShowRectangles = true;
                     DisplayPreview.UpdateDisplay(true);
                 }
             }
