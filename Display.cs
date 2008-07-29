@@ -340,6 +340,7 @@ namespace DreamBeam {
 		public PictureBox pictureBox;
 		public Graphics graphics;
 		public ShowBeam showBeam;
+        public ImagePanel imagepanel;
 		public XmlRpcClient XmlRpcProxy;
 
 		public static BibleLib bibleLib;
@@ -526,6 +527,10 @@ namespace DreamBeam {
 		public void SetDestination(PictureBox box) {
 			pictureBox = box;
 		}
+        public void SetDestination(ImagePanel panel)
+        {
+            this.imagepanel = panel;
+        }
 		public void SetDestination(Graphics graphics) {
 			this.graphics = graphics;
 		}
@@ -577,8 +582,11 @@ namespace DreamBeam {
 			if (content != null) {
 				if (pictureBox != null) {
 					// Preview, or mini-Live display                    
-					pictureBox.Image = ShowBeam.DrawProportionalBitmap(pictureBox.Size, GetBitmap(this.Size));
-
+					pictureBox.Image = ShowBeam.DrawProportionalBitmap(pictureBox.Size, GetBitmap(this.Size)).Bitmap;
+                }
+                else if (imagepanel != null){
+                  imagepanel.ImagePack = ShowBeam.DrawProportionalBitmap(imagepanel.Size, GetBitmap(this.Size));
+                    
 				} else if (showBeam != null && showBeam.TopLevelControl.Visible) {
 					// Live display
 					showBeam.GDIDraw(this.GetBitmap(Size));

@@ -39,6 +39,7 @@ namespace DreamBeam {
             this.BGImagePathLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ThemeLabel = new System.Windows.Forms.Label();
+            this.SetTextPositionButton = new RibbonStyle.RibbonMenuButton();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -79,6 +80,7 @@ namespace DreamBeam {
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(243, 325);
             this.tabControl.TabIndex = 1;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -101,7 +103,7 @@ namespace DreamBeam {
             this.textFormatOptions1.Margin = new System.Windows.Forms.Padding(0);
             this.textFormatOptions1.Name = "textFormatOptions1";
             this.textFormatOptions1.Size = new System.Drawing.Size(235, 296);
-            this.textFormatOptions1.TabIndex = 0;            
+            this.textFormatOptions1.TabIndex = 0;
             // 
             // TabContainerPanel
             // 
@@ -257,10 +259,48 @@ namespace DreamBeam {
             this.ThemeLabel.TabIndex = 29;
             this.ThemeLabel.Text = "Theme";
             // 
+            // SetTextPositionButton
+            // 
+            this.SetTextPositionButton.Arrow = RibbonStyle.RibbonMenuButton.e_arrow.None;
+            this.SetTextPositionButton.BackColor = System.Drawing.Color.Transparent;
+            this.SetTextPositionButton.Checked = false;
+            this.SetTextPositionButton.ColorBase = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
+            this.SetTextPositionButton.ColorBaseStroke = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(187)))), ((int)(((byte)(213)))));
+            this.SetTextPositionButton.ColorOn = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.SetTextPositionButton.ColorOnStroke = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+            this.SetTextPositionButton.ColorPress = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.SetTextPositionButton.ColorPressStroke = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+            this.SetTextPositionButton.FadingSpeed = 35;
+            this.SetTextPositionButton.FlatAppearance.BorderSize = 0;
+            this.SetTextPositionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetTextPositionButton.GroupPos = RibbonStyle.RibbonMenuButton.e_groupPos.None;
+            this.SetTextPositionButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.SetTextPositionButton.ImageLocation = RibbonStyle.RibbonMenuButton.e_imagelocation.Left;
+            this.SetTextPositionButton.ImageOffset = 2;
+            this.SetTextPositionButton.IsPressed = false;
+            this.SetTextPositionButton.KeepPress = true;
+            this.SetTextPositionButton.Location = new System.Drawing.Point(51, 404);
+            this.SetTextPositionButton.MaxImageSize = new System.Drawing.Point(24, 24);
+            this.SetTextPositionButton.MenuPos = new System.Drawing.Point(0, 0);
+            this.SetTextPositionButton.Name = "SetTextPositionButton";
+            this.SetTextPositionButton.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.SetTextPositionButton.Radius = 6;
+            this.SetTextPositionButton.ShowBase = RibbonStyle.RibbonMenuButton.e_showbase.Yes;
+            this.SetTextPositionButton.SinglePressButton = true;
+            this.SetTextPositionButton.Size = new System.Drawing.Size(147, 29);
+            this.SetTextPositionButton.SplitButton = RibbonStyle.RibbonMenuButton.e_splitbutton.No;
+            this.SetTextPositionButton.SplitDistance = 0;
+            this.SetTextPositionButton.TabIndex = 34;
+            this.SetTextPositionButton.Text = "        Set Text Position";
+            this.SetTextPositionButton.Title = "";
+            this.SetTextPositionButton.UseVisualStyleBackColor = true;
+            this.SetTextPositionButton.Click += new System.EventHandler(this.ribbonMenuButton1_Click);
+            // 
             // ThemeWidget
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.SetTextPositionButton);
             this.Controls.Add(this.TabContainerPanel);
             this.Controls.Add(this.Design_checkBox);
             this.Controls.Add(this.TextOutlineMenuButton);
@@ -294,6 +334,7 @@ namespace DreamBeam {
         public System.Windows.Forms.Label ThemeLabel;
         private CodeVendor.Controls.Grouper grouper1;
         private System.Windows.Forms.Panel TabContainerPanel;
+        public RibbonStyle.RibbonMenuButton SetTextPositionButton;
 
 	}
 }

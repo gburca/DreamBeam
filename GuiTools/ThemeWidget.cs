@@ -13,6 +13,7 @@ namespace DreamBeam {
         private const string ImageFileFilter = "Image Files (*.bmp;*.jpg;*.jpeg;*.png;*.gif)|*.bmp;*.jpg;*.jpeg;*.png;*.gif|All files (*.*)|*.*";
 		private System.Type themeType;
         private bool _usedesign;
+        private bool _settextposition = false;
         private string _ThemePath = "";
         public string BGImagePath
         {
@@ -53,6 +54,24 @@ namespace DreamBeam {
                 _usedesign = value;
             }
         }
+        public bool SetTextPosition
+        {
+            get { return _settextposition; }
+            set
+            {
+                if (value)
+                {
+                    this.SetTextPositionButton.Checked = true;
+                    
+                }
+                else
+                {
+                    this.SetTextPositionButton.Checked = false;
+                }
+
+                _settextposition = value;
+            }
+        }
 
 		public ThemeWidget() {
 			InitializeComponent();		
@@ -73,6 +92,7 @@ namespace DreamBeam {
 		/// <param name="tabNames">The tab names to use</param>
 		public void setTabNames(string[] tabNames) {
 			this.SuspendLayout();
+            changingControls = true;
 			tabControl.Controls.Clear();
 
 			foreach (string tn in tabNames) {
@@ -80,6 +100,7 @@ namespace DreamBeam {
 				textOpt.Location = new Point(0, 0);
 				//textOpt.Size = new Point(392, 206);
 				textOpt.ControlChangedEvent += new ControlChangeHandler(TextFormatOptions_ControlChangedEvent);
+                
                 textOpt.MouseInsideEvent += new MouseInsideHandler(MouseInside);
 
 				TabPage tabPage = new TabPage();
@@ -89,6 +110,7 @@ namespace DreamBeam {
 			}
 
 			this.ResumeLayout(false);
+            changingControls = false;
 		}
 
         private void MouseInsideEventMaker(Control obj)
@@ -111,6 +133,10 @@ namespace DreamBeam {
 			return names;
 		}
 
+        public int getSelectedTab()
+        {
+            return tabControl.SelectedIndex;
+        }
 
 		/// <summary>
 		/// Returns the TextFormatOptions control from the i-th tab
@@ -285,6 +311,17 @@ namespace DreamBeam {
         {
             //this.DesignCheckText();
             this.UseDesign = Design_checkBox.Checked;
+            NotifyControlChangeListeners();
+        }
+
+        private void ribbonMenuButton1_Click(object sender, EventArgs e)
+        {
+            this.SetTextPosition = this.SetTextPositionButton.Checked;
+            NotifyControlChangeListeners();
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
             NotifyControlChangeListeners();
         }
 

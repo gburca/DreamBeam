@@ -719,14 +719,15 @@ namespace DreamBeam {
 			try {
 				Image tmpImage = Image.FromFile(Path);
 
-				bm = DrawProportionalBitmap(Size, tmpImage);
+				bm = DrawProportionalBitmap(Size, tmpImage).Bitmap;
 			} catch { }
 
 			return bm;
 
 		}
 
-		public static Bitmap DrawProportionalBitmap(System.Drawing.Size Size, Image MainImage) {
+        public static ResizedImagePack DrawProportionalBitmap(System.Drawing.Size Size, Image MainImage)
+        {
 			Graphics graph;
 
 			//	Image MainImage = Image.FromFile(Path);
@@ -747,10 +748,10 @@ namespace DreamBeam {
 			Size InputSize = Tools.VideoProportions(Size, MainImage.Size);
 
 			graph.DrawImage(MainImage, (int)((Size.Width - InputSize.Width) / 2), (int)((Size.Height - InputSize.Height) / 2), InputSize.Width, InputSize.Height);
+            return new ResizedImagePack(Canvas, InputSize);
+           
 
-
-
-			return Canvas;
+			//return Canvas;
 		}
 
 		#endregion
@@ -1192,4 +1193,15 @@ namespace DreamBeam {
 
 
 	}
+
+    public class ResizedImagePack{
+        public Bitmap Bitmap;        
+        public Size realsize;
+
+        public ResizedImagePack(Bitmap bmp, Size propsize)
+        {
+            this.Bitmap = bmp;            
+            this.realsize = propsize;
+        }
+    }
 }

@@ -88,8 +88,7 @@ namespace DreamBeam {
 		public MainTab selectedTab = MainTab.ShowSongs;
 		public int SongCount = 0;
 		public int Song_Edit_Box = 2;
-		public bool beamshowed = false;
-
+		public bool beamshowed = false;        
 		private Splash Splash = null;
 		public bool LoadingBGThumbs = false;
 		//static Thread Thread_LoadMovie = null;
@@ -694,7 +693,7 @@ namespace DreamBeam {
 
 		///<summarize> Initialize DreamBeam while MainForm is loading </summarize>
 		private void MainForm_Load(object sender, System.EventArgs e) {
-
+            
 			this.Hide();
 			Splash.SetStatus("Loading Configuration");
 			this.LoadSettings();
@@ -2570,7 +2569,7 @@ namespace DreamBeam {
 
         private void songThemeWidget_ControlChangedEvent(object sender, EventArgs e)
         {
-            IContentOperations content = DisplayPreview.content;
+            IContentOperations content = DisplayPreview.content;            
             if (content != null)
             {                
                 // First, let's clear the pre-render cache
@@ -2580,14 +2579,13 @@ namespace DreamBeam {
                 }
                 catch { }
 
-                content.ShowRectangles = true;
+                //content.ShowRectangles = true;
                 switch ((ContentType)content.GetIdentity().Type)
                 {
                         
                     case ContentType.Song:
-                        this.songEditor.Song.UseDesign = this.songThemeWidget.UseDesign;
-                        Song s = content as Song;
-                        Console.WriteLine(content.GetIdentity().Type.ToString());
+                        this.songEditor.Song.UseDesign = this.songThemeWidget.UseDesign;                                                 
+                        Song s = content as Song;                        
                         if (s != null) //&& String.IsNullOrEmpty(s.ThemePath)
                         {
                             if (this.songThemeWidget.ThemePath == "" && !this.songThemeWidget.UseDesign)
@@ -2597,7 +2595,10 @@ namespace DreamBeam {
 
                                 if (File.Exists(themefile)) this.songThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(SongTheme), themefile);
                             }
-                            content.Theme = this.songThemeWidget.Theme;
+                            content.Theme = this.songThemeWidget.Theme;                                                        
+                            this.RightDocks_PreviewScreen_PictureBox.ShowRect = this.songThemeWidget.SetTextPosition;
+                            this.RightDocks_PreviewScreen_PictureBox.RectPosition = content.Theme.TextFormat[songThemeWidget.getSelectedTab()].Bounds;
+                            if (this.RightDocks_PreviewScreen_PictureBox.ShowRect) DisplayPreview.content.ShowRectangles = false;
                         }
                         else
                         {
@@ -2605,6 +2606,7 @@ namespace DreamBeam {
                         }
                         break;
                     case ContentType.PlainText:
+                        this.RightDocks_PreviewScreen_PictureBox.ShowRect = this.sermonThemeWidget.SetTextPosition;
                         if (this.sermonThemeWidget.ThemePath == "" && !this.sermonThemeWidget.UseDesign)
                         {
                             this.sermonThemeWidget.ThemePath = Config.DefaultThemes.SermonThemePath;
@@ -2617,6 +2619,7 @@ namespace DreamBeam {
                     case ContentType.BibleVerseIdx:
                     case ContentType.BibleVerseRef:
                     case ContentType.BibleVerse:
+                        this.RightDocks_PreviewScreen_PictureBox.ShowRect = this.bibleThemeWidget.SetTextPosition;
                         if (this.bibleThemeWidget.ThemePath == "" && !this.bibleThemeWidget.UseDesign)
                         {
                             this.bibleThemeWidget.ThemePath = Config.DefaultThemes.BibleThemePath;
@@ -2626,8 +2629,8 @@ namespace DreamBeam {
                         content.Theme = this.bibleThemeWidget.Theme;
                         
                         break;
-                }                
-                DisplayPreview.UpdateDisplay(true);
+                }                 
+                    DisplayPreview.UpdateDisplay(true);                
             }                 
         }
 
@@ -2636,13 +2639,10 @@ namespace DreamBeam {
 
 
         private void menuButtonItem1_Activate(object sender, EventArgs e)
-        {            
-            Song song = new Song(this.Config);
-            try
-            {
-                this.songEditor.Song = song;
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        {
+            ImageTest t = new ImageTest();
+            t.imagePanel.Image = DisplayPreview.pictureBox.Image;
+            t.ShowDialog();
             //DisplayPreview.SetContent(song);
         }
 
@@ -2685,7 +2685,8 @@ namespace DreamBeam {
 
         private void songThemeWidget_MouseInsideEvent(object sender, EventArgs e)
         {
-            if (DisplayPreview.content != null)
+         
+            if (DisplayPreview.content != null && !RightDocks_PreviewScreen_PictureBox.ShowRect)
             {
                 HideRectanglesTimer.Start();
                 if (!DisplayPreview.content.ShowRectangles)
@@ -2694,6 +2695,25 @@ namespace DreamBeam {
                     DisplayPreview.UpdateDisplay(true);
                 }
             }
+        }
+
+        private void RightDocks_PreviewScreen_PictureBox_RectangleChangedEvent()
+        {
+            //MessageBox.Show(RightDocks_PreviewScreen_PictureBox.RectPosition.ToString());
+            
+            IContentOperations content = DisplayPreview.content;
+            if (content != null)
+            {
+                switch ((ContentType)content.GetIdentity().Type)
+                {
+                    case ContentType.Song:
+                        content.Theme.TextFormat[songThemeWidget.getSelectedTab()].Bounds = RightDocks_PreviewScreen_PictureBox.RectPosition;
+                        this.songThemeWidget.Theme = content.Theme;                        
+                    break;
+                }
+                DisplayPreview.UpdateDisplay(true);   
+            }
+            
         }
 
       
