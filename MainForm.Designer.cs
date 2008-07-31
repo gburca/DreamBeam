@@ -1673,6 +1673,7 @@ namespace DreamBeam {
             this.RightDocks_PreviewScreen_PictureBox.Size = new System.Drawing.Size(224, 134);
             this.RightDocks_PreviewScreen_PictureBox.TabIndex = 0;
             this.RightDocks_PreviewScreen_PictureBox.RectangleChangedEvent += new DreamBeam.RectangleChangeHandler(this.RightDocks_PreviewScreen_PictureBox_RectangleChangedEvent);
+            this.RightDocks_PreviewScreen_PictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RightDocks_PreviewScreen_PictureBox_MouseDown);
             this.RightDocks_PreviewScreen_PictureBox.SizeChanged += new System.EventHandler(this.RightDocks_PreviewScreen_PictureBox_SizeChanged);
             // 
             // panel5
@@ -2929,7 +2930,7 @@ namespace DreamBeam {
             // 
             // HideRectanglesTimer
             // 
-            this.HideRectanglesTimer.Interval = 10000;
+            this.HideRectanglesTimer.Interval = 4000;
             this.HideRectanglesTimer.Tick += new System.EventHandler(this.HideRectanglesTimer_Tick);
             // 
             // MainForm

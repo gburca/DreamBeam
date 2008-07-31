@@ -20,8 +20,7 @@ namespace DreamBeam
         public int nIsBounce;
         int nThatsIt;
         public int nWd;
-        public int nHt;
-
+        public int nHt;        
         int nResizeRT;
         int nResizeBL;
         int nResizeLT;
@@ -75,8 +74,9 @@ namespace DreamBeam
         {
             nWd = 0;
             nHt = 0;
-            RefreshAll(100,100);
+            RefreshAll(100,100);            
         }
+
         public void RefreshAll(int x, int y)
         {
             nThatsIt = 0;
@@ -112,9 +112,15 @@ namespace DreamBeam
             AdjustResizeRects();
             OldCur = Cursor;
             nIsBounce = 0;
-            rcBegin = new Rectangle();
-            Invalidate();
+            rcBegin = new Rectangle();            
+            Invalidator();
         }
+        
+
+        protected virtual void Invalidator(){
+            //Invalidate();
+        }
+
         public void AdjustResizeRects()
         {
             rcLT.X = rcBone.Left;

@@ -27,6 +27,7 @@ namespace DreamBeam
         //public Rectangle[] rectPositions;
         public List<Rectangle> rectList;
         public List<string> stringList;
+        Bitmap MemoryBitmap;
 
         public RectangleF RectPosition{
             get
@@ -53,6 +54,26 @@ namespace DreamBeam
     
         }
 
+        public override void Refresh()
+        {
+            this.PaintImage();
+            //base.Refresh();
+
+
+            Graphics dcPaint = Graphics.FromHwnd(this.Handle);
+
+         
+            if (MemoryBitmap != null)
+           {
+                
+                dcPaint.DrawImage(MemoryBitmap, 0, 0);
+            }
+            //dcPaint.Dispose();
+
+        }
+
+        
+
         private void SetPosition(RectangleF value)
         {
             if (_imagepack != null)
@@ -64,6 +85,14 @@ namespace DreamBeam
                 RefreshAll(rcBone.X, rcBone.Y);
             }
         }
+
+        protected override void Invalidator()
+        {
+            //this.PaintImage();
+            //base.Invalidator();
+            this.Refresh();
+        }
+
         public ResizedImagePack ImagePack
         {
             get { return this._imagepack; }
@@ -190,23 +219,49 @@ namespace DreamBeam
             }
         }
 
+       
+
 
         protected override void OnPaint(PaintEventArgs e)
-        {
+        {            
             Graphics dcPaint = e.Graphics;
-            if (ClientRectangle.Width > 0 && ClientRectangle.Height > 0 && Image != null)
+
+         
+            if (MemoryBitmap != null)
+           {
+                
+                dcPaint.DrawImage(MemoryBitmap, 0, 0);
+            }
+            dcPaint.Dispose();
+   
+           /*if (ClientRectangle.Width > 0 && ClientRectangle.Height > 0 && Image != null)
             {                
                 PaintStruct ps;
                 ps.dc = e.Graphics;
                 ps.isPaint = true;
                 DrawImage(ps);
                 DrawRectangle(dcPaint);
-            }                      
+            }*/
             base.OnPaint(e);
         }
 
 
-        
+        public void PaintImage(){
+            if (this.Height != null && this.Width != null)
+            {
+                MemoryBitmap = new Bitmap(this.Width, this.Height);
+                Graphics dcPaint = Graphics.FromImage(MemoryBitmap);
+                {
+                    PaintStruct ps;
+                    ps.dc = Graphics.FromImage(MemoryBitmap); ;
+                    ps.isPaint = true;
+                    DrawImage(ps);
+                    DrawRectangle(dcPaint);
+                }
+                dcPaint.Dispose();
+            }
+        }
+
        
         protected override void OnDoubleClick(EventArgs e)
         {

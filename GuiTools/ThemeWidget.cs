@@ -133,11 +133,16 @@ namespace DreamBeam {
 			return names;
 		}
 
+
+
         public int getSelectedTab()
         {
             return tabControl.SelectedIndex;
         }
 
+        public void selectTab(int i){
+            tabControl.SelectedIndex = i;
+        }
 		/// <summary>
 		/// Returns the TextFormatOptions control from the i-th tab
 		/// </summary>

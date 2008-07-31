@@ -78,7 +78,7 @@ namespace DreamBeam {
             this.tabControl.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(243, 325);
+            this.tabControl.Size = new System.Drawing.Size(243, 206);
             this.tabControl.TabIndex = 1;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -91,7 +91,7 @@ namespace DreamBeam {
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(235, 296);
+            this.tabPage1.Size = new System.Drawing.Size(235, 177);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             // 
@@ -102,7 +102,7 @@ namespace DreamBeam {
             this.textFormatOptions1.Location = new System.Drawing.Point(0, 0);
             this.textFormatOptions1.Margin = new System.Windows.Forms.Padding(0);
             this.textFormatOptions1.Name = "textFormatOptions1";
-            this.textFormatOptions1.Size = new System.Drawing.Size(235, 296);
+            this.textFormatOptions1.Size = new System.Drawing.Size(235, 182);
             this.textFormatOptions1.TabIndex = 0;
             // 
             // TabContainerPanel
@@ -113,7 +113,7 @@ namespace DreamBeam {
             this.TabContainerPanel.Margin = new System.Windows.Forms.Padding(0);
             this.TabContainerPanel.Name = "TabContainerPanel";
             this.TabContainerPanel.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.TabContainerPanel.Size = new System.Drawing.Size(245, 329);
+            this.TabContainerPanel.Size = new System.Drawing.Size(245, 210);
             this.TabContainerPanel.TabIndex = 32;
             // 
             // Design_checkBox
@@ -279,7 +279,7 @@ namespace DreamBeam {
             this.SetTextPositionButton.ImageOffset = 2;
             this.SetTextPositionButton.IsPressed = false;
             this.SetTextPositionButton.KeepPress = true;
-            this.SetTextPositionButton.Location = new System.Drawing.Point(51, 404);
+            this.SetTextPositionButton.Location = new System.Drawing.Point(50, 286);
             this.SetTextPositionButton.MaxImageSize = new System.Drawing.Point(24, 24);
             this.SetTextPositionButton.MenuPos = new System.Drawing.Point(0, 0);
             this.SetTextPositionButton.Name = "SetTextPositionButton";
@@ -300,13 +300,13 @@ namespace DreamBeam {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.SetTextPositionButton);
             this.Controls.Add(this.TabContainerPanel);
+            this.Controls.Add(this.SetTextPositionButton);
             this.Controls.Add(this.Design_checkBox);
             this.Controls.Add(this.TextOutlineMenuButton);
             this.Controls.Add(this.grouper1);
             this.Name = "ThemeWidget";
-            this.Size = new System.Drawing.Size(250, 483);
+            this.Size = new System.Drawing.Size(250, 323);
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

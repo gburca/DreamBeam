@@ -116,6 +116,7 @@ namespace DreamBeam {
 		public EventHandler BibleText_RegEx_ComboBox_EventHandler;
         public bool LoadingSong;
 		private Extensions.Set SongCollections = new Extensions.Set();
+        public ImageWindow ImageWindow;
 
 		#endregion
         
@@ -245,6 +246,8 @@ namespace DreamBeam {
             this.sermonThemeWidget.UseDesign = true;
             this.bibleThemeWidget.LoadFile(new BibleTheme().GetType(), Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.BibleThemePath));
             this.bibleThemeWidget.UseDesign = true;
+
+            ImageWindow = new ImageWindow(this);
             Console.WriteLine("DreamBeam starting up");
         }
 
@@ -2595,9 +2598,9 @@ namespace DreamBeam {
 
                                 if (File.Exists(themefile)) this.songThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(SongTheme), themefile);
                             }
-                            content.Theme = this.songThemeWidget.Theme;                                                        
-                            this.RightDocks_PreviewScreen_PictureBox.ShowRect = this.songThemeWidget.SetTextPosition;
+                            content.Theme = this.songThemeWidget.Theme;
                             this.RightDocks_PreviewScreen_PictureBox.RectPosition = content.Theme.TextFormat[songThemeWidget.getSelectedTab()].Bounds;
+                            this.RightDocks_PreviewScreen_PictureBox.ShowRect = this.songThemeWidget.SetTextPosition;                            
                             if (this.RightDocks_PreviewScreen_PictureBox.ShowRect) DisplayPreview.content.ShowRectangles = false;
                         }
                         else
@@ -2613,8 +2616,10 @@ namespace DreamBeam {
                             string themefile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SermonThemePath);
                             if (File.Exists(themefile)) this.sermonThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(SermonTheme), themefile);
                         }
-
                         content.Theme = this.sermonThemeWidget.Theme;
+                        this.RightDocks_PreviewScreen_PictureBox.RectPosition = content.Theme.TextFormat[sermonThemeWidget.getSelectedTab()].Bounds;
+                        this.RightDocks_PreviewScreen_PictureBox.ShowRect = this.sermonThemeWidget.SetTextPosition;
+                        if (this.RightDocks_PreviewScreen_PictureBox.ShowRect) DisplayPreview.content.ShowRectangles = false;
                         break;
                     case ContentType.BibleVerseIdx:
                     case ContentType.BibleVerseRef:
@@ -2627,7 +2632,9 @@ namespace DreamBeam {
                             if (File.Exists(themefile)) this.bibleThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(BibleTheme), themefile);
                         }
                         content.Theme = this.bibleThemeWidget.Theme;
-                        
+                        this.RightDocks_PreviewScreen_PictureBox.RectPosition = content.Theme.TextFormat[bibleThemeWidget.getSelectedTab()].Bounds;
+                        this.RightDocks_PreviewScreen_PictureBox.ShowRect = this.bibleThemeWidget.SetTextPosition;
+                        if (this.RightDocks_PreviewScreen_PictureBox.ShowRect) DisplayPreview.content.ShowRectangles = false;
                         break;
                 }                 
                     DisplayPreview.UpdateDisplay(true);                
@@ -2640,10 +2647,8 @@ namespace DreamBeam {
 
         private void menuButtonItem1_Activate(object sender, EventArgs e)
         {
-            ImageTest t = new ImageTest();
-            t.imagePanel.Image = DisplayPreview.pictureBox.Image;
-            t.ShowDialog();
-            //DisplayPreview.SetContent(song);
+           
+          
         }
 
         private void ToolBars_MenuBar_Open_DesignTab_Activate(object sender, EventArgs e)
@@ -2710,10 +2715,32 @@ namespace DreamBeam {
                         content.Theme.TextFormat[songThemeWidget.getSelectedTab()].Bounds = RightDocks_PreviewScreen_PictureBox.RectPosition;
                         this.songThemeWidget.Theme = content.Theme;                        
                     break;
+                    case ContentType.PlainText:
+                        content.Theme.TextFormat[sermonThemeWidget.getSelectedTab()].Bounds = RightDocks_PreviewScreen_PictureBox.RectPosition;
+                        this.sermonThemeWidget.Theme = content.Theme;                        
+                    break;
+                    case ContentType.BibleVerseIdx:
+                    case ContentType.BibleVerseRef:
+                    case ContentType.BibleVerse:
+                        content.Theme.TextFormat[bibleThemeWidget.getSelectedTab()].Bounds = RightDocks_PreviewScreen_PictureBox.RectPosition;
+                        this.bibleThemeWidget.Theme = content.Theme;                        
+                    break;
                 }
                 DisplayPreview.UpdateDisplay(true);   
             }
             
+        }
+
+        private void RightDocks_PreviewScreen_PictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+
+                ImageWindow.Size = new Size(this.Size.Width - 50, this.Size.Height - 50);                
+                ImageWindow.Activate(DisplayPreview);
+                DisplayPreview.SetDestination(RightDocks_PreviewScreen_PictureBox);
+                DisplayPreview.UpdateDisplay(true);
+            }
         }
 
       

@@ -31,17 +31,9 @@ namespace DreamBeam {
 	/// </summary>
 	public class TextFormatOptions : System.Windows.Forms.UserControl {
 		#region Designer generated variables
-		private System.Windows.Forms.GroupBox groupBox3;
-		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.FontDialog fontDialog;
-		private System.Windows.Forms.ColorDialog colorDialog;
-		private System.Windows.Forms.NumericUpDown Bounds4;
-		private System.Windows.Forms.NumericUpDown Bounds3;
-		private System.Windows.Forms.NumericUpDown Bounds2;
-        private System.Windows.Forms.NumericUpDown Bounds1;
+
+                                                                          private System.Windows.Forms.FontDialog fontDialog;
+                                                                          private System.Windows.Forms.ColorDialog colorDialog;
         private IContainer components;
         private System.Windows.Forms.NumericUpDown OutlineSize;
 		#endregion
@@ -81,7 +73,7 @@ namespace DreamBeam {
         private CodeVendor.Controls.Grouper grouper1;
         private CodeVendor.Controls.Grouper grouper2;
         private CodeVendor.Controls.Grouper grouper3;
-        
+        private RectangleF bounds = new RectangleF();
 
 		public TextFormatOptions() {
 			// This call is required by the Windows.Forms Form Designer.
@@ -90,11 +82,7 @@ namespace DreamBeam {
 			SetControls(new BeamTextFormat());
 
 
-			Bounds1.ValueChanged += new EventHandler(ControlChanged);
-			Bounds2.ValueChanged += new EventHandler(ControlChanged);
-			Bounds3.ValueChanged += new EventHandler(ControlChanged);
-			Bounds4.ValueChanged += new EventHandler(ControlChanged);
-
+		
 			OutlineSize.ValueChanged += new EventHandler(ControlChanged);
             Fontsize.TextChanged += new EventHandler(ControlChanged);
             fontComboBox1.TextChanged += new EventHandler(ControlChanged);
@@ -172,10 +160,8 @@ namespace DreamBeam {
 		private BeamTextFormat ReadControls() {
 			BeamTextFormat format = new BeamTextFormat();
 
-			format.Bounds.X = (float)this.Bounds1.Value;
-			format.Bounds.Y = (float)this.Bounds2.Value;
-			format.Bounds.Width = (float)(100 - this.Bounds3.Value - this.Bounds1.Value);
-			format.Bounds.Height = (float)(100 - this.Bounds4.Value - this.Bounds2.Value);
+            format.Bounds = this.bounds;
+			
 
 			format.OutlineSize = (int)this.OutlineSize.Value;                        
             this.font = CreateFont();
@@ -217,10 +203,8 @@ namespace DreamBeam {
             OutlineColorComboBox.Color = format.OutlineColor;
 
 			// If we assign values that are out-of-range to the controls, we'll get an exception.
-			this.Bounds1.Value = Tools.ForceToRange(Bounds1.Minimum, Bounds1.Maximum, (decimal)format.Bounds.Left);
-			this.Bounds2.Value = Tools.ForceToRange(Bounds2.Minimum, Bounds2.Maximum, (decimal)format.Bounds.Top);
-			this.Bounds3.Value = Tools.ForceToRange(Bounds3.Minimum, Bounds3.Maximum, (decimal)(100F - format.Bounds.Right));
-			this.Bounds4.Value = Tools.ForceToRange(Bounds4.Minimum, Bounds4.Maximum, (decimal)(100F - format.Bounds.Bottom));
+			this.bounds = format.Bounds;
+			
 
 			this.OutlineSize.Value = Tools.ForceToRange(OutlineSize.Minimum, OutlineSize.Maximum, format.OutlineSize);
 			if (format.TextFont != null) {
@@ -292,15 +276,6 @@ namespace DreamBeam {
 		/// </summary>
 		private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.Bounds4 = new System.Windows.Forms.NumericUpDown();
-            this.Bounds3 = new System.Windows.Forms.NumericUpDown();
-            this.Bounds2 = new System.Windows.Forms.NumericUpDown();
-            this.Bounds1 = new System.Windows.Forms.NumericUpDown();
             this.OutlineMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.NoOutlineItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FilledOutlineItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -309,36 +284,31 @@ namespace DreamBeam {
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.grouper3 = new CodeVendor.Controls.Grouper();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.grouper2 = new CodeVendor.Controls.Grouper();
-            this.OutlineColorComboBox = new OfficePickers.ColorPicker.ComboBoxColorPicker();
-            this.OutlineSize = new System.Windows.Forms.NumericUpDown();
-            this.grouper1 = new CodeVendor.Controls.Grouper();
-            this.ColorComboBox = new OfficePickers.ColorPicker.ComboBoxColorPicker();
-            this.fontComboBox1 = new FontCombo.FontComboBox();
-            this.Fontsize = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.HAlignRightButton = new RibbonStyle.RibbonMenuButton();
             this.HAlignCenterButton = new RibbonStyle.RibbonMenuButton();
             this.HAlignLeftButton = new RibbonStyle.RibbonMenuButton();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.VAlignTopButton = new RibbonStyle.RibbonMenuButton();
             this.VAlignMiddleButton = new RibbonStyle.RibbonMenuButton();
             this.VAlignBottomButton = new RibbonStyle.RibbonMenuButton();
+            this.grouper2 = new CodeVendor.Controls.Grouper();
+            this.OutlineColorComboBox = new OfficePickers.ColorPicker.ComboBoxColorPicker();
             this.TextOutlineMenuButton = new RibbonStyle.RibbonMenuButton();
             this.ribbonMenuButton2 = new RibbonStyle.RibbonMenuButton();
+            this.OutlineSize = new System.Windows.Forms.NumericUpDown();
             this.ribbonMenuButton3 = new RibbonStyle.RibbonMenuButton();
+            this.grouper1 = new CodeVendor.Controls.Grouper();
+            this.ColorComboBox = new OfficePickers.ColorPicker.ComboBoxColorPicker();
             this.ribbonMenuButton4 = new RibbonStyle.RibbonMenuButton();
+            this.fontComboBox1 = new FontCombo.FontComboBox();
+            this.Fontsize = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.fontUnderlineButton = new RibbonStyle.RibbonMenuButton();
             this.fontItalicButton = new RibbonStyle.RibbonMenuButton();
             this.fontBoldButton = new RibbonStyle.RibbonMenuButton();
             this.ribbonMenuButton1 = new RibbonStyle.RibbonMenuButton();
             this.TextSizeIncreaseButton = new RibbonStyle.RibbonMenuButton();
             this.TextSizeDecreaseButton = new RibbonStyle.RibbonMenuButton();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Bounds4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Bounds3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Bounds2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Bounds1)).BeginInit();
             this.OutlineMenu.SuspendLayout();
             this.grouper3.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -348,120 +318,6 @@ namespace DreamBeam {
             this.grouper1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.Bounds4);
-            this.groupBox3.Controls.Add(this.Bounds3);
-            this.groupBox3.Controls.Add(this.Bounds2);
-            this.groupBox3.Controls.Add(this.Bounds1);
-            this.groupBox3.Location = new System.Drawing.Point(30, 169);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(152, 118);
-            this.groupBox3.TabIndex = 12;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Margins (in %)";
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Location = new System.Drawing.Point(58, 77);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 16);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Bottom";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(100, 45);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 16);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Right";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(58, 11);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 16);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Top";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(8, 43);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 16);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Left";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Bounds4
-            // 
-            this.Bounds4.DecimalPlaces = 1;
-            this.Bounds4.Location = new System.Drawing.Point(56, 93);
-            this.Bounds4.Name = "Bounds4";
-            this.Bounds4.Size = new System.Drawing.Size(48, 20);
-            this.Bounds4.TabIndex = 3;
-            this.Bounds4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Bounds4.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // Bounds3
-            // 
-            this.Bounds3.DecimalPlaces = 1;
-            this.Bounds3.Location = new System.Drawing.Point(98, 61);
-            this.Bounds3.Name = "Bounds3";
-            this.Bounds3.Size = new System.Drawing.Size(48, 20);
-            this.Bounds3.TabIndex = 2;
-            this.Bounds3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Bounds3.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // Bounds2
-            // 
-            this.Bounds2.DecimalPlaces = 1;
-            this.Bounds2.Location = new System.Drawing.Point(56, 27);
-            this.Bounds2.Name = "Bounds2";
-            this.Bounds2.Size = new System.Drawing.Size(48, 20);
-            this.Bounds2.TabIndex = 1;
-            this.Bounds2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Bounds2.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // Bounds1
-            // 
-            this.Bounds1.DecimalPlaces = 1;
-            this.Bounds1.Location = new System.Drawing.Point(6, 59);
-            this.Bounds1.Name = "Bounds1";
-            this.Bounds1.Size = new System.Drawing.Size(48, 20);
-            this.Bounds1.TabIndex = 0;
-            this.Bounds1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Bounds1.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
             // 
             // OutlineMenu
             // 
@@ -530,263 +386,6 @@ namespace DreamBeam {
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(76, 26);
             this.panel3.TabIndex = 24;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Transparent;
-            this.panel2.Controls.Add(this.VAlignTopButton);
-            this.panel2.Controls.Add(this.VAlignMiddleButton);
-            this.panel2.Controls.Add(this.VAlignBottomButton);
-            this.panel2.Location = new System.Drawing.Point(4, 36);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(79, 29);
-            this.panel2.TabIndex = 23;
-            // 
-            // grouper2
-            // 
-            this.grouper2.BackgroundColor = System.Drawing.Color.BlanchedAlmond;
-            this.grouper2.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouper2.BackgroundGradientMode = CodeVendor.Controls.Grouper.GroupBoxGradientMode.BackwardDiagonal;
-            this.grouper2.BorderColor = System.Drawing.Color.Black;
-            this.grouper2.BorderThickness = 1F;
-            this.grouper2.Controls.Add(this.OutlineColorComboBox);
-            this.grouper2.Controls.Add(this.TextOutlineMenuButton);
-            this.grouper2.Controls.Add(this.ribbonMenuButton2);
-            this.grouper2.Controls.Add(this.OutlineSize);
-            this.grouper2.Controls.Add(this.ribbonMenuButton3);
-            this.grouper2.CustomGroupBoxColor = System.Drawing.Color.White;
-            this.grouper2.GroupImage = null;
-            this.grouper2.GroupTitle = "Text Outline";
-            this.grouper2.Location = new System.Drawing.Point(0, 92);
-            this.grouper2.Name = "grouper2";
-            this.grouper2.Padding = new System.Windows.Forms.Padding(20);
-            this.grouper2.PaintGroupBox = false;
-            this.grouper2.RoundCorners = 2;
-            this.grouper2.ShadowColor = System.Drawing.Color.DarkGray;
-            this.grouper2.ShadowControl = false;
-            this.grouper2.ShadowThickness = 3;
-            this.grouper2.Size = new System.Drawing.Size(149, 55);
-            this.grouper2.TabIndex = 26;
-            this.grouper2.TinyMode = true;
-            this.grouper2.TitleBorder = true;
-            // 
-            // OutlineColorComboBox
-            // 
-            this.OutlineColorComboBox.Color = System.Drawing.Color.Black;
-            this.OutlineColorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.OutlineColorComboBox.DropDownHeight = 1;
-            this.OutlineColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.OutlineColorComboBox.DropDownWidth = 1;
-            this.OutlineColorComboBox.FormattingEnabled = true;
-            this.OutlineColorComboBox.IntegralHeight = false;
-            this.OutlineColorComboBox.ItemHeight = 16;
-            this.OutlineColorComboBox.Items.AddRange(new object[] {
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color"});
-            this.OutlineColorComboBox.Location = new System.Drawing.Point(91, 21);
-            this.OutlineColorComboBox.Name = "OutlineColorComboBox";
-            this.OutlineColorComboBox.Size = new System.Drawing.Size(46, 22);
-            this.OutlineColorComboBox.TabIndex = 32;
-            // 
-            // OutlineSize
-            // 
-            this.OutlineSize.Location = new System.Drawing.Point(46, 23);
-            this.OutlineSize.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.OutlineSize.Name = "OutlineSize";
-            this.OutlineSize.Size = new System.Drawing.Size(37, 20);
-            this.OutlineSize.TabIndex = 8;
-            this.OutlineSize.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // grouper1
-            // 
-            this.grouper1.BackgroundColor = System.Drawing.Color.BlanchedAlmond;
-            this.grouper1.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouper1.BackgroundGradientMode = CodeVendor.Controls.Grouper.GroupBoxGradientMode.BackwardDiagonal;
-            this.grouper1.BorderColor = System.Drawing.Color.Black;
-            this.grouper1.BorderThickness = 1F;
-            this.grouper1.Controls.Add(this.ColorComboBox);
-            this.grouper1.Controls.Add(this.ribbonMenuButton4);
-            this.grouper1.Controls.Add(this.fontComboBox1);
-            this.grouper1.Controls.Add(this.Fontsize);
-            this.grouper1.Controls.Add(this.panel1);
-            this.grouper1.Controls.Add(this.ribbonMenuButton1);
-            this.grouper1.Controls.Add(this.TextSizeIncreaseButton);
-            this.grouper1.Controls.Add(this.TextSizeDecreaseButton);
-            this.grouper1.CustomGroupBoxColor = System.Drawing.Color.White;
-            this.grouper1.GroupImage = null;
-            this.grouper1.GroupTitle = "Font";
-            this.grouper1.Location = new System.Drawing.Point(0, 0);
-            this.grouper1.Name = "grouper1";
-            this.grouper1.Padding = new System.Windows.Forms.Padding(20);
-            this.grouper1.PaintGroupBox = false;
-            this.grouper1.RoundCorners = 2;
-            this.grouper1.ShadowColor = System.Drawing.Color.DarkGray;
-            this.grouper1.ShadowControl = false;
-            this.grouper1.ShadowThickness = 3;
-            this.grouper1.Size = new System.Drawing.Size(235, 88);
-            this.grouper1.TabIndex = 25;
-            this.grouper1.TinyMode = true;
-            this.grouper1.TitleBorder = true;
-            // 
-            // ColorComboBox
-            // 
-            this.ColorComboBox.Color = System.Drawing.Color.Black;
-            this.ColorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ColorComboBox.DropDownHeight = 1;
-            this.ColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ColorComboBox.DropDownWidth = 1;
-            this.ColorComboBox.FormattingEnabled = true;
-            this.ColorComboBox.IntegralHeight = false;
-            this.ColorComboBox.ItemHeight = 16;
-            this.ColorComboBox.Items.AddRange(new object[] {
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color",
-            "Color"});
-            this.ColorComboBox.Location = new System.Drawing.Point(123, 51);
-            this.ColorComboBox.Name = "ColorComboBox";
-            this.ColorComboBox.Size = new System.Drawing.Size(46, 22);
-            this.ColorComboBox.TabIndex = 16;
-            // 
-            // fontComboBox1
-            // 
-            this.fontComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.fontComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fontComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.fontComboBox1.FormattingEnabled = true;
-            this.fontComboBox1.IntegralHeight = false;
-            this.fontComboBox1.Location = new System.Drawing.Point(9, 21);
-            this.fontComboBox1.MaxDropDownItems = 20;
-            this.fontComboBox1.Name = "fontComboBox1";
-            this.fontComboBox1.Size = new System.Drawing.Size(162, 21);
-            this.fontComboBox1.TabIndex = 15;
-            this.fontComboBox1.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged);
-            // 
-            // Fontsize
-            // 
-            this.Fontsize.FormattingEnabled = true;
-            this.Fontsize.Items.AddRange(new object[] {
-            "10",
-            "14",
-            "18",
-            "20",
-            "24",
-            "28",
-            "36",
-            "48",
-            "54",
-            "62",
-            "72",
-            "84",
-            "100",
-            "110"});
-            this.Fontsize.Location = new System.Drawing.Point(175, 21);
-            this.Fontsize.Name = "Fontsize";
-            this.Fontsize.Size = new System.Drawing.Size(46, 21);
-            this.Fontsize.TabIndex = 27;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.fontUnderlineButton);
-            this.panel1.Controls.Add(this.fontItalicButton);
-            this.panel1.Controls.Add(this.fontBoldButton);
-            this.panel1.Location = new System.Drawing.Point(4, 46);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(123, 33);
-            this.panel1.TabIndex = 25;
             // 
             // HAlignRightButton
             // 
@@ -895,6 +494,17 @@ namespace DreamBeam {
             this.HAlignLeftButton.Title = "";
             this.HAlignLeftButton.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.Controls.Add(this.VAlignTopButton);
+            this.panel2.Controls.Add(this.VAlignMiddleButton);
+            this.panel2.Controls.Add(this.VAlignBottomButton);
+            this.panel2.Location = new System.Drawing.Point(4, 36);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(79, 29);
+            this.panel2.TabIndex = 23;
+            // 
             // VAlignTopButton
             // 
             this.VAlignTopButton.Arrow = RibbonStyle.RibbonMenuButton.e_arrow.None;
@@ -1002,6 +612,97 @@ namespace DreamBeam {
             this.VAlignBottomButton.Title = "";
             this.VAlignBottomButton.UseVisualStyleBackColor = true;
             // 
+            // grouper2
+            // 
+            this.grouper2.BackgroundColor = System.Drawing.Color.BlanchedAlmond;
+            this.grouper2.BackgroundGradientColor = System.Drawing.Color.White;
+            this.grouper2.BackgroundGradientMode = CodeVendor.Controls.Grouper.GroupBoxGradientMode.BackwardDiagonal;
+            this.grouper2.BorderColor = System.Drawing.Color.Black;
+            this.grouper2.BorderThickness = 1F;
+            this.grouper2.Controls.Add(this.OutlineColorComboBox);
+            this.grouper2.Controls.Add(this.TextOutlineMenuButton);
+            this.grouper2.Controls.Add(this.ribbonMenuButton2);
+            this.grouper2.Controls.Add(this.OutlineSize);
+            this.grouper2.Controls.Add(this.ribbonMenuButton3);
+            this.grouper2.CustomGroupBoxColor = System.Drawing.Color.White;
+            this.grouper2.GroupImage = null;
+            this.grouper2.GroupTitle = "Text Outline";
+            this.grouper2.Location = new System.Drawing.Point(0, 92);
+            this.grouper2.Name = "grouper2";
+            this.grouper2.Padding = new System.Windows.Forms.Padding(20);
+            this.grouper2.PaintGroupBox = false;
+            this.grouper2.RoundCorners = 2;
+            this.grouper2.ShadowColor = System.Drawing.Color.DarkGray;
+            this.grouper2.ShadowControl = false;
+            this.grouper2.ShadowThickness = 3;
+            this.grouper2.Size = new System.Drawing.Size(149, 55);
+            this.grouper2.TabIndex = 26;
+            this.grouper2.TinyMode = true;
+            this.grouper2.TitleBorder = true;
+            // 
+            // OutlineColorComboBox
+            // 
+            this.OutlineColorComboBox.Color = System.Drawing.Color.Black;
+            this.OutlineColorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.OutlineColorComboBox.DropDownHeight = 1;
+            this.OutlineColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.OutlineColorComboBox.DropDownWidth = 1;
+            this.OutlineColorComboBox.FormattingEnabled = true;
+            this.OutlineColorComboBox.IntegralHeight = false;
+            this.OutlineColorComboBox.ItemHeight = 16;
+            this.OutlineColorComboBox.Items.AddRange(new object[] {
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color"});
+            this.OutlineColorComboBox.Location = new System.Drawing.Point(91, 21);
+            this.OutlineColorComboBox.Name = "OutlineColorComboBox";
+            this.OutlineColorComboBox.Size = new System.Drawing.Size(46, 22);
+            this.OutlineColorComboBox.TabIndex = 32;
+            // 
             // TextOutlineMenuButton
             // 
             this.TextOutlineMenuButton.Arrow = RibbonStyle.RibbonMenuButton.e_arrow.ToDown;
@@ -1075,6 +776,23 @@ namespace DreamBeam {
             this.ribbonMenuButton2.Title = "";
             this.ribbonMenuButton2.UseVisualStyleBackColor = true;
             // 
+            // OutlineSize
+            // 
+            this.OutlineSize.Location = new System.Drawing.Point(46, 23);
+            this.OutlineSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.OutlineSize.Name = "OutlineSize";
+            this.OutlineSize.Size = new System.Drawing.Size(37, 20);
+            this.OutlineSize.TabIndex = 8;
+            this.OutlineSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // ribbonMenuButton3
             // 
             this.ribbonMenuButton3.Arrow = RibbonStyle.RibbonMenuButton.e_arrow.None;
@@ -1111,6 +829,99 @@ namespace DreamBeam {
             this.ribbonMenuButton3.Title = "";
             this.ribbonMenuButton3.UseVisualStyleBackColor = true;
             // 
+            // grouper1
+            // 
+            this.grouper1.BackgroundColor = System.Drawing.Color.BlanchedAlmond;
+            this.grouper1.BackgroundGradientColor = System.Drawing.Color.White;
+            this.grouper1.BackgroundGradientMode = CodeVendor.Controls.Grouper.GroupBoxGradientMode.BackwardDiagonal;
+            this.grouper1.BorderColor = System.Drawing.Color.Black;
+            this.grouper1.BorderThickness = 1F;
+            this.grouper1.Controls.Add(this.ColorComboBox);
+            this.grouper1.Controls.Add(this.ribbonMenuButton4);
+            this.grouper1.Controls.Add(this.fontComboBox1);
+            this.grouper1.Controls.Add(this.Fontsize);
+            this.grouper1.Controls.Add(this.panel1);
+            this.grouper1.Controls.Add(this.ribbonMenuButton1);
+            this.grouper1.Controls.Add(this.TextSizeIncreaseButton);
+            this.grouper1.Controls.Add(this.TextSizeDecreaseButton);
+            this.grouper1.CustomGroupBoxColor = System.Drawing.Color.White;
+            this.grouper1.GroupImage = null;
+            this.grouper1.GroupTitle = "Font";
+            this.grouper1.Location = new System.Drawing.Point(0, 0);
+            this.grouper1.Name = "grouper1";
+            this.grouper1.Padding = new System.Windows.Forms.Padding(20);
+            this.grouper1.PaintGroupBox = false;
+            this.grouper1.RoundCorners = 2;
+            this.grouper1.ShadowColor = System.Drawing.Color.DarkGray;
+            this.grouper1.ShadowControl = false;
+            this.grouper1.ShadowThickness = 3;
+            this.grouper1.Size = new System.Drawing.Size(235, 88);
+            this.grouper1.TabIndex = 25;
+            this.grouper1.TinyMode = true;
+            this.grouper1.TitleBorder = true;
+            // 
+            // ColorComboBox
+            // 
+            this.ColorComboBox.Color = System.Drawing.Color.Black;
+            this.ColorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ColorComboBox.DropDownHeight = 1;
+            this.ColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ColorComboBox.DropDownWidth = 1;
+            this.ColorComboBox.FormattingEnabled = true;
+            this.ColorComboBox.IntegralHeight = false;
+            this.ColorComboBox.ItemHeight = 16;
+            this.ColorComboBox.Items.AddRange(new object[] {
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color",
+            "Color"});
+            this.ColorComboBox.Location = new System.Drawing.Point(123, 51);
+            this.ColorComboBox.Name = "ColorComboBox";
+            this.ColorComboBox.Size = new System.Drawing.Size(46, 22);
+            this.ColorComboBox.TabIndex = 16;
+            // 
             // ribbonMenuButton4
             // 
             this.ribbonMenuButton4.Arrow = RibbonStyle.RibbonMenuButton.e_arrow.None;
@@ -1146,6 +957,53 @@ namespace DreamBeam {
             this.ribbonMenuButton4.Text = "\r\n";
             this.ribbonMenuButton4.Title = "";
             this.ribbonMenuButton4.UseVisualStyleBackColor = true;
+            // 
+            // fontComboBox1
+            // 
+            this.fontComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.fontComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fontComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.fontComboBox1.FormattingEnabled = true;
+            this.fontComboBox1.IntegralHeight = false;
+            this.fontComboBox1.Location = new System.Drawing.Point(9, 21);
+            this.fontComboBox1.MaxDropDownItems = 20;
+            this.fontComboBox1.Name = "fontComboBox1";
+            this.fontComboBox1.Size = new System.Drawing.Size(162, 21);
+            this.fontComboBox1.TabIndex = 15;
+            this.fontComboBox1.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged);
+            // 
+            // Fontsize
+            // 
+            this.Fontsize.FormattingEnabled = true;
+            this.Fontsize.Items.AddRange(new object[] {
+            "10",
+            "14",
+            "18",
+            "20",
+            "24",
+            "28",
+            "36",
+            "48",
+            "54",
+            "62",
+            "72",
+            "84",
+            "100",
+            "110"});
+            this.Fontsize.Location = new System.Drawing.Point(175, 21);
+            this.Fontsize.Name = "Fontsize";
+            this.Fontsize.Size = new System.Drawing.Size(46, 21);
+            this.Fontsize.TabIndex = 27;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.fontUnderlineButton);
+            this.panel1.Controls.Add(this.fontItalicButton);
+            this.panel1.Controls.Add(this.fontBoldButton);
+            this.panel1.Location = new System.Drawing.Point(4, 46);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(123, 33);
+            this.panel1.TabIndex = 25;
             // 
             // fontUnderlineButton
             // 
@@ -1369,15 +1227,9 @@ namespace DreamBeam {
             this.Controls.Add(this.grouper3);
             this.Controls.Add(this.grouper2);
             this.Controls.Add(this.grouper1);
-            this.Controls.Add(this.groupBox3);
             this.Name = "TextFormatOptions";
-            this.Size = new System.Drawing.Size(245, 302);
+            this.Size = new System.Drawing.Size(245, 183);
             this.Load += new System.EventHandler(this.TextFormatOptions_Load);
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Bounds4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Bounds3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Bounds2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Bounds1)).EndInit();
             this.OutlineMenu.ResumeLayout(false);
             this.grouper3.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
