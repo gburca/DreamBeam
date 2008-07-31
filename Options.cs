@@ -59,57 +59,9 @@ namespace DreamBeam {
 			base.Dispose(disposing);
 		}
 
-		/// <summary>
-		/// By default we handle theme changes by using the contents of the widgets
-		/// </summary>
-		private void HandleThemeChange() {
-			/* This will get called 3-times on load, as each theme is configured.
-			 * After the first widget is configured, the yet-unconfigured ones will
-			 * return a "default" SongTheme which can't be typecast to a Bible or SermonTheme.
-			 */
-		/*	if (!loadComplete) return;
-			HandleThemeChange(
-				this.songThemeWidget.Theme as SongTheme,
-				this.bibleFormatWidget.Theme as BibleTheme,
-				this.sermonThemeWidget.Theme as SermonTheme);*/
-		}
+	
 
-		/// <summary>
-		/// Propagates the provided themes to the preview window content
-		/// </summary>
-		/// <param name="song"></param>
-		/// <param name="bible"></param>
-		/// <param name="sermon"></param>
-		private void HandleThemeChange(SongTheme song, BibleTheme bible, SermonTheme sermon) {
-			IContentOperations content = _MainForm.DisplayPreview.content;
-			if (content != null) {
-				// First, let's clear the pre-render cache
-				try {
-					(content as Content).RenderedFramesClear();
-				} catch { }
-
-				switch ((ContentType)content.GetIdentity().Type) {
-					case ContentType.Song:
-						Song s = content as Song;
-						if (s != null && String.IsNullOrEmpty(s.ThemePath)) {
-							content.Theme = song;
-						} else {
-							// This is a song with a custom theme. Don't override with default.
-						}
-						break;
-					case ContentType.PlainText:
-						content.Theme = sermon;
-						break;
-					case ContentType.BibleVerseIdx:
-					case ContentType.BibleVerseRef:
-					case ContentType.BibleVerse:
-						content.Theme = bible;
-						break;
-				}
-				_MainForm.DisplayPreview.UpdateDisplay(true);
-			}
-		}
-
+		
 		private void Options_OkBtn_Click(object sender, System.EventArgs e) {
 			Config config = new Config();
 			this._MainForm.Config = config;
@@ -181,7 +133,6 @@ namespace DreamBeam {
 			IContentOperations content = _MainForm.DisplayPreview.content;
 			if (content != null) content.ShowRectangles = false;
 
-			HandleThemeChange();
 
 			config.ServerAddress = this.ServerAddress.Text;
 			config.ListeningPort = (int)this.ListeningPort.Value;
@@ -214,11 +165,6 @@ namespace DreamBeam {
 		}
 
 		private void Options_Cancelbtn_Click(object sender, System.EventArgs e) {
-			IContentOperations content = _MainForm.DisplayPreview.content;
-			if (content != null) content.ShowRectangles = false;
-
-			ComboTheme t = _MainForm.Config.theme;
-			HandleThemeChange(t.Song, t.Bible, t.Sermon);
 			this.Close();
 		}
 

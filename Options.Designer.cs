@@ -1130,11 +1130,11 @@ namespace DreamBeam {
             // tabControl
             // 
             this.tabControl.Controls.Add(this.Common_Tab);
-            this.tabControl.Controls.Add(this.BeamBox_tab);
-            this.tabControl.Controls.Add(this.Misc_Tab);
-            this.tabControl.Controls.Add(this.BibleCache_Tab);
-            this.tabControl.Controls.Add(this.Graphics_tab);
             this.tabControl.Controls.Add(this.SongFormat_Tab);
+            this.tabControl.Controls.Add(this.Graphics_tab);            
+            this.tabControl.Controls.Add(this.BeamBox_tab);            
+            this.tabControl.Controls.Add(this.BibleCache_Tab);          
+            this.tabControl.Controls.Add(this.Misc_Tab);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Multiline = true;

@@ -306,7 +306,7 @@ namespace DreamBeam {
             this.Controls.Add(this.TextOutlineMenuButton);
             this.Controls.Add(this.grouper1);
             this.Name = "ThemeWidget";
-            this.Size = new System.Drawing.Size(250, 323);
+            this.Size = new System.Drawing.Size(250, 320);
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

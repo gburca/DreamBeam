@@ -55,7 +55,7 @@ namespace DreamBeam {
 		public Bitmap memoryBitmap = null;
 
 		///<summary>Use AlphaBlending Transitions </summary>
-		public bool transit = false;
+		//public bool transit = false;
 
 		///<summary>Temporary bitmap</summary>
 		public Bitmap bmp = null;
@@ -656,7 +656,7 @@ namespace DreamBeam {
 			ShowSongPanel.Show();
 
 			//Draw Image on Screen, make a Alphablending if transit == true
-			if (transit) {
+			if (this.Config.Alphablending) {
 				// We set the new bitmap before making the form visible or else
 				// it shows up with the old bitmap for a fraction of a second
 				// and it looks like it flickers.

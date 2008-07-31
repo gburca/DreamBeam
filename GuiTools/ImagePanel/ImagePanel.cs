@@ -247,7 +247,7 @@ namespace DreamBeam
 
 
         public void PaintImage(){
-            if (this.Height != null && this.Width != null)
+            if (this.Height != null && this.Width != null && this.Height > 0 && this.Width >0)
             {
                 MemoryBitmap = new Bitmap(this.Width, this.Height);
                 Graphics dcPaint = Graphics.FromImage(MemoryBitmap);

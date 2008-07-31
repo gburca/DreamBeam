@@ -503,7 +503,7 @@ namespace DreamBeam {
 			this.Config.BeamBoxAutoPosSize = ShowBeam.BeamBoxAutoPosSize;
 			this.Config.BeamBoxScreenNum = ShowBeam.BeamBoxScreenNum;
 
-			this.Config.Alphablending = ShowBeam.transit;
+			
 			this.Config.BibleLang = this.Sermon_BibleLang;
 			this.Config.ShowBibleTranslation = this.Sermon_ShowBibleTranslation;
 
@@ -532,6 +532,7 @@ namespace DreamBeam {
 
 			// Alphablending enabled?
 			ShowBeam.Config = this.Config;
+           
 			// Direct3D
 			ShowBeam.useDirect3d = this.Config.useDirect3D;
 
@@ -2690,42 +2691,52 @@ namespace DreamBeam {
 
         private void songThemeWidget_MouseInsideEvent(object sender, EventArgs e)
         {
-         
+         //do we still need Rectangles?
             if (DisplayPreview.content != null && !RightDocks_PreviewScreen_PictureBox.ShowRect)
             {
-                HideRectanglesTimer.Start();
+                //HideRectanglesTimer.Start();
                 if (!DisplayPreview.content.ShowRectangles)
                 {
-                    DisplayPreview.content.ShowRectangles = true;
-                    DisplayPreview.UpdateDisplay(true);
+                    //DisplayPreview.content.ShowRectangles = true;
+                    //DisplayPreview.UpdateDisplay(true);
                 }
             }
         }
 
-        private void RightDocks_PreviewScreen_PictureBox_RectangleChangedEvent()
+        private ThemeWidget getWidget()
         {
-            //MessageBox.Show(RightDocks_PreviewScreen_PictureBox.RectPosition.ToString());
-            
             IContentOperations content = DisplayPreview.content;
             if (content != null)
             {
                 switch ((ContentType)content.GetIdentity().Type)
                 {
                     case ContentType.Song:
-                        content.Theme.TextFormat[songThemeWidget.getSelectedTab()].Bounds = RightDocks_PreviewScreen_PictureBox.RectPosition;
-                        this.songThemeWidget.Theme = content.Theme;                        
-                    break;
+                        return this.songThemeWidget;
+                        break;
                     case ContentType.PlainText:
-                        content.Theme.TextFormat[sermonThemeWidget.getSelectedTab()].Bounds = RightDocks_PreviewScreen_PictureBox.RectPosition;
-                        this.sermonThemeWidget.Theme = content.Theme;                        
-                    break;
+                        return this.sermonThemeWidget;
+                        break;
                     case ContentType.BibleVerseIdx:
                     case ContentType.BibleVerseRef:
                     case ContentType.BibleVerse:
-                        content.Theme.TextFormat[bibleThemeWidget.getSelectedTab()].Bounds = RightDocks_PreviewScreen_PictureBox.RectPosition;
-                        this.bibleThemeWidget.Theme = content.Theme;                        
-                    break;
+                        return this.bibleThemeWidget;
+
+                        break;
                 }
+
+            }
+            return new ThemeWidget();
+        }
+
+
+        private void RightDocks_PreviewScreen_PictureBox_RectangleChangedEvent()
+        {            
+            
+            IContentOperations content = DisplayPreview.content;
+            if (content != null)
+            {
+                content.Theme.TextFormat[getWidget().getSelectedTab()].Bounds = RightDocks_PreviewScreen_PictureBox.RectPosition;
+                getWidget().Theme = content.Theme;                        
                 DisplayPreview.UpdateDisplay(true);   
             }
             
@@ -2735,11 +2746,14 @@ namespace DreamBeam {
         {
             if (e.Button == MouseButtons.Right)
             {
-
-                ImageWindow.Size = new Size(this.Size.Width - 50, this.Size.Height - 50);                
-                ImageWindow.Activate(DisplayPreview);
-                DisplayPreview.SetDestination(RightDocks_PreviewScreen_PictureBox);
-                DisplayPreview.UpdateDisplay(true);
+                  IContentOperations content = DisplayPreview.content;
+                  if (content != null)
+                  {
+                      ImageWindow.Size = new Size(this.Size.Width - 50, this.Size.Height - 50);
+                      ImageWindow.Activate(DisplayPreview);
+                      DisplayPreview.SetDestination(RightDocks_PreviewScreen_PictureBox);
+                      DisplayPreview.UpdateDisplay(true);
+                  }
             }
         }
 

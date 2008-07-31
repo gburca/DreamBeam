@@ -304,11 +304,13 @@ namespace DreamBeam {
             {
                 this.Design_checkBox.Text = "    Individual Design (on)";                
                 this.TabContainerPanel.Show();
+                this.SetTextPositionButton.Show();
             }
             if (!this.Design_checkBox.Checked)
             {
                 this.Design_checkBox.Text = "    Individual Design (off)";                
                 this.TabContainerPanel.Hide();
+                this.SetTextPositionButton.Hide();
             }
         }
 
