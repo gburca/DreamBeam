@@ -14,17 +14,16 @@ namespace DreamBeam
 
     public class CDrawDragRect : Panel
     {
-        public Rectangle rcLT, rcRT, rcLB, rcRB, rcLT2, rcRT2, rcLB2, rcRB2;
+        public Rectangle rcLT, rcRT, rcLB, rcRB, rcLT2, rcRT2, rcLB2, rcRB2, rcTM, rcBM, rcLM,rcRM;
         Cursor OldCur ;
 
         public int nIsBounce;
         int nThatsIt;
         public int nWd;
         public int nHt;        
-        int nResizeRT;
-        int nResizeBL;
-        int nResizeLT;
-        int nResizeRB;
+        int nResizeRT,nResizeBL, nResizeLT,nResizeRB;
+        int nResizeTM, nResizeBM, nResizeLM, nResizeRM;
+
         public Rectangle rcBone;
         int nBone = 0;
         Point ptOld;
@@ -38,6 +37,7 @@ namespace DreamBeam
         Region rgnTmpDeflated, rgnTmpPreDefalted;
         Rectangle rcTmp;
         protected bool _showrect = false;
+        private bool mousemoved = false;
 
         public bool ShowRect
         {
@@ -101,10 +101,19 @@ namespace DreamBeam
             if (nHt == 0)
                 nHt = 150;
             rcNew = rcOld = rcBone = new Rectangle(x,y, nWd, nHt);
+            
+            // Border Rectangles
             rcLT = new Rectangle(0, 0, nSize, nSize);
             rcRT = new Rectangle(0, 0, nSize, nSize);
             rcLB = new Rectangle(0, 0, nSize, nSize);
             rcRB = new Rectangle(0, 0, nSize, nSize);
+            
+            // Middle Rectangles
+            rcLM = new Rectangle(0, 0, nSize, nSize);
+            rcRM = new Rectangle(0, 0, nSize, nSize);
+            rcTM = new Rectangle(0, 0, nSize, nSize);
+            rcBM = new Rectangle(0, 0, nSize, nSize);
+
             rcLT2 = new Rectangle(0, 0, nSize-2, nSize-2);
             rcRT2 = new Rectangle(0, 0, nSize-2, nSize-2);
             rcLB2 = new Rectangle(0, 0, nSize-2, nSize-2);
@@ -123,30 +132,38 @@ namespace DreamBeam
 
         public void AdjustResizeRects()
         {
-            rcLT.X = rcBone.Left;
-            rcLT.Y = rcBone.Top;
-            rcLT2.X = rcLT.X + 1;
-            rcLT2.Y = rcLT.Y + 1;
-
+            rcLT.X = rcBone.Left+1;
+            rcLT.Y = rcBone.Top+1;
+         
             rcRT.X = rcBone.Right - rcRT.Width;
-            rcRT.Y = rcBone.Top;
-            rcRT2.X = rcRT.X + 1;
-            rcRT2.Y = rcRT.Y + 1;
-
-            rcLB.X = rcBone.Left;
+            rcRT.Y = rcBone.Top+1;
+            
+            rcLB.X = rcBone.Left+1;
             rcLB.Y = rcBone.Bottom - rcLB.Height;
-            rcLB2.X = rcLB.X + 1;
-            rcLB2.Y = rcLB.Y + 1;
-
+            
             rcRB.X = rcBone.Right - rcRB.Width;
             rcRB.Y = rcBone.Bottom - rcRB.Height;
-            rcRB2.X = rcRB.X + 1;
-            rcRB2.Y = rcRB.Y + 1;
+
+
+
+            rcTM.X = rcBone.Left + (rcBone.Width / 2)-2;
+            rcTM.Y = rcBone.Top + 1;
+
+            rcBM.X = rcBone.Left + (rcBone.Width / 2)-2;
+            rcBM.Y = rcBone.Bottom - rcRB.Height;
+
+            rcLM.X = rcBone.Left + 1;
+            rcLM.Y = rcBone.Top + (rcBone.Height /2)-2;
+
+            rcRM.X = rcBone.Right - rcRB.Width;
+            rcRM.Y = rcBone.Top + (rcBone.Height / 2) -2;
         }
+
         public int RGB(int r, int g, int b)
         {
             return ((int)(((byte)(r) | ((ushort)((byte)(g)) << 8)) | (((ushort)(byte)(b)) << 16)));
         }
+
         void DrawDragRect(MouseEventArgs e)
         {
             Graphics grfxClient = CreateGraphics();
@@ -206,18 +223,28 @@ namespace DreamBeam
             }
             grfxClient.Dispose();
         }
+     
         public virtual void ChildDisplay()
         {
         }
+     
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            if (nThatsIt == 0) return;
+            if (nThatsIt == 0 || !mousemoved) return;
+            
+            mousemoved = false;         
             nBone = 0;
-            Invalidate();
+            //Invalidate();
             nResizeRB = 0;
             nResizeBL = 0;
             nResizeRT = 0;
             nResizeLT = 0;
+
+            nResizeBM = 0;
+            nResizeTM = 0;
+            nResizeRM = 0;
+            nResizeLM = 0;
+            
 
             if (rcBone.Width <= 0 || rcBone.Height <= 0)
                 rcBone = rcOriginal;
@@ -235,13 +262,10 @@ namespace DreamBeam
                 rcBone.Y = 0;
 
 
-            AdjustResizeRects();
+            //AdjustResizeRects();
             
             base.OnMouseUp(e);
-            
-            //if (rcBone.Width > 0 && rcBone.Height > 0)
-              //     ChildDisplay();
-
+                     
             nWd = rcNew.Width;
             nHt = rcNew.Height;
             rcBegin = rcNew;
@@ -262,59 +286,78 @@ namespace DreamBeam
                     rcNew = rcOld;
                     nResizeRB = 1;
                 }
-                else
-                    if (rcLB.Contains(pt))
-                    {
-                        rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
-                        rcNew = rcOld;
-                        nResizeBL = 1;
-                    }
-                    else
-                        if (rcRT.Contains(pt))
-                        {
-                            rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
-                            rcNew = rcOld;
-                            nResizeRT = 1;
-                        }
-                        else
-                            if (rcLT.Contains(pt))
-                            {
-                                rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
-                                rcNew = rcOld;
-                                nResizeLT = 1;
-                            }
-                            else
-                                if (rcBone.Contains(pt))
-                                {
-                                    nBone = 1;
-                                    ptNew = ptOld = pt;
-                                }
+                else if (rcLB.Contains(pt))
+                {
+                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcNew = rcOld;
+                    nResizeBL = 1;
+                }
+                else if (rcRT.Contains(pt))
+                {
+                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcNew = rcOld;
+                    nResizeRT = 1;
+                }
+                else if (rcLT.Contains(pt))
+                {
+                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcNew = rcOld;
+                    nResizeLT = 1;
+                }
+                else if (rcTM.Contains(pt))
+                {
+                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcNew = rcOld;
+                    nResizeTM = 1;
+                }
+                else if (rcBM.Contains(pt))
+                {
+                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcNew = rcOld;
+                    nResizeBM = 1;
+                }
+                else if (rcLM.Contains(pt))
+                {
+                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcNew = rcOld;
+                    nResizeLM = 1;
+                }
+                else if (rcRM.Contains(pt))
+                {
+                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcNew = rcOld;
+                    nResizeRM = 1;
+                }
+                else if (rcBone.Contains(pt))
+                {
+                    nBone = 1;
+                    ptNew = ptOld = pt;
+                }
                 nThatsIt = 1;
             }
             base.OnMouseDown(e);
         }
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
             if (_showrect)
             {
+
                 Point pt = new Point(e.X, e.Y);
 
-                if (rcLT.Contains(pt))
-                    Cursor = Cursors.SizeNWSE;
+                if (rcLT.Contains(pt)) Cursor = Cursors.SizeNWSE;
+                else if (rcRT.Contains(pt)) Cursor = Cursors.SizeNESW;
+                else if (rcLB.Contains(pt)) Cursor = Cursors.SizeNESW;
+                else if (rcRB.Contains(pt)) Cursor = Cursors.SizeNWSE;
+                else if (rcTM.Contains(pt) || rcBM.Contains(pt)) Cursor = Cursors.SizeNS;
+                else if (rcLM.Contains(pt) || rcRM.Contains(pt)) Cursor = Cursors.SizeWE;
+                else if (rcBone.Contains(pt)) Cursor = Cursors.Hand;
                 else
-                    if (rcRT.Contains(pt))
-                        Cursor = Cursors.SizeNESW;
-                    else
-                        if (rcLB.Contains(pt))
-                            Cursor = Cursors.SizeNESW;
-                        else
-                            if (rcRB.Contains(pt))
-                                Cursor = Cursors.SizeNWSE;
-                            else
-                                if (rcBone.Contains(pt))
-                                    Cursor = Cursors.Hand;
-                                else
-                                    Cursor = OldCur;
+                {
+                    Cursor = Cursors.Default;
+                    nBone = 0;
+                }
+
 
                 if (e.Button == MouseButtons.Left)
                 {
@@ -326,6 +369,7 @@ namespace DreamBeam
 
                     if (nResizeRB == 1) //Bottom:Right
                     {
+                        mousemoved = true;
                         rcNew.X = rcBone.X;
                         rcNew.Y = rcBone.Y;
                         rcNew.Width = pt.X - rcNew.Left;
@@ -380,6 +424,7 @@ namespace DreamBeam
                     else
                         if (nResizeBL == 1)
                         {
+                            mousemoved = true;
                             rcNew.X = pt.X;
                             rcNew.Y = rcBone.Y;
                             rcNew.Width = rcBone.Right - pt.X;
@@ -433,118 +478,209 @@ namespace DreamBeam
                             rcOld = rcBone = rcNew;
                             Cursor = Cursors.SizeNESW;
                         }
-                        else
-                            if (nResizeRT == 1)
-                            {
-                                rcNew.X = rcBone.X;
-                                rcNew.Y = pt.Y;
-                                rcNew.Width = pt.X - rcNew.Left;
-                                rcNew.Height = rcBone.Bottom - pt.Y;
+                        else if (nResizeRT == 1)
+                        {
+                            mousemoved = true;
+                            rcNew.X = rcBone.X;
+                            rcNew.Y = pt.Y;
+                            rcNew.Width = pt.X - rcNew.Left;
+                            rcNew.Height = rcBone.Bottom - pt.Y;
 
-                                if (nIsBounce == 0)
-                                {
-                                    //method Two
-                                    if (pt.X < rcNew.X)
-                                    //if (rcNew.X > rcNew.Right)
-                                    {
-                                        rcNew.X = pt.X;
-                                        rcNew.Width = rcBegin.X - pt.X;
-                                        nResizeRT = 0;
-                                        nResizeLT = 1;
-                                        rcBegin = rcNew;
-                                    }
-                                    if (pt.Y > rcNew.Bottom)
-                                    //if (rcNew.Y > rcNew.Bottom)
-                                    {
-                                        rcNew.Y = rcBegin.Bottom;
-                                        rcNew.Height = pt.Y - rcBegin.Bottom;
-                                        nResizeRT = 0;
-                                        nResizeRB = 1;
-                                        rcBegin = rcNew;
-                                    }
-                                }
-                                else
-                                {
-                                    //method One
-                                    if (rcNew.X > rcNew.Right)
-                                    {
-                                        rcNew.Offset(-nWd, 0);
-                                        if (rcNew.X < 0)
-                                            rcNew.X = 0;
-                                    }
-                                    if (rcNew.Y > rcNew.Bottom)
-                                    {
-                                        rcNew.Offset(0, nHt);
-                                        if (rcNew.Bottom > ClientRectangle.Height)
-                                            rcNew.Y = ClientRectangle.Height - rcNew.Height;
-                                    }
-                                }
-                                DrawDragRect(e);
-                                rcOld = rcBone = rcNew;
-                                Cursor = Cursors.SizeNESW;
-                            }
-                            else
-                                if (nResizeLT == 1)
+                            if (nIsBounce == 0)
+                            {
+                                //method Two
+                                if (pt.X < rcNew.X)
+                                //if (rcNew.X > rcNew.Right)
                                 {
                                     rcNew.X = pt.X;
-                                    rcNew.Y = pt.Y;
-                                    rcNew.Width = rcBone.Right - pt.X;
-                                    rcNew.Height = rcBone.Bottom - pt.Y;
-
-                                    if (nIsBounce == 0)
-                                    {
-                                        //Method Two;
-                                        if (pt.X > rcNew.Right)
-                                        //if (rcNew.X > rcNew.Right)
-                                        {
-                                            rcNew.X = rcBegin.Right;
-                                            rcNew.Width = pt.X = rcBegin.Right;
-                                            nResizeLT = 0;
-                                            nResizeRT = 1;
-                                            rcBegin = rcNew;
-                                        }
-                                        if (pt.Y > rcNew.Bottom)
-                                        //if (rcNew.Y > rcNew.Bottom)
-                                        {
-                                            rcNew.Y = rcBegin.Bottom;
-                                            rcNew.Height = pt.Y - rcBegin.Bottom;
-                                            nResizeLT = 0;
-                                            nResizeBL = 1;
-                                            rcBegin = rcNew;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        //method One
-                                        if (rcNew.X > rcNew.Right)
-                                        {
-                                            rcNew.Offset(nWd, 0);
-                                            if (rcNew.Right > ClientRectangle.Width)
-                                                rcNew.Width = ClientRectangle.Width - rcNew.X;
-                                        }
-                                        if (rcNew.Y > rcNew.Bottom)
-                                        {
-                                            rcNew.Offset(0, nHt);
-                                            if (rcNew.Bottom > ClientRectangle.Height)
-                                                rcNew.Height = ClientRectangle.Height - rcNew.Y;
-                                        }
-                                    }
-
-                                    DrawDragRect(e);
-                                    rcOld = rcBone = rcNew;
-                                    Cursor = Cursors.SizeNWSE;
+                                    rcNew.Width = rcBegin.X - pt.X;
+                                    nResizeRT = 0;
+                                    nResizeLT = 1;
+                                    rcBegin = rcNew;
                                 }
-                                else
-                                    if (nBone == 1) //Moving the rectangle
-                                    {
-                                        ptNew = pt;
-                                        int dx = ptNew.X - ptOld.X;
-                                        int dy = ptNew.Y - ptOld.Y;
-                                        rcBone.Offset(dx, dy);
-                                        rcNew = rcBone;
-                                        DrawDragRect(e);
-                                        ptOld = ptNew;
-                                    }
+                                if (pt.Y > rcNew.Bottom)
+                                //if (rcNew.Y > rcNew.Bottom)
+                                {
+                                    rcNew.Y = rcBegin.Bottom;
+                                    rcNew.Height = pt.Y - rcBegin.Bottom;
+                                    nResizeRT = 0;
+                                    nResizeRB = 1;
+                                    rcBegin = rcNew;
+                                }
+                            }
+
+
+                            else
+                            {
+                                //method One
+                                if (rcNew.X > rcNew.Right)
+                                {
+                                    rcNew.Offset(-nWd, 0);
+                                    if (rcNew.X < 0)
+                                        rcNew.X = 0;
+                                }
+                                if (rcNew.Y > rcNew.Bottom)
+                                {
+                                    rcNew.Offset(0, nHt);
+                                    if (rcNew.Bottom > ClientRectangle.Height)
+                                        rcNew.Y = ClientRectangle.Height - rcNew.Height;
+                                }
+                            }
+                            DrawDragRect(e);
+                            rcOld = rcBone = rcNew;
+                            Cursor = Cursors.SizeNESW;
+                        }
+                        else if (nResizeLT == 1)
+                        {
+                            mousemoved = true;
+                            rcNew.X = pt.X;
+                            rcNew.Y = pt.Y;
+                            rcNew.Width = rcBone.Right - pt.X;
+                            rcNew.Height = rcBone.Bottom - pt.Y;
+
+                            if (nIsBounce == 0)
+                            {
+                                //Method Two;
+                                if (pt.X > rcNew.Right)
+                                //if (rcNew.X > rcNew.Right)
+                                {
+                                    rcNew.X = rcBegin.Right;
+                                    rcNew.Width = pt.X = rcBegin.Right;
+                                    nResizeLT = 0;
+                                    nResizeRT = 1;
+                                    rcBegin = rcNew;
+                                }
+                                if (pt.Y > rcNew.Bottom)
+                                //if (rcNew.Y > rcNew.Bottom)
+                                {
+                                    rcNew.Y = rcBegin.Bottom;
+                                    rcNew.Height = pt.Y - rcBegin.Bottom;
+                                    nResizeLT = 0;
+                                    nResizeBL = 1;
+                                    rcBegin = rcNew;
+                                }
+                            }
+                            else
+                            {
+                                //method One
+                                if (rcNew.X > rcNew.Right)
+                                {
+                                    rcNew.Offset(nWd, 0);
+                                    if (rcNew.Right > ClientRectangle.Width)
+                                        rcNew.Width = ClientRectangle.Width - rcNew.X;
+                                }
+                                if (rcNew.Y > rcNew.Bottom)
+                                {
+                                    rcNew.Offset(0, nHt);
+                                    if (rcNew.Bottom > ClientRectangle.Height)
+                                        rcNew.Height = ClientRectangle.Height - rcNew.Y;
+                                }
+                            }
+
+                            DrawDragRect(e);
+                            rcOld = rcBone = rcNew;
+                            Cursor = Cursors.SizeNWSE;
+                        }
+
+                        // Modified 1
+                        else if (nResizeTM == 1)
+                        {
+                            mousemoved = true;
+                            rcNew.X = rcBone.Left;
+                            rcNew.Y = pt.Y;
+                            rcNew.Width = rcBone.Right - rcBone.Left;
+                            rcNew.Height = rcBone.Bottom - pt.Y;
+                            if (nIsBounce == 0)
+                            {
+                                if (pt.Y > rcNew.Bottom - 7)
+                                {
+                                    rcNew.Y = rcBone.Bottom - 8;
+                                    rcNew.Height = 8;
+                                }
+                            }
+                            DrawDragRect(e);
+                            rcOld = rcBone = rcNew;
+                            Cursor = Cursors.SizeNS;
+                        }
+
+                    // Modified 2
+                        else if (nResizeBM == 1)
+                        {
+                            mousemoved = true;
+                            rcNew.X = rcBone.Left;
+                            rcNew.Y = rcBone.Top;
+                            rcNew.Width = rcBone.Right - rcBone.Left;
+                            rcNew.Height = pt.Y - rcNew.Top;
+                            //rcBone.Bottom - pt.Y;
+                            if (nIsBounce == 0)
+                            {
+                                if (pt.Y < rcNew.Top + 7)
+                                {
+                                    rcNew.Height = 8;
+                                }
+                            }
+                            DrawDragRect(e);
+                            rcOld = rcBone = rcNew;
+                            Cursor = Cursors.SizeNS;
+                        }
+
+                       // Modified 3
+                        else if (nResizeLM == 1)
+                        {
+                            mousemoved = true;
+                            rcNew.X = pt.X;
+                            rcNew.Y = rcBone.Top;
+                            rcNew.Width = rcBone.Right - pt.X;
+                            rcNew.Height = rcBone.Bottom - rcBone.Top;
+                            //rcBone.Bottom - pt.Y;
+                            if (nIsBounce == 0)
+                            {
+                                if (pt.X > rcBone.Right - 9)
+                                {
+                                    Console.WriteLine("Event");
+                                    rcNew.X = rcBone.Right - 10;
+                                    rcNew.Width = 10;
+                                }
+                            }
+                            DrawDragRect(e);
+                            rcOld = rcBone = rcNew;
+                            Cursor = Cursors.SizeWE;
+                        }
+                        // Modified 4
+                        else if (nResizeRM == 1)
+                        {
+                            mousemoved = true;
+                            rcNew.X = rcBone.Left;
+                            rcNew.Y = rcBone.Top;
+                            rcNew.Width = pt.X - rcBone.Left;
+                            rcNew.Height = rcBone.Bottom - rcBone.Top;
+                            //rcBone.Bottom - pt.Y;
+                            if (nIsBounce == 0)
+                            {
+                                if (pt.X < rcNew.Left + 9)
+                                {
+                                    rcNew.Width = 10;
+                                }
+                            }
+                            DrawDragRect(e);
+                            rcOld = rcBone = rcNew;
+                            Cursor = Cursors.SizeWE;
+                        }
+
+                        else
+                            if (nBone == 1) //Moving the rectangle
+                            {
+
+                                mousemoved = true;
+                                ptNew = pt;
+                                int dx = ptNew.X - ptOld.X;
+                                int dy = ptNew.Y - ptOld.Y;
+                                rcBone.Offset(dx, dy);
+                                rcNew = rcBone;
+                                DrawDragRect(e);
+                                ptOld = ptNew;                                
+                            }
+
                 }
             }
             base.OnMouseMove(e);

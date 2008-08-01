@@ -2600,7 +2600,7 @@ namespace DreamBeam {
                                 if (File.Exists(themefile)) this.songThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(SongTheme), themefile);
                             }
                             content.Theme = this.songThemeWidget.Theme;
-                            this.RightDocks_PreviewScreen_PictureBox.RectPosition = content.Theme.TextFormat[songThemeWidget.getSelectedTab()].Bounds;
+                            //this.RightDocks_PreviewScreen_PictureBox.RectPosition = content.Theme.TextFormat[songThemeWidget.getSelectedTab()].Bounds;
                             this.RightDocks_PreviewScreen_PictureBox.ShowRect = this.songThemeWidget.SetTextPosition;                            
                             if (this.RightDocks_PreviewScreen_PictureBox.ShowRect) DisplayPreview.content.ShowRectangles = false;
                         }
@@ -2737,7 +2737,7 @@ namespace DreamBeam {
             {
                 content.Theme.TextFormat[getWidget().getSelectedTab()].Bounds = RightDocks_PreviewScreen_PictureBox.RectPosition;
                 getWidget().Theme = content.Theme;                        
-                DisplayPreview.UpdateDisplay(true);   
+                DisplayPreview.UpdateDisplay(true);                
             }
             
         }
@@ -2752,6 +2752,7 @@ namespace DreamBeam {
                       ImageWindow.Size = new Size(this.Size.Width - 50, this.Size.Height - 50);
                       ImageWindow.Activate(DisplayPreview);
                       DisplayPreview.SetDestination(RightDocks_PreviewScreen_PictureBox);
+                      getWidget().Theme = content.Theme;                        
                       DisplayPreview.UpdateDisplay(true);
                   }
             }

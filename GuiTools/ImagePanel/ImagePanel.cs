@@ -19,12 +19,10 @@ namespace DreamBeam
     public class ImagePanel : CDrawDragRect
     {
         public string strImagePath;
-        string strTmp;
-        //public Image Image;
+        string strTmp;        
         public Image imgResize;
         public int nDblClick;
-        public RectangleF _rectPosition;
-        //public Rectangle[] rectPositions;
+        public RectangleF _rectPosition;        
         public List<Rectangle> rectList;
         public List<string> stringList;
         Bitmap MemoryBitmap;
@@ -115,25 +113,12 @@ namespace DreamBeam
         }
 
         public Image Image;
-       /* {
-            get
-            {
-                return this.ImagePack.Bitmap;      
-            }
-            set
-            {
-                this.ImagePack.Image = value;
-            }
-        }*/
-
+  
         public ImagePanel()
         {
            
 
         }
-
-
-
        
         public void SizeToFit(int nRectNumber)
         {
@@ -145,17 +130,7 @@ namespace DreamBeam
             RefreshAll(rcBone.X, rcBone.Y);
             rectList.RemoveAt(nRectNumber);
             stringList.RemoveAt(nRectNumber);
-        }
-
-
-
-        public void ShowAllPositions()
-        {
-            MessageBox.Show(imgResize.Size.Width.ToString());                
-            
-            //MessageBox.Show(rcBone.X.ToString());
-            
-        }
+        }      
    
 
         public void DrawImage(PaintStruct ps)
@@ -212,10 +187,12 @@ namespace DreamBeam
                 dc.FillRectangle(Brushes.Blue, rcLB);
                 dc.FillRectangle(Brushes.Blue, rcRB);
 
-                //dc.FillRectangle(p, rcLT2);
-                /* dc.FillRectangle(Brushes.LightBlue, rcRT2);
-                 dc.FillRectangle(Brushes.LightBlue, rcLB2);
-                 dc.FillRectangle(Brushes.LightBlue, rcRB2);*/
+                dc.FillRectangle(Brushes.Blue, rcTM);
+                dc.FillRectangle(Brushes.Blue, rcBM);
+                dc.FillRectangle(Brushes.Blue, rcLM);
+                dc.FillRectangle(Brushes.Blue, rcRM);
+
+        
             }
         }
 

@@ -73,6 +73,7 @@ namespace DreamBeam
         {
             this.Display = d;
             SetTextButtons();
+            UpdateMarginBoxes();
             SaveUndo();
             this.ShowDialog();
         }
@@ -141,9 +142,9 @@ namespace DreamBeam
         private void TextButton_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(((RibbonStyle.RibbonMenuButton)sender).Text.ToString());
-            //getWidget().            
-            getWidget().selectTab(Convert.ToInt32(((Control)sender).Name));
+            //getWidget().                       
             this.imagePanel.RectPosition = this.Content.Theme.TextFormat[Convert.ToInt32(((Control)sender).Name)].Bounds;
+            getWidget().selectTab(Convert.ToInt32(((Control)sender).Name));
             _display.UpdateDisplay(true);   
         }
 
@@ -159,18 +160,23 @@ namespace DreamBeam
         }
 
         private void imagePanel_RectangleChangedEvent()
+        {                        
+            changingRect = true;
+            UpdateMarginBoxes();            
+            changingRect = false;
+            if (!ChangeRect()) Update();                       
+        }
+
+        private void UpdateMarginBoxes()
         {
-                        
             changingRect = true;
             // If we assign values that are out-of-range to the controls, we'll get an exception.
             this.Bounds1.Value = Tools.ForceToRange(Bounds1.Minimum, Bounds1.Maximum, (decimal)imagePanel.RectPosition.Left);
             this.Bounds2.Value = Tools.ForceToRange(Bounds2.Minimum, Bounds2.Maximum, (decimal)imagePanel.RectPosition.Top);
             this.Bounds3.Value = Tools.ForceToRange(Bounds3.Minimum, Bounds3.Maximum, (decimal)(100F - imagePanel.RectPosition.Right));
             this.Bounds4.Value = Tools.ForceToRange(Bounds4.Minimum, Bounds4.Maximum, (decimal)(100F - imagePanel.RectPosition.Bottom));
-            changingRect = false;
-            if (!ChangeRect()) Update();
+            changingRect = true;
         }
-
        
 
         private void ImageWindow_Shown(object sender, EventArgs e)
@@ -192,8 +198,8 @@ namespace DreamBeam
            
            for (int i = 0; i < Content.Theme.TextFormat.Length; i++)
            {
-               Content.Theme.TextFormat[i].Bounds = this.UndoBounds[i];
-           }
+               Content.Theme.TextFormat[i].Bounds = this.UndoBounds[i];               
+           }           
        }
 
   
@@ -233,7 +239,7 @@ namespace DreamBeam
             //Comparing in String Format seems to work better
             if (r.X.ToString() != imagePanel.RectPosition.X.ToString() || r.Y.ToString() != imagePanel.RectPosition.Y.ToString() || r.Width.ToString() != imagePanel.RectPosition.Width.ToString() || r.Height.ToString() != imagePanel.RectPosition.Height.ToString())            
             {
-                imagePanel.RectPosition = r;
+                imagePanel.RectPosition = r;                
                 Update();
                 return true;
             }
