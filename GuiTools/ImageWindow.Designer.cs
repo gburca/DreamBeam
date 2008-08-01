@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImageWindow));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.grouper2 = new CodeVendor.Controls.Grouper();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -55,6 +56,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.grouper2);
             this.panel1.Controls.Add(this.Cancel_Button);
             this.panel1.Controls.Add(this.OK_button);
@@ -64,6 +66,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(127, 485);
             this.panel1.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(25, 395);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // grouper2
             // 
@@ -313,6 +324,7 @@
             this.imagePanel.ShowRect = false;
             this.imagePanel.Size = new System.Drawing.Size(516, 485);
             this.imagePanel.TabIndex = 0;
+            this.imagePanel.Click += new System.EventHandler(this.imagePanel_Click);
             this.imagePanel.RectangleChangedEvent += new DreamBeam.RectangleChangeHandler(this.imagePanel_RectangleChangedEvent);
             this.imagePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.imagePanel_MouseClick);
             // 
@@ -331,6 +343,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Text Margins";
             this.Shown += new System.EventHandler(this.ImageWindow_Shown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ImageWindow_KeyPress);
             this.panel1.ResumeLayout(false);
             this.grouper2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Bounds4)).EndInit();
@@ -359,6 +372,7 @@
         private System.Windows.Forms.NumericUpDown Bounds3;
         private System.Windows.Forms.NumericUpDown Bounds2;
         private System.Windows.Forms.NumericUpDown Bounds1;
+        private System.Windows.Forms.Button button1;
 
     }
 }

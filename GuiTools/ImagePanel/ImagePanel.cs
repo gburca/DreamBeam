@@ -76,10 +76,10 @@ namespace DreamBeam
         {
             if (_imagepack != null)
             {
-                rcBone.X = (int)(value.X * (float)this._imagepack.realsize.Width / (float)100) + (int)((this._imagepack.Bitmap.Size.Width - this._imagepack.realsize.Width) / 2);
-                rcBone.Y = (int)(value.Y * (float)this._imagepack.realsize.Height / (float)100) + (int)((this._imagepack.Bitmap.Size.Height - this._imagepack.realsize.Height) / 2); ;
-                nWd = rcBone.Width = (int)(value.Width * (float)this._imagepack.realsize.Width / (float)100);
-                nHt = rcBone.Height = (int)(value.Height * (float)this._imagepack.realsize.Height / (float)100);
+                rcBone.X = (value.X * (float)this._imagepack.realsize.Width / (float)100) + ((this._imagepack.Bitmap.Size.Width - this._imagepack.realsize.Width) / 2f);
+                rcBone.Y = (value.Y * (float)this._imagepack.realsize.Height / (float)100) + ((this._imagepack.Bitmap.Size.Height - this._imagepack.realsize.Height) / 2f);
+                nWd = rcBone.Width = (value.Width * (float)this._imagepack.realsize.Width / (float)100);
+                nHt = rcBone.Height = (value.Height * (float)this._imagepack.realsize.Height / (float)100);
                 RefreshAll(rcBone.X, rcBone.Y);
             }
         }
@@ -178,9 +178,9 @@ namespace DreamBeam
                 dc.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
 
                 Pen p = new Pen(Color.FromArgb(200, Color.Blue), 3);
-                dc.DrawRectangle(p, rcBone);
+                dc.DrawRectangle(p, rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);                
                 Pen x = new Pen(Color.FromArgb(200, Color.LightBlue), 1);
-                dc.DrawRectangle(x, rcBone);
+                dc.DrawRectangle(x, rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
 
                 dc.FillRectangle(Brushes.Blue, rcLT);
                 dc.FillRectangle(Brushes.Blue, rcRT);
@@ -196,7 +196,34 @@ namespace DreamBeam
             }
         }
 
-       
+
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Down:
+
+                    this.rcBone.Y += 1;
+                    NotifyRectangleChangeListeners();
+                    break;
+                case Keys.Up:
+                    this.rcBone.Y -= 1;
+                    NotifyRectangleChangeListeners();
+                    break;
+                case Keys.Left:
+                    this.rcBone.X -= 1;
+                    
+                    NotifyRectangleChangeListeners();
+                    break;
+                case Keys.Right:
+                    this.rcBone.X += 1;
+                    
+                    NotifyRectangleChangeListeners();
+                    break;
+            }
+            return base.ProcessDialogKey(keyData);
+
+        }
 
 
         protected override void OnPaint(PaintEventArgs e)
@@ -250,8 +277,8 @@ namespace DreamBeam
                 base.OnDoubleClick(e);
                 return;
             }
-            pt.X = pt.X - nWd / 2;
-            pt.Y = pt.Y - nHt / 2;
+            pt.X = (int)(pt.X - nWd / 2);
+            pt.Y = (int)(pt.Y - nHt / 2);
             RefreshAll(pt.X, pt.Y);
 
             base.OnDoubleClick(e);

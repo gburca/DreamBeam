@@ -14,28 +14,28 @@ namespace DreamBeam
 
     public class CDrawDragRect : Panel
     {
-        public Rectangle rcLT, rcRT, rcLB, rcRB, rcLT2, rcRT2, rcLB2, rcRB2, rcTM, rcBM, rcLM,rcRM;
+        public RectangleF rcLT, rcRT, rcLB, rcRB, rcLT2, rcRT2, rcLB2, rcRB2, rcTM, rcBM, rcLM,rcRM;
         Cursor OldCur ;
 
         public int nIsBounce;
         int nThatsIt;
-        public int nWd;
-        public int nHt;        
+        public float nWd;
+        public float nHt;        
         int nResizeRT,nResizeBL, nResizeLT,nResizeRB;
         int nResizeTM, nResizeBM, nResizeLM, nResizeRM;
 
-        public Rectangle rcBone;
+        public RectangleF rcBone;
         int nBone = 0;
-        Point ptOld;
-        Point ptNew;
-        Point ptTmpStart;
-        Point ptStart;
+        PointF ptOld;
+        PointF ptNew;
+        PointF ptTmpStart;
+        PointF ptStart;
         int nBroderSize;
-        public Rectangle rcOld, rcNew;
+        public RectangleF rcOld, rcNew;
         Region rgnDiffCombined;
         Region rgnDiffOld, rgnDiffNew;
         Region rgnTmpDeflated, rgnTmpPreDefalted;
-        Rectangle rcTmp;
+        RectangleF rcTmp;
         protected bool _showrect = false;
         private bool mousemoved = false;
 
@@ -58,6 +58,9 @@ namespace DreamBeam
         static extern bool PatBlt(IntPtr hdc, int nXLeft, int nYLeft, int nWidth,
                                     int nHeight, uint dwRop);
         [DllImport("gdi32.dll")]
+        static extern bool PatBlt(IntPtr hdc, float nXLeft, float nYLeft, float nWidth,
+                                    float nHeight, uint dwRop);
+        [DllImport("gdi32.dll")]
         static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobj);
 
         [DllImport("gdi32.dll")]
@@ -68,8 +71,8 @@ namespace DreamBeam
 
         [DllImport("gdi32.dll")]
         static extern bool DeleteObject(IntPtr hObject);
-        public Rectangle rcOriginal;
-        public Rectangle rcBegin;
+        public RectangleF rcOriginal;
+        public RectangleF rcBegin;
         public CDrawDragRect()
         {
             nWd = 0;
@@ -77,7 +80,7 @@ namespace DreamBeam
             RefreshAll(100,100);            
         }
 
-        public void RefreshAll(int x, int y)
+        public void RefreshAll(float x, float y)
         {
             nThatsIt = 0;
             nResizeRT = 0;
@@ -100,7 +103,7 @@ namespace DreamBeam
                 nWd = 150;
             if (nHt == 0)
                 nHt = 150;
-            rcNew = rcOld = rcBone = new Rectangle(x,y, nWd, nHt);
+            rcNew = rcOld = rcBone = new RectangleF(x,y, nWd, nHt);
             
             // Border Rectangles
             rcLT = new Rectangle(0, 0, nSize, nSize);
@@ -174,9 +177,9 @@ namespace DreamBeam
                 ptNew = point;
                 
                 rcTmp = rcOld;
-                rgnTmpPreDefalted = new Region(new Rectangle(rcTmp.Left, rcTmp.Top, rcTmp.Width, rcTmp.Height));
+                rgnTmpPreDefalted = new Region(new RectangleF(rcTmp.Left, rcTmp.Top, rcTmp.Width, rcTmp.Height));
                 rcTmp.Inflate(-nBroderSize, -nBroderSize);
-                rgnTmpDeflated = new Region(new Rectangle(rcTmp.Left, rcTmp.Top, rcTmp.Width, rcTmp.Height));
+                rgnTmpDeflated = new Region(new RectangleF(rcTmp.Left, rcTmp.Top, rcTmp.Width, rcTmp.Height));
 
                 rgnDiffOld = rgnTmpDeflated;
                 rgnDiffOld.Xor(rgnTmpPreDefalted);
@@ -188,9 +191,9 @@ namespace DreamBeam
                 rcTmp.Height = (int)rcF.Height;
 
                 rcTmp = rcNew;
-                rgnTmpPreDefalted = new Region(new Rectangle(rcTmp.Left, rcTmp.Top, rcTmp.Width, rcTmp.Height));
+                rgnTmpPreDefalted = new Region(new RectangleF(rcTmp.Left, rcTmp.Top, rcTmp.Width, rcTmp.Height));
                 rcTmp.Inflate(-nBroderSize, -nBroderSize);
-                rgnTmpDeflated = new Region(new Rectangle(rcTmp.Left, rcTmp.Top, rcTmp.Width, rcTmp.Height));
+                rgnTmpDeflated = new Region(new RectangleF(rcTmp.Left, rcTmp.Top, rcTmp.Width, rcTmp.Height));
 
                 rgnDiffNew = rgnTmpDeflated;
                 rgnDiffNew.Xor(rgnTmpPreDefalted);
@@ -282,49 +285,49 @@ namespace DreamBeam
                 rcBegin = rcBone;
                 if (rcRB.Contains(pt))
                 {
-                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcOld = new RectangleF(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
                     rcNew = rcOld;
                     nResizeRB = 1;
                 }
                 else if (rcLB.Contains(pt))
                 {
-                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcOld = new RectangleF(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
                     rcNew = rcOld;
                     nResizeBL = 1;
                 }
                 else if (rcRT.Contains(pt))
                 {
-                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcOld = new RectangleF(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
                     rcNew = rcOld;
                     nResizeRT = 1;
                 }
                 else if (rcLT.Contains(pt))
                 {
-                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcOld = new RectangleF(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
                     rcNew = rcOld;
                     nResizeLT = 1;
                 }
                 else if (rcTM.Contains(pt))
                 {
-                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcOld = new RectangleF(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
                     rcNew = rcOld;
                     nResizeTM = 1;
                 }
                 else if (rcBM.Contains(pt))
                 {
-                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcOld = new RectangleF(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
                     rcNew = rcOld;
                     nResizeBM = 1;
                 }
                 else if (rcLM.Contains(pt))
                 {
-                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcOld = new RectangleF(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
                     rcNew = rcOld;
                     nResizeLM = 1;
                 }
                 else if (rcRM.Contains(pt))
                 {
-                    rcOld = new Rectangle(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
+                    rcOld = new RectangleF(rcBone.X, rcBone.Y, rcBone.Width, rcBone.Height);
                     rcNew = rcOld;
                     nResizeRM = 1;
                 }
@@ -545,7 +548,8 @@ namespace DreamBeam
                                 //if (rcNew.X > rcNew.Right)
                                 {
                                     rcNew.X = rcBegin.Right;
-                                    rcNew.Width = pt.X = rcBegin.Right;
+                                    pt.X = (int) rcBegin.Right;
+                                    rcNew.Width = rcBegin.Right;
                                     nResizeLT = 0;
                                     nResizeRT = 1;
                                     rcBegin = rcNew;
@@ -673,8 +677,8 @@ namespace DreamBeam
 
                                 mousemoved = true;
                                 ptNew = pt;
-                                int dx = ptNew.X - ptOld.X;
-                                int dy = ptNew.Y - ptOld.Y;
+                                float dx = ptNew.X - ptOld.X;
+                                float dy = ptNew.Y - ptOld.Y;
                                 rcBone.Offset(dx, dy);
                                 rcNew = rcBone;
                                 DrawDragRect(e);

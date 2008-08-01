@@ -164,17 +164,18 @@ namespace DreamBeam
             changingRect = true;
             UpdateMarginBoxes();            
             changingRect = false;
-            if (!ChangeRect()) Update();                       
+            //if (!ChangeRect()) Update();                       
+            Update();                      
         }
 
         private void UpdateMarginBoxes()
         {
             changingRect = true;
             // If we assign values that are out-of-range to the controls, we'll get an exception.
-            this.Bounds1.Value = Tools.ForceToRange(Bounds1.Minimum, Bounds1.Maximum, (decimal)imagePanel.RectPosition.Left);
-            this.Bounds2.Value = Tools.ForceToRange(Bounds2.Minimum, Bounds2.Maximum, (decimal)imagePanel.RectPosition.Top);
-            this.Bounds3.Value = Tools.ForceToRange(Bounds3.Minimum, Bounds3.Maximum, (decimal)(100F - imagePanel.RectPosition.Right));
-            this.Bounds4.Value = Tools.ForceToRange(Bounds4.Minimum, Bounds4.Maximum, (decimal)(100F - imagePanel.RectPosition.Bottom));
+            //this.Bounds1.Value = Tools.ForceToRange(Bounds1.Minimum, Bounds1.Maximum, (decimal)imagePanel.RectPosition.Left);
+            //this.Bounds2.Value = Tools.ForceToRange(Bounds2.Minimum, Bounds2.Maximum, (decimal)imagePanel.RectPosition.Top);
+            //this.Bounds3.Value = Tools.ForceToRange(Bounds3.Minimum, Bounds3.Maximum, (decimal)(100F - imagePanel.RectPosition.Right));
+            //this.Bounds4.Value = Tools.ForceToRange(Bounds4.Minimum, Bounds4.Maximum, (decimal)(100F - imagePanel.RectPosition.Bottom));
             changingRect = true;
         }
        
@@ -245,6 +246,26 @@ namespace DreamBeam
             }
             return false;
         }
+
+        private void ImageWindow_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+            if (e.KeyChar == (Char)Keys.Q)
+            {
+               
+            }
+        }
+
+       
+
+      
+
+        private void imagePanel_Click(object sender, EventArgs e)
+        {
+            this.ActiveControl = this.imagePanel;
+        }
+
+        
 
     }
 }
