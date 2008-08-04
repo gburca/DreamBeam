@@ -1,8 +1,0 @@
-D:\Projekte\Dreambeam\Quellcode\libs\RibbonMenuButton\RibbonMenuControlTest\RibbonMenuControlTest\bin\Release\RibbonMenuControlTest.exe
-D:\Projekte\Dreambeam\Quellcode\libs\RibbonMenuButton\RibbonMenuControlTest\RibbonMenuControlTest\bin\Release\RibbonMenuControlTest.pdb
-D:\Projekte\Dreambeam\Quellcode\libs\RibbonMenuButton\RibbonMenuControlTest\RibbonMenuControlTest\obj\Release\ResolveAssemblyReference.cache
-D:\Projekte\Dreambeam\Quellcode\libs\RibbonMenuButton\RibbonMenuControlTest\RibbonMenuControlTest\obj\Release\RibbonMenuControlTest.Form1.resources
-D:\Projekte\Dreambeam\Quellcode\libs\RibbonMenuButton\RibbonMenuControlTest\RibbonMenuControlTest\obj\Release\RibbonMenuControlTest.Properties.Resources.resources
-D:\Projekte\Dreambeam\Quellcode\libs\RibbonMenuButton\RibbonMenuControlTest\RibbonMenuControlTest\obj\Release\RibbonMenuControlTest.csproj.GenerateResource.Cache
-D:\Projekte\Dreambeam\Quellcode\libs\RibbonMenuButton\RibbonMenuControlTest\RibbonMenuControlTest\obj\Release\RibbonMenuControlTest.exe
-D:\Projekte\Dreambeam\Quellcode\libs\RibbonMenuButton\RibbonMenuControlTest\RibbonMenuControlTest\obj\Release\RibbonMenuControlTest.pdb
