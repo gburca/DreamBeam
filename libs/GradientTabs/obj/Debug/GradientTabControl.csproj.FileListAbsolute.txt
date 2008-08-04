@@ -1,9 +1,0 @@
-D:\Projekte\Dreambeam\Quellcode\libs\GradientTabs\bin\Debug\GradientTabControl.exe
-D:\Projekte\Dreambeam\Quellcode\libs\GradientTabs\bin\Debug\GradientTabControl.pdb
-D:\Projekte\Dreambeam\Quellcode\libs\GradientTabs\obj\Debug\ResolveAssemblyReference.cache
-D:\Projekte\Dreambeam\Quellcode\libs\GradientTabs\obj\Debug\GradientTabControl.Form1.resources
-D:\Projekte\Dreambeam\Quellcode\libs\GradientTabs\obj\Debug\GradientTabControl.GradientTab.resources
-D:\Projekte\Dreambeam\Quellcode\libs\GradientTabs\obj\Debug\GradientTabControl.Properties.Resources.resources
-D:\Projekte\Dreambeam\Quellcode\libs\GradientTabs\obj\Debug\GradientTabControl.csproj.GenerateResource.Cache
-D:\Projekte\Dreambeam\Quellcode\libs\GradientTabs\obj\Debug\GradientTabControl.exe
-D:\Projekte\Dreambeam\Quellcode\libs\GradientTabs\obj\Debug\GradientTabControl.pdb
