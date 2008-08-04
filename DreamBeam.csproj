@@ -340,6 +340,7 @@
     <Compile Include="GuiTools\SlideDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GuiTools\Songeditor\ISongEditor.cs" />
     <Compile Include="GuiTools\TextFormatOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -400,7 +401,7 @@
     <Compile Include="ShowBeam.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SongEditor.cs">
+    <Compile Include="GuiTools\Songeditor\SongEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="splash.cs">
@@ -490,7 +491,7 @@
       <DependentUpon>ShowBeam.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SongEditor.resx">
+    <EmbeddedResource Include="GuiTools\Songeditor\SongEditor.resx">
       <DependentUpon>SongEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
