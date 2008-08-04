@@ -127,6 +127,10 @@
       <Name>DragNDrop</Name>
       <HintPath>libs\DragNDrop.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="ListControls">
       <Name>ListControls</Name>
       <HintPath>libs\ListControls.dll</HintPath>
@@ -286,6 +290,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FileTypes\Theme.cs" />
+    <Compile Include="Graphics\BitmapManipulator.cs" />
     <Compile Include="Graphics\WordWrap.cs" />
     <Compile Include="Graphics\PerPixelAlphaForm.cs">
       <SubType>Form</SubType>
@@ -332,6 +337,9 @@
     <Compile Include="GuiTools\MediaListTools.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GuiTools\SlideDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GuiTools\TextFormatOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -349,6 +357,17 @@
     </Compile>
     <Compile Include="GuiTools\BibleText.Designer.cs">
       <DependentUpon>BibleText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Import_Export\Export.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Import_Export\Exporters.cs" />
+    <Compile Include="Import_Export\Import.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Import_Export\Importer.cs" />
+    <Compile Include="Import_Export\Previewer.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="InputBox.cs">
       <SubType>Form</SubType>
@@ -411,6 +430,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GuiTools\ImageWindow.resx">
       <DependentUpon>ImageWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Import_Export\Export.resx">
+      <DependentUpon>Export.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Import_Export\Import.resx">
+      <DependentUpon>Import.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Images.resx">
@@ -545,6 +572,9 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

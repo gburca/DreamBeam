@@ -557,6 +557,156 @@ namespace DreamBeam {
 			}
 		}
 
+        public static string createTimeStamp()
+        {
+            System.DateTime dt = System.DateTime.Now;
+            return dt.ToString("yyMMHHmmss");
+        }
+        public static void delTree(string path)
+        {
+            try
+            {
+                string[] dirs = Directory.GetDirectories(@path);
+                foreach (string dir in dirs)
+                {
+                    Tools.delTree(dir);
+                    //	Directory.Delete (dir);
+                }
+                dirs = Directory.GetFiles(@path);
+                foreach (string dir in dirs)
+                {
+                    //	File.Delete(dir);
+                }
+            }
+            catch (Exception e) { }
+        }
+
+        public static string ReplaceSpecialChars(string text)
+        {
+            Hashtable myHash;
+
+            myHash = new Hashtable();
+            //		   myHash.Add("<p>", "\r\n");
+            myHash.Add("&Aacute;", "Á");
+            myHash.Add("&aacute;", "á");
+            myHash.Add("&Acirc;", "Â");
+            myHash.Add("&acirc;", "â");
+            myHash.Add("&acute;", "´");
+            myHash.Add("&AElig;", "Æ");
+            myHash.Add("&aelig;", "æ");
+            myHash.Add("&Agrave;", "À");
+            myHash.Add("&agrave;", "à");
+            myHash.Add("&Aring;", "Å");
+            myHash.Add("&aring;", "å");
+            myHash.Add("&Atilde;", "Ã");
+            myHash.Add("&atilde;", "ã");
+            myHash.Add("&Auml;", "Ä");
+            myHash.Add("&auml;", "ä");
+            //		   myHash.Add("&amp;", "&");
+            myHash.Add("&brvbar;", "¦");
+            myHash.Add("&brkbar;", "¦");
+            myHash.Add("&Ccedil;", "Ç");
+            myHash.Add("&ccedil;", "ç");
+            myHash.Add("&cedil;", "¸");
+            myHash.Add("&cent;", "¢");
+            myHash.Add("&copy;", "©");
+            myHash.Add("&curren;", "¤");
+            myHash.Add("&deg;", "°");
+            myHash.Add("&divide;", "÷");
+            myHash.Add("&Eacute;", "É");
+            myHash.Add("&eacute;", "é");
+            myHash.Add("&Ecirc;", "Ê");
+            myHash.Add("&ecirc;", "ê");
+            myHash.Add("&Egrave;", "È");
+            myHash.Add("&egrave;", "è");
+            myHash.Add("&ETH;", "Ð");
+            myHash.Add("&eth;", "ð");
+            myHash.Add("&Euml;", "Ë");
+            myHash.Add("&euml;", "ë");
+            myHash.Add("&frac12;", "½");
+            myHash.Add("&frac14;", "¼");
+            myHash.Add("&frac34;", "¾");
+            myHash.Add("&gt;", ">");
+            myHash.Add("&Iacute;", "Í");
+            myHash.Add("&iacute;", "í");
+            myHash.Add("&Icirc;", "Î");
+            myHash.Add("&icirc;", "î");
+            myHash.Add("&iexcl;", "¡");
+            myHash.Add("&Igrave;", "Ì");
+            myHash.Add("&igrave;", "ì");
+            myHash.Add("&iquest;", "¿");
+            myHash.Add("&Iuml;", "Ï");
+            myHash.Add("&iuml;", "ï");
+            myHash.Add("&laquo;", "«");
+            myHash.Add("&lt;", "<");
+            myHash.Add("&macr;", "¯");
+            myHash.Add("&hibar;", "¯");
+            myHash.Add("&micro;", "µ");
+            myHash.Add("&middot;", "·");
+            //		   myHash.Add("&nbsp;", " ");
+            myHash.Add("&not", "¬");
+            myHash.Add("&Ntilde;", "Ñ");
+            myHash.Add("&ntilde;", "ñ");
+            myHash.Add("&Oacute;", "Ó");
+            myHash.Add("&oacute;", "ó");
+            myHash.Add("&Ocirc;", "Ô");
+            myHash.Add("&ocirc;", "ô");
+            myHash.Add("&Ograve;", "Ò");
+            myHash.Add("&ograve;", "ò");
+            myHash.Add("&ordf;", "ª");
+            myHash.Add("&ordm;", "º");
+            myHash.Add("&Oslash;", "Ø");
+            myHash.Add("&oslash;", "ø");
+            myHash.Add("&Otilde;", "Õ");
+            myHash.Add("&otilde;", "õ");
+            myHash.Add("&Ouml;", "Ö");
+            myHash.Add("&ouml;", "ö");
+            myHash.Add("&para;", "¶");
+            myHash.Add("&plusmn;", "±");
+            myHash.Add("&pound;", "£");
+            //		   myHash.Add("&quot;", "\"");
+            myHash.Add("&raquo;", "»");
+            myHash.Add("&reg;", "®");
+            myHash.Add("&sect;", "§");
+            myHash.Add("&shy;", "­");
+            myHash.Add("&sup1;", "¹");
+            myHash.Add("&sup2;", "²");
+            myHash.Add("&sup3;", "³");
+            myHash.Add("&szlig;", "ß");
+            myHash.Add("&THORN;", "Þ");
+            myHash.Add("&thorn;", "þ");
+            myHash.Add("&times;", "×");
+            myHash.Add("&Uacute;", "Ú");
+            myHash.Add("&uacute;", "ú");
+            myHash.Add("&Ucirc;", "Û");
+            myHash.Add("&ucirc;", "û");
+            myHash.Add("&Ugrave;", "Ù");
+            myHash.Add("&ugrave;", "ù");
+            myHash.Add("&uml;", "¨");
+            myHash.Add("&die;", "¨");
+            myHash.Add("&Uuml;", "Ü");
+            myHash.Add("&uuml;", "ü");
+            myHash.Add("&Yacute;", "Ý");
+            myHash.Add("&yacute;", "ý");
+            myHash.Add("&yen;", "¥");
+            myHash.Add("&yuml;", "ÿ");
+
+            //		  myDE;
+            foreach (DictionaryEntry myDE in myHash)
+            {
+
+
+                if (text.IndexOf(System.Convert.ToString(myDE.Value)) != -1)
+                {
+
+
+                    //	 text = text.Replace(System.Convert.ToString(myDE.Key), System.Convert.ToString(myDE.Value));
+                    text = text.Replace(System.Convert.ToString(myDE.Value), System.Convert.ToString(myDE.Key));
+                }
+            }
+            return text;
+        }
+
 		// We use this to open or close the console programatically
 		[DllImport("kernel32.dll")]
 		public static extern Boolean AllocConsole();
@@ -565,6 +715,7 @@ namespace DreamBeam {
 
 	}
 
+   
 
 	[Serializable]
 	public class SerializableHashtable : Hashtable,

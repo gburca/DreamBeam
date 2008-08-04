@@ -37,6 +37,22 @@ namespace DreamBeam {
 //			}
 //		}
 
+        public static void ListBoxSorter(ref ListBox list)
+        {
+            ArrayList tmp = new ArrayList();
+
+            for (int j = 0; j < list.Items.Count; j++)
+            {
+                tmp.Add(list.Items[j]);
+            }
+            list.Items.Clear();
+            tmp.Sort();
+            for (int j = 0; j < tmp.Count; j++)
+            {
+                list.Items.Add((string)tmp[j]);
+            }
+        }
+
 		/// <summary>
 		/// Shows the assigned Tab
 		/// </summary>

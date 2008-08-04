@@ -2648,7 +2648,8 @@ namespace DreamBeam {
 
         private void menuButtonItem1_Activate(object sender, EventArgs e)
         {
-           
+         
+            
           
         }
 
@@ -2756,6 +2757,18 @@ namespace DreamBeam {
                       DisplayPreview.UpdateDisplay(true);
                   }
             }
+        }
+
+        private void ImportFormButton_Activate(object sender, EventArgs e)
+        {
+            ImportForm imform = new ImportForm();
+            imform.ShowDialog();
+        }
+
+        private void ExportFormButton_Activate(object sender, EventArgs e)
+        {
+            ExportForm exform = new ExportForm();
+            exform.ShowDialog();
         }
 
       
