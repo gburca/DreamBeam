@@ -32,7 +32,7 @@ namespace DreamBeam
 
 		public static void CreateTempDir(){
 
-			Importer.tempDir =  Tools.GetDirectory(DirType.DataRoot)  +"\\temp\\importer_"+ Tools.createTimeStamp()+"\\";
+			Importer.tempDir =  DreamTools.GetDirectory(DirType.DataRoot)  +"\\temp\\importer_"+ DreamTools.createTimeStamp()+"\\";
 			Directory.CreateDirectory(Importer.tempDir);
 		}
 
@@ -41,7 +41,7 @@ namespace DreamBeam
 		}
 
 		public static void EmptyTempDir(){
-			Tools.delTree(Tools.GetDirectory(DirType.DataRoot)+"\\temp");
+			DreamTools.delTree(DreamTools.GetDirectory(DirType.DataRoot)+"\\temp");
 		}
 
 		public static void GetDreamSongs(System.Windows.Forms.ListBox listBox, string filename){

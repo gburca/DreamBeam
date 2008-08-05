@@ -68,7 +68,7 @@ namespace DreamBeam {
 			//this.label1.Text  = "Dreambeam "+ this.version +"\n";
 			//this.label1.Text += " hallo";
 
-			this.version = Application.ProductVersion.Substring(0, Application.ProductVersion.Length - Tools.Reverse(Application.ProductVersion).IndexOf(".") - 1);
+			this.version = Application.ProductVersion.Substring(0, Application.ProductVersion.Length - DreamTools.Reverse(Application.ProductVersion).IndexOf(".") - 1);
 			//
 			this.Opacity = .00;
 			timer1.Interval = TIMER_INTERVAL;

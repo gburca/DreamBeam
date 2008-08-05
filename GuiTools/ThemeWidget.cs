@@ -160,7 +160,7 @@ namespace DreamBeam {
                 this.changingControls = true;
 				this.themeType = value.GetType();
 				if (value.BGImagePath != null) {
-                    this.BGImagePathLabel.Text = Tools.GetRelativePath(DirType.DataRoot, value.BGImagePath);                    
+                    this.BGImagePathLabel.Text = DreamTools.GetRelativePath(DirType.DataRoot, value.BGImagePath);                    
 				} else {
                     this.BGImagePathLabel.Text = "";
 				}
@@ -182,7 +182,7 @@ namespace DreamBeam {
                 {
                     theme = new SongTheme();
                 }
-                theme.BGImagePath = Tools.GetRelativePath(DirType.DataRoot, BGImagePathLabel.Text);
+                theme.BGImagePath = DreamTools.GetRelativePath(DirType.DataRoot, BGImagePathLabel.Text);
                 theme.ThemeFile = this.ThemePath;
                 for (int i = 0; i < Math.Min(tabs, theme.TextFormat.Length); i++)
                 {
@@ -200,9 +200,9 @@ namespace DreamBeam {
 		private void bgImageBrowse_Click(object sender, EventArgs e) {
 			OpenFileDialog ofd = new OpenFileDialog();
 			ofd.Filter = ImageFileFilter;
-			ofd.InitialDirectory = Tools.GetDirectory(DirType.Backgrounds);
+			ofd.InitialDirectory = DreamTools.GetDirectory(DirType.Backgrounds);
 			if (ofd.ShowDialog() != DialogResult.Cancel) {
-                this.BGImagePathLabel.Text = Tools.GetRelativePath(DirType.DataRoot, ofd.FileName);
+                this.BGImagePathLabel.Text = DreamTools.GetRelativePath(DirType.DataRoot, ofd.FileName);
 			}
 		}
 

@@ -34,7 +34,7 @@ namespace DreamBeam {
 
 	/// <summary>
 	/// These are the various directories used to store data for DreamBeam.
-	/// They are used in the Tools.GetDirectory and Tools.GetRelativePath functions.
+	/// They are used in the DreamTools.GetDirectory and DreamTools.GetRelativePath functions.
 	/// </summary>
 	public enum DirType {
 		// Summary:
@@ -73,8 +73,8 @@ namespace DreamBeam {
 	/// <summary>
 	/// Zusammenfassende Beschreibung für Class
 	/// </summary>
-	public class Tools {
-		public Tools() {
+	public class DreamTools {
+		public DreamTools() {
 		}
 
 		/// <summary>
@@ -88,6 +88,38 @@ namespace DreamBeam {
 				return Reverse(str.Substring(1)) + str.Substring(0, 1);
 			}
 		}
+
+
+        /// <summary>
+        /// Splits a string into an arry
+        /// </summary>
+        public static string[] SplitString(string text,string seperator)
+        {
+            return Regex.Split(text, seperator);
+            
+        }
+
+        /// <summary>
+        /// Removes a line from a StringArray
+        /// </summary>
+        public static string[] deleteStringArrayLineAt(string[] Lines, int pos)
+        {
+            string[] newLines = new String[Lines.Length - 1];
+            int i = 0;
+            int j = 0;
+            foreach (string line in Lines)
+            {
+                if (j != pos)
+                {
+                    newLines[i] = line;
+                    i++;
+                }
+                j++;
+            }
+
+            return newLines;
+        }
+
 		/// <summary>
 		/// Counts the Number of Needles in the InputString
 		/// </summary>
@@ -109,10 +141,10 @@ namespace DreamBeam {
 		/// <returns>A formatted sentence with all relevant times showsn</returns>
 		public static string ElapsedTime(string msg) {
 			string res;
-			System.TimeSpan span = DateTime.Now.Subtract(Tools.lastTime);
-			string last = Tools.lastTime.TimeOfDay.ToString();
-			Tools.lastTime = DateTime.Now;
-			res = "Last time " + last + " now " + Tools.lastTime.TimeOfDay +
+			System.TimeSpan span = DateTime.Now.Subtract(DreamTools.lastTime);
+			string last = DreamTools.lastTime.TimeOfDay.ToString();
+			DreamTools.lastTime = DateTime.Now;
+			res = "Last time " + last + " now " + DreamTools.lastTime.TimeOfDay +
 					"  Elapsed " + span + " -> " + msg;
 			Console.WriteLine(res);
 			return res;
@@ -142,7 +174,7 @@ namespace DreamBeam {
 		/// 
 		/// This directory is selected by the user during installation and will be
 		/// saved to the registry. It defaults to the same directory as the one
-		/// returned by Tools.GetCommonAppDataPath() if there's a problem with reading
+		/// returned by DreamTools.GetCommonAppDataPath() if there's a problem with reading
 		/// the registry entry.
 		/// </summary>
 		/// <returns></returns>
@@ -569,7 +601,7 @@ namespace DreamBeam {
                 string[] dirs = Directory.GetDirectories(@path);
                 foreach (string dir in dirs)
                 {
-                    Tools.delTree(dir);
+                    DreamTools.delTree(dir);
                     //	Directory.Delete (dir);
                 }
                 dirs = Directory.GetFiles(@path);

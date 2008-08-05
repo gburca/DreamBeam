@@ -1,0 +1,466 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tools.VisualStudio.CS</name>
+    </assembly>
+    <members>
+        <member name="T:Tools.Generators.ServiceProvider">
+            <summary>
+                This wraps the <see cref="T:Tools.Generators.IOleServiceProvider"/> interface and provides an easy COM+ way to get at
+                services.
+            </summary>
+        </member>
+        <member name="T:Tools.Generators.IObjectWithSite">
+            <summary>Provides simple objects with a lightweight siting mechanism (lighter than IOleObject).</summary>
+            <remarks>See <a href="http://msdn2.microsoft.com/en-us/library/aa768220.aspx">IObjectWithSite Interface</a> for details.</remarks>
+        </member>
+        <member name="M:Tools.Generators.IObjectWithSite.SetSite(System.Object)">
+            <summary>Provides the site's IUnknown pointer to the object.</summary>
+            <param name="pUnkSite">An interface pointer to the site managing this object. If NULL, the object should call IUnknown.Release to release the existing site.</param>
+            <remarks><code>HRESULT SetSite(IUnknown *pUnkSite);</code></remarks>
+        </member>
+        <member name="M:Tools.Generators.IObjectWithSite.GetSite(System.Guid@,System.Object[])">
+            <summary>Gets the last site set with <see cref="M:Tools.Generators.IObjectWithSite.SetSite(System.Object)"/>. If there is no known site, the object returns a failure code.</summary>
+            <param name="ppvSite">The address of the caller's void* variable in which the object stores the interface pointer of the site last seen in <see cref="M:Tools.Generators.IObjectWithSite.SetSite(System.Object)"/>. The specific interface returned depends on the riid argument; the two arguments act identically to those in QueryInterface. If the appropriate interface pointer is available, the object must call AddRef on that pointer before returning successfully. If no site is available, or the requested interface is not supported, the object sets this argument to NULL, and returns a failure code.</param>
+            <param name="riid">The IID of the interface pointer that should be returned in <paramref name="ppvSite"/>.</param>
+        </member>
+        <member name="F:Tools.Generators.ServiceProvider.IID_IUnknown">
+            <summary>GUID of IUnknown</summary>
+        </member>
+        <member name="F:Tools.Generators.ServiceProvider.serviceProvider">
+            <summary>The <see cref="T:Tools.Generators.IOleServiceProvider"/> interface used.</summary>
+        </member>
+        <member name="M:Tools.Generators.ServiceProvider.#ctor(Tools.Generators.IOleServiceProvider)">
+            <summary>
+                Creates a new <see cref="T:Tools.Generators.ServiceProvider"/> object and uses the given interface to resolve
+                services.
+            </summary>
+            <param name="sp">
+                The <see cref="T:Tools.Generators.IOleServiceProvider"/> interface to use.
+            </param>
+        </member>
+        <member name="M:Tools.Generators.ServiceProvider.Dispose">
+            <summary>
+            gives this class a chance to free its references.
+            </summary>
+        </member>
+        <member name="M:Tools.Generators.ServiceProvider.Failed(System.Int32)">
+            <summary>
+            returns true if the given HRESULT is a failure HRESULT
+            </summary>
+            <param name="hr">HRESULT to test</param>
+            <returns>true if the HRESULT is a failure, false if not.</returns>
+        </member>
+        <member name="M:Tools.Generators.ServiceProvider.GetService(System.Type)">
+            <summary>
+                Retrieves the requested service.
+            </summary>
+            <param name='serviceClass'>
+                The class of the service to retrieve.
+            </param>
+            <returns>
+                an instance of serviceClass or null if no
+                such service exists.
+            </returns>
+        </member>
+        <member name="M:Tools.Generators.ServiceProvider.GetService(System.Guid)">
+            <summary>
+                Retrieves the requested service.
+            </summary>
+            <param name='guid'>
+                The GUID of the service to retrieve.
+            </param>
+            <returns>
+                an instance of the service or null if no
+                such service exists.
+            </returns>
+        </member>
+        <member name="M:Tools.Generators.ServiceProvider.GetService(System.Guid,System.Type)">
+            <summary>
+                Retrieves the requested service.  The guid must be specified; the class is only
+                used when debugging and it may be null.
+            </summary>
+        </member>
+        <member name="M:Tools.Generators.ServiceProvider.Tools#Generators#IObjectWithSite#GetSite(System.Guid@,System.Object[])">
+            <summary>
+                Retrieves the current site object we're using to
+                resolve services.
+            </summary>
+            <param name="riid">
+                Must be IServiceProvider.class.GUID
+            </param>
+            <param name="ppvSite">
+                Outparam that will contain the site object.
+            </param>
+            <seealso cref="T:Tools.Generators.IObjectWithSite"/>
+        </member>
+        <member name="M:Tools.Generators.ServiceProvider.Tools#Generators#IObjectWithSite#SetSite(System.Object)">
+            <summary>
+                Sets the site object we will be using to resolve services.
+            </summary>
+            <param name="pUnkSite">
+                The site we will use.  This site will only be
+                used if it also implements IOleServiceProvider.
+            </param>
+            <seealso cref="T:Tools.Generators.IObjectWithSite"/>
+        </member>
+        <member name="M:Tools.Generators.ServiceProvider.Succeeded(System.Int32)">
+            <summary>
+            returns true if the given HRESULT is a success HRESULT
+            </summary>
+            <param name="hr">HRESULT to test</param>
+            <returns>true if the HRESULT is a success, false if not.</returns>
+        </member>
+        <member name="T:Tools.Generators.BaseCodeGenerator">
+            <summary>
+            A managed wrapper for VS's concept of an <see cref="T:Tools.Generators.IVsSingleFileGenerator"/> which is
+            a custom tool invoked during the build which can take any file as an input
+            and provide a compilable code file as output.
+            </summary>
+        </member>
+        <member name="T:Tools.Generators.IVsSingleFileGenerator">
+            <summary>Transforms a single input file into a single output file that can be compiled or added to a project. Any COM component that implements the IVsSingleFileGenerator is a custom tool.</summary>
+            <remarks>
+            <para>Any custom tool that is a COM component must implement the IVsSingleFileGenerator interface.</para>
+            <para>See <a href="http://msdn2.microsoft.com/en-us/library/microsoft.visualstudio.shell.interop.ivssinglefilegenerator(VS.80).aspx">IVsSingleFileGenerator Interface</a></para>
+            </remarks>
+        </member>
+        <member name="M:Tools.Generators.IVsSingleFileGenerator.GetDefaultExtension">
+            <summary>Retrieves the file extension that is given to the output file name.</summary>
+            <returns>Returns the file extension that is to be given to the output file name. The returned extension must include a leading period.</returns>
+            <remarks>The project system invokes DefaultExtension in order to determine what extension to give to the generated output file.
+            <code>[propget]   HRESULT DefaultExtension( [out,retval] BSTR* pbstrDefaultExtension );</code></remarks>
+        </member>
+        <member name="M:Tools.Generators.IVsSingleFileGenerator.Generate(System.String,System.String,System.String,System.IntPtr@,System.Int32@,Tools.Generators.IVsGeneratorProgress)">
+            <summary>Executes the transformation and returns the newly generated output file, whenever a custom tool is loaded, or the input file is saved.</summary>
+            <param name="wszInputFilePath">The full path of the input file. May be a null reference (Nothing in Visual Basic) in future releases of Visual Studio, so generators should not rely on this value.</param>
+            <param name="bstrInputFileContents">The contents of the input file. This is either a UNICODE BSTR (if the input file is text) or a binary BSTR (if the input file is binary). If the input file is a text file, the project system automatically converts the BSTR to UNICODE.</param>
+            <param name="wszDefaultNamespace">This parameter is meaningful only for custom tools that generate code. It represents the namespace into which the generated code will be placed. If the parameter is not a null reference (Nothing in Visual Basic) and not empty, the custom tool can use the following syntax to enclose the generated code.
+            <code> ' Visual Basic Namespace [default namespace]
+            ... End Namespace
+            // Visual C#
+            namespace [default namespace] { ... }</code></param>
+            <param name="rgbOutputFileContents">Returns an array of bytes to be written to the generated file. You must include UNICODE or UTF-8 signature bytes in the returned byte array, as this is a raw stream. The memory for rgbOutputFileContents must be allocated using the .NET Framework call, System.Runtime.InteropServices.AllocCoTaskMem, or the equivalent Win32 system call, CoTaskMemAlloc. The project system is responsible for freeing this memory.</param>
+            <param name="pcbOutput">Returns the count of bytes in the rgbOutputFileContent array.</param>
+            <param name="pGenerateProgress">A reference to the <see craf="IVsGeneratorProgress"/> interface through which the generator can report its progress to the project system.</param>
+            <remarks><code>HRESULT Generate( [in] LPCOLESTR wszInputFilePath, [in] BSTR bstrInputFileContents, [in] LPCOLESTR wszDefaultNamespace,  [out] BYTE**    rgbOutputFileContents, [out] ULONG*    pcbOutput, [in] IVsGeneratorProgress* pGenerateProgress );</code></remarks>
+        </member>
+        <member name="F:Tools.Generators.BaseCodeGenerator.codeGeneratorProgress">
+            <summary>Contains value of the <see cref="P:Tools.Generators.BaseCodeGenerator.CodeGeneratorProgress"/> property</summary>
+        </member>
+        <member name="F:Tools.Generators.BaseCodeGenerator.codeFileNameSpace">
+            <summary>Contains value of the <see cref="P:Tools.Generators.BaseCodeGenerator.FileNameSpace"/> property</summary>
+        </member>
+        <member name="F:Tools.Generators.BaseCodeGenerator.codeFilePath">
+            <summary>Contains value of the <see cref="P:Tools.Generators.BaseCodeGenerator.InputFilePath"/> property</summary>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGenerator.GetDefaultExtension">
+            <summary>
+            gets the default extension for this generator
+            </summary>
+            <returns>string with the default extension for this generator</returns>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGenerator.GenerateCode(System.String,System.String)">
+            <summary>
+            the method that does the actual work of generating code given the input
+            file.
+            </summary>
+            <param name="inputFileName">input file name</param>
+            <param name="inputFileContent">file contents as a string</param>
+            <returns>the generated code file as a byte-array</returns>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGenerator.GeneratorErrorCallback(System.Boolean,System.Int32,System.String,System.Int32,System.Int32)">
+            <summary>
+            method that will communicate an error via the shell callback mechanism.
+            </summary>
+            <param name="warning">true if this is a warning</param>
+            <param name="level">level or severity</param>
+            <param name="message">text displayed to the user</param>
+            <param name="line">line number of error/warning</param>
+            <param name="column">column number of error/warning</param>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGenerator.Generate(System.String,System.String,System.String,System.IntPtr@,System.Int32@,Tools.Generators.IVsGeneratorProgress)">
+            <summary>
+            main method that the VS shell calls to do the generation
+            </summary>
+            <param name="wszInputFilePath">path to the input file</param>
+            <param name="bstrInputFileContents">contents of the input file as a string ( shell handles UTF-8 to Unicode &amp; those types of conversions )</param>
+            <param name="wszDefaultNamespace">default namespace for the generated code file</param>
+            <param name="rgbOutputFileContents">byte-array of output file contents</param>
+            <param name="pcbOutput">count of bytes in the output byte-array</param>
+            <param name="pGenerateProgress">interface to send progress updates to the shell</param>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGenerator.StreamToBytes(System.IO.Stream)">
+            <summary>
+            method to return a byte-array given a Stream
+            </summary>
+            <param name="stream">stream to convert to a byte-array</param>
+            <returns>the stream's contents as a byte-array</returns>
+        </member>
+        <member name="P:Tools.Generators.BaseCodeGenerator.FileNameSpace">
+            <summary>
+            namespace for the file.
+            </summary>
+        </member>
+        <member name="P:Tools.Generators.BaseCodeGenerator.InputFilePath">
+            <summary>
+            file-path for the input file.
+            </summary>
+        </member>
+        <member name="P:Tools.Generators.BaseCodeGenerator.CodeGeneratorProgress">
+            <summary>
+            interface to the VS shell object we use to tell our
+            progress while we are generating.
+            </summary>
+        </member>
+        <member name="T:Tools.Generators.IOleServiceProvider">
+            <summary>OLE Service provider</summary>
+        </member>
+        <member name="M:Tools.Generators.IOleServiceProvider.QueryService(System.Guid@,System.Guid@,System.IntPtr@)">
+            <summary>Queries the OLE service</summary>
+            <param name="guidService">Sefice GUID</param>
+            <param name="ppvObject">Object queried</param>
+            <param name="riid">IID of the interface pointer that should be returned in <paramref name="ppvObject"/></param>
+        </member>
+        <member name="T:Tools.Generators.IVsGeneratorProgress">
+            <summary>Enables the single file generator to report on its progress and to provide additional warning and/or error information.</summary>
+            <remarks><para>When a custom tool is loaded, or the input for a custom tool is saved, the Visual Basic or Visual C# project system invokes the Generate Method, and passes a reference to IVsGeneratorProgress that enables the single file generator to report its progress to the user.</para>
+            <para>See <a href="http://msdn2.microsoft.com/en-us/library/microsoft.visualstudio.shell.interop.ivsgeneratorprogress.aspx">IVsGeneratorProgress Interface</a></para></remarks>
+        </member>
+        <member name="M:Tools.Generators.IVsGeneratorProgress.GeneratorError(System.Boolean,System.Int32,System.String,System.Int32,System.Int32)">
+            <summary>Returns warning and error information to the project system.</summary>
+            <param name="fWarning">Flag that indicates whether this message is a warning or an error. Set to true to indicate a warning or to false to indicate an error.</param>
+            <param name="dwLevel">Severity level of the error. The project system currently ignores the value of this parameter.</param>
+            <param name="bstrError">Text of the error to be displayed to the user by means of the Task List.</param>
+            <param name="dwLine">Zero-based line number that indicates where in the source file the error occurred. This can be –1 (or, 0xFFFFFFFF) if not needed.</param>
+            <param name="dwColumn">One-based column number that indicates where in the source file the error occurred. This can be –1 if not needed, but must be –1 if dwLine is –1.</param>
+            <remarks><code><![CDATA[HRESULT GeneratorError( [in] BOOL fWarning, [in] DWORD dwLevel, [in] BSTR bstrError, in] DWORD dwLine, [in] DWORD dwColumn );]]></code></remarks>
+        </member>
+        <member name="M:Tools.Generators.IVsGeneratorProgress.Progress(System.Int32,System.Int32)">
+            <summary>Sets an index that specifies how much of the generation has been completed.</summary>
+            <param name="nComplete">Index that specifies how much of the generation has been completed. This value can range from zero to <paramref name="nTotal"/>.</param>
+            <param name="nTotal">The maximum value for <paramref name="nComplete"/>.</param>
+            <remarks>
+            <code>HRESULT Progress( [in] ULONG nComplete, [in] ULONG nTotal );</code>
+            </remarks>
+        </member>
+        <member name="T:Tools.Generators.BaseCodeGeneratorWithSite">
+            <summary>
+                This class exists to be cocreated a in a preprocessor build step.
+            </summary>
+        </member>
+        <member name="F:Tools.Generators.BaseCodeGeneratorWithSite.E_FAIL">
+            <summary>Error HRESULT for a generic failure.</summary>
+        </member>
+        <member name="F:Tools.Generators.BaseCodeGeneratorWithSite.E_NOINTERFACE">
+            <summary>Error HRESULT for the request of a not implemented interface.</summary>
+        </member>
+        <member name="F:Tools.Generators.BaseCodeGeneratorWithSite.site">
+            <summary>Contains value of the <see cref="P:Tools.Generators.BaseCodeGeneratorWithSite.Site"/> property</summary>
+        </member>
+        <member name="F:Tools.Generators.BaseCodeGeneratorWithSite.codeDomProvider">
+            <summary>Provider for code generation</summary>
+        </member>
+        <member name="F:Tools.Generators.BaseCodeGeneratorWithSite.CodeDomInterfaceGuid">
+            <summary>Guid of dom interface</summary>
+        </member>
+        <member name="F:Tools.Generators.BaseCodeGeneratorWithSite.CodeDomServiceGuid">
+            <summary>Same as <see cref="F:Tools.Generators.BaseCodeGeneratorWithSite.CodeDomInterfaceGuid"/></summary>
+        </member>
+        <member name="F:Tools.Generators.BaseCodeGeneratorWithSite.serviceProvider">
+            <summary>Service provider</summary>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGeneratorWithSite.GetService(System.Guid)">
+            <summary>
+            method to get a service by its GUID
+            </summary>
+            <param name="serviceGuid">GUID of service to retrieve</param>
+            <returns>an object that implements the requested service</returns>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGeneratorWithSite.GetService(System.Type)">
+            <summary>
+            method to get a service by its Type
+            </summary>
+            <param name="serviceType">Type of service to retrieve</param>
+            <returns>an object that implements the requested service</returns>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGeneratorWithSite.GetDefaultExtension">
+            <summary>
+            gets the default extension of the output file by asking the CodeDomProvider
+            what its default extension is.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGeneratorWithSite.GetCodeWriter">
+            <summary>
+            Method to get an ICodeGenerator with which this class can create code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGeneratorWithSite.SetSite(System.Object)">
+            <summary>
+            SetSite method of IOleObjectWithSite
+            </summary>
+            <param name="pUnkSite">site for this object to use</param>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGeneratorWithSite.GetSite(System.Guid@,System.Object[])">
+            <summary>
+            GetSite method of IOleObjectWithSite
+            </summary>
+            <param name="riid">interface to get</param>
+            <param name="ppvSite">array in which to stuff return value</param>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGeneratorWithSite.GetDLLNames(System.String[])">
+            <summary>
+            gets a string containing the DLL names to add.
+            </summary>
+            <param name="DLLToAdd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGeneratorWithSite.AddReferenceDLLToProject(System.String[])">
+            <summary>
+            adds a reference to the project for each required DLL
+            </summary>
+            <param name="referenceDLL"></param>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGeneratorWithSite.CreateExceptionMessage(System.Exception)">
+            <summary>
+            method to create an exception message given an exception
+            </summary>
+            <param name="e">exception caught</param>
+            <returns>message to display to the user</returns>
+        </member>
+        <member name="M:Tools.Generators.BaseCodeGeneratorWithSite.GenerateVersionComment(System.CodeDom.CodeNamespace)">
+            <summary>
+            method to create a version comment
+            </summary>
+            <param name="codeNamespace"></param>
+        </member>
+        <member name="P:Tools.Generators.BaseCodeGeneratorWithSite.CodeProvider">
+            <summary>
+            demand-creates a CodeDomProvider
+            </summary>
+        </member>
+        <member name="P:Tools.Generators.BaseCodeGeneratorWithSite.SiteServiceProvider">
+            <summary>
+            demand-creates a ServiceProvider given an IOleServiceProvider
+            </summary>
+        </member>
+        <member name="P:Tools.Generators.BaseCodeGeneratorWithSite.Site">
+            <summary>Gets the last site set with <see cref="M:Tools.Generators.IObjectWithSite.SetSite(System.Object)"/>.</summary>
+        </member>
+        <member name="T:Tools.Generators.CustomToolBase">
+            <summary>
+            Abstract base for custom tools for text files
+            </summary>
+            <remarks>Inheriter must supply the <see cref="T:System.Runtime.InteropServices.GuidAttribute"/> and <see cref="T:Tools.Generators.CustomToolAttribute"/> </remarks>
+        </member>
+        <member name="F:Tools.Generators.CustomToolBase.CSharpCategoryGuid">
+            <summary>Guid of C#'s category under HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\9.0\Generators\ in registry.</summary>
+            <remarks>Valid for VS 2008 and 2005 as well</remarks>
+        </member>
+        <member name="F:Tools.Generators.CustomToolBase.VBCategoryGuid">
+            <summary>Guid of VB's category under HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\9.0\Generators\ in registry.</summary>
+            <remarks>Valid for VS 2008 and 2005 as well</remarks>
+        </member>
+        <member name="M:Tools.Generators.CustomToolBase.RegisterClass(System.Type)">
+            <summary>
+            Registers class
+            </summary>
+            <param name="t">Type to register</param>
+        </member>
+        <member name="M:Tools.Generators.CustomToolBase.UnregisterClass(System.Type)">
+            <summary>
+            Unregisters class
+            </summary>
+            <param name="t">Type to unregister</param>
+        </member>
+        <member name="M:Tools.Generators.CustomToolBase.getGuidAttribute(System.Type)">
+            <summary>
+            Gets class's <see cref="T:System.Runtime.InteropServices.GuidAttribute"/>
+            </summary>
+            <param name="t">Type to get GUID of</param>
+            <returns><see cref="T:System.Runtime.InteropServices.GuidAttribute"/> applied on type <paramref name="t"/></returns>
+        </member>
+        <member name="M:Tools.Generators.CustomToolBase.getCustomToolAttribute(System.Type)">
+            <summary>
+            Gets <see cref="T:Tools.Generators.CustomToolAttribute"/> of class
+            </summary>
+            <param name="t">Class to get attribute of</param>
+            <returns><see cref="T:Tools.Generators.CustomToolAttribute"/> applied on type <paramref name="t"/></returns>
+        </member>
+        <member name="M:Tools.Generators.CustomToolBase.getAttribute(System.Type,System.Type)">
+            <summary>
+            Gets attribute of given type which is applied on given type
+            </summary>
+            <param name="t">Type to get attribute of</param>
+            <param name="attributeType">Type of attribute to get</param>
+            <returns>1st attribute applied</returns>
+            <exception cref="T:System.ArgumentException">Type <paramref name="t"/> is not decorated with attribute <paramref name="attributeType"/>.</exception>
+        </member>
+        <member name="M:Tools.Generators.CustomToolBase.GetKeyName(System.Guid,System.String,System.String)">
+            <summary>
+            Gets kay name for given VS version, language GUID and tool name
+            </summary>
+            <param name="categoryGuid">GUID of language category. <see cref="F:Tools.Generators.CustomToolBase.CSharpCategoryGuid"/> and <see cref="F:Tools.Generators.CustomToolBase.VBCategoryGuid"/>.</param>
+            <param name="toolName">Name of tool itself</param>
+            <param name="VSVersion">Version of Visual Studio (i.e. 8.0, 9.0)</param>
+            <returns>Registy key path (root key not included)</returns>
+        </member>
+        <member name="M:Tools.Generators.CustomToolBase.#ctor">
+            <summary>
+            CTor
+            </summary>
+        </member>
+        <member name="M:Tools.Generators.CustomToolBase.GenerateCode(System.String,System.String)">
+            <summary>
+            Performs code generation
+            </summary>
+            <param name="inputFileName">Name of file to convert. Note: May be invalid or inactual. <paramref name="inputFileContent"/> is more important.</param>
+            <param name="inputFileContent">Content of file to convert</param>
+            <returns>Converted content</returns>
+        </member>
+        <member name="M:Tools.Generators.CustomToolBase.DoGenerateCode(System.String,System.String)">
+            <summary>
+            Performs content conversion
+            </summary>
+            <param name="inputFileName">Name of input file to convert. Note: My be invalid or inactual. <paramref name="inputFileContent"/> always contain actual text of file.</param>
+            <param name="inputFileContent">Content of file to convert</param>
+            <returns>File converted</returns>
+        </member>
+        <member name="T:Tools.Generators.CustomToolAttribute">
+            <summary>
+            Marks class as cutom tool
+            </summary>
+        </member>
+        <member name="F:Tools.Generators.CustomToolAttribute._name">
+            <summary>Contains value of the <see cref="P:Tools.Generators.CustomToolAttribute.Name"/> property</summary>
+        </member>
+        <member name="F:Tools.Generators.CustomToolAttribute._description">
+            <summary>Contains vaklue of the <see cref="P:Tools.Generators.CustomToolAttribute.Description"/> property</summary>
+        </member>
+        <member name="M:Tools.Generators.CustomToolAttribute.#ctor(System.String)">
+            <summary>
+            CTor
+            </summary>
+            <param name="name">Name of the custom tool</param>
+        </member>
+        <member name="M:Tools.Generators.CustomToolAttribute.#ctor(System.String,System.String)">
+            <summary>
+            CTor
+            </summary>
+            <param name="name">Name of the custom tool</param>
+            <param name="description">Tool description</param>
+        </member>
+        <member name="P:Tools.Generators.CustomToolAttribute.Name">
+            <summary>
+            Name of the custom tool
+            </summary>
+        </member>
+        <member name="P:Tools.Generators.CustomToolAttribute.Description">
+            <summary>
+            Tool description
+            </summary>
+        </member>
+    </members>
+</doc>

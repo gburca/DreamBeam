@@ -44,7 +44,7 @@ namespace DreamBeam {
 		public void Log(string Text) {
 			if (doLog) {
 				StreamWriter SW;
-				SW = File.AppendText(Tools.GetDirectory(DirType.Logs, logPrefix + ".LogFile.txt"));
+				SW = File.AppendText(DreamTools.GetDirectory(DirType.Logs, logPrefix + ".LogFile.txt"));
 				SW.WriteLine(DateTime.Now.ToString() + ": " + Text);
 				SW.Close();
 			}

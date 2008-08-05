@@ -206,7 +206,7 @@ namespace DreamBeam {
 			this.bounds = format.Bounds;
 			
 
-			this.OutlineSize.Value = Tools.ForceToRange(OutlineSize.Minimum, OutlineSize.Maximum, format.OutlineSize);
+			this.OutlineSize.Value = DreamTools.ForceToRange(OutlineSize.Minimum, OutlineSize.Maximum, format.OutlineSize);
 			if (format.TextFont != null) {
 				this.fontDialog.Font = format.TextFont;
 			} else {
@@ -1413,14 +1413,14 @@ namespace DreamBeam {
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public string XmlTextColor {
-			get { return Tools.SerializeColor(TextColor); }
-			set { TextColor = Tools.DeserializeColor(value); }
+			get { return DreamTools.SerializeColor(TextColor); }
+			set { TextColor = DreamTools.DeserializeColor(value); }
 		}
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public string XmlOutlineColor {
-			get { return Tools.SerializeColor(OutlineColor); }
-			set { OutlineColor = Tools.DeserializeColor(value); }
+			get { return DreamTools.SerializeColor(OutlineColor); }
+			set { OutlineColor = DreamTools.DeserializeColor(value); }
 		}
 
 		/// <summary>

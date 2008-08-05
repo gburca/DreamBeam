@@ -200,7 +200,7 @@ namespace DreamBeam.FileTypes {
                 // report the error
             }
 
-            return Tools.Sword_ConvertEncoding(module.RenderText(vk)).Trim();
+            return DreamTools.Sword_ConvertEncoding(module.RenderText(vk)).Trim();
         }
 
         /// <summary>
@@ -373,7 +373,7 @@ namespace DreamBeam.FileTypes {
                     int progress = (int)(((float)i / 31102F) * 100);
                     worker.ReportProgress(progress);
                 }
-                string t = Tools.Sword_ConvertEncoding(module.RenderText(vk)).Trim();
+                string t = DreamTools.Sword_ConvertEncoding(module.RenderText(vk)).Trim();
                 book = vk.Book();
 
                 // Book numbering is 1-based and starts back up from 1 in the New Testament
@@ -472,9 +472,9 @@ namespace DreamBeam.FileTypes {
             BibleVerse v = verses[verseIdx];
 
             if (Abbreviated) {
-                return string.Format("{0} {1}:{2}", Tools.RemoveDiacritics(BibleBooks[v.b].Short), v.c, v.v);
+                return string.Format("{0} {1}:{2}", DreamTools.RemoveDiacritics(BibleBooks[v.b].Short), v.c, v.v);
             } else {
-                return string.Format("{0} {1}:{2}", Tools.RemoveDiacritics(BibleBooks[v.b].Long), v.c, v.v);
+                return string.Format("{0} {1}:{2}", DreamTools.RemoveDiacritics(BibleBooks[v.b].Long), v.c, v.v);
             }
         }
 
@@ -506,9 +506,9 @@ namespace DreamBeam.FileTypes {
         public int BookNumber(string book) {
             int i = 0;
             string bLC;
-            book = Tools.RemoveDiacritics(book.ToLower());
+            book = DreamTools.RemoveDiacritics(book.ToLower());
             foreach (BibleBook b in BibleBooks) {
-                bLC = Tools.RemoveDiacritics(b.Long.ToLower());
+                bLC = DreamTools.RemoveDiacritics(b.Long.ToLower());
                 if (bLC.StartsWith(book)) { return i; }
                 i++;
             }
@@ -635,7 +635,7 @@ namespace DreamBeam.FileTypes {
         /// <returns>The converted text</returns>
         private string Replace(string text) {
             if (_replacements == null) {
-                return Tools.RemoveNonAlpha(Tools.RemoveDiacritics(text));
+                return DreamTools.RemoveNonAlpha(DreamTools.RemoveDiacritics(text));
             }
 
             foreach (System.Data.DataRow r in _replacements.Rows) {

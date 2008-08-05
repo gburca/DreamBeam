@@ -89,7 +89,7 @@ namespace DreamBeam.Bible {
 		public void Populate(BibleVersion bible, int target) {
 			StringBuilder _rtfData = new StringBuilder();
 
-			//Tools.ElapsedTime("Start Populate");
+			//DreamTools.ElapsedTime("Start Populate");
 
 			if (target < 0 || target >= bible.VerseCount) return;
 
@@ -126,7 +126,7 @@ namespace DreamBeam.Bible {
 			this.SelectionRightIndent = 5;
 			
 			this.ScrollTo( this.GetSelectionFromVerseIndex(target)[0] );
-			//Tools.ElapsedTime("Finish Populate");
+			//DreamTools.ElapsedTime("Finish Populate");
 		}
 
 		/// <summary>
@@ -137,7 +137,7 @@ namespace DreamBeam.Bible {
 		/// <param name="regex"></param>
 		/// <returns>The result of calling BibleVersion.Find (negative number to indicate failure, or a 0-based verse index)</returns>
 		public int Find(BibleVersion bible, bool dirFwd, string regex) {
-			Tools.ElapsedTime("Start regex search");
+			DreamTools.ElapsedTime("Start regex search");
 			
 			if (regex.Length == 0) return -1;
 
@@ -151,7 +151,7 @@ namespace DreamBeam.Bible {
 			}
 
 			int target = bible.Find(currentVerse, dirFwd, regex);
-			Tools.ElapsedTime("End regex search");
+			DreamTools.ElapsedTime("End regex search");
 
 			lastRegex = regex;
 			if (target >= 0) {

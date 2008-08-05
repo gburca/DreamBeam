@@ -745,7 +745,7 @@ namespace DreamBeam {
 			graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
 			graph.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-			Size InputSize = Tools.VideoProportions(Size, MainImage.Size);
+			Size InputSize = DreamTools.VideoProportions(Size, MainImage.Size);
 
 			graph.DrawImage(MainImage, (int)((Size.Width - InputSize.Width) / 2), (int)((Size.Height - InputSize.Height) / 2), InputSize.Width, InputSize.Height);
             return new ResizedImagePack(Canvas, InputSize);
@@ -1079,8 +1079,8 @@ namespace DreamBeam {
 					}
 
 					if (!VideoProblem) {
-						this.VideoPanel.Size = Tools.VideoProportions(this.Size, video.DefaultSize);
-						this.video.Size = Tools.VideoProportions(this.Size, video.DefaultSize);
+						this.VideoPanel.Size = DreamTools.VideoProportions(this.Size, video.DefaultSize);
+						this.video.Size = DreamTools.VideoProportions(this.Size, video.DefaultSize);
 						this.VideoPanel.Location = new Point((int)((this.Size.Width - this.VideoPanel.Size.Width) / 2), (int)((this.Size.Height - this.VideoPanel.Size.Height) / 2));
 						try {
 							this.video.Audio.Volume = this.AudioVolume;

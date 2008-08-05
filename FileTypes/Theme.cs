@@ -17,7 +17,7 @@ namespace DreamBeam {
 		public string ThemeFile = null;
 
 		public Theme() {
-			Version = Tools.GetAppVersion();
+			Version = DreamTools.GetAppVersion();
 		}
 		//public Theme(int formats)
 		//    : this() {
@@ -54,7 +54,7 @@ namespace DreamBeam {
 			dialog.DefaultExt = "xml";
 			dialog.Filter = FileDialogFilter;
 			dialog.FilterIndex = 1;
-			dialog.InitialDirectory = Tools.GetDirectory(DirType.Themes);
+			dialog.InitialDirectory = DreamTools.GetDirectory(DirType.Themes);
 			dialog.Title = "Open Theme";
 			dialog.Multiselect = false;
 
@@ -73,7 +73,7 @@ namespace DreamBeam {
 			dialog.DefaultExt = "xml";
 			dialog.Filter = FileDialogFilter;
 			dialog.FilterIndex = 1;
-			dialog.InitialDirectory = Tools.GetDirectory(DirType.Themes);
+			dialog.InitialDirectory = DreamTools.GetDirectory(DirType.Themes);
 			dialog.Title = "Save Theme As";
 
 			Directory.CreateDirectory(dialog.InitialDirectory);
@@ -82,7 +82,7 @@ namespace DreamBeam {
 				string fileName = dialog.FileName;
 				try {
 					SerializeTo(this, fileName);
-					this.ThemeFile = Tools.GetRelativePath(DirType.DataRoot, fileName);
+					this.ThemeFile = DreamTools.GetRelativePath(DirType.DataRoot, fileName);
 					//this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.SaveFileDialog.FileName);
 				} catch (Exception ex) {
 					MessageBox.Show("Theme not saved: " + ex.Message);
@@ -100,7 +100,7 @@ namespace DreamBeam {
             try
             {
                 SerializeTo(this, fileName);
-                this.ThemeFile = Tools.GetRelativePath(DirType.DataRoot, fileName);
+                this.ThemeFile = DreamTools.GetRelativePath(DirType.DataRoot, fileName);
                 //this.StatusPanel.Text = Lang.say("Status.SongSavedAs", this.SaveFileDialog.FileName);
             }
             catch (Exception ex)
@@ -118,7 +118,7 @@ namespace DreamBeam {
 			FileStream fs = null;
 
 			// Override version the theme was deserialized with
-			instance.Version = Tools.GetAppVersion();
+			instance.Version = DreamTools.GetAppVersion();
 
 			try {
 				fs = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Read);
@@ -135,7 +135,7 @@ namespace DreamBeam {
 		public static object DeserializeFrom(Type type, string file) {
 			XmlSerializer xs = null;
 
-			file = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), file);
+			file = DreamTools.GetFullPathOrNull(DreamTools.GetDirectory(DirType.DataRoot), file);
 			if (file == null) { return null; }
 			try {
 				xs = new XmlSerializer(type);
@@ -149,7 +149,7 @@ namespace DreamBeam {
 					using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read)) {
 						Theme t = (Theme)xs.Deserialize(fs);
 						if (t != null) {
-							t.ThemeFile = Tools.GetRelativePath(DirType.DataRoot, file);
+							t.ThemeFile = DreamTools.GetRelativePath(DirType.DataRoot, file);
 							if (type == typeof(SongTheme)) {
 								t.CreateTextFormats(Enum.GetValues(typeof(SongTextType)).Length);
 							} else if (type == typeof(BibleTheme)) {

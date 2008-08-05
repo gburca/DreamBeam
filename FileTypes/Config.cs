@@ -89,8 +89,8 @@ namespace DreamBeam {
 		public System.Drawing.Color BackgroundColor = Color.Black;
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public string XmlBackgroundColor {
-			get { return Tools.SerializeColor(BackgroundColor); }
-			set { BackgroundColor = Tools.DeserializeColor(value); }
+			get { return DreamTools.SerializeColor(BackgroundColor); }
+			set { BackgroundColor = DreamTools.DeserializeColor(value); }
 		}
 
 		public bool LoopMedia = false;
@@ -125,7 +125,7 @@ namespace DreamBeam {
 		#endregion
 
 		public Config() {
-			Version = Tools.GetAppVersion();
+			Version = DreamTools.GetAppVersion();
 			Init();
 		}
 
@@ -143,7 +143,7 @@ namespace DreamBeam {
 		}
 
 		string GetLocation(Type type) {
-			return Tools.GetDirectory(DirType.Config, type.Name + ".xml");
+			return DreamTools.GetDirectory(DirType.Config, type.Name + ".xml");
 		}
 
 		/// <summary>
@@ -159,7 +159,7 @@ namespace DreamBeam {
 			Directory.CreateDirectory(Path.GetDirectoryName(file));
 			FileStream fs = null;
 
-			instance.Version = Tools.GetAppVersion();
+			instance.Version = DreamTools.GetAppVersion();
 
 			try {
 				fs = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Read);
@@ -183,14 +183,14 @@ namespace DreamBeam {
 
 
             
-            if (config.DefaultThemes.SongThemePath != "" && File.Exists(Path.Combine(Tools.GetDirectory(DirType.DataRoot), config.DefaultThemes.SongThemePath)))
+            if (config.DefaultThemes.SongThemePath != "" && File.Exists(Path.Combine(DreamTools.GetDirectory(DirType.DataRoot), config.DefaultThemes.SongThemePath)))
             {
-                config.theme.Song.ThemeFile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), config.DefaultThemes.SongThemePath);
+                config.theme.Song.ThemeFile = Path.Combine(DreamTools.GetDirectory(DirType.DataRoot), config.DefaultThemes.SongThemePath);
             }
-            else if (File.Exists(Path.Combine(Tools.GetDirectory(DirType.DataRoot), "Themes\\Default.SongTheme.xml")))
+            else if (File.Exists(Path.Combine(DreamTools.GetDirectory(DirType.DataRoot), "Themes\\Default.SongTheme.xml")))
             {                
                 config.DefaultThemes.SongThemePath = "Themes\\Default.SongTheme.xml";
-                config.theme.Song.ThemeFile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), config.DefaultThemes.SongThemePath);
+                config.theme.Song.ThemeFile = Path.Combine(DreamTools.GetDirectory(DirType.DataRoot), config.DefaultThemes.SongThemePath);
             }
 
 
@@ -208,7 +208,7 @@ namespace DreamBeam {
 		public static object DeserializeFrom(Config instance, string file) {
 			Type type = instance.GetType();
 			XmlSerializer xs = null;
-			string fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.Config), file);
+			string fullPath = DreamTools.GetFullPathOrNull(DreamTools.GetDirectory(DirType.Config), file);
 
 
 			try {
@@ -218,7 +218,7 @@ namespace DreamBeam {
 				Console.WriteLine("DeserializeFrom exception: " + ex.Message);
 			}
 
-			if (!Tools.FileExists(fullPath)) {
+			if (!DreamTools.FileExists(fullPath)) {
 				// fullPath could be NULL here, so use "file"
 				Config.SerializeTo(instance, file);
 			} else if (xs != null) {

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Tools.VisualStudio
+</name>
+</assembly>
+<members>
+<member name="M:Tools.DiagnosticsT.ImageVisualizer.Show(Microsoft.VisualStudio.DebuggerVisualizers.IDialogVisualizerService,Microsoft.VisualStudio.DebuggerVisualizers.IVisualizerObjectProvider)">
+	<summary>Shows visualizer dialog</summary>
+	<param name="objectProvider">An object of type <see cref="T:Microsoft.VisualStudio.DebuggerVisualizers.IVisualizerObjectProvider"/>. This object provides communication from the debugger side of the visualizer to the object source (<see cref="T:Microsoft.VisualStudio.DebuggerVisualizers.VisualizerObjectSource"/>) on the debuggee side.</param>
+	<param name="windowService">An object of type <see cref="T:Microsoft.VisualStudio.DebuggerVisualizers.IDialogVisualizerService"/>, which provides methods your visualizer can use to display Windows forms, controls, and dialogs.</param>
+</member><member name="F:Tools.DiagnosticsT.ImageVisualizer.VisualizerForm.Image">
+	<summary><see cref="T:System.Windows.Forms.PictureBox"/> to show <see cref="T:System.Drawing.Image"/> in</summary>
+</member><member name="F:Tools.DiagnosticsT.ImageVisualizer.VisualizerForm.Label">
+	<summary><see cref="P:Tools.DiagnosticsT.ImageVisualizer.VisualizerForm.Label"/> that displays additional information about <see cref="T:System.Drawing.Image"/></summary>
+</member><member name="M:Tools.DiagnosticsT.ImageVisualizer.VisualizerForm.#ctor(System.Drawing.Image)">
+	<summary>CTor</summary>
+	<param name="Image"><see cref="T:System.Drawing.Image"/> to be shown</param>
+</member><member name="M:Tools.DiagnosticsT.ImageVisualizer.VisualizerForm.InitializeComponent">
+	<summary>Initializes form</summary>
+</member><member name="F:Tools.DiagnosticsT.ImageVisualizer.VisualizerForm.Real">
+	<summary>If tru image is shown in real size, if false it is shown zoomed to form</summary>
+</member><member name="T:Tools.DiagnosticsT.ImageVisualizer.VisualizerForm">
+	<summary>Realizes <see cref="T:System.Windows.Forms.Form"/> that shows <see cref="T:System.Drawing.Image"/> being visualized</summary>
+</member><member name="T:Tools.DiagnosticsT.ImageVisualizer">
+	<summary>Implements <see cref="T:Microsoft.VisualStudio.DebuggerVisualizers.DialogDebuggerVisualizer"/> for datatype <see cref="T:System.Drawing.Image"/></summary>
+</member><member name="P:Tools.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Tools.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:Tools.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

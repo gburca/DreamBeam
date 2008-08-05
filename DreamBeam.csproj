@@ -203,6 +203,10 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
+    <Reference Include="Tools, Version=1.0.3070.22929, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DTools\Tools.dll</HintPath>
+    </Reference>
     <Reference Include="UIAutomationProvider">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -341,6 +345,39 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GuiTools\Songeditor\ISongEditor.cs" />
+    <Compile Include="GuiTools\Songeditor\NewEditor\ColoredTextBoxPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\ColoredTextBoxPanel.Designer.cs">
+      <DependentUpon>ColoredTextBoxPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\Form1.designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\RicherTextBox2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\RTFEditorPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\RTFEditorPanel.Designer.cs">
+      <DependentUpon>RTFEditorPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\RTFSongEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\RTFSongEditor.Designer.cs">
+      <DependentUpon>RTFSongEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GuiTools\TextFormatOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -431,6 +468,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GuiTools\ImageWindow.resx">
       <DependentUpon>ImageWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\ColoredTextBoxPanel.resx">
+      <DependentUpon>ColoredTextBoxPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\RTFEditorPanel.resx">
+      <DependentUpon>RTFEditorPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\RTFSongEditor.resx">
+      <DependentUpon>RTFSongEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Import_Export\Export.resx">

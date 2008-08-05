@@ -120,7 +120,7 @@ namespace DreamBeam
 			bool singleFile = Exporter.singleFile;
 			
 			if(List.Count > 0){
-                string strSongDir = Tools.GetDirectory(DirType.Songs);
+                string strSongDir = DreamTools.GetDirectory(DirType.Songs);
 				Crc32 crc = new Crc32();
 				ZipOutputStream s = new ZipOutputStream(File.Create(filepath));
 				s.SetLevel(9); //0 - store only to 9 - means best compression
@@ -147,7 +147,7 @@ namespace DreamBeam
                                /*   if(includeBG){
 
                                       bgList.Add(song.bgImage);
-                                       //Tools.DreamBeamPath()+"\\"+
+                                       //DreamTools.DreamBeamPath()+"\\"+
                                        string bgImage = song.bg_image;
 
                                        if( ((Path.GetExtension(song.bg_image).ToLower() != ".jpg")&(Path.GetExtension(song.bg_image).ToLower() != ".jpeg"))  && convert_Images){
@@ -157,7 +157,7 @@ namespace DreamBeam
                                             EncoderParameters eps = new EncoderParameters(1);
                                            eps.Param[0] = new EncoderParameter(Encoder.Quality, 100L);
 
-                                           bgImage = Tools.DreamBeamPath()+"\\"+Path.GetFileNameWithoutExtension(bgImage)+".jpg";
+                                           bgImage = DreamTools.DreamBeamPath()+"\\"+Path.GetFileNameWithoutExtension(bgImage)+".jpg";
 
                                            bmp.Save(bgImage,ici,eps);
                                            addToZip(s,crc,bgImage,false);
@@ -187,7 +187,7 @@ namespace DreamBeam
 
 		public static void CreateDreamSongPackage(string filepath,ArrayList List, ProgressBar progressBar,bool include_Images, bool convert_Images,bool singleFile){
 			if(List.Count > 0){
-                string strSongDir = Tools.GetDirectory(DirType.Songs);
+                string strSongDir = DreamTools.GetDirectory(DirType.Songs);
 				Crc32 crc = new Crc32();
 				ZipOutputStream s = new ZipOutputStream(File.Create(filepath));
 				s.SetLevel(9); //0 - store only to 9 - means best compression
@@ -212,7 +212,7 @@ namespace DreamBeam
 								   if(includeBG){
 
 										bgList.Add(song.bg_image);
-										//Tools.DreamBeamPath()+"\\"+
+										//DreamTools.DreamBeamPath()+"\\"+
 										string bgImage = song.bg_image;
 
 										if( ((Path.GetExtension(song.bg_image).ToLower() != ".jpg")&(Path.GetExtension(song.bg_image).ToLower() != ".jpeg"))  && convert_Images){
@@ -222,7 +222,7 @@ namespace DreamBeam
 											 EncoderParameters eps = new EncoderParameters(1);
 											eps.Param[0] = new EncoderParameter(Encoder.Quality, 100L);
 
-											bgImage = Tools.DreamBeamPath()+"\\"+Path.GetFileNameWithoutExtension(bgImage)+".jpg";
+											bgImage = DreamTools.DreamBeamPath()+"\\"+Path.GetFileNameWithoutExtension(bgImage)+".jpg";
 
 											bmp.Save(bgImage,ici,eps);
 											addToZip(s,crc,bgImage,true);
@@ -524,7 +524,7 @@ namespace DreamBeam
 
 
 			if(List.Count > 0){
-                string strMediaListDir = Tools.GetDirectory(DirType.MediaLists);
+                string strMediaListDir = DreamTools.GetDirectory(DirType.MediaLists);
 				Crc32 crc = new Crc32();
 				ZipOutputStream s = new ZipOutputStream(File.Create(filepath));
 				s.SetLevel(9); //0 - store only to 9 - means best compression
@@ -554,7 +554,7 @@ namespace DreamBeam
 								   if(includeBG){
 
 										bgList.Add(mediaList.iItem[k].Path);
-										//Tools.DreamBeamPath()+"\\"+
+										//DreamTools.DreamBeamPath()+"\\"+
 										string bgImage = mediaList.iItem[k].Path;
 
 										if( ((Path.GetExtension(bgImage).ToLower() != ".jpg")&(Path.GetExtension(bgImage).ToLower() != ".jpeg"))  && convert_Images){
@@ -564,7 +564,7 @@ namespace DreamBeam
 											 EncoderParameters eps = new EncoderParameters(1);
 											eps.Param[0] = new EncoderParameter(Encoder.Quality, 100L);
 
-											bgImage = Tools.GetDirectory(DirType.DataRoot)+"\\"+Path.GetFileNameWithoutExtension(bgImage)+".jpg";
+											bgImage = DreamTools.GetDirectory(DirType.DataRoot)+"\\"+Path.GetFileNameWithoutExtension(bgImage)+".jpg";
 
 											bmp.Save(bgImage,ici,eps);
 											addToZip(s,crc,bgImage,true);
@@ -659,7 +659,7 @@ namespace DreamBeam
 
 
 			if(List.Count > 0){
-                string strMediaListDir = Tools.GetDirectory(DirType.Backgrounds);
+                string strMediaListDir = DreamTools.GetDirectory(DirType.Backgrounds);
 				Crc32 crc = new Crc32();
 				ZipOutputStream s = new ZipOutputStream(File.Create(filepath));
 				s.SetLevel(9); //0 - store only to 9 - means best compression
@@ -693,7 +693,7 @@ namespace DreamBeam
 											 EncoderParameters eps = new EncoderParameters(1);
 											eps.Param[0] = new EncoderParameter(Encoder.Quality, 100L);
 
-                                            bgImage = Tools.GetDirectory(DirType.DataRoot)+"\\" + Path.GetFileNameWithoutExtension(bgImage) + ".jpg";
+                                            bgImage = DreamTools.GetDirectory(DirType.DataRoot)+"\\" + Path.GetFileNameWithoutExtension(bgImage) + ".jpg";
 
 											bmp.Save(bgImage,ici,eps);
 											addToZip(s,crc,bgImage,true);
@@ -728,7 +728,7 @@ namespace DreamBeam
 		   byte[] buffer = new byte[fs.Length];
 		   fs.Read(buffer, 0, buffer.Length);
 		   string filename = Path.GetFileName(file);
-		   if(putInFolder) filename = Tools.ReplaceSpecialChars(Tools.Reverse(Tools.Reverse(Path.GetDirectoryName(file)).Substring(0,Tools.Reverse(Path.GetDirectoryName(file)).IndexOf("\\")))+"\\"+filename);
+		   if(putInFolder) filename = DreamTools.ReplaceSpecialChars(DreamTools.Reverse(DreamTools.Reverse(Path.GetDirectoryName(file)).Substring(0,DreamTools.Reverse(Path.GetDirectoryName(file)).IndexOf("\\")))+"\\"+filename);
 
 //           MessageBox.Show(filename);
 		   ZipEntry entry = new ZipEntry(filename);

@@ -136,7 +136,7 @@ namespace DreamBeam {
 			XmlDocument document = new XmlDocument();
 			try {
 				//"Songs\\"+filename+".xml"
-				//document.Load(Tools.DreamBeamPath() + @"\Songs\" + filename + ".xml");
+				//document.Load(DreamTools.DreamBeamPath() + @"\Songs\" + filename + ".xml");
 				document.Load(filename);
 			} catch (XmlException xmle) {
 				MessageBox.Show(xmle.Message);
@@ -283,12 +283,12 @@ namespace DreamBeam {
 				} else {
 					this.bg_image = null;
 					// Define Directory and ImageTypes
-					string strImageDir = Tools.GetDirectory(DirType.Backgrounds);
+					string strImageDir = DreamTools.GetDirectory(DirType.Backgrounds);
 					string[] folders = Directory.GetDirectories(@strImageDir);
 
 					string tmpfilename = Path.GetFileName(n.InnerText);
-					if (File.Exists(Tools.GetDirectory(DirType.Backgrounds, tmpfilename))) {
-						this.bg_image = Tools.GetDirectory(DirType.Backgrounds, tmpfilename);
+					if (File.Exists(DreamTools.GetDirectory(DirType.Backgrounds, tmpfilename))) {
+						this.bg_image = DreamTools.GetDirectory(DirType.Backgrounds, tmpfilename);
 					} else {
 						foreach (string folder in folders) {
 							if (File.Exists(Path.Combine(folder, tmpfilename))) {
@@ -393,7 +393,7 @@ namespace DreamBeam {
 		#region StropheTools
 
 		public int CountStrophes() {
-			return (Tools.Count(Text[1], strSeperator));
+			return (DreamTools.Count(Text[1], strSeperator));
 		}
 
 		public static int GetLongestLine(string Text) {
@@ -437,7 +437,7 @@ namespace DreamBeam {
 					}
 
 					//check if this is the longest strophe
-					int tmp = Tools.Count(temp.Substring(0, temp.IndexOf(strSeperator)), "\n");
+					int tmp = DreamTools.Count(temp.Substring(0, temp.IndexOf(strSeperator)), "\n");
 					if (tmp > intSLength) {
 						intSLength = tmp;
 						LongestStrophe = temp.Substring(0, temp.IndexOf(strSeperator));
@@ -462,7 +462,7 @@ namespace DreamBeam {
 					}
 
 					//check if this is the longest strophe
-					int tmp = Tools.Count(temp, "\n");
+					int tmp = DreamTools.Count(temp, "\n");
 					if (tmp > intSLength) {
 						intSLength = tmp;
 						LongestStrophe = temp;

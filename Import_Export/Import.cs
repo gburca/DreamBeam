@@ -1037,7 +1037,7 @@ namespace DreamBeam
 				path = Importer.tempDir;
 			}
 			if(sender == allSongsList){
-                path = Tools.GetDirectory(DirType.Songs);
+                path = DreamTools.GetDirectory(DirType.Songs);
 			}
 			if(Songs_Button.Checked){
 				if(((ListBox)sender).SelectedItems.Count >0){
@@ -1112,7 +1112,7 @@ namespace DreamBeam
 			///<summary>Reads all Songs in Directory, validates if it is a Song and put's them into the RightDocks_SongList Box </summary>
 			public void ListSongs() {
 				allSongsList.Items.Clear();
-                string strSongDir = Tools.GetDirectory(DirType.Songs);
+                string strSongDir = DreamTools.GetDirectory(DirType.Songs);
 				if(!System.IO.Directory.Exists(strSongDir)) {
 					System.IO.Directory.CreateDirectory(strSongDir);
 				}

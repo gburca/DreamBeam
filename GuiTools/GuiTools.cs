@@ -241,8 +241,8 @@ namespace DreamBeam {
 //				_MainForm.SongEdit_Preview_Panel.Size = _MainForm.SongShow_Preview_Panel.Size;
 //
 //				if(_MainForm.video != null) {
-//					_MainForm.video.Size = Tools.VideoProportions(_MainForm.Presentation_PreviewBox.Size,_MainForm.video.DefaultSize);
-//					_MainForm.Presentation_VideoPanel.Size = Tools.VideoProportions(_MainForm.Presentation_PreviewBox.Size,_MainForm.video.DefaultSize);
+//					_MainForm.video.Size = DreamTools.VideoProportions(_MainForm.Presentation_PreviewBox.Size,_MainForm.video.DefaultSize);
+//					_MainForm.Presentation_VideoPanel.Size = DreamTools.VideoProportions(_MainForm.Presentation_PreviewBox.Size,_MainForm.video.DefaultSize);
 //					_MainForm.Presentation_VideoPanel.Location = new Point((int)((_MainForm.Presentation_PreviewBox.Size.Width - _MainForm.Presentation_VideoPanel.Size.Width)/2)+10,(int)((_MainForm.Presentation_PreviewBox.Size.Height - _MainForm.Presentation_VideoPanel.Size.Height)/2)+10);
 //				}
 //
@@ -359,7 +359,7 @@ namespace DreamBeam {
 		/// <param name="tab"></param>
 		/// <returns></returns>
 		private string GetTabLayoutFile(MainTab tab) {
-			return Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".Tab_" + Enum.GetName(typeof(MainTab), tab) + ".xml");
+			return DreamTools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".Tab_" + Enum.GetName(typeof(MainTab), tab) + ".xml");
 		}
 		#endregion
 

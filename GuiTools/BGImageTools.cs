@@ -121,7 +121,7 @@ namespace DreamBeam {
 		/// <summary></summary>
 		public void ListDirectories() {
 
-			string strImageDir = Tools.GetDirectory(DirType.Backgrounds);
+			string strImageDir = DreamTools.GetDirectory(DirType.Backgrounds);
 
 			_MainForm.RightDocks_imageList.Images.Clear();
 			_MainForm.RightDocks_ImageListBox.Items.Clear();
@@ -139,7 +139,7 @@ namespace DreamBeam {
 		#region Listeners
 		///<summary>If BGImage chosen, update the current component </summary>
 		public void SelectedIndexChanged(object sender, System.EventArgs e) {
-			string path = Tools.GetDirectory(DirType.Backgrounds);
+			string path = DreamTools.GetDirectory(DirType.Backgrounds);
             string relativePath = "";
 			if (_MainForm.RightDocks_FolderDropdown.SelectedIndex > 0) {
 				path = Path.Combine(path, _MainForm.RightDocks_FolderDropdown.Items[_MainForm.RightDocks_FolderDropdown.SelectedIndex].ToString());
@@ -175,7 +175,7 @@ namespace DreamBeam {
 
 		#region internalTools
 		private string GetCurrentPath() {
-			string path = Tools.GetDirectory(DirType.Backgrounds);
+			string path = DreamTools.GetDirectory(DirType.Backgrounds);
 			if (_MainForm.RightDocks_FolderDropdown.SelectedIndex > 0) {
 				path = Path.Combine(path, _MainForm.RightDocks_FolderDropdown.Items[_MainForm.RightDocks_FolderDropdown.SelectedIndex].ToString());
 			}

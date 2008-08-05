@@ -677,8 +677,8 @@ namespace DreamBeam
 			public void ListSongs() {
 				InnerList.Items.Clear();
 
-                string strSongDir = Tools.GetDirectory(DirType.Songs);
-                    //Tools.DreamBeamPath()+"\\Songs";
+                string strSongDir = DreamTools.GetDirectory(DirType.Songs);
+                    //DreamTools.DreamBeamPath()+"\\Songs";
 				if(!System.IO.Directory.Exists(strSongDir)) {
 					System.IO.Directory.CreateDirectory(strSongDir);
 				}
@@ -695,7 +695,7 @@ namespace DreamBeam
 				///<summary>Reads all MediaLists in Directory, validates if it is a MediaList and put's them into the RightDocks_SongList Box </summary>
 				public void ListMediaLists(){
 					InnerList.Items.Clear();
-                    string strSongDir = Tools.GetDirectory(DirType.MediaLists);
+                    string strSongDir = DreamTools.GetDirectory(DirType.MediaLists);
 					if(!System.IO.Directory.Exists(strSongDir)){
 						System.IO.Directory.CreateDirectory(strSongDir);
 					}
@@ -720,7 +720,7 @@ namespace DreamBeam
 
 					// Define Directory and ImageTypes
 
-                    string strImageDir = Tools.GetDirectory(DirType.DataRoot) +"\\" + directory;
+                    string strImageDir = DreamTools.GetDirectory(DirType.DataRoot) +"\\" + directory;
 						if(!System.IO.Directory.Exists(strImageDir)){
 						System.IO.Directory.CreateDirectory(strImageDir);
 					}
@@ -728,7 +728,7 @@ namespace DreamBeam
 					InnerList.Items.Clear();
 
 					foreach (string folder in folders){
-						InnerList.Items.Add(Tools.Reverse(Tools.Reverse(folder).Substring(0,Tools.Reverse(folder).IndexOf(@"\"))));
+						InnerList.Items.Add(DreamTools.Reverse(DreamTools.Reverse(folder).Substring(0,DreamTools.Reverse(folder).IndexOf(@"\"))));
 					}
 			   }
 

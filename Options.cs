@@ -27,12 +27,12 @@ namespace DreamBeam {
 			InitializeComponent();
             InitializeBackgroundWorker();
 
-			this.DataDirectory.Text = Tools.GetAppDocPath();
+			this.DataDirectory.Text = DreamTools.GetAppDocPath();
 
 			PopulateBibleCacheTab();
 
-            string DataSetFile = Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml");
-			if (Tools.FileExists(DataSetFile)) {
+            string DataSetFile = DreamTools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml");
+			if (DreamTools.FileExists(DataSetFile)) {
 				this.Options_DataSet.ReadXml(DataSetFile, XmlReadMode.ReadSchema);
 			}
             if (Options_RegEx_Table.Rows.Count > 0) {
@@ -158,9 +158,9 @@ namespace DreamBeam {
 
 
 			config.Options_DataSet = this.Options_DataSet;
-			this.Options_DataSet.WriteXml(Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml"), XmlWriteMode.WriteSchema);
+			this.Options_DataSet.WriteXml(DreamTools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".dataset.config.xml"), XmlWriteMode.WriteSchema);
 
-			Config.SerializeTo(config, Tools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".config.xml"));
+			Config.SerializeTo(config, DreamTools.GetDirectory(DirType.Config, _MainForm.ConfigSet + ".config.xml"));
 			this.Close();
 		}
 
@@ -272,7 +272,7 @@ namespace DreamBeam {
             this.DefaultBibleFormatListBox.Items.Clear();
             this.DefaultSermonFormatListBox.Items.Clear();
             
-            DirectoryInfo di = new DirectoryInfo(Tools.GetDirectory(DirType.Themes));
+            DirectoryInfo di = new DirectoryInfo(DreamTools.GetDirectory(DirType.Themes));
             
             FileInfo[] rgFiles = di.GetFiles("*.SongTheme.xml");
             foreach (FileInfo fi in rgFiles)
@@ -666,7 +666,7 @@ namespace DreamBeam {
 
         private void openDataDirectoryButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer", Tools.GetDirectory(DirType.DataRoot));
+            System.Diagnostics.Process.Start("explorer", DreamTools.GetDirectory(DirType.DataRoot));
         }
 
 	}

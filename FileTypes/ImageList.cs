@@ -94,14 +94,14 @@ namespace DreamBeam {
 
 		///<summary>Saves the ImageList</summary>
 		public void Save() {
-			XmlTextWriter tw = new XmlTextWriter(Tools.GetDirectory(DirType.MediaLists, Name + ".xml"), null);
+			XmlTextWriter tw = new XmlTextWriter(DreamTools.GetDirectory(DirType.MediaLists, Name + ".xml"), null);
 			tw.Formatting = Formatting.Indented;
 			tw.WriteStartDocument();
 			tw.WriteStartElement("MediaList");
-			tw.WriteElementString("Version", Tools.GetAppVersion());
+			tw.WriteElementString("Version", DreamTools.GetAppVersion());
 			for (int i = 0; i < Count; i++) {
 				tw.WriteStartElement("MediaItem");
-				tw.WriteElementString("Path", Tools.GetRelativePath(DirType.DataRoot, this.iItem[i].Path));
+				tw.WriteElementString("Path", DreamTools.GetRelativePath(DirType.DataRoot, this.iItem[i].Path));
 				tw.WriteEndElement();
 			}
 			tw.WriteEndElement();
@@ -116,7 +116,7 @@ namespace DreamBeam {
 			Count = 0;
 			XmlDocument document = new XmlDocument();
 			try {
-				document.Load(Tools.GetDirectory(DirType.MediaLists, filename + ".xml"));
+				document.Load(DreamTools.GetDirectory(DirType.MediaLists, filename + ".xml"));
 			} catch (XmlException xmle) {
 				MessageBox.Show(xmle.Message);
 			}
@@ -127,7 +127,7 @@ namespace DreamBeam {
 			// Get the Path
 			list = document.GetElementsByTagName("Path");
 			foreach (XmlNode n in list) {
-				fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), n.InnerText);
+				fullPath = DreamTools.GetFullPathOrNull(DreamTools.GetDirectory(DirType.DataRoot), n.InnerText);
 				if (fullPath != null && File.Exists(fullPath)) {
 					this.iItem[Count].Path = fullPath;
 					this.iItem[Count].Name = Path.GetFileName(this.iItem[Count].Path);

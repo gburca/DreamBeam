@@ -203,17 +203,17 @@ namespace DreamBeam {
 		/// <param name="Height"></param>
 		public void RenderBGImage(string ConfigBGImagePath, Graphics graphics, int Width, int Height) {
 			if (this.HideBG == false) {
-				string fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), this.BGImagePath);
-				if (Tools.FileExists(fullPath)) {
+				string fullPath = DreamTools.GetFullPathOrNull(DreamTools.GetDirectory(DirType.DataRoot), this.BGImagePath);
+				if (DreamTools.FileExists(fullPath)) {
 					if (this.bgImage == null) {
 						try {
 							this.bgImage = Image.FromFile(fullPath);
 						} catch { }
 					}
-				} else if (Tools.FileExists(Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), ConfigBGImagePath))) {
+				} else if (DreamTools.FileExists(DreamTools.GetFullPathOrNull(DreamTools.GetDirectory(DirType.DataRoot), ConfigBGImagePath))) {
 					if (this.bgImage == null) {
 						try {
-							this.bgImage = Image.FromFile(Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), ConfigBGImagePath));
+							this.bgImage = Image.FromFile(DreamTools.GetFullPathOrNull(DreamTools.GetDirectory(DirType.DataRoot), ConfigBGImagePath));
 						} catch { }
 					}
 				}
@@ -253,8 +253,8 @@ namespace DreamBeam {
 			#region Render background image
 			// Draw background image
 			if (this.HideBG == false) {
-				string fullPath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.DataRoot), this.BGImagePath);
-				if (Tools.FileExists(fullPath)) {
+				string fullPath = DreamTools.GetFullPathOrNull(DreamTools.GetDirectory(DirType.DataRoot), this.BGImagePath);
+				if (DreamTools.FileExists(fullPath)) {
 					if (this.bgImage == null) {
 						try {
 							this.bgImage = Image.FromFile(fullPath);
@@ -440,7 +440,7 @@ namespace DreamBeam {
 						newContent = new TextToolContents(identity.Text, Display.config);
 						break;
 					case ContentType.Song:
-						string songFile = Tools.GetDirectory(DirType.Songs, identity.SongName);
+						string songFile = DreamTools.GetDirectory(DirType.Songs, identity.SongName);
 						newContent = (Song)Song.DeserializeFrom(songFile, identity.SongStrophe, Display.config);
 						break;
 				}

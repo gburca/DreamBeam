@@ -186,7 +186,7 @@ namespace DreamBeam {
 		[XmlIgnore]
 		public string FullName {
 			get {
-				if (!Tools.StringIsNullOrEmptyTrim(this.Number)) {
+				if (!DreamTools.StringIsNullOrEmptyTrim(this.Number)) {
 					return this.Number + ". " + this.Title;
 				} else {
 					return this.Title;
@@ -306,7 +306,7 @@ namespace DreamBeam {
 			this.SongLyrics = new ArrayList();
 			this.Sequence = new ArrayList();
 			this.CurrentLyric = 0;
-			this.Version = Tools.GetAppVersion();            
+			this.Version = DreamTools.GetAppVersion();            
             wrapper = new WordWrapAtSpace();
         }
 
@@ -747,7 +747,7 @@ namespace DreamBeam {
 							font = new Font(format[type].TextFont.FontFamily, fontSz, format[type].TextFont.Style);
 							pth.AddString(text[type], font.FontFamily, (int)font.Style, font.Size, new Point(0, 0), sf);
 
-							pth.Transform(Tools.FitContents(bounds, pth.GetBounds(), sf));
+							pth.Transform(DreamTools.FitContents(bounds, pth.GetBounds(), sf));
 						}
 
 						brush = new SolidBrush(format[type].TextColor);
@@ -888,13 +888,13 @@ namespace DreamBeam {
 
 			// When files are de-serialized, they retain the version they were
 			// originally serialized under. We need to update it here.
-			instance.Version = Tools.GetAppVersion();
+			instance.Version = DreamTools.GetAppVersion();
 
             if (instance.UseDesign)
             {
                 Console.WriteLine("Saving Design..");
-                instance.Theme.SaveFile(Tools.GetDirectory(DirType.SongDesigns) + "\\" + Path.GetFileNameWithoutExtension(file) + ".SongTheme.xml");
-                instance.ThemePath = Tools.GetFullPathOrNull(Tools.GetDirectory(DirType.SongDesigns), Path.GetFileNameWithoutExtension(file) + ".SongTheme.xml");
+                instance.Theme.SaveFile(DreamTools.GetDirectory(DirType.SongDesigns) + "\\" + Path.GetFileNameWithoutExtension(file) + ".SongTheme.xml");
+                instance.ThemePath = DreamTools.GetFullPathOrNull(DreamTools.GetDirectory(DirType.SongDesigns), Path.GetFileNameWithoutExtension(file) + ".SongTheme.xml");
 
             }
 
@@ -998,10 +998,10 @@ namespace DreamBeam {
 					 * BGImagePath has now been generalized to ThemePath.
 					 */
 					if (newSong) {
-						Tools.RenameXmlNode(root, root.NamespaceURI, "DreamSong");
+						DreamTools.RenameXmlNode(root, root.NamespaceURI, "DreamSong");
 						XmlNode bgImageNode = xmlDoc.SelectSingleNode(@"/DreamSong/BGImagePath");
 						if (bgImageNode != null) {
-							Tools.RenameXmlNode(bgImageNode, root.NamespaceURI, "ThemePath");
+							DreamTools.RenameXmlNode(bgImageNode, root.NamespaceURI, "ThemePath");
 						}
 						s = (Song)Song.DeserializeFrom(typeof(Song), new StringReader(xmlDoc.OuterXml));
 

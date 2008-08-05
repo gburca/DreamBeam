@@ -154,13 +154,13 @@ namespace DreamBeam {
 			// Opens a console if the "-console" argumet is given, so that
 			// Console.Write or WriteLine output can be seen. VisualStudio takes
 			// over the console output, so this only works when not used from VS.
-			if (CommandLine["console"] != null) { Tools.AllocConsole(); }
+			if (CommandLine["console"] != null) { DreamTools.AllocConsole(); }
 
-			bibleLibFile = Path.Combine(Tools.GetAppCachePath(), "BibleLib.bin");
+			bibleLibFile = Path.Combine(DreamTools.GetAppCachePath(), "BibleLib.bin");
 
 			// Make sure we do the same thing when the Options dialog is "cancelled"
 			this.Config = (Config)Config.DeserializeFrom(new Config(),
-				Tools.GetDirectory(DirType.Config, ConfigSet + ".config.xml"));
+				DreamTools.GetDirectory(DirType.Config, ConfigSet + ".config.xml"));
 
 			//logFile = new LogFile(ConfigSet);
 			//if (CommandLine["log"] != null) {
@@ -220,7 +220,7 @@ namespace DreamBeam {
 
 			// Restore the SermonTool documents
 			SermonToolDocuments sermon = (SermonToolDocuments)SermonToolDocuments.DeserializeFrom(typeof(SermonToolDocuments),
-				Tools.GetDirectory(DirType.Sermon, ConfigSet + ".SermonDocs.xml"));
+				DreamTools.GetDirectory(DirType.Sermon, ConfigSet + ".SermonDocs.xml"));
 			if (sermon != null) {
 				foreach (string doc in sermon.Documents) {
 					DocumentManager.Document d = Sermon_NewDocument();
@@ -241,10 +241,10 @@ namespace DreamBeam {
 			this.Presentation_PreviewBox.BackColor = Color.Black;
 
             
-            this.songThemeWidget.LoadFile(new SongTheme().GetType(), Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SongThemePath));
-            this.sermonThemeWidget.LoadFile(new SermonTheme().GetType(), Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SermonThemePath));
+            this.songThemeWidget.LoadFile(new SongTheme().GetType(), Path.Combine(DreamTools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SongThemePath));
+            this.sermonThemeWidget.LoadFile(new SermonTheme().GetType(), Path.Combine(DreamTools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SermonThemePath));
             this.sermonThemeWidget.UseDesign = true;
-            this.bibleThemeWidget.LoadFile(new BibleTheme().GetType(), Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.BibleThemePath));
+            this.bibleThemeWidget.LoadFile(new BibleTheme().GetType(), Path.Combine(DreamTools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.BibleThemePath));
             this.bibleThemeWidget.UseDesign = true;
 
             ImageWindow = new ImageWindow(this);
@@ -271,9 +271,10 @@ namespace DreamBeam {
 		[STAThread]
 		static void Main(string[] args) {
 			try {
-				Application.Run(new MainForm(args));
+                Application.EnableVisualStyles();
+                Application.Run(new MainForm(args));
 			} catch (Exception e) {
-				string logFile = Tools.GetDirectory(DirType.Logs, "LogFile.txt");
+				string logFile = DreamTools.GetDirectory(DirType.Logs, "LogFile.txt");
 
 				using (StreamWriter SW = File.AppendText(logFile)) {
 					SW.WriteLine(e.Message);
@@ -579,7 +580,7 @@ namespace DreamBeam {
 
 			// We first load the relevant information from each song into the SongListTable of the GlobalDataSet
 			try {
-				songFiles = Directory.GetFiles(Tools.GetDirectory(DirType.Songs), "*.xml");
+				songFiles = Directory.GetFiles(DreamTools.GetDirectory(DirType.Songs), "*.xml");
 			} catch { return; }
 			foreach (string songFile in songFiles) {
 				Song song = Song.DeserializeFrom(songFile, 0, this.Config) as Song;
@@ -600,7 +601,7 @@ namespace DreamBeam {
 					// Create FoldedTitle by folding (removing) diacritics
 					// and removing anything that's not an ASCII letter (or
 					// space) from the Title
-					r["FoldedTitle"] = Regex.Replace(Tools.RemoveDiacritics(r["Title"] as string), @"[^a-zA-Z ]", "");
+					r["FoldedTitle"] = Regex.Replace(DreamTools.RemoveDiacritics(r["Title"] as string), @"[^a-zA-Z ]", "");
 
 					// Create FoldedText by folding (removing) diacritics
 					// and anything that's not an ASCII letter (or space)
@@ -611,9 +612,9 @@ namespace DreamBeam {
 						// the first word on the second line will be combined into a single word
 						lyrics.Append(Regex.Replace(l.Lyrics, @"[\n\r]+", " ") + " ");
 					}
-					r["FoldedText"] = Regex.Replace(Tools.RemoveDiacritics(lyrics.ToString()), @"[^a-zA-Z ]", "");
+					r["FoldedText"] = Regex.Replace(DreamTools.RemoveDiacritics(lyrics.ToString()), @"[^a-zA-Z ]", "");
 
-					if (!Tools.StringIsNullOrEmptyTrim(song.Collection)) {
+					if (!DreamTools.StringIsNullOrEmptyTrim(song.Collection)) {
 						r["Collection"] = song.Collection;
 					} else {
 						r["Collection"] = "Unspecified Collection";
@@ -623,7 +624,7 @@ namespace DreamBeam {
 
 					// DataView does not support custom sorting, so we convert numbers such as
 					// "57a" into "0057 57a" so that we can sort strings numerically.
-					if (!Tools.StringIsNullOrEmptyTrim(song.Number)) {
+					if (!DreamTools.StringIsNullOrEmptyTrim(song.Number)) {
 						r["NumberSort"] = string.Format("{0:0000} {1}",
 							Convert.ToInt32(Regex.Replace(song.Number, @"[^\d]+", "")),
 							song.Number);
@@ -706,7 +707,7 @@ namespace DreamBeam {
 			this.GuiTools.RightDock.BGImageTools.ListDirectories();
 
 			//				this.ListImages(@"Backgrounds\");
-			this.GuiTools.RightDock.BGImageTools.ListImages(Tools.GetDirectory(DirType.Backgrounds));
+			this.GuiTools.RightDock.BGImageTools.ListImages(DreamTools.GetDirectory(DirType.Backgrounds));
 			Splash.SetStatus("Reading Songs");
 			this.ListSongs();
 			Splash.SetStatus("Reading MediaLists");
@@ -741,7 +742,7 @@ namespace DreamBeam {
 					sermons.Documents.Add(d.Control.Text);
 				}
 			}
-			SermonToolDocuments.SerializeTo(sermons, Tools.GetDirectory(DirType.Sermon, ConfigSet + ".SermonDocs.xml"));
+			SermonToolDocuments.SerializeTo(sermons, DreamTools.GetDirectory(DirType.Sermon, ConfigSet + ".SermonDocs.xml"));
 
 			if (bibles.IsDirty) {
 				bibles.SerializeNow(this.bibleLibFile);
@@ -752,7 +753,7 @@ namespace DreamBeam {
 			}
 
 			// This is only needed if we make changes to the conf programatically.
-			Config.SerializeTo(this.Config, Tools.GetDirectory(DirType.Config, ConfigSet + ".config.xml"));
+			Config.SerializeTo(this.Config, DreamTools.GetDirectory(DirType.Config, ConfigSet + ".config.xml"));
 		}
 
 
@@ -821,15 +822,15 @@ namespace DreamBeam {
 			InputBoxResult result = InputBox.Show(Lang.say("Message.MediaListName"), Lang.say("Message.RenameMediaListTitle", MediaList.Name), "", null);
 			if (result.OK) {
 				if (result.Text.Length > 0) {
-					if (!File.Exists(Tools.GetDirectory(DirType.MediaLists, result.Text + ".xml"))
-						&& File.Exists(Tools.GetDirectory(DirType.MediaLists, MediaList.Name + ".xml"))) {
+					if (!File.Exists(DreamTools.GetDirectory(DirType.MediaLists, result.Text + ".xml"))
+						&& File.Exists(DreamTools.GetDirectory(DirType.MediaLists, MediaList.Name + ".xml"))) {
 						try {
-							File.Move(Tools.GetDirectory(DirType.MediaLists, MediaList.Name + ".xml"),
-								Tools.GetDirectory(DirType.MediaLists, result.Text + ".xml"));
+							File.Move(DreamTools.GetDirectory(DirType.MediaLists, MediaList.Name + ".xml"),
+								DreamTools.GetDirectory(DirType.MediaLists, result.Text + ".xml"));
 							MediaList.Name = result.Text;
 							this.ListMediaLists();
 
-							string MediaFolder = Tools.GetDirectory(DirType.MediaFiles);
+							string MediaFolder = DreamTools.GetDirectory(DirType.MediaFiles);
 							//rename MediaFolder if existing
 							if (File.Exists(MediaFolder + MediaList.Name)) {
 								try {
@@ -977,15 +978,15 @@ namespace DreamBeam {
 
 		#region Help
 		private void HelpIntro_Activate(object sender, System.EventArgs e) {
-			string helpFile = Tools.CombinePaths(Application.StartupPath, "Help", "DreamBeam.html");
-			if (Tools.FileExists(helpFile)) {
+			string helpFile = DreamTools.CombinePaths(Application.StartupPath, "Help", "DreamBeam.html");
+			if (DreamTools.FileExists(helpFile)) {
 				System.Diagnostics.Process.Start(helpFile);
 			}
 		}
 
 		private void AboutButton_Activate(object sender, System.EventArgs e) {
 			About about = new About();
-			about.version = Tools.GetAppVersion();
+			about.version = DreamTools.GetAppVersion();
 			about.ShowDialog();
 		}
 
@@ -1056,10 +1057,10 @@ namespace DreamBeam {
             s.Theme = this.songThemeWidget.Theme;
             Console.WriteLine("----- Starting to save song");                                    
 
-			if (Tools.FileExists(s.FileName)) {
+			if (DreamTools.FileExists(s.FileName)) {
 				Song.SerializeTo(s, s.FileName);
 				this.ListSongs();
-				this.StatusPanel.Text = Lang.say("Status.SongSavedAs", Tools.GetRelativePath(DirType.DataRoot, s.FileName));
+				this.StatusPanel.Text = Lang.say("Status.SongSavedAs", DreamTools.GetRelativePath(DirType.DataRoot, s.FileName));
 			} else {
 				SaveSongAs();
 			}
@@ -1069,14 +1070,14 @@ namespace DreamBeam {
 			this.SaveFileDialog.DefaultExt = "xml";
 			this.SaveFileDialog.Filter = @"DreamBeam songs (*.xml)|*.xml|All (*.*)|*.*";
 			this.SaveFileDialog.FilterIndex = 1;
-			this.SaveFileDialog.InitialDirectory = Tools.GetDirectory(DirType.Songs);
+			this.SaveFileDialog.InitialDirectory = DreamTools.GetDirectory(DirType.Songs);
 			this.SaveFileDialog.Title = "Save Song As";
 
 			Song s = this.songEditor.Song;
 
-			if (!Tools.StringIsNullOrEmptyTrim(s.FileName)) {
+			if (!DreamTools.StringIsNullOrEmptyTrim(s.FileName)) {
 				this.SaveFileDialog.FileName = s.FileName;
-			} else if (!Tools.StringIsNullOrEmptyTrim(s.Title)) {
+			} else if (!DreamTools.StringIsNullOrEmptyTrim(s.Title)) {
 				this.SaveFileDialog.FileName = s.Title + ".xml";
 			} else {
 				this.SaveFileDialog.FileName = "New Song.xml";
@@ -1086,7 +1087,7 @@ namespace DreamBeam {
 				s.FileName = this.SaveFileDialog.FileName;
 				try {
 					Song.SerializeTo(s, s.FileName);
-					this.StatusPanel.Text = Lang.say("Status.SongSavedAs", Tools.GetRelativePath(DirType.DataRoot, s.FileName));
+					this.StatusPanel.Text = Lang.say("Status.SongSavedAs", DreamTools.GetRelativePath(DirType.DataRoot, s.FileName));
 				} catch (Exception ex) {
 					MessageBox.Show(Lang.say("Message.SongNotSaved") + "\nReason: " + ex.Message);
 				}
@@ -1185,7 +1186,7 @@ namespace DreamBeam {
 			DisplayPreview.SetContent(song);
 			this.LoadSongShow(DisplayPreview.content as Song);
 			this.SongShow_HideElement_UpdateButtons();
-			this.StatusPanel.Text = Lang.say("Status.SongLoaded", Tools.GetRelativePath(DirType.Songs, FileName));
+			this.StatusPanel.Text = Lang.say("Status.SongLoaded", DreamTools.GetRelativePath(DirType.Songs, FileName));
 			GC.Collect();
 			song.PreRenderFrames();
             this.LoadingSong = false;
@@ -1194,7 +1195,7 @@ namespace DreamBeam {
 		///<summary> Delete Song in List </summary>
 		private void btnRightDocks_SongListDelete_Click(object sender, System.EventArgs e) {
 			string FileName = GetSelectedSongFileName();
-			if (!Tools.FileExists(FileName)) return;
+			if (!DreamTools.FileExists(FileName)) return;
 
 			DialogResult answer = MessageBox.Show(
 				Lang.say("Message.WantDeleteSong", FileName),
@@ -1388,7 +1389,7 @@ namespace DreamBeam {
 				// the song).
 
 				//string FileName = GetSelectedSongFileName();
-				if (Tools.FileExists(FileName)) {
+				if (DreamTools.FileExists(FileName)) {
 					Song song = Song.DeserializeFrom(FileName, this.SongShow_StropheList_ListEx.SelectedIndex, this.Config) as Song;
 					DisplayPreview.SetContent(song);
 					this.SongShow_HideElement_UpdateButtons();
@@ -1725,7 +1726,7 @@ namespace DreamBeam {
 			Rectangle r = new Rectangle();
 			ContainerSize.Width -= Padding * 2;
 			ContainerSize.Height -= Padding * 2;
-			r.Size = Tools.VideoProportions(ContainerSize, ContentSize);
+			r.Size = DreamTools.VideoProportions(ContainerSize, ContentSize);
 			r.X = (ContainerSize.Width - r.Size.Width) / 2 + Padding;
 			r.Y = (ContainerSize.Height - r.Size.Height) / 2 + Padding;
 			return r;
@@ -1810,7 +1811,7 @@ namespace DreamBeam {
 		///<summary>Reads all MediaLists in Directory, validates if it is a MediaList and put's them into the RightDocks_SongList Box </summary>
 		public void ListMediaLists() {
 			this.RightDocks_MediaLists.Items.Clear();
-			string strMediaListsDir = Tools.GetDirectory(DirType.MediaLists);
+			string strMediaListsDir = DreamTools.GetDirectory(DirType.MediaLists);
 
 			string[] dirs2 = Directory.GetFiles(strMediaListsDir, "*.xml");
 			foreach (string dir2 in dirs2) {
@@ -1822,7 +1823,7 @@ namespace DreamBeam {
 
 		/// <summary>Loads Default MediaList on Startup</summary>
 		void LoadDefaultMediaList() {
-			if (File.Exists(Tools.GetDirectory(DirType.MediaLists, "Default.xml"))) {
+			if (File.Exists(DreamTools.GetDirectory(DirType.MediaLists, "Default.xml"))) {
 				GuiTools.RightDock.MediaListTools.LoadSelectedMediaList("Default");
 			}
 		}
@@ -1848,10 +1849,10 @@ namespace DreamBeam {
 		private void RightDocks_MediaLists_DeleteButton_Click(object sender, System.EventArgs e) {
 			if (this.RightDocks_MediaLists.SelectedIndex >= 0) {
 				string fileName = RightDocks_MediaLists.SelectedItem.ToString() + ".xml";
-				fileName = Tools.GetDirectory(DirType.MediaLists, fileName);
+				fileName = DreamTools.GetDirectory(DirType.MediaLists, fileName);
 
 				if (File.Exists(fileName)) {
-					DialogResult answer = MessageBox.Show("Delete " + Tools.GetRelativePath(DirType.MediaLists, fileName) + " ?",
+					DialogResult answer = MessageBox.Show("Delete " + DreamTools.GetRelativePath(DirType.MediaLists, fileName) + " ?",
 						"Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 					if (answer == DialogResult.Yes) {
 						File.Delete(fileName);
@@ -2015,13 +2016,13 @@ namespace DreamBeam {
                 string r = vk.getShortText();
 
                 if (!String.IsNullOrEmpty(v)) {
-                    sb.Append(Tools.Sword_ConvertEncoding(v).Trim());
+                    sb.Append(DreamTools.Sword_ConvertEncoding(v).Trim());
                 }
 
                 //if (this.Sermon_ShowBibleTranslation && !String.IsNullOrEmpty(r)) {
                 if (!String.IsNullOrEmpty(r)) {
                     sb.Append("\n");
-                    sb.Append("(" + Tools.Sword_ConvertEncoding(r) + " - " + version + ")");
+                    sb.Append("(" + DreamTools.Sword_ConvertEncoding(r) + " - " + version + ")");
                 }
 
                 sb.Append("\n");
@@ -2159,12 +2160,12 @@ namespace DreamBeam {
 		#region ContextMenu Things
 
 		private void ImageContextItemManage_Click(object sender, System.EventArgs e) {
-			System.Diagnostics.Process.Start("explorer", Tools.GetDirectory(DirType.Backgrounds));
+			System.Diagnostics.Process.Start("explorer", DreamTools.GetDirectory(DirType.Backgrounds));
 		}
 
 		private void ImageContextItemReload_Click(object sender, System.EventArgs e) {
 			GuiTools.RightDock.BGImageTools.ListDirectories();
-			GuiTools.RightDock.BGImageTools.ListImages(Tools.GetDirectory(DirType.Backgrounds));
+			GuiTools.RightDock.BGImageTools.ListImages(DreamTools.GetDirectory(DirType.Backgrounds));
 		}
 
 		#endregion
@@ -2497,9 +2498,9 @@ namespace DreamBeam {
 				foreach (string fileName in this.OpenFileDialog.FileNames) {
 					Console.WriteLine("Importing from: " + fileName);
 					this.StatusPanel.Text = "Importing from: " + fileName;
-					if (Tools.FileExists(fileName)) {
+					if (DreamTools.FileExists(fileName)) {
 						Song song = new Song(fileName);
-						if (Tools.FileExists(song.FileName)) {
+						if (DreamTools.FileExists(song.FileName)) {
 							MessageBoxEx msgBox = MessageBoxExManager.GetMessageBox("SongImportOverwrite");
 							if (msgBox == null) {
 								msgBox = MessageBoxExManager.CreateMessageBox("SongImportOverwrite");
@@ -2595,7 +2596,7 @@ namespace DreamBeam {
                             if (this.songThemeWidget.ThemePath == "" && !this.songThemeWidget.UseDesign)
                             {
                                 this.songThemeWidget.ThemePath = Config.DefaultThemes.SongThemePath;
-                                string themefile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SongThemePath);
+                                string themefile = Path.Combine(DreamTools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SongThemePath);
 
                                 if (File.Exists(themefile)) this.songThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(SongTheme), themefile);
                             }
@@ -2614,7 +2615,7 @@ namespace DreamBeam {
                         if (this.sermonThemeWidget.ThemePath == "" && !this.sermonThemeWidget.UseDesign)
                         {
                             this.sermonThemeWidget.ThemePath = Config.DefaultThemes.SermonThemePath;
-                            string themefile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SermonThemePath);
+                            string themefile = Path.Combine(DreamTools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.SermonThemePath);
                             if (File.Exists(themefile)) this.sermonThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(SermonTheme), themefile);
                         }
                         content.Theme = this.sermonThemeWidget.Theme;
@@ -2629,7 +2630,7 @@ namespace DreamBeam {
                         if (this.bibleThemeWidget.ThemePath == "" && !this.bibleThemeWidget.UseDesign)
                         {
                             this.bibleThemeWidget.ThemePath = Config.DefaultThemes.BibleThemePath;
-                            string themefile = Path.Combine(Tools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.BibleThemePath);
+                            string themefile = Path.Combine(DreamTools.GetDirectory(DirType.DataRoot), Config.DefaultThemes.BibleThemePath);
                             if (File.Exists(themefile)) this.bibleThemeWidget.Theme = (Theme)Theme.DeserializeFrom(typeof(BibleTheme), themefile);
                         }
                         content.Theme = this.bibleThemeWidget.Theme;
@@ -2648,7 +2649,8 @@ namespace DreamBeam {
 
         private void menuButtonItem1_Activate(object sender, EventArgs e)
         {
-         
+            TestForm f1 = new TestForm();
+            f1.ShowDialog();
             
           
         }
