@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImageWindow));
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.grouper2 = new CodeVendor.Controls.Grouper();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -40,18 +41,17 @@
             this.Bounds3 = new System.Windows.Forms.NumericUpDown();
             this.Bounds2 = new System.Windows.Forms.NumericUpDown();
             this.Bounds1 = new System.Windows.Forms.NumericUpDown();
+            this.grouper1 = new CodeVendor.Controls.Grouper();
+            this.imagePanel = new DreamBeam.ImagePanel();
             this.Cancel_Button = new RibbonStyle.RibbonMenuButton();
             this.OK_button = new RibbonStyle.RibbonMenuButton();
-            this.grouper1 = new CodeVendor.Controls.Grouper();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.imagePanel = new DreamBeam.ImagePanel();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.grouper2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bounds4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bounds3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bounds2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bounds1)).BeginInit();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -75,6 +75,15 @@
             this.button1.TabIndex = 29;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.imagePanel);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(516, 485);
+            this.panel2.TabIndex = 3;
             // 
             // grouper2
             // 
@@ -207,6 +216,44 @@
             0});
             this.Bounds1.ValueChanged += new System.EventHandler(this.Bounds_ValueChanged);
             // 
+            // grouper1
+            // 
+            this.grouper1.BackgroundColor = System.Drawing.Color.BlanchedAlmond;
+            this.grouper1.BackgroundGradientColor = System.Drawing.Color.White;
+            this.grouper1.BackgroundGradientMode = CodeVendor.Controls.Grouper.GroupBoxGradientMode.BackwardDiagonal;
+            this.grouper1.BorderColor = System.Drawing.Color.Black;
+            this.grouper1.BorderThickness = 1F;
+            this.grouper1.CustomGroupBoxColor = System.Drawing.Color.White;
+            this.grouper1.GroupImage = null;
+            this.grouper1.GroupTitle = "Select Text";
+            this.grouper1.Location = new System.Drawing.Point(4, 81);
+            this.grouper1.Name = "grouper1";
+            this.grouper1.Padding = new System.Windows.Forms.Padding(20);
+            this.grouper1.PaintGroupBox = false;
+            this.grouper1.RoundCorners = 3;
+            this.grouper1.ShadowColor = System.Drawing.Color.DarkGray;
+            this.grouper1.ShadowControl = false;
+            this.grouper1.ShadowThickness = 3;
+            this.grouper1.Size = new System.Drawing.Size(118, 135);
+            this.grouper1.TabIndex = 2;
+            this.grouper1.TinyMode = true;
+            this.grouper1.TitleBorder = true;
+            // 
+            // imagePanel
+            // 
+            this.imagePanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.imagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imagePanel.ImagePack = null;
+            this.imagePanel.Location = new System.Drawing.Point(0, 0);
+            this.imagePanel.Name = "imagePanel";
+            this.imagePanel.RectPosition = ((System.Drawing.RectangleF)(resources.GetObject("imagePanel.RectPosition")));
+            this.imagePanel.ShowRect = false;
+            this.imagePanel.Size = new System.Drawing.Size(516, 485);
+            this.imagePanel.TabIndex = 0;
+            this.imagePanel.Click += new System.EventHandler(this.imagePanel_Click);
+            this.imagePanel.RectangleChangedEvent += new DreamBeam.RectangleChangeHandler(this.imagePanel_RectangleChangedEvent);
+            this.imagePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.imagePanel_MouseClick);
+            // 
             // Cancel_Button
             // 
             this.Cancel_Button.Arrow = RibbonStyle.RibbonMenuButton.e_arrow.None;
@@ -281,53 +328,6 @@
             this.OK_button.UseVisualStyleBackColor = true;
             this.OK_button.Click += new System.EventHandler(this.OK_button_Click);
             // 
-            // grouper1
-            // 
-            this.grouper1.BackgroundColor = System.Drawing.Color.BlanchedAlmond;
-            this.grouper1.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouper1.BackgroundGradientMode = CodeVendor.Controls.Grouper.GroupBoxGradientMode.BackwardDiagonal;
-            this.grouper1.BorderColor = System.Drawing.Color.Black;
-            this.grouper1.BorderThickness = 1F;
-            this.grouper1.CustomGroupBoxColor = System.Drawing.Color.White;
-            this.grouper1.GroupImage = null;
-            this.grouper1.GroupTitle = "Select Text";
-            this.grouper1.Location = new System.Drawing.Point(4, 81);
-            this.grouper1.Name = "grouper1";
-            this.grouper1.Padding = new System.Windows.Forms.Padding(20);
-            this.grouper1.PaintGroupBox = false;
-            this.grouper1.RoundCorners = 3;
-            this.grouper1.ShadowColor = System.Drawing.Color.DarkGray;
-            this.grouper1.ShadowControl = false;
-            this.grouper1.ShadowThickness = 3;
-            this.grouper1.Size = new System.Drawing.Size(118, 135);
-            this.grouper1.TabIndex = 2;
-            this.grouper1.TinyMode = true;
-            this.grouper1.TitleBorder = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.imagePanel);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(516, 485);
-            this.panel2.TabIndex = 3;
-            // 
-            // imagePanel
-            // 
-            this.imagePanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.imagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imagePanel.ImagePack = null;
-            this.imagePanel.Location = new System.Drawing.Point(0, 0);
-            this.imagePanel.Name = "imagePanel";
-            this.imagePanel.RectPosition = ((System.Drawing.RectangleF)(resources.GetObject("imagePanel.RectPosition")));
-            this.imagePanel.ShowRect = false;
-            this.imagePanel.Size = new System.Drawing.Size(516, 485);
-            this.imagePanel.TabIndex = 0;
-            this.imagePanel.Click += new System.EventHandler(this.imagePanel_Click);
-            this.imagePanel.RectangleChangedEvent += new DreamBeam.RectangleChangeHandler(this.imagePanel_RectangleChangedEvent);
-            this.imagePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.imagePanel_MouseClick);
-            // 
             // ImageWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -345,12 +345,12 @@
             this.Shown += new System.EventHandler(this.ImageWindow_Shown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ImageWindow_KeyPress);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.grouper2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Bounds4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bounds3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bounds2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bounds1)).EndInit();
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

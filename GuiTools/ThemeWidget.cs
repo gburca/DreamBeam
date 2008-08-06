@@ -15,6 +15,7 @@ namespace DreamBeam {
         private bool _usedesign;
         private bool _settextposition = false;
         private string _ThemePath = "";
+      
         public string BGImagePath
         {
             get { return this.BGImagePathLabel.Text; }

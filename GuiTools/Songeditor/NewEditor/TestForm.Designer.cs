@@ -33,7 +33,7 @@
             // 
             // coloredTextBoxPanel1
             // 
-            this.coloredTextBoxPanel1.Location = new System.Drawing.Point(40, 12);
+            this.coloredTextBoxPanel1.Location = new System.Drawing.Point(12, 12);
             this.coloredTextBoxPanel1.Name = "coloredTextBoxPanel1";
             this.coloredTextBoxPanel1.Size = new System.Drawing.Size(621, 464);
             this.coloredTextBoxPanel1.TabIndex = 0;
@@ -53,6 +53,7 @@
         #endregion
 
         private ColoredTextBoxPanel coloredTextBoxPanel1;
+
 
 
     }
