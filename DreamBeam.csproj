@@ -372,6 +372,9 @@
     <Compile Include="GuiTools\Songeditor\NewEditor\RTFSongEditor.Designer.cs">
       <DependentUpon>RTFSongEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\ScrollablePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GuiTools\Songeditor\NewEditor\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
