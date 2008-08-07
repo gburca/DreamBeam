@@ -344,7 +344,16 @@
     <Compile Include="GuiTools\SlideDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GuiTools\SlidePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GuiTools\Songeditor\ISongEditor.cs" />
+    <Compile Include="GuiTools\Songeditor\NewEditor\AdditionalInformationDialog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\AdditionalInformationDialog.Designer.cs">
+      <DependentUpon>AdditionalInformationDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="GuiTools\Songeditor\NewEditor\ColoredTextBoxPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -357,23 +366,23 @@
     <Compile Include="GuiTools\Songeditor\NewEditor\Form1.designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\ModernSongEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\ModernSongEditor.Designer.cs">
+      <DependentUpon>ModernSongEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="GuiTools\Songeditor\NewEditor\RicherTextBox2.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="GuiTools\Songeditor\NewEditor\RTFEditorPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GuiTools\Songeditor\NewEditor\RTFEditorPanel.Designer.cs">
-      <DependentUpon>RTFEditorPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GuiTools\Songeditor\NewEditor\RTFSongEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GuiTools\Songeditor\NewEditor\RTFSongEditor.Designer.cs">
-      <DependentUpon>RTFSongEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="GuiTools\Songeditor\NewEditor\ScrollablePanel.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\SequenceDialog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\SequenceDialog.Designer.cs">
+      <DependentUpon>SequenceDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="GuiTools\Songeditor\NewEditor\TestForm.cs">
       <SubType>Form</SubType>
@@ -473,16 +482,20 @@
       <DependentUpon>ImageWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\SlidePanel.resx">
+      <DependentUpon>SlidePanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\AdditionalInformationDialog.resx">
+      <DependentUpon>AdditionalInformationDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\ColoredTextBoxPanel.resx">
       <DependentUpon>ColoredTextBoxPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\RTFEditorPanel.resx">
-      <DependentUpon>RTFEditorPanel.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\RTFSongEditor.resx">
-      <DependentUpon>RTFSongEditor.cs</DependentUpon>
+    <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\ModernSongEditor.resx">
+      <DependentUpon>ModernSongEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\TestForm.resx">

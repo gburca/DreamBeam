@@ -1,27 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 
 using System.Text;
 using System.Windows.Forms;
 
 namespace DreamBeam
 {
-    public partial class TestForm : Form
+    public partial class AdditionalInformationDialog : SlidePanel
     {
-        public TestForm()
+        public AdditionalInformationDialog(Control poOwner, float pfStep) : base(poOwner,pfStep)
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-            
-            //d.SlideAsDialog();
-            
         }
     }
 }

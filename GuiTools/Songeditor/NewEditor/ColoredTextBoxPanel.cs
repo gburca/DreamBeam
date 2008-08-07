@@ -347,7 +347,9 @@ namespace DreamBeam
             //this.rtePanel.Location = new Point(0, 0);            
 
             this.rtePanel.Width = Scrollpanel.Width-50;
-            
+
+            minLineNumber = Scrollpanel.Height / textHeight;
+            rte.Font = new Font("Microsoft Sans Serif", 9);
             if (rte.Lines.Length > minLineNumber)
             {
                 

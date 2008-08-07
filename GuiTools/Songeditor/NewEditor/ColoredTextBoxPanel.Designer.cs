@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColoredTextBoxPanel));
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.asdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chorusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,7 +123,7 @@
             this.rte.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
             this.rte.Size = new System.Drawing.Size(564, 399);
             this.rte.TabIndex = 3;
-            this.rte.Text = resources.GetString("rte.Text");
+            this.rte.Text = "";
             this.rte.KeyUp += new System.Windows.Forms.KeyEventHandler(this.rte_KeyUp);
             this.rte.TextChanged += new System.EventHandler(this.rte_TextChanged);
             // 
