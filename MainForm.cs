@@ -143,6 +143,12 @@ namespace DreamBeam {
 
 		#endregion
 
+        private ISongEditor ActiveSongEditor()
+        {
+            if (Config.useModernSongEditor) return (ISongEditor)modernSongEditor;
+            return (ISongEditor)songEditor;
+        }
+
 		#region MAIN
 
 		///<summary> Initialise DreamBeam </summary>
@@ -230,7 +236,24 @@ namespace DreamBeam {
 				try {
 					Sermon_DocManager.FocusedDocument = Sermon_DocManager.TabStrips[0].Documents[0];
 				} catch { }
-			}
+                if (Config.useModernSongEditor)
+                {
+                    modernSongEditor = new ModernSongEditor();
+                    songEditor.Dispose();
+
+                    
+                    EditSongs_Tab.Controls.Add(this.modernSongEditor);
+                    modernSongEditor.Collections = new string[0];
+                    modernSongEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+                    modernSongEditor.Location = new System.Drawing.Point(0, 0);
+                    modernSongEditor.Name = "songEditor";
+                    modernSongEditor.Size = new System.Drawing.Size(383, 492);
+                    modernSongEditor.TabIndex = 0;
+                    
+                    
+                }
+            
+            }
 
 			// Change the Multimedia panels to black. They're using color for ease of design.            
             //this.songEditor.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);                       
@@ -655,7 +678,8 @@ namespace DreamBeam {
 			int i = 0;
 			foreach (string collection in this.SongCollections.Keys) collections[i++] = collection.ToString();
 			Array.Sort(collections);
-			this.songEditor.Collections = collections;
+			//this.songEditor.Collections = collections;
+            ActiveSongEditor().Collections = collections;
 		}
 
 		/// <summary>Loads the song into the ListEx control</summary>
@@ -775,7 +799,8 @@ namespace DreamBeam {
 		///<summary> new Song from Menu</summary>
 		private void ToolBars_MenuBar_Song_New_Activate(object sender, System.EventArgs e) {
 			
-            this.songEditor.Song = new Song(this.Config);
+            //this.songEditor.Song = new Song(this.Config);
+            ActiveSongEditor().Song = new Song(this.Config);
 		}
 
 		/// <summary>Saves the Selected Song</summary>
@@ -1052,7 +1077,8 @@ namespace DreamBeam {
 		}
 
 		void SaveSong() {
-			Song s = this.songEditor.Song;
+			//Song s = this.songEditor.Song;
+            Song s = ActiveSongEditor().Song;
             s.UseDesign = this.songThemeWidget.UseDesign;
             s.Theme = this.songThemeWidget.Theme;
             Console.WriteLine("----- Starting to save song");                                    
@@ -1073,7 +1099,8 @@ namespace DreamBeam {
 			this.SaveFileDialog.InitialDirectory = DreamTools.GetDirectory(DirType.Songs);
 			this.SaveFileDialog.Title = "Save Song As";
 
-			Song s = this.songEditor.Song;
+			//Song s = this.songEditor.Song;
+            Song s = ActiveSongEditor().Song;
 
 			if (!DreamTools.StringIsNullOrEmptyTrim(s.FileName)) {
 				this.SaveFileDialog.FileName = s.FileName;
@@ -1178,7 +1205,8 @@ namespace DreamBeam {
 			if (FileName == null) return;
             this.LoadingSong = true;
 			Song song = (Song)Song.DeserializeFrom(FileName, 0, this.Config);                       
-            this.songEditor.Song = song;
+            //this.songEditor.Song = song;
+            ActiveSongEditor().Song = song;
             this.songThemeWidget.UseDesign = song.UseDesign;
             if (song.ThemePath == null) {this.songThemeWidget.ThemePath="";}
             else{this.songThemeWidget.ThemePath = song.ThemePath;}
@@ -1381,7 +1409,8 @@ namespace DreamBeam {
 				// DisplayPreview.content will not be a Song and the
 				// typecasting above will give us a null, so we need to re-load
 				// the song.
-				string FileName = this.songEditor.Song.FileName;
+				//string FileName = this.songEditor.Song.FileName;
+                string FileName = ActiveSongEditor().Song.FileName;
 
 				// We can't use GetSelectedSongFileName because the song could
 				// have been loaded from the PlayList, or could no longer be
@@ -2589,7 +2618,8 @@ namespace DreamBeam {
                 {
                         
                     case ContentType.Song:
-                        this.songEditor.Song.UseDesign = this.songThemeWidget.UseDesign;                                                 
+                        //this.songEditor.Song.UseDesign = this.songThemeWidget.UseDesign;
+                        ActiveSongEditor().Song.UseDesign = this.songThemeWidget.UseDesign;
                         Song s = content as Song;                        
                         if (s != null) //&& String.IsNullOrEmpty(s.ThemePath)
                         {

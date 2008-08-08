@@ -15,10 +15,12 @@ namespace DreamBeam
     {
         private string[] oldLines = {"1"};
         private int oldLineCount = 0;
-        private string seperator = "\n\n\n";
+        public string separator = "\n\n";
+        public SongVerseSeparator verseSeparator = SongVerseSeparator.OneBlankLine;
         private int buttonClicked = 0;
         private bool renew = false;
         private int textHeight = 15;
+        private bool Updating = false;
         public int minLineNumber = 20;
         ArrayList Typelist = new ArrayList();
 
@@ -41,13 +43,13 @@ namespace DreamBeam
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
-        public enum SongListItem
+      /*  public enum SongListItem
         {
             Verse,
             Chorus,
             Other,
             Undefined
-        }
+        }*/
 
         public ColoredTextBoxPanel()
         {
@@ -55,28 +57,60 @@ namespace DreamBeam
 
 
             renew = true;
-            oldLines = DreamTools.SplitString(rte.Text, seperator);
+            oldLines = DreamTools.SplitString(rte.Text, separator);
             for (int i = 0; i < oldLines.Length; i++)
             {
-                Typelist.Add(SongListItem.Verse);
+                Typelist.Add(LyricsType.Verse);
             }
             this.Update();
         }
 
+
+        public void setText(Song song)
+        {
+            if (verseSeparator == SongVerseSeparator.OneBlankLine) separator = "\n\n";
+            if (verseSeparator == SongVerseSeparator.TwoBlankLines) separator = "\n\n\n";
+            Typelist = new ArrayList();
+            song.SongLyrics.Sort();
+            StringBuilder s = new StringBuilder();
+            int i = 0;
+            foreach (LyricsItem item in song.SongLyrics)
+            {
+                if (s.Length > 0) s.Append(separator);                
+               s.Append(item.Lyrics);
+               Typelist.Add(item.Type);
+                
+               Console.WriteLine("");
+               Console.WriteLine("Typelist: " + Typelist.Count);
+               Console.WriteLine(item.Type.ToString() + " = " + item.Lyrics);
+               Console.WriteLine("Typelist says: " + Typelist[i].ToString());
+               Console.WriteLine("");
+               i++;
+            }
+
+            Updating = true;
+            rte.Clear();            
+            rte.Text = song.SanitizeLyrics(s.ToString());
+            oldLines = DreamTools.SplitString(rte.Text, separator);
+            rte.Font = new Font("Microsoft Sans Serif", 9);
+            Updating = false;
+            renew = true;
+            Update();
+        }
+
         private void WhatChanged()
         {
-            string[] newLines = DreamTools.SplitString(rte.Text, seperator);
+            string[] newLines = DreamTools.SplitString(rte.Text, separator);
 
             if (newLines.Length != oldLines.Length)
-            {
-                ArrayList Changes = new ArrayList();
+            {                
                 ArrayList NewTypelist = new ArrayList();
 
                 for (int i = 0; i < newLines.Length; i++)
                 {
-                    NewTypelist.Add(SongListItem.Undefined);
+                    NewTypelist.Add(LyricsType.Undefined);
                 }
-
+                Console.WriteLine(NewTypelist[0].ToString());
                 int j = 0;
                 foreach (string line in newLines)
                 {
@@ -95,13 +129,13 @@ namespace DreamBeam
                 for (int i = 0; i < NewTypelist.Count; i++)
                 {
 
-                    if ((SongListItem)NewTypelist[i] == SongListItem.Undefined)
+                    if ((LyricsType)NewTypelist[i] == LyricsType.Undefined)
                     {
 
                         // Maybe the Line was split, so the next line is undefined too
                         if (i + 1 < NewTypelist.Count)
                         {
-                            if ((SongListItem)NewTypelist[i + 1] == SongListItem.Undefined)
+                            if ((LyricsType)NewTypelist[i + 1] == LyricsType.Undefined)
                             {
                                 if (i < Typelist.Count)
                                 {
@@ -113,7 +147,7 @@ namespace DreamBeam
 
 
                         // if its still not undefined...
-                        if ((SongListItem)NewTypelist[i] == SongListItem.Undefined)
+                        if ((LyricsType)NewTypelist[i] == LyricsType.Undefined)
                         {
                             //is it a new verse at the first line?
                             if (i == 0)
@@ -127,16 +161,16 @@ namespace DreamBeam
                         }
 
                         // Last Option, if nothing worked
-                        if ((SongListItem)NewTypelist[i] == SongListItem.Undefined)
+                        if ((LyricsType)NewTypelist[i] == LyricsType.Undefined)
                         {
-                            NewTypelist[i] = SongListItem.Verse;
+                            NewTypelist[i] = LyricsType.Verse;
                         }
                     }
                 }                
                 Typelist = NewTypelist;
                 renew = true;
             }
-            oldLines = DreamTools.SplitString(rte.Text, seperator);
+            oldLines = DreamTools.SplitString(rte.Text, separator);
         }
 
 
@@ -146,7 +180,7 @@ namespace DreamBeam
             WhatChanged();            
             int i = 0;
             int totalrows = 0;
-          
+           // renew = true;
 
             if (renew)
             {
@@ -167,7 +201,7 @@ namespace DreamBeam
                     p.BackgroundGradientMode = CodeVendor.Controls.Grouper.GroupBoxGradientMode.ForwardDiagonal;
                     //p.BackgroundColor = GetColor((SongListItem)Typelist[i]);
                     //p.BackgroundGradientColor = Color.LightBlue;
-                    setColor(p, (SongListItem)Typelist[i]);
+                    setColor(p, (LyricsType)Typelist[i]);
 
                     p.GroupTitle = "";
                     p.BorderColor = Color.White;
@@ -241,7 +275,7 @@ namespace DreamBeam
                             string[] mystringarr = oldLines[i].Split("\n".ToCharArray());
                             int rows = mystringarr.Length;
                             c.Hide();
-                            setColor((CodeVendor.Controls.Grouper)c, (SongListItem)Typelist[i]);
+                            setColor((CodeVendor.Controls.Grouper)c, (LyricsType)Typelist[i]);
                             c.Location = new Point(-1, (totalrows * textHeight) - 11);
                             c.Height = (rows * textHeight) + 14;
                             totalrows = rows + 2 + totalrows;
@@ -271,19 +305,19 @@ namespace DreamBeam
         }
 
 
-        private void setColor(CodeVendor.Controls.Grouper p, SongListItem item)
+        private void setColor(CodeVendor.Controls.Grouper p, LyricsType item)
         {
             switch (item)
             {
-                case SongListItem.Verse:
+                case LyricsType.Verse:
                     p.BackgroundColor = Color.AliceBlue;
                     p.BackgroundGradientColor = Color.LightBlue;                    
                     break;
-                case SongListItem.Chorus:
+                case LyricsType.Chorus:
                     p.BackgroundColor = Color.LightGoldenrodYellow; //Color.LightYellow;
                     p.BackgroundGradientColor = Color.Moccasin;
                     break;
-                case SongListItem.Other:
+                case LyricsType.Other:
                     p.BackgroundColor = Color.MintCream;
                     p.BackgroundGradientColor = Color.LightGreen;
                     break;
@@ -291,16 +325,17 @@ namespace DreamBeam
 
         }
 
-        private Color GetColor(SongListItem item){
+        private Color GetColor(LyricsType item)
+        {
             switch (item)
             {
-                case SongListItem.Verse:
+                case LyricsType.Verse:
                     return Color.AliceBlue;
                     break;
-                case SongListItem.Chorus:
+                case LyricsType.Chorus:
                     return Color.Wheat;
                     break;
-                case SongListItem.Other:
+                case LyricsType.Other:
                     return Color.NavajoWhite;
                     break;
             }
@@ -368,19 +403,19 @@ namespace DreamBeam
 
         private void asdfToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Typelist[buttonClicked] = SongListItem.Verse;            
+            Typelist[buttonClicked] = LyricsType.Verse;            
             Update();
         }
 
         private void chorusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Typelist[buttonClicked] = SongListItem.Chorus;            
+            Typelist[buttonClicked] = LyricsType.Chorus;            
             Update();
         }
 
         private void otherToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Typelist[buttonClicked] = SongListItem.Other;
+            Typelist[buttonClicked] = LyricsType.Other;
             Update();
 
            
@@ -388,9 +423,13 @@ namespace DreamBeam
 
         private void rte_TextChanged(object sender, EventArgs e)
         {
-            if(rte.Lines.Length != oldLineCount) Resizer();
-            oldLineCount = rte.Lines.Length;
-            Update();
+            if (!Updating)
+            {
+                if (rte.Lines.Length != oldLineCount) Resizer();
+                oldLineCount = rte.Lines.Length;
+                Update();
+            }
+
         }
         private void CheckScroller()
         {

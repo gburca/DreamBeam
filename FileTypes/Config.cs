@@ -52,6 +52,7 @@ namespace DreamBeam {
 		public bool ShowBibleTranslation = false;
 		public string PlayListString = "";
 		public bool RememberPanelLocations = false;
+        public bool useModernSongEditor = true;
 
 		[XmlIgnore]
 		public ArrayList PlayList = new ArrayList();

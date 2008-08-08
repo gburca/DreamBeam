@@ -15,5 +15,20 @@ namespace DreamBeam
         {
             InitializeComponent();
         }
+
+
+        private void ListEx_Available_PressIcon(int Index)
+        {
+            this.ListEx_Sequence.Add((string)this.ListEx_Available.Items[Index], 1);
+            //this.sequence.Add(this.sequenceAvailable[Index]);
+        }
+
+        private void ListEx_Sequence_PressIcon(int Index)
+        {
+            this.ListEx_Sequence.Remove(Index);
+           // this.sequence.RemoveAt(Index);
+        }
+
+		
     }
 }

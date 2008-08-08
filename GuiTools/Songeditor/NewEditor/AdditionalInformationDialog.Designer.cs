@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.Collection = new System.Windows.Forms.ComboBox();
             this.MinorKey = new System.Windows.Forms.CheckBox();
             this.KeyRangeHigh = new System.Windows.Forms.ComboBox();
             this.KeyRangeLow = new System.Windows.Forms.ComboBox();
@@ -40,12 +42,14 @@
             this.Notes = new System.Windows.Forms.TextBox();
             this.Number = new System.Windows.Forms.TextBox();
             this.Author = new System.Windows.Forms.TextBox();
-            this.Collection = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.OldLace;
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.MinorKey);
             this.panel1.Controls.Add(this.KeyRangeHigh);
             this.panel1.Controls.Add(this.KeyRangeLow);
@@ -57,12 +61,30 @@
             this.panel1.Controls.Add(this.Notes);
             this.panel1.Controls.Add(this.Number);
             this.panel1.Controls.Add(this.Author);
-            this.panel1.Controls.Add(this.Collection);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(348, 348);
             this.panel1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.Collection);
+            this.panel2.Location = new System.Drawing.Point(87, 33);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(247, 23);
+            this.panel2.TabIndex = 54;
+            // 
+            // Collection
+            // 
+            this.Collection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Collection.Location = new System.Drawing.Point(0, 0);
+            this.Collection.Name = "Collection";
+            this.Collection.Size = new System.Drawing.Size(245, 21);
+            this.Collection.TabIndex = 43;
             // 
             // MinorKey
             // 
@@ -205,17 +227,8 @@
             this.Author.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Author.Location = new System.Drawing.Point(87, 7);
             this.Author.Name = "Author";
-            this.Author.Size = new System.Drawing.Size(243, 20);
+            this.Author.Size = new System.Drawing.Size(247, 20);
             this.Author.TabIndex = 42;
-            // 
-            // Collection
-            // 
-            this.Collection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.Collection.Location = new System.Drawing.Point(87, 33);
-            this.Collection.Name = "Collection";
-            this.Collection.Size = new System.Drawing.Size(243, 21);
-            this.Collection.TabIndex = 43;
             // 
             // AdditionalInformationDialog
             // 
@@ -225,6 +238,7 @@
             this.Size = new System.Drawing.Size(348, 348);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -232,17 +246,18 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.CheckBox MinorKey;
-        private System.Windows.Forms.ComboBox KeyRangeHigh;
-        private System.Windows.Forms.ComboBox KeyRangeLow;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox Notes;
-        private System.Windows.Forms.TextBox Number;
-        private System.Windows.Forms.TextBox Author;
-        private System.Windows.Forms.ComboBox Collection;
+        private System.Windows.Forms.Panel panel2;
+        public System.Windows.Forms.TextBox Number;
+        public System.Windows.Forms.TextBox Author;
+        public System.Windows.Forms.ComboBox Collection;
+        public System.Windows.Forms.CheckBox MinorKey;
+        public System.Windows.Forms.ComboBox KeyRangeHigh;
+        public System.Windows.Forms.ComboBox KeyRangeLow;
+        public System.Windows.Forms.TextBox Notes;
     }
 }

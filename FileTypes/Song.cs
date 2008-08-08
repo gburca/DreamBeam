@@ -55,7 +55,8 @@ namespace DreamBeam {
 	public enum LyricsType {
 		Verse,
 		Chorus,
-		Other
+		Other,
+        Undefined
 	}
 
 	/// <summary>
@@ -542,6 +543,39 @@ namespace DreamBeam {
 
 			return SanitizeLyrics(s.ToString());
 		}
+
+
+        /// <summary>
+        /// Returns a string containing all the verses (or choruses, or other),
+        /// the way a user would have typed them in.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public int GetVerseCount(LyricsType type, SongVerseSeparator sep)
+        {
+            int i = 0;
+
+            string separator;
+            switch (sep)
+            {
+                case SongVerseSeparator.TwoBlankLines:
+                    separator = "\n\n\n";
+                    break;
+                case SongVerseSeparator.OneBlankLine:
+                default:
+                    separator = "\n\n";
+                    break;
+            }
+
+            this.SongLyrics.Sort();
+            foreach (LyricsItem item in this.SongLyrics)
+            {
+                if (item.Type == type) i++;
+            }
+
+            return i;
+        }
+
 
 		/// <summary>
 		/// Returns the words of a single verse/chorus.

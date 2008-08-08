@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.Toppanel = new System.Windows.Forms.Panel();
-            this.Title = new System.Windows.Forms.TextBox();
-            this.EditorPanel = new System.Windows.Forms.Panel();
-            this.coloredTextBoxPanel1 = new DreamBeam.ColoredTextBoxPanel();
             this.SequenceButton = new RibbonStyle.RibbonMenuButton();
             this.AdditionalInformationButton = new RibbonStyle.RibbonMenuButton();
+            this.Title = new System.Windows.Forms.TextBox();
             this.Design_checkBox = new RibbonStyle.RibbonMenuButton();
+            this.EditorPanel = new System.Windows.Forms.Panel();
+            this.coloredTextBoxPanel1 = new DreamBeam.ColoredTextBoxPanel();
             this.Toppanel.SuspendLayout();
             this.EditorPanel.SuspendLayout();
             this.SuspendLayout();
@@ -52,33 +52,6 @@
             this.Toppanel.Size = new System.Drawing.Size(348, 29);
             this.Toppanel.TabIndex = 0;
             // 
-            // Title
-            // 
-            this.Title.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.Title.Location = new System.Drawing.Point(34, 4);
-            this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(173, 20);
-            this.Title.TabIndex = 12;
-            // 
-            // EditorPanel
-            // 
-            this.EditorPanel.Controls.Add(this.coloredTextBoxPanel1);
-            this.EditorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EditorPanel.Location = new System.Drawing.Point(0, 29);
-            this.EditorPanel.Name = "EditorPanel";
-            this.EditorPanel.Size = new System.Drawing.Size(348, 369);
-            this.EditorPanel.TabIndex = 1;
-            // 
-            // coloredTextBoxPanel1
-            // 
-            this.coloredTextBoxPanel1.BackColor = System.Drawing.SystemColors.Control;
-            this.coloredTextBoxPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.coloredTextBoxPanel1.Location = new System.Drawing.Point(0, 0);
-            this.coloredTextBoxPanel1.Name = "coloredTextBoxPanel1";
-            this.coloredTextBoxPanel1.Size = new System.Drawing.Size(348, 369);
-            this.coloredTextBoxPanel1.TabIndex = 0;
-            // 
             // SequenceButton
             // 
             this.SequenceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -87,10 +60,10 @@
             this.SequenceButton.Checked = false;
             this.SequenceButton.ColorBase = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(209)))), ((int)(((byte)(140)))));
             this.SequenceButton.ColorBaseStroke = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(76)))), ((int)(((byte)(62)))), ((int)(((byte)(42)))));
-            this.SequenceButton.ColorOn = System.Drawing.Color.Khaki;
-            this.SequenceButton.ColorOnStroke = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(76)))), ((int)(((byte)(73)))), ((int)(((byte)(44)))));
-            this.SequenceButton.ColorPress = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(209)))), ((int)(((byte)(140)))));
-            this.SequenceButton.ColorPressStroke = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(75)))), ((int)(((byte)(76)))), ((int)(((byte)(59)))));
+            this.SequenceButton.ColorOn = System.Drawing.Color.LemonChiffon;
+            this.SequenceButton.ColorOnStroke = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(76)))), ((int)(((byte)(74)))), ((int)(((byte)(61)))));
+            this.SequenceButton.ColorPress = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(177)))), ((int)(((byte)(86)))));
+            this.SequenceButton.ColorPressStroke = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(76)))), ((int)(((byte)(54)))), ((int)(((byte)(26)))));
             this.SequenceButton.FadingSpeed = 35;
             this.SequenceButton.FlatAppearance.BorderSize = 0;
             this.SequenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -100,7 +73,7 @@
             this.SequenceButton.ImageOffset = 2;
             this.SequenceButton.IsPressed = false;
             this.SequenceButton.KeepPress = true;
-            this.SequenceButton.Location = new System.Drawing.Point(279, 0);
+            this.SequenceButton.Location = new System.Drawing.Point(278, 0);
             this.SequenceButton.MaxImageSize = new System.Drawing.Point(24, 24);
             this.SequenceButton.MenuPos = new System.Drawing.Point(0, 0);
             this.SequenceButton.Name = "SequenceButton";
@@ -125,8 +98,8 @@
             this.AdditionalInformationButton.Checked = false;
             this.AdditionalInformationButton.ColorBase = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(209)))), ((int)(((byte)(140)))));
             this.AdditionalInformationButton.ColorBaseStroke = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(76)))), ((int)(((byte)(62)))), ((int)(((byte)(42)))));
-            this.AdditionalInformationButton.ColorOn = System.Drawing.Color.Khaki;
-            this.AdditionalInformationButton.ColorOnStroke = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(76)))), ((int)(((byte)(73)))), ((int)(((byte)(44)))));
+            this.AdditionalInformationButton.ColorOn = System.Drawing.Color.LemonChiffon;
+            this.AdditionalInformationButton.ColorOnStroke = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(76)))), ((int)(((byte)(74)))), ((int)(((byte)(61)))));
             this.AdditionalInformationButton.ColorPress = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(209)))), ((int)(((byte)(140)))));
             this.AdditionalInformationButton.ColorPressStroke = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(75)))), ((int)(((byte)(76)))), ((int)(((byte)(59)))));
             this.AdditionalInformationButton.FadingSpeed = 35;
@@ -146,7 +119,7 @@
             this.AdditionalInformationButton.Radius = 6;
             this.AdditionalInformationButton.ShowBase = RibbonStyle.RibbonMenuButton.e_showbase.Yes;
             this.AdditionalInformationButton.SinglePressButton = true;
-            this.AdditionalInformationButton.Size = new System.Drawing.Size(70, 29);
+            this.AdditionalInformationButton.Size = new System.Drawing.Size(69, 29);
             this.AdditionalInformationButton.SplitButton = RibbonStyle.RibbonMenuButton.e_splitbutton.No;
             this.AdditionalInformationButton.SplitDistance = 0;
             this.AdditionalInformationButton.TabIndex = 31;
@@ -154,6 +127,15 @@
             this.AdditionalInformationButton.Title = "";
             this.AdditionalInformationButton.UseVisualStyleBackColor = true;
             this.AdditionalInformationButton.Click += new System.EventHandler(this.ribbonMenuButton2_Click);
+            // 
+            // Title
+            // 
+            this.Title.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.Title.Location = new System.Drawing.Point(34, 5);
+            this.Title.Name = "Title";
+            this.Title.Size = new System.Drawing.Size(173, 20);
+            this.Title.TabIndex = 12;
             // 
             // Design_checkBox
             // 
@@ -194,6 +176,24 @@
             this.Design_checkBox.Title = "";
             this.Design_checkBox.UseVisualStyleBackColor = true;
             // 
+            // EditorPanel
+            // 
+            this.EditorPanel.Controls.Add(this.coloredTextBoxPanel1);
+            this.EditorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EditorPanel.Location = new System.Drawing.Point(0, 29);
+            this.EditorPanel.Name = "EditorPanel";
+            this.EditorPanel.Size = new System.Drawing.Size(348, 369);
+            this.EditorPanel.TabIndex = 1;
+            // 
+            // coloredTextBoxPanel1
+            // 
+            this.coloredTextBoxPanel1.BackColor = System.Drawing.SystemColors.Control;
+            this.coloredTextBoxPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.coloredTextBoxPanel1.Location = new System.Drawing.Point(0, 0);
+            this.coloredTextBoxPanel1.Name = "coloredTextBoxPanel1";
+            this.coloredTextBoxPanel1.Size = new System.Drawing.Size(348, 369);
+            this.coloredTextBoxPanel1.TabIndex = 0;
+            // 
             // ModernSongEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,10 +214,10 @@
 
         private System.Windows.Forms.Panel Toppanel;
         private System.Windows.Forms.Panel EditorPanel;
-        private ColoredTextBoxPanel coloredTextBoxPanel1;
         private System.Windows.Forms.TextBox Title;
         public RibbonStyle.RibbonMenuButton Design_checkBox;
         public RibbonStyle.RibbonMenuButton AdditionalInformationButton;
         public RibbonStyle.RibbonMenuButton SequenceButton;
+        private ColoredTextBoxPanel coloredTextBoxPanel1;
     }
 }

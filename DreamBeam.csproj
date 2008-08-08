@@ -498,6 +498,10 @@
       <DependentUpon>ModernSongEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\SequenceDialog.resx">
+      <DependentUpon>SequenceDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="GuiTools\Songeditor\NewEditor\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
       <SubType>Designer</SubType>

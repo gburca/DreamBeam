@@ -275,6 +275,7 @@ namespace DreamBeam {
 		private System.Windows.Forms.TrackBar AudioBar;
 		public System.Windows.Forms.TabPage EditSongs_Tab;
 		public DreamBeam.SongEditor songEditor;
+        public DreamBeam.ModernSongEditor modernSongEditor;
 		public System.Windows.Forms.TabPage BibleText_Tab;
 		public System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.OpenFileDialog OpenFileDialog;
@@ -514,7 +515,7 @@ namespace DreamBeam {
             this.muteButton = new System.Windows.Forms.Button();
             this.AudioBar = new System.Windows.Forms.TrackBar();
             this.EditSongs_Tab = new System.Windows.Forms.TabPage();
-            this.songEditor = new DreamBeam.SongEditor();
+            this.songEditor = new DreamBeam.SongEditor();            
             this.BibleText_Tab = new System.Windows.Forms.TabPage();
             this.bibleTextControl = new DreamBeam.BibleText();
             this.tabControl1 = new System.Windows.Forms.TabControl();
