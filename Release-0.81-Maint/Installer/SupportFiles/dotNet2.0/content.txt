@@ -1,5 +1,0 @@
-contains the .Net 2.0 download
-
-Download http://www.microsoft.com/downloads/details.aspx?familyid=0856eacb-4362-4b0d-8edd-aab15c5e04f5&displaylang=en
-
-Place the downloaded dotnetfx.exe file in this directory so that the full install can include it
