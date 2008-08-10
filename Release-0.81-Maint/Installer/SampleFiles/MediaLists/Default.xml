@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<MediaList>
+  <Version>0.80</Version>
+  <MediaItem>
+    <Path>MediaFiles\Default\lead me.jpg</Path>
+  </MediaItem>
+  <MediaItem>
+    <Path>MediaFiles\Default\sexy prayer.jpg</Path>
+  </MediaItem>
+  <MediaItem>
+    <Path>MediaFiles\Default\triDoor.swf</Path>
+  </MediaItem>
+</MediaList>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<MediaList>
+  <Version>0.80</Version>
+  <MediaItem>
+    <Path>MediaFiles\sample_MediaTests\Sauna_mpg4.avi</Path>
+  </MediaItem>
+  <MediaItem>
+    <Path>MediaFiles\sample_MediaTests\water154.swf</Path>
+  </MediaItem>
+</MediaList>
