@@ -15,7 +15,7 @@ namespace DreamBeam
     {
         private string[] oldLines = {"1"};
         private int oldLineCount = 0;
-        public string separator = "\n\n";
+        public string separator = "\n\n\n";
         public SongVerseSeparator verseSeparator = SongVerseSeparator.OneBlankLine;
         private int buttonClicked = 0;
         private bool renew = false;
@@ -43,18 +43,14 @@ namespace DreamBeam
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
-      /*  public enum SongListItem
-        {
-            Verse,
-            Chorus,
-            Other,
-            Undefined
-        }*/
+    
 
         public ColoredTextBoxPanel()
         {
             InitializeComponent();
+            //verseSeparator = f.Config.SongVerseSeparator;
 
+            this.rte.MouseWheel += new MouseEventHandler(this.MouseWheelHandler);
 
             renew = true;
             oldLines = DreamTools.SplitString(rte.Text, separator);
@@ -69,34 +65,67 @@ namespace DreamBeam
         public void setText(Song song)
         {
             if (verseSeparator == SongVerseSeparator.OneBlankLine) separator = "\n\n";
-            if (verseSeparator == SongVerseSeparator.TwoBlankLines) separator = "\n\n\n";
-            Typelist = new ArrayList();
+            if (verseSeparator == SongVerseSeparator.TwoBlankLines) separator = "\n\n\n";          
+                        
+            Typelist = new ArrayList();            
             song.SongLyrics.Sort();
             StringBuilder s = new StringBuilder();
             int i = 0;
+
             foreach (LyricsItem item in song.SongLyrics)
             {
-                if (s.Length > 0) s.Append(separator);                
-               s.Append(item.Lyrics);
-               Typelist.Add(item.Type);
+                if (item.Lyrics.Length > 0)
+                {
+                    if(s.Length >0) s.Append(separator);
+
+                    s.Append(item.Lyrics);
+                    Typelist.Add(item.Type);
+                    i++;
+                }               
+            }
+            if (Typelist.Count == 0)
+            {
+               Typelist.Add(LyricsType.Verse);
+            }
+                Updating = true;
+
+                rte.Text = song.SanitizeLyrics(s.ToString());
+                oldLines = DreamTools.SplitString(rte.Text, separator);
+                rte.Font = new Font("Microsoft Sans Serif", 9);
+                Updating = false;
+                renew = true;
+                Update();                                   
+                Resizer();
+        }
+
+
+        public void GetText(Song song)
+        {
+            string[] newLines = DreamTools.SplitString(rte.Text, separator);
+            int verseCount = 1;
+            int chorusCount = 1;
+            int otherCount = 1;
+            int j = 0;
+            song.ClearLyrics();
+            foreach (string line in newLines)
+            {
+                switch ((LyricsType)Typelist[j])
+                {
+                    case LyricsType.Verse:
+                        verseCount = song.AddLyrics(LyricsType.Verse, line, verseCount, verseSeparator);
+                        break;
+                    case LyricsType.Chorus:
+                        chorusCount = song.AddLyrics(LyricsType.Chorus, line, chorusCount, verseSeparator);
+                        break;
+                    case LyricsType.Other:
+                        otherCount = song.AddLyrics(LyricsType.Other, line, otherCount, verseSeparator);
+                        break;
+                }
                 
-               Console.WriteLine("");
-               Console.WriteLine("Typelist: " + Typelist.Count);
-               Console.WriteLine(item.Type.ToString() + " = " + item.Lyrics);
-               Console.WriteLine("Typelist says: " + Typelist[i].ToString());
-               Console.WriteLine("");
-               i++;
             }
 
-            Updating = true;
-            rte.Clear();            
-            rte.Text = song.SanitizeLyrics(s.ToString());
-            oldLines = DreamTools.SplitString(rte.Text, separator);
-            rte.Font = new Font("Microsoft Sans Serif", 9);
-            Updating = false;
-            renew = true;
-            Update();
         }
+
 
         private void WhatChanged()
         {
@@ -109,8 +138,7 @@ namespace DreamBeam
                 for (int i = 0; i < newLines.Length; i++)
                 {
                     NewTypelist.Add(LyricsType.Undefined);
-                }
-                Console.WriteLine(NewTypelist[0].ToString());
+                }                
                 int j = 0;
                 foreach (string line in newLines)
                 {
@@ -170,126 +198,144 @@ namespace DreamBeam
                 Typelist = NewTypelist;
                 renew = true;
             }
-            oldLines = DreamTools.SplitString(rte.Text, separator);
+            oldLines = DreamTools.SplitString(rte.Text, separator);            
         }
 
 
         private void Update()
         {
-           //Resizer();
-            WhatChanged();            
+            
+            WhatChanged();
+            
+            
             int i = 0;
             int totalrows = 0;
            // renew = true;
 
-            if (renew)
+            int blankrows = 1;            
+            if (verseSeparator == SongVerseSeparator.TwoBlankLines) blankrows = 2;
+            try
             {
-                #region renew
-                RemoveBackground();
-                foreach (string line in oldLines)
+                if (renew)
                 {
-
-                    string[] mystringarr = line.Split("\n".ToCharArray());
-                    int rows = mystringarr.Length;
-
-                    // Background Panel
-                    CodeVendor.Controls.Grouper p = new CodeVendor.Controls.Grouper();
-                    p.Height = (rows * textHeight) + 14;
-                    p.Width = rtePanel.Width + 1;
-
-                    p.Location = new Point(-1, (totalrows * textHeight) - 11);                    
-                    p.BackgroundGradientMode = CodeVendor.Controls.Grouper.GroupBoxGradientMode.ForwardDiagonal;
-                    //p.BackgroundColor = GetColor((SongListItem)Typelist[i]);
-                    //p.BackgroundGradientColor = Color.LightBlue;
-                    setColor(p, (LyricsType)Typelist[i]);
-
-                    p.GroupTitle = "";
-                    p.BorderColor = Color.White;
-                    p.RoundCorners = 0;
-                    p.Hide();
-                    rtePanel.Controls.Add(p);
-                    p.Name = i.ToString();
-                    p.SendToBack();
-                    p.Show();
-
-                    //Button
-
-                    RibbonStyle.RibbonMenuButton b = new RibbonStyle.RibbonMenuButton();
-                    b.SetBounds(0, (totalrows * textHeight), 30, (rows * textHeight) + 4);
-                    b.Text = "";
-                    //b.Click += new System.EventHandler(this.TextButton_Click);
-                    b.MouseDown += new MouseEventHandler(b_MouseDown);
-                    b.ColorBase = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
-                    b.ColorBaseStroke = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(187)))), ((int)(((byte)(213)))));
-                    b.ColorOn = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
-                    b.ColorOnStroke = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-                    b.ColorPress = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
-                    b.ColorPressStroke = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-                    b.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-                    b.ImageLocation = RibbonStyle.RibbonMenuButton.e_imagelocation.Left;
-                    b.ImageOffset = 2;
-                    b.KeepPress = false;
-                    b.SinglePressButton = false;
-                    b.FadingSpeed = 35;
-                    b.Name = i.ToString();
-                    b.ContextMenuStrip = this.contextMenuStrip;
-                    b.Arrow = RibbonStyle.RibbonMenuButton.e_arrow.ToDown;
-                    b.SplitButton = RibbonStyle.RibbonMenuButton.e_splitbutton.Yes;
-                    b.SplitDistance = b.Width;
-                    ButtonPanel.Controls.Add(b);
-
-                    totalrows = rows + 2 + totalrows;
-                    i++;
-                }
-                renew = false;
-                #endregion
-            }
-            else
-            {
-                #region refresh                                
-                while (i < Typelist.Count)
-                {
-                    foreach (Control c in ButtonPanel.Controls)
-                    {                       
-                        if (c.Name == i.ToString())
-                        {
-                          
-                            string[] mystringarr = oldLines[i].Split("\n".ToCharArray());
-                            int rows = mystringarr.Length;
-
-                            ((RibbonStyle.RibbonMenuButton)c).SetBounds(0, (totalrows * textHeight), 30, (rows * textHeight) + 4);
-                            totalrows = rows + 2 + totalrows;
-                            i++;       
-                        }                                             
-                    }
-                }
-                totalrows = 0;
-                i = 0;
-                while (i < Typelist.Count)
-                {
-                    foreach (Control c in rtePanel.Controls)
+                    #region renew
+                    RemoveBackground();
+                    foreach (string line in oldLines)
                     {
-                        if (c.Name == i.ToString() && c.Visible)
-                        {
 
-                            string[] mystringarr = oldLines[i].Split("\n".ToCharArray());
-                            int rows = mystringarr.Length;
-                            c.Hide();
-                            setColor((CodeVendor.Controls.Grouper)c, (LyricsType)Typelist[i]);
-                            c.Location = new Point(-1, (totalrows * textHeight) - 11);
-                            c.Height = (rows * textHeight) + 14;
-                            totalrows = rows + 2 + totalrows;
-                            c.SendToBack();
-                            c.Show();
-                            i++;
+
+                        string[] mystringarr = line.Split("\n".ToCharArray());
+                        int rows = mystringarr.Length;
+
+                        // Background Panel
+                        CodeVendor.Controls.Grouper p = new CodeVendor.Controls.Grouper();
+                        p.Height = (rows * textHeight) + 14;
+                        p.Width = rtePanel.Width + 1;
+
+                        p.Location = new Point(-1, (totalrows * textHeight) - 11);
+                        p.BackgroundGradientMode = CodeVendor.Controls.Grouper.GroupBoxGradientMode.ForwardDiagonal;
+                        //p.BackgroundColor = GetColor((SongListItem)Typelist[i]);
+                        //p.BackgroundGradientColor = Color.LightBlue;
+                        setColor(p, (LyricsType)Typelist[i]);
+
+                        p.GroupTitle = "";
+                        p.BorderColor = Color.White;
+                        p.RoundCorners = 0;
+                        p.Hide();
+                        rtePanel.Controls.Add(p);
+                        p.Name = i.ToString();
+                        p.SendToBack();
+                        p.Show();
+
+                        //Button
+
+                        RibbonStyle.RibbonMenuButton b = new RibbonStyle.RibbonMenuButton();
+                        b.SetBounds(0, (totalrows * textHeight), 30, (rows * textHeight) + 4);
+                        b.Text = "";
+                        //b.Click += new System.EventHandler(this.TextButton_Click);
+                        b.MouseDown += new MouseEventHandler(b_MouseDown);
+                        b.ColorBase = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
+                        b.ColorBaseStroke = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(187)))), ((int)(((byte)(213)))));
+                        b.ColorOn = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+                        b.ColorOnStroke = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+                        b.ColorPress = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+                        b.ColorPressStroke = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+                        b.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+                        b.ImageLocation = RibbonStyle.RibbonMenuButton.e_imagelocation.Left;
+                        b.ImageOffset = 2;
+                        b.KeepPress = false;
+                        b.SinglePressButton = false;
+                        b.FadingSpeed = 35;
+                        b.Name = i.ToString();
+                        b.ContextMenuStrip = this.contextMenuStrip;
+                        b.Arrow = RibbonStyle.RibbonMenuButton.e_arrow.ToDown;
+                        b.SplitButton = RibbonStyle.RibbonMenuButton.e_splitbutton.Yes;
+                        b.SplitDistance = b.Width;
+                        if ((LyricsType)Typelist[i] == LyricsType.Verse) { b.Image = global::DreamBeam.Properties.Resources.verse; }
+                        else if ((LyricsType)Typelist[i] == LyricsType.Chorus) { b.Image = global::DreamBeam.Properties.Resources.chorus; }
+                        else { b.Image = global::DreamBeam.Properties.Resources.Other; }
+                        b.MaxImageSize = new Point(16, 16);
+                        ButtonPanel.Controls.Add(b);
+
+                        if (verseSeparator == SongVerseSeparator.OneBlankLine) separator = "\n\n";
+
+                        totalrows = rows + blankrows + totalrows;
+                        i++;
+                    }
+                    renew = false;
+                    #endregion
+                }
+                else
+                {
+                    #region refresh
+                    while (i < Typelist.Count)
+                    {
+                        foreach (Control c in ButtonPanel.Controls)
+                        {
+                            if (c.Name == i.ToString())
+                            {
+
+                                string[] mystringarr = oldLines[i].Split("\n".ToCharArray());
+                                int rows = mystringarr.Length;
+
+                                ((RibbonStyle.RibbonMenuButton)c).SetBounds(0, (totalrows * textHeight), 30, (rows * textHeight) + 4);
+                                if ((LyricsType)Typelist[i] == LyricsType.Verse) { ((RibbonStyle.RibbonMenuButton)c).Image = global::DreamBeam.Properties.Resources.verse; }
+                                else if ((LyricsType)Typelist[i] == LyricsType.Chorus) { ((RibbonStyle.RibbonMenuButton)c).Image = global::DreamBeam.Properties.Resources.chorus; }
+                                else { ((RibbonStyle.RibbonMenuButton)c).Image = global::DreamBeam.Properties.Resources.Other; }
+
+                                totalrows = rows + blankrows + totalrows;
+                                i++;
+                            }
                         }
                     }
+                    totalrows = 0;
+                    i = 0;
+                    while (i < Typelist.Count)
+                    {
+                        foreach (Control c in rtePanel.Controls)
+                        {
+                            if (c.Name == i.ToString() && c.Visible)
+                            {
+
+                                string[] mystringarr = oldLines[i].Split("\n".ToCharArray());
+                                int rows = mystringarr.Length;
+                                //c.Hide();
+                                setColor((CodeVendor.Controls.Grouper)c, (LyricsType)Typelist[i]);
+                                c.Location = new Point(-1, (totalrows * textHeight) - 11);
+                                c.Height = (rows * textHeight) + 14;
+                                c.Width = rtePanel.Width + 1;
+                                totalrows = rows + blankrows + totalrows;
+                                c.SendToBack();
+                                //c.Show();
+                                i++;
+                            }
+                        }
+                    }
+                    #endregion
+
+
                 }
-                #endregion 
-
-
-            }
-            CheckScroller();
+            }catch(Exception e){}
             }
 
         
@@ -396,12 +442,19 @@ namespace DreamBeam
                 this.rtePanel.Height = (minLineNumber * textHeight) + 9;
             }
             this.ButtonPanel.Height = rtePanel.Height;
-            this.ButtonPanel.Location = new Point(this.rtePanel.Width, ButtonPanel.Location.Y);           
-                       
+            this.ButtonPanel.Location = new Point(this.rtePanel.Width, ButtonPanel.Location.Y);
+
+            
+                foreach (Control c in rtePanel.Controls)
+                {                                       
+                    if(c.Name!= "rte") c.Width = rtePanel.Width+ 1;                        
+                        //c.SendToBack();                                           
+                }
+            
             
         }
 
-        private void asdfToolStripMenuItem_Click(object sender, EventArgs e)
+        private void verseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Typelist[buttonClicked] = LyricsType.Verse;            
             Update();
@@ -431,57 +484,100 @@ namespace DreamBeam
             }
 
         }
-        private void CheckScroller()
-        {
-
-        }
+      
 
         private void rte_KeyUp(object sender, KeyEventArgs e)
         {
-            //if (e.KeyCode != Keys.Enter )
+            ScrollToCursor();
+        }
+
+
+        private void ScrollToCursor()
+        {
+
+
+            #region ScrollDownToCursor
+            int loops = 0; // just to prevent an endless loop, (didn't happen yet)
+            while ((Scrollpanel.AutoScrollVPos + Scrollpanel.Height) < ((rte.CurrentLine * textHeight) + 23) && loops < 1000)
             {
-                Console.WriteLine((Scrollpanel.AutoScrollVPos) .ToString()+": "+((rte.CurrentLine * textHeight)-15).ToString());
+                loops++;
+                if (loops == 999) Console.WriteLine("Endless Loop in ColoredTextBoxPanel  rte_KeyUp");
 
-           
-
-                #region ScrollDownToCursor
-                int loops = 0; // just to prevent an endless loop, (didn't happen yet)
-                while ((Scrollpanel.AutoScrollVPos + Scrollpanel.Height) < ((rte.CurrentLine * textHeight) + 23) && loops < 1000 )  
+                // Scroll PageDown if possible
+                if ((Scrollpanel.AutoScrollVPos + (Scrollpanel.Height) + 50) < ((rte.CurrentLine * textHeight) + 23))
                 {
-                    loops++;
-                    if (loops == 999) Console.WriteLine("Endless Loop in ColoredTextBoxPanel  rte_KeyUp");
-                    
-                    // Scroll PageDown if possible
-                    if ((Scrollpanel.AutoScrollVPos + (Scrollpanel.Height) + 50) < ((rte.CurrentLine * textHeight) + 23)){
-                        SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGEDOWN, IntPtr.Zero); 
-                    }
-                    else { 
-                        SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero); 
-                    }
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGEDOWN, IntPtr.Zero);
                 }
-                #endregion
-
-                if (rte.Height > Scrollpanel.Height && (rte.CurrentLine * textHeight) - 15 >= 0) 
+                else
                 {
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
+                }
+            }
+            #endregion
+
+            #region ScrollUptoCursor
+            if (rte.CurrentLine == 1)
+            {
+                SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGETOP, IntPtr.Zero);
+                SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
+                
+            }else if (rte.Height > Scrollpanel.Height && (rte.CurrentLine * textHeight) - 15 >= 0)
+            {
                 loops = 0;
                 while (Scrollpanel.AutoScrollVPos > (rte.CurrentLine * textHeight) - 15 && loops < 1000)
                 {
                     loops++;
                     if (loops == 999) Console.WriteLine("Endless Loop 2 in ColoredTextBoxPanel  rte_KeyUp");
-                    
-                    if (Scrollpanel.AutoScrollVPos - 50 > (rte.CurrentLine * textHeight) - 15 ){
-                        SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGEUP, IntPtr.Zero); 
-                    }else{
-                        SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero); 
+
+                    if (Scrollpanel.AutoScrollVPos - 50 > (rte.CurrentLine * textHeight) - 15)
+                    {
+                        SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGEUP, IntPtr.Zero);
                     }
-                    
+                    else
+                    {
+                        SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
+                    }
+
                 }
-            }    
+            }
+            #endregion
 
+        }
 
+        private void MouseWheelHandler(object sender, System.Windows.Forms.MouseEventArgs e)
+        {                        
+            if (e.Delta < 0)
+            {                
+                for (int i = 1; i <= SystemInformation.MouseWheelScrollLines; i++)
+                {
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
+                }
+            }
+            if (e.Delta > 0)
+            {
+                for (int i = 1; i <= SystemInformation.MouseWheelScrollLines; i++)
+                {
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
+                }
                 
             }
+
         }
+
+        private void rte_MouseEnter(object sender, EventArgs e)
+        {
+            rte.Focus();
+        }
+
+        
+
+        
+
+        
 
        
     }

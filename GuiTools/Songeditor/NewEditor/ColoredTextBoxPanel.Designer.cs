@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.asdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.VerseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chorusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Scrollpanel = new CustomAutoScrollPanel.ScrollablePanel();
@@ -45,21 +45,23 @@
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.asdfToolStripMenuItem,
+            this.VerseToolStripMenuItem,
             this.chorusToolStripMenuItem,
             this.otherToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.Size = new System.Drawing.Size(113, 70);
             // 
-            // asdfToolStripMenuItem
+            // VerseToolStripMenuItem
             // 
-            this.asdfToolStripMenuItem.Name = "asdfToolStripMenuItem";
-            this.asdfToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.asdfToolStripMenuItem.Text = "Verse";
-            this.asdfToolStripMenuItem.Click += new System.EventHandler(this.asdfToolStripMenuItem_Click);
+            this.VerseToolStripMenuItem.Image = global::DreamBeam.Properties.Resources.verse;
+            this.VerseToolStripMenuItem.Name = "VerseToolStripMenuItem";
+            this.VerseToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.VerseToolStripMenuItem.Text = "Verse";
+            this.VerseToolStripMenuItem.Click += new System.EventHandler(this.verseToolStripMenuItem_Click);
             // 
             // chorusToolStripMenuItem
             // 
+            this.chorusToolStripMenuItem.Image = global::DreamBeam.Properties.Resources.chorus;
             this.chorusToolStripMenuItem.Name = "chorusToolStripMenuItem";
             this.chorusToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.chorusToolStripMenuItem.Text = "Chorus";
@@ -67,6 +69,7 @@
             // 
             // otherToolStripMenuItem
             // 
+            this.otherToolStripMenuItem.Image = global::DreamBeam.Properties.Resources.Other;
             this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
             this.otherToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.otherToolStripMenuItem.Text = "Other";
@@ -93,6 +96,7 @@
             this.Scrollpanel.TabIndex = 3;
             this.Scrollpanel.VisibleAutoScrollHorizontal = false;
             this.Scrollpanel.VisibleAutoScrollVertical = false;
+           
             // 
             // ButtonPanel
             // 
@@ -124,6 +128,7 @@
             this.rte.Size = new System.Drawing.Size(564, 399);
             this.rte.TabIndex = 3;
             this.rte.Text = "";
+            this.rte.MouseEnter += new System.EventHandler(this.rte_MouseEnter);
             this.rte.KeyUp += new System.Windows.Forms.KeyEventHandler(this.rte_KeyUp);
             this.rte.TextChanged += new System.EventHandler(this.rte_TextChanged);
             // 
@@ -153,7 +158,7 @@
         
 
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem asdfToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem VerseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chorusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem otherToolStripMenuItem;
         

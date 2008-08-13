@@ -19,7 +19,7 @@ namespace DreamBeam
         private ArrayList sequenceAvailable = new ArrayList();
         private ArrayList sequence = new ArrayList();
         private Song song;
-        
+
 
 
         public ModernSongEditor()
@@ -29,15 +29,14 @@ namespace DreamBeam
              AdditionalInformation = new AdditionalInformationDialog(EditorPanel, 0.1f);
              AdditionalInformation.Hide();
              AdditionalInformation.SlideDirection = AdditionalInformationDialog.SLIDE_DIRECTION.BOTTOM;
-             AdditionalInformation.Size = EditorPanel.Size;
 
              Sequence = new SequenceDialog(EditorPanel, 0.1f);
              Sequence.Hide();
              Sequence.SlideDirection = AdditionalInformationDialog.SLIDE_DIRECTION.LEFT;
-             Sequence.Size = EditorPanel.Size;
 
-             this.Controls.Add(AdditionalInformation);
-             this.Controls.Add(Sequence);
+             EditorPanel.Controls.Add(AdditionalInformation);
+             EditorPanel.Controls.Add(Sequence);
+
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -90,17 +89,9 @@ namespace DreamBeam
                 coloredTextBoxPanel1.verseSeparator = SongVerseSeparator.OneBlankLine;
             }
 
-            // If we don't Clear, old RTF formatting codes from the previous Paste operation
-            // remain in the control and cause the new text to take on that formatting
             
-            //this.VerseLyrics.Clear();
-            //this.ChorusLyrics.Clear();
-            //this.OtherLyrics.Clear();
             coloredTextBoxPanel1.setText(song);
-            //this.VerseLyrics.Text = song.GetLyrics(LyricsType.Verse, verseSeparator);
-            //this.ChorusLyrics.Text = song.GetLyrics(LyricsType.Chorus, verseSeparator);
-            //this.OtherLyrics.Text = song.GetLyrics(LyricsType.Other, verseSeparator);
-
+            
             Sequence.ListEx_Sequence.Items.Clear();
             this.sequence.Clear();
             foreach (LyricsSequenceItem item in song.Sequence)
@@ -130,7 +121,7 @@ namespace DreamBeam
             //song.SetLyrics(LyricsType.Verse, this.VerseLyrics.Text, verseSeparator);
             //song.SetLyrics(LyricsType.Chorus, this.ChorusLyrics.Text, verseSeparator);
             //song.SetLyrics(LyricsType.Other, this.OtherLyrics.Text, verseSeparator);
-
+            coloredTextBoxPanel1.GetText(song);
             song.Sequence = new ArrayList();
             foreach (LyricsSequenceItem item in this.sequence)
             {
@@ -173,11 +164,7 @@ namespace DreamBeam
             AdditionalInformation.Slide();
         }
 
-        private void ModernSongEditor_SizeChanged(object sender, EventArgs e)
-        {
-            Sequence.Size = EditorPanel.Size;
-            AdditionalInformation.Size = EditorPanel.Size;
-        }
+
 
         private void SequenceButton_Click(object sender, EventArgs e)
         {

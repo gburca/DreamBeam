@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DreamBeam
 	{
-	public class RicherTextBox2 : Tools.WindowsT.FormsT.TransparentTextBox 
+	public class RicherTextBox2 : WindowsT.FormsT.TransparentTextBox 
 		{
 		public event EventHandler CursorPositionChanged;
 				

@@ -81,6 +81,13 @@ namespace DreamBeam.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap chorus {
+            get {
+                object obj = ResourceManager.GetObject("chorus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap go_bottom {
             get {
                 object obj = ResourceManager.GetObject("go-bottom", resourceCulture);
@@ -105,6 +112,13 @@ namespace DreamBeam.Properties {
         internal static System.Drawing.Bitmap go_up {
             get {
                 object obj = ResourceManager.GetObject("go-up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Other {
+            get {
+                object obj = ResourceManager.GetObject("Other", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -259,6 +273,13 @@ namespace DreamBeam.Properties {
         internal static System.Drawing.Bitmap stock_text_vup16 {
             get {
                 object obj = ResourceManager.GetObject("stock_text_vup16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap verse {
+            get {
+                object obj = ResourceManager.GetObject("verse", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

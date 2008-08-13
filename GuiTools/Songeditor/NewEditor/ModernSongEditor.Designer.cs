@@ -201,8 +201,7 @@
             this.Controls.Add(this.EditorPanel);
             this.Controls.Add(this.Toppanel);
             this.Name = "ModernSongEditor";
-            this.Size = new System.Drawing.Size(348, 398);
-            this.SizeChanged += new System.EventHandler(this.ModernSongEditor_SizeChanged);
+            this.Size = new System.Drawing.Size(348, 398);            
             this.Toppanel.ResumeLayout(false);
             this.Toppanel.PerformLayout();
             this.EditorPanel.ResumeLayout(false);

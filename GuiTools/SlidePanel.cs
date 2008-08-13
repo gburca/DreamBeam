@@ -50,11 +50,11 @@ namespace DreamBeam
 			}
 		}
 		/// <summary>
-		/// Default constructor
+		/// Default constructor disabled, this requires a panel;
 		/// </summary>
-		public SlidePanel() : this(null, 0)
+		/*public SlidePanel() : this(null, 0)
 		{
-		}
+		}*/
 		/// <summary>
 		/// Constructor with parent window and step of sliding motion
 		/// </summary>
@@ -63,10 +63,17 @@ namespace DreamBeam
 			InitializeComponent();
 			_oOwner = poOwner;
 			_fRatio = 0.0f;
-			SlideStep = pfStep;
-			//if (poOwner != null)
-			//	Owner = poOwner.Owner;
+			SlideStep = pfStep;            
+            _oOwner.Resize += new System.EventHandler(this.SlidePanel_Resize);
+            this.Size = _oOwner.Size;
+            this.Init();
 		}
+
+
+        void SlidePanel_Resize(object sender, EventArgs e)
+        {
+            this.Size = _oOwner.Size;
+        }
 
 		protected override void Dispose( bool disposing )
 		{
@@ -111,37 +118,46 @@ namespace DreamBeam
 		/// according to the slide direction
 		/// </summary>
 		public void Slide()
-		{
-            this.Init();            
-			if (!_bExpand)
-				Show();			
-			//_oOwner.BringToFront();
+		{                   
+            this.Init();
+            if (!_bExpand) Show();
+
 			_bExpand = !_bExpand;            
 			timer1.Start();
 		}
 
 		private void timer1_Tick(object sender, System.EventArgs e)
 		{
-            
+           
 			if (_bExpand)
 			{
 				_fRatio += _fStep;
 				_oOffset += _oStep;
-				if (_fRatio >= 1)
-					timer1.Stop();
+                if (_fRatio >= 1)
+                {
+                    timer1.Stop();
+                    SetOffset();
+                    
+                }
+                
 			}
 			else
 			{
 				_fRatio -= _fStep;
 				_oOffset -= _oStep;
-				if (_fRatio <= 0)
-					timer1.Stop();
+                if (_fRatio <= 0)
+                {
+                    timer1.Stop();
+                    _oOffset = new Size(0, 0);
+                    this.Hide();
+                }
 			}
 			SetLocation();
+            
 		}
 		private void SetLocation()
-		{
-			Location = _oOrigin + _oOffset.ToSize();
+		{            
+            Location = _oOrigin + _oOffset.ToSize();
 		}
 
 		private void SlideDialog_Move(object sender, System.EventArgs e)
@@ -150,51 +166,58 @@ namespace DreamBeam
 			SetLocation();
 		}
 
-		private void SlideDialog_Resize(object sender, System.EventArgs e)
-		{
-			SetSlideLocation();
-			SetLocation();
-		}
 		private void SlideDialog_Closed(object sender, System.EventArgs e)
 		{
 
 		}
 
+        private void SetOffset()
+        {
+            if (_oOwner != null)
+            {
+                switch (_eSlideDirection)
+                {
+                    case SLIDE_DIRECTION.BOTTOM:
+                        _oOffset = new Size(0, this.Height);
+                        break;
+                    case SLIDE_DIRECTION.LEFT:
+                        _oOffset = new Size(-this.Width, 0);
+                        break;
+                    case SLIDE_DIRECTION.TOP:
+                        _oOffset = new Size(0, -this.Height);
+                        break;
+                    case SLIDE_DIRECTION.RIGHT:
+                        _oOffset = new Size(this.Width, 0);
+                        break;
+                }
+            }
+        }
+
 		private void SetSlideLocation()
-		{
+		{            
 			if (_oOwner != null)
 			{				
 				switch (_eSlideDirection)
 				{
-					case SLIDE_DIRECTION.BOTTOM:                        
-                        _oOrigin.X = _oOwner.Location.X;
-                        _oOrigin.Y = _oOwner.Location.Y - Height+1 ;
-
-						//_oOrigin.X = _oOwner.Location.X;
-						//_oOrigin.Y = _oOwner.Location.Y + _oOwner.Height - Height;
-						//Width = _oOwner.Width;
-						_oStep = new SizeF(0, Height * _fStep);
+					case SLIDE_DIRECTION.BOTTOM:
+                        _oOrigin.X = 0;                           
+                        _oOrigin.Y = - this.Height;                        
+                        _oStep = new SizeF(0, this.Height * _fStep);
 						break;
 					case SLIDE_DIRECTION.LEFT:
-
-                        _oOrigin.X = _oOwner.Location.X + Width-1;
-                        _oOrigin.Y = _oOwner.Location.Y;
+                        _oOrigin.X = Width;
+                        _oOrigin.Y = 0;
 						_oStep = new SizeF(- Width * _fStep, 0);
-						//Height = _oOwner.Height;
 						break;
 					case SLIDE_DIRECTION.TOP:
-                        _oOrigin.X = _oOwner.Location.X;
-                        _oOrigin.Y = _oOwner.Location.Y + Height-1;
-						//Width = _oOwner.Width;
-                        
+                        _oOrigin.X = 0;
+                        _oOrigin.Y = Height-1;
 						_oStep = new SizeF(0, - Height * _fStep);
 						break;
-					case SLIDE_DIRECTION.RIGHT:
-                        
-						_oOrigin.X = _oOwner.Location.X  - Width+1;
-						_oOrigin.Y = _oOwner.Location.Y;
+					case SLIDE_DIRECTION.RIGHT:                       
+						_oOrigin.X =  - Width;
+                        _oOrigin.Y = 0;
 						_oStep = new SizeF(Width * _fStep, 0);
-						//Height = _oOwner.Height;
 						break;
 				}
 			}
@@ -204,13 +227,6 @@ namespace DreamBeam
 		{
 			SetSlideLocation();
 			SetLocation();
-			if (_oOwner != null)
-			{
-				//_oOwner.LocationChanged += new System.EventHandler(this.SlideDialog_Move);
-				//_oOwner.Resize += new System.EventHandler(this.SlideDialog_Resize);
-				//_oOwner.Closed += new System.EventHandler(this.SlideDialog_Closed);
-
-			}
 		}
 	}
 }

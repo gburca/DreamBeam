@@ -240,7 +240,6 @@ namespace DreamBeam {
                 {
                     modernSongEditor = new ModernSongEditor();
                     songEditor.Dispose();
-
                     
                     EditSongs_Tab.Controls.Add(this.modernSongEditor);
                     modernSongEditor.Collections = new string[0];
@@ -249,7 +248,14 @@ namespace DreamBeam {
                     modernSongEditor.Name = "songEditor";
                     modernSongEditor.Size = new System.Drawing.Size(383, 492);
                     modernSongEditor.TabIndex = 0;
-                    
+                    try
+                    {
+                        modernSongEditor.Song = new Song(this.Config);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.ToString());
+                    }
                     
                 }
             

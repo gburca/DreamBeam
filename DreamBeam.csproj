@@ -390,6 +390,9 @@
     <Compile Include="GuiTools\Songeditor\NewEditor\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuiTools\Songeditor\NewEditor\Transparent_RTF.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GuiTools\TextFormatOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -577,6 +580,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="ChangeLog.txt" />
+    <None Include="Resources\Other.png" />
+    <None Include="Resources\chorus.png" />
+    <None Include="Resources\verse.png" />
     <None Include="Resources\stock-templates.png" />
     <None Include="Resources\stock_text_vup16.png" />
     <None Include="Resources\stock_text_vcenter16.png" />

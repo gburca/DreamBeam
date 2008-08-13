@@ -480,6 +480,46 @@ namespace DreamBeam {
 			return null;
 		}
 
+
+        /// <summary>
+        /// Clears all Song Lyrics
+        /// </summary>
+        public void ClearLyrics()
+        {
+            this.SongLyrics = new ArrayList();
+        }
+
+        /// <summary>
+        /// Ads one ore more lyric item/s to the LyricsList
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="text"></param>
+        public int AddLyrics(LyricsType type, string text,int number, SongVerseSeparator sep)
+        {
+            int num = number;
+            string separator;
+
+            switch (sep)
+            {
+                case SongVerseSeparator.TwoBlankLines:
+                    separator = "\n\n\n";
+                    break;
+                case SongVerseSeparator.OneBlankLine:
+                default:
+                    separator = "\n\n";
+                    break;
+            }
+
+            foreach (string v in Regex.Split(text, separator))
+            {
+                string l = v.Trim();
+                if (l.Length == 0) continue;	// Don't add blank verses
+                this.SongLyrics.Add(new LyricsItem(type, num++, l));
+            }
+            return num;
+        }
+
+
 		/// <summary>
 		/// Replaces all existing lyrics of the type with new ones obtained by
 		/// breaking the (user) provided text at blank lines and creating
@@ -513,6 +553,8 @@ namespace DreamBeam {
 				string l = v.Trim();
 				if (l.Length == 0) continue;	// Don't add blank verses
 				this.SongLyrics.Add(new LyricsItem(type, num++, l));
+                Console.WriteLine("Saving: " + type.ToString() + " " + l);
+                Console.WriteLine("");
 			}
 		}
 

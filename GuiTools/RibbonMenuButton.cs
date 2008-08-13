@@ -472,10 +472,12 @@ namespace RibbonStyle
             {
                 offsety = _imageoffset; offsetx = _imageoffset;
                 if (_imagelocation == e_imagelocation.Left | _imagelocation == e_imagelocation.Right)
-                {
+                {                    
                     imageheight = this.Height - offsety * 2;
+                    
                     if (imageheight > _maximagesize.Y & _maximagesize.Y != 0)
                     { imageheight = _maximagesize.Y; }
+                    offsety = (this.Height - imageheight) / 2;
                     imagewidth = (int)((Convert.ToDouble(imageheight) / this.Image.Height) * this.Image.Width);
                 }
                 else if (_imagelocation == e_imagelocation.Top | _imagelocation == e_imagelocation.Bottom)
