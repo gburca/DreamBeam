@@ -24,6 +24,7 @@ namespace DreamBeam
         public int minLineNumber = 20;
         ArrayList Typelist = new ArrayList();
 
+        #region Scrolling
         private const int WM_SCROLL = 276; // Horizontal scroll
         private const int WM_VSCROLL = 277; // Vertical scroll
         private const int SB_LINEUP = 0; // Scrolls one line up
@@ -43,12 +44,92 @@ namespace DreamBeam
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
+
+
+        private void ScrollToCursor()
+        {
+
+
+            #region ScrollDownToCursor
+            int loops = 0; // just to prevent an endless loop, (didn't happen yet)
+            while ((Scrollpanel.AutoScrollVPos + Scrollpanel.Height) < ((rte.CurrentLine * textHeight) + 23) && loops < 100)
+            {
+                loops++;
+                if (loops == 99) Console.WriteLine("Endless Loop in ColoredTextBoxPanel  rte_KeyUp");
+
+                // Scroll PageDown if possible
+                if ((Scrollpanel.AutoScrollVPos + (Scrollpanel.Height) + 50) < ((rte.CurrentLine * textHeight) + 23))
+                {
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGEDOWN, IntPtr.Zero);
+                }
+                else
+                {
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
+                }
+            }
+            #endregion
+
+            #region ScrollUptoCursor
+            if (rte.CurrentLine == 1)
+            {
+                SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGETOP, IntPtr.Zero);
+                SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
+
+            }
+            else if (rte.Height > Scrollpanel.Height && (rte.CurrentLine * textHeight) - 15 >= 0)
+            {
+                loops = 0;
+                while (Scrollpanel.AutoScrollVPos > (rte.CurrentLine * textHeight) - 15 && loops < 100)
+                {
+                    loops++;
+                    if (loops == 99) Console.WriteLine("Endless Loop 2 in ColoredTextBoxPanel  rte_KeyUp");
+
+                    if (Scrollpanel.AutoScrollVPos - 50 > (rte.CurrentLine * textHeight) - 15)
+                    {
+                        SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGEUP, IntPtr.Zero);
+                    }
+                    else
+                    {
+                        SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
+                    }
+
+                }
+            }
+            #endregion
+
+        }
+
+        private void MouseWheelHandler(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Delta < 0)
+            {
+                for (int i = 1; i <= SystemInformation.MouseWheelScrollLines; i++)
+                {
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
+                }
+            }
+            if (e.Delta > 0)
+            {
+                for (int i = 1; i <= SystemInformation.MouseWheelScrollLines; i++)
+                {
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
+                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
+                }
+
+            }
+
+        }
+
+        #endregion 
     
 
         public ColoredTextBoxPanel()
         {
             InitializeComponent();
-            //verseSeparator = f.Config.SongVerseSeparator;
+            
 
             this.rte.MouseWheel += new MouseEventHandler(this.MouseWheelHandler);
 
@@ -68,7 +149,7 @@ namespace DreamBeam
             if (verseSeparator == SongVerseSeparator.TwoBlankLines) separator = "\n\n\n";          
                         
             Typelist = new ArrayList();            
-            song.SongLyrics.Sort();
+            //song.SongLyrics.Sort();
             StringBuilder s = new StringBuilder();
             int i = 0;
 
@@ -95,7 +176,7 @@ namespace DreamBeam
                 Updating = false;
                 renew = true;
                 Update();                                   
-                Resizer();
+                Resizer(false);
         }
 
 
@@ -106,23 +187,38 @@ namespace DreamBeam
             int chorusCount = 1;
             int otherCount = 1;
             int j = 0;
+
             song.ClearLyrics();
+
+            StringBuilder verse = new StringBuilder();
+            StringBuilder chorus = new StringBuilder();
+            StringBuilder other = new StringBuilder();
             foreach (string line in newLines)
             {
                 switch ((LyricsType)Typelist[j])
                 {
                     case LyricsType.Verse:
-                        verseCount = song.AddLyrics(LyricsType.Verse, line, verseCount, verseSeparator);
+                         verseCount = song.AddLyrics(LyricsType.Verse, line, verseCount, verseSeparator);
+                        //if (verse.Length > 0) verse.Append(separator);
+                        //verse.Append(line);
                         break;
                     case LyricsType.Chorus:
+                        //if (chorus.Length > 0) chorus.Append(separator);
+                        //chorus.Append(line);
                         chorusCount = song.AddLyrics(LyricsType.Chorus, line, chorusCount, verseSeparator);
                         break;
                     case LyricsType.Other:
+                        //if (other.Length > 0) other.Append(separator);
+                        //other.Append(line);
                         otherCount = song.AddLyrics(LyricsType.Other, line, otherCount, verseSeparator);
                         break;
                 }
-                
+                j++;  
             }
+            
+            //song.SetLyrics(LyricsType.Verse, verse.ToString(), verseSeparator);
+            //song.SetLyrics(LyricsType.Chorus, chorus.ToString(), verseSeparator);
+            //song.SetLyrics(LyricsType.Other, other.ToString(), verseSeparator);
 
         }
 
@@ -203,15 +299,11 @@ namespace DreamBeam
 
 
         private void Update()
-        {
-            
+        {            
             WhatChanged();
-            
-            
+                        
             int i = 0;
             int totalrows = 0;
-           // renew = true;
-
             int blankrows = 1;            
             if (verseSeparator == SongVerseSeparator.TwoBlankLines) blankrows = 2;
             try
@@ -319,14 +411,16 @@ namespace DreamBeam
 
                                 string[] mystringarr = oldLines[i].Split("\n".ToCharArray());
                                 int rows = mystringarr.Length;
-                                //c.Hide();
+                                c.Hide();                                
                                 setColor((CodeVendor.Controls.Grouper)c, (LyricsType)Typelist[i]);
                                 c.Location = new Point(-1, (totalrows * textHeight) - 11);
                                 c.Height = (rows * textHeight) + 14;
                                 c.Width = rtePanel.Width + 1;
                                 totalrows = rows + blankrows + totalrows;
                                 c.SendToBack();
-                                //c.Show();
+                                c.Show();
+                                rte.BringToFront();
+                                
                                 i++;
                             }
                         }
@@ -418,16 +512,26 @@ namespace DreamBeam
 
         private void ColoredTextBoxPanel_Resize(object sender, EventArgs e)
         {
-            Resizer();
+            Resizer(true);
         }
 
-        private void Resizer()
+        private void Resizer(bool UpdatePanels)
         {
             
            
             //this.rtePanel.Location = new Point(0, 0);            
-
+            
             this.rtePanel.Width = Scrollpanel.Width-50;
+            if (UpdatePanels)
+            {
+                foreach (Control c in rtePanel.Controls)
+                {
+                    if (c.Name != "rte"){ c.Width = rtePanel.Width + 1;
+                    c.SendToBack();    }                                  
+
+                }
+               // rte.BringToFront();
+            }
 
             minLineNumber = Scrollpanel.Height / textHeight;
             rte.Font = new Font("Microsoft Sans Serif", 9);
@@ -445,11 +549,7 @@ namespace DreamBeam
             this.ButtonPanel.Location = new Point(this.rtePanel.Width, ButtonPanel.Location.Y);
 
             
-                foreach (Control c in rtePanel.Controls)
-                {                                       
-                    if(c.Name!= "rte") c.Width = rtePanel.Width+ 1;                        
-                        //c.SendToBack();                                           
-                }
+                
             
             
         }
@@ -478,7 +578,7 @@ namespace DreamBeam
         {
             if (!Updating)
             {
-                if (rte.Lines.Length != oldLineCount) Resizer();
+                if (rte.Lines.Length != oldLineCount) Resizer(false);
                 oldLineCount = rte.Lines.Length;
                 Update();
             }
@@ -492,81 +592,6 @@ namespace DreamBeam
         }
 
 
-        private void ScrollToCursor()
-        {
-
-
-            #region ScrollDownToCursor
-            int loops = 0; // just to prevent an endless loop, (didn't happen yet)
-            while ((Scrollpanel.AutoScrollVPos + Scrollpanel.Height) < ((rte.CurrentLine * textHeight) + 23) && loops < 1000)
-            {
-                loops++;
-                if (loops == 999) Console.WriteLine("Endless Loop in ColoredTextBoxPanel  rte_KeyUp");
-
-                // Scroll PageDown if possible
-                if ((Scrollpanel.AutoScrollVPos + (Scrollpanel.Height) + 50) < ((rte.CurrentLine * textHeight) + 23))
-                {
-                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGEDOWN, IntPtr.Zero);
-                }
-                else
-                {
-                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
-                }
-            }
-            #endregion
-
-            #region ScrollUptoCursor
-            if (rte.CurrentLine == 1)
-            {
-                SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGETOP, IntPtr.Zero);
-                SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
-                
-            }else if (rte.Height > Scrollpanel.Height && (rte.CurrentLine * textHeight) - 15 >= 0)
-            {
-                loops = 0;
-                while (Scrollpanel.AutoScrollVPos > (rte.CurrentLine * textHeight) - 15 && loops < 1000)
-                {
-                    loops++;
-                    if (loops == 999) Console.WriteLine("Endless Loop 2 in ColoredTextBoxPanel  rte_KeyUp");
-
-                    if (Scrollpanel.AutoScrollVPos - 50 > (rte.CurrentLine * textHeight) - 15)
-                    {
-                        SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_PAGEUP, IntPtr.Zero);
-                    }
-                    else
-                    {
-                        SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
-                    }
-
-                }
-            }
-            #endregion
-
-        }
-
-        private void MouseWheelHandler(object sender, System.Windows.Forms.MouseEventArgs e)
-        {                        
-            if (e.Delta < 0)
-            {                
-                for (int i = 1; i <= SystemInformation.MouseWheelScrollLines; i++)
-                {
-                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
-                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
-                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEDOWN, IntPtr.Zero);
-                }
-            }
-            if (e.Delta > 0)
-            {
-                for (int i = 1; i <= SystemInformation.MouseWheelScrollLines; i++)
-                {
-                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
-                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
-                    SendMessage(this.Scrollpanel.Handle, WM_VSCROLL, (IntPtr)SB_LINEUP, IntPtr.Zero);
-                }
-                
-            }
-
-        }
 
         private void rte_MouseEnter(object sender, EventArgs e)
         {

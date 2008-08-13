@@ -181,9 +181,32 @@ namespace Lister
 			// Set the line color
 			this.lineColor = Color.FromArgb(199,199,199);
 
-		}	
-		
-		/////
+            this.EnabledChanged += new System.EventHandler(ListEx_EnabledChanged);
+
+        }
+        
+        #region Enabled_Disabled
+        private Color oldBackColor;
+        private Color oldForeColor;
+        void ListEx_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.Enabled)
+            {
+                if(oldBackColor != null) this.BackColor = oldBackColor;
+                if (oldForeColor != null) this.ForeColor = oldForeColor;
+            }
+            else
+            {
+                this.oldBackColor = this.BackColor;
+                this.oldForeColor = this.ForeColor;
+                this.BackColor = System.Drawing.Color.LightGray;
+                this.ForeColor = System.Drawing.Color.Silver;
+                
+            }
+        }
+        #endregion
+
+        /////
 		// This is the constructor
 		public ListEx(ImageList imgs)
 		{

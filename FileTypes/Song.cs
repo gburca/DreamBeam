@@ -152,6 +152,7 @@ namespace DreamBeam {
 		public bool MinorKey;
 		public bool DualLanguage;
         public bool UseDesign = false;
+        public bool AutoSequencer = true;
 		[XmlArrayItem(ElementName = "LyricsItem", Type = typeof(LyricsItem))]
 		[XmlArray]
 		public ArrayList SongLyrics;
@@ -291,13 +292,7 @@ namespace DreamBeam {
                     this.Theme.TextFormat[i].Bounds.Y = y;
                     this.Theme.TextFormat[i].Bounds.Height = 100-y;
                 }
-
-
-
-
-
-        //s.TextEffect
-        this.UseDesign = true;
+                this.UseDesign = true;
                 CreateSimpleSequence();
             }
         }
@@ -314,6 +309,7 @@ namespace DreamBeam {
 		public Song(Config config) : this() {
 			if (config != null && config.theme != null) {
                 Theme = config.theme.Song;
+                this.config = config;
 				// This is not a custom theme, so null the ThemePath so it doesn't get saved.
 				Theme.ThemeFile = null;
 			}                             
@@ -1093,9 +1089,14 @@ namespace DreamBeam {
 						s = (Song)Song.DeserializeFrom(typeof(Song), file);
 					}
 				} else { // version >= 0.72                                        
+                    
 					s = (Song)Song.DeserializeFrom(typeof(Song), file);
                     
 				}
+                // Songs which don't have the AutoSequencerOption
+                if(version <= 82){
+                        s.AutoSequencer = false; // For a new Song the Autosequencer should be true - only for older versions it has to be disabled
+                 }
 			}
           
 			if (s != null) {

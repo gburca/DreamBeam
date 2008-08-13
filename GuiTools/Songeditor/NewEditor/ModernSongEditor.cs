@@ -42,7 +42,7 @@ namespace DreamBeam
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Song Song
         {
-            set { song = (Song)value; PopulateControls(song); }
+            set {song = value;PopulateControls(song);}
             get { return ReadControls(); }
         }
 
@@ -91,6 +91,8 @@ namespace DreamBeam
 
             
             coloredTextBoxPanel1.setText(song);
+            Sequence.AutoSequence.Checked = song.AutoSequencer;
+            Sequence.EnableDisableListBoxes();
             
             Sequence.ListEx_Sequence.Items.Clear();
             this.sequence.Clear();
@@ -113,7 +115,8 @@ namespace DreamBeam
             song.Notes = (AdditionalInformation.Notes.Text != null) ? Regex.Replace(AdditionalInformation.Notes.Text, "\r\n", "\n") : null;
             song.KeyRangeLow = AdditionalInformation.KeyRangeLow.Text;
             song.KeyRangeHigh = AdditionalInformation.KeyRangeHigh.Text;
-            song.MinorKey = AdditionalInformation.MinorKey.Checked;
+            song.MinorKey = AdditionalInformation.MinorKey.Checked;            
+            song.AutoSequencer = Sequence.AutoSequence.Checked;
             //song.DualLanguage = AdditionalInformation.DualLanguage.Checked;
             
 
