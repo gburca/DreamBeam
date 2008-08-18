@@ -45,36 +45,40 @@ namespace DreamBeam {
 		public void DragDropThread() {
 			DialogResult answer = MessageBox.Show(_MainForm.Lang.say("Message.ImportMedia"), _MainForm.Lang.say("Message.ImportMediaTitle"), MessageBoxButtons.YesNo);
 
-			if (answer == DialogResult.No) {
-				LoadingMediaList = "";
-				return;
-			}
-
 			try {
-
 				int i = 0;
 				foreach (string dropFile in DragDropArray) {
 					foreach (string ex in _MainForm.GuiTools.Presentation.filetypes) {
 						if (Path.GetExtension(dropFile).ToLower() == ex) {
 
-							string MediaFolder = Tools.GetDirectory(DirType.MediaFiles);
-							if (Directory.Exists(MediaFolder) == false) {
-								Directory.CreateDirectory(MediaFolder);
-							}
+							string fileName;
+							if (answer == DialogResult.Yes) {
+								// Copy the file and change the file name to point to the copy
 
-							MediaFolder = Path.Combine(MediaFolder, this.MediaList.Name);
-							if (Directory.Exists(MediaFolder) == false) {
-								Directory.CreateDirectory(MediaFolder);
-							}
+								string MediaFolder = Tools.GetDirectory(DirType.MediaFiles);
+								if (Directory.Exists(MediaFolder) == false) {
+									Directory.CreateDirectory(MediaFolder);
+								}
 
-							string fileName = Path.Combine(MediaFolder, Path.GetFileName(dropFile));
-							if (File.Exists(fileName) == false) {
-								File.Copy(dropFile, fileName, true);
+								MediaFolder = Path.Combine(MediaFolder, this.MediaList.Name);
+								if (Directory.Exists(MediaFolder) == false) {
+									Directory.CreateDirectory(MediaFolder);
+								}
+
+								fileName = Path.Combine(MediaFolder, Path.GetFileName(dropFile));
+								if (File.Exists(fileName) == false) {
+									File.Copy(dropFile, fileName, true);
+								}
+							} else {
+								// Link file from the current location
+								fileName = dropFile;
 							}
 
 							if (File.Exists(fileName)) {
 								AddMedia(fileName);
 							}
+
+							break;
 						}
 					}
 

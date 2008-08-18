@@ -214,7 +214,7 @@
     <value>Grafik</value>
   </data>
   <data name="Right.MediaLists.Load" xml:space="preserve">
-    <value>&lt;-Laden</value>
+    <value>Laden</value>
   </data>
   <data name="Right.Search.sAllSongs" xml:space="preserve">
     <value>alle Lieder</value>
@@ -340,7 +340,7 @@
     <value>Neues Lied...</value>
   </data>
   <data name="Right.Songs.Load" xml:space="preserve">
-    <value>&lt;-Laden</value>
+    <value>Laden</value>
   </data>
   <data name="Message.SongNotSaved" xml:space="preserve">
     <value>Kein Name angegeben - Lied wurde nicht gespeichert.</value>
@@ -355,7 +355,7 @@
     <value>Importieren oder Verknüpfen?</value>
   </data>
   <data name="Right.Search.Load" xml:space="preserve">
-    <value>&lt;&lt;-Laden</value>
+    <value>Laden</value>
   </data>
   <data name="SongEdit.TextAlignPanel" xml:space="preserve">
     <value>Textausrichtung</value>
@@ -445,7 +445,7 @@
     <value>Auto Position</value>
   </data>
   <data name="Right.Playlist.Load" xml:space="preserve">
-    <value>&lt;-Laden</value>
+    <value>Laden</value>
   </data>
   <data name="Status.SongRenamed" xml:space="preserve">
     <value>Lied wurde zu "%1%" umbenannt.</value>

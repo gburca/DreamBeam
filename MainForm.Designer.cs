@@ -801,7 +801,7 @@ namespace DreamBeam {
             this.RightDocks_PlayList_Load_Button.Name = "RightDocks_PlayList_Load_Button";
             this.RightDocks_PlayList_Load_Button.Size = new System.Drawing.Size(54, 18);
             this.RightDocks_PlayList_Load_Button.TabIndex = 4;
-            this.RightDocks_PlayList_Load_Button.Text = "<- Load";
+            this.RightDocks_PlayList_Load_Button.Text = "Load";
             this.MainForm_ToolTip.SetToolTip(this.RightDocks_PlayList_Load_Button, "Preview selected song");
             // 
             // RightDocks_FolderDropdown
