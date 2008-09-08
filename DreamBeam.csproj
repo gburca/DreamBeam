@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9DB1A764-37C9-4E6E-83B2-BA43D1CBEC84}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -580,6 +580,13 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="ChangeLog.txt" />
+    <None Include="Resources\media-playback-pause.png" />
+    <None Include="Resources\media-skip-forward.png" />
+    <None Include="Resources\media-skip-backward.png" />
+    <None Include="Resources\media-seek-forward.png" />
+    <None Include="Resources\media-seek-backward.png" />
+    <None Include="Resources\media-playback-stop.png" />
+    <None Include="Resources\media-playback-start.png" />
     <None Include="Resources\Other.png" />
     <None Include="Resources\chorus.png" />
     <None Include="Resources\verse.png" />

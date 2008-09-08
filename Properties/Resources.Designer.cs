@@ -116,6 +116,55 @@ namespace DreamBeam.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap media_playback_pause {
+            get {
+                object obj = ResourceManager.GetObject("media_playback_pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_playback_start {
+            get {
+                object obj = ResourceManager.GetObject("media_playback_start", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_playback_stop {
+            get {
+                object obj = ResourceManager.GetObject("media_playback_stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_seek_backward {
+            get {
+                object obj = ResourceManager.GetObject("media_seek_backward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_seek_forward {
+            get {
+                object obj = ResourceManager.GetObject("media_seek_forward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_skip_backward {
+            get {
+                object obj = ResourceManager.GetObject("media_skip_backward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_skip_forward {
+            get {
+                object obj = ResourceManager.GetObject("media_skip_forward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Other {
             get {
                 object obj = ResourceManager.GetObject("Other", resourceCulture);

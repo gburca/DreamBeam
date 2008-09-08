@@ -22,7 +22,7 @@ namespace DreamBeam
         private int textHeight = 15;
         private bool Updating = false;
         public int minLineNumber = 20;
-        ArrayList Typelist = new ArrayList();
+        public ArrayList Typelist = new ArrayList();
 
         #region Scrolling
         private const int WM_SCROLL = 276; // Horizontal scroll

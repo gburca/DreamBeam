@@ -14,8 +14,7 @@ namespace DreamBeam
     public partial class ModernSongEditor : UserControl, ISongEditor
     {
         private AdditionalInformationDialog AdditionalInformation;
-        private SequenceDialog Sequence;
-
+        private SequenceDialog Sequence;        
         private ArrayList sequenceAvailable = new ArrayList();
         private ArrayList sequence = new ArrayList();
         private Song song;
@@ -105,6 +104,8 @@ namespace DreamBeam
             this.UpdateAvailableLyrics();
         }
 
+   
+
         private Song ReadControls()
         {
             if (song == null) song = new Song();
@@ -141,14 +142,23 @@ namespace DreamBeam
             Sequence.ListEx_Available.Items.Clear();
 
             if (s.SongLyrics == null) return;
-            s.SongLyrics.Sort();
+            //   s.SongLyrics.Sort(); // is this really necessaray?
             this.sequenceAvailable.Clear();
-            foreach (LyricsItem l in s.SongLyrics)
-            {
-                LyricsSequenceItem item = new LyricsSequenceItem(l.Type, l.Number);
-                Sequence.ListEx_Available.Add(item.ToString(), 0);
-                this.sequenceAvailable.Add(item);
-            }
+            if (Sequence.AutoSequence.Checked) Sequence.ListEx_Sequence.Items.Clear();
+            
+         
+                foreach (LyricsItem l in s.SongLyrics)
+                {
+                    LyricsSequenceItem item = new LyricsSequenceItem(l.Type, l.Number);
+                    Sequence.ListEx_Available.Add(item.ToString(), 0);
+                    if (Sequence.AutoSequence.Checked)  Sequence.ListEx_Sequence.Add(item.ToString(), 1);
+                    this.sequenceAvailable.Add(item);
+                }
+         
+
+
+            
+           
 
             // TODO: Update the sequence list as well, in case the user removed a verse that was part of the sequence.
         }
@@ -176,6 +186,7 @@ namespace DreamBeam
                 AdditionalInformation.Slide();
                 AdditionalInformationButton.Checked = false;
             }
+            UpdateAvailableLyrics();
             Sequence.BringToFront();
             Sequence.Slide();
 
