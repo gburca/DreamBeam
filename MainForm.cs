@@ -270,6 +270,7 @@ namespace DreamBeam {
             this.bibleThemeWidget.UseDesign = true;
 
             ImageWindow = new ImageWindow(this);
+            MovieControlPanelWipe("out");
             Console.WriteLine("DreamBeam starting up");
         }
 
@@ -1451,7 +1452,7 @@ namespace DreamBeam {
 					Presentation_MovieControlPanel.Size = new System.Drawing.Size(Presentation_MovieControlPanel.Size.Width, 0);
 				}
 			} else {
-				int height = 137;
+				int height = 100;
 				Media_TrackBar.Enabled = true;
 				if (Presentation_MovieControlPanel.Size.Height != height) {
 					Presentation_MovieControlPanel.Size = new System.Drawing.Size(Presentation_MovieControlPanel.Size.Width, height);
@@ -2800,6 +2801,20 @@ namespace DreamBeam {
         {
             ExportForm exform = new ExportForm();
             exform.ShowDialog();
+        }
+
+        private void panel5_SizeChanged(object sender, EventArgs e)
+        {
+            RightDocks_Preview_Prev.Location = new Point((panel5.Width - (RightDocks_Preview_Prev.Width + RightDocks_Preview_GoLive.Width + RightDocks_Preview_Next.Width)) / 2, RightDocks_Preview_Prev.Location.Y);
+
+            RightDocks_Preview_GoLive.Location = new Point(RightDocks_Preview_Prev.Location.X + RightDocks_Preview_Prev.Width - 1, RightDocks_Preview_Prev.Location.Y);
+            RightDocks_Preview_Next.Location = new Point(RightDocks_Preview_GoLive.Location.X + RightDocks_Preview_GoLive.Width-1, RightDocks_Preview_Prev.Location.Y);
+        }
+
+        private void panel9_Resize(object sender, EventArgs e)
+        {
+            RightDocks_Live_Prev.Location = new Point((panel9.Width - (RightDocks_Live_Prev.Width + RightDocks_Live_Next.Width)) / 2, RightDocks_Live_Prev.Location.Y);
+            RightDocks_Live_Next.Location = new Point(RightDocks_Live_Prev.Location.X + RightDocks_Live_Prev.Width -1, RightDocks_Live_Prev.Location.Y);
         }
 
         

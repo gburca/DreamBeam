@@ -56,7 +56,32 @@ namespace DreamBeam {
 			get { return this.label.Text; }
 			set { this.label.Text = value; }
 		}
-
+        [
+        Bindable(true),
+        Category("Appearance"),
+        Description("Label text")
+        ]
+        private bool _red = false;
+        public bool Red
+        {
+            get { return _red; }
+            set { _red = value; 
+                    if(value){
+                        foreach (Control c in panel1.Controls) {
+                            ((RibbonStyle.RibbonMenuButton)c).ColorBase = Color.FromArgb(255, 128, 128);
+                            ((RibbonStyle.RibbonMenuButton)c).ColorOn = Color.Red;
+                            ((RibbonStyle.RibbonMenuButton)c).ColorPress = Color.DarkRed;
+                        }
+                    }else{
+                        foreach (Control c in panel1.Controls)
+                        {
+                            ((RibbonStyle.RibbonMenuButton)c).ColorBase = Color.FromArgb(186, 209, 240);
+                            ((RibbonStyle.RibbonMenuButton)c).ColorOn = Color.FromArgb(224, 240, 255);
+                            ((RibbonStyle.RibbonMenuButton)c).ColorPress = Color.FromArgb(194, 224, 255);
+                        }
+                    }
+                }
+        }
 		public MediaControls() {
 			InitializeComponent();
 		}
