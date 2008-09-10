@@ -105,7 +105,7 @@ namespace DreamBeam {
 		private TD.SandBar.ToolBarContainer ToolBars_bottomSandBarDock;
 		private TD.SandBar.ToolBarContainer ToolBars_topSandBarDock;
 
-		public TD.SandDock.SandDockManager sandDockManager1;
+        public TD.SandDock.SandDockManager sandDockManager1;
 		private TD.SandDock.DockContainer leftSandDock;
 		private TD.SandDock.DockContainer rightSandDock;
 		private TD.SandDock.DockContainer bottomSandDock;
@@ -303,6 +303,7 @@ namespace DreamBeam {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
             this.Presentation_MediaLoop_Checkbox = new System.Windows.Forms.CheckBox();
+            this.liveMediaControls = new DreamBeam.MediaControls();
             this.RightDocks_ImageListBox = new Controls.Development.ImageListBox();
             this.ImageContext = new System.Windows.Forms.ContextMenu();
             this.ImageContextItemManage = new System.Windows.Forms.MenuItem();
@@ -366,9 +367,9 @@ namespace DreamBeam {
             this.ToolBars_MenuBar_Help_Intro = new TD.SandBar.MenuButtonItem();
             this.ToolBars_MenuBar_Help_About = new TD.SandBar.MenuButtonItem();
             this.statusBar = new System.Windows.Forms.StatusBar();
-            this.RenderStatus = new System.Windows.Forms.ProgressBar();
             this.StatusPanel = new System.Windows.Forms.StatusBarPanel();
             this.statusBarUpdatePanel = new System.Windows.Forms.StatusBarPanel();
+            this.RenderStatus = new System.Windows.Forms.ProgressBar();
             this.SongShow_ImageList = new System.Windows.Forms.ImageList(this.components);
             this.Presentation_Fade_ImageList = new System.Windows.Forms.ImageList(this.components);
             this.imageList_Folders = new System.Windows.Forms.ImageList(this.components);
@@ -376,17 +377,77 @@ namespace DreamBeam {
             this.SongShow_CollapsPanel = new Salamander.Windows.Forms.CollapsiblePanelBar();
             this.SongShow_HideElementsPanel = new Salamander.Windows.Forms.CollapsiblePanel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.SongShow_HideAuthor_Button = new ctlLEDRadioButton.LEDradioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.SongShow_HideText_Button = new ctlLEDRadioButton.LEDradioButton();
             this.SongShow_HideElementsSub1Panel = new System.Windows.Forms.Panel();
+            this.SongShow_HideTitle_Button = new ctlLEDRadioButton.LEDradioButton();
             this.TextTypedTimer = new System.Windows.Forms.Timer(this.components);
             this.sandDockManager1 = new TD.SandDock.SandDockManager();
             this.leftSandDock = new TD.SandDock.DockContainer();
+            this.dockControl1 = new TD.SandDock.DockControl();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.ShowSong_Tab = new System.Windows.Forms.TabPage();
+            this.SongShow_StropheList_ListEx = new Lister.ListEx();
+            this.EditSongs_Tab = new System.Windows.Forms.TabPage();
+            this.songEditor = new DreamBeam.SongEditor();
+            this.Presentation_Tab = new System.Windows.Forms.TabPage();
+            this.Presentation_FadePanel = new System.Windows.Forms.Panel();
+            this.Fade_panel = new System.Windows.Forms.Panel();
+            this.Fade_Top_Panel = new System.Windows.Forms.Panel();
+            this.Presentation_Fade_ListView = new System.Windows.Forms.ListView();
+            this.Presentation_Fade_Refresh_Button = new System.Windows.Forms.Button();
+            this.Presentation_Fade_ToPlaylist_Button = new System.Windows.Forms.Button();
+            this.Presentation_Fade_preview = new System.Windows.Forms.PictureBox();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.Presentation_MainPanel = new System.Windows.Forms.Panel();
+            this.Presentation_PreviewPanel = new System.Windows.Forms.Panel();
+            this.Presentation_VideoPanel = new System.Windows.Forms.Panel();
+            this.axShockwaveFlash = new AxShockwaveFlashObjects.AxShockwaveFlash();
+            this.Presentation_PreviewBox = new System.Windows.Forms.PictureBox();
+            this.Presentation_MovieControlPanel = new System.Windows.Forms.Panel();
+            this.Presentation_MovieControlPanelBottom = new System.Windows.Forms.Panel();
+            this.Presentation_MovieControl_PreviewButtonPanel = new System.Windows.Forms.Panel();
+            this.previewMediaControls = new DreamBeam.MediaControls();
+            this.Presentation_MovieControlPanel_Top = new System.Windows.Forms.Panel();
+            this.Media_TrackBar = new System.Windows.Forms.TrackBar();
+            this.Presentation_MovieControlPanel_Right = new System.Windows.Forms.Panel();
+            this.muteButton = new System.Windows.Forms.Button();
+            this.AudioBar = new System.Windows.Forms.TrackBar();
+            this.SermonTools_Tab = new System.Windows.Forms.TabPage();
+            this.Sermon_LeftPanel = new System.Windows.Forms.Panel();
+            this.Sermon_LeftDoc_Panel = new System.Windows.Forms.Panel();
+            this.Sermon_DocManager = new DocumentManager.DocumentManager();
+            this.Sermon_LeftToolBar_Panel = new System.Windows.Forms.Panel();
+            this.Sermon_ToolBar = new TD.SandBar.ToolBar();
+            this.Sermon_ToolBar_NewDoc_Button = new TD.SandBar.ButtonItem();
+            this.Sermon_LeftBottom_Panel = new System.Windows.Forms.Panel();
+            this.Sermon_Preview_Button = new System.Windows.Forms.Button();
+            this.Sermon_BeamBox_Button = new System.Windows.Forms.Button();
+            this.Sermon_TabControl = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.Sermon_Verse_Label = new System.Windows.Forms.Label();
+            this.Sermon_Translation_Label = new System.Windows.Forms.Label();
+            this.Sermon_Books_Label = new System.Windows.Forms.Label();
+            this.Sermon_BibleKey = new System.Windows.Forms.TextBox();
+            this.Sermon_Testament_ListBox = new System.Windows.Forms.ListBox();
+            this.Sermon_Books = new System.Windows.Forms.ComboBox();
+            this.Sermon_BookList = new System.Windows.Forms.ListBox();
+            this.BibleText_Tab = new System.Windows.Forms.TabPage();
+            this.bibleTextControl = new DreamBeam.BibleText();
             this.rightSandDock = new TD.SandDock.DockContainer();
             this.DockControl_PreviewScreen = new TD.SandDock.DockControl();
+            this.RightDocks_PreviewScreen_PictureBox = new DreamBeam.ImagePanel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.RightDocks_Preview_Prev = new RibbonStyle.RibbonMenuButton();
+            this.RightDocks_Preview_Next = new RibbonStyle.RibbonMenuButton();
+            this.RightDocks_Preview_GoLive = new RibbonStyle.RibbonMenuButton();
             this.DockControl_LiveScreen = new TD.SandDock.DockControl();
             this.RightDocks_LiveScreen_PictureBox = new System.Windows.Forms.PictureBox();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.RightDocks_Live_Prev = new RibbonStyle.RibbonMenuButton();
+            this.RightDocks_Live_Next = new RibbonStyle.RibbonMenuButton();
             this.Dock_SongTools = new TD.SandDock.DockControl();
             this.DockControl_BibleTools = new TD.SandDock.DockControl();
             this.BibleTools_CollapsiblePanelBar = new Salamander.Windows.Forms.CollapsiblePanelBar();
@@ -397,9 +458,13 @@ namespace DreamBeam {
             this.DockControl_DesignEditor = new TD.SandDock.DockControl();
             this.DesignTabControl = new System.Windows.Forms.TabControl();
             this.SongDesignTab = new System.Windows.Forms.TabPage();
+            this.songThemeWidget = new DreamBeam.ThemeWidget();
             this.SermonDesignTab = new System.Windows.Forms.TabPage();
+            this.sermonThemeWidget = new DreamBeam.ThemeWidget();
             this.BibleDesignTab = new System.Windows.Forms.TabPage();
+            this.bibleThemeWidget = new DreamBeam.ThemeWidget();
             this.DockControl_Songs = new TD.SandDock.DockControl();
+            this.SongList_Tree = new ControlLib.dbTreeViewCtrl();
             this.RightDocks_Songlist_SearchPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.RightDocks_SongListSearch = new System.Windows.Forms.TextBox();
@@ -448,54 +513,8 @@ namespace DreamBeam {
             this.VideoLoadTimer = new System.Windows.Forms.Timer(this.components);
             this.Presentation_AutoPlayTimer = new System.Windows.Forms.Timer(this.components);
             this.MainForm_ToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.Sermon_BibleKey = new System.Windows.Forms.TextBox();
             this.Main_ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.ShowSong_Tab = new System.Windows.Forms.TabPage();
-            this.SermonTools_Tab = new System.Windows.Forms.TabPage();
-            this.Sermon_LeftPanel = new System.Windows.Forms.Panel();
-            this.Sermon_LeftDoc_Panel = new System.Windows.Forms.Panel();
-            this.Sermon_DocManager = new DocumentManager.DocumentManager();
-            this.Sermon_LeftToolBar_Panel = new System.Windows.Forms.Panel();
-            this.Sermon_ToolBar = new TD.SandBar.ToolBar();
-            this.Sermon_ToolBar_NewDoc_Button = new TD.SandBar.ButtonItem();
-            this.Sermon_LeftBottom_Panel = new System.Windows.Forms.Panel();
-            this.Sermon_Preview_Button = new System.Windows.Forms.Button();
-            this.Sermon_BeamBox_Button = new System.Windows.Forms.Button();
-            this.Sermon_TabControl = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.Sermon_Verse_Label = new System.Windows.Forms.Label();
-            this.Sermon_Translation_Label = new System.Windows.Forms.Label();
-            this.Sermon_Books_Label = new System.Windows.Forms.Label();
-            this.Sermon_Testament_ListBox = new System.Windows.Forms.ListBox();
-            this.Sermon_Books = new System.Windows.Forms.ComboBox();
-            this.Sermon_BookList = new System.Windows.Forms.ListBox();
-            this.Presentation_Tab = new System.Windows.Forms.TabPage();
-            this.Presentation_FadePanel = new System.Windows.Forms.Panel();
-            this.Fade_panel = new System.Windows.Forms.Panel();
-            this.Fade_Top_Panel = new System.Windows.Forms.Panel();
-            this.Presentation_Fade_ListView = new System.Windows.Forms.ListView();
-            this.Presentation_Fade_Refresh_Button = new System.Windows.Forms.Button();
-            this.Presentation_Fade_ToPlaylist_Button = new System.Windows.Forms.Button();
-            this.Presentation_Fade_preview = new System.Windows.Forms.PictureBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.Presentation_MainPanel = new System.Windows.Forms.Panel();
-            this.Presentation_PreviewPanel = new System.Windows.Forms.Panel();
-            this.Presentation_VideoPanel = new System.Windows.Forms.Panel();
-            this.axShockwaveFlash = new AxShockwaveFlashObjects.AxShockwaveFlash();
-            this.Presentation_PreviewBox = new System.Windows.Forms.PictureBox();
-            this.Presentation_MovieControlPanel = new System.Windows.Forms.Panel();
-            this.Presentation_MovieControlPanelBottom = new System.Windows.Forms.Panel();
-            this.Presentation_MovieControl_PreviewButtonPanel = new System.Windows.Forms.Panel();
-            this.Presentation_MovieControlPanel_Top = new System.Windows.Forms.Panel();
-            this.Media_TrackBar = new System.Windows.Forms.TrackBar();
-            this.Presentation_MovieControlPanel_Right = new System.Windows.Forms.Panel();
-            this.muteButton = new System.Windows.Forms.Button();
-            this.AudioBar = new System.Windows.Forms.TrackBar();
-            this.EditSongs_Tab = new System.Windows.Forms.TabPage();
-            this.BibleText_Tab = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.GlobalDataSet = new System.Data.DataSet();
             this.SongListTable = new System.Data.DataTable();
@@ -508,29 +527,10 @@ namespace DreamBeam {
             this.dataColumn2 = new System.Data.DataColumn();
             this.SongListDataView = new System.Data.DataView();
             this.HideRectanglesTimer = new System.Windows.Forms.Timer(this.components);
-            this.SongShow_StropheList_ListEx = new Lister.ListEx();
-            this.songEditor = new DreamBeam.SongEditor();
-            this.liveMediaControls = new DreamBeam.MediaControls();
-            this.previewMediaControls = new DreamBeam.MediaControls();
-            this.bibleTextControl = new DreamBeam.BibleText();
-            this.RightDocks_PreviewScreen_PictureBox = new DreamBeam.ImagePanel();
-            this.RightDocks_Preview_Prev = new RibbonStyle.RibbonMenuButton();
-            this.RightDocks_Preview_Next = new RibbonStyle.RibbonMenuButton();
-            this.RightDocks_Preview_GoLive = new RibbonStyle.RibbonMenuButton();
-            this.RightDocks_Live_Prev = new RibbonStyle.RibbonMenuButton();
-            this.RightDocks_Live_Next = new RibbonStyle.RibbonMenuButton();
-            this.SongShow_HideAuthor_Button = new ctlLEDRadioButton.LEDradioButton();
-            this.SongShow_HideText_Button = new ctlLEDRadioButton.LEDradioButton();
-            this.SongShow_HideTitle_Button = new ctlLEDRadioButton.LEDradioButton();
-            this.songThemeWidget = new DreamBeam.ThemeWidget();
-            this.sermonThemeWidget = new DreamBeam.ThemeWidget();
-            this.bibleThemeWidget = new DreamBeam.ThemeWidget();
-            this.SongList_Tree = new ControlLib.dbTreeViewCtrl();
             Presentation_MovieControl_LiveButtonPanel = new System.Windows.Forms.Panel();
             Presentation_MovieControl_LiveButtonPanel.SuspendLayout();
             this.ToolBars_leftSandBarDock.SuspendLayout();
             this.ToolBars_topSandBarDock.SuspendLayout();
-            this.statusBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StatusPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarUpdatePanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SongShow_CollapsPanel)).BeginInit();
@@ -539,6 +539,35 @@ namespace DreamBeam {
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SongShow_HideElementsSub1Panel.SuspendLayout();
+            this.leftSandDock.SuspendLayout();
+            this.dockControl1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.ShowSong_Tab.SuspendLayout();
+            this.EditSongs_Tab.SuspendLayout();
+            this.Presentation_Tab.SuspendLayout();
+            this.Presentation_FadePanel.SuspendLayout();
+            this.Fade_panel.SuspendLayout();
+            this.Fade_Top_Panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Presentation_Fade_preview)).BeginInit();
+            this.Presentation_MainPanel.SuspendLayout();
+            this.Presentation_PreviewPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axShockwaveFlash)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Presentation_PreviewBox)).BeginInit();
+            this.Presentation_MovieControlPanel.SuspendLayout();
+            this.Presentation_MovieControlPanelBottom.SuspendLayout();
+            this.Presentation_MovieControl_PreviewButtonPanel.SuspendLayout();
+            this.Presentation_MovieControlPanel_Top.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Media_TrackBar)).BeginInit();
+            this.Presentation_MovieControlPanel_Right.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AudioBar)).BeginInit();
+            this.SermonTools_Tab.SuspendLayout();
+            this.Sermon_LeftPanel.SuspendLayout();
+            this.Sermon_LeftDoc_Panel.SuspendLayout();
+            this.Sermon_LeftToolBar_Panel.SuspendLayout();
+            this.Sermon_LeftBottom_Panel.SuspendLayout();
+            this.Sermon_TabControl.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.BibleText_Tab.SuspendLayout();
             this.rightSandDock.SuspendLayout();
             this.DockControl_PreviewScreen.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -576,33 +605,6 @@ namespace DreamBeam {
             this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RightDocks_BottomPanel_MediaLists_Numeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Main_ErrorProvider)).BeginInit();
-            this.ShowSong_Tab.SuspendLayout();
-            this.SermonTools_Tab.SuspendLayout();
-            this.Sermon_LeftPanel.SuspendLayout();
-            this.Sermon_LeftDoc_Panel.SuspendLayout();
-            this.Sermon_LeftToolBar_Panel.SuspendLayout();
-            this.Sermon_LeftBottom_Panel.SuspendLayout();
-            this.Sermon_TabControl.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.Presentation_Tab.SuspendLayout();
-            this.Presentation_FadePanel.SuspendLayout();
-            this.Fade_panel.SuspendLayout();
-            this.Fade_Top_Panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Presentation_Fade_preview)).BeginInit();
-            this.Presentation_MainPanel.SuspendLayout();
-            this.Presentation_PreviewPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axShockwaveFlash)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Presentation_PreviewBox)).BeginInit();
-            this.Presentation_MovieControlPanel.SuspendLayout();
-            this.Presentation_MovieControlPanelBottom.SuspendLayout();
-            this.Presentation_MovieControl_PreviewButtonPanel.SuspendLayout();
-            this.Presentation_MovieControlPanel_Top.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Media_TrackBar)).BeginInit();
-            this.Presentation_MovieControlPanel_Right.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.AudioBar)).BeginInit();
-            this.EditSongs_Tab.SuspendLayout();
-            this.BibleText_Tab.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SongListTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SongListDataView)).BeginInit();
@@ -628,6 +630,19 @@ namespace DreamBeam {
             this.Presentation_MediaLoop_Checkbox.TabIndex = 4;
             this.Presentation_MediaLoop_Checkbox.Text = "Loop";
             this.Presentation_MediaLoop_Checkbox.CheckedChanged += new System.EventHandler(this.Presentation_MediaLoop_Checkbox_CheckedChanged);
+            // 
+            // liveMediaControls
+            // 
+            this.liveMediaControls.BackColor = System.Drawing.Color.Transparent;
+            this.liveMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.liveMediaControls.LabelColor = System.Drawing.Color.Black;
+            this.liveMediaControls.LabelText = "Live Window";
+            this.liveMediaControls.Location = new System.Drawing.Point(0, 11);
+            this.liveMediaControls.Name = "liveMediaControls";
+            this.liveMediaControls.Red = true;
+            this.liveMediaControls.Size = new System.Drawing.Size(234, 63);
+            this.liveMediaControls.TabIndex = 5;
+            this.liveMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.liveMediaControls_MediaButtonPressed);
             // 
             // RightDocks_ImageListBox
             // 
@@ -693,10 +708,10 @@ namespace DreamBeam {
             // ToolBars_bottomSandBarDock
             // 
             this.ToolBars_bottomSandBarDock.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ToolBars_bottomSandBarDock.Location = new System.Drawing.Point(0, 582);
+            this.ToolBars_bottomSandBarDock.Location = new System.Drawing.Point(0, 560);
             this.ToolBars_bottomSandBarDock.Manager = this.ToolBars_sandBarManager1;
             this.ToolBars_bottomSandBarDock.Name = "ToolBars_bottomSandBarDock";
-            this.ToolBars_bottomSandBarDock.Size = new System.Drawing.Size(1039, 0);
+            this.ToolBars_bottomSandBarDock.Size = new System.Drawing.Size(843, 0);
             this.ToolBars_bottomSandBarDock.TabIndex = 20;
             // 
             // ToolBars_leftSandBarDock
@@ -706,7 +721,7 @@ namespace DreamBeam {
             this.ToolBars_leftSandBarDock.Location = new System.Drawing.Point(0, 50);
             this.ToolBars_leftSandBarDock.Manager = this.ToolBars_sandBarManager1;
             this.ToolBars_leftSandBarDock.Name = "ToolBars_leftSandBarDock";
-            this.ToolBars_leftSandBarDock.Size = new System.Drawing.Size(72, 532);
+            this.ToolBars_leftSandBarDock.Size = new System.Drawing.Size(72, 510);
             this.ToolBars_leftSandBarDock.TabIndex = 18;
             // 
             // ToolBars_ComponentBar
@@ -728,7 +743,7 @@ namespace DreamBeam {
             this.ToolBars_ComponentBar.Name = "ToolBars_ComponentBar";
             this.ToolBars_ComponentBar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ToolBars_ComponentBar.ShowShortcutsInToolTips = true;
-            this.ToolBars_ComponentBar.Size = new System.Drawing.Size(72, 530);
+            this.ToolBars_ComponentBar.Size = new System.Drawing.Size(72, 508);
             this.ToolBars_ComponentBar.Stretch = true;
             this.ToolBars_ComponentBar.TabIndex = 0;
             this.ToolBars_ComponentBar.Text = "Main Tool Bar";
@@ -788,7 +803,7 @@ namespace DreamBeam {
             this.ToolBars_topSandBarDock.Location = new System.Drawing.Point(0, 0);
             this.ToolBars_topSandBarDock.Manager = this.ToolBars_sandBarManager1;
             this.ToolBars_topSandBarDock.Name = "ToolBars_topSandBarDock";
-            this.ToolBars_topSandBarDock.Size = new System.Drawing.Size(1039, 50);
+            this.ToolBars_topSandBarDock.Size = new System.Drawing.Size(843, 50);
             this.ToolBars_topSandBarDock.TabIndex = 21;
             // 
             // ToolBars_MainToolbar
@@ -809,7 +824,7 @@ namespace DreamBeam {
             this.ToolBars_MainToolbar.Location = new System.Drawing.Point(2, 24);
             this.ToolBars_MainToolbar.Name = "ToolBars_MainToolbar";
             this.ToolBars_MainToolbar.ShowShortcutsInToolTips = true;
-            this.ToolBars_MainToolbar.Size = new System.Drawing.Size(1037, 26);
+            this.ToolBars_MainToolbar.Size = new System.Drawing.Size(841, 26);
             this.ToolBars_MainToolbar.Stretch = true;
             this.ToolBars_MainToolbar.TabIndex = 1;
             this.ToolBars_MainToolbar.Text = "Action Tool Bar";
@@ -1223,23 +1238,15 @@ namespace DreamBeam {
             // 
             // statusBar
             // 
-            this.statusBar.Controls.Add(this.RenderStatus);
-            this.statusBar.Location = new System.Drawing.Point(72, 560);
+            this.statusBar.Location = new System.Drawing.Point(0, 560);
             this.statusBar.Name = "statusBar";
             this.statusBar.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.StatusPanel,
             this.statusBarUpdatePanel});
             this.statusBar.ShowPanels = true;
-            this.statusBar.Size = new System.Drawing.Size(577, 22);
+            this.statusBar.Size = new System.Drawing.Size(843, 22);
             this.statusBar.SizingGrip = false;
             this.statusBar.TabIndex = 22;
-            // 
-            // RenderStatus
-            // 
-            this.RenderStatus.Location = new System.Drawing.Point(418, 4);
-            this.RenderStatus.Name = "RenderStatus";
-            this.RenderStatus.Size = new System.Drawing.Size(100, 16);
-            this.RenderStatus.TabIndex = 7;
             // 
             // StatusPanel
             // 
@@ -1247,13 +1254,20 @@ namespace DreamBeam {
             this.StatusPanel.Icon = ((System.Drawing.Icon)(resources.GetObject("StatusPanel.Icon")));
             this.StatusPanel.MinWidth = 330;
             this.StatusPanel.Name = "StatusPanel";
-            this.StatusPanel.Width = 467;
+            this.StatusPanel.Width = 733;
             // 
             // statusBarUpdatePanel
             // 
             this.statusBarUpdatePanel.MinWidth = 110;
             this.statusBarUpdatePanel.Name = "statusBarUpdatePanel";
             this.statusBarUpdatePanel.Width = 110;
+            // 
+            // RenderStatus
+            // 
+            this.RenderStatus.Location = new System.Drawing.Point(932, 563);
+            this.RenderStatus.Name = "RenderStatus";
+            this.RenderStatus.Size = new System.Drawing.Size(100, 16);
+            this.RenderStatus.TabIndex = 7;
             // 
             // SongShow_ImageList
             // 
@@ -1292,7 +1306,7 @@ namespace DreamBeam {
             this.SongShow_CollapsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SongShow_CollapsPanel.Location = new System.Drawing.Point(0, 0);
             this.SongShow_CollapsPanel.Name = "SongShow_CollapsPanel";
-            this.SongShow_CollapsPanel.Size = new System.Drawing.Size(223, 268);
+            this.SongShow_CollapsPanel.Size = new System.Drawing.Size(223, 255);
             this.SongShow_CollapsPanel.Spacing = 4;
             this.SongShow_CollapsPanel.TabIndex = 27;
             // 
@@ -1326,6 +1340,25 @@ namespace DreamBeam {
             this.panel3.Size = new System.Drawing.Size(207, 28);
             this.panel3.TabIndex = 5;
             // 
+            // SongShow_HideAuthor_Button
+            // 
+            this.SongShow_HideAuthor_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.SongShow_HideAuthor_Button.Appearance = System.Windows.Forms.Appearance.Button;
+            this.SongShow_HideAuthor_Button.bottomColor = System.Drawing.Color.DarkBlue;
+            this.SongShow_HideAuthor_Button.BottomTransparent = 64;
+            this.SongShow_HideAuthor_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SongShow_HideAuthor_Button.LEDColor = System.Drawing.Color.SteelBlue;
+            this.SongShow_HideAuthor_Button.Location = new System.Drawing.Point(52, 2);
+            this.SongShow_HideAuthor_Button.Name = "SongShow_HideAuthor_Button";
+            this.SongShow_HideAuthor_Button.Size = new System.Drawing.Size(104, 24);
+            this.SongShow_HideAuthor_Button.TabIndex = 3;
+            this.SongShow_HideAuthor_Button.Text = "Hide Author";
+            this.SongShow_HideAuthor_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SongShow_HideAuthor_Button.topColor = System.Drawing.Color.Aquamarine;
+            this.SongShow_HideAuthor_Button.TopTransparent = 64;
+            this.SongShow_HideAuthor_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideAuthor_Button_MouseDown);
+            this.SongShow_HideAuthor_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideAuthor_Button_MouseUp);
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -1336,6 +1369,25 @@ namespace DreamBeam {
             this.panel1.Size = new System.Drawing.Size(207, 28);
             this.panel1.TabIndex = 4;
             // 
+            // SongShow_HideText_Button
+            // 
+            this.SongShow_HideText_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.SongShow_HideText_Button.Appearance = System.Windows.Forms.Appearance.Button;
+            this.SongShow_HideText_Button.bottomColor = System.Drawing.Color.DarkBlue;
+            this.SongShow_HideText_Button.BottomTransparent = 64;
+            this.SongShow_HideText_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SongShow_HideText_Button.LEDColor = System.Drawing.Color.SteelBlue;
+            this.SongShow_HideText_Button.Location = new System.Drawing.Point(52, 2);
+            this.SongShow_HideText_Button.Name = "SongShow_HideText_Button";
+            this.SongShow_HideText_Button.Size = new System.Drawing.Size(104, 24);
+            this.SongShow_HideText_Button.TabIndex = 2;
+            this.SongShow_HideText_Button.Text = "Hide Verses";
+            this.SongShow_HideText_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SongShow_HideText_Button.topColor = System.Drawing.Color.Aquamarine;
+            this.SongShow_HideText_Button.TopTransparent = 64;
+            this.SongShow_HideText_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideText_Button_MouseDown);
+            this.SongShow_HideText_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideText_Button_MouseUp);
+            // 
             // SongShow_HideElementsSub1Panel
             // 
             this.SongShow_HideElementsSub1Panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -1345,6 +1397,25 @@ namespace DreamBeam {
             this.SongShow_HideElementsSub1Panel.Name = "SongShow_HideElementsSub1Panel";
             this.SongShow_HideElementsSub1Panel.Size = new System.Drawing.Size(207, 28);
             this.SongShow_HideElementsSub1Panel.TabIndex = 3;
+            // 
+            // SongShow_HideTitle_Button
+            // 
+            this.SongShow_HideTitle_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.SongShow_HideTitle_Button.Appearance = System.Windows.Forms.Appearance.Button;
+            this.SongShow_HideTitle_Button.bottomColor = System.Drawing.Color.DarkBlue;
+            this.SongShow_HideTitle_Button.BottomTransparent = 64;
+            this.SongShow_HideTitle_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SongShow_HideTitle_Button.LEDColor = System.Drawing.Color.SteelBlue;
+            this.SongShow_HideTitle_Button.Location = new System.Drawing.Point(52, 2);
+            this.SongShow_HideTitle_Button.Name = "SongShow_HideTitle_Button";
+            this.SongShow_HideTitle_Button.Size = new System.Drawing.Size(104, 24);
+            this.SongShow_HideTitle_Button.TabIndex = 1;
+            this.SongShow_HideTitle_Button.Text = "Hide Title";
+            this.SongShow_HideTitle_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SongShow_HideTitle_Button.topColor = System.Drawing.Color.Aquamarine;
+            this.SongShow_HideTitle_Button.TopTransparent = 64;
+            this.SongShow_HideTitle_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideTitle_Button_MouseDown);
+            this.SongShow_HideTitle_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideTitle_Button_MouseUp);
             // 
             // TextTypedTimer
             // 
@@ -1359,982 +1430,94 @@ namespace DreamBeam {
             // 
             // leftSandDock
             // 
+            this.leftSandDock.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.leftSandDock.Controls.Add(this.dockControl1);
             this.leftSandDock.Dock = System.Windows.Forms.DockStyle.Left;
+            this.leftSandDock.DockingManager = TD.SandDock.DockingManager.Whidbey;
             this.leftSandDock.Guid = new System.Guid("4844958a-6b63-4783-8909-9805d07b9fab");
-            this.leftSandDock.LayoutSystem = new TD.SandDock.SplitLayoutSystem(250, 400);
+            this.leftSandDock.LayoutSystem = new TD.SandDock.SplitLayoutSystem(250, 400, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
+            ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(382, 510, new TD.SandDock.DockControl[] {
+                        this.dockControl1}, this.dockControl1)))});
             this.leftSandDock.Location = new System.Drawing.Point(72, 50);
             this.leftSandDock.Manager = this.sandDockManager1;
+            this.leftSandDock.MaximumSize = 550;
             this.leftSandDock.Name = "leftSandDock";
-            this.leftSandDock.Size = new System.Drawing.Size(0, 532);
+            this.leftSandDock.Size = new System.Drawing.Size(386, 510);
             this.leftSandDock.TabIndex = 23;
-            // 
-            // rightSandDock
-            // 
-            this.rightSandDock.Controls.Add(this.DockControl_PreviewScreen);
-            this.rightSandDock.Controls.Add(this.DockControl_LiveScreen);
-            this.rightSandDock.Controls.Add(this.Dock_SongTools);
-            this.rightSandDock.Controls.Add(this.DockControl_BibleTools);
-            this.rightSandDock.Controls.Add(this.DockControl_DesignEditor);
-            this.rightSandDock.Controls.Add(this.DockControl_Songs);
-            this.rightSandDock.Controls.Add(this.DockControl_PlayList);
-            this.rightSandDock.Controls.Add(this.DockControl_Backgrounds);
-            this.rightSandDock.Controls.Add(this.DockControl_Media);
-            this.rightSandDock.Controls.Add(this.DockControl_MediaLists);
-            this.rightSandDock.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rightSandDock.Guid = new System.Guid("a6039876-f9a8-471e-b56f-5b1bf7264f06");
-            this.rightSandDock.LayoutSystem = new TD.SandDock.SplitLayoutSystem(250, 400, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
-            ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(386, 532, System.Windows.Forms.Orientation.Vertical, new TD.SandDock.LayoutSystemBase[] {
-                        ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(222, 532, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
-                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(223, 212, new TD.SandDock.DockControl[] {
-                                                this.DockControl_PreviewScreen,
-                                                this.DockControl_LiveScreen}, this.DockControl_LiveScreen))),
-                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(223, 315, new TD.SandDock.DockControl[] {
-                                                this.Dock_SongTools,
-                                                this.DockControl_BibleTools,
-                                                this.DockControl_DesignEditor}, this.DockControl_DesignEditor)))}))),
-                        ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(159, 532, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
-                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(159, 228, new TD.SandDock.DockControl[] {
-                                                this.DockControl_Songs,
-                                                this.DockControl_PlayList}, this.DockControl_PlayList))),
-                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(159, 299, new TD.SandDock.DockControl[] {
-                                                this.DockControl_Backgrounds,
-                                                this.DockControl_Media,
-                                                this.DockControl_MediaLists}, this.DockControl_Media)))})))})))});
-            this.rightSandDock.Location = new System.Drawing.Point(649, 50);
-            this.rightSandDock.Manager = this.sandDockManager1;
-            this.rightSandDock.MaximumSize = 600;
-            this.rightSandDock.Name = "rightSandDock";
-            this.rightSandDock.Size = new System.Drawing.Size(390, 532);
-            this.rightSandDock.TabIndex = 24;
-            // 
-            // DockControl_PreviewScreen
-            // 
-            this.DockControl_PreviewScreen.Controls.Add(this.RightDocks_PreviewScreen_PictureBox);
-            this.DockControl_PreviewScreen.Controls.Add(this.panel5);
-            this.DockControl_PreviewScreen.Guid = new System.Guid("8a7e4f9a-a6a1-48b7-a273-8494de07e6b2");
-            this.DockControl_PreviewScreen.Location = new System.Drawing.Point(4, 25);
-            this.DockControl_PreviewScreen.Name = "DockControl_PreviewScreen";
-            this.DockControl_PreviewScreen.Size = new System.Drawing.Size(223, 164);
-            this.DockControl_PreviewScreen.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_PreviewScreen.TabImage")));
-            this.DockControl_PreviewScreen.TabIndex = 1;
-            this.DockControl_PreviewScreen.Text = "Preview";
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel5.Controls.Add(this.RightDocks_Preview_Prev);
-            this.panel5.Controls.Add(this.RightDocks_Preview_Next);
-            this.panel5.Controls.Add(this.RightDocks_Preview_GoLive);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 134);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(223, 30);
-            this.panel5.TabIndex = 1;
-            this.panel5.SizeChanged += new System.EventHandler(this.panel5_SizeChanged);
-            // 
-            // DockControl_LiveScreen
-            // 
-            this.DockControl_LiveScreen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.DockControl_LiveScreen.Controls.Add(this.RightDocks_LiveScreen_PictureBox);
-            this.DockControl_LiveScreen.Controls.Add(this.panel9);
-            this.DockControl_LiveScreen.Guid = new System.Guid("e37c7ea7-844c-4a80-baba-1b5d7ddb42e7");
-            this.DockControl_LiveScreen.Location = new System.Drawing.Point(4, 25);
-            this.DockControl_LiveScreen.Name = "DockControl_LiveScreen";
-            this.DockControl_LiveScreen.Size = new System.Drawing.Size(223, 164);
-            this.DockControl_LiveScreen.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_LiveScreen.TabImage")));
-            this.DockControl_LiveScreen.TabIndex = 2;
-            this.DockControl_LiveScreen.Text = "Live";
-            // 
-            // RightDocks_LiveScreen_PictureBox
-            // 
-            this.RightDocks_LiveScreen_PictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightDocks_LiveScreen_PictureBox.Location = new System.Drawing.Point(0, 0);
-            this.RightDocks_LiveScreen_PictureBox.Name = "RightDocks_LiveScreen_PictureBox";
-            this.RightDocks_LiveScreen_PictureBox.Size = new System.Drawing.Size(223, 134);
-            this.RightDocks_LiveScreen_PictureBox.TabIndex = 0;
-            this.RightDocks_LiveScreen_PictureBox.TabStop = false;
-            this.RightDocks_LiveScreen_PictureBox.SizeChanged += new System.EventHandler(this.RightDocks_LiveScreen_PictureBox_SizeChanged);
-            // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel9.Controls.Add(this.RightDocks_Live_Prev);
-            this.panel9.Controls.Add(this.RightDocks_Live_Next);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel9.Location = new System.Drawing.Point(0, 134);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(223, 30);
-            this.panel9.TabIndex = 1;
-            this.panel9.Resize += new System.EventHandler(this.panel9_Resize);
-            // 
-            // Dock_SongTools
-            // 
-            this.Dock_SongTools.Controls.Add(this.SongShow_CollapsPanel);
-            this.Dock_SongTools.Guid = new System.Guid("7bae0dc0-4ef3-4da4-a888-a9cafaee19c6");
-            this.Dock_SongTools.Location = new System.Drawing.Point(4, 241);
-            this.Dock_SongTools.Name = "Dock_SongTools";
-            this.Dock_SongTools.Size = new System.Drawing.Size(223, 268);
-            this.Dock_SongTools.TabIndex = 7;
-            this.Dock_SongTools.Text = "Song Tools";
-            // 
-            // DockControl_BibleTools
-            // 
-            this.DockControl_BibleTools.Controls.Add(this.BibleTools_CollapsiblePanelBar);
-            this.DockControl_BibleTools.Guid = new System.Guid("226af261-a2b0-437c-8c85-a1c4d4b57298");
-            this.DockControl_BibleTools.Location = new System.Drawing.Point(4, 241);
-            this.DockControl_BibleTools.Name = "DockControl_BibleTools";
-            this.DockControl_BibleTools.Size = new System.Drawing.Size(223, 268);
-            this.DockControl_BibleTools.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_BibleTools.TabImage")));
-            this.DockControl_BibleTools.TabIndex = 6;
-            this.DockControl_BibleTools.Text = "Bible Tools";
-            // 
-            // BibleTools_CollapsiblePanelBar
-            // 
-            this.BibleTools_CollapsiblePanelBar.AutoScroll = true;
-            this.BibleTools_CollapsiblePanelBar.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.BibleTools_CollapsiblePanelBar.Border = 8;
-            this.BibleTools_CollapsiblePanelBar.Controls.Add(this.BibleBookmarks_CollapsiblePanel);
-            this.BibleTools_CollapsiblePanelBar.Controls.Add(this.BibleTranslations_CollapsiblePanel);
-            this.BibleTools_CollapsiblePanelBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BibleTools_CollapsiblePanelBar.Location = new System.Drawing.Point(0, 0);
-            this.BibleTools_CollapsiblePanelBar.Name = "BibleTools_CollapsiblePanelBar";
-            this.BibleTools_CollapsiblePanelBar.Size = new System.Drawing.Size(223, 268);
-            this.BibleTools_CollapsiblePanelBar.Spacing = 8;
-            this.BibleTools_CollapsiblePanelBar.TabIndex = 2;
-            // 
-            // BibleBookmarks_CollapsiblePanel
-            // 
-            this.BibleBookmarks_CollapsiblePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.BibleBookmarks_CollapsiblePanel.BackColor = System.Drawing.Color.AliceBlue;
-            this.BibleBookmarks_CollapsiblePanel.Controls.Add(this.BibleText_Bookmarks);
-            this.BibleBookmarks_CollapsiblePanel.EndColour = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(212)))), ((int)(((byte)(247)))));
-            this.BibleBookmarks_CollapsiblePanel.Image = null;
-            this.BibleBookmarks_CollapsiblePanel.Location = new System.Drawing.Point(8, 121);
-            this.BibleBookmarks_CollapsiblePanel.Name = "BibleBookmarks_CollapsiblePanel";
-            this.BibleBookmarks_CollapsiblePanel.PanelState = Salamander.Windows.Forms.PanelState.Expanded;
-            this.BibleBookmarks_CollapsiblePanel.Size = new System.Drawing.Size(190, 209);
-            this.BibleBookmarks_CollapsiblePanel.StartColour = System.Drawing.Color.White;
-            this.BibleBookmarks_CollapsiblePanel.TabIndex = 1;
-            this.BibleBookmarks_CollapsiblePanel.TitleFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BibleBookmarks_CollapsiblePanel.TitleFontColour = System.Drawing.Color.Navy;
-            this.BibleBookmarks_CollapsiblePanel.TitleText = "Bookmarks";
-            // 
-            // BibleText_Bookmarks
-            // 
-            this.BibleText_Bookmarks.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BibleText_Bookmarks.Location = new System.Drawing.Point(0, 23);
-            this.BibleText_Bookmarks.Name = "BibleText_Bookmarks";
-            this.BibleText_Bookmarks.Size = new System.Drawing.Size(190, 186);
-            this.BibleText_Bookmarks.TabIndex = 1;
-            this.MainForm_ToolTip.SetToolTip(this.BibleText_Bookmarks, "Click to preview this verse, or right-click to remove it.");
-            this.BibleText_Bookmarks.SelectedIndexChanged += new System.EventHandler(this.BibleText_Bookmarks_SelectedIndexChanged);
-            this.BibleText_Bookmarks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BibleText_Bookmarks_MouseDown);
-            // 
-            // BibleTranslations_CollapsiblePanel
-            // 
-            this.BibleTranslations_CollapsiblePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.BibleTranslations_CollapsiblePanel.BackColor = System.Drawing.Color.AliceBlue;
-            this.BibleTranslations_CollapsiblePanel.Controls.Add(this.BibleText_Translations);
-            this.BibleTranslations_CollapsiblePanel.EndColour = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(212)))), ((int)(((byte)(247)))));
-            this.BibleTranslations_CollapsiblePanel.Image = null;
-            this.BibleTranslations_CollapsiblePanel.Location = new System.Drawing.Point(8, 8);
-            this.BibleTranslations_CollapsiblePanel.Name = "BibleTranslations_CollapsiblePanel";
-            this.BibleTranslations_CollapsiblePanel.PanelState = Salamander.Windows.Forms.PanelState.Expanded;
-            this.BibleTranslations_CollapsiblePanel.Size = new System.Drawing.Size(190, 105);
-            this.BibleTranslations_CollapsiblePanel.StartColour = System.Drawing.Color.White;
-            this.BibleTranslations_CollapsiblePanel.TabIndex = 0;
-            this.BibleTranslations_CollapsiblePanel.TitleFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BibleTranslations_CollapsiblePanel.TitleFontColour = System.Drawing.Color.Navy;
-            this.BibleTranslations_CollapsiblePanel.TitleText = "Translations";
-            // 
-            // BibleText_Translations
-            // 
-            this.BibleText_Translations.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BibleText_Translations.Location = new System.Drawing.Point(0, 23);
-            this.BibleText_Translations.Name = "BibleText_Translations";
-            this.BibleText_Translations.Size = new System.Drawing.Size(190, 82);
-            this.BibleText_Translations.TabIndex = 1;
-            this.BibleText_Translations.SelectedIndexChanged += new System.EventHandler(this.BibleText_Translations_SelectedIndexChanged);
-            // 
-            // DockControl_DesignEditor
-            // 
-            this.DockControl_DesignEditor.Controls.Add(this.DesignTabControl);
-            this.DockControl_DesignEditor.Guid = new System.Guid("69c6f3d1-3cc1-404c-ae1c-cf6db365a077");
-            this.DockControl_DesignEditor.Location = new System.Drawing.Point(4, 241);
-            this.DockControl_DesignEditor.Name = "DockControl_DesignEditor";
-            this.DockControl_DesignEditor.Size = new System.Drawing.Size(223, 268);
-            this.DockControl_DesignEditor.TabIndex = 8;
-            this.DockControl_DesignEditor.Text = "Song Design";
-            // 
-            // DesignTabControl
-            // 
-            this.DesignTabControl.Controls.Add(this.SongDesignTab);
-            this.DesignTabControl.Controls.Add(this.SermonDesignTab);
-            this.DesignTabControl.Controls.Add(this.BibleDesignTab);
-            this.DesignTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DesignTabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.DesignTabControl.Location = new System.Drawing.Point(0, 0);
-            this.DesignTabControl.Name = "DesignTabControl";
-            this.DesignTabControl.Padding = new System.Drawing.Point(0, 0);
-            this.DesignTabControl.SelectedIndex = 0;
-            this.DesignTabControl.Size = new System.Drawing.Size(223, 268);
-            this.DesignTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.DesignTabControl.TabIndex = 3;
-            // 
-            // SongDesignTab
-            // 
-            this.SongDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.SongDesignTab.Controls.Add(this.songThemeWidget);
-            this.SongDesignTab.Location = new System.Drawing.Point(4, 22);
-            this.SongDesignTab.Name = "SongDesignTab";
-            this.SongDesignTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SongDesignTab.Size = new System.Drawing.Size(215, 242);
-            this.SongDesignTab.TabIndex = 0;
-            this.SongDesignTab.SizeChanged += new System.EventHandler(this.SongDesignTab_SizeChanged);
-            // 
-            // SermonDesignTab
-            // 
-            this.SermonDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.SermonDesignTab.Controls.Add(this.sermonThemeWidget);
-            this.SermonDesignTab.Location = new System.Drawing.Point(4, 22);
-            this.SermonDesignTab.Name = "SermonDesignTab";
-            this.SermonDesignTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SermonDesignTab.Size = new System.Drawing.Size(215, 242);
-            this.SermonDesignTab.TabIndex = 1;
-            this.SermonDesignTab.SizeChanged += new System.EventHandler(this.SermonDesignTab_SizeChanged);
-            // 
-            // BibleDesignTab
-            // 
-            this.BibleDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.BibleDesignTab.Controls.Add(this.bibleThemeWidget);
-            this.BibleDesignTab.Location = new System.Drawing.Point(4, 22);
-            this.BibleDesignTab.Name = "BibleDesignTab";
-            this.BibleDesignTab.Padding = new System.Windows.Forms.Padding(3);
-            this.BibleDesignTab.Size = new System.Drawing.Size(215, 242);
-            this.BibleDesignTab.TabIndex = 2;
-            this.BibleDesignTab.SizeChanged += new System.EventHandler(this.BibleDesignTab_SizeChanged);
-            // 
-            // DockControl_Songs
-            // 
-            this.DockControl_Songs.Controls.Add(this.SongList_Tree);
-            this.DockControl_Songs.Controls.Add(this.RightDocks_Songlist_SearchPanel);
-            this.DockControl_Songs.Controls.Add(this.RightDocks_SongList_ButtonPanel);
-            this.DockControl_Songs.Guid = new System.Guid("6044bb67-05ab-4617-bbfa-99e49388b41f");
-            this.DockControl_Songs.Location = new System.Drawing.Point(231, 25);
-            this.DockControl_Songs.Name = "DockControl_Songs";
-            this.DockControl_Songs.Size = new System.Drawing.Size(159, 180);
-            this.DockControl_Songs.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_Songs.TabImage")));
-            this.DockControl_Songs.TabIndex = 0;
-            this.DockControl_Songs.Text = "Songs";
-            // 
-            // RightDocks_Songlist_SearchPanel
-            // 
-            this.RightDocks_Songlist_SearchPanel.Controls.Add(this.pictureBox1);
-            this.RightDocks_Songlist_SearchPanel.Controls.Add(this.RightDocks_SongListSearch);
-            this.RightDocks_Songlist_SearchPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.RightDocks_Songlist_SearchPanel.Location = new System.Drawing.Point(0, 0);
-            this.RightDocks_Songlist_SearchPanel.Name = "RightDocks_Songlist_SearchPanel";
-            this.RightDocks_Songlist_SearchPanel.Size = new System.Drawing.Size(159, 23);
-            this.RightDocks_Songlist_SearchPanel.TabIndex = 6;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(22, 22);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
-            // RightDocks_SongListSearch
-            // 
-            this.RightDocks_SongListSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.RightDocks_SongListSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RightDocks_SongListSearch.Location = new System.Drawing.Point(22, 0);
-            this.RightDocks_SongListSearch.Name = "RightDocks_SongListSearch";
-            this.RightDocks_SongListSearch.Size = new System.Drawing.Size(137, 20);
-            this.RightDocks_SongListSearch.TabIndex = 4;
-            this.RightDocks_SongListSearch.TextChanged += new System.EventHandler(this.RightDocks_SongListSearch_TextChanged);
-            // 
-            // RightDocks_SongList_ButtonPanel
-            // 
-            this.RightDocks_SongList_ButtonPanel.Controls.Add(this.btnRightDocks_SongListDelete);
-            this.RightDocks_SongList_ButtonPanel.Controls.Add(this.btnRightDocks_SongList2PlayList);
-            this.RightDocks_SongList_ButtonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RightDocks_SongList_ButtonPanel.Location = new System.Drawing.Point(0, 160);
-            this.RightDocks_SongList_ButtonPanel.Name = "RightDocks_SongList_ButtonPanel";
-            this.RightDocks_SongList_ButtonPanel.Size = new System.Drawing.Size(159, 20);
-            this.RightDocks_SongList_ButtonPanel.TabIndex = 5;
-            // 
-            // btnRightDocks_SongListDelete
-            // 
-            this.btnRightDocks_SongListDelete.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnRightDocks_SongListDelete.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRightDocks_SongListDelete.Location = new System.Drawing.Point(-3, 1);
-            this.btnRightDocks_SongListDelete.Name = "btnRightDocks_SongListDelete";
-            this.btnRightDocks_SongListDelete.Size = new System.Drawing.Size(62, 18);
-            this.btnRightDocks_SongListDelete.TabIndex = 2;
-            this.btnRightDocks_SongListDelete.Text = "Delete";
-            this.MainForm_ToolTip.SetToolTip(this.btnRightDocks_SongListDelete, "Delete selected song");
-            this.btnRightDocks_SongListDelete.Click += new System.EventHandler(this.btnRightDocks_SongListDelete_Click);
-            // 
-            // btnRightDocks_SongList2PlayList
-            // 
-            this.btnRightDocks_SongList2PlayList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRightDocks_SongList2PlayList.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRightDocks_SongList2PlayList.Location = new System.Drawing.Point(59, 1);
-            this.btnRightDocks_SongList2PlayList.Name = "btnRightDocks_SongList2PlayList";
-            this.btnRightDocks_SongList2PlayList.Size = new System.Drawing.Size(88, 18);
-            this.btnRightDocks_SongList2PlayList.TabIndex = 1;
-            this.btnRightDocks_SongList2PlayList.Text = "Add to Playlist";
-            this.MainForm_ToolTip.SetToolTip(this.btnRightDocks_SongList2PlayList, "Add selected song to the playlist");
-            this.btnRightDocks_SongList2PlayList.Click += new System.EventHandler(this.btnRightDocks_SongList2PlayList_Click);
-            // 
-            // DockControl_PlayList
-            // 
-            this.DockControl_PlayList.Controls.Add(this.RightDocks_PlayList);
-            this.DockControl_PlayList.Controls.Add(this.RightDocks_TopPanel_PlayList_Button_Panel);
-            this.DockControl_PlayList.Guid = new System.Guid("92186926-e7f9-4850-98b8-190a99f81ea6");
-            this.DockControl_PlayList.Location = new System.Drawing.Point(231, 25);
-            this.DockControl_PlayList.Name = "DockControl_PlayList";
-            this.DockControl_PlayList.Size = new System.Drawing.Size(159, 180);
-            this.DockControl_PlayList.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_PlayList.TabImage")));
-            this.DockControl_PlayList.TabIndex = 2;
-            this.DockControl_PlayList.Text = "Playlist";
-            // 
-            // RightDocks_PlayList
-            // 
-            this.RightDocks_PlayList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RightDocks_PlayList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightDocks_PlayList.Location = new System.Drawing.Point(0, 0);
-            this.RightDocks_PlayList.Name = "RightDocks_PlayList";
-            this.RightDocks_PlayList.Size = new System.Drawing.Size(159, 158);
-            this.RightDocks_PlayList.TabIndex = 1;
-            this.RightDocks_PlayList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RightDocks_PlayList_MouseUp);
-            this.RightDocks_PlayList.DoubleClick += new System.EventHandler(this.RightDocks_PlayList_DoubleClick);
-            // 
-            // RightDocks_TopPanel_PlayList_Button_Panel
-            // 
-            this.RightDocks_TopPanel_PlayList_Button_Panel.Controls.Add(this.RightDocks_PlayList_Down_Button);
-            this.RightDocks_TopPanel_PlayList_Button_Panel.Controls.Add(this.RightDocks_PlayList_Up_Button);
-            this.RightDocks_TopPanel_PlayList_Button_Panel.Controls.Add(this.RightDocks_PlayList_Remove_Button);
-            this.RightDocks_TopPanel_PlayList_Button_Panel.Controls.Add(this.RightDocks_PlayList_Load_Button);
-            this.RightDocks_TopPanel_PlayList_Button_Panel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RightDocks_TopPanel_PlayList_Button_Panel.Location = new System.Drawing.Point(0, 160);
-            this.RightDocks_TopPanel_PlayList_Button_Panel.Name = "RightDocks_TopPanel_PlayList_Button_Panel";
-            this.RightDocks_TopPanel_PlayList_Button_Panel.Size = new System.Drawing.Size(159, 20);
-            this.RightDocks_TopPanel_PlayList_Button_Panel.TabIndex = 8;
-            // 
-            // RightDocks_PlayList_Down_Button
-            // 
-            this.RightDocks_PlayList_Down_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RightDocks_PlayList_Down_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_PlayList_Down_Button.Location = new System.Drawing.Point(117, 2);
-            this.RightDocks_PlayList_Down_Button.Name = "RightDocks_PlayList_Down_Button";
-            this.RightDocks_PlayList_Down_Button.Size = new System.Drawing.Size(40, 18);
-            this.RightDocks_PlayList_Down_Button.TabIndex = 7;
-            this.RightDocks_PlayList_Down_Button.Text = "Down";
-            this.RightDocks_PlayList_Down_Button.Click += new System.EventHandler(this.RightDocks_PlayList_Down_Button_Click);
-            // 
-            // RightDocks_PlayList_Up_Button
-            // 
-            this.RightDocks_PlayList_Up_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RightDocks_PlayList_Up_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_PlayList_Up_Button.Location = new System.Drawing.Point(77, 2);
-            this.RightDocks_PlayList_Up_Button.Name = "RightDocks_PlayList_Up_Button";
-            this.RightDocks_PlayList_Up_Button.Size = new System.Drawing.Size(40, 18);
-            this.RightDocks_PlayList_Up_Button.TabIndex = 6;
-            this.RightDocks_PlayList_Up_Button.Text = "Up";
-            this.RightDocks_PlayList_Up_Button.Click += new System.EventHandler(this.RightDocks_PlayList_Up_Button_Click);
-            // 
-            // RightDocks_PlayList_Remove_Button
-            // 
-            this.RightDocks_PlayList_Remove_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.RightDocks_PlayList_Remove_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_PlayList_Remove_Button.Location = new System.Drawing.Point(38, 2);
-            this.RightDocks_PlayList_Remove_Button.Name = "RightDocks_PlayList_Remove_Button";
-            this.RightDocks_PlayList_Remove_Button.Size = new System.Drawing.Size(54, 18);
-            this.RightDocks_PlayList_Remove_Button.TabIndex = 5;
-            this.RightDocks_PlayList_Remove_Button.Text = "Remove";
-            this.MainForm_ToolTip.SetToolTip(this.RightDocks_PlayList_Remove_Button, "Remove selected song from playlist");
-            this.RightDocks_PlayList_Remove_Button.Click += new System.EventHandler(this.RightDocks_PlayList_Remove_Button_Click);
-            // 
-            // RightDocks_PlayList_Load_Button
-            // 
-            this.RightDocks_PlayList_Load_Button.Enabled = false;
-            this.RightDocks_PlayList_Load_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_PlayList_Load_Button.Location = new System.Drawing.Point(2, 2);
-            this.RightDocks_PlayList_Load_Button.Name = "RightDocks_PlayList_Load_Button";
-            this.RightDocks_PlayList_Load_Button.Size = new System.Drawing.Size(54, 18);
-            this.RightDocks_PlayList_Load_Button.TabIndex = 4;
-            this.RightDocks_PlayList_Load_Button.Text = "<- Load";
-            this.MainForm_ToolTip.SetToolTip(this.RightDocks_PlayList_Load_Button, "Preview selected song");
-            // 
-            // DockControl_Backgrounds
-            // 
-            this.DockControl_Backgrounds.Controls.Add(this.panel2);
-            this.DockControl_Backgrounds.Controls.Add(this.panel6);
-            this.DockControl_Backgrounds.Controls.Add(this.RightDocks_BottomPanel2_TopPanel);
-            this.DockControl_Backgrounds.Guid = new System.Guid("b561dd7f-3e79-4e07-912c-18ac9600db75");
-            this.DockControl_Backgrounds.Location = new System.Drawing.Point(231, 257);
-            this.DockControl_Backgrounds.Name = "DockControl_Backgrounds";
-            this.DockControl_Backgrounds.Size = new System.Drawing.Size(159, 252);
-            this.DockControl_Backgrounds.TabIndex = 1;
-            this.DockControl_Backgrounds.Text = "Backgrounds";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.RightDocks_ImageListBox);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 24);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(159, 204);
-            this.panel2.TabIndex = 25;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.RightDocks_Backgrounds_UseDefault);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 228);
-            this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(2);
-            this.panel6.Size = new System.Drawing.Size(159, 24);
-            this.panel6.TabIndex = 24;
-            // 
-            // RightDocks_Backgrounds_UseDefault
-            // 
-            this.RightDocks_Backgrounds_UseDefault.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.RightDocks_Backgrounds_UseDefault.Location = new System.Drawing.Point(41, 3);
-            this.RightDocks_Backgrounds_UseDefault.Name = "RightDocks_Backgrounds_UseDefault";
-            this.RightDocks_Backgrounds_UseDefault.Size = new System.Drawing.Size(75, 18);
-            this.RightDocks_Backgrounds_UseDefault.TabIndex = 23;
-            this.RightDocks_Backgrounds_UseDefault.Text = "Use Default";
-            this.RightDocks_Backgrounds_UseDefault.Click += new System.EventHandler(this.RightDocks_Backgrounds_UseDefault_Click);
-            // 
-            // RightDocks_BottomPanel2_TopPanel
-            // 
-            this.RightDocks_BottomPanel2_TopPanel.Controls.Add(this.RightDocks_FolderDropdown);
-            this.RightDocks_BottomPanel2_TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.RightDocks_BottomPanel2_TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.RightDocks_BottomPanel2_TopPanel.Name = "RightDocks_BottomPanel2_TopPanel";
-            this.RightDocks_BottomPanel2_TopPanel.Size = new System.Drawing.Size(159, 24);
-            this.RightDocks_BottomPanel2_TopPanel.TabIndex = 22;
-            // 
-            // DockControl_Media
-            // 
-            this.DockControl_Media.Controls.Add(this.RightDocks_BottomPanel_MediaList);
-            this.DockControl_Media.Controls.Add(this.RightDocks_BottomPanel_Media_Bottom);
-            this.DockControl_Media.Controls.Add(this.RightDocks_BottomPanel_Media_Top);
-            this.DockControl_Media.Guid = new System.Guid("c9d617ca-0165-45b7-8e07-329a81273abc");
-            this.DockControl_Media.Location = new System.Drawing.Point(231, 257);
-            this.DockControl_Media.Name = "DockControl_Media";
-            this.DockControl_Media.Size = new System.Drawing.Size(159, 252);
-            this.DockControl_Media.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_Media.TabImage")));
-            this.DockControl_Media.TabIndex = 4;
-            this.DockControl_Media.Text = "Media";
-            // 
-            // RightDocks_BottomPanel_MediaList
-            // 
-            this.RightDocks_BottomPanel_MediaList.AllowDrop = true;
-            this.RightDocks_BottomPanel_MediaList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RightDocks_BottomPanel_MediaList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightDocks_BottomPanel_MediaList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.RightDocks_BottomPanel_MediaList.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RightDocks_BottomPanel_MediaList.ImageList = this.Media_ImageList;
-            this.RightDocks_BottomPanel_MediaList.ItemHeight = 76;
-            this.RightDocks_BottomPanel_MediaList.Location = new System.Drawing.Point(0, 32);
-            this.RightDocks_BottomPanel_MediaList.Name = "RightDocks_BottomPanel_MediaList";
-            this.RightDocks_BottomPanel_MediaList.Size = new System.Drawing.Size(159, 154);
-            this.RightDocks_BottomPanel_MediaList.TabIndex = 3;
-            this.RightDocks_BottomPanel_MediaList.SelectedIndexChanged += new System.EventHandler(this.RightDocks_BottomPanel_MediaList_SelectedIndexChanged);
-            this.RightDocks_BottomPanel_MediaList.DragDrop += new System.Windows.Forms.DragEventHandler(this.RightDocks_BottomPanel_MediaList_DragDrop);
-            this.RightDocks_BottomPanel_MediaList.DoubleClick += new System.EventHandler(this.RightDocks_BottomPanel_MediaList_DoubleClick);
-            this.RightDocks_BottomPanel_MediaList.DragEnter += new System.Windows.Forms.DragEventHandler(this.RightDocks_BottomPanel_MediaList_DragEnter);
-            // 
-            // Media_ImageList
-            // 
-            this.Media_ImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
-            this.Media_ImageList.ImageSize = new System.Drawing.Size(100, 75);
-            this.Media_ImageList.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // RightDocks_BottomPanel_Media_Bottom
-            // 
-            this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_AutoPlay);
-            this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_Remove);
-            this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_Down);
-            this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_Up);
-            this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_ShowNext);
-            this.RightDocks_BottomPanel_Media_Bottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RightDocks_BottomPanel_Media_Bottom.Location = new System.Drawing.Point(0, 196);
-            this.RightDocks_BottomPanel_Media_Bottom.Name = "RightDocks_BottomPanel_Media_Bottom";
-            this.RightDocks_BottomPanel_Media_Bottom.Size = new System.Drawing.Size(159, 56);
-            this.RightDocks_BottomPanel_Media_Bottom.TabIndex = 5;
-            // 
-            // RightDocks_BottomPanel_Media_AutoPlay
-            // 
-            this.RightDocks_BottomPanel_Media_AutoPlay.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_BottomPanel_Media_AutoPlay.Location = new System.Drawing.Point(104, 32);
-            this.RightDocks_BottomPanel_Media_AutoPlay.Name = "RightDocks_BottomPanel_Media_AutoPlay";
-            this.RightDocks_BottomPanel_Media_AutoPlay.Size = new System.Drawing.Size(75, 23);
-            this.RightDocks_BottomPanel_Media_AutoPlay.TabIndex = 11;
-            this.RightDocks_BottomPanel_Media_AutoPlay.Text = "Auto Play";
-            this.RightDocks_BottomPanel_Media_AutoPlay.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_AutoPlay_Click);
-            // 
-            // RightDocks_BottomPanel_Media_Remove
-            // 
-            this.RightDocks_BottomPanel_Media_Remove.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_BottomPanel_Media_Remove.Location = new System.Drawing.Point(56, 8);
-            this.RightDocks_BottomPanel_Media_Remove.Name = "RightDocks_BottomPanel_Media_Remove";
-            this.RightDocks_BottomPanel_Media_Remove.Size = new System.Drawing.Size(56, 18);
-            this.RightDocks_BottomPanel_Media_Remove.TabIndex = 10;
-            this.RightDocks_BottomPanel_Media_Remove.Text = "Remove";
-            this.RightDocks_BottomPanel_Media_Remove.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_Remove_Click);
-            // 
-            // RightDocks_BottomPanel_Media_Down
-            // 
-            this.RightDocks_BottomPanel_Media_Down.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_BottomPanel_Media_Down.Location = new System.Drawing.Point(152, 8);
-            this.RightDocks_BottomPanel_Media_Down.Name = "RightDocks_BottomPanel_Media_Down";
-            this.RightDocks_BottomPanel_Media_Down.Size = new System.Drawing.Size(40, 18);
-            this.RightDocks_BottomPanel_Media_Down.TabIndex = 9;
-            this.RightDocks_BottomPanel_Media_Down.Text = "down";
-            this.RightDocks_BottomPanel_Media_Down.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_Down_Click);
-            // 
-            // RightDocks_BottomPanel_Media_Up
-            // 
-            this.RightDocks_BottomPanel_Media_Up.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_BottomPanel_Media_Up.Location = new System.Drawing.Point(112, 8);
-            this.RightDocks_BottomPanel_Media_Up.Name = "RightDocks_BottomPanel_Media_Up";
-            this.RightDocks_BottomPanel_Media_Up.Size = new System.Drawing.Size(40, 18);
-            this.RightDocks_BottomPanel_Media_Up.TabIndex = 8;
-            this.RightDocks_BottomPanel_Media_Up.Text = "up";
-            this.RightDocks_BottomPanel_Media_Up.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_Up_Click);
-            // 
-            // RightDocks_BottomPanel_Media_ShowNext
-            // 
-            this.RightDocks_BottomPanel_Media_ShowNext.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_BottomPanel_Media_ShowNext.Location = new System.Drawing.Point(16, 32);
-            this.RightDocks_BottomPanel_Media_ShowNext.Name = "RightDocks_BottomPanel_Media_ShowNext";
-            this.RightDocks_BottomPanel_Media_ShowNext.Size = new System.Drawing.Size(75, 23);
-            this.RightDocks_BottomPanel_Media_ShowNext.TabIndex = 0;
-            this.RightDocks_BottomPanel_Media_ShowNext.Text = "Show&&Next";
-            this.RightDocks_BottomPanel_Media_ShowNext.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_ShowNext_Click);
-            // 
-            // RightDocks_BottomPanel_Media_Top
-            // 
-            this.RightDocks_BottomPanel_Media_Top.Controls.Add(this.RightDocks_BottomPanel_Media_FadePanelButton);
-            this.RightDocks_BottomPanel_Media_Top.Dock = System.Windows.Forms.DockStyle.Top;
-            this.RightDocks_BottomPanel_Media_Top.Location = new System.Drawing.Point(0, 0);
-            this.RightDocks_BottomPanel_Media_Top.Name = "RightDocks_BottomPanel_Media_Top";
-            this.RightDocks_BottomPanel_Media_Top.Size = new System.Drawing.Size(159, 32);
-            this.RightDocks_BottomPanel_Media_Top.TabIndex = 4;
-            // 
-            // RightDocks_BottomPanel_Media_FadePanelButton
-            // 
-            this.RightDocks_BottomPanel_Media_FadePanelButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_BottomPanel_Media_FadePanelButton.Location = new System.Drawing.Point(23, 5);
-            this.RightDocks_BottomPanel_Media_FadePanelButton.Name = "RightDocks_BottomPanel_Media_FadePanelButton";
-            this.RightDocks_BottomPanel_Media_FadePanelButton.Size = new System.Drawing.Size(136, 23);
-            this.RightDocks_BottomPanel_Media_FadePanelButton.TabIndex = 2;
-            this.RightDocks_BottomPanel_Media_FadePanelButton.Text = "Add Media...";
-            this.RightDocks_BottomPanel_Media_FadePanelButton.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_FadePanelButton_Click);
-            // 
-            // DockControl_MediaLists
-            // 
-            this.DockControl_MediaLists.BackColor = System.Drawing.SystemColors.Control;
-            this.DockControl_MediaLists.Controls.Add(this.RightDocks_BottomPanel_MediaListsTopPanel);
-            this.DockControl_MediaLists.Controls.Add(this.RightDocks_BottomPanel_MediaLists_BottomPanel);
-            this.DockControl_MediaLists.Guid = new System.Guid("3429dfd5-f5ba-4785-ac79-49140d88b66b");
-            this.DockControl_MediaLists.Location = new System.Drawing.Point(231, 257);
-            this.DockControl_MediaLists.Name = "DockControl_MediaLists";
-            this.DockControl_MediaLists.Size = new System.Drawing.Size(159, 252);
-            this.DockControl_MediaLists.TabIndex = 5;
-            this.DockControl_MediaLists.Text = "MediaLists";
-            // 
-            // RightDocks_BottomPanel_MediaListsTopPanel
-            // 
-            this.RightDocks_BottomPanel_MediaListsTopPanel.Controls.Add(this.RightDocks_MediaLists);
-            this.RightDocks_BottomPanel_MediaListsTopPanel.Controls.Add(this.RightDocks_BottomPanel_MediaListsTop_Control_Panel);
-            this.RightDocks_BottomPanel_MediaListsTopPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightDocks_BottomPanel_MediaListsTopPanel.Location = new System.Drawing.Point(0, 0);
-            this.RightDocks_BottomPanel_MediaListsTopPanel.Name = "RightDocks_BottomPanel_MediaListsTopPanel";
-            this.RightDocks_BottomPanel_MediaListsTopPanel.Size = new System.Drawing.Size(159, 152);
-            this.RightDocks_BottomPanel_MediaListsTopPanel.TabIndex = 1;
-            // 
-            // RightDocks_MediaLists
-            // 
-            this.RightDocks_MediaLists.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightDocks_MediaLists.Location = new System.Drawing.Point(0, 0);
-            this.RightDocks_MediaLists.Name = "RightDocks_MediaLists";
-            this.RightDocks_MediaLists.Size = new System.Drawing.Size(159, 121);
-            this.RightDocks_MediaLists.TabIndex = 1;
-            this.RightDocks_MediaLists.DoubleClick += new System.EventHandler(this.RightDocks_MediaLists_DoubleClick);
-            // 
-            // RightDocks_BottomPanel_MediaListsTop_Control_Panel
-            // 
-            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Controls.Add(this.RightDocks_MediaLists_DeleteButton);
-            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Controls.Add(this.RightDocks_MediaLists_LoadButton);
-            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Location = new System.Drawing.Point(0, 128);
-            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Name = "RightDocks_BottomPanel_MediaListsTop_Control_Panel";
-            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Size = new System.Drawing.Size(159, 24);
-            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.TabIndex = 0;
-            // 
-            // RightDocks_MediaLists_DeleteButton
-            // 
-            this.RightDocks_MediaLists_DeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_MediaLists_DeleteButton.Location = new System.Drawing.Point(66, 1);
-            this.RightDocks_MediaLists_DeleteButton.Name = "RightDocks_MediaLists_DeleteButton";
-            this.RightDocks_MediaLists_DeleteButton.Size = new System.Drawing.Size(64, 18);
-            this.RightDocks_MediaLists_DeleteButton.TabIndex = 5;
-            this.RightDocks_MediaLists_DeleteButton.Text = "Delete";
-            this.RightDocks_MediaLists_DeleteButton.Click += new System.EventHandler(this.RightDocks_MediaLists_DeleteButton_Click);
-            // 
-            // RightDocks_MediaLists_LoadButton
-            // 
-            this.RightDocks_MediaLists_LoadButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RightDocks_MediaLists_LoadButton.Location = new System.Drawing.Point(2, 1);
-            this.RightDocks_MediaLists_LoadButton.Name = "RightDocks_MediaLists_LoadButton";
-            this.RightDocks_MediaLists_LoadButton.Size = new System.Drawing.Size(64, 18);
-            this.RightDocks_MediaLists_LoadButton.TabIndex = 4;
-            this.RightDocks_MediaLists_LoadButton.Text = "<-Load";
-            this.RightDocks_MediaLists_LoadButton.Click += new System.EventHandler(this.RightDocks_MediaLists_LoadButton_Click);
-            // 
-            // RightDocks_BottomPanel_MediaLists_BottomPanel
-            // 
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Controls.Add(this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox);
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Location = new System.Drawing.Point(0, 152);
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Name = "RightDocks_BottomPanel_MediaLists_BottomPanel";
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Size = new System.Drawing.Size(159, 100);
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel.TabIndex = 0;
-            // 
-            // RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox
-            // 
-            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Controls.Add(this.RightDocks_BottomPanel_MediaLists_LoopCheckBox);
-            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Controls.Add(this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2);
-            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Controls.Add(this.RightDocks_BottomPanel_MediaLists_Numeric);
-            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Controls.Add(this.RightDocks_BottomPanel_MediaList_BottomPanel_Label);
-            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Location = new System.Drawing.Point(32, 7);
-            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Name = "RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox";
-            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Size = new System.Drawing.Size(142, 89);
-            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.TabIndex = 0;
-            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.TabStop = false;
-            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Text = "Set Auto Play -Timer";
-            // 
-            // RightDocks_BottomPanel_MediaLists_LoopCheckBox
-            // 
-            this.RightDocks_BottomPanel_MediaLists_LoopCheckBox.Location = new System.Drawing.Point(8, 60);
-            this.RightDocks_BottomPanel_MediaLists_LoopCheckBox.Name = "RightDocks_BottomPanel_MediaLists_LoopCheckBox";
-            this.RightDocks_BottomPanel_MediaLists_LoopCheckBox.Size = new System.Drawing.Size(128, 24);
-            this.RightDocks_BottomPanel_MediaLists_LoopCheckBox.TabIndex = 3;
-            this.RightDocks_BottomPanel_MediaLists_LoopCheckBox.Text = "Loop MediaList";
-            // 
-            // RightDocks_BottomPanel_MediaLists_BottomPanel_Label2
-            // 
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2.Location = new System.Drawing.Point(72, 43);
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2.Name = "RightDocks_BottomPanel_MediaLists_BottomPanel_Label2";
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2.Size = new System.Drawing.Size(64, 16);
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2.TabIndex = 2;
-            this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2.Text = "seconds.";
-            // 
-            // RightDocks_BottomPanel_MediaLists_Numeric
-            // 
-            this.RightDocks_BottomPanel_MediaLists_Numeric.Location = new System.Drawing.Point(8, 40);
-            this.RightDocks_BottomPanel_MediaLists_Numeric.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.RightDocks_BottomPanel_MediaLists_Numeric.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.RightDocks_BottomPanel_MediaLists_Numeric.Name = "RightDocks_BottomPanel_MediaLists_Numeric";
-            this.RightDocks_BottomPanel_MediaLists_Numeric.Size = new System.Drawing.Size(64, 20);
-            this.RightDocks_BottomPanel_MediaLists_Numeric.TabIndex = 1;
-            this.RightDocks_BottomPanel_MediaLists_Numeric.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.RightDocks_BottomPanel_MediaLists_Numeric.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.RightDocks_BottomPanel_MediaLists_Numeric.ValueChanged += new System.EventHandler(this.RightDocks_BottomPanel_MediaLists_Numeric_ValueChanged);
-            // 
-            // RightDocks_BottomPanel_MediaList_BottomPanel_Label
-            // 
-            this.RightDocks_BottomPanel_MediaList_BottomPanel_Label.Location = new System.Drawing.Point(4, 16);
-            this.RightDocks_BottomPanel_MediaList_BottomPanel_Label.Name = "RightDocks_BottomPanel_MediaList_BottomPanel_Label";
-            this.RightDocks_BottomPanel_MediaList_BottomPanel_Label.Size = new System.Drawing.Size(135, 24);
-            this.RightDocks_BottomPanel_MediaList_BottomPanel_Label.TabIndex = 0;
-            this.RightDocks_BottomPanel_MediaList_BottomPanel_Label.Text = "Change Media Item after:";
-            // 
-            // bottomSandDock
-            // 
-            this.bottomSandDock.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomSandDock.Guid = new System.Guid("11832edf-4b5f-4911-9e7c-da764193d89f");
-            this.bottomSandDock.LayoutSystem = new TD.SandDock.SplitLayoutSystem(250, 400);
-            this.bottomSandDock.Location = new System.Drawing.Point(72, 582);
-            this.bottomSandDock.Manager = this.sandDockManager1;
-            this.bottomSandDock.Name = "bottomSandDock";
-            this.bottomSandDock.Size = new System.Drawing.Size(577, 0);
-            this.bottomSandDock.TabIndex = 25;
-            // 
-            // topSandDock
-            // 
-            this.topSandDock.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topSandDock.Guid = new System.Guid("f3084065-73e3-4825-a957-0918e3006a24");
-            this.topSandDock.LayoutSystem = new TD.SandDock.SplitLayoutSystem(250, 400);
-            this.topSandDock.Location = new System.Drawing.Point(72, 50);
-            this.topSandDock.Manager = this.sandDockManager1;
-            this.topSandDock.Name = "topSandDock";
-            this.topSandDock.Size = new System.Drawing.Size(577, 0);
-            this.topSandDock.TabIndex = 26;
-            // 
-            // Media_Logos
-            // 
-            this.Media_Logos.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("Media_Logos.ImageStream")));
-            this.Media_Logos.TransparentColor = System.Drawing.Color.Transparent;
-            this.Media_Logos.Images.SetKeyName(0, "");
-            this.Media_Logos.Images.SetKeyName(1, "");
-            // 
-            // PlayProgress
-            // 
-            this.PlayProgress.Interval = 500;
-            this.PlayProgress.Tick += new System.EventHandler(this.PlayProgress_Tick);
-            // 
-            // VideoLoadTimer
-            // 
-            this.VideoLoadTimer.Tick += new System.EventHandler(this.VideoLoadTimer_Tick);
-            // 
-            // Presentation_AutoPlayTimer
-            // 
-            this.Presentation_AutoPlayTimer.Tick += new System.EventHandler(this.Presentation_AutoPlayTimer_Tick);
-            // 
-            // Sermon_BibleKey
-            // 
-            this.Sermon_BibleKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Sermon_BibleKey.Location = new System.Drawing.Point(8, 32);
-            this.Sermon_BibleKey.Name = "Sermon_BibleKey";
-            this.Sermon_BibleKey.Size = new System.Drawing.Size(128, 20);
-            this.Sermon_BibleKey.TabIndex = 3;
-            this.MainForm_ToolTip.SetToolTip(this.Sermon_BibleKey, "You can enter a reference, or a range: \"Mat 1:1 - 1:8\"");
-            this.Sermon_BibleKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Sermon_BibleKey_KeyDown);
-            // 
-            // Main_ErrorProvider
-            // 
-            this.Main_ErrorProvider.ContainerControl = this;
-            // 
-            // SaveFileDialog
-            // 
-            this.SaveFileDialog.DefaultExt = "xml";
+            this.leftSandDock.SizeChanged += new System.EventHandler(this.leftSandDock_SizeChanged);
+            // 
+            // dockControl1
+            // 
+            this.dockControl1.Closable = false;
+            this.dockControl1.Collapsible = false;
+            this.dockControl1.Controls.Add(this.tabControl1);
+            this.dockControl1.Guid = new System.Guid("29918e95-86bd-4806-b964-eca2991349ae");
+            this.dockControl1.Location = new System.Drawing.Point(0, 25);
+            this.dockControl1.Name = "dockControl1";
+            this.dockControl1.Size = new System.Drawing.Size(382, 462);
+            this.dockControl1.TabIndex = 0;
+            this.dockControl1.Text = "dockControl1";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.ShowSong_Tab);
+            this.tabControl1.Controls.Add(this.EditSongs_Tab);
+            this.tabControl1.Controls.Add(this.Presentation_Tab);
+            this.tabControl1.Controls.Add(this.SermonTools_Tab);
+            this.tabControl1.Controls.Add(this.BibleText_Tab);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControl1.ItemSize = new System.Drawing.Size(20, 10);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(382, 462);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControl1.TabIndex = 2;
             // 
             // ShowSong_Tab
             // 
             this.ShowSong_Tab.Controls.Add(this.SongShow_StropheList_ListEx);
             this.ShowSong_Tab.Location = new System.Drawing.Point(4, 14);
             this.ShowSong_Tab.Name = "ShowSong_Tab";
-            this.ShowSong_Tab.Size = new System.Drawing.Size(569, 492);
+            this.ShowSong_Tab.Size = new System.Drawing.Size(374, 444);
             this.ShowSong_Tab.TabIndex = 2;
             this.ShowSong_Tab.Text = "Show Songs";
             // 
-            // SermonTools_Tab
+            // SongShow_StropheList_ListEx
             // 
-            this.SermonTools_Tab.Controls.Add(this.Sermon_LeftPanel);
-            this.SermonTools_Tab.Controls.Add(this.Sermon_TabControl);
-            this.SermonTools_Tab.Location = new System.Drawing.Point(4, 14);
-            this.SermonTools_Tab.Name = "SermonTools_Tab";
-            this.SermonTools_Tab.Size = new System.Drawing.Size(569, 492);
-            this.SermonTools_Tab.TabIndex = 3;
-            this.SermonTools_Tab.Text = "SermonTool";
+            this.SongShow_StropheList_ListEx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SongShow_StropheList_ListEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.SongShow_StropheList_ListEx.Imgs = this.SongShow_ImageList;
+            this.SongShow_StropheList_ListEx.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
+            this.SongShow_StropheList_ListEx.Location = new System.Drawing.Point(0, 0);
+            this.SongShow_StropheList_ListEx.Name = "SongShow_StropheList_ListEx";
+            this.SongShow_StropheList_ListEx.ReadOnly = true;
+            this.SongShow_StropheList_ListEx.ShowBullets = true;
+            this.SongShow_StropheList_ListEx.Size = new System.Drawing.Size(374, 444);
+            this.SongShow_StropheList_ListEx.TabIndex = 0;
+            this.SongShow_StropheList_ListEx.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SongShow_StropheList_ListEx_MouseDoubleClick);
+            this.SongShow_StropheList_ListEx.SelectedIndexChanged += new System.EventHandler(this.SongShow_StropheList_ListEx_SelectedIndexChanged);
+            this.SongShow_StropheList_ListEx.PressIcon += new Lister.ListEx.EventHandler(this.SongShow_StropheList_ListEx_PressIcon);
             // 
-            // Sermon_LeftPanel
+            // EditSongs_Tab
             // 
-            this.Sermon_LeftPanel.Controls.Add(this.Sermon_LeftDoc_Panel);
-            this.Sermon_LeftPanel.Controls.Add(this.Sermon_LeftToolBar_Panel);
-            this.Sermon_LeftPanel.Controls.Add(this.Sermon_LeftBottom_Panel);
-            this.Sermon_LeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Sermon_LeftPanel.Location = new System.Drawing.Point(0, 0);
-            this.Sermon_LeftPanel.Name = "Sermon_LeftPanel";
-            this.Sermon_LeftPanel.Size = new System.Drawing.Size(425, 492);
-            this.Sermon_LeftPanel.TabIndex = 3;
+            this.EditSongs_Tab.Controls.Add(this.songEditor);
+            this.EditSongs_Tab.Location = new System.Drawing.Point(4, 14);
+            this.EditSongs_Tab.Name = "EditSongs_Tab";
+            this.EditSongs_Tab.Size = new System.Drawing.Size(374, 444);
+            this.EditSongs_Tab.TabIndex = 6;
+            this.EditSongs_Tab.Text = "Edit Songs";
             // 
-            // Sermon_LeftDoc_Panel
+            // songEditor
             // 
-            this.Sermon_LeftDoc_Panel.Controls.Add(this.Sermon_DocManager);
-            this.Sermon_LeftDoc_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Sermon_LeftDoc_Panel.Location = new System.Drawing.Point(0, 24);
-            this.Sermon_LeftDoc_Panel.Name = "Sermon_LeftDoc_Panel";
-            this.Sermon_LeftDoc_Panel.Size = new System.Drawing.Size(425, 438);
-            this.Sermon_LeftDoc_Panel.TabIndex = 4;
-            // 
-            // Sermon_DocManager
-            // 
-            this.Sermon_DocManager.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Sermon_DocManager.Location = new System.Drawing.Point(0, 0);
-            this.Sermon_DocManager.Name = "Sermon_DocManager";
-            this.Sermon_DocManager.Size = new System.Drawing.Size(425, 438);
-            this.Sermon_DocManager.TabIndex = 1;
-            this.Sermon_DocManager.CloseButtonPressed += new DocumentManager.DocumentManager.CloseButtonPressedEventHandler(this.Sermon_DocManager_CloseButtonPressed);
-            // 
-            // Sermon_LeftToolBar_Panel
-            // 
-            this.Sermon_LeftToolBar_Panel.Controls.Add(this.Sermon_ToolBar);
-            this.Sermon_LeftToolBar_Panel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Sermon_LeftToolBar_Panel.Location = new System.Drawing.Point(0, 0);
-            this.Sermon_LeftToolBar_Panel.Name = "Sermon_LeftToolBar_Panel";
-            this.Sermon_LeftToolBar_Panel.Size = new System.Drawing.Size(425, 24);
-            this.Sermon_LeftToolBar_Panel.TabIndex = 3;
-            // 
-            // Sermon_ToolBar
-            // 
-            this.Sermon_ToolBar.Buttons.AddRange(new TD.SandBar.ToolbarItemBase[] {
-            this.Sermon_ToolBar_NewDoc_Button});
-            this.Sermon_ToolBar.Guid = new System.Guid("e8851e50-0b9f-4b93-8a5e-c7a9528f2cf6");
-            this.Sermon_ToolBar.ImageList = null;
-            this.Sermon_ToolBar.Location = new System.Drawing.Point(0, 0);
-            this.Sermon_ToolBar.Name = "Sermon_ToolBar";
-            this.Sermon_ToolBar.Size = new System.Drawing.Size(425, 24);
-            this.Sermon_ToolBar.TabIndex = 0;
-            this.Sermon_ToolBar.Text = "toolBar1";
-            this.Sermon_ToolBar.ButtonClick += new TD.SandBar.ToolBar.ButtonClickEventHandler(this.Sermon_ToolBar_ButtonClick);
-            // 
-            // Sermon_ToolBar_NewDoc_Button
-            // 
-            this.Sermon_ToolBar_NewDoc_Button.BuddyMenu = null;
-            this.Sermon_ToolBar_NewDoc_Button.Icon = null;
-            this.Sermon_ToolBar_NewDoc_Button.Tag = null;
-            this.Sermon_ToolBar_NewDoc_Button.Text = "New Document";
-            // 
-            // Sermon_LeftBottom_Panel
-            // 
-            this.Sermon_LeftBottom_Panel.Controls.Add(this.Sermon_Preview_Button);
-            this.Sermon_LeftBottom_Panel.Controls.Add(this.Sermon_BeamBox_Button);
-            this.Sermon_LeftBottom_Panel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Sermon_LeftBottom_Panel.Location = new System.Drawing.Point(0, 462);
-            this.Sermon_LeftBottom_Panel.Name = "Sermon_LeftBottom_Panel";
-            this.Sermon_LeftBottom_Panel.Size = new System.Drawing.Size(425, 30);
-            this.Sermon_LeftBottom_Panel.TabIndex = 5;
-            // 
-            // Sermon_Preview_Button
-            // 
-            this.Sermon_Preview_Button.Location = new System.Drawing.Point(16, 4);
-            this.Sermon_Preview_Button.Name = "Sermon_Preview_Button";
-            this.Sermon_Preview_Button.Size = new System.Drawing.Size(75, 23);
-            this.Sermon_Preview_Button.TabIndex = 3;
-            this.Sermon_Preview_Button.Text = "Preview";
-            this.Sermon_Preview_Button.Click += new System.EventHandler(this.Sermon_Preview_Button_Click);
-            // 
-            // Sermon_BeamBox_Button
-            // 
-            this.Sermon_BeamBox_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Sermon_BeamBox_Button.BackColor = System.Drawing.Color.Maroon;
-            this.Sermon_BeamBox_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Sermon_BeamBox_Button.ForeColor = System.Drawing.Color.White;
-            this.Sermon_BeamBox_Button.Location = new System.Drawing.Point(331, 4);
-            this.Sermon_BeamBox_Button.Name = "Sermon_BeamBox_Button";
-            this.Sermon_BeamBox_Button.Size = new System.Drawing.Size(80, 23);
-            this.Sermon_BeamBox_Button.TabIndex = 2;
-            this.Sermon_BeamBox_Button.Text = "Live";
-            this.Sermon_BeamBox_Button.UseVisualStyleBackColor = false;
-            this.Sermon_BeamBox_Button.Click += new System.EventHandler(this.Sermon_BeamBox_Button_Click);
-            // 
-            // Sermon_TabControl
-            // 
-            this.Sermon_TabControl.Controls.Add(this.tabPage3);
-            this.Sermon_TabControl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Sermon_TabControl.ItemSize = new System.Drawing.Size(42, 18);
-            this.Sermon_TabControl.Location = new System.Drawing.Point(425, 0);
-            this.Sermon_TabControl.Name = "Sermon_TabControl";
-            this.Sermon_TabControl.SelectedIndex = 0;
-            this.Sermon_TabControl.Size = new System.Drawing.Size(144, 492);
-            this.Sermon_TabControl.TabIndex = 2;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage3.Controls.Add(this.linkLabel1);
-            this.tabPage3.Controls.Add(this.Sermon_Verse_Label);
-            this.tabPage3.Controls.Add(this.Sermon_Translation_Label);
-            this.tabPage3.Controls.Add(this.Sermon_Books_Label);
-            this.tabPage3.Controls.Add(this.Sermon_BibleKey);
-            this.tabPage3.Controls.Add(this.Sermon_Testament_ListBox);
-            this.tabPage3.Controls.Add(this.Sermon_Books);
-            this.tabPage3.Controls.Add(this.Sermon_BookList);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(136, 466);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Bible";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(8, 400);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(120, 15);
-            this.linkLabel1.TabIndex = 7;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Get the Sword Bible";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.linkLabel1.Click += new System.EventHandler(this.linkLabel1_Click);
-            // 
-            // Sermon_Verse_Label
-            // 
-            this.Sermon_Verse_Label.Location = new System.Drawing.Point(8, 8);
-            this.Sermon_Verse_Label.Name = "Sermon_Verse_Label";
-            this.Sermon_Verse_Label.Size = new System.Drawing.Size(112, 16);
-            this.Sermon_Verse_Label.TabIndex = 6;
-            this.Sermon_Verse_Label.Text = "Find  Verse:";
-            // 
-            // Sermon_Translation_Label
-            // 
-            this.Sermon_Translation_Label.Location = new System.Drawing.Point(8, 64);
-            this.Sermon_Translation_Label.Name = "Sermon_Translation_Label";
-            this.Sermon_Translation_Label.Size = new System.Drawing.Size(100, 16);
-            this.Sermon_Translation_Label.TabIndex = 5;
-            this.Sermon_Translation_Label.Text = "Translation:";
-            // 
-            // Sermon_Books_Label
-            // 
-            this.Sermon_Books_Label.Location = new System.Drawing.Point(8, 112);
-            this.Sermon_Books_Label.Name = "Sermon_Books_Label";
-            this.Sermon_Books_Label.Size = new System.Drawing.Size(100, 16);
-            this.Sermon_Books_Label.TabIndex = 4;
-            this.Sermon_Books_Label.Text = "Books:";
-            // 
-            // Sermon_Testament_ListBox
-            // 
-            this.Sermon_Testament_ListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Sermon_Testament_ListBox.Items.AddRange(new object[] {
-            "Old Testament",
-            "New Testament"});
-            this.Sermon_Testament_ListBox.Location = new System.Drawing.Point(8, 128);
-            this.Sermon_Testament_ListBox.Name = "Sermon_Testament_ListBox";
-            this.Sermon_Testament_ListBox.Size = new System.Drawing.Size(128, 28);
-            this.Sermon_Testament_ListBox.TabIndex = 2;
-            this.Sermon_Testament_ListBox.SelectedIndexChanged += new System.EventHandler(this.Sermon_Testament_ListBox_SelectedIndexChanged);
-            // 
-            // Sermon_Books
-            // 
-            this.Sermon_Books.ItemHeight = 13;
-            this.Sermon_Books.Location = new System.Drawing.Point(8, 80);
-            this.Sermon_Books.Name = "Sermon_Books";
-            this.Sermon_Books.Size = new System.Drawing.Size(120, 21);
-            this.Sermon_Books.TabIndex = 1;
-            // 
-            // Sermon_BookList
-            // 
-            this.Sermon_BookList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Sermon_BookList.Location = new System.Drawing.Point(8, 160);
-            this.Sermon_BookList.Name = "Sermon_BookList";
-            this.Sermon_BookList.Size = new System.Drawing.Size(128, 236);
-            this.Sermon_BookList.TabIndex = 0;
-            this.Sermon_BookList.SelectedIndexChanged += new System.EventHandler(this.Sermon_BookList_SelectedIndexChanged);
+            this.songEditor.Collections = new string[0];
+            this.songEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.songEditor.Location = new System.Drawing.Point(0, 0);
+            this.songEditor.Name = "songEditor";
+            this.songEditor.Size = new System.Drawing.Size(374, 444);
+            this.songEditor.TabIndex = 0;
             // 
             // Presentation_Tab
             // 
@@ -2343,7 +1526,7 @@ namespace DreamBeam {
             this.Presentation_Tab.Controls.Add(this.Presentation_MainPanel);
             this.Presentation_Tab.Location = new System.Drawing.Point(4, 14);
             this.Presentation_Tab.Name = "Presentation_Tab";
-            this.Presentation_Tab.Size = new System.Drawing.Size(569, 492);
+            this.Presentation_Tab.Size = new System.Drawing.Size(374, 444);
             this.Presentation_Tab.TabIndex = 4;
             this.Presentation_Tab.Text = "Presentation";
             // 
@@ -2354,10 +1537,10 @@ namespace DreamBeam {
             this.Presentation_FadePanel.Controls.Add(this.Fade_panel);
             this.Presentation_FadePanel.Controls.Add(this.treeView1);
             this.Presentation_FadePanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Presentation_FadePanel.Location = new System.Drawing.Point(568, 0);
+            this.Presentation_FadePanel.Location = new System.Drawing.Point(373, 0);
             this.Presentation_FadePanel.Name = "Presentation_FadePanel";
             this.Presentation_FadePanel.Padding = new System.Windows.Forms.Padding(2);
-            this.Presentation_FadePanel.Size = new System.Drawing.Size(1, 492);
+            this.Presentation_FadePanel.Size = new System.Drawing.Size(1, 444);
             this.Presentation_FadePanel.TabIndex = 3;
             // 
             // Fade_panel
@@ -2366,7 +1549,7 @@ namespace DreamBeam {
             this.Fade_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Fade_panel.Location = new System.Drawing.Point(192, 2);
             this.Fade_panel.Name = "Fade_panel";
-            this.Fade_panel.Size = new System.Drawing.Size(0, 486);
+            this.Fade_panel.Size = new System.Drawing.Size(0, 438);
             this.Fade_panel.TabIndex = 4;
             // 
             // Fade_Top_Panel
@@ -2441,7 +1624,7 @@ namespace DreamBeam {
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(190, 486);
+            this.treeView1.Size = new System.Drawing.Size(190, 438);
             this.treeView1.TabIndex = 2;
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
             this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
@@ -2454,7 +1637,7 @@ namespace DreamBeam {
             this.Presentation_MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Presentation_MainPanel.Location = new System.Drawing.Point(0, 0);
             this.Presentation_MainPanel.Name = "Presentation_MainPanel";
-            this.Presentation_MainPanel.Size = new System.Drawing.Size(569, 492);
+            this.Presentation_MainPanel.Size = new System.Drawing.Size(374, 444);
             this.Presentation_MainPanel.TabIndex = 4;
             // 
             // Presentation_PreviewPanel
@@ -2467,7 +1650,7 @@ namespace DreamBeam {
             this.Presentation_PreviewPanel.Location = new System.Drawing.Point(0, 0);
             this.Presentation_PreviewPanel.Name = "Presentation_PreviewPanel";
             this.Presentation_PreviewPanel.Padding = new System.Windows.Forms.Padding(10);
-            this.Presentation_PreviewPanel.Size = new System.Drawing.Size(569, 392);
+            this.Presentation_PreviewPanel.Size = new System.Drawing.Size(374, 344);
             this.Presentation_PreviewPanel.TabIndex = 2;
             this.Presentation_PreviewPanel.Resize += new System.EventHandler(this.Presentation_PreviewPanel_Resize);
             // 
@@ -2497,7 +1680,7 @@ namespace DreamBeam {
             this.Presentation_PreviewBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Presentation_PreviewBox.Location = new System.Drawing.Point(10, 10);
             this.Presentation_PreviewBox.Name = "Presentation_PreviewBox";
-            this.Presentation_PreviewBox.Size = new System.Drawing.Size(549, 372);
+            this.Presentation_PreviewBox.Size = new System.Drawing.Size(354, 324);
             this.Presentation_PreviewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Presentation_PreviewBox.TabIndex = 0;
             this.Presentation_PreviewBox.TabStop = false;
@@ -2512,9 +1695,9 @@ namespace DreamBeam {
             this.Presentation_MovieControlPanel.Controls.Add(this.Presentation_MovieControlPanel_Top);
             this.Presentation_MovieControlPanel.Controls.Add(this.Presentation_MovieControlPanel_Right);
             this.Presentation_MovieControlPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Presentation_MovieControlPanel.Location = new System.Drawing.Point(0, 392);
+            this.Presentation_MovieControlPanel.Location = new System.Drawing.Point(0, 344);
             this.Presentation_MovieControlPanel.Name = "Presentation_MovieControlPanel";
-            this.Presentation_MovieControlPanel.Size = new System.Drawing.Size(569, 100);
+            this.Presentation_MovieControlPanel.Size = new System.Drawing.Size(374, 100);
             this.Presentation_MovieControlPanel.TabIndex = 3;
             // 
             // Presentation_MovieControlPanelBottom
@@ -2525,17 +1708,30 @@ namespace DreamBeam {
             this.Presentation_MovieControlPanelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Presentation_MovieControlPanelBottom.Location = new System.Drawing.Point(0, 24);
             this.Presentation_MovieControlPanelBottom.Name = "Presentation_MovieControlPanelBottom";
-            this.Presentation_MovieControlPanelBottom.Size = new System.Drawing.Size(532, 74);
+            this.Presentation_MovieControlPanelBottom.Size = new System.Drawing.Size(337, 74);
             this.Presentation_MovieControlPanelBottom.TabIndex = 4;
             // 
             // Presentation_MovieControl_PreviewButtonPanel
             // 
             this.Presentation_MovieControl_PreviewButtonPanel.Controls.Add(this.previewMediaControls);
             this.Presentation_MovieControl_PreviewButtonPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Presentation_MovieControl_PreviewButtonPanel.Location = new System.Drawing.Point(298, 0);
+            this.Presentation_MovieControl_PreviewButtonPanel.Location = new System.Drawing.Point(103, 0);
             this.Presentation_MovieControl_PreviewButtonPanel.Name = "Presentation_MovieControl_PreviewButtonPanel";
             this.Presentation_MovieControl_PreviewButtonPanel.Size = new System.Drawing.Size(234, 74);
             this.Presentation_MovieControl_PreviewButtonPanel.TabIndex = 3;
+            // 
+            // previewMediaControls
+            // 
+            this.previewMediaControls.BackColor = System.Drawing.Color.Transparent;
+            this.previewMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.previewMediaControls.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.previewMediaControls.LabelText = "Preview Window";
+            this.previewMediaControls.Location = new System.Drawing.Point(0, 11);
+            this.previewMediaControls.Name = "previewMediaControls";
+            this.previewMediaControls.Red = false;
+            this.previewMediaControls.Size = new System.Drawing.Size(234, 63);
+            this.previewMediaControls.TabIndex = 2;
+            this.previewMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.previewMediaControls_MediaButtonPressed);
             // 
             // Presentation_MovieControlPanel_Top
             // 
@@ -2543,7 +1739,7 @@ namespace DreamBeam {
             this.Presentation_MovieControlPanel_Top.Dock = System.Windows.Forms.DockStyle.Top;
             this.Presentation_MovieControlPanel_Top.Location = new System.Drawing.Point(0, 0);
             this.Presentation_MovieControlPanel_Top.Name = "Presentation_MovieControlPanel_Top";
-            this.Presentation_MovieControlPanel_Top.Size = new System.Drawing.Size(532, 30);
+            this.Presentation_MovieControlPanel_Top.Size = new System.Drawing.Size(337, 30);
             this.Presentation_MovieControlPanel_Top.TabIndex = 3;
             // 
             // Media_TrackBar
@@ -2553,7 +1749,7 @@ namespace DreamBeam {
             this.Media_TrackBar.Enabled = false;
             this.Media_TrackBar.Location = new System.Drawing.Point(0, 0);
             this.Media_TrackBar.Name = "Media_TrackBar";
-            this.Media_TrackBar.Size = new System.Drawing.Size(532, 30);
+            this.Media_TrackBar.Size = new System.Drawing.Size(337, 30);
             this.Media_TrackBar.TabIndex = 0;
             this.Media_TrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.Media_TrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Media_TrackBar_Up);
@@ -2564,7 +1760,7 @@ namespace DreamBeam {
             this.Presentation_MovieControlPanel_Right.Controls.Add(this.muteButton);
             this.Presentation_MovieControlPanel_Right.Controls.Add(this.AudioBar);
             this.Presentation_MovieControlPanel_Right.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Presentation_MovieControlPanel_Right.Location = new System.Drawing.Point(532, 0);
+            this.Presentation_MovieControlPanel_Right.Location = new System.Drawing.Point(337, 0);
             this.Presentation_MovieControlPanel_Right.Name = "Presentation_MovieControlPanel_Right";
             this.Presentation_MovieControlPanel_Right.Size = new System.Drawing.Size(35, 98);
             this.Presentation_MovieControlPanel_Right.TabIndex = 2;
@@ -2600,162 +1796,278 @@ namespace DreamBeam {
             this.AudioBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.AudioBar.ValueChanged += new System.EventHandler(this.AudioBar_ValueChanged);
             // 
-            // EditSongs_Tab
+            // SermonTools_Tab
             // 
-            this.EditSongs_Tab.Controls.Add(this.songEditor);
-            this.EditSongs_Tab.Location = new System.Drawing.Point(4, 14);
-            this.EditSongs_Tab.Name = "EditSongs_Tab";
-            this.EditSongs_Tab.Size = new System.Drawing.Size(569, 492);
-            this.EditSongs_Tab.TabIndex = 6;
-            this.EditSongs_Tab.Text = "Edit Songs";
+            this.SermonTools_Tab.Controls.Add(this.Sermon_LeftPanel);
+            this.SermonTools_Tab.Controls.Add(this.Sermon_TabControl);
+            this.SermonTools_Tab.Location = new System.Drawing.Point(4, 14);
+            this.SermonTools_Tab.Name = "SermonTools_Tab";
+            this.SermonTools_Tab.Size = new System.Drawing.Size(374, 444);
+            this.SermonTools_Tab.TabIndex = 3;
+            this.SermonTools_Tab.Text = "SermonTool";
+            // 
+            // Sermon_LeftPanel
+            // 
+            this.Sermon_LeftPanel.Controls.Add(this.Sermon_LeftDoc_Panel);
+            this.Sermon_LeftPanel.Controls.Add(this.Sermon_LeftToolBar_Panel);
+            this.Sermon_LeftPanel.Controls.Add(this.Sermon_LeftBottom_Panel);
+            this.Sermon_LeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Sermon_LeftPanel.Location = new System.Drawing.Point(0, 0);
+            this.Sermon_LeftPanel.Name = "Sermon_LeftPanel";
+            this.Sermon_LeftPanel.Size = new System.Drawing.Size(230, 444);
+            this.Sermon_LeftPanel.TabIndex = 3;
+            // 
+            // Sermon_LeftDoc_Panel
+            // 
+            this.Sermon_LeftDoc_Panel.Controls.Add(this.Sermon_DocManager);
+            this.Sermon_LeftDoc_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Sermon_LeftDoc_Panel.Location = new System.Drawing.Point(0, 24);
+            this.Sermon_LeftDoc_Panel.Name = "Sermon_LeftDoc_Panel";
+            this.Sermon_LeftDoc_Panel.Size = new System.Drawing.Size(230, 390);
+            this.Sermon_LeftDoc_Panel.TabIndex = 4;
+            // 
+            // Sermon_DocManager
+            // 
+            this.Sermon_DocManager.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Sermon_DocManager.Location = new System.Drawing.Point(0, 0);
+            this.Sermon_DocManager.Name = "Sermon_DocManager";
+            this.Sermon_DocManager.Size = new System.Drawing.Size(230, 390);
+            this.Sermon_DocManager.TabIndex = 1;
+            this.Sermon_DocManager.CloseButtonPressed += new DocumentManager.DocumentManager.CloseButtonPressedEventHandler(this.Sermon_DocManager_CloseButtonPressed);
+            // 
+            // Sermon_LeftToolBar_Panel
+            // 
+            this.Sermon_LeftToolBar_Panel.Controls.Add(this.Sermon_ToolBar);
+            this.Sermon_LeftToolBar_Panel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Sermon_LeftToolBar_Panel.Location = new System.Drawing.Point(0, 0);
+            this.Sermon_LeftToolBar_Panel.Name = "Sermon_LeftToolBar_Panel";
+            this.Sermon_LeftToolBar_Panel.Size = new System.Drawing.Size(230, 24);
+            this.Sermon_LeftToolBar_Panel.TabIndex = 3;
+            // 
+            // Sermon_ToolBar
+            // 
+            this.Sermon_ToolBar.Buttons.AddRange(new TD.SandBar.ToolbarItemBase[] {
+            this.Sermon_ToolBar_NewDoc_Button});
+            this.Sermon_ToolBar.Guid = new System.Guid("e8851e50-0b9f-4b93-8a5e-c7a9528f2cf6");
+            this.Sermon_ToolBar.ImageList = null;
+            this.Sermon_ToolBar.Location = new System.Drawing.Point(0, 0);
+            this.Sermon_ToolBar.Name = "Sermon_ToolBar";
+            this.Sermon_ToolBar.Size = new System.Drawing.Size(230, 24);
+            this.Sermon_ToolBar.TabIndex = 0;
+            this.Sermon_ToolBar.Text = "toolBar1";
+            this.Sermon_ToolBar.ButtonClick += new TD.SandBar.ToolBar.ButtonClickEventHandler(this.Sermon_ToolBar_ButtonClick);
+            // 
+            // Sermon_ToolBar_NewDoc_Button
+            // 
+            this.Sermon_ToolBar_NewDoc_Button.BuddyMenu = null;
+            this.Sermon_ToolBar_NewDoc_Button.Icon = null;
+            this.Sermon_ToolBar_NewDoc_Button.Tag = null;
+            this.Sermon_ToolBar_NewDoc_Button.Text = "New Document";
+            // 
+            // Sermon_LeftBottom_Panel
+            // 
+            this.Sermon_LeftBottom_Panel.Controls.Add(this.Sermon_Preview_Button);
+            this.Sermon_LeftBottom_Panel.Controls.Add(this.Sermon_BeamBox_Button);
+            this.Sermon_LeftBottom_Panel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Sermon_LeftBottom_Panel.Location = new System.Drawing.Point(0, 414);
+            this.Sermon_LeftBottom_Panel.Name = "Sermon_LeftBottom_Panel";
+            this.Sermon_LeftBottom_Panel.Size = new System.Drawing.Size(230, 30);
+            this.Sermon_LeftBottom_Panel.TabIndex = 5;
+            // 
+            // Sermon_Preview_Button
+            // 
+            this.Sermon_Preview_Button.Location = new System.Drawing.Point(16, 4);
+            this.Sermon_Preview_Button.Name = "Sermon_Preview_Button";
+            this.Sermon_Preview_Button.Size = new System.Drawing.Size(75, 23);
+            this.Sermon_Preview_Button.TabIndex = 3;
+            this.Sermon_Preview_Button.Text = "Preview";
+            this.Sermon_Preview_Button.Click += new System.EventHandler(this.Sermon_Preview_Button_Click);
+            // 
+            // Sermon_BeamBox_Button
+            // 
+            this.Sermon_BeamBox_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Sermon_BeamBox_Button.BackColor = System.Drawing.Color.Maroon;
+            this.Sermon_BeamBox_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Sermon_BeamBox_Button.ForeColor = System.Drawing.Color.White;
+            this.Sermon_BeamBox_Button.Location = new System.Drawing.Point(136, 4);
+            this.Sermon_BeamBox_Button.Name = "Sermon_BeamBox_Button";
+            this.Sermon_BeamBox_Button.Size = new System.Drawing.Size(80, 23);
+            this.Sermon_BeamBox_Button.TabIndex = 2;
+            this.Sermon_BeamBox_Button.Text = "Live";
+            this.Sermon_BeamBox_Button.UseVisualStyleBackColor = false;
+            this.Sermon_BeamBox_Button.Click += new System.EventHandler(this.Sermon_BeamBox_Button_Click);
+            // 
+            // Sermon_TabControl
+            // 
+            this.Sermon_TabControl.Controls.Add(this.tabPage3);
+            this.Sermon_TabControl.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Sermon_TabControl.ItemSize = new System.Drawing.Size(42, 18);
+            this.Sermon_TabControl.Location = new System.Drawing.Point(230, 0);
+            this.Sermon_TabControl.Name = "Sermon_TabControl";
+            this.Sermon_TabControl.SelectedIndex = 0;
+            this.Sermon_TabControl.Size = new System.Drawing.Size(144, 444);
+            this.Sermon_TabControl.TabIndex = 2;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage3.Controls.Add(this.linkLabel1);
+            this.tabPage3.Controls.Add(this.Sermon_Verse_Label);
+            this.tabPage3.Controls.Add(this.Sermon_Translation_Label);
+            this.tabPage3.Controls.Add(this.Sermon_Books_Label);
+            this.tabPage3.Controls.Add(this.Sermon_BibleKey);
+            this.tabPage3.Controls.Add(this.Sermon_Testament_ListBox);
+            this.tabPage3.Controls.Add(this.Sermon_Books);
+            this.tabPage3.Controls.Add(this.Sermon_BookList);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(136, 418);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Bible";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel1.Location = new System.Drawing.Point(8, 400);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(120, 15);
+            this.linkLabel1.TabIndex = 7;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Get the Sword Bible";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.linkLabel1.Click += new System.EventHandler(this.linkLabel1_Click);
+            // 
+            // Sermon_Verse_Label
+            // 
+            this.Sermon_Verse_Label.Location = new System.Drawing.Point(8, 8);
+            this.Sermon_Verse_Label.Name = "Sermon_Verse_Label";
+            this.Sermon_Verse_Label.Size = new System.Drawing.Size(112, 16);
+            this.Sermon_Verse_Label.TabIndex = 6;
+            this.Sermon_Verse_Label.Text = "Find  Verse:";
+            // 
+            // Sermon_Translation_Label
+            // 
+            this.Sermon_Translation_Label.Location = new System.Drawing.Point(8, 64);
+            this.Sermon_Translation_Label.Name = "Sermon_Translation_Label";
+            this.Sermon_Translation_Label.Size = new System.Drawing.Size(100, 16);
+            this.Sermon_Translation_Label.TabIndex = 5;
+            this.Sermon_Translation_Label.Text = "Translation:";
+            // 
+            // Sermon_Books_Label
+            // 
+            this.Sermon_Books_Label.Location = new System.Drawing.Point(8, 112);
+            this.Sermon_Books_Label.Name = "Sermon_Books_Label";
+            this.Sermon_Books_Label.Size = new System.Drawing.Size(100, 16);
+            this.Sermon_Books_Label.TabIndex = 4;
+            this.Sermon_Books_Label.Text = "Books:";
+            // 
+            // Sermon_BibleKey
+            // 
+            this.Sermon_BibleKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Sermon_BibleKey.Location = new System.Drawing.Point(8, 32);
+            this.Sermon_BibleKey.Name = "Sermon_BibleKey";
+            this.Sermon_BibleKey.Size = new System.Drawing.Size(128, 20);
+            this.Sermon_BibleKey.TabIndex = 3;
+            this.MainForm_ToolTip.SetToolTip(this.Sermon_BibleKey, "You can enter a reference, or a range: \"Mat 1:1 - 1:8\"");
+            this.Sermon_BibleKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Sermon_BibleKey_KeyDown);
+            // 
+            // Sermon_Testament_ListBox
+            // 
+            this.Sermon_Testament_ListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Sermon_Testament_ListBox.Items.AddRange(new object[] {
+            "Old Testament",
+            "New Testament"});
+            this.Sermon_Testament_ListBox.Location = new System.Drawing.Point(8, 128);
+            this.Sermon_Testament_ListBox.Name = "Sermon_Testament_ListBox";
+            this.Sermon_Testament_ListBox.Size = new System.Drawing.Size(128, 28);
+            this.Sermon_Testament_ListBox.TabIndex = 2;
+            this.Sermon_Testament_ListBox.SelectedIndexChanged += new System.EventHandler(this.Sermon_Testament_ListBox_SelectedIndexChanged);
+            // 
+            // Sermon_Books
+            // 
+            this.Sermon_Books.ItemHeight = 13;
+            this.Sermon_Books.Location = new System.Drawing.Point(8, 80);
+            this.Sermon_Books.Name = "Sermon_Books";
+            this.Sermon_Books.Size = new System.Drawing.Size(120, 21);
+            this.Sermon_Books.TabIndex = 1;
+            // 
+            // Sermon_BookList
+            // 
+            this.Sermon_BookList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Sermon_BookList.Location = new System.Drawing.Point(8, 160);
+            this.Sermon_BookList.Name = "Sermon_BookList";
+            this.Sermon_BookList.Size = new System.Drawing.Size(128, 236);
+            this.Sermon_BookList.TabIndex = 0;
+            this.Sermon_BookList.SelectedIndexChanged += new System.EventHandler(this.Sermon_BookList_SelectedIndexChanged);
             // 
             // BibleText_Tab
             // 
             this.BibleText_Tab.Controls.Add(this.bibleTextControl);
             this.BibleText_Tab.Location = new System.Drawing.Point(4, 14);
             this.BibleText_Tab.Name = "BibleText_Tab";
-            this.BibleText_Tab.Size = new System.Drawing.Size(569, 492);
+            this.BibleText_Tab.Size = new System.Drawing.Size(374, 444);
             this.BibleText_Tab.TabIndex = 5;
             this.BibleText_Tab.Text = "Bible Text";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.ShowSong_Tab);
-            this.tabControl1.Controls.Add(this.EditSongs_Tab);
-            this.tabControl1.Controls.Add(this.Presentation_Tab);
-            this.tabControl1.Controls.Add(this.SermonTools_Tab);
-            this.tabControl1.Controls.Add(this.BibleText_Tab);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.tabControl1.ItemSize = new System.Drawing.Size(20, 10);
-            this.tabControl1.Location = new System.Drawing.Point(72, 50);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(577, 510);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabControl1.TabIndex = 2;
-            // 
-            // OpenFileDialog
-            // 
-            this.OpenFileDialog.AddExtension = false;
-            // 
-            // GlobalDataSet
-            // 
-            this.GlobalDataSet.DataSetName = "GlobalDataSet";
-            this.GlobalDataSet.Locale = new System.Globalization.CultureInfo("en-US");
-            this.GlobalDataSet.Tables.AddRange(new System.Data.DataTable[] {
-            this.SongListTable});
-            // 
-            // SongListTable
-            // 
-            this.SongListTable.Columns.AddRange(new System.Data.DataColumn[] {
-            this.NumberColumn,
-            this.TitleColumn,
-            this.CollectionColumn,
-            this.FileNameColumn,
-            this.NumberSortColumn,
-            this.dataColumn1,
-            this.dataColumn2});
-            this.SongListTable.TableName = "SongListTable";
-            // 
-            // NumberColumn
-            // 
-            this.NumberColumn.ColumnName = "Number";
-            // 
-            // TitleColumn
-            // 
-            this.TitleColumn.ColumnName = "Title";
-            // 
-            // CollectionColumn
-            // 
-            this.CollectionColumn.ColumnName = "Collection";
-            // 
-            // FileNameColumn
-            // 
-            this.FileNameColumn.ColumnName = "FileName";
-            // 
-            // NumberSortColumn
-            // 
-            this.NumberSortColumn.ColumnName = "NumberSort";
-            // 
-            // dataColumn1
-            // 
-            this.dataColumn1.Caption = "FoldedTitle";
-            this.dataColumn1.ColumnName = "FoldedTitle";
-            // 
-            // dataColumn2
-            // 
-            this.dataColumn2.Caption = "FoldedText";
-            this.dataColumn2.ColumnName = "FoldedText";
-            // 
-            // SongListDataView
-            // 
-            this.SongListDataView.Table = this.SongListTable;
-            // 
-            // HideRectanglesTimer
-            // 
-            this.HideRectanglesTimer.Interval = 4000;
-            this.HideRectanglesTimer.Tick += new System.EventHandler(this.HideRectanglesTimer_Tick);
-            // 
-            // SongShow_StropheList_ListEx
-            // 
-            this.SongShow_StropheList_ListEx.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SongShow_StropheList_ListEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.SongShow_StropheList_ListEx.Imgs = this.SongShow_ImageList;
-            this.SongShow_StropheList_ListEx.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
-            this.SongShow_StropheList_ListEx.Location = new System.Drawing.Point(0, 0);
-            this.SongShow_StropheList_ListEx.Name = "SongShow_StropheList_ListEx";
-            this.SongShow_StropheList_ListEx.ReadOnly = true;
-            this.SongShow_StropheList_ListEx.ShowBullets = true;
-            this.SongShow_StropheList_ListEx.Size = new System.Drawing.Size(569, 492);
-            this.SongShow_StropheList_ListEx.TabIndex = 0;
-            this.SongShow_StropheList_ListEx.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SongShow_StropheList_ListEx_MouseDoubleClick);
-            this.SongShow_StropheList_ListEx.SelectedIndexChanged += new System.EventHandler(this.SongShow_StropheList_ListEx_SelectedIndexChanged);
-            this.SongShow_StropheList_ListEx.PressIcon += new Lister.ListEx.EventHandler(this.SongShow_StropheList_ListEx_PressIcon);
-            // 
-            // songEditor
-            // 
-            this.songEditor.Collections = new string[0];
-            this.songEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.songEditor.Location = new System.Drawing.Point(0, 0);
-            this.songEditor.Name = "songEditor";
-            this.songEditor.Size = new System.Drawing.Size(569, 492);
-            this.songEditor.TabIndex = 0;
-            // 
-            // liveMediaControls
-            // 
-            this.liveMediaControls.BackColor = System.Drawing.Color.Transparent;
-            this.liveMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.liveMediaControls.LabelColor = System.Drawing.Color.Black;
-            this.liveMediaControls.LabelText = "Live Window";
-            this.liveMediaControls.Location = new System.Drawing.Point(0, 11);
-            this.liveMediaControls.Name = "liveMediaControls";
-            this.liveMediaControls.Red = true;
-            this.liveMediaControls.Size = new System.Drawing.Size(234, 63);
-            this.liveMediaControls.TabIndex = 5;
-            this.liveMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.liveMediaControls_MediaButtonPressed);
-            // 
-            // previewMediaControls
-            // 
-            this.previewMediaControls.BackColor = System.Drawing.Color.Transparent;
-            this.previewMediaControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.previewMediaControls.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.previewMediaControls.LabelText = "Preview Window";
-            this.previewMediaControls.Location = new System.Drawing.Point(0, 11);
-            this.previewMediaControls.Name = "previewMediaControls";
-            this.previewMediaControls.Red = false;
-            this.previewMediaControls.Size = new System.Drawing.Size(234, 63);
-            this.previewMediaControls.TabIndex = 2;
-            this.previewMediaControls.MediaButtonPressed += new DreamBeam.MediaControlsChanged(this.previewMediaControls_MediaButtonPressed);
             // 
             // bibleTextControl
             // 
             this.bibleTextControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bibleTextControl.Location = new System.Drawing.Point(0, 0);
             this.bibleTextControl.Name = "bibleTextControl";
-            this.bibleTextControl.Size = new System.Drawing.Size(569, 492);
+            this.bibleTextControl.Size = new System.Drawing.Size(374, 444);
             this.bibleTextControl.TabIndex = 3;
+            // 
+            // rightSandDock
+            // 
+            this.rightSandDock.Controls.Add(this.DockControl_PreviewScreen);
+            this.rightSandDock.Controls.Add(this.DockControl_LiveScreen);
+            this.rightSandDock.Controls.Add(this.Dock_SongTools);
+            this.rightSandDock.Controls.Add(this.DockControl_BibleTools);
+            this.rightSandDock.Controls.Add(this.DockControl_DesignEditor);
+            this.rightSandDock.Controls.Add(this.DockControl_Songs);
+            this.rightSandDock.Controls.Add(this.DockControl_PlayList);
+            this.rightSandDock.Controls.Add(this.DockControl_Backgrounds);
+            this.rightSandDock.Controls.Add(this.DockControl_Media);
+            this.rightSandDock.Controls.Add(this.DockControl_MediaLists);
+            this.rightSandDock.Dock = System.Windows.Forms.DockStyle.Right;
+            this.rightSandDock.Guid = new System.Guid("a6039876-f9a8-471e-b56f-5b1bf7264f06");
+            this.rightSandDock.LayoutSystem = new TD.SandDock.SplitLayoutSystem(250, 400, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
+            ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(386, 510, System.Windows.Forms.Orientation.Vertical, new TD.SandDock.LayoutSystemBase[] {
+                        ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(222, 510, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
+                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(223, 203, new TD.SandDock.DockControl[] {
+                                                this.DockControl_PreviewScreen,
+                                                this.DockControl_LiveScreen}, this.DockControl_LiveScreen))),
+                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(223, 302, new TD.SandDock.DockControl[] {
+                                                this.Dock_SongTools,
+                                                this.DockControl_BibleTools,
+                                                this.DockControl_DesignEditor}, this.DockControl_DesignEditor)))}))),
+                        ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.SplitLayoutSystem(159, 510, System.Windows.Forms.Orientation.Horizontal, new TD.SandDock.LayoutSystemBase[] {
+                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(159, 218, new TD.SandDock.DockControl[] {
+                                                this.DockControl_Songs,
+                                                this.DockControl_PlayList}, this.DockControl_PlayList))),
+                                    ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(159, 287, new TD.SandDock.DockControl[] {
+                                                this.DockControl_Backgrounds,
+                                                this.DockControl_Media,
+                                                this.DockControl_MediaLists}, this.DockControl_Media)))})))})))});
+            this.rightSandDock.Location = new System.Drawing.Point(453, 50);
+            this.rightSandDock.Manager = this.sandDockManager1;
+            this.rightSandDock.MaximumSize = 600;
+            this.rightSandDock.Name = "rightSandDock";
+            this.rightSandDock.Size = new System.Drawing.Size(390, 510);
+            this.rightSandDock.TabIndex = 24;
+            this.rightSandDock.SizeChanged += new System.EventHandler(this.rightSandDock_SizeChanged);
+            // 
+            // DockControl_PreviewScreen
+            // 
+            this.DockControl_PreviewScreen.Controls.Add(this.RightDocks_PreviewScreen_PictureBox);
+            this.DockControl_PreviewScreen.Controls.Add(this.panel5);
+            this.DockControl_PreviewScreen.Guid = new System.Guid("8a7e4f9a-a6a1-48b7-a273-8494de07e6b2");
+            this.DockControl_PreviewScreen.Location = new System.Drawing.Point(4, 25);
+            this.DockControl_PreviewScreen.Name = "DockControl_PreviewScreen";
+            this.DockControl_PreviewScreen.Size = new System.Drawing.Size(223, 155);
+            this.DockControl_PreviewScreen.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_PreviewScreen.TabImage")));
+            this.DockControl_PreviewScreen.TabIndex = 1;
+            this.DockControl_PreviewScreen.Text = "Preview";
             // 
             // RightDocks_PreviewScreen_PictureBox
             // 
@@ -2766,12 +2078,25 @@ namespace DreamBeam {
             this.RightDocks_PreviewScreen_PictureBox.Name = "RightDocks_PreviewScreen_PictureBox";
             this.RightDocks_PreviewScreen_PictureBox.RectPosition = ((System.Drawing.RectangleF)(resources.GetObject("RightDocks_PreviewScreen_PictureBox.RectPosition")));
             this.RightDocks_PreviewScreen_PictureBox.ShowRect = false;
-            this.RightDocks_PreviewScreen_PictureBox.Size = new System.Drawing.Size(223, 134);
+            this.RightDocks_PreviewScreen_PictureBox.Size = new System.Drawing.Size(223, 125);
             this.RightDocks_PreviewScreen_PictureBox.TabIndex = 0;
             this.MainForm_ToolTip.SetToolTip(this.RightDocks_PreviewScreen_PictureBox, "RightClick for Large TextPlacement");
             this.RightDocks_PreviewScreen_PictureBox.RectangleChangedEvent += new DreamBeam.RectangleChangeHandler(this.RightDocks_PreviewScreen_PictureBox_RectangleChangedEvent);
             this.RightDocks_PreviewScreen_PictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RightDocks_PreviewScreen_PictureBox_MouseDown);
             this.RightDocks_PreviewScreen_PictureBox.SizeChanged += new System.EventHandler(this.RightDocks_PreviewScreen_PictureBox_SizeChanged);
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel5.Controls.Add(this.RightDocks_Preview_Prev);
+            this.panel5.Controls.Add(this.RightDocks_Preview_Next);
+            this.panel5.Controls.Add(this.RightDocks_Preview_GoLive);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(0, 125);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(223, 30);
+            this.panel5.TabIndex = 1;
+            this.panel5.SizeChanged += new System.EventHandler(this.panel5_SizeChanged);
             // 
             // RightDocks_Preview_Prev
             // 
@@ -2878,6 +2203,41 @@ namespace DreamBeam {
             this.RightDocks_Preview_GoLive.UseVisualStyleBackColor = true;
             this.RightDocks_Preview_GoLive.Click += new System.EventHandler(this.RightDocks_Preview_GoLive_Click);
             // 
+            // DockControl_LiveScreen
+            // 
+            this.DockControl_LiveScreen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.DockControl_LiveScreen.Controls.Add(this.RightDocks_LiveScreen_PictureBox);
+            this.DockControl_LiveScreen.Controls.Add(this.panel9);
+            this.DockControl_LiveScreen.Guid = new System.Guid("e37c7ea7-844c-4a80-baba-1b5d7ddb42e7");
+            this.DockControl_LiveScreen.Location = new System.Drawing.Point(4, 25);
+            this.DockControl_LiveScreen.Name = "DockControl_LiveScreen";
+            this.DockControl_LiveScreen.Size = new System.Drawing.Size(223, 155);
+            this.DockControl_LiveScreen.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_LiveScreen.TabImage")));
+            this.DockControl_LiveScreen.TabIndex = 2;
+            this.DockControl_LiveScreen.Text = "Live";
+            // 
+            // RightDocks_LiveScreen_PictureBox
+            // 
+            this.RightDocks_LiveScreen_PictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RightDocks_LiveScreen_PictureBox.Location = new System.Drawing.Point(0, 0);
+            this.RightDocks_LiveScreen_PictureBox.Name = "RightDocks_LiveScreen_PictureBox";
+            this.RightDocks_LiveScreen_PictureBox.Size = new System.Drawing.Size(223, 125);
+            this.RightDocks_LiveScreen_PictureBox.TabIndex = 0;
+            this.RightDocks_LiveScreen_PictureBox.TabStop = false;
+            this.RightDocks_LiveScreen_PictureBox.SizeChanged += new System.EventHandler(this.RightDocks_LiveScreen_PictureBox_SizeChanged);
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel9.Controls.Add(this.RightDocks_Live_Prev);
+            this.panel9.Controls.Add(this.RightDocks_Live_Next);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel9.Location = new System.Drawing.Point(0, 125);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(223, 30);
+            this.panel9.TabIndex = 1;
+            this.panel9.Resize += new System.EventHandler(this.panel9_Resize);
+            // 
             // RightDocks_Live_Prev
             // 
             this.RightDocks_Live_Prev.Arrow = RibbonStyle.RibbonMenuButton.e_arrow.None;
@@ -2948,67 +2308,138 @@ namespace DreamBeam {
             this.RightDocks_Live_Next.UseVisualStyleBackColor = true;
             this.RightDocks_Live_Next.Click += new System.EventHandler(this.RightDocks_Live_Next_Click);
             // 
-            // SongShow_HideAuthor_Button
+            // Dock_SongTools
             // 
-            this.SongShow_HideAuthor_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.SongShow_HideAuthor_Button.Appearance = System.Windows.Forms.Appearance.Button;
-            this.SongShow_HideAuthor_Button.bottomColor = System.Drawing.Color.DarkBlue;
-            this.SongShow_HideAuthor_Button.BottomTransparent = 64;
-            this.SongShow_HideAuthor_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SongShow_HideAuthor_Button.LEDColor = System.Drawing.Color.SteelBlue;
-            this.SongShow_HideAuthor_Button.Location = new System.Drawing.Point(52, 2);
-            this.SongShow_HideAuthor_Button.Name = "SongShow_HideAuthor_Button";
-            this.SongShow_HideAuthor_Button.Size = new System.Drawing.Size(104, 24);
-            this.SongShow_HideAuthor_Button.TabIndex = 3;
-            this.SongShow_HideAuthor_Button.Text = "Hide Author";
-            this.SongShow_HideAuthor_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SongShow_HideAuthor_Button.topColor = System.Drawing.Color.Aquamarine;
-            this.SongShow_HideAuthor_Button.TopTransparent = 64;
-            this.SongShow_HideAuthor_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideAuthor_Button_MouseDown);
-            this.SongShow_HideAuthor_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideAuthor_Button_MouseUp);
+            this.Dock_SongTools.Controls.Add(this.SongShow_CollapsPanel);
+            this.Dock_SongTools.Guid = new System.Guid("7bae0dc0-4ef3-4da4-a888-a9cafaee19c6");
+            this.Dock_SongTools.Location = new System.Drawing.Point(4, 232);
+            this.Dock_SongTools.Name = "Dock_SongTools";
+            this.Dock_SongTools.Size = new System.Drawing.Size(223, 255);
+            this.Dock_SongTools.TabIndex = 7;
+            this.Dock_SongTools.Text = "Song Tools";
             // 
-            // SongShow_HideText_Button
+            // DockControl_BibleTools
             // 
-            this.SongShow_HideText_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.SongShow_HideText_Button.Appearance = System.Windows.Forms.Appearance.Button;
-            this.SongShow_HideText_Button.bottomColor = System.Drawing.Color.DarkBlue;
-            this.SongShow_HideText_Button.BottomTransparent = 64;
-            this.SongShow_HideText_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SongShow_HideText_Button.LEDColor = System.Drawing.Color.SteelBlue;
-            this.SongShow_HideText_Button.Location = new System.Drawing.Point(52, 2);
-            this.SongShow_HideText_Button.Name = "SongShow_HideText_Button";
-            this.SongShow_HideText_Button.Size = new System.Drawing.Size(104, 24);
-            this.SongShow_HideText_Button.TabIndex = 2;
-            this.SongShow_HideText_Button.Text = "Hide Verses";
-            this.SongShow_HideText_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SongShow_HideText_Button.topColor = System.Drawing.Color.Aquamarine;
-            this.SongShow_HideText_Button.TopTransparent = 64;
-            this.SongShow_HideText_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideText_Button_MouseDown);
-            this.SongShow_HideText_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideText_Button_MouseUp);
+            this.DockControl_BibleTools.Controls.Add(this.BibleTools_CollapsiblePanelBar);
+            this.DockControl_BibleTools.Guid = new System.Guid("226af261-a2b0-437c-8c85-a1c4d4b57298");
+            this.DockControl_BibleTools.Location = new System.Drawing.Point(4, 232);
+            this.DockControl_BibleTools.Name = "DockControl_BibleTools";
+            this.DockControl_BibleTools.Size = new System.Drawing.Size(223, 255);
+            this.DockControl_BibleTools.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_BibleTools.TabImage")));
+            this.DockControl_BibleTools.TabIndex = 6;
+            this.DockControl_BibleTools.Text = "Bible Tools";
             // 
-            // SongShow_HideTitle_Button
+            // BibleTools_CollapsiblePanelBar
             // 
-            this.SongShow_HideTitle_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.SongShow_HideTitle_Button.Appearance = System.Windows.Forms.Appearance.Button;
-            this.SongShow_HideTitle_Button.bottomColor = System.Drawing.Color.DarkBlue;
-            this.SongShow_HideTitle_Button.BottomTransparent = 64;
-            this.SongShow_HideTitle_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SongShow_HideTitle_Button.LEDColor = System.Drawing.Color.SteelBlue;
-            this.SongShow_HideTitle_Button.Location = new System.Drawing.Point(52, 2);
-            this.SongShow_HideTitle_Button.Name = "SongShow_HideTitle_Button";
-            this.SongShow_HideTitle_Button.Size = new System.Drawing.Size(104, 24);
-            this.SongShow_HideTitle_Button.TabIndex = 1;
-            this.SongShow_HideTitle_Button.Text = "Hide Title";
-            this.SongShow_HideTitle_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SongShow_HideTitle_Button.topColor = System.Drawing.Color.Aquamarine;
-            this.SongShow_HideTitle_Button.TopTransparent = 64;
-            this.SongShow_HideTitle_Button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideTitle_Button_MouseDown);
-            this.SongShow_HideTitle_Button.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongShow_HideTitle_Button_MouseUp);
+            this.BibleTools_CollapsiblePanelBar.AutoScroll = true;
+            this.BibleTools_CollapsiblePanelBar.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.BibleTools_CollapsiblePanelBar.Border = 8;
+            this.BibleTools_CollapsiblePanelBar.Controls.Add(this.BibleBookmarks_CollapsiblePanel);
+            this.BibleTools_CollapsiblePanelBar.Controls.Add(this.BibleTranslations_CollapsiblePanel);
+            this.BibleTools_CollapsiblePanelBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BibleTools_CollapsiblePanelBar.Location = new System.Drawing.Point(0, 0);
+            this.BibleTools_CollapsiblePanelBar.Name = "BibleTools_CollapsiblePanelBar";
+            this.BibleTools_CollapsiblePanelBar.Size = new System.Drawing.Size(223, 255);
+            this.BibleTools_CollapsiblePanelBar.Spacing = 8;
+            this.BibleTools_CollapsiblePanelBar.TabIndex = 2;
+            // 
+            // BibleBookmarks_CollapsiblePanel
+            // 
+            this.BibleBookmarks_CollapsiblePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.BibleBookmarks_CollapsiblePanel.BackColor = System.Drawing.Color.AliceBlue;
+            this.BibleBookmarks_CollapsiblePanel.Controls.Add(this.BibleText_Bookmarks);
+            this.BibleBookmarks_CollapsiblePanel.EndColour = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(212)))), ((int)(((byte)(247)))));
+            this.BibleBookmarks_CollapsiblePanel.Image = null;
+            this.BibleBookmarks_CollapsiblePanel.Location = new System.Drawing.Point(8, 121);
+            this.BibleBookmarks_CollapsiblePanel.Name = "BibleBookmarks_CollapsiblePanel";
+            this.BibleBookmarks_CollapsiblePanel.PanelState = Salamander.Windows.Forms.PanelState.Expanded;
+            this.BibleBookmarks_CollapsiblePanel.Size = new System.Drawing.Size(190, 209);
+            this.BibleBookmarks_CollapsiblePanel.StartColour = System.Drawing.Color.White;
+            this.BibleBookmarks_CollapsiblePanel.TabIndex = 1;
+            this.BibleBookmarks_CollapsiblePanel.TitleFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BibleBookmarks_CollapsiblePanel.TitleFontColour = System.Drawing.Color.Navy;
+            this.BibleBookmarks_CollapsiblePanel.TitleText = "Bookmarks";
+            // 
+            // BibleText_Bookmarks
+            // 
+            this.BibleText_Bookmarks.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BibleText_Bookmarks.Location = new System.Drawing.Point(0, 23);
+            this.BibleText_Bookmarks.Name = "BibleText_Bookmarks";
+            this.BibleText_Bookmarks.Size = new System.Drawing.Size(190, 186);
+            this.BibleText_Bookmarks.TabIndex = 1;
+            this.MainForm_ToolTip.SetToolTip(this.BibleText_Bookmarks, "Click to preview this verse, or right-click to remove it.");
+            this.BibleText_Bookmarks.SelectedIndexChanged += new System.EventHandler(this.BibleText_Bookmarks_SelectedIndexChanged);
+            this.BibleText_Bookmarks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BibleText_Bookmarks_MouseDown);
+            // 
+            // BibleTranslations_CollapsiblePanel
+            // 
+            this.BibleTranslations_CollapsiblePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.BibleTranslations_CollapsiblePanel.BackColor = System.Drawing.Color.AliceBlue;
+            this.BibleTranslations_CollapsiblePanel.Controls.Add(this.BibleText_Translations);
+            this.BibleTranslations_CollapsiblePanel.EndColour = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(212)))), ((int)(((byte)(247)))));
+            this.BibleTranslations_CollapsiblePanel.Image = null;
+            this.BibleTranslations_CollapsiblePanel.Location = new System.Drawing.Point(8, 8);
+            this.BibleTranslations_CollapsiblePanel.Name = "BibleTranslations_CollapsiblePanel";
+            this.BibleTranslations_CollapsiblePanel.PanelState = Salamander.Windows.Forms.PanelState.Expanded;
+            this.BibleTranslations_CollapsiblePanel.Size = new System.Drawing.Size(190, 105);
+            this.BibleTranslations_CollapsiblePanel.StartColour = System.Drawing.Color.White;
+            this.BibleTranslations_CollapsiblePanel.TabIndex = 0;
+            this.BibleTranslations_CollapsiblePanel.TitleFont = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BibleTranslations_CollapsiblePanel.TitleFontColour = System.Drawing.Color.Navy;
+            this.BibleTranslations_CollapsiblePanel.TitleText = "Translations";
+            // 
+            // BibleText_Translations
+            // 
+            this.BibleText_Translations.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BibleText_Translations.Location = new System.Drawing.Point(0, 23);
+            this.BibleText_Translations.Name = "BibleText_Translations";
+            this.BibleText_Translations.Size = new System.Drawing.Size(190, 82);
+            this.BibleText_Translations.TabIndex = 1;
+            this.BibleText_Translations.SelectedIndexChanged += new System.EventHandler(this.BibleText_Translations_SelectedIndexChanged);
+            // 
+            // DockControl_DesignEditor
+            // 
+            this.DockControl_DesignEditor.Controls.Add(this.DesignTabControl);
+            this.DockControl_DesignEditor.Guid = new System.Guid("69c6f3d1-3cc1-404c-ae1c-cf6db365a077");
+            this.DockControl_DesignEditor.Location = new System.Drawing.Point(4, 232);
+            this.DockControl_DesignEditor.Name = "DockControl_DesignEditor";
+            this.DockControl_DesignEditor.Size = new System.Drawing.Size(223, 255);
+            this.DockControl_DesignEditor.TabIndex = 8;
+            this.DockControl_DesignEditor.Text = "Song Design";
+            // 
+            // DesignTabControl
+            // 
+            this.DesignTabControl.Controls.Add(this.SongDesignTab);
+            this.DesignTabControl.Controls.Add(this.SermonDesignTab);
+            this.DesignTabControl.Controls.Add(this.BibleDesignTab);
+            this.DesignTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DesignTabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.DesignTabControl.Location = new System.Drawing.Point(0, 0);
+            this.DesignTabControl.MinimumSize = new System.Drawing.Size(300, 0);
+            this.DesignTabControl.Name = "DesignTabControl";
+            this.DesignTabControl.Padding = new System.Drawing.Point(0, 0);
+            this.DesignTabControl.SelectedIndex = 0;
+            this.DesignTabControl.Size = new System.Drawing.Size(300, 255);
+            this.DesignTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.DesignTabControl.TabIndex = 3;
+            // 
+            // SongDesignTab
+            // 
+            this.SongDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.SongDesignTab.Controls.Add(this.songThemeWidget);
+            this.SongDesignTab.Location = new System.Drawing.Point(4, 22);
+            this.SongDesignTab.Name = "SongDesignTab";
+            this.SongDesignTab.Padding = new System.Windows.Forms.Padding(3);
+            this.SongDesignTab.Size = new System.Drawing.Size(292, 229);
+            this.SongDesignTab.TabIndex = 0;
+            this.SongDesignTab.SizeChanged += new System.EventHandler(this.SongDesignTab_SizeChanged);
             // 
             // songThemeWidget
             // 
             this.songThemeWidget.BGImagePath = "Image";
-            this.songThemeWidget.Location = new System.Drawing.Point(31, 0);
+            this.songThemeWidget.Location = new System.Drawing.Point(-1, -4);
             this.songThemeWidget.Name = "songThemeWidget";
             this.songThemeWidget.SetTextPosition = false;
             this.songThemeWidget.Size = new System.Drawing.Size(255, 320);
@@ -3022,6 +2453,17 @@ namespace DreamBeam {
             this.songThemeWidget.UseDesign = false;
             this.songThemeWidget.MouseInsideEvent += new System.EventHandler(this.songThemeWidget_MouseInsideEvent);
             this.songThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
+            // 
+            // SermonDesignTab
+            // 
+            this.SermonDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.SermonDesignTab.Controls.Add(this.sermonThemeWidget);
+            this.SermonDesignTab.Location = new System.Drawing.Point(4, 22);
+            this.SermonDesignTab.Name = "SermonDesignTab";
+            this.SermonDesignTab.Padding = new System.Windows.Forms.Padding(3);
+            this.SermonDesignTab.Size = new System.Drawing.Size(292, 229);
+            this.SermonDesignTab.TabIndex = 1;
+            this.SermonDesignTab.SizeChanged += new System.EventHandler(this.SermonDesignTab_SizeChanged);
             // 
             // sermonThemeWidget
             // 
@@ -3037,6 +2479,17 @@ namespace DreamBeam {
             this.sermonThemeWidget.ThemePath = "";
             this.sermonThemeWidget.UseDesign = false;
             this.sermonThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
+            // 
+            // BibleDesignTab
+            // 
+            this.BibleDesignTab.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.BibleDesignTab.Controls.Add(this.bibleThemeWidget);
+            this.BibleDesignTab.Location = new System.Drawing.Point(4, 22);
+            this.BibleDesignTab.Name = "BibleDesignTab";
+            this.BibleDesignTab.Padding = new System.Windows.Forms.Padding(3);
+            this.BibleDesignTab.Size = new System.Drawing.Size(292, 229);
+            this.BibleDesignTab.TabIndex = 2;
+            this.BibleDesignTab.SizeChanged += new System.EventHandler(this.BibleDesignTab_SizeChanged);
             // 
             // bibleThemeWidget
             // 
@@ -3054,6 +2507,19 @@ namespace DreamBeam {
             this.bibleThemeWidget.UseDesign = false;
             this.bibleThemeWidget.ControlChangedEvent += new System.EventHandler(this.songThemeWidget_ControlChangedEvent);
             // 
+            // DockControl_Songs
+            // 
+            this.DockControl_Songs.Controls.Add(this.SongList_Tree);
+            this.DockControl_Songs.Controls.Add(this.RightDocks_Songlist_SearchPanel);
+            this.DockControl_Songs.Controls.Add(this.RightDocks_SongList_ButtonPanel);
+            this.DockControl_Songs.Guid = new System.Guid("6044bb67-05ab-4617-bbfa-99e49388b41f");
+            this.DockControl_Songs.Location = new System.Drawing.Point(231, 25);
+            this.DockControl_Songs.Name = "DockControl_Songs";
+            this.DockControl_Songs.Size = new System.Drawing.Size(159, 170);
+            this.DockControl_Songs.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_Songs.TabImage")));
+            this.DockControl_Songs.TabIndex = 0;
+            this.DockControl_Songs.Text = "Songs";
+            // 
             // SongList_Tree
             // 
             this.SongList_Tree.AutoBuildTree = true;
@@ -3062,20 +2528,576 @@ namespace DreamBeam {
             this.SongList_Tree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SongList_Tree.Location = new System.Drawing.Point(0, 23);
             this.SongList_Tree.Name = "SongList_Tree";
-            this.SongList_Tree.Size = new System.Drawing.Size(159, 137);
+            this.SongList_Tree.Size = new System.Drawing.Size(159, 127);
             this.SongList_Tree.TabIndex = 7;
             this.SongList_Tree.ValueMember = null;
             this.SongList_Tree.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SongList_Tree_MouseClick);
             this.SongList_Tree.DoubleClick += new System.EventHandler(this.SongList_Tree_DoubleClick);
             this.SongList_Tree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.SongList_Tree_AfterSelect);
             // 
+            // RightDocks_Songlist_SearchPanel
+            // 
+            this.RightDocks_Songlist_SearchPanel.Controls.Add(this.pictureBox1);
+            this.RightDocks_Songlist_SearchPanel.Controls.Add(this.RightDocks_SongListSearch);
+            this.RightDocks_Songlist_SearchPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.RightDocks_Songlist_SearchPanel.Location = new System.Drawing.Point(0, 0);
+            this.RightDocks_Songlist_SearchPanel.Name = "RightDocks_Songlist_SearchPanel";
+            this.RightDocks_Songlist_SearchPanel.Size = new System.Drawing.Size(159, 23);
+            this.RightDocks_Songlist_SearchPanel.TabIndex = 6;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(22, 22);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
+            // RightDocks_SongListSearch
+            // 
+            this.RightDocks_SongListSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.RightDocks_SongListSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RightDocks_SongListSearch.Location = new System.Drawing.Point(22, 0);
+            this.RightDocks_SongListSearch.Name = "RightDocks_SongListSearch";
+            this.RightDocks_SongListSearch.Size = new System.Drawing.Size(137, 20);
+            this.RightDocks_SongListSearch.TabIndex = 4;
+            this.RightDocks_SongListSearch.TextChanged += new System.EventHandler(this.RightDocks_SongListSearch_TextChanged);
+            // 
+            // RightDocks_SongList_ButtonPanel
+            // 
+            this.RightDocks_SongList_ButtonPanel.Controls.Add(this.btnRightDocks_SongListDelete);
+            this.RightDocks_SongList_ButtonPanel.Controls.Add(this.btnRightDocks_SongList2PlayList);
+            this.RightDocks_SongList_ButtonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.RightDocks_SongList_ButtonPanel.Location = new System.Drawing.Point(0, 150);
+            this.RightDocks_SongList_ButtonPanel.Name = "RightDocks_SongList_ButtonPanel";
+            this.RightDocks_SongList_ButtonPanel.Size = new System.Drawing.Size(159, 20);
+            this.RightDocks_SongList_ButtonPanel.TabIndex = 5;
+            // 
+            // btnRightDocks_SongListDelete
+            // 
+            this.btnRightDocks_SongListDelete.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnRightDocks_SongListDelete.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnRightDocks_SongListDelete.Location = new System.Drawing.Point(-3, 1);
+            this.btnRightDocks_SongListDelete.Name = "btnRightDocks_SongListDelete";
+            this.btnRightDocks_SongListDelete.Size = new System.Drawing.Size(62, 18);
+            this.btnRightDocks_SongListDelete.TabIndex = 2;
+            this.btnRightDocks_SongListDelete.Text = "Delete";
+            this.MainForm_ToolTip.SetToolTip(this.btnRightDocks_SongListDelete, "Delete selected song");
+            this.btnRightDocks_SongListDelete.Click += new System.EventHandler(this.btnRightDocks_SongListDelete_Click);
+            // 
+            // btnRightDocks_SongList2PlayList
+            // 
+            this.btnRightDocks_SongList2PlayList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRightDocks_SongList2PlayList.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnRightDocks_SongList2PlayList.Location = new System.Drawing.Point(59, 1);
+            this.btnRightDocks_SongList2PlayList.Name = "btnRightDocks_SongList2PlayList";
+            this.btnRightDocks_SongList2PlayList.Size = new System.Drawing.Size(88, 18);
+            this.btnRightDocks_SongList2PlayList.TabIndex = 1;
+            this.btnRightDocks_SongList2PlayList.Text = "Add to Playlist";
+            this.MainForm_ToolTip.SetToolTip(this.btnRightDocks_SongList2PlayList, "Add selected song to the playlist");
+            this.btnRightDocks_SongList2PlayList.Click += new System.EventHandler(this.btnRightDocks_SongList2PlayList_Click);
+            // 
+            // DockControl_PlayList
+            // 
+            this.DockControl_PlayList.Controls.Add(this.RightDocks_PlayList);
+            this.DockControl_PlayList.Controls.Add(this.RightDocks_TopPanel_PlayList_Button_Panel);
+            this.DockControl_PlayList.Guid = new System.Guid("92186926-e7f9-4850-98b8-190a99f81ea6");
+            this.DockControl_PlayList.Location = new System.Drawing.Point(231, 25);
+            this.DockControl_PlayList.Name = "DockControl_PlayList";
+            this.DockControl_PlayList.Size = new System.Drawing.Size(159, 170);
+            this.DockControl_PlayList.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_PlayList.TabImage")));
+            this.DockControl_PlayList.TabIndex = 2;
+            this.DockControl_PlayList.Text = "Playlist";
+            // 
+            // RightDocks_PlayList
+            // 
+            this.RightDocks_PlayList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RightDocks_PlayList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RightDocks_PlayList.Location = new System.Drawing.Point(0, 0);
+            this.RightDocks_PlayList.Name = "RightDocks_PlayList";
+            this.RightDocks_PlayList.Size = new System.Drawing.Size(159, 145);
+            this.RightDocks_PlayList.TabIndex = 1;
+            this.RightDocks_PlayList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RightDocks_PlayList_MouseUp);
+            this.RightDocks_PlayList.DoubleClick += new System.EventHandler(this.RightDocks_PlayList_DoubleClick);
+            // 
+            // RightDocks_TopPanel_PlayList_Button_Panel
+            // 
+            this.RightDocks_TopPanel_PlayList_Button_Panel.Controls.Add(this.RightDocks_PlayList_Down_Button);
+            this.RightDocks_TopPanel_PlayList_Button_Panel.Controls.Add(this.RightDocks_PlayList_Up_Button);
+            this.RightDocks_TopPanel_PlayList_Button_Panel.Controls.Add(this.RightDocks_PlayList_Remove_Button);
+            this.RightDocks_TopPanel_PlayList_Button_Panel.Controls.Add(this.RightDocks_PlayList_Load_Button);
+            this.RightDocks_TopPanel_PlayList_Button_Panel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.RightDocks_TopPanel_PlayList_Button_Panel.Location = new System.Drawing.Point(0, 150);
+            this.RightDocks_TopPanel_PlayList_Button_Panel.Name = "RightDocks_TopPanel_PlayList_Button_Panel";
+            this.RightDocks_TopPanel_PlayList_Button_Panel.Size = new System.Drawing.Size(159, 20);
+            this.RightDocks_TopPanel_PlayList_Button_Panel.TabIndex = 8;
+            // 
+            // RightDocks_PlayList_Down_Button
+            // 
+            this.RightDocks_PlayList_Down_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RightDocks_PlayList_Down_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_PlayList_Down_Button.Location = new System.Drawing.Point(117, 2);
+            this.RightDocks_PlayList_Down_Button.Name = "RightDocks_PlayList_Down_Button";
+            this.RightDocks_PlayList_Down_Button.Size = new System.Drawing.Size(40, 18);
+            this.RightDocks_PlayList_Down_Button.TabIndex = 7;
+            this.RightDocks_PlayList_Down_Button.Text = "Down";
+            this.RightDocks_PlayList_Down_Button.Click += new System.EventHandler(this.RightDocks_PlayList_Down_Button_Click);
+            // 
+            // RightDocks_PlayList_Up_Button
+            // 
+            this.RightDocks_PlayList_Up_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RightDocks_PlayList_Up_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_PlayList_Up_Button.Location = new System.Drawing.Point(77, 2);
+            this.RightDocks_PlayList_Up_Button.Name = "RightDocks_PlayList_Up_Button";
+            this.RightDocks_PlayList_Up_Button.Size = new System.Drawing.Size(40, 18);
+            this.RightDocks_PlayList_Up_Button.TabIndex = 6;
+            this.RightDocks_PlayList_Up_Button.Text = "Up";
+            this.RightDocks_PlayList_Up_Button.Click += new System.EventHandler(this.RightDocks_PlayList_Up_Button_Click);
+            // 
+            // RightDocks_PlayList_Remove_Button
+            // 
+            this.RightDocks_PlayList_Remove_Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.RightDocks_PlayList_Remove_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_PlayList_Remove_Button.Location = new System.Drawing.Point(38, 2);
+            this.RightDocks_PlayList_Remove_Button.Name = "RightDocks_PlayList_Remove_Button";
+            this.RightDocks_PlayList_Remove_Button.Size = new System.Drawing.Size(54, 18);
+            this.RightDocks_PlayList_Remove_Button.TabIndex = 5;
+            this.RightDocks_PlayList_Remove_Button.Text = "Remove";
+            this.MainForm_ToolTip.SetToolTip(this.RightDocks_PlayList_Remove_Button, "Remove selected song from playlist");
+            this.RightDocks_PlayList_Remove_Button.Click += new System.EventHandler(this.RightDocks_PlayList_Remove_Button_Click);
+            // 
+            // RightDocks_PlayList_Load_Button
+            // 
+            this.RightDocks_PlayList_Load_Button.Enabled = false;
+            this.RightDocks_PlayList_Load_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_PlayList_Load_Button.Location = new System.Drawing.Point(2, 2);
+            this.RightDocks_PlayList_Load_Button.Name = "RightDocks_PlayList_Load_Button";
+            this.RightDocks_PlayList_Load_Button.Size = new System.Drawing.Size(54, 18);
+            this.RightDocks_PlayList_Load_Button.TabIndex = 4;
+            this.RightDocks_PlayList_Load_Button.Text = "<- Load";
+            this.MainForm_ToolTip.SetToolTip(this.RightDocks_PlayList_Load_Button, "Preview selected song");
+            // 
+            // DockControl_Backgrounds
+            // 
+            this.DockControl_Backgrounds.Controls.Add(this.panel2);
+            this.DockControl_Backgrounds.Controls.Add(this.panel6);
+            this.DockControl_Backgrounds.Controls.Add(this.RightDocks_BottomPanel2_TopPanel);
+            this.DockControl_Backgrounds.Guid = new System.Guid("b561dd7f-3e79-4e07-912c-18ac9600db75");
+            this.DockControl_Backgrounds.Location = new System.Drawing.Point(231, 247);
+            this.DockControl_Backgrounds.Name = "DockControl_Backgrounds";
+            this.DockControl_Backgrounds.Size = new System.Drawing.Size(159, 240);
+            this.DockControl_Backgrounds.TabIndex = 1;
+            this.DockControl_Backgrounds.Text = "Backgrounds";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.RightDocks_ImageListBox);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 24);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(159, 192);
+            this.panel2.TabIndex = 25;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.RightDocks_Backgrounds_UseDefault);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(0, 216);
+            this.panel6.Name = "panel6";
+            this.panel6.Padding = new System.Windows.Forms.Padding(2);
+            this.panel6.Size = new System.Drawing.Size(159, 24);
+            this.panel6.TabIndex = 24;
+            // 
+            // RightDocks_Backgrounds_UseDefault
+            // 
+            this.RightDocks_Backgrounds_UseDefault.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.RightDocks_Backgrounds_UseDefault.Location = new System.Drawing.Point(41, 3);
+            this.RightDocks_Backgrounds_UseDefault.Name = "RightDocks_Backgrounds_UseDefault";
+            this.RightDocks_Backgrounds_UseDefault.Size = new System.Drawing.Size(75, 18);
+            this.RightDocks_Backgrounds_UseDefault.TabIndex = 23;
+            this.RightDocks_Backgrounds_UseDefault.Text = "Use Default";
+            this.RightDocks_Backgrounds_UseDefault.Click += new System.EventHandler(this.RightDocks_Backgrounds_UseDefault_Click);
+            // 
+            // RightDocks_BottomPanel2_TopPanel
+            // 
+            this.RightDocks_BottomPanel2_TopPanel.Controls.Add(this.RightDocks_FolderDropdown);
+            this.RightDocks_BottomPanel2_TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.RightDocks_BottomPanel2_TopPanel.Location = new System.Drawing.Point(0, 0);
+            this.RightDocks_BottomPanel2_TopPanel.Name = "RightDocks_BottomPanel2_TopPanel";
+            this.RightDocks_BottomPanel2_TopPanel.Size = new System.Drawing.Size(159, 24);
+            this.RightDocks_BottomPanel2_TopPanel.TabIndex = 22;
+            // 
+            // DockControl_Media
+            // 
+            this.DockControl_Media.Controls.Add(this.RightDocks_BottomPanel_MediaList);
+            this.DockControl_Media.Controls.Add(this.RightDocks_BottomPanel_Media_Bottom);
+            this.DockControl_Media.Controls.Add(this.RightDocks_BottomPanel_Media_Top);
+            this.DockControl_Media.Guid = new System.Guid("c9d617ca-0165-45b7-8e07-329a81273abc");
+            this.DockControl_Media.Location = new System.Drawing.Point(231, 247);
+            this.DockControl_Media.Name = "DockControl_Media";
+            this.DockControl_Media.Size = new System.Drawing.Size(159, 240);
+            this.DockControl_Media.TabImage = ((System.Drawing.Image)(resources.GetObject("DockControl_Media.TabImage")));
+            this.DockControl_Media.TabIndex = 4;
+            this.DockControl_Media.Text = "Media";
+            // 
+            // RightDocks_BottomPanel_MediaList
+            // 
+            this.RightDocks_BottomPanel_MediaList.AllowDrop = true;
+            this.RightDocks_BottomPanel_MediaList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RightDocks_BottomPanel_MediaList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RightDocks_BottomPanel_MediaList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.RightDocks_BottomPanel_MediaList.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RightDocks_BottomPanel_MediaList.ImageList = this.Media_ImageList;
+            this.RightDocks_BottomPanel_MediaList.ItemHeight = 76;
+            this.RightDocks_BottomPanel_MediaList.Location = new System.Drawing.Point(0, 32);
+            this.RightDocks_BottomPanel_MediaList.Name = "RightDocks_BottomPanel_MediaList";
+            this.RightDocks_BottomPanel_MediaList.Size = new System.Drawing.Size(159, 78);
+            this.RightDocks_BottomPanel_MediaList.TabIndex = 3;
+            this.RightDocks_BottomPanel_MediaList.SelectedIndexChanged += new System.EventHandler(this.RightDocks_BottomPanel_MediaList_SelectedIndexChanged);
+            this.RightDocks_BottomPanel_MediaList.DragDrop += new System.Windows.Forms.DragEventHandler(this.RightDocks_BottomPanel_MediaList_DragDrop);
+            this.RightDocks_BottomPanel_MediaList.DoubleClick += new System.EventHandler(this.RightDocks_BottomPanel_MediaList_DoubleClick);
+            this.RightDocks_BottomPanel_MediaList.DragEnter += new System.Windows.Forms.DragEventHandler(this.RightDocks_BottomPanel_MediaList_DragEnter);
+            // 
+            // Media_ImageList
+            // 
+            this.Media_ImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
+            this.Media_ImageList.ImageSize = new System.Drawing.Size(100, 75);
+            this.Media_ImageList.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // RightDocks_BottomPanel_Media_Bottom
+            // 
+            this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_AutoPlay);
+            this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_Remove);
+            this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_Down);
+            this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_Up);
+            this.RightDocks_BottomPanel_Media_Bottom.Controls.Add(this.RightDocks_BottomPanel_Media_ShowNext);
+            this.RightDocks_BottomPanel_Media_Bottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.RightDocks_BottomPanel_Media_Bottom.Location = new System.Drawing.Point(0, 184);
+            this.RightDocks_BottomPanel_Media_Bottom.Name = "RightDocks_BottomPanel_Media_Bottom";
+            this.RightDocks_BottomPanel_Media_Bottom.Size = new System.Drawing.Size(159, 56);
+            this.RightDocks_BottomPanel_Media_Bottom.TabIndex = 5;
+            // 
+            // RightDocks_BottomPanel_Media_AutoPlay
+            // 
+            this.RightDocks_BottomPanel_Media_AutoPlay.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_BottomPanel_Media_AutoPlay.Location = new System.Drawing.Point(104, 32);
+            this.RightDocks_BottomPanel_Media_AutoPlay.Name = "RightDocks_BottomPanel_Media_AutoPlay";
+            this.RightDocks_BottomPanel_Media_AutoPlay.Size = new System.Drawing.Size(75, 23);
+            this.RightDocks_BottomPanel_Media_AutoPlay.TabIndex = 11;
+            this.RightDocks_BottomPanel_Media_AutoPlay.Text = "Auto Play";
+            this.RightDocks_BottomPanel_Media_AutoPlay.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_AutoPlay_Click);
+            // 
+            // RightDocks_BottomPanel_Media_Remove
+            // 
+            this.RightDocks_BottomPanel_Media_Remove.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_BottomPanel_Media_Remove.Location = new System.Drawing.Point(56, 8);
+            this.RightDocks_BottomPanel_Media_Remove.Name = "RightDocks_BottomPanel_Media_Remove";
+            this.RightDocks_BottomPanel_Media_Remove.Size = new System.Drawing.Size(56, 18);
+            this.RightDocks_BottomPanel_Media_Remove.TabIndex = 10;
+            this.RightDocks_BottomPanel_Media_Remove.Text = "Remove";
+            this.RightDocks_BottomPanel_Media_Remove.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_Remove_Click);
+            // 
+            // RightDocks_BottomPanel_Media_Down
+            // 
+            this.RightDocks_BottomPanel_Media_Down.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_BottomPanel_Media_Down.Location = new System.Drawing.Point(152, 8);
+            this.RightDocks_BottomPanel_Media_Down.Name = "RightDocks_BottomPanel_Media_Down";
+            this.RightDocks_BottomPanel_Media_Down.Size = new System.Drawing.Size(40, 18);
+            this.RightDocks_BottomPanel_Media_Down.TabIndex = 9;
+            this.RightDocks_BottomPanel_Media_Down.Text = "down";
+            this.RightDocks_BottomPanel_Media_Down.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_Down_Click);
+            // 
+            // RightDocks_BottomPanel_Media_Up
+            // 
+            this.RightDocks_BottomPanel_Media_Up.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_BottomPanel_Media_Up.Location = new System.Drawing.Point(112, 8);
+            this.RightDocks_BottomPanel_Media_Up.Name = "RightDocks_BottomPanel_Media_Up";
+            this.RightDocks_BottomPanel_Media_Up.Size = new System.Drawing.Size(40, 18);
+            this.RightDocks_BottomPanel_Media_Up.TabIndex = 8;
+            this.RightDocks_BottomPanel_Media_Up.Text = "up";
+            this.RightDocks_BottomPanel_Media_Up.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_Up_Click);
+            // 
+            // RightDocks_BottomPanel_Media_ShowNext
+            // 
+            this.RightDocks_BottomPanel_Media_ShowNext.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_BottomPanel_Media_ShowNext.Location = new System.Drawing.Point(16, 32);
+            this.RightDocks_BottomPanel_Media_ShowNext.Name = "RightDocks_BottomPanel_Media_ShowNext";
+            this.RightDocks_BottomPanel_Media_ShowNext.Size = new System.Drawing.Size(75, 23);
+            this.RightDocks_BottomPanel_Media_ShowNext.TabIndex = 0;
+            this.RightDocks_BottomPanel_Media_ShowNext.Text = "Show&&Next";
+            this.RightDocks_BottomPanel_Media_ShowNext.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_ShowNext_Click);
+            // 
+            // RightDocks_BottomPanel_Media_Top
+            // 
+            this.RightDocks_BottomPanel_Media_Top.Controls.Add(this.RightDocks_BottomPanel_Media_FadePanelButton);
+            this.RightDocks_BottomPanel_Media_Top.Dock = System.Windows.Forms.DockStyle.Top;
+            this.RightDocks_BottomPanel_Media_Top.Location = new System.Drawing.Point(0, 0);
+            this.RightDocks_BottomPanel_Media_Top.Name = "RightDocks_BottomPanel_Media_Top";
+            this.RightDocks_BottomPanel_Media_Top.Size = new System.Drawing.Size(159, 32);
+            this.RightDocks_BottomPanel_Media_Top.TabIndex = 4;
+            // 
+            // RightDocks_BottomPanel_Media_FadePanelButton
+            // 
+            this.RightDocks_BottomPanel_Media_FadePanelButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_BottomPanel_Media_FadePanelButton.Location = new System.Drawing.Point(23, 5);
+            this.RightDocks_BottomPanel_Media_FadePanelButton.Name = "RightDocks_BottomPanel_Media_FadePanelButton";
+            this.RightDocks_BottomPanel_Media_FadePanelButton.Size = new System.Drawing.Size(136, 23);
+            this.RightDocks_BottomPanel_Media_FadePanelButton.TabIndex = 2;
+            this.RightDocks_BottomPanel_Media_FadePanelButton.Text = "Add Media...";
+            this.RightDocks_BottomPanel_Media_FadePanelButton.Click += new System.EventHandler(this.RightDocks_BottomPanel_Media_FadePanelButton_Click);
+            // 
+            // DockControl_MediaLists
+            // 
+            this.DockControl_MediaLists.BackColor = System.Drawing.SystemColors.Control;
+            this.DockControl_MediaLists.Controls.Add(this.RightDocks_BottomPanel_MediaListsTopPanel);
+            this.DockControl_MediaLists.Controls.Add(this.RightDocks_BottomPanel_MediaLists_BottomPanel);
+            this.DockControl_MediaLists.Guid = new System.Guid("3429dfd5-f5ba-4785-ac79-49140d88b66b");
+            this.DockControl_MediaLists.Location = new System.Drawing.Point(231, 247);
+            this.DockControl_MediaLists.Name = "DockControl_MediaLists";
+            this.DockControl_MediaLists.Size = new System.Drawing.Size(159, 240);
+            this.DockControl_MediaLists.TabIndex = 5;
+            this.DockControl_MediaLists.Text = "MediaLists";
+            // 
+            // RightDocks_BottomPanel_MediaListsTopPanel
+            // 
+            this.RightDocks_BottomPanel_MediaListsTopPanel.Controls.Add(this.RightDocks_MediaLists);
+            this.RightDocks_BottomPanel_MediaListsTopPanel.Controls.Add(this.RightDocks_BottomPanel_MediaListsTop_Control_Panel);
+            this.RightDocks_BottomPanel_MediaListsTopPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RightDocks_BottomPanel_MediaListsTopPanel.Location = new System.Drawing.Point(0, 0);
+            this.RightDocks_BottomPanel_MediaListsTopPanel.Name = "RightDocks_BottomPanel_MediaListsTopPanel";
+            this.RightDocks_BottomPanel_MediaListsTopPanel.Size = new System.Drawing.Size(159, 140);
+            this.RightDocks_BottomPanel_MediaListsTopPanel.TabIndex = 1;
+            // 
+            // RightDocks_MediaLists
+            // 
+            this.RightDocks_MediaLists.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RightDocks_MediaLists.Location = new System.Drawing.Point(0, 0);
+            this.RightDocks_MediaLists.Name = "RightDocks_MediaLists";
+            this.RightDocks_MediaLists.Size = new System.Drawing.Size(159, 108);
+            this.RightDocks_MediaLists.TabIndex = 1;
+            this.RightDocks_MediaLists.DoubleClick += new System.EventHandler(this.RightDocks_MediaLists_DoubleClick);
+            // 
+            // RightDocks_BottomPanel_MediaListsTop_Control_Panel
+            // 
+            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Controls.Add(this.RightDocks_MediaLists_DeleteButton);
+            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Controls.Add(this.RightDocks_MediaLists_LoadButton);
+            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Location = new System.Drawing.Point(0, 116);
+            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Name = "RightDocks_BottomPanel_MediaListsTop_Control_Panel";
+            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.Size = new System.Drawing.Size(159, 24);
+            this.RightDocks_BottomPanel_MediaListsTop_Control_Panel.TabIndex = 0;
+            // 
+            // RightDocks_MediaLists_DeleteButton
+            // 
+            this.RightDocks_MediaLists_DeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_MediaLists_DeleteButton.Location = new System.Drawing.Point(66, 1);
+            this.RightDocks_MediaLists_DeleteButton.Name = "RightDocks_MediaLists_DeleteButton";
+            this.RightDocks_MediaLists_DeleteButton.Size = new System.Drawing.Size(64, 18);
+            this.RightDocks_MediaLists_DeleteButton.TabIndex = 5;
+            this.RightDocks_MediaLists_DeleteButton.Text = "Delete";
+            this.RightDocks_MediaLists_DeleteButton.Click += new System.EventHandler(this.RightDocks_MediaLists_DeleteButton_Click);
+            // 
+            // RightDocks_MediaLists_LoadButton
+            // 
+            this.RightDocks_MediaLists_LoadButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RightDocks_MediaLists_LoadButton.Location = new System.Drawing.Point(2, 1);
+            this.RightDocks_MediaLists_LoadButton.Name = "RightDocks_MediaLists_LoadButton";
+            this.RightDocks_MediaLists_LoadButton.Size = new System.Drawing.Size(64, 18);
+            this.RightDocks_MediaLists_LoadButton.TabIndex = 4;
+            this.RightDocks_MediaLists_LoadButton.Text = "<-Load";
+            this.RightDocks_MediaLists_LoadButton.Click += new System.EventHandler(this.RightDocks_MediaLists_LoadButton_Click);
+            // 
+            // RightDocks_BottomPanel_MediaLists_BottomPanel
+            // 
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Controls.Add(this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox);
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Location = new System.Drawing.Point(0, 140);
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Name = "RightDocks_BottomPanel_MediaLists_BottomPanel";
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel.Size = new System.Drawing.Size(159, 100);
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel.TabIndex = 0;
+            // 
+            // RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox
+            // 
+            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Controls.Add(this.RightDocks_BottomPanel_MediaLists_LoopCheckBox);
+            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Controls.Add(this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2);
+            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Controls.Add(this.RightDocks_BottomPanel_MediaLists_Numeric);
+            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Controls.Add(this.RightDocks_BottomPanel_MediaList_BottomPanel_Label);
+            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Location = new System.Drawing.Point(32, 7);
+            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Name = "RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox";
+            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Size = new System.Drawing.Size(142, 89);
+            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.TabIndex = 0;
+            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.TabStop = false;
+            this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.Text = "Set Auto Play -Timer";
+            // 
+            // RightDocks_BottomPanel_MediaLists_LoopCheckBox
+            // 
+            this.RightDocks_BottomPanel_MediaLists_LoopCheckBox.Location = new System.Drawing.Point(8, 60);
+            this.RightDocks_BottomPanel_MediaLists_LoopCheckBox.Name = "RightDocks_BottomPanel_MediaLists_LoopCheckBox";
+            this.RightDocks_BottomPanel_MediaLists_LoopCheckBox.Size = new System.Drawing.Size(128, 24);
+            this.RightDocks_BottomPanel_MediaLists_LoopCheckBox.TabIndex = 3;
+            this.RightDocks_BottomPanel_MediaLists_LoopCheckBox.Text = "Loop MediaList";
+            // 
+            // RightDocks_BottomPanel_MediaLists_BottomPanel_Label2
+            // 
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2.Location = new System.Drawing.Point(72, 43);
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2.Name = "RightDocks_BottomPanel_MediaLists_BottomPanel_Label2";
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2.Size = new System.Drawing.Size(64, 16);
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2.TabIndex = 2;
+            this.RightDocks_BottomPanel_MediaLists_BottomPanel_Label2.Text = "seconds.";
+            // 
+            // RightDocks_BottomPanel_MediaLists_Numeric
+            // 
+            this.RightDocks_BottomPanel_MediaLists_Numeric.Location = new System.Drawing.Point(8, 40);
+            this.RightDocks_BottomPanel_MediaLists_Numeric.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.RightDocks_BottomPanel_MediaLists_Numeric.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.RightDocks_BottomPanel_MediaLists_Numeric.Name = "RightDocks_BottomPanel_MediaLists_Numeric";
+            this.RightDocks_BottomPanel_MediaLists_Numeric.Size = new System.Drawing.Size(64, 20);
+            this.RightDocks_BottomPanel_MediaLists_Numeric.TabIndex = 1;
+            this.RightDocks_BottomPanel_MediaLists_Numeric.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.RightDocks_BottomPanel_MediaLists_Numeric.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.RightDocks_BottomPanel_MediaLists_Numeric.ValueChanged += new System.EventHandler(this.RightDocks_BottomPanel_MediaLists_Numeric_ValueChanged);
+            // 
+            // RightDocks_BottomPanel_MediaList_BottomPanel_Label
+            // 
+            this.RightDocks_BottomPanel_MediaList_BottomPanel_Label.Location = new System.Drawing.Point(4, 16);
+            this.RightDocks_BottomPanel_MediaList_BottomPanel_Label.Name = "RightDocks_BottomPanel_MediaList_BottomPanel_Label";
+            this.RightDocks_BottomPanel_MediaList_BottomPanel_Label.Size = new System.Drawing.Size(135, 24);
+            this.RightDocks_BottomPanel_MediaList_BottomPanel_Label.TabIndex = 0;
+            this.RightDocks_BottomPanel_MediaList_BottomPanel_Label.Text = "Change Media Item after:";
+            // 
+            // bottomSandDock
+            // 
+            this.bottomSandDock.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomSandDock.Guid = new System.Guid("11832edf-4b5f-4911-9e7c-da764193d89f");
+            this.bottomSandDock.LayoutSystem = new TD.SandDock.SplitLayoutSystem(250, 400);
+            this.bottomSandDock.Location = new System.Drawing.Point(72, 560);
+            this.bottomSandDock.Manager = this.sandDockManager1;
+            this.bottomSandDock.Name = "bottomSandDock";
+            this.bottomSandDock.Size = new System.Drawing.Size(381, 0);
+            this.bottomSandDock.TabIndex = 25;
+            this.bottomSandDock.SizeChanged += new System.EventHandler(this.bottomSandDock_SizeChanged);
+            // 
+            // topSandDock
+            // 
+            this.topSandDock.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topSandDock.Guid = new System.Guid("f3084065-73e3-4825-a957-0918e3006a24");
+            this.topSandDock.LayoutSystem = new TD.SandDock.SplitLayoutSystem(250, 400);
+            this.topSandDock.Location = new System.Drawing.Point(72, 50);
+            this.topSandDock.Manager = this.sandDockManager1;
+            this.topSandDock.Name = "topSandDock";
+            this.topSandDock.Size = new System.Drawing.Size(381, 0);
+            this.topSandDock.TabIndex = 26;
+            // 
+            // Media_Logos
+            // 
+            this.Media_Logos.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("Media_Logos.ImageStream")));
+            this.Media_Logos.TransparentColor = System.Drawing.Color.Transparent;
+            this.Media_Logos.Images.SetKeyName(0, "");
+            this.Media_Logos.Images.SetKeyName(1, "");
+            // 
+            // PlayProgress
+            // 
+            this.PlayProgress.Interval = 500;
+            this.PlayProgress.Tick += new System.EventHandler(this.PlayProgress_Tick);
+            // 
+            // VideoLoadTimer
+            // 
+            this.VideoLoadTimer.Tick += new System.EventHandler(this.VideoLoadTimer_Tick);
+            // 
+            // Presentation_AutoPlayTimer
+            // 
+            this.Presentation_AutoPlayTimer.Tick += new System.EventHandler(this.Presentation_AutoPlayTimer_Tick);
+            // 
+            // Main_ErrorProvider
+            // 
+            this.Main_ErrorProvider.ContainerControl = this;
+            // 
+            // SaveFileDialog
+            // 
+            this.SaveFileDialog.DefaultExt = "xml";
+            // 
+            // OpenFileDialog
+            // 
+            this.OpenFileDialog.AddExtension = false;
+            // 
+            // GlobalDataSet
+            // 
+            this.GlobalDataSet.DataSetName = "GlobalDataSet";
+            this.GlobalDataSet.Locale = new System.Globalization.CultureInfo("en-US");
+            this.GlobalDataSet.Tables.AddRange(new System.Data.DataTable[] {
+            this.SongListTable});
+            // 
+            // SongListTable
+            // 
+            this.SongListTable.Columns.AddRange(new System.Data.DataColumn[] {
+            this.NumberColumn,
+            this.TitleColumn,
+            this.CollectionColumn,
+            this.FileNameColumn,
+            this.NumberSortColumn,
+            this.dataColumn1,
+            this.dataColumn2});
+            this.SongListTable.TableName = "SongListTable";
+            // 
+            // NumberColumn
+            // 
+            this.NumberColumn.ColumnName = "Number";
+            // 
+            // TitleColumn
+            // 
+            this.TitleColumn.ColumnName = "Title";
+            // 
+            // CollectionColumn
+            // 
+            this.CollectionColumn.ColumnName = "Collection";
+            // 
+            // FileNameColumn
+            // 
+            this.FileNameColumn.ColumnName = "FileName";
+            // 
+            // NumberSortColumn
+            // 
+            this.NumberSortColumn.ColumnName = "NumberSort";
+            // 
+            // dataColumn1
+            // 
+            this.dataColumn1.Caption = "FoldedTitle";
+            this.dataColumn1.ColumnName = "FoldedTitle";
+            // 
+            // dataColumn2
+            // 
+            this.dataColumn2.Caption = "FoldedText";
+            this.dataColumn2.ColumnName = "FoldedText";
+            // 
+            // SongListDataView
+            // 
+            this.SongListDataView.Table = this.SongListTable;
+            // 
+            // HideRectanglesTimer
+            // 
+            this.HideRectanglesTimer.Interval = 4000;
+            this.HideRectanglesTimer.Tick += new System.EventHandler(this.HideRectanglesTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1039, 582);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.statusBar);
+            this.ClientSize = new System.Drawing.Size(843, 582);
+            this.Controls.Add(this.RenderStatus);
             this.Controls.Add(this.leftSandDock);
             this.Controls.Add(this.bottomSandDock);
             this.Controls.Add(this.topSandDock);
@@ -3083,6 +3105,7 @@ namespace DreamBeam {
             this.Controls.Add(this.ToolBars_leftSandBarDock);
             this.Controls.Add(this.ToolBars_bottomSandBarDock);
             this.Controls.Add(this.ToolBars_topSandBarDock);
+            this.Controls.Add(this.statusBar);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -3098,7 +3121,6 @@ namespace DreamBeam {
             Presentation_MovieControl_LiveButtonPanel.ResumeLayout(false);
             this.ToolBars_leftSandBarDock.ResumeLayout(false);
             this.ToolBars_topSandBarDock.ResumeLayout(false);
-            this.statusBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StatusPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarUpdatePanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SongShow_CollapsPanel)).EndInit();
@@ -3107,6 +3129,37 @@ namespace DreamBeam {
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.SongShow_HideElementsSub1Panel.ResumeLayout(false);
+            this.leftSandDock.ResumeLayout(false);
+            this.dockControl1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.ShowSong_Tab.ResumeLayout(false);
+            this.EditSongs_Tab.ResumeLayout(false);
+            this.Presentation_Tab.ResumeLayout(false);
+            this.Presentation_FadePanel.ResumeLayout(false);
+            this.Fade_panel.ResumeLayout(false);
+            this.Fade_Top_Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Presentation_Fade_preview)).EndInit();
+            this.Presentation_MainPanel.ResumeLayout(false);
+            this.Presentation_PreviewPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axShockwaveFlash)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Presentation_PreviewBox)).EndInit();
+            this.Presentation_MovieControlPanel.ResumeLayout(false);
+            this.Presentation_MovieControlPanelBottom.ResumeLayout(false);
+            this.Presentation_MovieControl_PreviewButtonPanel.ResumeLayout(false);
+            this.Presentation_MovieControlPanel_Top.ResumeLayout(false);
+            this.Presentation_MovieControlPanel_Top.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Media_TrackBar)).EndInit();
+            this.Presentation_MovieControlPanel_Right.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.AudioBar)).EndInit();
+            this.SermonTools_Tab.ResumeLayout(false);
+            this.Sermon_LeftPanel.ResumeLayout(false);
+            this.Sermon_LeftDoc_Panel.ResumeLayout(false);
+            this.Sermon_LeftToolBar_Panel.ResumeLayout(false);
+            this.Sermon_LeftBottom_Panel.ResumeLayout(false);
+            this.Sermon_TabControl.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.BibleText_Tab.ResumeLayout(false);
             this.rightSandDock.ResumeLayout(false);
             this.DockControl_PreviewScreen.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -3145,35 +3198,6 @@ namespace DreamBeam {
             this.RightDocks_BottomPanel_MediaListsBottomPanel_GroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.RightDocks_BottomPanel_MediaLists_Numeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Main_ErrorProvider)).EndInit();
-            this.ShowSong_Tab.ResumeLayout(false);
-            this.SermonTools_Tab.ResumeLayout(false);
-            this.Sermon_LeftPanel.ResumeLayout(false);
-            this.Sermon_LeftDoc_Panel.ResumeLayout(false);
-            this.Sermon_LeftToolBar_Panel.ResumeLayout(false);
-            this.Sermon_LeftBottom_Panel.ResumeLayout(false);
-            this.Sermon_TabControl.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.Presentation_Tab.ResumeLayout(false);
-            this.Presentation_FadePanel.ResumeLayout(false);
-            this.Fade_panel.ResumeLayout(false);
-            this.Fade_Top_Panel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Presentation_Fade_preview)).EndInit();
-            this.Presentation_MainPanel.ResumeLayout(false);
-            this.Presentation_PreviewPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.axShockwaveFlash)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Presentation_PreviewBox)).EndInit();
-            this.Presentation_MovieControlPanel.ResumeLayout(false);
-            this.Presentation_MovieControlPanelBottom.ResumeLayout(false);
-            this.Presentation_MovieControl_PreviewButtonPanel.ResumeLayout(false);
-            this.Presentation_MovieControlPanel_Top.ResumeLayout(false);
-            this.Presentation_MovieControlPanel_Top.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Media_TrackBar)).EndInit();
-            this.Presentation_MovieControlPanel_Right.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.AudioBar)).EndInit();
-            this.EditSongs_Tab.ResumeLayout(false);
-            this.BibleText_Tab.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GlobalDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SongListTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SongListDataView)).EndInit();
@@ -3204,6 +3228,7 @@ namespace DreamBeam {
         private RibbonStyle.RibbonMenuButton RightDocks_Preview_Prev;
         private RibbonStyle.RibbonMenuButton RightDocks_Live_Prev;
         private RibbonStyle.RibbonMenuButton RightDocks_Live_Next;
+        private TD.SandDock.DockControl dockControl1;
 
 
 	}

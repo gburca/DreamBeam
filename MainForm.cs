@@ -711,8 +711,12 @@ namespace DreamBeam {
 		///<summary> Adjust Panel Sizes on Mainform Size changed </summary>
 		private void MainForm_SizeChanged(object sender, System.EventArgs e) {
 			this.GuiTools.Resize();
+            setLeftSandDockSize();
 		}
 
+        private void setLeftSandDockSize(){
+            this.leftSandDock.Size = new Size(this.Size.Width - this.leftSandDock.Location.X - this.rightSandDock.Size.Width - 15,this.leftSandDock.Height);
+        }
 
 		private void MainForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e) {
 			//if (this.ErrorProvider_LastControl != null) this.Main_ErrorProvider.SetError(this.ErrorProvider_LastControl, "");
@@ -2815,6 +2819,21 @@ namespace DreamBeam {
         {
             RightDocks_Live_Prev.Location = new Point((panel9.Width - (RightDocks_Live_Prev.Width + RightDocks_Live_Next.Width)) / 2, RightDocks_Live_Prev.Location.Y);
             RightDocks_Live_Next.Location = new Point(RightDocks_Live_Prev.Location.X + RightDocks_Live_Prev.Width -1, RightDocks_Live_Prev.Location.Y);
+        }
+
+        private void bottomSandDock_SizeChanged(object sender, EventArgs e)
+        {
+            this.setLeftSandDockSize();
+        }
+
+        private void rightSandDock_SizeChanged(object sender, EventArgs e)
+        {
+            this.setLeftSandDockSize();
+        }
+
+        private void leftSandDock_SizeChanged(object sender, EventArgs e)
+        {
+            this.setLeftSandDockSize();
         }
 
         
