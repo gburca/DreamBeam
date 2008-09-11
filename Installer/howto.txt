@@ -10,7 +10,8 @@ http://crosswire.org/ftpmirror/pub/sword/frontend/win32/v1.5/sword-starter-win32
 	SupportFiles\sword-starter-win32-1.5.9.exe
 	SupportFiles\directx_apr2006_redist.exe
 	SupportFiles\dotNet2.0\dotnetfx.exe
-	
+
+- copy all .nsh Files from NSIS_related\ into your NSIS\Include Folder  and the uac.dll file into your NSIS\Plugin Folder
 
 - If the project is not set up to create the "Release" builds in the Install directory,
 manually copy DreamBeam Bins into "Dreambeam"

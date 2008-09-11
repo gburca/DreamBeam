@@ -270,7 +270,7 @@ namespace DreamBeam {
             this.bibleThemeWidget.UseDesign = true;
 
             ImageWindow = new ImageWindow(this);
-            MovieControlPanelWipe("out");
+            MovieControlPanelWipe("in");
             Console.WriteLine("DreamBeam starting up");
         }
 
@@ -400,6 +400,7 @@ namespace DreamBeam {
 			EditSongs_Button.ToolTipText = Lang.say("TabPages.EditSongs");
 			Presentation_Button.ToolTipText = Lang.say("TabPages.Presentation");
 			Sermon_Button.ToolTipText = Lang.say("TabPages.TextTool");
+                 
 			#endregion
 
 			#region TabPages
@@ -1138,6 +1139,7 @@ namespace DreamBeam {
 			}
 
 			(e.Item as TD.SandBar.ButtonItem).Checked = true;
+            this.MainDock.Text = e.Item.ToolTipText;
 
 			if (e.Item == ShowSongs_Button) {
 				GuiTools.ShowTab(MainTab.ShowSongs);
@@ -2709,7 +2711,7 @@ namespace DreamBeam {
         private void BibleDesignTab_SizeChanged(object sender, EventArgs e)
         {
             this.bibleThemeWidget.Left = this.BibleDesignTab.Width / 2 - this.bibleThemeWidget.Width / 2;
-            this.bibleThemeWidget.Left = this.BibleDesignTab.Height / 2 - this.bibleThemeWidget.Height / 2;
+            this.bibleThemeWidget.Top = this.BibleDesignTab.Height / 2 - this.bibleThemeWidget.Height / 2;
         }
 
        
@@ -2834,6 +2836,13 @@ namespace DreamBeam {
         private void leftSandDock_SizeChanged(object sender, EventArgs e)
         {
             this.setLeftSandDockSize();
+        }
+
+        private void DockControl_DesignEditor_SizeChanged(object sender, EventArgs e)
+        {
+           
+           
+           
         }
 
         
