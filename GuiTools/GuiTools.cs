@@ -162,6 +162,7 @@ namespace DreamBeam {
 
 		#region KeyListner
 		public void KeyListner(System.Windows.Forms.KeyEventArgs e){
+           // MessageBox.Show(e.KeyCode.ToString());
 			switch(e.KeyCode){
 				case Keys.F1:
 					ShowStrophe(0);			e.Handled = true;

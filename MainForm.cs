@@ -1590,14 +1590,35 @@ namespace DreamBeam {
 
 		/// <summary>Show selected Media and select next Item</summary>
 		private void RightDocks_BottomPanel_Media_ShowNext_Click(object sender, System.EventArgs e) {
-			if (this.RightDocks_BottomPanel_MediaList.Items.Count != -1) {
-				this.Media2BeamBox();
+            //ShowNext();			
+            ShowPrev();
+		}
+
+        private void ShowNext(){
+        if (this.RightDocks_BottomPanel_MediaList.Items.Count != -1) {
+				
 				int tmp = this.RightDocks_BottomPanel_MediaList.SelectedIndex;
 				if (tmp < this.RightDocks_BottomPanel_MediaList.Items.Count - 1) {
 					this.RightDocks_BottomPanel_MediaList.SelectedIndex = tmp + 1;
 				}
-			}
-		}
+                this.Media2BeamBox();	
+             }
+         }
+
+        private void ShowPrev()
+        {
+            if (this.RightDocks_BottomPanel_MediaList.Items.Count != -1)
+            {
+                
+                int tmp = this.RightDocks_BottomPanel_MediaList.SelectedIndex;
+                if (tmp > 0)
+                {
+                    this.RightDocks_BottomPanel_MediaList.SelectedIndex = tmp - 1;
+                }
+                this.Media2BeamBox();
+            }
+        }   
+   
 
 		/// <summary>On tick Show Media and select next</summary>
 		private void Presentation_AutoPlayTimer_Tick(object sender, System.EventArgs e) {
@@ -2475,18 +2496,39 @@ namespace DreamBeam {
 		}
 
 		public void DisplayLive_Prev() {
-			if (Config.AppOperatingMode == OperatingMode.Client) {
-				DisplayLiveClient.ContentPrev();
-			} else {
-				DisplayLiveLocal.ContentPrev();
-			}
+            if (this.selectedTab == MainTab.Presentation)
+            {
+                ShowPrev();
+            }
+            else
+            {
+                if (Config.AppOperatingMode == OperatingMode.Client)
+                {
+                    DisplayLiveClient.ContentPrev();
+                }
+                else
+                {
+                    DisplayLiveLocal.ContentPrev();
+                }
+            }
 		}
 		public void DisplayLive_Next() {
-			if (Config.AppOperatingMode == OperatingMode.Client) {
-				DisplayLiveClient.ContentNext();
-			} else {
-				DisplayLiveLocal.ContentNext();
-			}
+            if (this.selectedTab == MainTab.Presentation)
+            {
+                ShowNext();
+            }
+            else
+            {
+
+                if (Config.AppOperatingMode == OperatingMode.Client)
+                {
+                    DisplayLiveClient.ContentNext();
+                }
+                else
+                {
+                    DisplayLiveLocal.ContentNext();
+                }
+            }
 		}
 
 		#endregion
