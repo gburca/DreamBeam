@@ -238,6 +238,13 @@ namespace DreamBeam {
 			this.Theme = new SermonTheme();
 			this.BGImagePath = Path;
 		}
+        private bool _proportional = false;
+        public ImageContent(string Path, bool drawProportional)
+        {
+            this.Theme = new SermonTheme();
+            this.BGImagePath = Path;
+            this._proportional = drawProportional;
+        }
 
 		#region IContentOperations Members
 
@@ -263,7 +270,14 @@ namespace DreamBeam {
 				}
 
 				if (this.bgImage != null) {
-					graphics.DrawImage(this.bgImage, 0, 0, Width, Height);
+                    if (this._proportional)
+                    {
+                        graphics.DrawImage(ShowBeam.DrawProportionalBitmap(new System.Drawing.Size(Width, Height), this.bgImage).Bitmap, 0, 0, Width, Height);                    
+                    }
+                    else
+                    {
+                        graphics.DrawImage(this.bgImage, 0, 0, Width, Height);
+                    }
 				}
 			} else {
 				// Draw blank rectangle if no image is defined

@@ -1097,9 +1097,9 @@ namespace DreamBeam {
 					this.ShowSongPanel.Location = new Point(0, 0);
 
 					if (this.Config.AppOperatingMode == OperatingMode.Client) {
-						_MainForm.DisplayLiveClient.SetContent(new ImageContent(Path));
+						_MainForm.DisplayLiveClient.SetContent(new ImageContent(Path,true));
 					} else {
-						_MainForm.DisplayLiveLocal.SetContent(new ImageContent(Path));
+						_MainForm.DisplayLiveLocal.SetContent(new ImageContent(Path,true));
 					}
 
 					this.liveMedia = null;

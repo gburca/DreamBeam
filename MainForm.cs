@@ -1590,8 +1590,7 @@ namespace DreamBeam {
 
 		/// <summary>Show selected Media and select next Item</summary>
 		private void RightDocks_BottomPanel_Media_ShowNext_Click(object sender, System.EventArgs e) {
-            //ShowNext();			
-            ShowPrev();
+            ShowNext();			            
 		}
 
         private void ShowNext(){
