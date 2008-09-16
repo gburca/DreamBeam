@@ -47,6 +47,8 @@
 	; Request application privileges for Windows Vista
 	RequestExecutionLevel user
 
+
+	
 ;--------------------------------
 ; Interface Configuration
 
@@ -61,16 +63,18 @@
 ;--------------------------------
 ; Pages
 	!insertmacro MUI_PAGE_WELCOME
-	!insertmacro MUI_PAGE_LICENSE "Images\License.rtf"
+	!insertmacro MUI_PAGE_LICENSE "Images\License.rtf"	
 	!insertmacro MUI_PAGE_COMPONENTS
 	!insertmacro MUI_PAGE_DIRECTORY
 	; Sample files
 	!define MUI_DIRECTORYPAGE_TEXT_TOP "Program settings and data directory. This is where the sample files will be installed and where ${PRODUCT} will expect to find songs and other files. All files created by ${PRODUCT} will also be saved to this directory by default."
 	!define MUI_DIRECTORYPAGE_TEXT_DESTINATION "Program settings and data directory"
 	!define MUI_DIRECTORYPAGE_VARIABLE $USERFILES
-	!define MUI_DIRECTORYPAGE_VERIFYONLEAVE
+	!define MUI_DIRECTORYPAGE_VERIFYONLEAVE	
 	!insertmacro MUI_PAGE_DIRECTORY
-
+			
+	
+	
 	!insertmacro MUI_PAGE_INSTFILES
 
 	!define MUI_FINISHPAGE_TEXT "${PRODUCT} ${VERSION} has been installed on your computer.\r\n\r\nIf upgrading from a version of ${PRODUCT} prior to 0.80, you should copy all your songs, backgrounds, etc... to the program settings and data directory you selected earlier in the installation process. The location of this directory is also shown in the Options dialog box once ${PRODUCT} is running.\r\n\r\nClick Finish to close this wizard."
@@ -174,8 +178,30 @@ Section "DreamBeam" SDreamBeam
 	; Create uninstaller
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 
+	
+	 
+
 	; A place where we can create logs
 	CreateDirectory "$USERFILES"
+	
+	;Check if Config Files Are Present
+	SetOutPath "$USERFILES"
+	IfFileExists "$USERFILES\default.Tab_ShowSongs.xml" +2 0
+	File /r /x .svn SampleFiles\ConfigFiles\default.Tab_ShowSongs.xml
+	IfFileExists "$USERFILES\default.Tab_SermonTools.xml" +2 0
+	File /r /x .svn SampleFiles\ConfigFiles\default.Tab_SermonTools.xml
+	IfFileExists "$USERFILES\default.Tab_Presentation.xml" +2 0
+	File /r /x .svn SampleFiles\ConfigFiles\default.Tab_Presentation.xml
+	IfFileExists "$USERFILES\default.Tab_EditSongs.xml" +2 0
+	File /r /x .svn SampleFiles\ConfigFiles\default.Tab_EditSongs.xml
+	IfFileExists "$USERFILES\default.Tab_BibleText.xml" +2 0
+	File /r /x .svn SampleFiles\ConfigFiles\default.Tab_BibleText.xml
+	IfFileExists "$USERFILES\default.SermonDocs.xml" +2 0
+	File /r /x .svn SampleFiles\ConfigFiles\default.SermonDocs.xml
+	IfFileExists "$USERFILES\default.dataset.config.xml" +2 0
+	File /r /x .svn SampleFiles\ConfigFiles\default.dataset.config.xml
+	IfFileExists "$USERFILES\default.config.xml" +2 0
+	File /r /x .svn SampleFiles\ConfigFiles\default.config.xml
 SectionEnd
 
 ; Subsections should default to optional if this is an update so that
@@ -210,7 +236,10 @@ SectionGroup /e "Sample Files" SSampleFiles
 		SetOutPath "$USERFILES\Themes"
 		File /nonfatal /r /x .svn SampleFiles\Themes\*.*
 	SectionEnd
+		
+
 SectionGroupEnd
+
 
 ;--------------------------------
 ; Create Read_USERFILES and un.Read_USERFILES functions
