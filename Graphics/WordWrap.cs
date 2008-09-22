@@ -30,7 +30,7 @@ namespace DreamBeam {
 	/// <summary>
 	/// An interface implemented by word-wrap (line-break) algorithms
 	/// </summary>
-	public interface IWordWrap {
+	public interface IWordWrap : ICloneable {
 		GraphicsPath GetPath(string doc, Font font, StringFormat sf, RectangleF bounds);
 	}
 
@@ -69,6 +69,15 @@ namespace DreamBeam {
 
 			return pth;
 		}
+
+		#region ICloneable Members
+		object ICloneable.Clone() {
+			return this.Clone();
+		}
+		public virtual WordWrapDefault Clone() {
+			return new WordWrapDefault();
+		}
+		#endregion
 	}
 
 	/// <summary>
@@ -256,6 +265,15 @@ namespace DreamBeam {
 				}
 			}
 		}
+
+		#region ICloneable Members
+		object ICloneable.Clone() {
+			return this.Clone();
+		}
+		public virtual WordWrapAtSpace Clone() {
+			return new WordWrapAtSpace();
+		}
+		#endregion
 	}
 
 

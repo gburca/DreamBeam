@@ -1264,17 +1264,22 @@ namespace DreamBeam {
 			string searchFor = this.RightDocks_SongListSearch.Text.Trim();
 
 			if (searchFor.Length > 0) {
-				// We try to do some intelligent searching.
-				// TODO: Treat words in quotes as phrases
-				if (Regex.IsMatch(searchFor, @"^\d+")) {
-					// The user is searching using a song number
-					this.SongListDataView.RowFilter = "Number LIKE '" + searchFor + "%'";
-				} else {
-					//this.SongListDataView.RowFilter = "Title LIKE '%" + searchFor + "%' OR FoldedTitle LIKE '%" + searchFor + "%'";
-					this.SongListDataView.RowFilter =
-						"Title LIKE '%" + searchFor + "%' " +
-						"OR FoldedTitle LIKE '%" + searchFor + "%' " +
-						"OR FoldedText LIKE '%" + searchFor + "%' ";
+				try {
+					// We try to do some intelligent searching.
+					// TODO: Treat words in quotes as phrases
+					if (Regex.IsMatch(searchFor, @"^\d+")) {
+						// The user is searching using a song number
+						this.SongListDataView.RowFilter = "Number LIKE '" + searchFor + "%'";
+					} else {
+						//this.SongListDataView.RowFilter = "Title LIKE '%" + searchFor + "%' OR FoldedTitle LIKE '%" + searchFor + "%'";
+						this.SongListDataView.RowFilter =
+							"Title LIKE '%" + searchFor + "%' " +
+							"OR FoldedTitle LIKE '%" + searchFor + "%' " +
+							"OR FoldedText LIKE '%" + searchFor + "%' ";
+					}
+				} catch (Exception) {
+					// The user entered some invalid character, such as "'"
+					return;
 				}
 			} else {
 				this.SongListDataView.RowFilter = "";
@@ -1734,7 +1739,9 @@ namespace DreamBeam {
 		}
 
 		private void RightDocks_BottomPanel_MediaList_SelectedIndexChanged(object sender, System.EventArgs e) {
-			PreviewPresentationMedia(this.MediaList.iItem[RightDocks_BottomPanel_MediaList.SelectedIndex].Path);
+            if (MediaList.iItem.Length > RightDocks_BottomPanel_MediaList.SelectedIndex) {
+                PreviewPresentationMedia(this.MediaList.iItem[RightDocks_BottomPanel_MediaList.SelectedIndex].Path);
+            }
 		}
 
 		private void LoadVideo() {

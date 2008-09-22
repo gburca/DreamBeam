@@ -936,6 +936,10 @@ namespace DreamBeam {
 			ms.Position = 0;
 			object clone = bf.Deserialize(ms);
 			ms.Close();
+
+			// Need to clone any elements that are marked as unserializable
+			((Song)clone).wrapper = wrapper.Clone() as IWordWrap;
+
 			return (Song)clone;
 		}
 
