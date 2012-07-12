@@ -639,6 +639,7 @@ namespace DreamBeam {
 						StringFormat sf = new StringFormat();
 						sf.Alignment = format[type].HAlignment;
 						sf.LineAlignment = format[type].VAlignment;
+                        text[type] = Regex.Replace(text[type], "(\u2011|\u00ad)", "-");
 
 						if (this.WordWrap) {
                             // Used by TextTool (which inherits from Song).

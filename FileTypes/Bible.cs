@@ -768,7 +768,8 @@ namespace DreamBeam.FileTypes {
                 string vText = bible.getVerseText(vIdx);
 				// Non-breaking hyphen gets displayed with too much space after it in Arial Unicode
 				// and with empty glyph box on other fonts. Change it to regular hyphen.
-				vText = Regex.Replace(vText, "\u2011", "\u00ad");
+				//vText = Regex.Replace(vText, "\u2011", "\u00ad");
+                vText = Regex.Replace(vText, "\u2011", "-");
 				text[(int)BibleTextType.Reference] = bible.GetRef(vIdx);
 				text[(int)BibleTextType.Verse] = vText;
 				text[(int)BibleTextType.Translation] = bible.version;

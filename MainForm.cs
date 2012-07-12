@@ -2053,7 +2053,21 @@ namespace DreamBeam {
 			t.AcceptsTab = true;
 			t.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Both;
 			//t.Font = new Font("Courier New", 10, FontStyle.Regular);
-			t.Font = new Font("Arial Unicode MS", 12, FontStyle.Regular);
+            Font f = null;
+            try {
+                f = new Font("Arial Unicode MS", 12, FontStyle.Regular);
+            } catch {
+                try {
+                    f = new Font("Lucida Sans Unicode", 12, FontStyle.Regular);
+                } catch {
+                    try {
+                        f = new Font("Arial", 12, FontStyle.Regular);
+                    } catch {
+                        f = new Font(FontFamily.GenericMonospace, 12);
+                    }
+                }
+            }
+            t.Font = f;
 			t.TextChanged += new System.EventHandler(this.Sermon_DocManager_Control_TextChanged);
 			DocumentManager.Document document = new DocumentManager.Document(t, "Document ");
 			Sermon_DocManager.AddDocument(document);
